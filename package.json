@@ -99,6 +99,10 @@
     "data:coverage-v9": "tsx --env-file=.env scripts/report-football-data-center-v9.ts",
     "test:football-data-v9": "tsx scripts/test-football-data-center-v9.ts"
   },
+  "engines": {
+    "node": "22.x"
+  },
+  "packageManager": "pnpm@10.28.0",
   "dependencies": {
     "@prisma/adapter-pg": "^7.9.0",
     "@prisma/client": "^7.9.0",
@@ -120,9 +124,5 @@
     "tailwindcss": "^4.3.3",
     "tsx": "^4.23.1",
     "typescript": "^5.9.3"
-  },
-  "engines": {
-    "node": "22.x"
-  },
-  "packageManager": "pnpm@10.28.0"
+  }
 }
