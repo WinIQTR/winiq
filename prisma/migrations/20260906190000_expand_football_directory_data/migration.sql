@@ -1,0 +1,42 @@
+ALTER TABLE "Team"
+  ADD COLUMN "founded" INTEGER,
+  ADD COLUMN "national" BOOLEAN NOT NULL DEFAULT false,
+  ADD COLUMN "venueApiId" INTEGER,
+  ADD COLUMN "venueName" TEXT,
+  ADD COLUMN "venueAddress" TEXT,
+  ADD COLUMN "venueCity" TEXT,
+  ADD COLUMN "venueCapacity" INTEGER,
+  ADD COLUMN "venueSurface" TEXT,
+  ADD COLUMN "venueImageUrl" TEXT;
+
+ALTER TABLE "Match"
+  ADD COLUMN "statusShort" TEXT,
+  ADD COLUMN "elapsedMinutes" INTEGER,
+  ADD COLUMN "referee" TEXT,
+  ADD COLUMN "venueName" TEXT,
+  ADD COLUMN "venueCity" TEXT,
+  ADD COLUMN "halfTimeHomeScore" INTEGER,
+  ADD COLUMN "halfTimeAwayScore" INTEGER,
+  ADD COLUMN "extraTimeHomeScore" INTEGER,
+  ADD COLUMN "extraTimeAwayScore" INTEGER,
+  ADD COLUMN "penaltyHomeScore" INTEGER,
+  ADD COLUMN "penaltyAwayScore" INTEGER;
+
+ALTER TABLE "Player" ADD COLUMN "nationality" TEXT;
+
+ALTER TABLE "PlayerSeasonStatistic"
+  ADD COLUMN "substituteIn" INTEGER NOT NULL DEFAULT 0,
+  ADD COLUMN "substituteOut" INTEGER NOT NULL DEFAULT 0,
+  ADD COLUMN "substituteBench" INTEGER NOT NULL DEFAULT 0,
+  ADD COLUMN "passes" INTEGER NOT NULL DEFAULT 0,
+  ADD COLUMN "dribbleAttempts" INTEGER NOT NULL DEFAULT 0,
+  ADD COLUMN "duels" INTEGER NOT NULL DEFAULT 0,
+  ADD COLUMN "foulsDrawn" INTEGER NOT NULL DEFAULT 0,
+  ADD COLUMN "foulsCommitted" INTEGER NOT NULL DEFAULT 0,
+  ADD COLUMN "goalsConceded" INTEGER NOT NULL DEFAULT 0,
+  ADD COLUMN "saves" INTEGER NOT NULL DEFAULT 0,
+  ADD COLUMN "penaltiesWon" INTEGER NOT NULL DEFAULT 0,
+  ADD COLUMN "penaltiesCommitted" INTEGER NOT NULL DEFAULT 0,
+  ADD COLUMN "penaltiesScored" INTEGER NOT NULL DEFAULT 0,
+  ADD COLUMN "penaltiesMissed" INTEGER NOT NULL DEFAULT 0,
+  ADD COLUMN "penaltiesSaved" INTEGER NOT NULL DEFAULT 0;

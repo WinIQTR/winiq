@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-07T03:30:47.858Z",
+  "seasonYear": 2026,
+  "totalFixtures": 2774,
+  "finishedFixtures": 604,
+  "archivedMatches": 261,
+  "missingFinalScores": 0,
+  "pendingSettlements": 0,
+  "archiveScoreMismatches": 0,
+  "overdueStatuses": 0,
+  "issueCount": 0,
+  "status": "HEALTHY",
+  "issues": [],
+  "settlementRun": {
+    "pendingEvaluated": 0,
+    "won": 0,
+    "lost": 0,
+    "voided": 0,
+    "unsupportedMarkets": 0,
+    "incompleteScores": 0,
+    "rescheduled": 0
+  },
+  "production": {
+    "champion": "20% ML / 80% Poisson",
+    "automaticModelChangeAllowed": false,
+    "externalNotificationSent": false
+  }
+}

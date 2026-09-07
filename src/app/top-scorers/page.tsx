@@ -1,0 +1,19 @@
+import Image from "next/image";
+import { PageShell } from "@/components/page-shell";
+import { FootballDirectoryNav } from "@/components/football-directory-nav";
+import { ACTIVE_SEASON_YEAR } from "@/config/season";
+import { prisma } from "@/lib/prisma";
+import { resolveDirectoryCompetition, round } from "@/lib/football-directory";
+import styles from "../football-data.module.css";
+
+type Props={searchParams:Promise<{league?:string|string[]}>};
+export default async function TopScorersPage({searchParams}:Props){
+ const params=await searchParams,competition=resolveDirectoryCompetition(params.league);const season=await prisma.season.findFirst({where:{year:ACTIVE_SEASON_YEAR,league:{apiId:competition.apiId}},select:{id:true}});
+ const rows=season?await prisma.playerSeasonStatistic.findMany({where:{seasonId:season.id,appearances:{gt:0}},orderBy:[{goals:"desc"},{assists:"desc"},{minutes:"asc"}],take:50,include:{player:true,team:true}}):[];const scorerCount=rows.filter(r=>r.goals>0).length;const goals=rows.reduce((n,r)=>n+r.goals,0);const top=rows[0];
+ return <PageShell><main className={styles.page}>
+  <header className={styles.hero}><div><p className={styles.eyebrow}>GOL & HÜCUM LİDERLERİ · {ACTIVE_SEASON_YEAR}</p><h1>Gol krallığı</h1><p>Gol sayısının yanında asist, dakika, 90 dakika verimi, şut kalitesi, penaltı ve rating bilgileriyle gerçek performansı görün.</p></div><div className={styles.fresh}><span><strong>{rows.length}</strong> oyuncu</span><span><strong>{goals}</strong> toplam gol</span></div></header>
+  <FootballDirectoryNav pathname="/top-scorers" selected={competition.apiId}/>
+  <section className={styles.stats}><article className={styles.stat}><span>Lider</span><strong>{top?.player.name??"–"}</strong></article><article className={styles.stat}><span>Lider gol</span><strong>{top?.goals??0}</strong></article><article className={styles.stat}><span>Gol atan oyuncu</span><strong>{scorerCount}</strong></article><article className={styles.stat}><span>Veri kaynağı</span><strong>Pro API</strong></article></section>
+  <section className={styles.panel}><header className={styles.panelHead}><h2>{competition.name} · İlk 50</h2><span className={styles.badge}>Sezon istatistiği</span></header>{rows.length===0?<div className={styles.empty}>Oyuncu verisi bulunamadı. Öncelikli Pro yenilemesini çalıştırın.</div>:<div className={styles.teamCards}>{rows.map((r,i)=>{const per90=r.minutes?round(r.goals*90/r.minutes,2):0;const minutesPerGoal=r.goals?Math.round(r.minutes/r.goals):null;return <details className={styles.teamCard} key={r.id}><summary><div className={styles.identity}><strong>#{i+1}</strong>{r.player.photoUrl?<Image src={r.player.photoUrl} alt="" width={44} height={44}/>:null}<div><strong>{r.player.name}</strong><small>{r.team.name} · {r.appearances} maç</small></div></div><b>{r.goals} GOL</b></summary><div className={styles.teamCardBody}><div><span>Asist</span><strong>{r.assists}</strong></div><div><span>Dakika</span><strong>{r.minutes}</strong></div><div><span>Gol / 90</span><strong>{per90}</strong></div><div><span>Gol başına dk.</span><strong>{minutesPerGoal??"–"}</strong></div><div><span>Şut / isabet</span><strong>{r.shots}/{r.shotsOnTarget}</strong></div><div><span>Şut dönüşümü</span><strong>{r.shots?`%${round(r.goals/r.shots*100)}`:"–"}</strong></div><div><span>Penaltı gol/kaçan</span><strong>{r.penaltiesScored}/{r.penaltiesMissed}</strong></div><div><span>Rating</span><strong>{r.averageRating?.toFixed(2)??"–"}</strong></div><div><span>Kilit pas</span><strong>{r.keyPasses}</strong></div><div><span>Pas isabeti</span><strong>{r.passAccuracy??"–"}%</strong></div><div><span>İlk 11</span><strong>{r.starts}</strong></div><div><span>Kart</span><strong>{r.yellowCards}S / {r.redCards}K</strong></div></div></details>})}</div>}</section>
+ </main></PageShell>;
+}

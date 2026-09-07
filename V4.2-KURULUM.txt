@@ -1,0 +1,38 @@
+BET PROJECT V4.2 - HARICI BILDIRIM TESLIMATI
+=============================================
+
+Durum:
+- Mevcut urun: %100
+- V4 genisletmesi: bu adim dogrulaninca %40
+- Champion: 20% ML / 80% Poisson (degismez)
+- Otomatik model degisikligi: kapali
+
+Kurulum:
+1. ZIP dosyasini C:\Users\FMGammon\Desktop\bet-project klasorine cikarin.
+2. Sorulursa package.json ve src/app/operations/page.tsx dosyalarinin uzerine yazmayi onaylayin.
+3. Migration, pnpm install veya zorunlu .env degisikligi yoktur.
+
+Ilk dogrulama - disariya bildirim gondermez:
+
+pnpm run test:notification-delivery-v4
+pnpm run notifications:deliver-v4
+pnpm exec tsc --noEmit
+Remove-Item .next -Recurse -Force -ErrorAction SilentlyContinue
+pnpm build
+
+Beklenen mesajlar:
+- Production Notification Delivery V4.2 tests passed.
+- Teslimat komutu SAFELY_BLOCKED gosterir.
+- No external notification was sent and no outbox file was modified.
+
+Gercek webhook aktivasyonu simdi yapilmayacak. Ileride acik onay verildiginde:
+- PRODUCTION_NOTIFICATION_DELIVERY_ENABLED=true
+- PRODUCTION_NOTIFICATION_WEBHOOK_URL=https://...
+- Istege bagli PRODUCTION_NOTIFICATION_WEBHOOK_TOKEN=...
+
+Guvenlik:
+- Yalnizca lokal olmayan HTTPS webhook kabul edilir.
+- Varsayilan durum SAFELY_BLOCKED'tir.
+- Token dosyaya, payload'a veya terminal tablosuna yazilmaz.
+- Basarili teslimattan sonra bildirim dosyasi teslim edildi olarak isaretlenir.
+- Model agirligi ve uretim kilitleri degistirilmez.

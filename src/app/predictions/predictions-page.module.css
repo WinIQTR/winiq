@@ -1,0 +1,49 @@
+.predictionsTopbar {
+  margin-bottom: 18px;
+}
+
+.predictionsTopbar h1 {
+  font-size: clamp(42px, 4.2vw, 68px);
+  line-height: 0.98;
+}
+
+.predictionsTopbar :global(.subtitle) {
+  max-width: 900px;
+  margin-top: 12px;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.matchCenter {
+  padding: 15px !important;
+}
+
+.matchCenterHeader {
+  margin-bottom: 12px !important;
+}
+
+.matchCenterHeader h2 {
+  margin-top: 2px;
+  font-size: clamp(20px, 1.8vw, 28px) !important;
+}
+
+.matchCenterHeader :global(.dashboard-muted) {
+  max-width: 980px;
+  margin-top: 5px;
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+@media (max-width: 700px) {
+  .predictionsTopbar h1 {
+    font-size: 38px;
+  }
+
+  .predictionsTopbar :global(.subtitle) {
+    font-size: 13px;
+  }
+
+  .matchCenter {
+    padding: 11px !important;
+  }
+}

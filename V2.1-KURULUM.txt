@@ -1,0 +1,34 @@
+BET PROJECT V2.1 — PORTFÖY VE RİSK MOTORU
+
+Bu paket V2.0/V2.0.1 kurulumu üzerine uygulanır.
+
+1. Çalışan geliştirme sunucusunu terminalde Ctrl+C ile durdurun.
+
+2. ZIP dosyasını açın ve içindeki dosyaları Bet Project ana klasörüne
+   kopyalayın. Sorulduğunda mevcut dosyaların üzerine yazılmasına izin verin.
+   src, scripts ve package.json yolları korunmalıdır.
+
+3. Proje klasöründe şu kontrolleri çalıştırın:
+
+   npm run test:portfolio-v2
+   npm run test:value-v2
+   npx tsc --noEmit
+
+4. Uygulamayı yeniden başlatın:
+
+   npm run dev
+
+5. Tarayıcıda /value-bets sayfasını açın. Yeni oran aktarımı gerekmez;
+   portföy görünümü mevcut maç öncesi arşiv kayıtlarından otomatik hesaplanır.
+
+V2.1 KURALLARI
+
+- Her maç için yalnız en yüksek valueScore değerine sahip seçim ana öneridir.
+- Aynı maçın diğer seçimleri Alternatifler bölümünde 0.00% miktarla gösterilir.
+- Beklenen değer %5'in veya piyasa avantajı %3'ün altındaysa seçim İzleme
+  Listesine alınır ve miktarı 0.00% olur.
+- Ana önerilerin günlük toplam miktarı İstanbul tarihine göre en fazla %6'dır.
+  Gerekirse tüm ana miktarlar orantılı olarak küçültülür.
+- Arşiv kayıtları değiştirilmez; bu mantık yalnız portföy sunum katmanıdır.
+
+Not: npm install gerekmez; paket yeni bağımlılık eklemez.

@@ -1,0 +1,64 @@
+BET PROJECT V6.1 - UYELIK VE ERISIM KONTROLU
+
+Bu paket mevcut projenin uzerine acilir. .env, veritabani ve uretim verileri pakette yoktur ve degistirilmez.
+
+1) Calisan pnpm dev oturumunu Ctrl+C ile durdurun.
+
+2) Once mevcut uretim yedegini alin:
+   pnpm run backup:production
+   pnpm run verify:backup
+
+3) ZIP dosyasini proje kokune acin.
+
+4) Veritabani ve kod dogrulama:
+   pnpm exec prisma generate
+   pnpm exec prisma migrate deploy
+   pnpm run test:membership-v6
+   pnpm exec tsc --noEmit
+   Remove-Item .next -Recurse -Force -ErrorAction SilentlyContinue
+   pnpm build
+
+5) Ilk yonetici hesabini olusturun. Sifre ekranda ve komut gecmisinde gorunmez:
+
+   $env:BOOTSTRAP_ADMIN_EMAIL = "yonetici@ornek.com"
+   $env:BOOTSTRAP_ADMIN_NAME = "Yonetici"
+   $SecurePassword = Read-Host "En az 12 karakterli yonetici sifresi" -AsSecureString
+   $BSTR = [Runtime.InteropServices.Marshal]::SecureStringToBSTR($SecurePassword)
+   try {
+     $env:BOOTSTRAP_ADMIN_PASSWORD = [Runtime.InteropServices.Marshal]::PtrToStringBSTR($BSTR)
+     pnpm run auth:create-admin-v6
+   }
+   finally {
+     [Runtime.InteropServices.Marshal]::ZeroFreeBSTR($BSTR)
+     Remove-Item Env:BOOTSTRAP_ADMIN_EMAIL -ErrorAction SilentlyContinue
+     Remove-Item Env:BOOTSTRAP_ADMIN_NAME -ErrorAction SilentlyContinue
+     Remove-Item Env:BOOTSTRAP_ADMIN_PASSWORD -ErrorAction SilentlyContinue
+   }
+
+6) BASIC uye olusturma ornegi:
+
+   $env:MEMBER_EMAIL = "uye@ornek.com"
+   $env:MEMBER_NAME = "Deneme Uye"
+   $env:MEMBER_PLAN = "BASIC"
+   $SecurePassword = Read-Host "En az 12 karakterli uye sifresi" -AsSecureString
+   $BSTR = [Runtime.InteropServices.Marshal]::SecureStringToBSTR($SecurePassword)
+   try {
+     $env:MEMBER_PASSWORD = [Runtime.InteropServices.Marshal]::PtrToStringBSTR($BSTR)
+     pnpm run auth:create-member-v6
+   }
+   finally {
+     [Runtime.InteropServices.Marshal]::ZeroFreeBSTR($BSTR)
+     Remove-Item Env:MEMBER_EMAIL -ErrorAction SilentlyContinue
+     Remove-Item Env:MEMBER_NAME -ErrorAction SilentlyContinue
+     Remove-Item Env:MEMBER_PLAN -ErrorAction SilentlyContinue
+     Remove-Item Env:MEMBER_PASSWORD -ErrorAction SilentlyContinue
+   }
+
+7) Uygulamayi baslatin:
+   pnpm dev
+
+Giris adresi: http://localhost:3000/login
+
+BASIC kullanici sadece bugunun sade tahmin ekranina ulasir. Detayli mevcut sayfalar ve yonetim API'leri ADMIN oturumu gerektirir. Acik kayit yoktur.
+
+Champion: %20 ML / %80 Poisson. Otomatik model degisikligi kilitlidir.

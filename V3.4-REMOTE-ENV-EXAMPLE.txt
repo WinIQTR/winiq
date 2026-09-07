@@ -1,0 +1,8 @@
+# This is an example only. Do not paste real secrets into chat.
+# Do not replace the current local .env until a remote server is selected.
+
+NODE_ENV=production
+APP_BASE_URL=https://your-final-domain.example
+DATABASE_URL=postgresql://REMOTE_USER:REMOTE_PASSWORD@REMOTE_DATABASE_HOST:5432/bet_project?sslmode=require
+API_FOOTBALL_KEY=STORE_THIS_IN_THE_REMOTE_SECRET_MANAGER
+PRODUCTION_DATA_ROOT=D:\bet-project-production-data

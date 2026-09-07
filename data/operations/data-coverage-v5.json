@@ -1,0 +1,140 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-07T03:30:46.686Z",
+  "seasonYear": 2026,
+  "api": {
+    "state": "CONNECTED",
+    "plan": "Pro",
+    "active": true,
+    "endsAt": "2026-10-06T16:08:46+00:00",
+    "usedToday": 24,
+    "dailyLimit": 7500,
+    "remainingToday": 7476
+  },
+  "totals": {
+    "leagues": 9,
+    "fixtures": 2774,
+    "finished": 604,
+    "scheduled": 2170,
+    "live": 0,
+    "postponedOrCancelled": 0,
+    "missingFinalScores": 0,
+    "publishedCandidates": 258,
+    "lastDatabaseUpdateAt": "2026-09-07T03:30:09.559Z"
+  },
+  "leagues": [
+    {
+      "leagueApiId": 78,
+      "leagueName": "Bundesliga",
+      "fixtures": 306,
+      "finished": 18,
+      "scheduled": 288,
+      "live": 0,
+      "postponedOrCancelled": 0,
+      "missingFinalScores": 0,
+      "publishedCandidates": 23,
+      "lastDatabaseUpdateAt": "2026-09-07T03:30:07.627Z"
+    },
+    {
+      "leagueApiId": 140,
+      "leagueName": "La Liga",
+      "fixtures": 380,
+      "finished": 39,
+      "scheduled": 341,
+      "live": 0,
+      "postponedOrCancelled": 0,
+      "missingFinalScores": 0,
+      "publishedCandidates": 41,
+      "lastDatabaseUpdateAt": "2026-09-07T03:30:05.611Z"
+    },
+    {
+      "leagueApiId": 61,
+      "leagueName": "Ligue 1",
+      "fixtures": 306,
+      "finished": 27,
+      "scheduled": 279,
+      "live": 0,
+      "postponedOrCancelled": 0,
+      "missingFinalScores": 0,
+      "publishedCandidates": 27,
+      "lastDatabaseUpdateAt": "2026-09-07T03:30:08.270Z"
+    },
+    {
+      "leagueApiId": 39,
+      "leagueName": "Premier League",
+      "fixtures": 380,
+      "finished": 30,
+      "scheduled": 350,
+      "live": 0,
+      "postponedOrCancelled": 0,
+      "missingFinalScores": 0,
+      "publishedCandidates": 28,
+      "lastDatabaseUpdateAt": "2026-09-07T03:30:04.910Z"
+    },
+    {
+      "leagueApiId": 135,
+      "leagueName": "Serie A",
+      "fixtures": 380,
+      "finished": 28,
+      "scheduled": 352,
+      "live": 0,
+      "postponedOrCancelled": 0,
+      "missingFinalScores": 0,
+      "publishedCandidates": 29,
+      "lastDatabaseUpdateAt": "2026-09-07T03:30:06.952Z"
+    },
+    {
+      "leagueApiId": 203,
+      "leagueName": "Süper Lig",
+      "fixtures": 306,
+      "finished": 34,
+      "scheduled": 272,
+      "live": 0,
+      "postponedOrCancelled": 0,
+      "missingFinalScores": 0,
+      "publishedCandidates": 28,
+      "lastDatabaseUpdateAt": "2026-09-07T03:30:06.277Z"
+    },
+    {
+      "leagueApiId": 2,
+      "leagueName": "UEFA Champions League",
+      "fixtures": 234,
+      "finished": 90,
+      "scheduled": 144,
+      "live": 0,
+      "postponedOrCancelled": 0,
+      "missingFinalScores": 0,
+      "publishedCandidates": 58,
+      "lastDatabaseUpdateAt": "2026-09-07T03:30:08.913Z"
+    },
+    {
+      "leagueApiId": 848,
+      "leagueName": "UEFA Europa Conference League",
+      "fixtures": 258,
+      "finished": 258,
+      "scheduled": 0,
+      "live": 0,
+      "postponedOrCancelled": 0,
+      "missingFinalScores": 0,
+      "publishedCandidates": 12,
+      "lastDatabaseUpdateAt": "2026-09-06T16:14:13.495Z"
+    },
+    {
+      "leagueApiId": 3,
+      "leagueName": "UEFA Europa League",
+      "fixtures": 224,
+      "finished": 80,
+      "scheduled": 144,
+      "live": 0,
+      "postponedOrCancelled": 0,
+      "missingFinalScores": 0,
+      "publishedCandidates": 12,
+      "lastDatabaseUpdateAt": "2026-09-07T03:30:09.559Z"
+    }
+  ],
+  "production": {
+    "champion": "20% ML / 80% Poisson",
+    "automaticModelChangeAllowed": false,
+    "secretsStored": false
+  }
+}

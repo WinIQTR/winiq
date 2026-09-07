@@ -1,0 +1,38 @@
+BET PROJECT V3.4.1 - TURBOPACK SNAPSHOT TRACE DUZELTMESI
+
+DURUM
+- V3.4 islevsel testleri ve production build basariliydi.
+- Bu paket production build sirasindaki NFT/dinamik dosya izleme uyarisini temizler.
+- Dogrulandiginda genel proje %95 olarak kapanir.
+
+DUZELTME
+- Snapshot varsayilan yolu statik data klasoru ile sinirlandi.
+- Uzak ortamda PRODUCTION_DATA_ROOT altindaki data klasoru desteklendi.
+- Harici/dinamik kalici yollar Turbopack izleme listesinin disinda birakildi.
+- Mevcut yerel snapshot yolu degismedi.
+- Model, tahmin, oran, ROI ve portfoy hesaplari degistirilmedi.
+
+KURULUM
+1. Calisan pnpm dev islemini Ctrl+C ile durdurun.
+2. ZIP dosyasini ayri bir klasore acin.
+3. src, scripts ve package.json dosyalarini proje ana klasorune kopyalayin.
+4. Soruldugunda Replace the files in the destination secenegini kullanin.
+
+KOMUTLARI TEK TEK CALISTIRIN
+
+pnpm run test:storage-v3
+pnpm exec tsc --noEmit
+pnpm build
+
+BEKLENEN
+- Production Snapshot Storage V3.4.1 tests passed.
+- TypeScript hatasi olmamasi.
+- Production build basarili olmasi.
+- Encountered unexpected file in NFT list uyarisinin artik gorunmemesi.
+
+NOT
+- Migration gerekmez.
+- pnpm install gerekmez.
+- .env degisikligi gerekmez.
+- %20 ML / %80 Poisson Champion degismez.
+- Otomatik model degisikligi kapali kalir.

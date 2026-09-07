@@ -1,0 +1,35 @@
+BET PROJECT V6.2 - UYE YONETIMI VE PAKET EKRANLARI
+
+Bu paket V6.1.3 uzerine kurulur. Yeni migration yoktur.
+
+1) Calisan pnpm dev terminalinde Ctrl+C basin.
+2) ZIP dosyasini proje kokune acin.
+3) Calistirin:
+
+   pnpm exec prisma generate
+   pnpm run test:membership-admin-v6
+   pnpm run test:membership-v6
+   pnpm run test:login-loop-v6
+   pnpm run test:value-history-hotfix-v6
+   pnpm exec tsc --noEmit
+   Remove-Item .next -Recurse -Force -ErrorAction SilentlyContinue
+   pnpm build
+   pnpm dev
+
+4) Yonetici girisi sonrasinda acin:
+   http://localhost:3000/admin/members
+
+YENI YETENEKLER
+- Yonetici panelinden uye olusturma
+- BASIC, ANALYSIS ve PROFESSIONAL paket atama
+- Uyelik bitis tarihi
+- ACTIVE / SUSPENDED durum yonetimi
+- Guvenli sifre yenileme
+- Tum uye oturumlarini kapatma
+- Yonetici cikis dugmesi
+- BASIC: sadece bugunun sade tahminleri
+- ANALYSIS: bugunun olasiliklari ve son 30 gun sonuclari
+- PROFESSIONAL: ANALYSIS + xG, veri kalitesi ve adil oran
+
+Acik kayit yoktur. ADMIN hesaplari uye panelinden degistirilemez.
+%20 ML / %80 Poisson Champion ve otomatik model degisikligi kilidi korunur.

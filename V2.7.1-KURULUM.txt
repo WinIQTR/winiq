@@ -1,0 +1,22 @@
+BET PROJECT V2.7.1 - WINDOWS FINAL VERIFIER DUZELTMESI
+
+Bu paket V2.7 uzerine kurulur.
+
+DUZELTME
+- verify-production-v2-final.ts icindeki top-level await kaldirildi.
+- Final dogrulama Windows CommonJS / tsx ile uyumlu async main yapisina alindi.
+- Model, veri, hesaplama ve production ayarlari degismedi.
+
+KURULUM
+1. ZIP icindeki scripts klasorunu proje ana klasorune kopyalayip uzerine yazin.
+2. Calistirin:
+
+pnpm exec tsc --noEmit
+pnpm run verify:v2-final
+
+Beklenen son satirlar:
+
+V2 final production verification passed.
+20% ML / 80% Poisson Champion remains unchanged.
+
+Migration, pnpm install ve pnpm run refresh gerekmez. Snapshot az once basariyla yenilenmistir.

@@ -1,0 +1,18 @@
+BET PROJECT V6.6.1 - FIYAT YAYIN DURUMU HOTFIX
+
+Bu hotfix, paket fiyatlari henuz yayinlanmadiginda V6 final dogrulamasinin
+gereksiz yere basarisiz olmasini engeller.
+
+- Uc aktif fiyat kaydi varsa: CONFIGURED
+- Fiyatlar henuz belirlenmediyse: NOT_PUBLISHED
+- Fiyatlarin yayinlanmamis olmasi yerel sistem hatasi sayilmaz.
+- Fiyat, uye, talep, odeme veya model ayari degistirilmez.
+
+KURULUM
+1. ZIP dosyasini proje kokune cikarin.
+2. Asagidaki komutlari calistirin:
+
+pnpm run test:v6-final
+pnpm exec tsc --noEmit
+pnpm run verify:v6-final
+

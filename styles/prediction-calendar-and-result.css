@@ -1,0 +1,153 @@
+/*
+ * globals.css dosyasının sonuna ekleyin.
+ * Takvim, günlük gezinme ve tahmin sonuç rozetleri.
+ */
+
+.prediction-calendar-area {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 360px;
+}
+
+.prediction-calendar-navigation {
+  display: grid;
+  grid-template-columns: 48px minmax(220px, 1fr) 48px;
+  align-items: stretch;
+  overflow: hidden;
+  min-height: 58px;
+  border: 1px solid #dbe3ff;
+  border-radius: 999px;
+  background: #ffffff;
+  box-shadow: 0 8px 24px rgb(15 23 42 / 6%);
+}
+
+.calendar-arrow-button {
+  border: 0;
+  background: #ffffff;
+  color: #3156f5;
+  font-size: 34px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 160ms ease, color 160ms ease;
+}
+
+.calendar-arrow-button:first-child {
+  border-right: 1px solid #e5eaf7;
+}
+
+.calendar-arrow-button:last-child {
+  border-left: 1px solid #e5eaf7;
+}
+
+.calendar-arrow-button:hover {
+  background: #f4f6ff;
+  color: #1d35ca;
+}
+
+.calendar-arrow-button:focus-visible,
+.calendar-date-selector:focus-within,
+.calendar-today-button:focus-visible {
+  outline: 3px solid rgb(49 86 245 / 22%);
+  outline-offset: 2px;
+}
+
+.calendar-date-selector {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 7px 16px;
+  color: #243bdb;
+  text-align: center;
+  cursor: pointer;
+}
+
+.calendar-date-selector strong {
+  font-size: 15px;
+  font-weight: 800;
+  text-transform: capitalize;
+}
+
+.calendar-date-selector span {
+  color: #8590a7;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.calendar-date-selector input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.calendar-today-button {
+  border: 1px solid #dbe3ff;
+  border-radius: 999px;
+  padding: 10px 16px;
+  background: #f4f6ff;
+  color: #3156f5;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.calendar-today-button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.prediction-result-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 112px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.prediction-result-success {
+  border-color: #b7ebcf;
+  background: #eafaf1;
+  color: #128048;
+}
+
+.prediction-result-failure {
+  border-color: #ffc8c8;
+  background: #fff0f0;
+  color: #c43232;
+}
+
+.prediction-result-neutral {
+  border-color: #dce2ec;
+  background: #f3f5f8;
+  color: #7b8496;
+}
+
+@media (max-width: 900px) {
+  .prediction-control-bar,
+  .prediction-calendar-area {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .prediction-calendar-area,
+  .prediction-calendar-navigation {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .prediction-calendar-navigation {
+    grid-template-columns: 44px minmax(0, 1fr) 44px;
+  }
+}

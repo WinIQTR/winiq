@@ -1,0 +1,23 @@
+BET PROJECT V6.4.1 - YÜKSELTME TALEBİ DURUM TÜRÜ HOTFIX
+
+Sorun:
+Prisma UpgradeRequestStatus dört olası durum döndürürken yönetici bileşeni
+yalnızca PENDING ve CONTACTED değerlerini kabul ediyordu. Sorgu aktif kayıtları
+doğru filtrelese de TypeScript bu filtreyi otomatik daraltmadığı için build duruyordu.
+
+Çözüm:
+Yönetici bileşeninin veri türü Prisma enumunun dört güvenli değeriyle eşitlendi.
+Ekranda yine yalnızca PENDING ve CONTACTED talepler sorgulanır.
+
+Migration yoktur. Veritabanı ve üyelik kayıtları değişmez.
+
+KURULUM VE TEST
+1. Çalışan pnpm dev işlemini Ctrl+C ile durdurun.
+2. ZIP dosyasını proje köküne çıkarın.
+3. Aşağıdaki komutları çalıştırın:
+
+pnpm exec tsx scripts/test-membership-request-status-hotfix-v6.ts
+pnpm exec tsc --noEmit
+Remove-Item .next -Recurse -Force -ErrorAction SilentlyContinue
+pnpm build
+pnpm dev

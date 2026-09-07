@@ -1,0 +1,888 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum MatchStatus {
+  SCHEDULED
+  LIVE
+  FINISHED
+  POSTPONED
+  CANCELLED
+}
+
+enum PlayerPosition {
+  GOALKEEPER
+  DEFENDER
+  MIDFIELDER
+  FORWARD
+  UNKNOWN
+}
+
+enum InjuryStatus {
+  DOUBTFUL
+  INJURED
+  RECOVERING
+  AVAILABLE
+  UNKNOWN
+}
+
+enum LineupStatus {
+  PREDICTED
+  CONFIRMED
+}
+
+enum FeatureScope {
+  MATCH
+  TEAM
+  PLAYER
+  LINEUP
+  ODDS
+  WEATHER
+  REFEREE
+  MOTIVATION
+}
+
+enum FeatureCategory {
+  TEAM_STRENGTH
+  RECENT_FORM
+  HOME_AWAY
+  ATTACK
+  DEFENCE
+  HEAD_TO_HEAD
+  PLAYER_QUALITY
+  SQUAD_AVAILABILITY
+  TACTICAL_MATCHUP
+  REST_AND_FATIGUE
+  MOTIVATION
+  WEATHER
+  REFEREE
+  MARKET_ODDS
+  DATA_QUALITY
+}
+
+enum FeatureValueType {
+  NUMBER
+  PERCENTAGE
+  BOOLEAN
+  CATEGORY
+}
+
+enum FeatureStatus {
+  DRAFT
+  ACTIVE
+  EXPERIMENTAL
+  DISABLED
+}
+
+enum DataProviderCode {
+  API_FOOTBALL
+  SPORTMONKS
+  THE_ODDS_API
+  OPENWEATHER
+  TRANSFERMARKT
+  SOFASCORE
+  FLASHSCORE
+  INTERNAL
+}
+
+enum ImportRunStatus {
+  RUNNING
+  SUCCESS
+  PARTIAL
+  NO_DATA
+  FAILED
+  SKIPPED
+}
+
+enum ExternalEntityType {
+  COUNTRY
+  LEAGUE
+  SEASON
+  TEAM
+  PLAYER
+  MATCH
+  VENUE
+  COACH
+  REFEREE
+  BOOKMAKER
+}
+
+enum CoverageEntityType {
+  LEAGUE
+  SEASON
+  TEAM
+  MATCH
+}
+
+enum DataAvailabilityStatus {
+  AVAILABLE
+  PARTIAL
+  MISSING
+  NOT_SUPPORTED
+  STALE
+  NOT_CHECKED
+}
+
+enum TeamSeasonStatus {
+  ACTIVE
+  PROMOTED
+  RELEGATED
+  WITHDRAWN
+  UNKNOWN
+}
+
+model Country {
+  id        Int      @id @default(autoincrement())
+  apiId     Int?     @unique
+  name      String   @unique
+  code      String?  @unique
+  flagUrl   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  leagues League[]
+  teams   Team[]
+  players Player[]
+}
+
+model League {
+  id        Int      @id @default(autoincrement())
+  apiId     Int      @unique
+  name      String
+  type      String?
+  logoUrl   String?
+  countryId Int?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  country     Country?     @relation(fields: [countryId], references: [id])
+  seasons     Season[]
+  teamSeasons TeamSeason[]
+
+  @@index([countryId])
+}
+
+model Season {
+  id        Int       @id @default(autoincrement())
+  leagueId  Int
+  year      Int
+  startDate DateTime?
+  endDate   DateTime?
+  isCurrent Boolean   @default(false)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  league                  League                   @relation(fields: [leagueId], references: [id], onDelete: Cascade)
+  matches                 Match[]
+  playerSeasonStatistics  PlayerSeasonStatistic[]
+  playerImpactScores      PlayerImpactScore[]
+  teamSeasons             TeamSeason[]
+  dataQualitySnapshots    DataQualitySnapshot[]
+  playerMatchPerformances PlayerMatchPerformance[]
+
+  @@unique([leagueId, year])
+  @@index([isCurrent])
+}
+
+model PlayerMatchPerformance {
+  id Int @id @default(autoincrement())
+
+  playerId Int
+  matchId  Int
+  teamId   Int
+  seasonId Int
+
+  starter Boolean @default(false)
+  captain Boolean @default(false)
+
+  position    String?
+  shirtNumber Int?
+
+  minutes Int    @default(0)
+  rating  Float?
+
+  goals   Int @default(0)
+  assists Int @default(0)
+
+  shots         Int @default(0)
+  shotsOnTarget Int @default(0)
+
+  passes       Int    @default(0)
+  keyPasses    Int    @default(0)
+  passAccuracy Float?
+
+  tackles       Int @default(0)
+  interceptions Int @default(0)
+
+  duels    Int @default(0)
+  duelsWon Int @default(0)
+
+  dribbles    Int @default(0)
+  dribblesWon Int @default(0)
+
+  saves Int @default(0)
+
+  yellowCards Int @default(0)
+  redCards    Int @default(0)
+
+  source String @default("API_FOOTBALL")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  player Player @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  match  Match  @relation(fields: [matchId], references: [id], onDelete: Cascade)
+  team   Team   @relation(fields: [teamId], references: [id])
+  season Season @relation(fields: [seasonId], references: [id], onDelete: Cascade)
+
+  @@unique([playerId, matchId])
+  @@index([matchId])
+  @@index([teamId])
+  @@index([seasonId])
+  @@index([playerId])
+  @@index([rating])
+}
+
+model Team {
+  id        Int      @id @default(autoincrement())
+  apiId     Int      @unique
+  name      String
+  shortName String?
+  code      String?
+  logoUrl   String?
+  countryId Int?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  country                 Country?                 @relation(fields: [countryId], references: [id])
+  homeMatches             Match[]                  @relation("HomeTeam")
+  awayMatches             Match[]                  @relation("AwayTeam")
+  players                 Player[]
+  playerSeasonStatistics  PlayerSeasonStatistic[]
+  injuries                Injury[]
+  lineups                 Lineup[]
+  lineupPlayers           LineupPlayer[]
+  playerImpactScores      PlayerImpactScore[]
+  squadStrengthScores     SquadStrengthScore[]
+  featureValues           MatchFeatureValue[]
+  teamSeasons             TeamSeason[]
+  dataQualitySnapshots    DataQualitySnapshot[]
+  playerMatchPerformances PlayerMatchPerformance[]
+
+  @@index([countryId])
+}
+
+model Match {
+  id         Int         @id @default(autoincrement())
+  apiId      Int         @unique
+  seasonId   Int
+  homeTeamId Int
+  awayTeamId Int
+  round      String?
+  kickoffAt  DateTime
+  status     MatchStatus @default(SCHEDULED)
+  homeScore  Int?
+  awayScore  Int?
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+
+  season               Season                   @relation(fields: [seasonId], references: [id])
+  homeTeam             Team                     @relation("HomeTeam", fields: [homeTeamId], references: [id])
+  awayTeam             Team                     @relation("AwayTeam", fields: [awayTeamId], references: [id])
+  injuries             Injury[]
+  lineups              Lineup[]
+  playerImpactScores   PlayerImpactScore[]
+  squadStrengthScores  SquadStrengthScore[]
+  playerPerformances   PlayerMatchPerformance[]
+  featureValues        MatchFeatureValue[]
+  dataQualitySnapshots DataQualitySnapshot[]
+teamStatistics MatchTeamStatistic[]
+
+  @@index([kickoffAt])
+  @@index([status])
+  @@index([homeTeamId])
+  @@index([awayTeamId])
+}
+
+model Player {
+  id                  Int            @id @default(autoincrement())
+  apiId               Int            @unique
+  teamId              Int?
+  countryId           Int?
+  name                String
+  firstName           String?
+  lastName            String?
+  birthDate           DateTime?
+  age                 Int?
+  position            PlayerPosition @default(UNKNOWN)
+  detailedPosition    String?
+  preferredFoot       String?
+  heightCm            Int?
+  weightKg            Int?
+  shirtNumber         Int?
+  photoUrl            String?
+  marketValue         Decimal?       @db.Decimal(14, 2)
+  marketValueCurrency String?
+  contractEndDate     DateTime?
+  isActive            Boolean        @default(true)
+  createdAt           DateTime       @default(now())
+  updatedAt           DateTime       @updatedAt
+
+  team              Team?                    @relation(fields: [teamId], references: [id])
+  country           Country?                 @relation(fields: [countryId], references: [id])
+  seasonStatistics  PlayerSeasonStatistic[]
+  injuries          Injury[]
+  lineupEntries     LineupPlayer[]
+  impactScores      PlayerImpactScore[]
+  matchPerformances PlayerMatchPerformance[]
+
+  @@index([teamId])
+  @@index([countryId])
+  @@index([position])
+  @@index([name])
+}
+
+model PlayerSeasonStatistic {
+  id                 Int      @id @default(autoincrement())
+  playerId           Int
+  teamId             Int
+  seasonId           Int
+  appearances        Int      @default(0)
+  starts             Int      @default(0)
+  minutes            Int      @default(0)
+  goals              Int      @default(0)
+  assists            Int      @default(0)
+  expectedGoals      Float?
+  expectedAssists    Float?
+  shots              Int      @default(0)
+  shotsOnTarget      Int      @default(0)
+  keyPasses          Int      @default(0)
+  bigChancesCreated  Int      @default(0)
+  bigChancesMissed   Int      @default(0)
+  successfulDribbles Int      @default(0)
+  tackles            Int      @default(0)
+  interceptions      Int      @default(0)
+  clearances         Int      @default(0)
+  duelsWon           Int      @default(0)
+  aerialDuelsWon     Int      @default(0)
+  passAccuracy       Float?
+  yellowCards        Int      @default(0)
+  redCards           Int      @default(0)
+  averageRating      Float?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  player Player @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  team   Team   @relation(fields: [teamId], references: [id])
+  season Season @relation(fields: [seasonId], references: [id], onDelete: Cascade)
+
+  @@unique([playerId, teamId, seasonId])
+  @@index([teamId, seasonId])
+  @@index([seasonId])
+}
+
+model Injury {
+  id                 Int          @id @default(autoincrement())
+  playerId           Int
+  teamId             Int
+  matchId            Int?
+  injuryType         String?
+  status             InjuryStatus @default(UNKNOWN)
+  startDate          DateTime?
+  expectedReturnDate DateTime?
+  actualReturnDate   DateTime?
+  matchesMissed      Int          @default(0)
+  source             String?
+  sourceUrl          String?
+  createdAt          DateTime     @default(now())
+  updatedAt          DateTime     @updatedAt
+
+  player Player @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  team   Team   @relation(fields: [teamId], references: [id])
+  match  Match? @relation(fields: [matchId], references: [id])
+
+  @@index([playerId])
+  @@index([teamId])
+  @@index([matchId])
+  @@index([status])
+}
+
+model Lineup {
+  id          Int          @id @default(autoincrement())
+  matchId     Int
+  teamId      Int
+  formation   String?
+  status      LineupStatus @default(PREDICTED)
+  isConfirmed Boolean      @default(false)
+  confirmedAt DateTime?
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  match   Match          @relation(fields: [matchId], references: [id], onDelete: Cascade)
+  team    Team           @relation(fields: [teamId], references: [id])
+  players LineupPlayer[]
+
+  @@unique([matchId, teamId, status])
+  @@index([teamId])
+  @@index([isConfirmed])
+}
+
+model LineupPlayer {
+  id                Int      @id @default(autoincrement())
+  lineupId          Int
+  playerId          Int
+  teamId            Int
+  starter           Boolean  @default(false)
+  position          String?
+  formationPosition String?
+  shirtNumber       Int?
+  captain           Boolean  @default(false)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  lineup Lineup @relation(fields: [lineupId], references: [id], onDelete: Cascade)
+  player Player @relation(fields: [playerId], references: [id])
+  team   Team   @relation(fields: [teamId], references: [id])
+
+  @@unique([lineupId, playerId])
+  @@index([playerId])
+  @@index([teamId])
+  @@index([starter])
+}
+
+model PlayerImpactScore {
+  id       Int  @id @default(autoincrement())
+  playerId Int
+  matchId  Int?
+  seasonId Int
+  teamId   Int
+
+  formScore        Float
+  qualityScore     Float
+  fitnessScore     Float
+  tacticalFitScore Float
+  importanceScore  Float
+  marketValueScore Float
+
+  overallImpactScore Float
+
+  dataQualityScore Float @default(0)
+
+  modelVersion String
+
+  calculatedAt DateTime @default(now())
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  player Player @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  match  Match? @relation(fields: [matchId], references: [id], onDelete: Cascade)
+  season Season @relation(fields: [seasonId], references: [id])
+  team   Team   @relation(fields: [teamId], references: [id])
+
+  @@unique([playerId, matchId, modelVersion])
+  @@index([teamId])
+  @@index([matchId])
+  @@index([seasonId])
+  @@index([overallImpactScore])
+}
+
+model SquadStrengthScore {
+  id                   Int      @id @default(autoincrement())
+  matchId              Int
+  teamId               Int
+  startingElevenScore  Float
+  benchScore           Float
+  goalkeeperScore      Float
+  defenceScore         Float
+  midfieldScore        Float
+  attackScore          Float
+  missingPlayerPenalty Float
+  squadDepthScore      Float
+  overallSquadScore    Float
+  lineupCertainty      Float
+  modelVersion         String
+  calculatedAt         DateTime @default(now())
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+
+  match Match @relation(fields: [matchId], references: [id], onDelete: Cascade)
+  team  Team  @relation(fields: [teamId], references: [id])
+
+  @@unique([matchId, teamId, modelVersion])
+  @@index([teamId])
+  @@index([overallSquadScore])
+}
+
+model FeatureDefinition {
+  id                   Int              @id @default(autoincrement())
+  key                  String           @unique
+  name                 String
+  description          String?
+  scope                FeatureScope
+  category             FeatureCategory
+  valueType            FeatureValueType
+  status               FeatureStatus    @default(DRAFT)
+  unit                 String?
+  minimumValue         Float?
+  maximumValue         Float?
+  higherIsBetter       Boolean?
+  availableBeforeMatch Boolean          @default(true)
+  requiredDataSource   String?
+  calculationVersion   String
+  createdAt            DateTime         @default(now())
+  updatedAt            DateTime         @updatedAt
+
+  values  MatchFeatureValue[]
+  weights ModelFeatureWeight[]
+
+  @@index([scope])
+  @@index([category])
+  @@index([status])
+}
+
+model MatchFeatureValue {
+  id               Int       @id @default(autoincrement())
+  matchId          Int
+  featureId        Int
+  teamId           Int?
+  numericValue     Float?
+  textValue        String?
+  booleanValue     Boolean?
+  normalizedValue  Float?
+  dataQualityScore Float     @default(100)
+  source           String?
+  sourceUpdatedAt  DateTime?
+  calculationRunId String?
+  calculatedAt     DateTime  @default(now())
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+
+  match   Match             @relation(fields: [matchId], references: [id], onDelete: Cascade)
+  feature FeatureDefinition @relation(fields: [featureId], references: [id], onDelete: Cascade)
+  team    Team?             @relation(fields: [teamId], references: [id])
+
+  @@unique([matchId, featureId, teamId, calculationRunId])
+  @@index([matchId])
+  @@index([featureId])
+  @@index([teamId])
+  @@index([calculatedAt])
+}
+
+model ModelVersion {
+  id          Int       @id @default(autoincrement())
+  name        String
+  version     String    @unique
+  description String?
+  isActive    Boolean   @default(false)
+  trainedFrom DateTime?
+  trainedTo   DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  featureWeights ModelFeatureWeight[]
+
+  @@index([isActive])
+}
+
+model ModelFeatureWeight {
+  id             Int      @id @default(autoincrement())
+  modelVersionId Int
+  featureId      Int
+  weight         Float
+  minimumWeight  Float?
+  maximumWeight  Float?
+  learned        Boolean  @default(false)
+  sampleSize     Int?
+  performance    Float?
+  updatedAt      DateTime @updatedAt
+  createdAt      DateTime @default(now())
+
+  modelVersion ModelVersion      @relation(fields: [modelVersionId], references: [id], onDelete: Cascade)
+  feature      FeatureDefinition @relation(fields: [featureId], references: [id], onDelete: Cascade)
+
+  @@unique([modelVersionId, featureId])
+  @@index([featureId])
+}
+
+model TeamSeason {
+  id        Int              @id @default(autoincrement())
+  teamId    Int
+  seasonId  Int
+  leagueId  Int
+  status    TeamSeasonStatus @default(ACTIVE)
+  position  Int?
+  groupName String?
+  joinedAt  DateTime?
+  leftAt    DateTime?
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+
+  team   Team   @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  season Season @relation(fields: [seasonId], references: [id], onDelete: Cascade)
+  league League @relation(fields: [leagueId], references: [id], onDelete: Cascade)
+
+  @@unique([teamId, seasonId])
+  @@index([leagueId, seasonId])
+  @@index([seasonId])
+  @@index([status])
+}
+
+model DataSource {
+  id               Int              @id @default(autoincrement())
+  code             DataProviderCode @unique
+  name             String
+  baseUrl          String?
+  isActive         Boolean          @default(true)
+  priority         Int              @default(100)
+  supportsLiveData Boolean          @default(false)
+  notes            String?
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+
+  importRuns      ImportRun[]
+  entityMappings  SourceEntityMap[]
+  coverageRecords DataCoverage[]
+
+  @@index([isActive])
+  @@index([priority])
+}
+
+model ImportRun {
+  id                Int                @id @default(autoincrement())
+  dataSourceId      Int
+  entityType        ExternalEntityType
+  operation         String
+  requestedLeagueId Int?
+  requestedSeason   Int?
+  requestedEntityId Int?
+  status            ImportRunStatus    @default(RUNNING)
+  recordsReceived   Int                @default(0)
+  recordsCreated    Int                @default(0)
+  recordsUpdated    Int                @default(0)
+  recordsSkipped    Int                @default(0)
+  requestCount      Int                @default(0)
+  errorCode         String?
+  errorMessage      String?
+  metadata          Json?
+  startedAt         DateTime           @default(now())
+  finishedAt        DateTime?
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+
+  dataSource DataSource @relation(fields: [dataSourceId], references: [id])
+
+  @@index([dataSourceId, startedAt])
+  @@index([entityType])
+  @@index([status])
+  @@index([requestedLeagueId, requestedSeason])
+}
+
+model SourceEntityMap {
+  id               Int                @id @default(autoincrement())
+  dataSourceId     Int
+  entityType       ExternalEntityType
+  externalId       String
+  internalEntityId Int
+  externalName     String?
+  externalCode     String?
+  confidenceScore  Float              @default(100)
+  isVerified       Boolean            @default(false)
+  lastSeenAt       DateTime           @default(now())
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+
+  dataSource DataSource @relation(fields: [dataSourceId], references: [id], onDelete: Cascade)
+
+  @@unique([dataSourceId, entityType, externalId])
+  @@index([entityType, internalEntityId])
+  @@index([externalName])
+  @@index([isVerified])
+}
+
+model DataCoverage {
+  id                     Int                    @id @default(autoincrement())
+  dataSourceId           Int
+  entityType             CoverageEntityType
+  entityId               Int
+  fixturesStatus         DataAvailabilityStatus @default(NOT_CHECKED)
+  resultsStatus          DataAvailabilityStatus @default(NOT_CHECKED)
+  standingsStatus        DataAvailabilityStatus @default(NOT_CHECKED)
+  teamStatisticsStatus   DataAvailabilityStatus @default(NOT_CHECKED)
+  playerStatisticsStatus DataAvailabilityStatus @default(NOT_CHECKED)
+  lineupStatus           DataAvailabilityStatus @default(NOT_CHECKED)
+  injuryStatus           DataAvailabilityStatus @default(NOT_CHECKED)
+  oddsStatus             DataAvailabilityStatus @default(NOT_CHECKED)
+  expectedGoalsStatus    DataAvailabilityStatus @default(NOT_CHECKED)
+  weatherStatus          DataAvailabilityStatus @default(NOT_CHECKED)
+  refereeStatus          DataAvailabilityStatus @default(NOT_CHECKED)
+  coverageScore          Float                  @default(0)
+  lastCheckedAt          DateTime?
+  dataUpdatedAt          DateTime?
+  notes                  String?
+  createdAt              DateTime               @default(now())
+  updatedAt              DateTime               @updatedAt
+
+  dataSource DataSource @relation(fields: [dataSourceId], references: [id], onDelete: Cascade)
+
+  @@unique([dataSourceId, entityType, entityId])
+  @@index([entityType, entityId])
+  @@index([coverageScore])
+  @@index([lastCheckedAt])
+}
+
+model DataQualitySnapshot {
+  id                    Int      @id @default(autoincrement())
+  matchId               Int
+  teamId                Int?
+  seasonId              Int
+  overallScore          Float
+  coreDataScore         Float
+  teamDataScore         Float
+  playerDataScore       Float
+  lineupDataScore       Float
+  injuryDataScore       Float
+  oddsDataScore         Float
+  weatherDataScore      Float
+  refereeDataScore      Float
+  availableFeatureCount Int      @default(0)
+  missingFeatureCount   Int      @default(0)
+  staleFeatureCount     Int      @default(0)
+  missingFeatureKeys    Json?
+  warningMessages       Json?
+  modelVersion          String
+  calculatedAt          DateTime @default(now())
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+
+  match  Match  @relation(fields: [matchId], references: [id], onDelete: Cascade)
+  team   Team?  @relation(fields: [teamId], references: [id])
+  season Season @relation(fields: [seasonId], references: [id])
+
+  @@unique([matchId, teamId, modelVersion])
+  @@index([matchId])
+  @@index([teamId])
+  @@index([seasonId])
+  @@index([overallScore])
+}
+
+PS C:\Users\FMGammon\Desktop\bet-project> Get-Content .\prisma\schema.prisma | Select-String -Pattern
+ "^model PlayerMatchPerformance " -Context 0,100
+
+> model PlayerMatchPerformance {
+    id Int @id @default(autoincrement())
+
+    playerId Int
+    matchId  Int
+    teamId   Int
+    seasonId Int
+
+    starter Boolean @default(false)
+    captain Boolean @default(false)
+
+    position    String?
+    shirtNumber Int?
+
+    minutes Int    @default(0)
+    rating  Float?
+
+    goals   Int @default(0)
+    assists Int @default(0)
+
+    shots         Int @default(0)
+    shotsOnTarget Int @default(0)
+
+    passes       Int    @default(0)
+    keyPasses    Int    @default(0)
+    passAccuracy Float?
+
+    tackles       Int @default(0)
+    interceptions Int @default(0)
+
+    duels    Int @default(0)
+    duelsWon Int @default(0)
+
+    dribbles    Int @default(0)
+    dribblesWon Int @default(0)
+
+    saves Int @default(0)
+
+    yellowCards Int @default(0)
+    redCards    Int @default(0)
+
+    source String @default("API_FOOTBALL")
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    player Player @relation(fields: [playerId], references: [id], onDelete: Cascade)
+    match  Match  @relation(fields: [matchId], references: [id], onDelete: Cascade)
+    team   Team   @relation(fields: [teamId], references: [id])
+    season Season @relation(fields: [seasonId], references: [id], onDelete: Cascade)
+
+    @@unique([playerId, matchId])
+    @@index([matchId])
+    @@index([teamId])
+    @@index([seasonId])
+    @@index([playerId])
+    @@index([rating])
+  }
+
+  model Team {
+    id        Int      @id @default(autoincrement())
+    apiId     Int      @unique
+    name      String
+    shortName String?
+    code      String?
+    logoUrl   String?
+    countryId Int?
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    country                 Country?                 @relation(fields: [countryId], references:      
+[id])
+    homeMatches             Match[]                  @relation("HomeTeam")
+    awayMatches             Match[]                  @relation("AwayTeam")
+    players                 Player[]
+    playerSeasonStatistics  PlayerSeasonStatistic[]
+    injuries                Injury[]
+    lineups                 Lineup[]
+    lineupPlayers           LineupPlayer[]
+    playerImpactScores      PlayerImpactScore[]
+    squadStrengthScores     SquadStrengthScore[]
+    featureValues           MatchFeatureValue[]
+    teamSeasons             TeamSeason[]
+    dataQualitySnapshots    DataQualitySnapshot[]
+    playerMatchPerformances PlayerMatchPerformance[]
+    matchStatistics MatchTeamStatistic[]
+
+
+    @@index([countryId])
+  }
+
+  model Match {
+    id         Int         @id @default(autoincrement())
+    apiId      Int         @unique
+    seasonId   Int
+    homeTeamId Int
+    awayTeamId Int
+    round      String?
+    kickoffAt  DateTime
+    status     MatchStatus @default(SCHEDULED)
+    homeScore  Int?
+    awayScore  Int?
+    createdAt  DateTime    @default(now())
+    updatedAt  DateTime    @updatedAt
+
+
+
+

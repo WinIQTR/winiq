@@ -1,0 +1,85 @@
+.workspace { display: grid; gap: 16px; min-width: 0; }
+.hero { display: grid; grid-template-columns: minmax(0, 1fr) 330px; gap: 24px; align-items: center; overflow: hidden; border: 1px solid #29486d; border-radius: 22px; padding: 28px; background: radial-gradient(circle at 88% 8%, rgb(37 99 235 / 24%), transparent 34%), linear-gradient(145deg, #11233e, #081423 72%); box-shadow: 0 24px 60px rgb(2 8 23 / 24%); }
+.hero p { margin: 0 0 7px; color: #60a5fa; font-size: .82rem; font-weight: 900; letter-spacing: .13em; }
+.hero h1 { margin: 0; color: #f8fafc; font-size: clamp(2.2rem, 4.6vw, 4.4rem); line-height: .98; letter-spacing: -.05em; }
+.hero > div > span { display: block; max-width: 830px; margin-top: 14px; color: #a9bbd1; font-size: 1rem; line-height: 1.65; }
+.heroStats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; border: 1px solid rgb(52 211 153 / 24%); border-radius: 17px; padding: 14px; background: rgb(4 22 31 / 68%); }
+.heroStats article { display: grid; gap: 4px; border-radius: 11px; padding: 12px; background: rgb(8 28 43 / 74%); }
+.heroStats span { color: #8da4c0; font-size: .78rem; }
+.heroStats strong { color: #6ee7b7; font-size: 1.45rem; }
+.heroStats small { grid-column: 1 / -1; color: #8197b2; font-size: .75rem; }
+.disclaimer { border: 1px solid rgb(251 191 36 / 28%); border-radius: 11px; padding: 13px 15px; background: rgb(120 53 15 / 10%); color: #c6b790; font-size: .84rem; line-height: 1.55; }
+.disclaimer strong { color: #fbbf24; }
+.diagnostics{border:1px solid #2a425f;border-radius:13px;padding:13px 15px;background:#091727}.diagnostics summary{color:#93c5fd;font-size:.82rem;font-weight:850;cursor:pointer}.diagnostics>div{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:7px;margin-top:10px}.diagnostics span{display:flex;justify-content:space-between;gap:8px;border:1px solid #203650;border-radius:8px;padding:10px;color:#91a7c1;font-size:.75rem}.diagnostics strong{color:#dbeafe}.diagnostics p{margin:9px 0 0;color:#8197b0;font-size:.75rem}.legWarnings{display:flex;flex-wrap:wrap;gap:4px}.legWarnings i{border:1px solid rgb(239 68 68/38%);border-radius:999px;padding:4px 6px;background:rgb(127 29 29/25%);color:#fca5a5;font-size:.7rem;font-style:normal}
+.filters { display: grid; grid-template-columns: minmax(240px, .55fr) minmax(520px, 1.45fr); gap: 10px; border: 1px solid #253c5a; border-radius: 15px; padding: 12px; background: #0b182a; }
+.filters > div { display: flex; align-items: center; gap: 7px; }
+.filters span { margin-right: 4px; color: #8299b5; font-size: .75rem; font-weight: 900; letter-spacing: .07em; }
+.filters button { flex: 1; min-height: 44px; border: 1px solid #29425f; border-radius: 9px; padding: 10px 12px; background: #0b1a2d; color: #aec0d5; font: inherit; font-size: .82rem; font-weight: 800; cursor: pointer; white-space: nowrap; }
+.filters .active { border-color: #3b82f6; background: #173b6a; color: #dbeafe; }
+.filters .activeSafe { border-color: #10b981; background: rgb(6 78 59 / 36%); color: #6ee7b7; }
+.filters .activeBalanced { border-color: #f59e0b; background: rgb(120 53 15 / 30%); color: #fcd34d; }
+.filters .activeSurprise { border-color: #ef4444; background: rgb(127 29 29 / 30%); color: #fca5a5; }
+.filters .activeWeak { border-color: #ef4444; background: rgb(127 29 29 / 42%); color: #fecaca; }
+.couponList { display: grid; gap: 13px; }
+.coupon { overflow: hidden; border: 1px solid #2a425f; border-radius: 18px; background: linear-gradient(145deg, #101f34, #081523); }
+.couponSAFE { border-color: rgb(16 185 129 / 42%); }
+.couponBALANCED { border-color: rgb(245 158 11 / 42%); }
+.couponSURPRISE { border-color: rgb(239 68 68 / 42%); }
+.couponWEAK { border-color: rgb(239 68 68 / 72%); background: linear-gradient(145deg, rgb(63 19 28 / 50%), #081523); }
+.coupon > header { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 16px 18px; border-bottom: 1px solid #233852; }
+.coupon > header span { color: #82a0c3; font-size: .76rem; font-weight: 900; letter-spacing: .07em; }
+.coupon > header h2 { margin: 5px 0 0; color: #eff6ff; font-size: 1.22rem; }
+.weakBadge { display: inline-block; margin-top: 7px; border: 1px solid rgb(248 113 113 / 52%); border-radius: 999px; padding: 4px 7px; background: rgb(127 29 29 / 35%); color: #fca5a5; font-size: .55rem; letter-spacing: .07em; }
+.couponWEAK .explanation { border-left-color: #ef4444; background: rgb(127 29 29 / 12%); }
+.couponWEAK .explanation strong,.couponWEAK .explanation small { color: #fca5a5; }
+.couponWEAK .odds strong { color: #fca5a5; }
+.totalOdds { display: grid; min-width: 112px; gap: 2px; border-radius: 11px; padding: 9px 12px; background: #071321; text-align: right; }
+.totalOdds strong { color: #f8fafc; font-size: 1.45rem; }
+.summaryGrid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 7px; padding: 12px 18px 0; }
+.summaryGrid > div { display: grid; gap: 3px; border: 1px solid #21354e; border-radius: 9px; padding: 9px; background: #091727; }
+.summaryGrid span { color: #8296af; font-size: .75rem; }
+.summaryGrid strong { color: #dbeafe; font-size: 1rem; }
+.explanation { margin: 12px 18px; border-left: 3px solid #3b82f6; border-radius: 0 10px 10px 0; padding: 10px 12px; background: rgb(37 99 235 / 8%); }
+.explanation strong { color: #93c5fd; font-size: .85rem; }
+.explanation p { margin: 6px 0; color: #c2cfdf; font-size: .86rem; line-height: 1.6; }
+.explanation small { color: #fbbf24; font-size: .76rem; }
+.legs { display: grid; gap: 1px; border-top: 1px solid #20334b; background: #20334b; }
+.legs article { display: grid; align-items: center; gap: 10px; min-width: 0; padding: 11px 18px; background: #091726; }
+.legs .legBasic { grid-template-columns: 34px minmax(210px, 1.4fr) minmax(190px, 1fr) 62px; }
+.legs .legAnalysis { grid-template-columns: 34px minmax(210px, 1.3fr) minmax(190px, 1fr) 76px 62px; }
+.legs .legProfessional { grid-template-columns: 34px minmax(210px, 1.25fr) minmax(190px, 1fr) 76px minmax(150px, .8fr) 62px; }
+.legNumber { color: #6c8caf; font-size: .8rem; font-weight: 900; }
+.match,.pick,.model,.pro,.odds { display: grid; min-width: 0; gap: 3px; }
+.match small,.pick small,.model small,.pro small,.odds small { color: #8297b2; font-size: .74rem; }
+.match strong,.pick strong,.model strong,.pro strong,.odds strong { overflow: hidden; color: #e5eef9; font-size: .88rem; line-height: 1.4; text-overflow: ellipsis; white-space: nowrap; }
+.pick strong { color: #7dd3fc; }
+.pro span,.model span { color: #7e95b1; font-size: .72rem; }
+.odds { text-align: right; }
+.odds strong { color: #6ee7b7; font-size: .9rem; }
+.locked,.empty { display: grid; justify-items: start; gap: 7px; border: 1px solid #2a415f; border-radius: 17px; padding: 24px; background: linear-gradient(145deg, #101d31, #091524); }
+.locked > span,.empty > span { color: #60a5fa; font-size: .62rem; font-weight: 900; letter-spacing: .1em; }
+.locked h2,.empty h2 { margin: 0; color: #eef5ff; font-size: 1.15rem; }
+.locked p,.empty p { margin: 0; color: #8ea2ba; font-size: .76rem; }
+.locked a { margin-top: 5px; border-radius: 9px; padding: 9px 12px; background: #1d4ed8; color: white; font-size: .7rem; font-weight: 800; text-decoration: none; }
+.empty small { color: #fbbf24; font-size: .64rem; }
+@media (max-width: 1120px) { .hero { grid-template-columns: 1fr; } .filters { grid-template-columns: 1fr; } .summaryGrid { grid-template-columns: repeat(3, 1fr); } .diagnostics>div{grid-template-columns:repeat(3,1fr)} .legs { overflow-x: auto; } .legs .legBasic { min-width: 720px; } .legs .legAnalysis { min-width: 830px; } .legs .legProfessional { min-width: 950px; } }
+@media (max-width: 680px) {
+  .workspace { gap: 13px; }
+  .hero { padding: 18px; border-radius: 17px; }
+  .hero h1 { font-size: 2.25rem; }
+  .heroStats{grid-template-columns:1fr}
+  .filters { padding: 10px; }
+  .filters > div { display: grid; grid-template-columns: 1fr 1fr; align-items: stretch; }
+  .filters span { grid-column: 1 / -1; margin-bottom: 2px; }
+  .filters button { white-space: normal; }
+  .summaryGrid { grid-template-columns: repeat(2, 1fr); padding: 12px; }
+  .diagnostics>div{grid-template-columns:1fr}
+  .coupon > header { align-items: flex-start; flex-direction: column; padding: 15px; }
+  .totalOdds { width: 100%; box-sizing: border-box; text-align: left; }
+  .explanation { margin: 12px; }
+  .legs { overflow: visible; }
+  .legs .legBasic,.legs .legAnalysis,.legs .legProfessional { grid-template-columns: 34px minmax(0,1fr); min-width: 0; padding: 14px 12px; gap: 7px 10px; }
+  .legNumber { grid-column: 1; grid-row: 1 / span 5; padding-top: 2px; }
+  .match,.pick,.model,.pro,.odds { grid-column: 2; text-align: left; }
+  .match strong,.pick strong,.model strong,.pro strong,.odds strong { white-space: normal; }
+}

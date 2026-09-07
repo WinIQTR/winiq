@@ -1,0 +1,33 @@
+BET PROJECT V6.6 - FINAL UYELIK VE YEREL URETIM DOGRULAMASI
+
+Bu paket V5 uretim cekirdegini, V6 uyelik sistemini, kalici tahmin gecmisini,
+mac bazli degerlendirme gorunumunu ve Windows gunluk gorevini tek komutta denetler.
+
+ONEMLI
+- Veritabani verisini degistirmez.
+- Uye, fiyat, talep veya oturum olusturmaz.
+- Model agirliklarini degistirmez.
+- Harici bildirim veya odeme islemi yapmaz.
+- 20% ML / 80% Poisson Champion kilidi korunur.
+
+KURULUM
+1. Calisan pnpm dev islemini Ctrl+C ile durdurun.
+2. ZIP dosyasini proje kokune cikarin.
+3. Asagidaki komutlari calistirin:
+
+pnpm run test:v6-final
+pnpm exec tsc --noEmit
+Remove-Item .next -Recurse -Force -ErrorAction SilentlyContinue
+pnpm build
+pnpm run verify:v6-final
+pnpm dev
+
+BEKLENEN SONUC
+- V5 production core: PASS
+- Membership access control: PASS
+- Persistent member history: PASS
+- Grouped evaluation accordion: PASS
+- Daily task: READY
+- Last daily task result: 0
+- Production model: LOCKED
+

@@ -1,0 +1,5 @@
+import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
+const source=async(path:string)=>readFile(path,"utf8");
+async function main(){const [schema,fixtures,teams,players,scorers,refresh,pkg]=await Promise.all([source("prisma/schema.prisma"),source("src/app/fixtures/page.tsx"),source("src/app/teams/page.tsx"),source("src/app/players/page.tsx"),source("src/app/top-scorers/page.tsx"),source("scripts/refresh-football-data-center-v9.ts"),source("package.json")]);for(const field of ["venueName","referee","halfTimeHomeScore","nationality","penaltiesScored","foulsCommitted"])assert.match(schema,new RegExp(field));assert.match(fixtures,/Tüm maç verisini göster/);assert.match(teams,/Tüm takım verileri/);assert.match(players,/Tüm API alanları/);assert.match(scorers,/Gol \/ 90/);assert.match(refresh,/Öncelik 1/);assert.match(pkg,/data:refresh-pro-v9/);console.log("V9 football data center tests passed.")}
+main().catch(error=>{console.error(error);process.exitCode=1});

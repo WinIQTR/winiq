@@ -1,0 +1,21 @@
+BET PROJECT V4 FINAL - POWERSHELL GOREV SORGUSU DUZELTMESI
+==========================================================
+
+DUZELTILEN HATA
+The hash literal was incomplete.
+
+NEDEN
+PowerShell PSCustomObject acilisindan hemen sonra gecersiz noktalı virgul
+olusuyordu. Nesne artik tek parca ve gecerli bir PowerShell ifadesidir.
+
+KURULUM VE DOGRULAMA
+ZIP dosyasini proje kokune acin ve dosyalarin uzerine yazilmasina izin verin.
+
+pnpm run test:v4-final
+pnpm exec tsc --noEmit
+pnpm run verify:v4-final
+
+NOT
+- Yeniden build gerekmez.
+- V3 final kontrolu zaten basariyla tamamlanmistir.
+- Veritabani, API, model, otomasyon ve .env ayarlari degismez.

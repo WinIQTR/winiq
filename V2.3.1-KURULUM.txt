@@ -1,0 +1,20 @@
+BET PROJECT V2.3.1 - DINAMIK TURKCE METIN DUZELTMESI
+
+Bu paket V2.3 uzerine kurulur.
+
+DUZELTME
+- "0 won • 0 lost • 0 gecersiz" satiri tamamen Turkcelestirildi.
+- Dogru gorunum: "0 kazandi • 0 kaybetti • 0 gecersiz"
+- Hesaplama, Accuracy Dashboard, model, oranlar ve veritabani degismedi.
+
+KURULUM
+1. pnpm dev islemini Ctrl+C ile durdurun.
+2. ZIP icindeki src klasorunu proje ana klasorune kopyalayip uzerine yazin.
+3. Calistirin:
+
+pnpm exec tsc --noEmit
+pnpm dev
+
+4. http://localhost:3000/value-bets sayfasini yenileyin.
+
+Migration, pnpm install ve oran aktarimi gerekmez.

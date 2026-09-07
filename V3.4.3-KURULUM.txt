@@ -1,0 +1,37 @@
+BET PROJECT V3.4.3 - SNAPSHOT STATIK TRACE DUZELTMESI
+
+KOK NEDEN
+- Turbopack readFile(getSnapshotPath()) cagrisini statik olarak cozemiyordu.
+- Fonksiyon icindeki ignore isareti readFile cagrisina tasinmadigi icin tum proje izleniyordu.
+
+KESIN DUZELTME
+- getSnapshotPath() dinamik fonksiyonu tamamen kaldirildi.
+- Snapshot yolu dogrudan su statik kapsamla sinirlandi:
+  process.cwd()\data\value-bet-dashboard-snapshot.json
+- readFile ve writeFile ayni sabit yolu dogrudan kullanir.
+- Yerel mevcut snapshot konumu degismez.
+
+KURULUM
+1. Calisan pnpm dev islemini Ctrl+C ile durdurun.
+2. ZIP dosyasini ayri bir klasore acin.
+3. src, scripts ve package.json dosyalarini proje ana klasorune kopyalayin.
+4. Soruldugunda Replace the files in the destination secenegini kullanin.
+
+KOMUTLARI TEK TEK CALISTIRIN
+
+pnpm run test:storage-v3
+pnpm exec tsc --noEmit
+Remove-Item .next -Recurse -Force -ErrorAction SilentlyContinue
+pnpm build
+
+BEKLENEN
+- Production Snapshot Static Trace V3.4.3 tests passed.
+- TypeScript hatasi olmamasi.
+- Build basarili olmasi.
+- Encountered unexpected file in NFT list uyarisinin gorunmemesi.
+
+NOT
+- Mevcut data\value-bet-dashboard-snapshot.json dosyasi kullanilmaya devam eder.
+- Veri, yedek, rapor, log ve veritabani degismez.
+- Migration ve pnpm install gerekmez.
+- Model ve uretim kilitleri degismez.

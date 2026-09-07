@@ -1,0 +1,27 @@
+BET PROJECT V6.1.1 - VALUE BET HISTORY PRISMA HOTFIX
+
+Bu duzeltme V6.1 kurulumundan sonra uygulanir. Veritabani tablosunu silmez,
+yeniden olusturmaz ve yeni migration calistirmaz. Eksik Prisma modelini ve
+nullable skor TypeScript kontrolunu geri getirir.
+
+1) Calisan pnpm dev varsa Ctrl+C ile durdurun.
+2) ZIP dosyasini proje kokune acin.
+3) Asagidaki komutlari calistirin:
+
+   pnpm exec prisma format
+   pnpm exec prisma generate
+   pnpm run test:value-history-hotfix-v6
+   pnpm run test:membership-v6
+   pnpm exec tsc --noEmit
+   Remove-Item .next -Recurse -Force -ErrorAction SilentlyContinue
+   pnpm build
+
+Migration deploy komutunu tekrar calistirmak gerekmez.
+
+Not: Ilk V6.1 denemesinde ornek e-posta adresiyle olusturulan yonetici hesabi
+gercek e-posta ile auth:create-admin-v6 calistirildiktan sonra ayrica
+su komutla temizlenir:
+
+   pnpm run auth:remove-placeholder-v6
+
+Sifreler ekrana yazdirilmaz.

@@ -1,0 +1,30 @@
+BET PROJECT V6.3 - ÜYE DENEYİMİ VE KALICI GEÇMİŞ
+
+Bu paket V6.2 üzerine kurulur. Yeni Prisma migration yoktur.
+
+YENİLİKLER
+- Kullanıcıya görünen tahmin ve sonuç ifadeleri Türkçeleştirildi.
+- ANALYSIS ve PROFESSIONAL geçmişi kalıcı SmartPickHistory arşivinden okunur.
+- Son 30 gündeki WON, LOST ve VOID kayıtları Türkçe sonuç etiketleriyle gösterilir.
+- BASIC üyeye geçmiş veri gönderilmez.
+- PROFESSIONAL xG, veri kalitesi ve adil oran erişimi değişmeden korunur.
+- 20% ML / 80% Poisson üretim modeli ve otomatik değişim kilidi değişmez.
+
+KURULUM VE TEST
+1. Çalışan pnpm dev işlemini Ctrl+C ile durdurun.
+2. ZIP dosyasını proje köküne çıkarın.
+3. Aşağıdaki komutları çalıştırın:
+
+pnpm exec prisma generate
+pnpm run test:member-experience-v6
+pnpm run test:membership-admin-v6
+pnpm run test:membership-v6
+pnpm exec tsc --noEmit
+Remove-Item .next -Recurse -Force -ErrorAction SilentlyContinue
+pnpm build
+pnpm dev
+
+KONTROL
+- BASIC: yalnız bugünün tahminleri.
+- ANALYSIS: bugünün tahminleri, 1X2 ve son 30 günlük sonuçlar.
+- PROFESSIONAL: ANALYSIS kapsamı + xG, veri kalitesi ve adil oran.

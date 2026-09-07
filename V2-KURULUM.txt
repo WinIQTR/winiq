@@ -1,0 +1,75 @@
+BET PROJECT V2.0 - GERCEK ORAN VE VALUE BET KURULUMU
+=====================================================
+
+1. ZIP icindeki dosyalari mevcut bet-project klasorunun uzerine kopyalayin.
+
+2. PowerShell'i proje klasorunde acin ve veritabani migration'ini uygulayin:
+
+   pnpm exec prisma migrate deploy
+
+3. Prisma istemcisini yenileyin:
+
+   pnpm exec prisma generate
+
+4. TypeScript kontrolunu calistirin:
+
+   pnpm exec tsc --noEmit
+
+5. V2 saf testlerini calistirin:
+
+   pnpm run test:value-v2
+
+6. Ilk V2 yenilemesini elle calistirin:
+
+   pnpm run refresh
+
+7. V2 durumunu kontrol edin:
+
+   pnpm run verify:v2
+
+8. Uygulamayi acin:
+
+   pnpm dev
+
+   http://localhost:3000/value-bets
+
+OTOMASYON
+---------
+
+Mevcut "GammonIQ Bet Project Refresh" gorevi degistirilmez. Gorev her alti
+saatte bir ayni `pnpm run refresh` komutunu calistirdigi icin V2 adimlarini da
+otomatik olarak calistirir. Gorevi yeniden kurmaya gerek yoktur.
+
+V2 her otomatik calismada:
+
+- Yaklasan fiksturleri ve sonuclari yeniler.
+- Kotayi korumak icin en yakin 15 uygun macin gercek oranlarini kontrol eder.
+- Oranlari zaman damgasi ve bahis sirketiyle veritabaninda saklar.
+- Model olasiligi ile marjdan arindirilmis piyasa olasiligini karsilastirir.
+- Edge, Expected Value ve ceyrek Kelly miktarini hesaplar.
+- Yalniz guvenlik filtrelerini gecen Value Bet'leri mac baslamadan arsivler.
+- Biten Value Bet'leri WON / LOST / VOID olarak sonuclandirir.
+- Value Bets Dashboard snapshot'ini yeniler.
+- Oran bulunamazsa V1 tahmin sistemi calismaya devam eder.
+
+ISTEGE BAGLI .env AYARLARI
+-------------------------
+
+ENABLE_BOOKMAKER_ODDS=true
+ODDS_MATCH_LIMIT=15
+ODDS_REQUEST_DELAY_MS=350
+
+ODDS_MATCH_LIMIT bir otomatik calismada kontrol edilecek maksimum mac sayisidir.
+API paketinizin gunluk istek kotasina gore bu degeri azaltabilir veya artirabilirsiniz.
+Izin verilen aralik 1-100'dur.
+
+ONEMLI
+------
+
+API-Football aboneliginizde Odds endpoint erisimi bulunmalidir. Erisim veya oran
+verisi yoksa sistem hata verip V1'i durdurmaz; Value Bets sayfasinda veri gelene
+kadar bos durum mesaji gosterilir.
+
+Value Bet bir kar garantisi degildir. Sistem minimum 1.10 oran, en az 3 gecerli
+bahis sirketi, minimum model olasiligi, edge, EV, guncellik ve aykiri oran
+kontrollerini birlikte uygular.

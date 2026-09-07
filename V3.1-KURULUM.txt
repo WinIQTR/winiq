@@ -1,0 +1,60 @@
+BET PROJECT V3.1.1 - PRODUCTION BACKUP VE RECOVERY
+
+V3.1.1 DUZELTMESI
+- Next.js 16 ProcessEnv tip kontrolu icin test ortamina NODE_ENV eklendi.
+- Yedekleme, recovery ve uretim modeli mantigi degistirilmedi.
+
+DURUM
+- V1: %100
+- V2: %100
+- V3.1 tamamlandiginda V3: %20
+- Genisletilmis genel yol haritasi: %80
+
+EKLENENLER
+- PostgreSQL custom-format production yedegi
+- data snapshot, Prisma schema ve migration kopyalari
+- SHA-256 dosya butunluk manifesti
+- pg_restore --list ile dump dogrulamasi
+- Yarim yedeklerin gecersiz sayilmasi ve temizlenmesi
+- 20 saatlik gunluk yedek kapisi
+- Mevcut 6 saatlik refresh otomasyonuna guvenli baglanti
+- Otomatik restore olmamasi; veritabaninin yanlislikla ezilmemesi
+- .env, API anahtari ve veritabani parolasinin yedege alinmamasi
+
+KURULUM
+1. Calisan pnpm dev islemini Ctrl+C ile durdurun.
+2. ZIP dosyasini ayri bir klasore acin.
+3. src, scripts ve package.json dosyalarini birlikte proje ana klasorune kopyalayin.
+4. Soruldugunda Replace the files in the destination secenegini kullanin.
+
+KOMUTLARI TEK TEK CALISTIRIN
+
+pnpm run test:backup-v3
+pnpm exec tsc --noEmit
+pnpm run backup:production
+pnpm run verify:backup
+
+BEKLENEN
+- Test: Production Backup and Recovery V3.1 tests passed.
+- Backup status: CREATED
+- PostgreSQL dump: VALID
+- Production backup verification passed.
+
+YEDEK KONUMU
+backups\production\YYYYMMDDTHHMMSSZ
+
+OTOMASYON
+- Mevcut Windows gorevini yeniden kurmayin.
+- Gorev pnpm run refresh kullandigi icin V3.1 otomatik devreye girer.
+- Son basarili yedek 20 saatten yeniyse Backup status SKIPPED normaldir.
+
+KALAN V3 ISLERI
+- Gunluk ve haftalik performans raporlari
+- Saglik/kritik durum log ve bildirim altyapisi
+- Guvenli uzaktan/online kullanim hazirligi
+- V3 final production dogrulamasi
+
+NOT
+- Migration gerekmez.
+- pnpm install gerekmez.
+- Restore islemi bilerek otomatik eklenmemistir.

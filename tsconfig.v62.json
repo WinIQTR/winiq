@@ -1,0 +1,25 @@
+{
+  "extends": "./tsconfig.v61.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "skipLibCheck": true
+  },
+  "include": [
+    "next-env.d.ts",
+    "src/generated/prisma/**/*.ts",
+    "src/lib/auth-password.ts",
+    "src/lib/auth-session.ts",
+    "src/lib/membership-access.ts",
+    "src/lib/prisma.ts",
+    "src/lib/prediction-dashboard-shared.ts",
+    "src/lib/prediction-dashboard-snapshot.ts",
+    "src/components/admin-members-manager.tsx",
+    "src/components/app-sidebar.tsx",
+    "src/components/logout-button.tsx",
+    "src/components/page-shell.tsx",
+    "src/app/admin/members/**/*.tsx",
+    "src/app/api/admin/members/route.ts",
+    "src/app/member/page.tsx",
+    "scripts/test-membership-admin-v6.ts"
+  ]
+}

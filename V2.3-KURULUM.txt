@@ -1,0 +1,35 @@
+BET PROJECT V2.3 - VALUE BET ACCURACY DASHBOARD
+
+Bu paket V2.2 uzerine kurulur.
+
+EKLENENLER
+- Sonuclanan Value Bet kayitlari icin dogruluk paneli
+- Toplam bahis, isabet orani, kar birimi ve sabit miktar ROI
+- Olasilik araligina gore performans
+- Bahis turune gore performans
+- Lige gore performans
+- Model olasiligi ile gerceklesen isabet arasinda kalibrasyon farki
+- VOID kayitlarini isabet ve ROI paydasindan cikarma
+- 30 ve 100 sonuc esiklerine gore orneklem uyarisi
+- AI aciklamalarindaki gunluk risk ifadesinin tam Turkcelestirilmesi
+
+KURULUM
+1. Calisan pnpm dev islemini Ctrl+C ile durdurun.
+2. ZIP icindeki dosyalari proje ana klasorune kopyalayip uzerine yazin.
+3. PowerShell icinde sirayla calistirin:
+
+pnpm run test:accuracy-v2
+pnpm run test:explanation-v2
+pnpm run test:portfolio-v2
+pnpm exec tsc --noEmit
+pnpm dev
+
+4. Tarayicida acin:
+http://localhost:3000/value-bets
+
+NOTLAR
+- Migration gerekmez.
+- pnpm install gerekmez.
+- Yeni oran aktarimi gerekmez.
+- Sonuclanmis kayit yoksa panel 'Veri Birikiyor' durumunda sifir degerlerle gorunur.
+- Aktif model ve Value Bet yayin filtreleri otomatik olarak degistirilmez.

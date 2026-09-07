@@ -1,0 +1,123 @@
+BET PROJECT V4.7
+UYGULAMA GENELİ 2026 SEZON TUTARLILIĞI
+
+PROJE DURUMU
+- V1-V3: %100
+- V4: Bu paket doğrulandıktan sonra %96
+- Öğrenme verisi: 9 / 300 (%3,0)
+- Canlı sezon: 2026/27 (API-Football season=2026)
+- Champion: %20 ML / %80 Poisson (değişmez)
+- Otomatik model değişikliği: KİLİTLİ
+
+GÖRSELDEKİ VERİ HANGİ SEZON?
+15 Ağustos 2026 tarihli Gençlerbirliği S.K. - Fenerbahçe maçı API-Football
+season=2026, yani Avrupa sezon adlandırmasıyla 2026/27 sezonuna aittir.
+
+SAYFA DENETİMİ
+
+1. / (Dashboard)
+   DURUM: 2026 kullanıyordu.
+   V4.7: Snapshot içindeki başka sezon kayıtları ayrıca reddedilir.
+
+2. /predictions
+   DURUM: 2026 başlığı ve 2026 üretim snapshot'ı kullanıyordu.
+   V4.7: Tarih arşivi yalnız 2026/27 sezon aralığını gösterir.
+
+3. /fixtures
+   DURUM: ACTIVE_SEASON_YEAR=2026 ile doğrudan veritabanı sorgusu yapıyor.
+   DEĞİŞİKLİK GEREKMEDİ.
+
+4. /teams
+   DURUM: ACTIVE_SEASON_YEAR=2026 ile doğrudan veritabanı sorgusu yapıyor.
+   DEĞİŞİKLİK GEREKMEDİ.
+
+5. /players
+   DURUM: ACTIVE_SEASON_YEAR=2026 ile doğrudan veritabanı sorgusu yapıyor.
+   DEĞİŞİKLİK GEREKMEDİ.
+
+6. /value-bets
+   RİSK: Geçmiş ve sonuçlanmış kayıt sorgularında sezon filtresi yoktu.
+   V4.7: Yayınlama, sonuçlandırma, yaklaşan kayıtlar ve geçmiş kayıtların tamamı
+   ACTIVE_SEASON_YEAR=2026 ile filtrelenir. Snapshot ekranı da ikinci kez
+   2026/27 tarih aralığını doğrular.
+
+7. /evaluation
+   RİSK: Bütün sezonlardaki sonuçlanmış tahminleri karıştırabiliyordu.
+   V4.7: Yalnız match.season.year=2026 üretim kayıtlarını gösterir.
+
+8. /smart-picks
+   DURUM: 2024/25 tarihsel holdout doğrulamasıdır. Bu veriyi 2026 yapmak doğru
+   değildir; modelin geçmişte görmediği test örneklemidir.
+   V4.7: Sayfa açıkça HISTORICAL HOLDOUT 2024/25 olarak etiketlenir ve 2026/27
+   canlı verisi olmadığı belirtilir.
+
+9. /admin
+   HATA: 2024 TEST MODU ve defaultValue=2024 gösteriyordu.
+   V4.7: 2026/27 CANLI MOD ve aktif sezon seçimi gösterilir.
+
+10. /settings
+    HATA: Varsayılan seçim 2024 Test idi.
+    V4.7: Yalnız 2026/27 Canlı seçimi gösterilir.
+
+11. /operations
+    DURUM: Sezonluk maç verisi göstermez. Güncel rapor, yedek, sağlık ve bildirim
+    kayıtlarını gösterir. Sezon karışıklığı bulunmadı.
+
+12. /api/evaluation
+    DURUM: Model eğitim/doğrulama API'sidir ve bilinçli olarak tarihsel 2024/25
+    kullanır.
+    V4.7: Yanıta HISTORICAL_MODEL_VALIDATION veri rolü ve sezon etiketi eklenir.
+
+13. /api/health ve /api/football/status
+    DURUM: Maç/sezon verisi göstermez. Değişiklik gerekmedi.
+
+KURULUM
+ZIP dosyasını doğrudan şu klasöre çıkart:
+C:\Users\FMGammon\Desktop\bet-project
+
+Windows dosya değiştirme sorusunda Replace / Değiştir seç.
+
+ARDINDAN SIRASIYLA ÇALIŞTIR
+
+pnpm run test:season-consistency-v4
+pnpm exec tsc --noEmit
+Remove-Item .next -Recurse -Force -ErrorAction SilentlyContinue
+pnpm build
+
+BEKLENEN TEST MESAJI
+Application-wide 2026 Season Consistency V4.7 tests passed.
+
+Bu kontroller başarılı olursa snapshot ve Value Bet arşivini 2026 filtresiyle
+yeniden üret:
+
+pnpm run refresh
+
+Ardından uygulamayı aç:
+
+pnpm dev
+
+KONTROL EDİLECEK SAYFALAR
+http://localhost:3000/
+http://localhost:3000/predictions
+http://localhost:3000/fixtures
+http://localhost:3000/teams
+http://localhost:3000/players
+http://localhost:3000/value-bets
+http://localhost:3000/evaluation
+http://localhost:3000/smart-picks
+http://localhost:3000/admin
+http://localhost:3000/settings
+http://localhost:3000/operations
+
+BEKLENEN
+- Canlı sayfalarda 2026 veya 2026/27 görünür.
+- Admin ve Ayarlar 2024 Test göstermez.
+- Model Performance yalnız 2026/27 üretim sonuçlarını gösterir.
+- Smart Picks açıkça 2024/25 tarihsel doğrulama olarak görünür.
+- Value Bets yalnız 2026/27 kayıtlarını kullanır.
+
+ŞİMDİLİK ÇALIŞTIRMA
+- docker compose up
+- Windows günlük görev kurucusu
+- Harici bildirim aktivasyonu
+- Deployment aktivasyonu

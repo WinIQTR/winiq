@@ -1,0 +1,1758 @@
+﻿===== FILE: .\src\config\season.ts =====
+const DEFAULT_ACTIVE_SEASON =
+  2026;
+
+const MINIMUM_SEASON_YEAR =
+  2000;
+
+const MAXIMUM_SEASON_YEAR =
+  2100;
+
+function resolveSeasonYear(
+  rawValue:
+    string | undefined,
+  fallback:
+    number,
+): number {
+  const normalizedValue =
+    rawValue?.trim();
+
+  if (
+    !normalizedValue
+  ) {
+    return fallback;
+  }
+
+  const parsedValue =
+    Number.parseInt(
+      normalizedValue,
+      10,
+    );
+
+  if (
+    !Number.isInteger(
+      parsedValue,
+    ) ||
+    parsedValue <
+      MINIMUM_SEASON_YEAR ||
+    parsedValue >
+      MAXIMUM_SEASON_YEAR
+  ) {
+    throw new Error(
+      [
+        "API_FOOTBALL_SEASON geÃ§erli deÄŸil.",
+        `Beklenen aralÄ±k: ${MINIMUM_SEASON_YEAR}-${MAXIMUM_SEASON_YEAR}.`,
+        `Gelen deÄŸer: ${normalizedValue}`,
+      ].join(
+        " ",
+      ),
+    );
+  }
+
+  return parsedValue;
+}
+
+/*
+ * GÃ¼ncel veri importu ve canlÄ± tahminler
+ * iÃ§in kullanÄ±lan aktif sezon.
+ *
+ * PowerShell:
+ * $env:API_FOOTBALL_SEASON="2026"
+ */
+export const ACTIVE_SEASON_YEAR =
+  resolveSeasonYear(
+    process.env
+      .API_FOOTBALL_SEASON,
+    DEFAULT_ACTIVE_SEASON,
+  );
+
+/*
+ * Historical eÄŸitim, backtest ve
+ * holdout validasyonu iÃ§in sabit sezon.
+ *
+ * Bu deÄŸer aktif sezondan baÄŸÄ±msÄ±zdÄ±r.
+ */
+export const HISTORICAL_MODEL_SEASON_YEAR =
+  2024;
+
+export function getActiveSeasonYear():
+  number {
+  return ACTIVE_SEASON_YEAR;
+}
+
+export function getHistoricalModelSeasonYear():
+  number {
+  return HISTORICAL_MODEL_SEASON_YEAR;
+}
+
+===== FILE: .\src\lib\prediction-dashboard.ts =====
+import {
+  ACTIVE_COMPETITIONS,
+} from "@/config/competitions";
+
+import {
+  ACTIVE_SEASON_YEAR,
+} from "@/config/season";
+
+import {
+  prisma,
+} from "@/lib/prisma";
+
+import {
+  calculateGoalProbabilities,
+} from "@/modules/goal-probability-engine";
+
+import {
+  calculateMarketsFromGoalModel,
+} from "@/modules/market-engine";
+
+import {
+  generateMatchPrediction,
+} from "@/modules/prediction-engine";
+
+import {
+  calculateMatchRating,
+} from "@/modules/rating-engine";
+
+import {
+  rankTopPicks,
+  selectPopularPicks,
+} from "@/modules/top-picks-engine";
+
+import type {
+  DashboardPrediction,
+} from "@/lib/prediction-dashboard-shared";
+
+import type {
+  MarketEngineResult,
+  MarketSelection,
+} from "@/modules/market-engine";
+
+import type {
+  OutcomeProbabilities,
+} from "@/modules/probability-engine";
+
+export type {
+  DashboardPrediction,
+} from "@/lib/prediction-dashboard-shared";
+
+const LIVE_LOOKAHEAD_DAYS =
+  30;
+
+const MATCH_QUERY_MULTIPLIER =
+  5;
+
+function addDays(
+  value: Date,
+  days: number,
+): Date {
+  const result =
+    new Date(
+      value,
+    );
+
+  result.setDate(
+    result.getDate() +
+      days,
+  );
+
+  return result;
+}
+
+function round(
+  value: number,
+  decimals = 2,
+): number {
+  const factor =
+    10 ** decimals;
+
+  return (
+    Math.round(
+      value *
+        factor,
+    ) /
+    factor
+  );
+}
+
+function calculateFairOdds(
+  probability: number,
+): number | null {
+  if (
+    !Number.isFinite(
+      probability,
+    ) ||
+    probability <=
+      0
+  ) {
+    return null;
+  }
+
+  return round(
+    100 /
+      probability,
+  );
+}
+
+function createUpdatedSelection(
+  selection:
+    MarketSelection,
+
+  probability:
+    number,
+): MarketSelection {
+  const normalizedProbability =
+    round(
+      Math.min(
+        Math.max(
+          probability,
+          0,
+        ),
+        100,
+      ),
+    );
+
+  return {
+    ...selection,
+
+    probability:
+      normalizedProbability,
+
+    fairOdds:
+      calculateFairOdds(
+        normalizedProbability,
+      ),
+  };
+}
+
+/**
+ * Goal Model bÃ¼tÃ¼n marketler iÃ§in skor matrisi Ã¼retir.
+ *
+ * Prediction Engine V2 ise Rating Engine ve kalibrasyon
+ * sonrasÄ±nda daha geliÅŸmiÅŸ bir nihai 1X2 sonucu Ã¼retir.
+ *
+ * Bu fonksiyon yalnÄ±zca doÄŸrudan 1X2 sonucundan tÃ¼reyen
+ * marketleri gÃ¼nceller:
+ *
+ * - Match Result
+ * - Double Chance
+ * - Draw No Bet
+ *
+ * Gol marketleri skor matrisi deÄŸerlerini korur.
+ */
+function applyFinalOutcomeProbabilitiesToMarkets(
+  marketModel:
+    MarketEngineResult,
+
+  probabilities:
+    OutcomeProbabilities,
+): MarketEngineResult {
+  const home =
+    probabilities.home;
+
+  const draw =
+    probabilities.draw;
+
+  const away =
+    probabilities.away;
+
+  const decisiveProbability =
+    home +
+    away;
+
+  const homeDrawNoBet =
+    decisiveProbability >
+    0
+      ? (
+          home /
+          decisiveProbability
+        ) *
+        100
+      : 50;
+
+  const awayDrawNoBet =
+    decisiveProbability >
+    0
+      ? (
+          away /
+          decisiveProbability
+        ) *
+        100
+      : 50;
+
+  const probabilityByKey =
+    new Map<
+      string,
+      number
+    >([
+      [
+        "match_result_home",
+        home,
+      ],
+
+      [
+        "match_result_draw",
+        draw,
+      ],
+
+      [
+        "match_result_away",
+        away,
+      ],
+
+      [
+        "double_chance_1x",
+        home +
+          draw,
+      ],
+
+      [
+        "double_chance_x2",
+        draw +
+          away,
+      ],
+
+      [
+        "double_chance_12",
+        home +
+          away,
+      ],
+
+      [
+        "dnb_home",
+        homeDrawNoBet,
+      ],
+
+      [
+        "dnb_away",
+        awayDrawNoBet,
+      ],
+    ]);
+
+  const selections =
+    marketModel.selections.map(
+      (
+        selection,
+      ) => {
+        const updatedProbability =
+          probabilityByKey.get(
+            selection.key,
+          );
+
+        if (
+          updatedProbability ===
+          undefined
+        ) {
+          return selection;
+        }
+
+        return createUpdatedSelection(
+          selection,
+          updatedProbability,
+        );
+      },
+    );
+
+  const topSelections =
+    [
+      ...selections,
+    ]
+      .sort(
+        (
+          first,
+          second,
+        ) =>
+          second.probability -
+          first.probability,
+      )
+      .slice(
+        0,
+        15,
+      );
+
+  return {
+    ...marketModel,
+
+    selections,
+    topSelections,
+
+    model: {
+      ...marketModel.model,
+
+      version:
+        `${marketModel.model.version}-prediction-v2`,
+    },
+
+    warnings: [
+      ...marketModel.warnings,
+
+      "Match Result, Double Chance ve Draw No Bet marketleri Prediction Engine V2 nihai 1X2 olasÄ±lÄ±klarÄ±yla gÃ¼ncellendi.",
+    ],
+  };
+}
+
+export async function loadDashboardPredictions(
+  limit = 10,
+): Promise<
+  DashboardPrediction[]
+> {
+  if (
+    !Number.isInteger(
+      limit,
+    ) ||
+    limit <= 0
+  ) {
+    throw new Error(
+      "limit pozitif bir tam sayÄ± olmalÄ±dÄ±r.",
+    );
+  }
+
+  const activeSeasonYear =
+    ACTIVE_SEASON_YEAR;
+
+  const leagueApiIds =
+    ACTIVE_COMPETITIONS.map(
+      (
+        competition,
+      ) =>
+        competition.apiId,
+    );
+
+  if (
+    leagueApiIds.length ===
+    0
+  ) {
+    return [];
+  }
+
+  const now =
+    new Date();
+
+  const liveUntil =
+    addDays(
+      now,
+      LIVE_LOOKAHEAD_DAYS,
+    );
+
+  const matches =
+    await prisma.match.findMany({
+      where: {
+        status:
+          "SCHEDULED",
+
+        kickoffAt: {
+          gte:
+            now,
+
+          lt:
+            liveUntil,
+        },
+
+        season: {
+          year:
+            activeSeasonYear,
+
+          league: {
+            apiId: {
+              in:
+                leagueApiIds,
+            },
+          },
+        },
+      },
+
+      select: {
+        id:
+          true,
+
+        kickoffAt:
+          true,
+
+        round:
+          true,
+
+        homeTeam: {
+          select: {
+            name:
+              true,
+
+            logoUrl:
+              true,
+          },
+        },
+
+        awayTeam: {
+          select: {
+            name:
+              true,
+
+            logoUrl:
+              true,
+          },
+        },
+
+        season: {
+          select: {
+            year:
+              true,
+
+            league: {
+              select: {
+                apiId:
+                  true,
+
+                name:
+                  true,
+              },
+            },
+          },
+        },
+      },
+
+      orderBy: {
+        kickoffAt:
+          "asc",
+      },
+
+      take:
+        Math.max(
+          limit *
+            MATCH_QUERY_MULTIPLIER,
+          50,
+        ),
+    });
+
+  const predictions:
+    DashboardPrediction[] =
+      [];
+
+  for (
+    const match
+    of matches
+  ) {
+    if (
+      predictions.length >=
+      limit
+    ) {
+      break;
+    }
+
+    try {
+      /**
+       * generateMatchPrediction Ã¶nce Feature Engine'i
+       * gÃ¼nceller ve ardÄ±ndan Prediction Engine V2,
+       * Rating Engine ve calibration sonuÃ§larÄ±nÄ± Ã¼retir.
+       */
+      const predictionV2 =
+        await generateMatchPrediction({
+          matchId:
+            match.id,
+        });
+
+      /**
+       * Feature Ã¼retimi tamamlandÄ±ktan sonra Goal Model
+       * ve detaylÄ± kategori rating deÄŸerlerini paralel alÄ±yoruz.
+       */
+      const [
+        goalModel,
+        rating,
+      ] =
+        await Promise.all([
+          calculateGoalProbabilities(
+            match.id,
+          ),
+
+          calculateMatchRating(
+            match.id,
+          ),
+        ]);
+
+      const originalMarketModel =
+        calculateMarketsFromGoalModel(
+          goalModel,
+        );
+
+      const marketModel =
+        applyFinalOutcomeProbabilitiesToMarkets(
+          originalMarketModel,
+          predictionV2
+            .finalProbabilities,
+        );
+
+      const topPicksResult =
+        rankTopPicks(
+          marketModel,
+          {
+            limit:
+              10,
+
+            minimumProbability:
+              60,
+
+            minimumHistoricalSamples:
+              300,
+
+            minimumFairOdds:
+              1.05,
+
+            maximumFairOdds:
+              5,
+
+            maximumSelectionsPerMarket:
+              1,
+
+            maximumSelectionsPerFamily:
+              2,
+          },
+        );
+
+const popularCandidateResult =
+  rankTopPicks(
+    marketModel,
+    {
+      limit:
+        50,
+
+      minimumProbability:
+        52,
+
+      minimumHistoricalSamples:
+        300,
+
+      minimumFairOdds:
+        1.2,
+
+      maximumFairOdds:
+        4,
+
+      maximumSelectionsPerMarket:
+        1,
+
+      maximumSelectionsPerFamily:
+        10,
+    },
+  );
+
+const popularPicks =
+  selectPopularPicks(
+    popularCandidateResult
+      .picks,
+  );
+
+      const probabilities =
+        predictionV2
+          .finalProbabilities;
+
+      const predictedOutcome =
+        predictionV2
+          .predictedOutcome;
+
+      const predictedProbability =
+        predictionV2
+          .predictedProbability;
+
+      predictions.push({
+        matchId:
+          match.id,
+
+        kickoffAt:
+          match.kickoffAt,
+
+        dataMode:
+          "LIVE",
+
+        leagueApiId:
+          match
+            .season
+            .league
+            .apiId,
+
+        leagueName:
+          match
+            .season
+            .league
+            .name,
+
+        homeTeam:
+          match
+            .homeTeam
+            .name,
+
+        awayTeam:
+          match
+            .awayTeam
+            .name,
+
+        homeTeamLogo:
+          match
+            .homeTeam
+            .logoUrl,
+
+        awayTeamLogo:
+          match
+            .awayTeam
+            .logoUrl,
+
+        /**
+         * Dashboard ve Prediction Card artÄ±k doÄŸrudan
+         * Prediction Engine V2 final deÄŸerlerini gÃ¶sterir.
+         */
+        homeProbability:
+          probabilities.home,
+
+        drawProbability:
+          probabilities.draw,
+
+        awayProbability:
+          probabilities.away,
+
+        predictedOutcome,
+
+        predictedProbability,
+
+        /**
+         * Genel kart gÃ¼veni artÄ±k yalnÄ±zca ilk Top Pick
+         * reliability deÄŸeri deÄŸildir.
+         *
+         * Probability + calibration + rating birleÅŸik
+         * gÃ¼ven puanÄ± kullanÄ±lÄ±r.
+         */
+        confidenceScore:
+          predictionV2
+            .combinedConfidenceScore,
+
+        confidenceLevel:
+          predictionV2
+            .combinedConfidenceLevel,
+
+        expectedHomeGoals:
+          goalModel
+            .expectedGoals
+            .home,
+
+        expectedAwayGoals:
+          goalModel
+            .expectedGoals
+            .away,
+
+popularPicks:
+  popularPicks.map(
+    (
+      pick,
+    ) => ({
+      rank:
+        pick.rank,
+
+      key:
+        pick.key,
+
+      market:
+        pick.market,
+
+      selection:
+        pick.selection,
+
+      probability:
+        pick.probability,
+
+      fairOdds:
+        pick.fairOdds,
+
+      reliabilityScore:
+        pick.reliabilityScore,
+
+      pickScore:
+        pick.popularityScore,
+
+      tier:
+        pick.tier,
+
+      reasons:
+        pick.reasons,
+    }),
+  ),
+
+
+        topPicks:
+          topPicksResult
+            .picks
+            .map(
+              (
+                pick,
+              ) => ({
+                rank:
+                  pick.rank,
+
+                key:
+                  pick.key,
+
+                market:
+                  pick.market,
+
+                selection:
+                  pick.selection,
+
+                probability:
+                  pick.probability,
+
+                fairOdds:
+                  pick.fairOdds,
+
+                reliabilityScore:
+                  pick
+                    .reliabilityScore,
+
+                pickScore:
+                  pick
+                    .pickScore,
+
+                tier:
+                  pick.tier,
+
+                reasons:
+                  pick.reasons,
+              }),
+            ),
+
+        marketCount:
+          marketModel
+            .selections
+            .length,
+
+        homeRating:
+          rating
+            .home
+            .overall,
+
+        awayRating:
+          rating
+            .away
+            .overall,
+
+        homeAttack:
+          rating
+            .home
+            .attack,
+
+        awayAttack:
+          rating
+            .away
+            .attack,
+
+        homeDefense:
+          rating
+            .home
+            .defense,
+
+        awayDefense:
+          rating
+            .away
+            .defense,
+
+        homeForm:
+          rating
+            .home
+            .form,
+
+        awayForm:
+          rating
+            .away
+            .form,
+
+        homeFitness:
+          rating
+            .home
+            .fitness,
+
+        awayFitness:
+          rating
+            .away
+            .fitness,
+
+        ratingDifference:
+          rating
+            .ratingDifference,
+
+        ratingEdge:
+          rating
+            .edge,
+
+        warnings: [
+  ...goalModel
+    .warnings,
+
+  ...predictionV2
+    .warnings,
+
+  ...marketModel
+    .warnings,
+
+  ...popularCandidateResult
+    .warnings,
+
+  ...topPicksResult
+    .warnings,
+].filter(
+          (
+            warning,
+            index,
+            warnings,
+          ) =>
+            warnings.indexOf(
+              warning,
+            ) ===
+            index,
+        ),
+      });
+    } catch (
+      error: unknown
+    ) {
+      console.error(
+        [
+          `Match ${match.id}`,
+          `${match.homeTeam.name} - ${match.awayTeam.name}`,
+          "dashboard prediction failed:",
+        ].join(
+          " ",
+        ),
+
+        error instanceof Error
+          ? error.message
+          : error,
+      );
+    }
+  }
+
+  predictions.sort(
+    (
+      first,
+      second,
+    ) =>
+      first.kickoffAt.getTime() -
+      second.kickoffAt.getTime(),
+  );
+
+  return predictions;
+}
+
+===== FILE: .\src\app\page.tsx =====
+import Link from "next/link";
+
+import {
+  MetricCard,
+} from "@/components/metric-card";
+
+import {
+  PageShell,
+} from "@/components/page-shell";
+
+import {
+  PredictionCard,
+} from "@/components/prediction-card";
+
+import {
+  ACTIVE_SEASON_YEAR,
+} from "@/config/season";
+
+import {
+  loadDashboardPredictions,
+} from "@/lib/prediction-dashboard";
+
+import {
+  getUiConfidence,
+} from "@/lib/prediction-dashboard-shared";
+
+function formatPercentage(
+  value: number,
+): string {
+  return `%${value.toFixed(1)}`;
+}
+
+function getBestPickLabel(
+  prediction:
+    Awaited<
+      ReturnType<
+        typeof loadDashboardPredictions
+      >
+    >[number],
+): string {
+  const pick =
+    prediction.popularPicks[0] ??
+    prediction.topPicks[0];
+
+  if (
+    pick
+  ) {
+    return `${pick.market} â€” ${pick.selection}`;
+  }
+
+  switch (
+    prediction.predictedOutcome
+  ) {
+    case "HOME":
+      return "Ev sahibi kazanÄ±r";
+
+    case "DRAW":
+      return "Beraberlik";
+
+    case "AWAY":
+      return "Deplasman kazanÄ±r";
+  }
+}
+
+export default async function HomePage() {
+  const predictions =
+    await loadDashboardPredictions(
+      12,
+    );
+
+  const strongestPredictions =
+    [...predictions]
+      .sort(
+        (
+          first,
+          second,
+        ) => {
+          const firstPick =
+            first.popularPicks[0] ??
+            first.topPicks[0];
+
+          const secondPick =
+            second.popularPicks[0] ??
+            second.topPicks[0];
+
+          const firstScore =
+            firstPick?.pickScore ??
+            first.confidenceScore;
+
+          const secondScore =
+            secondPick?.pickScore ??
+            second.confidenceScore;
+
+          return (
+            secondScore -
+            firstScore
+          );
+        },
+      )
+      .slice(
+        0,
+        6,
+      );
+
+  const veryHighConfidenceCount =
+    predictions.filter(
+      (
+        prediction,
+      ) =>
+        prediction.confidenceScore >=
+        80,
+    ).length;
+
+  const highConfidenceCount =
+    predictions.filter(
+      (
+        prediction,
+      ) =>
+        prediction.confidenceScore >=
+        70,
+    ).length;
+
+  const averageConfidence =
+    predictions.length >
+    0
+      ? predictions.reduce(
+          (
+            total,
+            prediction,
+          ) =>
+            total +
+            prediction.confidenceScore,
+          0,
+        ) /
+        predictions.length
+      : 0;
+
+  const averagePredictionProbability =
+    predictions.length >
+    0
+      ? predictions.reduce(
+          (
+            total,
+            prediction,
+          ) =>
+            total +
+            prediction.predictedProbability,
+          0,
+        ) /
+        predictions.length
+      : 0;
+
+  const totalPopularPicks =
+    predictions.reduce(
+      (
+        total,
+        prediction,
+      ) =>
+        total +
+        prediction.popularPicks.length,
+      0,
+    );
+
+  const totalSafePicks =
+    predictions.reduce(
+      (
+        total,
+        prediction,
+      ) =>
+        total +
+        prediction.topPicks.length,
+      0,
+    );
+
+  return (
+    <PageShell>
+      <header className="topbar dashboard-topbar">
+        <div>
+          <p className="eyebrow">
+            AI FOOTBALL PREDICTIONS
+            {" â€¢ "}
+            {ACTIVE_SEASON_YEAR}
+          </p>
+
+          <h1>
+            Prediction Dashboard
+          </h1>
+
+          <p className="subtitle">
+            YaklaÅŸan gerÃ§ek maÃ§lar;
+            Feature Engine V2,
+            Rating Engine V2,
+            Prediction Engine V2,
+            Poisson modeli ve
+            Market Engine ile analiz
+            ediliyor.
+          </p>
+        </div>
+
+        <span className="mode-badge">
+          LIVE DATA
+        </span>
+      </header>
+
+      <section className="metric-grid dashboard-metrics">
+        <MetricCard
+          label="YaklaÅŸan maÃ§"
+          value={
+            predictions.length
+          }
+          description={`Aktif sezon ${ACTIVE_SEASON_YEAR}`}
+        />
+
+        <MetricCard
+          label="YÃ¼ksek gÃ¼ven"
+          value={
+            highConfidenceCount
+          }
+          description={`${veryHighConfidenceCount} Ã§ok yÃ¼ksek`}
+        />
+
+        <MetricCard
+          label="Ortalama gÃ¼ven"
+          value={
+            formatPercentage(
+              averageConfidence,
+            )
+          }
+          description="BirleÅŸik model gÃ¼veni"
+        />
+
+        <MetricCard
+          label="Ortalama tahmin"
+          value={
+            formatPercentage(
+              averagePredictionProbability,
+            )
+          }
+          description="Nihai 1X2 olasÄ±lÄ±ÄŸÄ±"
+        />
+
+        <MetricCard
+          label="PopÃ¼ler seÃ§im"
+          value={
+            totalPopularPicks
+          }
+          description="AnlamlÄ± bahis Ã¶nerileri"
+        />
+      </section>
+
+      <section className="dashboard-main-grid">
+        <div className="dashboard-primary-column">
+          <article className="dashboard-section">
+            <div className="dashboard-section-header">
+              <div>
+                <p className="eyebrow">
+                  TOP PREDICTIONS
+                </p>
+
+                <h2>
+                  En gÃ¼Ã§lÃ¼ yaklaÅŸan maÃ§lar
+                </h2>
+
+                <p className="dashboard-muted">
+                  Ana seÃ§imlerde maÃ§ sonucu,
+                  Ã§ifte ÅŸans, 2.5 gol,
+                  karÅŸÄ±lÄ±klÄ± gol ve takÄ±m
+                  golÃ¼ marketleri Ã¶nceliklendirilir.
+                </p>
+              </div>
+
+              <Link
+                href="/predictions"
+                className="dashboard-link"
+              >
+                TÃ¼m tahminler â†’
+              </Link>
+            </div>
+
+            {strongestPredictions.length ===
+            0 ? (
+              <div className="empty-state">
+                <h2>
+                  YaklaÅŸan tahmin bulunamadÄ±
+                </h2>
+
+                <p>
+                  Ã–nÃ¼mÃ¼zdeki 30 gÃ¼n iÃ§in
+                  tahmin Ã¼retilebilir aktif
+                  maÃ§ bulunamadÄ±.
+                </p>
+
+                <p>
+                  FikstÃ¼rleri yeniden
+                  iÃ§e aktardÄ±ktan sonra
+                  ekran otomatik olarak
+                  gÃ¼ncellenecektir.
+                </p>
+              </div>
+            ) : (
+              <div className="prediction-list dashboard-prediction-list">
+                {strongestPredictions.map(
+                  (
+                    prediction,
+                  ) => {
+                    const strongestPick =
+                      prediction
+                        .popularPicks[0] ??
+                      prediction
+                        .topPicks[0];
+
+                    return (
+                      <PredictionCard
+                        key={
+                          prediction.matchId
+                        }
+
+                        kickoffAt={
+                          prediction.kickoffAt
+                        }
+
+                        leagueName={
+                          prediction.leagueName
+                        }
+
+                        homeTeam={
+                          prediction.homeTeam
+                        }
+
+                        awayTeam={
+                          prediction.awayTeam
+                        }
+
+                        homeTeamLogo={
+                          prediction.homeTeamLogo
+                        }
+
+                        awayTeamLogo={
+                          prediction.awayTeamLogo
+                        }
+
+                        homeProbability={
+                          prediction.homeProbability
+                        }
+
+                        drawProbability={
+                          prediction.drawProbability
+                        }
+
+                        awayProbability={
+                          prediction.awayProbability
+                        }
+
+                        expectedHomeGoals={
+                          prediction.expectedHomeGoals
+                        }
+
+                        expectedAwayGoals={
+                          prediction.expectedAwayGoals
+                        }
+
+                        bestPick={
+                          getBestPickLabel(
+                            prediction,
+                          )
+                        }
+
+                        bestPickProbability={
+                          strongestPick
+                            ?.probability ??
+                          prediction
+                            .predictedProbability
+                        }
+
+                        confidence={
+                          getUiConfidence(
+                            prediction.confidenceScore,
+                          )
+                        }
+
+                        confidenceScore={
+                          prediction.confidenceScore
+                        }
+                      />
+                    );
+                  },
+                )}
+              </div>
+            )}
+          </article>
+        </div>
+
+        <aside className="dashboard-side-column">
+          <article className="dashboard-panel">
+            <div className="dashboard-panel-heading">
+              <div>
+                <p className="eyebrow">
+                  LIVE PIPELINE
+                </p>
+
+                <h2>
+                  Aktif tahmin sistemi
+                </h2>
+              </div>
+
+              <Link
+                href="/predictions"
+                className="dashboard-link"
+              >
+                AÃ§ â†’
+              </Link>
+            </div>
+
+            <div className="dashboard-validation-block">
+              <span>
+                Tahmin akÄ±ÅŸÄ±
+              </span>
+
+              <strong>
+                Feature V2
+                {" â†’ "}
+                Rating V2
+                {" â†’ "}
+                Prediction V2
+              </strong>
+
+              <small>
+                Kalibrasyon ve kontrollÃ¼
+                rating dÃ¼zeltmesi aktif
+              </small>
+            </div>
+
+            <div className="dashboard-rule-grid">
+              <div>
+                <span>
+                  Aktif sezon
+                </span>
+
+                <strong>
+                  {ACTIVE_SEASON_YEAR}
+                </strong>
+              </div>
+
+              <div>
+                <span>
+                  GÃ¶sterilen maÃ§
+                </span>
+
+                <strong>
+                  {predictions.length}
+                </strong>
+              </div>
+
+              <div>
+                <span>
+                  PopÃ¼ler seÃ§im
+                </span>
+
+                <strong>
+                  {totalPopularPicks}
+                </strong>
+              </div>
+
+              <div>
+                <span>
+                  GÃ¼venli market
+                </span>
+
+                <strong>
+                  {totalSafePicks}
+                </strong>
+              </div>
+            </div>
+          </article>
+
+          <article className="dashboard-panel">
+            <div className="dashboard-panel-heading">
+              <div>
+                <p className="eyebrow">
+                  MARKET STRUCTURE
+                </p>
+
+                <h2>
+                  Tahmin listeleri
+                </h2>
+              </div>
+            </div>
+
+            <div className="dashboard-performance-list">
+              <div>
+                <span>
+                  PopÃ¼ler 5 bahis
+                </span>
+
+                <strong>
+                  MaÃ§ odaklÄ±
+                </strong>
+              </div>
+
+              <div>
+                <span>
+                  MaÃ§ sonucu
+                </span>
+
+                <strong>
+                  1 / X / 2
+                </strong>
+              </div>
+
+              <div>
+                <span>
+                  Gol marketleri
+                </span>
+
+                <strong>
+                  2.5 ve KG
+                </strong>
+              </div>
+
+              <div>
+                <span>
+                  GÃ¼venli Top 10
+                </span>
+
+                <strong>
+                  YÃ¼ksek olasÄ±lÄ±k
+                </strong>
+              </div>
+
+              <div>
+                <span>
+                  GÃ¶sterilen oran
+                </span>
+
+                <strong>
+                  Adil oran
+                </strong>
+              </div>
+            </div>
+          </article>
+
+          <article className="dashboard-panel">
+            <p className="eyebrow">
+              MODEL HEALTH
+            </p>
+
+            <h2>
+              Sistem durumu
+            </h2>
+
+            <div className="dashboard-system-status">
+              <div>
+                <span className="status-dot" />
+
+                <span>
+                  PostgreSQL
+                </span>
+
+                <strong>
+                  Aktif
+                </strong>
+              </div>
+
+              <div>
+                <span className="status-dot" />
+
+                <span>
+                  Feature Engine
+                </span>
+
+                <strong>
+                  V2
+                </strong>
+              </div>
+
+              <div>
+                <span className="status-dot" />
+
+                <span>
+                  Rating Engine
+                </span>
+
+                <strong>
+                  V2
+                </strong>
+              </div>
+
+              <div>
+                <span className="status-dot" />
+
+                <span>
+                  Prediction Engine
+                </span>
+
+                <strong>
+                  V2
+                </strong>
+              </div>
+
+              <div>
+                <span className="status-dot" />
+
+                <span>
+                  Market Engine
+                </span>
+
+                <strong>
+                  Aktif
+                </strong>
+              </div>
+
+              <div>
+                <span className="status-dot" />
+
+                <span>
+                  Top Picks
+                </span>
+
+                <strong>
+                  PopÃ¼ler + GÃ¼venli
+                </strong>
+              </div>
+
+              <div>
+                <span className="status-dot" />
+
+                <span>
+                  API-Football
+                </span>
+
+                <strong>
+                  BaÄŸlÄ±
+                </strong>
+              </div>
+            </div>
+          </article>
+
+          <article className="dashboard-panel">
+            <p className="eyebrow">
+              CONFIDENCE
+            </p>
+
+            <h2>
+              GÃ¼ven daÄŸÄ±lÄ±mÄ±
+            </h2>
+
+            <div className="dashboard-performance-list">
+              <div>
+                <span>
+                  Ã‡ok yÃ¼ksek
+                </span>
+
+                <strong>
+                  {
+                    predictions.filter(
+                      (
+                        prediction,
+                      ) =>
+                        prediction.confidenceScore >=
+                        80,
+                    ).length
+                  }
+                </strong>
+              </div>
+
+              <div>
+                <span>
+                  YÃ¼ksek
+                </span>
+
+                <strong>
+                  {
+                    predictions.filter(
+                      (
+                        prediction,
+                      ) =>
+                        prediction.confidenceScore >=
+                          70 &&
+                        prediction.confidenceScore <
+                          80,
+                    ).length
+                  }
+                </strong>
+              </div>
+
+              <div>
+                <span>
+                  Orta
+                </span>
+
+                <strong>
+                  {
+                    predictions.filter(
+                      (
+                        prediction,
+                      ) =>
+                        prediction.confidenceScore >=
+                          60 &&
+                        prediction.confidenceScore <
+                          70,
+                    ).length
+                  }
+                </strong>
+              </div>
+
+              <div>
+                <span>
+                  DÃ¼ÅŸÃ¼k
+                </span>
+
+                <strong>
+                  {
+                    predictions.filter(
+                      (
+                        prediction,
+                      ) =>
+                        prediction.confidenceScore <
+                        60,
+                    ).length
+                  }
+                </strong>
+              </div>
+            </div>
+          </article>
+        </aside>
+      </section>
+
+      <div className="dashboard-disclaimer">
+        Burada gÃ¶sterilen oranlar bahis
+        ÅŸirketi oranlarÄ± deÄŸil, model
+        olasÄ±lÄ±klarÄ±ndan hesaplanan adil
+        oranlardÄ±r. GerÃ§ek bookmaker
+        oranlarÄ± baÄŸlandÄ±ÄŸÄ±nda Value Bet
+        karÅŸÄ±laÅŸtÄ±rmasÄ± ayrÄ±ca gÃ¶sterilecektir.
+      </div>
+    </PageShell>
+  );
+}
+
+===== FILE: .\src\app\predictions\page.tsx =====
+import {
+  PageShell,
+} from "@/components/page-shell";
+
+import {
+  PredictionsWorkspace,
+} from "@/components/predictions-workspace";
+
+import {
+  ACTIVE_SEASON_YEAR,
+} from "@/config/season";
+
+import {
+  loadDashboardPredictions,
+} from "@/lib/prediction-dashboard";
+
+export default async function PredictionsPage() {
+  const predictions =
+    await loadDashboardPredictions(
+      30,
+    );
+
+  return (
+    <PageShell>
+      <header className="topbar">
+        <div>
+          <p className="eyebrow">
+            AI FOOTBALL PREDICTIONS
+            {" â€¢ "}
+            {ACTIVE_SEASON_YEAR}
+          </p>
+
+          <h1>
+            TÃ¼m Tahminler
+          </h1>
+
+          <p className="subtitle">
+            YaklaÅŸan gerÃ§ek maÃ§lar;
+            Poisson modeli, Rating Engine,
+            Market Engine ve doÄŸrulanmÄ±ÅŸ
+            Top Picks sistemiyle analiz
+            ediliyor.
+          </p>
+        </div>
+
+        <span className="mode-badge">
+          LIVE DATA
+        </span>
+      </header>
+
+      {predictions.length ===
+      0 ? (
+        <section className="empty-state">
+          <h2>
+            YaklaÅŸan tahmin bulunamadÄ±
+          </h2>
+
+          <p>
+            Ã–nÃ¼mÃ¼zdeki 30 gÃ¼n iÃ§inde aktif
+            organizasyonlara ait tahmin
+            Ã¼retilebilir maÃ§ bulunmuyor.
+          </p>
+
+          <p>
+            FikstÃ¼r importu yapÄ±ldÄ±ktan sonra
+            bu ekran otomatik olarak
+            gÃ¼ncellenecektir.
+          </p>
+        </section>
+      ) : (
+        <PredictionsWorkspace
+          predictions={
+            predictions
+          }
+        />
+      )}
+    </PageShell>
+  );
+}
+

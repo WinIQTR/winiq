@@ -1,0 +1,31 @@
+BET PROJECT V6.4 - MANUEL ABONELİK VE YÜKSELTME İŞ AKIŞI
+
+Bu paket V6.3 üzerine kurulur ve bir Prisma migration içerir.
+
+YENİLİKLER
+- Üyeler /member/plans ekranında paketleri karşılaştırabilir.
+- TL ve EUR fiyatları yönetici panelinden değiştirilebilir.
+- Üye yalnızca mevcut paketinden daha yüksek paket talep edebilir.
+- Aynı üyede birden fazla aktif yükseltme talebi engellenir.
+- Yönetici talebi iletişime geçildi, reddedildi veya onaylandı olarak işleyebilir.
+- Onay sırasında yeni bitiş tarihi zorunludur.
+- Onay, paketi etkinleştirir ve güvenlik için eski oturumları kapatır.
+- Üyelik bitimine kalan gün sayısı paket ekranında gösterilir.
+- Mevcut süre sonu erişim kilidi değişmeden çalışır.
+- Harici ödeme sağlayıcısı ve ek maliyet yoktur.
+- 20% ML / 80% Poisson modeli ve otomatik değişim kilidi değişmez.
+
+KURULUM
+pnpm exec prisma generate
+pnpm exec prisma migrate deploy
+pnpm run test:membership-commerce-v6
+pnpm run test:member-experience-v6
+pnpm run test:membership-admin-v6
+pnpm exec tsc --noEmit
+Remove-Item .next -Recurse -Force -ErrorAction SilentlyContinue
+pnpm build
+pnpm dev
+
+KONTROL ADRESLERİ
+Üye paketleri: http://localhost:3000/member/plans
+Yönetici talepleri ve fiyatlar: http://localhost:3000/admin/members

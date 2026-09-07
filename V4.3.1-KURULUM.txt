@@ -1,0 +1,39 @@
+BET PROJECT V4.3.1 - HETZNER + NEON DAGITIM PLANI
+=================================================
+
+Durum:
+- Mevcut urun: %100
+- V4 genisletmesi: bu plan dogrulaninca %55
+- Gercek sunucu satin alma ve dagitim: henuz yapilmaz
+- Champion: 20% ML / 80% Poisson (degismez)
+
+Kurulum:
+1. ZIP dosyasini C:\Users\FMGammon\Desktop\bet-project klasorine cikarin.
+2. package.json uzerine yazma sorulursa onaylayin.
+3. Migration, pnpm install veya mevcut .env degisikligi gerekmez.
+
+PowerShell dogrulamasi:
+
+pnpm run test:vps-blueprint-v4
+pnpm exec tsc --noEmit
+Remove-Item .next -Recurse -Force -ErrorAction SilentlyContinue
+pnpm build
+
+Beklenen:
+- Hetzner and Neon Deployment Blueprint V4.3.1 tests passed.
+- TypeScript ve Next.js build hatasiz tamamlanir.
+
+Paket icerigi:
+- Node.js 24 production Dockerfile
+- PostgreSQL 17 pg_dump/pg_restore istemcisi
+- Docker BuildKit secret ile gizli build ortami
+- Caddy otomatik HTTPS reverse proxy
+- Kalici production_data volume
+- Salt okunur ornek .env.production.example
+- /api/health Docker health check
+
+Simdi YAPILMAYACAKLAR:
+- docker compose up komutu calistirilmaz.
+- deploy/.env.production olusturulmaz.
+- Gercek parola, DATABASE_URL veya API anahtari paylasilmaz.
+- PRODUCTION_DEPLOYMENT_APPROVED true yapilmaz.
