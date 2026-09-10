@@ -2414,9 +2414,13 @@
 }
 
 .marketGroup > summary {
-  grid-template-columns: 34px minmax(125px, .8fr) minmax(160px, 1fr) minmax(150px, .7fr) auto 18px;
+  grid-template-columns: 48px minmax(0, 1fr) minmax(180px, .72fr) auto 20px;
   min-height: 78px;
   padding: 13px 16px;
+}
+
+.marketGroup > summary::after {
+  grid-column: 5;
 }
 
 .marketNumber {
@@ -2426,16 +2430,28 @@
   color: #83a8d7;
 }
 
-.marketTitle b {
-  color: #9fb3cc;
-  font-size: 12px;
-  font-weight: 650;
+.marketIdentity {
+  display: grid;
+  min-width: 0;
+  gap: 5px;
 }
 
-.marketBestSelection strong {
+.marketIdentity small {
+  overflow: hidden;
+  color: #7898bd;
+  font-size: 12px;
+  font-weight: 650;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.marketIdentity strong {
+  overflow-wrap: anywhere;
   color: #f0f6ff;
   font-size: 14px;
   font-weight: 760;
+  line-height: 1.25;
 }
 
 .marketScore {
@@ -2523,18 +2539,13 @@
     gap: 7px 10px;
   }
 
-  .marketTitle {
+  .marketIdentity {
     grid-column: 2 / 4;
-  }
-
-  .marketBestSelection {
-    grid-column: 2 / 4;
-    grid-row: 2;
   }
 
   .marketScore {
     grid-column: 2 / 4;
-    grid-row: 3;
+    grid-row: 2;
     width: 100%;
     min-width: 0;
   }
@@ -2542,7 +2553,7 @@
   .marketTier {
     display: inline-flex;
     grid-column: 2;
-    grid-row: 4;
+    grid-row: 3;
     min-width: 0;
     justify-content: center;
     justify-self: start;
@@ -2550,7 +2561,7 @@
 
   .marketGroup > summary::after {
     grid-column: 3;
-    grid-row: 4;
+    grid-row: 3;
   }
 
   .marketOptionGrid {

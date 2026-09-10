@@ -214,12 +214,10 @@ export function BetMarketCatalogPanel({
             >
               <summary>
                 <span className={styles.marketNumber}>{String(marketGroup.number).padStart(2, "0")}</span>
-                <span className={styles.marketTitle}>
-                  <b>{marketGroup.title}</b>
-                </span>
                 {!unlocked ? (
                   <>
-                    <span className={styles.marketBestSelection}>
+                    <span className={styles.marketIdentity}>
+                      <small>{marketGroup.title}</small>
                       <small>{locale === "tr" ? "PAKET ERİŞİMİ" : "PLAN ACCESS"}</small>
                       <strong className={styles.marketLockedSelection}>
                         {locale === "tr"
@@ -231,7 +229,8 @@ export function BetMarketCatalogPanel({
                   </>
                 ) : bestOption ? (
                   <>
-                    <span className={styles.marketBestSelection}>
+                    <span className={styles.marketIdentity}>
+                      <small>{marketGroup.title}</small>
                       <strong>{bestOption.selection}</strong>
                     </span>
                     <span className={styles.marketScore}>
@@ -245,8 +244,11 @@ export function BetMarketCatalogPanel({
                     </span>
                   </>
                 ) : (
-                  <span className={styles.marketUnavailableLabel}>
-                    {locale === "tr" ? "VERİ BEKLENİYOR" : "WAITING FOR DATA"}
+                  <span className={styles.marketIdentity}>
+                    <small>{marketGroup.title}</small>
+                    <strong className={styles.marketUnavailableLabel}>
+                      {locale === "tr" ? "VERİ BEKLENİYOR" : "WAITING FOR DATA"}
+                    </strong>
                   </span>
                 )}
               </summary>
