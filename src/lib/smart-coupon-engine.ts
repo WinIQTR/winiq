@@ -44,6 +44,7 @@ export type SmartCoupon = {
   minimumBookmakerCount: number;
   oldestSourceUpdatedAt: Date;
   legs: SmartCouponLeg[];
+  isFallback?: boolean;
 };
 
 export type SmartCouponCenter = {
@@ -60,6 +61,7 @@ export type SmartCouponCenter = {
     invalidProbability: number;
   };
   coupons: SmartCoupon[];
+  fallbackCoupons: SmartCoupon[];
   missing: Array<{ window: CouponWindow; band: CouponBand; reason: string }>;
 };
 
@@ -450,6 +452,7 @@ export function buildSmartCouponCenter(
   const forcedWeakRows = new Set(advisoryEligible.map(rowKey));
 
   const coupons: SmartCoupon[] = [];
+  const fallbackCoupons: SmartCoupon[] = [];
   const missing: SmartCouponCenter["missing"] = [];
   for (const window of ["DAILY", "WEEKLY"] as const) {
     const futureStrictRows = strictEligible.filter((row) =>
@@ -485,6 +488,40 @@ export function buildSmartCouponCenter(
   }
 
   const uniqueCoupons = deduplicateCoupons(coupons);
+
+  // UI-only fallback coupons keep the centre useful when otherwise valid,
+  // upcoming selections miss live publication rules (most often stale odds).
+  // They are returned separately so archive jobs never publish them.
+  const fallbackBase = strongestPerMatch(rows.filter((row) =>
+    row.result === "PENDING" &&
+    row.kickoffAt >= now &&
+    Number.isFinite(row.bestOdds) &&
+    row.bestOdds >= MINIMUM_BOOKMAKER_ODDS &&
+    Number.isFinite(row.modelProbability) &&
+    row.modelProbability >= 30
+  ), histories);
+  const nearestDate = fallbackBase[0] ? istanbulDateKey(fallbackBase[0].kickoffAt) : null;
+  for (const window of ["DAILY", "WEEKLY"] as const) {
+    const windowRows = fallbackBase.filter((row) =>
+      window === "DAILY"
+        ? nearestDate !== null && istanbulDateKey(row.kickoffAt) === nearestDate
+        : row.kickoffAt <= weeklyEnd,
+    );
+    const legs = windowRows.slice(0, Math.min(3, windowRows.length));
+    if (legs.length === 0) continue;
+    for (const policy of BAND_POLICIES) {
+      if (uniqueCoupons.some((coupon) => coupon.window === window && coupon.band === policy.band)) continue;
+      const fallback = buildCoupon(window, policy, legs, 1, histories, now);
+      fallbackCoupons.push({
+        ...fallback,
+        id: `FALLBACK-${fallback.id}`,
+        title: `Yakın Maçlardan Alternatif · ${policy.title}`,
+        explanation: `Resmî yayın koşullarını geçen kupon bulunamadığı için en yakın maç günündeki ${legs.length} yüksek puanlı seçim gösteriliyor.`,
+        riskNote: "ALTERNATİF ÖNERİ: Oran güncelliğini bookmaker üzerinden kontrol edin; resmî güçlü kupon değildir.",
+        isFallback: true,
+      });
+    }
+  }
   for (const coupon of coupons) {
     if (uniqueCoupons.some((unique) => unique.window === coupon.window && unique.band === coupon.band)) continue;
     if (missing.some((item) => item.window === coupon.window && item.band === coupon.band)) continue;
@@ -502,6 +539,7 @@ export function buildSmartCouponCenter(
     rejectedCandidates: rows.length - strictEligible.length - advisoryEligible.length,
     rejectionBreakdown,
     coupons: uniqueCoupons,
+    fallbackCoupons,
     missing,
   };
 }

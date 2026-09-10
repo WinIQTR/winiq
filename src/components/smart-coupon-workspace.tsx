@@ -48,6 +48,7 @@ export type SerializedCoupon = {
   minimumBookmakerCount: number;
   oldestSourceUpdatedAt: string;
   legs: SerializedLeg[];
+  isFallback?: boolean;
 };
 
 type AccessMode = "ADMIN" | MembershipPlanName;
@@ -96,6 +97,7 @@ function accessMessage(access: AccessMode, window: CouponWindow, band: CouponBan
 
 export function SmartCouponWorkspace({
   coupons,
+  fallbackCoupons,
   missing,
   generatedAt,
   eligibleCandidates,
@@ -105,6 +107,7 @@ export function SmartCouponWorkspace({
   access,
 }: {
   coupons: SerializedCoupon[];
+  fallbackCoupons: SerializedCoupon[];
   missing: Array<{ window: CouponWindow; band: CouponBand; reason: string }>;
   generatedAt: string;
   eligibleCandidates: number;
@@ -123,8 +126,13 @@ export function SmartCouponWorkspace({
   const [window, setWindow] = useState<CouponWindow>("DAILY");
   const [band, setBand] = useState<CouponBand>("SAFE");
   const visible = useMemo(
-    () => coupons.filter((coupon) => coupon.window === window && coupon.band === band),
-    [band, coupons, window],
+    () => {
+      const official = coupons.filter((coupon) => coupon.window === window && coupon.band === band);
+      return official.length > 0
+        ? official
+        : fallbackCoupons.filter((coupon) => coupon.window === window && coupon.band === band);
+    },
+    [band, coupons, fallbackCoupons, window],
   );
   const locked = !mayOpen(access, window, band);
   const missingReason = missing.find((item) => item.window === window && item.band === band)?.reason;
@@ -198,7 +206,7 @@ export function SmartCouponWorkspace({
           {visible.map((coupon, index) => (
             <article className={`${styles.coupon} ${styles[`coupon${coupon.band}`]}`} key={coupon.id}>
               <header>
-                <div><span>{coupon.window === "DAILY" ? "BUGÜN" : "7 GÜN"} · KUPON {index + 1}</span><h2>{coupon.title}</h2>{coupon.band === "WEAK" ? <b className={styles.weakBadge}>RESMÎ ÖNERİ DEĞİL</b> : null}</div>
+                <div><span>{coupon.window === "DAILY" ? "BUGÜN / EN YAKIN GÜN" : "7 GÜN"} · KUPON {index + 1}</span><h2>{coupon.title}</h2>{coupon.isFallback ? <b className={styles.fallbackBadge}>ALTERNATİF ÖNERİ · ORANI KONTROL ET</b> : coupon.band === "WEAK" ? <b className={styles.weakBadge}>RESMÎ ÖNERİ DEĞİL</b> : null}</div>
                 <div className={styles.totalOdds}><span>Toplam oran</span><strong>{coupon.totalOdds.toFixed(2)}</strong></div>
               </header>
 

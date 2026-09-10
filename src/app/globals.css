@@ -10629,8 +10629,36 @@ body .topbar .subtitle {
 /* Final cascade for the shared smart match-card layout. */
 .prediction-list {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr);
   gap: 14px;
+}
+
+.prediction-entry {
+  width: 100%;
+}
+
+.prediction-entry .prediction-inline-analysis {
+  width: 100%;
+  min-width: 0;
+}
+
+/* One consistent match-list rhythm on every prediction surface. */
+.predictions-workspace,
+.dashboard-prediction-list,
+.prediction-list,
+.prediction-entry,
+.prediction-clickable,
+.prediction-inline-analysis {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.prediction-card-smart strong,
+.prediction-card-smart span,
+.prediction-inline-analysis strong,
+.prediction-inline-analysis span {
+  word-break: normal;
+  overflow-wrap: break-word;
 }
 
 .prediction-card-pro.prediction-card-smart {
@@ -10641,8 +10669,4 @@ body .topbar .subtitle {
 
 .prediction-card-smart .prediction-team {
   display: flex;
-}
-
-@media (max-width: 1180px) {
-  .prediction-list { grid-template-columns: 1fr; }
 }

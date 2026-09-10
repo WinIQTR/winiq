@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-09T20:41:36.886Z",
+  "generatedAt": "2026-09-10T08:41:07.077Z",
   "predictions": [
     {
       "matchId": 9015,
@@ -49871,7 +49871,7 @@
         "Instead of the requested 50 picks, 11 distinct and sufficiently reliable picks were found. No weaker selections were added just to fill the list.",
         "Instead of the requested 10 picks, 9 distinct and sufficiently reliable picks were found. No weaker selections were added just to fill the list."
       ],
-      "settlementStatus": "PENDING",
+      "settlementStatus": "VOID",
       "finalHomeScore": null,
       "finalAwayScore": null
     },
@@ -50918,7 +50918,7 @@
         "Instead of the requested 50 picks, 10 distinct and sufficiently reliable picks were found. No weaker selections were added just to fill the list.",
         "Instead of the requested 10 picks, 8 distinct and sufficiently reliable picks were found. No weaker selections were added just to fill the list."
       ],
-      "settlementStatus": "PENDING",
+      "settlementStatus": "VOID",
       "finalHomeScore": null,
       "finalAwayScore": null
     },
@@ -58455,7 +58455,7 @@
         "Instead of the requested 50 picks, 9 distinct and sufficiently reliable picks were found. No weaker selections were added just to fill the list.",
         "Instead of the requested 10 picks, 7 distinct and sufficiently reliable picks were found. No weaker selections were added just to fill the list."
       ],
-      "settlementStatus": "PENDING",
+      "settlementStatus": "VOID",
       "finalHomeScore": null,
       "finalAwayScore": null
     },
@@ -66157,7 +66157,7 @@
         "Instead of the requested 50 picks, 9 distinct and sufficiently reliable picks were found. No weaker selections were added just to fill the list.",
         "Instead of the requested 10 picks, 8 distinct and sufficiently reliable picks were found. No weaker selections were added just to fill the list."
       ],
-      "settlementStatus": "PENDING",
+      "settlementStatus": "VOID",
       "finalHomeScore": null,
       "finalAwayScore": null
     },

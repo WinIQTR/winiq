@@ -85,7 +85,7 @@
 .fixtures-league-link:hover,.fixtures-league-link-active { color:#fff; border-color:#4f8cff; background:linear-gradient(135deg,rgba(55,113,225,.26),rgba(35,63,119,.22)); }
 .fixtures-week-nav { display:flex; justify-content:space-between; align-items:center; gap:14px; margin:16px 0; }
 .fixtures-week-nav a { color:#a9c9ff; text-decoration:none; padding:10px 14px; border:1px solid rgba(95,144,213,.2); border-radius:10px; }
-.fixtures-week-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
+.fixtures-week-grid { display:grid; grid-template-columns:minmax(0,1fr); gap:14px; }
 .fixture-week-panel { border:1px solid rgba(104,149,211,.2); border-radius:16px; overflow:hidden; background:linear-gradient(150deg,rgba(18,37,64,.92),rgba(8,22,41,.96)); }
 .fixture-week-heading { padding:16px 17px; border-bottom:1px solid rgba(104,149,211,.16); }
 .fixture-week-heading span { color:#72a8ff; font-size:.72rem; letter-spacing:.11em; text-transform:uppercase; }

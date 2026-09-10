@@ -30,6 +30,7 @@
 .coupon > header span { color: #82a0c3; font-size: .76rem; font-weight: 900; letter-spacing: .07em; }
 .coupon > header h2 { margin: 5px 0 0; color: #eff6ff; font-size: 1.22rem; }
 .weakBadge { display: inline-block; margin-top: 7px; border: 1px solid rgb(248 113 113 / 52%); border-radius: 999px; padding: 4px 7px; background: rgb(127 29 29 / 35%); color: #fca5a5; font-size: .55rem; letter-spacing: .07em; }
+.fallbackBadge { display: inline-block; margin-top: 7px; border: 1px solid rgb(245 158 11 / 52%); border-radius: 999px; padding: 4px 7px; background: rgb(120 53 15 / 30%); color: #fcd34d; font-size: .58rem; letter-spacing: .07em; }
 .couponWEAK .explanation { border-left-color: #ef4444; background: rgb(127 29 29 / 12%); }
 .couponWEAK .explanation strong,.couponWEAK .explanation small { color: #fca5a5; }
 .couponWEAK .odds strong { color: #fca5a5; }

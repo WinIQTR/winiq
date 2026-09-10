@@ -1,13 +1,13 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-09T20:40:38.762Z",
+  "generatedAt": "2026-09-10T08:40:32.407Z",
   "selectionPolicyVersion": "selection-policy-v2",
   "automaticModelChangeAllowed": false,
   "records": [
     {
       "matchId": 9019,
       "kickoffAt": "2026-10-18T15:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -65,7 +65,7 @@
     {
       "matchId": 9017,
       "kickoffAt": "2026-10-18T15:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -121,7 +121,7 @@
     {
       "matchId": 9016,
       "kickoffAt": "2026-10-18T15:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -179,7 +179,7 @@
     {
       "matchId": 9015,
       "kickoffAt": "2026-10-18T15:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -235,7 +235,7 @@
     {
       "matchId": 9013,
       "kickoffAt": "2026-10-18T15:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -294,7 +294,7 @@
     {
       "matchId": 8618,
       "kickoffAt": "2026-10-18T13:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -353,7 +353,7 @@
     {
       "matchId": 8611,
       "kickoffAt": "2026-10-18T13:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -409,7 +409,7 @@
     {
       "matchId": 9681,
       "kickoffAt": "2026-10-18T13:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "AWAY",
@@ -465,7 +465,7 @@
     {
       "matchId": 10356,
       "kickoffAt": "2026-10-18T13:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -524,7 +524,7 @@
     {
       "matchId": 8616,
       "kickoffAt": "2026-10-18T13:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -580,7 +580,7 @@
     {
       "matchId": 9374,
       "kickoffAt": "2026-10-18T12:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -636,7 +636,7 @@
     {
       "matchId": 9373,
       "kickoffAt": "2026-10-18T12:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -692,7 +692,7 @@
     {
       "matchId": 9381,
       "kickoffAt": "2026-10-18T12:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -751,7 +751,7 @@
     {
       "matchId": 9380,
       "kickoffAt": "2026-10-18T12:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -809,7 +809,7 @@
     {
       "matchId": 9379,
       "kickoffAt": "2026-10-18T12:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -865,7 +865,7 @@
     {
       "matchId": 9378,
       "kickoffAt": "2026-10-18T12:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -923,7 +923,7 @@
     {
       "matchId": 9377,
       "kickoffAt": "2026-10-18T12:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -982,22 +982,22 @@
     {
       "matchId": 9375,
       "kickoffAt": "2026-10-18T12:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "AWAY",
-      "predictedProbability": 58.501999999999995,
-      "homeProbability": 20.142,
-      "drawProbability": 21.356,
-      "awayProbability": 58.501999999999995,
+      "predictedProbability": 57.802,
+      "homeProbability": 20.746000000000002,
+      "drawProbability": 21.451999999999998,
+      "awayProbability": 57.802,
       "expectedHomeGoals": 0.8817,
       "expectedAwayGoals": 2.0217,
       "advisoryMarket": "Double Chance",
       "advisorySelection": "12",
-      "advisoryProbability": 78.64,
+      "advisoryProbability": 78.55,
       "advisoryReliabilityScore": 77.39,
       "confidenceLevel": "VERY_HIGH",
-      "confidenceScore": 93.73,
+      "confidenceScore": 93.35,
       "dataQualityScore": 100,
       "productionModelName": "v1.0-20-80",
       "summary": "All Selection Policy V2 publication checks passed.",
@@ -1019,7 +1019,7 @@
           "code": "CONFIDENCE",
           "passed": true,
           "label": "Reliability",
-          "detail": "Passed: VERY_HIGH (93.7/100)."
+          "detail": "Passed: VERY_HIGH (93.3/100)."
         },
         {
           "code": "DATA_QUALITY",
@@ -1031,14 +1031,14 @@
           "code": "PROBABILITY",
           "passed": true,
           "label": "Model probability",
-          "detail": "Passed: 58.5% (minimum 45%)."
+          "detail": "Passed: 57.8% (minimum 45%)."
         }
       ]
     },
     {
       "matchId": 9376,
       "kickoffAt": "2026-10-18T12:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -1097,7 +1097,7 @@
     {
       "matchId": 9677,
       "kickoffAt": "2026-10-18T10:30:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -1156,7 +1156,7 @@
     {
       "matchId": 9679,
       "kickoffAt": "2026-10-17T18:45:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -1212,7 +1212,7 @@
     {
       "matchId": 10361,
       "kickoffAt": "2026-10-17T18:45:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "AWAY",
@@ -1268,7 +1268,7 @@
     {
       "matchId": 10357,
       "kickoffAt": "2026-10-17T18:45:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -1324,7 +1324,7 @@
     {
       "matchId": 8610,
       "kickoffAt": "2026-10-17T16:30:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -1382,7 +1382,7 @@
     {
       "matchId": 9680,
       "kickoffAt": "2026-10-17T16:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "AWAY",
@@ -1438,14 +1438,14 @@
     {
       "matchId": 10359,
       "kickoffAt": "2026-10-17T15:15:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
-      "predictedProbability": 44.0478203820382,
-      "homeProbability": 32.83231383138314,
-      "drawProbability": 23.119865786578657,
-      "awayProbability": 44.0478203820382,
+      "predictedProbability": 44.9858203820382,
+      "homeProbability": 31.70031383138314,
+      "drawProbability": 23.31386578657866,
+      "awayProbability": 44.9858203820382,
       "expectedHomeGoals": 1.3283,
       "expectedAwayGoals": 1.769,
       "advisoryMarket": "Total Goals 4.5",
@@ -1453,7 +1453,7 @@
       "advisoryProbability": 80.09,
       "advisoryReliabilityScore": 82.79,
       "confidenceLevel": "MEDIUM",
-      "confidenceScore": 62.06,
+      "confidenceScore": 64.64,
       "dataQualityScore": 100,
       "productionModelName": "v1.0-20-80",
       "summary": "2 Selection Policy V2 check(s) failed.",
@@ -1478,7 +1478,7 @@
           "code": "CONFIDENCE",
           "passed": false,
           "label": "Reliability",
-          "detail": "Failed: MEDIUM (62.1/100); HIGH or VERY_HIGH is required."
+          "detail": "Failed: MEDIUM (64.6/100); HIGH or VERY_HIGH is required."
         },
         {
           "code": "DATA_QUALITY",
@@ -1490,21 +1490,21 @@
           "code": "PROBABILITY",
           "passed": false,
           "label": "Model probability",
-          "detail": "Failed: 44.0% (minimum 45%)."
+          "detail": "Failed: 45.0% (minimum 45%)."
         }
       ]
     },
     {
       "matchId": 8617,
       "kickoffAt": "2026-10-17T14:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
-      "predictedProbability": 49.422000000000004,
-      "homeProbability": 49.422000000000004,
-      "drawProbability": 22.728,
-      "awayProbability": 27.85,
+      "predictedProbability": 48.99491149114911,
+      "homeProbability": 48.99491149114911,
+      "drawProbability": 22.80447404740474,
+      "awayProbability": 28.200614461446143,
       "expectedHomeGoals": 1.8781,
       "expectedAwayGoals": 1.3447,
       "advisoryMarket": "Total Goals 4.5",
@@ -1512,7 +1512,7 @@
       "advisoryProbability": 77.94,
       "advisoryReliabilityScore": 82.42,
       "confidenceLevel": "HIGH",
-      "confidenceScore": 75.35,
+      "confidenceScore": 74.34,
       "dataQualityScore": 100,
       "productionModelName": "v1.0-20-80",
       "summary": "All Selection Policy V2 publication checks passed.",
@@ -1534,7 +1534,7 @@
           "code": "CONFIDENCE",
           "passed": true,
           "label": "Reliability",
-          "detail": "Passed: HIGH (75.3/100)."
+          "detail": "Passed: HIGH (74.3/100)."
         },
         {
           "code": "DATA_QUALITY",
@@ -1546,14 +1546,14 @@
           "code": "PROBABILITY",
           "passed": true,
           "label": "Model probability",
-          "detail": "Passed: 49.4% (minimum 45%)."
+          "detail": "Passed: 49.0% (minimum 45%)."
         }
       ]
     },
     {
       "matchId": 8612,
       "kickoffAt": "2026-10-17T14:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -1612,7 +1612,7 @@
     {
       "matchId": 8615,
       "kickoffAt": "2026-10-17T14:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -1668,7 +1668,7 @@
     {
       "matchId": 10048,
       "kickoffAt": "2026-10-17T13:30:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "AWAY",
@@ -1724,7 +1724,7 @@
     {
       "matchId": 10046,
       "kickoffAt": "2026-10-17T13:30:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -1783,7 +1783,7 @@
     {
       "matchId": 10047,
       "kickoffAt": "2026-10-17T13:30:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "AWAY",
@@ -1839,7 +1839,7 @@
     {
       "matchId": 10049,
       "kickoffAt": "2026-10-17T13:30:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -1897,7 +1897,7 @@
     {
       "matchId": 10041,
       "kickoffAt": "2026-10-17T13:30:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -1953,7 +1953,7 @@
     {
       "matchId": 10044,
       "kickoffAt": "2026-10-17T13:30:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -2009,7 +2009,7 @@
     {
       "matchId": 10043,
       "kickoffAt": "2026-10-17T13:30:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -2068,7 +2068,7 @@
     {
       "matchId": 10045,
       "kickoffAt": "2026-10-17T13:30:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -2124,7 +2124,7 @@
     {
       "matchId": 10042,
       "kickoffAt": "2026-10-17T13:30:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -2183,14 +2183,14 @@
     {
       "matchId": 9683,
       "kickoffAt": "2026-10-17T13:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
-      "predictedProbability": 45.628,
-      "homeProbability": 25.917999999999996,
-      "drawProbability": 28.454,
-      "awayProbability": 45.628,
+      "predictedProbability": 45.512,
+      "homeProbability": 26.056,
+      "drawProbability": 28.432000000000002,
+      "awayProbability": 45.512,
       "expectedHomeGoals": 0.8065,
       "expectedAwayGoals": 1.2327,
       "advisoryMarket": "Away Win To Nil",
@@ -2198,7 +2198,7 @@
       "advisoryProbability": 68.37,
       "advisoryReliabilityScore": 82.05,
       "confidenceLevel": "MEDIUM",
-      "confidenceScore": 68.88,
+      "confidenceScore": 68.72,
       "dataQualityScore": 100,
       "productionModelName": "v1.0-20-80",
       "summary": "1 Selection Policy V2 check(s) failed.",
@@ -2222,7 +2222,7 @@
           "code": "CONFIDENCE",
           "passed": false,
           "label": "Reliability",
-          "detail": "Failed: MEDIUM (68.9/100); HIGH or VERY_HIGH is required."
+          "detail": "Failed: MEDIUM (68.7/100); HIGH or VERY_HIGH is required."
         },
         {
           "code": "DATA_QUALITY",
@@ -2234,14 +2234,14 @@
           "code": "PROBABILITY",
           "passed": true,
           "label": "Model probability",
-          "detail": "Passed: 45.6% (minimum 45%)."
+          "detail": "Passed: 45.5% (minimum 45%)."
         }
       ]
     },
     {
       "matchId": 8613,
       "kickoffAt": "2026-10-17T11:30:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -2300,7 +2300,7 @@
     {
       "matchId": 9682,
       "kickoffAt": "2026-10-16T18:45:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -2359,7 +2359,7 @@
     {
       "matchId": 10364,
       "kickoffAt": "2026-10-16T18:45:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -2418,7 +2418,7 @@
     {
       "matchId": 38495,
       "kickoffAt": "2026-10-15T19:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -2477,7 +2477,7 @@
     {
       "matchId": 38450,
       "kickoffAt": "2026-10-15T19:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -2536,7 +2536,7 @@
     {
       "matchId": 38542,
       "kickoffAt": "2026-10-15T19:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -2592,7 +2592,7 @@
     {
       "matchId": 38432,
       "kickoffAt": "2026-10-15T19:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -2650,7 +2650,7 @@
     {
       "matchId": 38442,
       "kickoffAt": "2026-10-15T19:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -2708,7 +2708,7 @@
     {
       "matchId": 38447,
       "kickoffAt": "2026-10-15T19:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -2768,7 +2768,7 @@
     {
       "matchId": 38462,
       "kickoffAt": "2026-10-15T19:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -2824,7 +2824,7 @@
     {
       "matchId": 46672,
       "kickoffAt": "2026-10-15T19:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -2882,7 +2882,7 @@
     {
       "matchId": 46671,
       "kickoffAt": "2026-10-15T19:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -2941,7 +2941,7 @@
     {
       "matchId": 46670,
       "kickoffAt": "2026-10-15T19:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -2999,7 +2999,7 @@
     {
       "matchId": 46669,
       "kickoffAt": "2026-10-15T19:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -3055,7 +3055,7 @@
     {
       "matchId": 46668,
       "kickoffAt": "2026-10-15T19:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -3114,7 +3114,7 @@
     {
       "matchId": 46667,
       "kickoffAt": "2026-10-15T19:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -3172,7 +3172,7 @@
     {
       "matchId": 46666,
       "kickoffAt": "2026-10-15T19:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -3231,7 +3231,7 @@
     {
       "matchId": 46673,
       "kickoffAt": "2026-10-15T19:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -3290,7 +3290,7 @@
     {
       "matchId": 38527,
       "kickoffAt": "2026-10-15T19:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -3349,7 +3349,7 @@
     {
       "matchId": 38483,
       "kickoffAt": "2026-10-15T19:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -3409,7 +3409,7 @@
     {
       "matchId": 38476,
       "kickoffAt": "2026-10-15T19:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -3467,7 +3467,7 @@
     {
       "matchId": 38532,
       "kickoffAt": "2026-10-15T16:45:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -3526,7 +3526,7 @@
     {
       "matchId": 38437,
       "kickoffAt": "2026-10-15T16:45:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -3584,7 +3584,7 @@
     {
       "matchId": 38522,
       "kickoffAt": "2026-10-15T16:45:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -3642,7 +3642,7 @@
     {
       "matchId": 46663,
       "kickoffAt": "2026-10-15T16:45:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -3701,7 +3701,7 @@
     {
       "matchId": 38477,
       "kickoffAt": "2026-10-15T16:45:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -3760,7 +3760,7 @@
     {
       "matchId": 38555,
       "kickoffAt": "2026-10-15T16:45:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -3819,7 +3819,7 @@
     {
       "matchId": 38571,
       "kickoffAt": "2026-10-15T16:45:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -3878,7 +3878,7 @@
     {
       "matchId": 38458,
       "kickoffAt": "2026-10-15T16:45:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -3936,7 +3936,7 @@
     {
       "matchId": 38568,
       "kickoffAt": "2026-10-15T16:45:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -3995,7 +3995,7 @@
     {
       "matchId": 46665,
       "kickoffAt": "2026-10-15T16:45:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -4053,7 +4053,7 @@
     {
       "matchId": 46664,
       "kickoffAt": "2026-10-15T16:45:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -4111,7 +4111,7 @@
     {
       "matchId": 46656,
       "kickoffAt": "2026-10-15T16:45:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -4169,7 +4169,7 @@
     {
       "matchId": 46657,
       "kickoffAt": "2026-10-15T16:45:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -4228,7 +4228,7 @@
     {
       "matchId": 46658,
       "kickoffAt": "2026-10-15T16:45:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -4286,7 +4286,7 @@
     {
       "matchId": 46659,
       "kickoffAt": "2026-10-15T16:45:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -4344,7 +4344,7 @@
     {
       "matchId": 46660,
       "kickoffAt": "2026-10-15T16:45:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -4400,7 +4400,7 @@
     {
       "matchId": 46661,
       "kickoffAt": "2026-10-15T16:45:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -4460,7 +4460,7 @@
     {
       "matchId": 46662,
       "kickoffAt": "2026-10-15T16:45:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -4518,22 +4518,22 @@
     {
       "matchId": 38397,
       "kickoffAt": "2026-10-14T19:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
-      "predictedProbability": 50.63511488851115,
-      "homeProbability": 50.63511488851115,
-      "drawProbability": 21.18152424757524,
-      "awayProbability": 28.183360863913602,
-      "expectedHomeGoals": 2.215,
-      "expectedAwayGoals": 1.5641,
+      "predictedProbability": 49.94266229942663,
+      "homeProbability": 49.94266229942663,
+      "drawProbability": 21.246835412468354,
+      "awayProbability": 28.81050228810502,
+      "expectedHomeGoals": 2.2109,
+      "expectedAwayGoals": 1.5673,
       "advisoryMarket": "Away Team Goals 2.5",
       "advisorySelection": "UNDER",
-      "advisoryProbability": 79.35,
+      "advisoryProbability": 79.27,
       "advisoryReliabilityScore": 86.84,
       "confidenceLevel": "MEDIUM",
-      "confidenceScore": 66.02,
+      "confidenceScore": 64.32,
       "dataQualityScore": 82.5,
       "productionModelName": "v1.0-20-80",
       "summary": "1 Selection Policy V2 check(s) failed.",
@@ -4557,7 +4557,7 @@
           "code": "CONFIDENCE",
           "passed": false,
           "label": "Reliability",
-          "detail": "Failed: MEDIUM (66.0/100); HIGH or VERY_HIGH is required."
+          "detail": "Failed: MEDIUM (64.3/100); HIGH or VERY_HIGH is required."
         },
         {
           "code": "DATA_QUALITY",
@@ -4569,29 +4569,29 @@
           "code": "PROBABILITY",
           "passed": true,
           "label": "Model probability",
-          "detail": "Passed: 50.6% (minimum 45%)."
+          "detail": "Passed: 49.9% (minimum 45%)."
         }
       ]
     },
     {
       "matchId": 38338,
       "kickoffAt": "2026-10-14T19:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
-      "predictedProbability": 62.33709829017099,
-      "homeProbability": 62.33709829017099,
-      "drawProbability": 18.033491050894913,
-      "awayProbability": 19.629410658934106,
-      "expectedHomeGoals": 2.966,
-      "expectedAwayGoals": 1.4862,
+      "predictedProbability": 62.0997900209979,
+      "homeProbability": 62.0997900209979,
+      "drawProbability": 18.104189581041894,
+      "awayProbability": 19.796020397960206,
+      "expectedHomeGoals": 2.9539,
+      "expectedAwayGoals": 1.492,
       "advisoryMarket": "Total Goals 5.5",
       "advisorySelection": "UNDER",
-      "advisoryProbability": 73.51,
+      "advisoryProbability": 73.58,
       "advisoryReliabilityScore": 92.37,
       "confidenceLevel": "VERY_HIGH",
-      "confidenceScore": 95.82,
+      "confidenceScore": 95.69,
       "dataQualityScore": 100,
       "productionModelName": "v1.0-20-80",
       "summary": "All Selection Policy V2 publication checks passed.",
@@ -4613,7 +4613,7 @@
           "code": "CONFIDENCE",
           "passed": true,
           "label": "Reliability",
-          "detail": "Passed: VERY_HIGH (95.8/100)."
+          "detail": "Passed: VERY_HIGH (95.7/100)."
         },
         {
           "code": "DATA_QUALITY",
@@ -4625,29 +4625,29 @@
           "code": "PROBABILITY",
           "passed": true,
           "label": "Model probability",
-          "detail": "Passed: 62.3% (minimum 45%)."
+          "detail": "Passed: 62.1% (minimum 45%)."
         }
       ]
     },
     {
       "matchId": 38285,
       "kickoffAt": "2026-10-14T19:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
-      "predictedProbability": 42.90955784421558,
-      "homeProbability": 33.92688731126887,
-      "drawProbability": 23.16355484451555,
-      "awayProbability": 42.90955784421558,
-      "expectedHomeGoals": 1.3064,
-      "expectedAwayGoals": 1.7638,
+      "predictedProbability": 43.924,
+      "homeProbability": 32.66600000000001,
+      "drawProbability": 23.41,
+      "awayProbability": 43.924,
+      "expectedHomeGoals": 1.3032,
+      "expectedAwayGoals": 1.7714,
       "advisoryMarket": "Away Team Goals 2.5",
       "advisorySelection": "UNDER",
-      "advisoryProbability": 74.2,
+      "advisoryProbability": 74,
       "advisoryReliabilityScore": 86.84,
       "confidenceLevel": "MEDIUM",
-      "confidenceScore": 59.21,
+      "confidenceScore": 62.04,
       "dataQualityScore": 100,
       "productionModelName": "v1.0-20-80",
       "summary": "2 Selection Policy V2 check(s) failed.",
@@ -4672,7 +4672,7 @@
           "code": "CONFIDENCE",
           "passed": false,
           "label": "Reliability",
-          "detail": "Failed: MEDIUM (59.2/100); HIGH or VERY_HIGH is required."
+          "detail": "Failed: MEDIUM (62.0/100); HIGH or VERY_HIGH is required."
         },
         {
           "code": "DATA_QUALITY",
@@ -4684,29 +4684,29 @@
           "code": "PROBABILITY",
           "passed": false,
           "label": "Model probability",
-          "detail": "Failed: 42.9% (minimum 45%)."
+          "detail": "Failed: 43.9% (minimum 45%)."
         }
       ]
     },
     {
       "matchId": 38371,
       "kickoffAt": "2026-10-14T19:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
-      "predictedProbability": 49.366,
-      "homeProbability": 49.366,
-      "drawProbability": 23.046,
-      "awayProbability": 27.588,
-      "expectedHomeGoals": 1.824,
-      "expectedAwayGoals": 1.332,
+      "predictedProbability": 49.83,
+      "homeProbability": 49.83,
+      "drawProbability": 22.982000000000003,
+      "awayProbability": 27.188000000000002,
+      "expectedHomeGoals": 1.838,
+      "expectedAwayGoals": 1.32,
       "advisoryMarket": "Total Goals 4.5",
       "advisorySelection": "UNDER",
-      "advisoryProbability": 79.1,
+      "advisoryProbability": 79.07,
       "advisoryReliabilityScore": 82.42,
       "confidenceLevel": "VERY_LOW",
-      "confidenceScore": 20.02,
+      "confidenceScore": 21.14,
       "dataQualityScore": 30,
       "productionModelName": "v1.0-20-80",
       "summary": "2 Selection Policy V2 check(s) failed.",
@@ -4731,7 +4731,7 @@
           "code": "CONFIDENCE",
           "passed": false,
           "label": "Reliability",
-          "detail": "Failed: VERY_LOW (20.0/100); HIGH or VERY_HIGH is required."
+          "detail": "Failed: VERY_LOW (21.1/100); HIGH or VERY_HIGH is required."
         },
         {
           "code": "DATA_QUALITY",
@@ -4743,29 +4743,29 @@
           "code": "PROBABILITY",
           "passed": true,
           "label": "Model probability",
-          "detail": "Passed: 49.4% (minimum 45%)."
+          "detail": "Passed: 49.8% (minimum 45%)."
         }
       ]
     },
     {
       "matchId": 38375,
       "kickoffAt": "2026-10-14T19:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
-      "predictedProbability": 40.07876707670767,
-      "homeProbability": 34.77075467546755,
-      "drawProbability": 25.150478247824786,
-      "awayProbability": 40.07876707670767,
-      "expectedHomeGoals": 1.3074,
-      "expectedAwayGoals": 1.45,
+      "predictedProbability": 39.85476707670767,
+      "homeProbability": 34.986754675467544,
+      "drawProbability": 25.158478247824785,
+      "awayProbability": 39.85476707670767,
+      "expectedHomeGoals": 1.3139,
+      "expectedAwayGoals": 1.4444,
       "advisoryMarket": "Away Win To Nil",
       "advisorySelection": "NO",
-      "advisoryProbability": 79.29,
+      "advisoryProbability": 79.46,
       "advisoryReliabilityScore": 82.58,
       "confidenceLevel": "VERY_LOW",
-      "confidenceScore": 22.34,
+      "confidenceScore": 21.77,
       "dataQualityScore": 51.88,
       "productionModelName": "v1.0-20-80",
       "summary": "2 Selection Policy V2 check(s) failed.",
@@ -4790,7 +4790,7 @@
           "code": "CONFIDENCE",
           "passed": false,
           "label": "Reliability",
-          "detail": "Failed: VERY_LOW (22.3/100); HIGH or VERY_HIGH is required."
+          "detail": "Failed: VERY_LOW (21.8/100); HIGH or VERY_HIGH is required."
         },
         {
           "code": "DATA_QUALITY",
@@ -4802,29 +4802,29 @@
           "code": "PROBABILITY",
           "passed": false,
           "label": "Model probability",
-          "detail": "Failed: 40.1% (minimum 45%)."
+          "detail": "Failed: 39.9% (minimum 45%)."
         }
       ]
     },
     {
       "matchId": 38347,
       "kickoffAt": "2026-10-14T19:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
-      "predictedProbability": 42.49000000000001,
-      "homeProbability": 42.49000000000001,
-      "drawProbability": 22.644,
-      "awayProbability": 34.866,
-      "expectedHomeGoals": 1.7432,
-      "expectedAwayGoals": 1.7189,
+      "predictedProbability": 42.602000000000004,
+      "homeProbability": 42.602000000000004,
+      "drawProbability": 22.636,
+      "awayProbability": 34.762,
+      "expectedHomeGoals": 1.7468,
+      "expectedAwayGoals": 1.7158,
       "advisoryMarket": "Away Team Goals 2.5",
       "advisorySelection": "UNDER",
-      "advisoryProbability": 75.37,
+      "advisoryProbability": 75.45,
       "advisoryReliabilityScore": 86.84,
       "confidenceLevel": "VERY_LOW",
-      "confidenceScore": 29.87,
+      "confidenceScore": 30.15,
       "dataQualityScore": 65,
       "productionModelName": "v1.0-20-80",
       "summary": "2 Selection Policy V2 check(s) failed.",
@@ -4849,7 +4849,7 @@
           "code": "CONFIDENCE",
           "passed": false,
           "label": "Reliability",
-          "detail": "Failed: VERY_LOW (29.9/100); HIGH or VERY_HIGH is required."
+          "detail": "Failed: VERY_LOW (30.1/100); HIGH or VERY_HIGH is required."
         },
         {
           "code": "DATA_QUALITY",
@@ -4861,29 +4861,29 @@
           "code": "PROBABILITY",
           "passed": false,
           "label": "Model probability",
-          "detail": "Failed: 42.5% (minimum 45%)."
+          "detail": "Failed: 42.6% (minimum 45%)."
         }
       ]
     },
     {
       "matchId": 38291,
       "kickoffAt": "2026-10-14T19:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
-      "predictedProbability": 51.72761643835616,
-      "homeProbability": 51.72761643835616,
-      "drawProbability": 23.882116988301163,
-      "awayProbability": 24.390266573342664,
-      "expectedHomeGoals": 1.7566,
-      "expectedAwayGoals": 1.0101,
+      "predictedProbability": 51.70800000000001,
+      "homeProbability": 51.70800000000001,
+      "drawProbability": 23.891999999999996,
+      "awayProbability": 24.4,
+      "expectedHomeGoals": 1.7551,
+      "expectedAwayGoals": 1.0099,
       "advisoryMarket": "Home Team Goals 2.5",
       "advisorySelection": "UNDER",
-      "advisoryProbability": 74.39,
+      "advisoryProbability": 74.43,
       "advisoryReliabilityScore": 79.11,
       "confidenceLevel": "HIGH",
-      "confidenceScore": 76.47,
+      "confidenceScore": 76.43,
       "dataQualityScore": 86.88,
       "productionModelName": "v1.0-20-80",
       "summary": "All Selection Policy V2 publication checks passed.",
@@ -4905,7 +4905,7 @@
           "code": "CONFIDENCE",
           "passed": true,
           "label": "Reliability",
-          "detail": "Passed: HIGH (76.5/100)."
+          "detail": "Passed: HIGH (76.4/100)."
         },
         {
           "code": "DATA_QUALITY",
@@ -4924,22 +4924,22 @@
     {
       "matchId": 38328,
       "kickoffAt": "2026-10-14T16:45:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
-      "predictedProbability": 39.03,
-      "homeProbability": 39.03,
-      "drawProbability": 23.392000000000003,
-      "awayProbability": 37.578,
-      "expectedHomeGoals": 1.6767,
-      "expectedAwayGoals": 1.555,
+      "predictedProbability": 39.222,
+      "homeProbability": 39.222,
+      "drawProbability": 23.384,
+      "awayProbability": 37.394,
+      "expectedHomeGoals": 1.6825,
+      "expectedAwayGoals": 1.55,
       "advisoryMarket": "Away Team Goals 2.5",
       "advisorySelection": "UNDER",
-      "advisoryProbability": 79.58,
+      "advisoryProbability": 79.71,
       "advisoryReliabilityScore": 86.84,
       "confidenceLevel": "VERY_LOW",
-      "confidenceScore": 19.84,
+      "confidenceScore": 20.32,
       "dataQualityScore": 60.63,
       "productionModelName": "v1.0-20-80",
       "summary": "2 Selection Policy V2 check(s) failed.",
@@ -4964,7 +4964,7 @@
           "code": "CONFIDENCE",
           "passed": false,
           "label": "Reliability",
-          "detail": "Failed: VERY_LOW (19.8/100); HIGH or VERY_HIGH is required."
+          "detail": "Failed: VERY_LOW (20.3/100); HIGH or VERY_HIGH is required."
         },
         {
           "code": "DATA_QUALITY",
@@ -4976,29 +4976,29 @@
           "code": "PROBABILITY",
           "passed": false,
           "label": "Model probability",
-          "detail": "Failed: 39.0% (minimum 45%)."
+          "detail": "Failed: 39.2% (minimum 45%)."
         }
       ]
     },
     {
       "matchId": 38409,
       "kickoffAt": "2026-10-14T16:45:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
-      "predictedProbability": 38.588,
-      "homeProbability": 36.286,
-      "drawProbability": 25.125999999999998,
-      "awayProbability": 38.588,
-      "expectedHomeGoals": 1.3577,
-      "expectedAwayGoals": 1.4173,
+      "predictedProbability": 38.897194280571945,
+      "homeProbability": 35.94728687131287,
+      "drawProbability": 25.15551884811519,
+      "awayProbability": 38.897194280571945,
+      "expectedHomeGoals": 1.3598,
+      "expectedAwayGoals": 1.4154,
       "advisoryMarket": "Home Team Goals 0.5",
       "advisorySelection": "OVER",
-      "advisoryProbability": 74.26,
+      "advisoryProbability": 74.32,
       "advisoryReliabilityScore": 79.35,
       "confidenceLevel": "VERY_LOW",
-      "confidenceScore": 29.39,
+      "confidenceScore": 30.21,
       "dataQualityScore": 69.38,
       "productionModelName": "v1.0-20-80",
       "summary": "2 Selection Policy V2 check(s) failed.",
@@ -5023,7 +5023,7 @@
           "code": "CONFIDENCE",
           "passed": false,
           "label": "Reliability",
-          "detail": "Failed: VERY_LOW (29.4/100); HIGH or VERY_HIGH is required."
+          "detail": "Failed: VERY_LOW (30.2/100); HIGH or VERY_HIGH is required."
         },
         {
           "code": "DATA_QUALITY",
@@ -5035,29 +5035,29 @@
           "code": "PROBABILITY",
           "passed": false,
           "label": "Model probability",
-          "detail": "Failed: 38.6% (minimum 45%)."
+          "detail": "Failed: 38.9% (minimum 45%)."
         }
       ]
     },
     {
       "matchId": 38401,
       "kickoffAt": "2026-10-13T19:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
-      "predictedProbability": 39.458000000000006,
-      "homeProbability": 38.926,
+      "predictedProbability": 39.442,
+      "homeProbability": 38.942,
       "drawProbability": 21.616000000000003,
-      "awayProbability": 39.458000000000006,
-      "expectedHomeGoals": 1.9888,
-      "expectedAwayGoals": 2.0511,
+      "awayProbability": 39.442,
+      "expectedHomeGoals": 1.9891,
+      "expectedAwayGoals": 2.0505,
       "advisoryMarket": "Total Goals 5.5",
       "advisorySelection": "UNDER",
       "advisoryProbability": 78.64,
       "advisoryReliabilityScore": 92.37,
       "confidenceLevel": "VERY_LOW",
-      "confidenceScore": 28.1,
+      "confidenceScore": 28.06,
       "dataQualityScore": 69.38,
       "productionModelName": "v1.0-20-80",
       "summary": "2 Selection Policy V2 check(s) failed.",
@@ -5094,29 +5094,29 @@
           "code": "PROBABILITY",
           "passed": false,
           "label": "Model probability",
-          "detail": "Failed: 39.5% (minimum 45%)."
+          "detail": "Failed: 39.4% (minimum 45%)."
         }
       ]
     },
     {
       "matchId": 38357,
       "kickoffAt": "2026-10-13T19:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
-      "predictedProbability": 53.54062446244625,
-      "homeProbability": 53.54062446244625,
-      "drawProbability": 21.025613761376142,
-      "awayProbability": 25.433761776177622,
-      "expectedHomeGoals": 2.2289,
-      "expectedAwayGoals": 1.3144,
+      "predictedProbability": 53.96723927607239,
+      "homeProbability": 53.96723927607239,
+      "drawProbability": 21.00351084891511,
+      "awayProbability": 25.029249875012493,
+      "expectedHomeGoals": 2.2328,
+      "expectedAwayGoals": 1.3111,
       "advisoryMarket": "Double Chance",
       "advisorySelection": "12",
-      "advisoryProbability": 78.97,
+      "advisoryProbability": 79,
       "advisoryReliabilityScore": 77.39,
       "confidenceLevel": "MEDIUM",
-      "confidenceScore": 56.38,
+      "confidenceScore": 57.44,
       "dataQualityScore": 65,
       "productionModelName": "v1.0-20-80",
       "summary": "1 Selection Policy V2 check(s) failed.",
@@ -5140,7 +5140,7 @@
           "code": "CONFIDENCE",
           "passed": false,
           "label": "Reliability",
-          "detail": "Failed: MEDIUM (56.4/100); HIGH or VERY_HIGH is required."
+          "detail": "Failed: MEDIUM (57.4/100); HIGH or VERY_HIGH is required."
         },
         {
           "code": "DATA_QUALITY",
@@ -5152,29 +5152,29 @@
           "code": "PROBABILITY",
           "passed": true,
           "label": "Model probability",
-          "detail": "Passed: 53.5% (minimum 45%)."
+          "detail": "Passed: 54.0% (minimum 45%)."
         }
       ]
     },
     {
       "matchId": 38396,
       "kickoffAt": "2026-10-13T19:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
-      "predictedProbability": 40.70934106589341,
-      "homeProbability": 40.70934106589341,
-      "drawProbability": 22.817500649935006,
-      "awayProbability": 36.47315828417158,
-      "expectedHomeGoals": 1.8446,
-      "expectedAwayGoals": 1.6571,
+      "predictedProbability": 40.534,
+      "homeProbability": 40.534,
+      "drawProbability": 22.808,
+      "awayProbability": 36.658,
+      "expectedHomeGoals": 1.8405,
+      "expectedAwayGoals": 1.6616,
       "advisoryMarket": "Away Team Goals 2.5",
       "advisorySelection": "UNDER",
-      "advisoryProbability": 76.98,
+      "advisoryProbability": 76.86,
       "advisoryReliabilityScore": 86.84,
       "confidenceLevel": "LOW",
-      "confidenceScore": 51.29,
+      "confidenceScore": 50.84,
       "dataQualityScore": 95.63,
       "productionModelName": "v1.0-20-80",
       "summary": "2 Selection Policy V2 check(s) failed.",
@@ -5199,7 +5199,7 @@
           "code": "CONFIDENCE",
           "passed": false,
           "label": "Reliability",
-          "detail": "Failed: LOW (51.3/100); HIGH or VERY_HIGH is required."
+          "detail": "Failed: LOW (50.8/100); HIGH or VERY_HIGH is required."
         },
         {
           "code": "DATA_QUALITY",
@@ -5211,29 +5211,29 @@
           "code": "PROBABILITY",
           "passed": false,
           "label": "Model probability",
-          "detail": "Failed: 40.7% (minimum 45%)."
+          "detail": "Failed: 40.5% (minimum 45%)."
         }
       ]
     },
     {
       "matchId": 38319,
       "kickoffAt": "2026-10-13T19:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
-      "predictedProbability": 40.026,
-      "homeProbability": 40.026,
-      "drawProbability": 23.308000000000003,
-      "awayProbability": 36.666,
-      "expectedHomeGoals": 1.6039,
-      "expectedAwayGoals": 1.6843,
+      "predictedProbability": 39.962,
+      "homeProbability": 39.962,
+      "drawProbability": 23.3,
+      "awayProbability": 36.738,
+      "expectedHomeGoals": 1.6033,
+      "expectedAwayGoals": 1.6878,
       "advisoryMarket": "Away Team Goals 2.5",
       "advisorySelection": "UNDER",
-      "advisoryProbability": 76.27,
+      "advisoryProbability": 76.18,
       "advisoryReliabilityScore": 86.84,
       "confidenceLevel": "LOW",
-      "confidenceScore": 41.14,
+      "confidenceScore": 40.97,
       "dataQualityScore": 82.5,
       "productionModelName": "v1.0-20-80",
       "summary": "2 Selection Policy V2 check(s) failed.",
@@ -5258,7 +5258,7 @@
           "code": "CONFIDENCE",
           "passed": false,
           "label": "Reliability",
-          "detail": "Failed: LOW (41.1/100); HIGH or VERY_HIGH is required."
+          "detail": "Failed: LOW (41.0/100); HIGH or VERY_HIGH is required."
         },
         {
           "code": "DATA_QUALITY",
@@ -5277,22 +5277,22 @@
     {
       "matchId": 38363,
       "kickoffAt": "2026-10-13T19:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
-      "predictedProbability": 48.994932293229326,
-      "homeProbability": 48.994932293229326,
-      "drawProbability": 22.860505250525055,
-      "awayProbability": 28.144562456245627,
-      "expectedHomeGoals": 1.9229,
-      "expectedAwayGoals": 1.4021,
+      "predictedProbability": 49.19602759724028,
+      "homeProbability": 49.19602759724028,
+      "drawProbability": 22.804220177982202,
+      "awayProbability": 27.99975222477753,
+      "expectedHomeGoals": 1.9244,
+      "expectedAwayGoals": 1.4007,
       "advisoryMarket": "Total Goals 4.5",
       "advisorySelection": "UNDER",
       "advisoryProbability": 76.13,
       "advisoryReliabilityScore": 82.42,
       "confidenceLevel": "LOW",
-      "confidenceScore": 52.64,
+      "confidenceScore": 53.1,
       "dataQualityScore": 65,
       "productionModelName": "v1.0-20-80",
       "summary": "1 Selection Policy V2 check(s) failed.",
@@ -5316,7 +5316,7 @@
           "code": "CONFIDENCE",
           "passed": false,
           "label": "Reliability",
-          "detail": "Failed: LOW (52.6/100); HIGH or VERY_HIGH is required."
+          "detail": "Failed: LOW (53.1/100); HIGH or VERY_HIGH is required."
         },
         {
           "code": "DATA_QUALITY",
@@ -5328,29 +5328,29 @@
           "code": "PROBABILITY",
           "passed": true,
           "label": "Model probability",
-          "detail": "Passed: 49.0% (minimum 45%)."
+          "detail": "Passed: 49.2% (minimum 45%)."
         }
       ]
     },
     {
       "matchId": 38281,
       "kickoffAt": "2026-10-13T19:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
-      "predictedProbability": 61.64999999999999,
-      "homeProbability": 61.64999999999999,
-      "drawProbability": 22.646,
-      "awayProbability": 15.704,
-      "expectedHomeGoals": 1.7526,
-      "expectedAwayGoals": 0.6111,
+      "predictedProbability": 61.50199999999999,
+      "homeProbability": 61.50199999999999,
+      "drawProbability": 22.708,
+      "awayProbability": 15.79,
+      "expectedHomeGoals": 1.7488,
+      "expectedAwayGoals": 0.6112,
       "advisoryMarket": "Double Chance",
       "advisorySelection": "12",
-      "advisoryProbability": 77.35,
+      "advisoryProbability": 77.29,
       "advisoryReliabilityScore": 77.39,
       "confidenceLevel": "VERY_HIGH",
-      "confidenceScore": 93.48,
+      "confidenceScore": 93.4,
       "dataQualityScore": 95.63,
       "productionModelName": "v1.0-20-80",
       "summary": "All Selection Policy V2 publication checks passed.",
@@ -5372,7 +5372,7 @@
           "code": "CONFIDENCE",
           "passed": true,
           "label": "Reliability",
-          "detail": "Passed: VERY_HIGH (93.5/100)."
+          "detail": "Passed: VERY_HIGH (93.4/100)."
         },
         {
           "code": "DATA_QUALITY",
@@ -5384,29 +5384,29 @@
           "code": "PROBABILITY",
           "passed": true,
           "label": "Model probability",
-          "detail": "Passed: 61.6% (minimum 45%)."
+          "detail": "Passed: 61.5% (minimum 45%)."
         }
       ]
     },
     {
       "matchId": 38352,
       "kickoffAt": "2026-10-13T19:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
-      "predictedProbability": 57.56,
-      "homeProbability": 57.56,
-      "drawProbability": 21.756,
-      "awayProbability": 20.684,
-      "expectedHomeGoals": 2.0211,
-      "expectedAwayGoals": 1.1412,
+      "predictedProbability": 57.363418058194185,
+      "homeProbability": 57.363418058194185,
+      "drawProbability": 21.810282571742825,
+      "awayProbability": 20.826299370062994,
+      "expectedHomeGoals": 2.0141,
+      "expectedAwayGoals": 1.1452,
       "advisoryMarket": "Total Goals 4.5",
       "advisorySelection": "UNDER",
-      "advisoryProbability": 79.12,
+      "advisoryProbability": 79.17,
       "advisoryReliabilityScore": 82.42,
       "confidenceLevel": "VERY_HIGH",
-      "confidenceScore": 93.22,
+      "confidenceScore": 93.11,
       "dataQualityScore": 100,
       "productionModelName": "v1.0-20-80",
       "summary": "All Selection Policy V2 publication checks passed.",
@@ -5428,7 +5428,7 @@
           "code": "CONFIDENCE",
           "passed": true,
           "label": "Reliability",
-          "detail": "Passed: VERY_HIGH (93.2/100)."
+          "detail": "Passed: VERY_HIGH (93.1/100)."
         },
         {
           "code": "DATA_QUALITY",
@@ -5440,26 +5440,26 @@
           "code": "PROBABILITY",
           "passed": true,
           "label": "Model probability",
-          "detail": "Passed: 57.6% (minimum 45%)."
+          "detail": "Passed: 57.4% (minimum 45%)."
         }
       ]
     },
     {
       "matchId": 38416,
       "kickoffAt": "2026-10-13T16:45:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
-      "predictedProbability": 73.99137273727372,
-      "homeProbability": 73.99137273727372,
-      "drawProbability": 17.248388838883887,
-      "awayProbability": 8.760238423842383,
-      "expectedHomeGoals": 2.2363,
-      "expectedAwayGoals": 0.5687,
+      "predictedProbability": 74.02337273727373,
+      "homeProbability": 74.02337273727373,
+      "drawProbability": 17.24838883888389,
+      "awayProbability": 8.728238423842384,
+      "expectedHomeGoals": 2.2347,
+      "expectedAwayGoals": 0.566,
       "advisoryMarket": "Total Goals 1.5",
       "advisorySelection": "OVER",
-      "advisoryProbability": 76.79,
+      "advisoryProbability": 76.72,
       "advisoryReliabilityScore": 77.22,
       "confidenceLevel": "VERY_HIGH",
       "confidenceScore": 85.19,
@@ -5503,22 +5503,22 @@
     {
       "matchId": 38302,
       "kickoffAt": "2026-10-13T16:45:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
-      "predictedProbability": 48.754000000000005,
-      "homeProbability": 48.754000000000005,
-      "drawProbability": 24.851999999999997,
-      "awayProbability": 26.394000000000002,
-      "expectedHomeGoals": 1.57,
-      "expectedAwayGoals": 1.1038,
+      "predictedProbability": 48.8090201020102,
+      "homeProbability": 48.8090201020102,
+      "drawProbability": 24.844472447244723,
+      "awayProbability": 26.346507450745076,
+      "expectedHomeGoals": 1.5744,
+      "expectedAwayGoals": 1.1,
       "advisoryMarket": "Home Team Goals 0.5",
       "advisorySelection": "OVER",
-      "advisoryProbability": 79.17,
+      "advisoryProbability": 79.26,
       "advisoryReliabilityScore": 79.35,
       "confidenceLevel": "LOW",
-      "confidenceScore": 48.02,
+      "confidenceScore": 48.16,
       "dataQualityScore": 65,
       "productionModelName": "v1.0-20-80",
       "summary": "1 Selection Policy V2 check(s) failed.",
@@ -5542,7 +5542,7 @@
           "code": "CONFIDENCE",
           "passed": false,
           "label": "Reliability",
-          "detail": "Failed: LOW (48.0/100); HIGH or VERY_HIGH is required."
+          "detail": "Failed: LOW (48.2/100); HIGH or VERY_HIGH is required."
         },
         {
           "code": "DATA_QUALITY",
@@ -5561,7 +5561,7 @@
     {
       "matchId": 8609,
       "kickoffAt": "2026-10-12T19:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -5620,7 +5620,7 @@
     {
       "matchId": 9672,
       "kickoffAt": "2026-10-12T18:45:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -5678,7 +5678,7 @@
     {
       "matchId": 9671,
       "kickoffAt": "2026-10-12T16:30:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -5734,7 +5734,7 @@
     {
       "matchId": 9668,
       "kickoffAt": "2026-10-11T18:45:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -5793,7 +5793,7 @@
     {
       "matchId": 10354,
       "kickoffAt": "2026-10-11T18:45:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -5851,7 +5851,7 @@
     {
       "matchId": 9667,
       "kickoffAt": "2026-10-11T16:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "AWAY",
@@ -5907,14 +5907,14 @@
     {
       "matchId": 8601,
       "kickoffAt": "2026-10-11T15:30:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
-      "predictedProbability": 43.2,
-      "homeProbability": 32.718,
-      "drawProbability": 24.082,
-      "awayProbability": 43.2,
+      "predictedProbability": 42.02,
+      "homeProbability": 33.744,
+      "drawProbability": 24.236,
+      "awayProbability": 42.02,
       "expectedHomeGoals": 1.3667,
       "expectedAwayGoals": 1.5768,
       "advisoryMarket": "Away Team Goals 2.5",
@@ -5922,7 +5922,7 @@
       "advisoryProbability": 79.03,
       "advisoryReliabilityScore": 86.84,
       "confidenceLevel": "MEDIUM",
-      "confidenceScore": 60.87,
+      "confidenceScore": 58.02,
       "dataQualityScore": 100,
       "productionModelName": "v1.0-20-80",
       "summary": "2 Selection Policy V2 check(s) failed.",
@@ -5947,7 +5947,7 @@
           "code": "CONFIDENCE",
           "passed": false,
           "label": "Reliability",
-          "detail": "Failed: MEDIUM (60.9/100); HIGH or VERY_HIGH is required."
+          "detail": "Failed: MEDIUM (58.0/100); HIGH or VERY_HIGH is required."
         },
         {
           "code": "DATA_QUALITY",
@@ -5959,14 +5959,14 @@
           "code": "PROBABILITY",
           "passed": false,
           "label": "Model probability",
-          "detail": "Failed: 43.2% (minimum 45%)."
+          "detail": "Failed: 42.0% (minimum 45%)."
         }
       ]
     },
     {
       "matchId": 10351,
       "kickoffAt": "2026-10-11T15:15:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -6022,7 +6022,7 @@
     {
       "matchId": 9001,
       "kickoffAt": "2026-10-11T15:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -6080,7 +6080,7 @@
     {
       "matchId": 9000,
       "kickoffAt": "2026-10-11T15:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -6136,14 +6136,14 @@
     {
       "matchId": 9004,
       "kickoffAt": "2026-10-11T15:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
-      "predictedProbability": 46.266,
-      "homeProbability": 46.266,
-      "drawProbability": 24.342,
-      "awayProbability": 29.391999999999996,
+      "predictedProbability": 45.915136313631365,
+      "homeProbability": 45.915136313631365,
+      "drawProbability": 24.396449244924494,
+      "awayProbability": 29.688414441444145,
       "expectedHomeGoals": 1.5464,
       "expectedAwayGoals": 1.2947,
       "advisoryMarket": "Home Team Goals 2.5",
@@ -6151,7 +6151,7 @@
       "advisoryProbability": 79.8,
       "advisoryReliabilityScore": 79.11,
       "confidenceLevel": "MEDIUM",
-      "confidenceScore": 68.93,
+      "confidenceScore": 68.09,
       "dataQualityScore": 100,
       "productionModelName": "v1.0-20-80",
       "summary": "1 Selection Policy V2 check(s) failed.",
@@ -6175,7 +6175,7 @@
           "code": "CONFIDENCE",
           "passed": false,
           "label": "Reliability",
-          "detail": "Failed: MEDIUM (68.9/100); HIGH or VERY_HIGH is required."
+          "detail": "Failed: MEDIUM (68.1/100); HIGH or VERY_HIGH is required."
         },
         {
           "code": "DATA_QUALITY",
@@ -6187,14 +6187,14 @@
           "code": "PROBABILITY",
           "passed": true,
           "label": "Model probability",
-          "detail": "Passed: 46.3% (minimum 45%)."
+          "detail": "Passed: 45.9% (minimum 45%)."
         }
       ]
     },
     {
       "matchId": 9005,
       "kickoffAt": "2026-10-11T15:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -6250,7 +6250,7 @@
     {
       "matchId": 9009,
       "kickoffAt": "2026-10-11T15:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -6308,7 +6308,7 @@
     {
       "matchId": 9008,
       "kickoffAt": "2026-10-11T15:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -6367,7 +6367,7 @@
     {
       "matchId": 9007,
       "kickoffAt": "2026-10-11T15:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -6423,7 +6423,7 @@
     {
       "matchId": 9003,
       "kickoffAt": "2026-10-11T15:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -6479,7 +6479,7 @@
     {
       "matchId": 9006,
       "kickoffAt": "2026-10-11T15:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -6538,7 +6538,7 @@
     {
       "matchId": 9002,
       "kickoffAt": "2026-10-11T15:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -6597,7 +6597,7 @@
     {
       "matchId": 9674,
       "kickoffAt": "2026-10-11T13:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "AWAY",
@@ -6653,7 +6653,7 @@
     {
       "matchId": 9666,
       "kickoffAt": "2026-10-11T13:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -6709,7 +6709,7 @@
     {
       "matchId": 10348,
       "kickoffAt": "2026-10-11T13:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -6768,7 +6768,7 @@
     {
       "matchId": 8604,
       "kickoffAt": "2026-10-11T13:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -6827,7 +6827,7 @@
     {
       "matchId": 8606,
       "kickoffAt": "2026-10-11T13:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -6886,7 +6886,7 @@
     {
       "matchId": 9369,
       "kickoffAt": "2026-10-11T12:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "AWAY",
@@ -6942,14 +6942,14 @@
     {
       "matchId": 9366,
       "kickoffAt": "2026-10-11T12:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
-      "predictedProbability": 68.67199999999998,
-      "homeProbability": 68.67199999999998,
-      "drawProbability": 17.618,
-      "awayProbability": 13.71,
+      "predictedProbability": 68.644,
+      "homeProbability": 68.644,
+      "drawProbability": 17.610000000000003,
+      "awayProbability": 13.746000000000002,
       "expectedHomeGoals": 2.5554,
       "expectedAwayGoals": 0.9358,
       "advisoryMarket": "Home Team Goals 3.5",
@@ -6957,7 +6957,7 @@
       "advisoryProbability": 75.76,
       "advisoryReliabilityScore": 90.3,
       "confidenceLevel": "VERY_HIGH",
-      "confidenceScore": 99.28,
+      "confidenceScore": 99.26,
       "dataQualityScore": 100,
       "productionModelName": "v1.0-20-80",
       "summary": "All Selection Policy V2 publication checks passed.",
@@ -6991,14 +6991,14 @@
           "code": "PROBABILITY",
           "passed": true,
           "label": "Model probability",
-          "detail": "Passed: 68.7% (minimum 45%)."
+          "detail": "Passed: 68.6% (minimum 45%)."
         }
       ]
     },
     {
       "matchId": 9365,
       "kickoffAt": "2026-10-11T12:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -7056,7 +7056,7 @@
     {
       "matchId": 9364,
       "kickoffAt": "2026-10-11T12:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -7112,7 +7112,7 @@
     {
       "matchId": 9371,
       "kickoffAt": "2026-10-11T12:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -7171,7 +7171,7 @@
     {
       "matchId": 9367,
       "kickoffAt": "2026-10-11T12:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -7229,7 +7229,7 @@
     {
       "matchId": 9368,
       "kickoffAt": "2026-10-11T12:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -7288,7 +7288,7 @@
     {
       "matchId": 9372,
       "kickoffAt": "2026-10-11T12:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -7347,7 +7347,7 @@
     {
       "matchId": 9370,
       "kickoffAt": "2026-10-11T12:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -7406,7 +7406,7 @@
     {
       "matchId": 9675,
       "kickoffAt": "2026-10-11T10:30:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -7465,14 +7465,14 @@
     {
       "matchId": 9669,
       "kickoffAt": "2026-10-10T18:45:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
-      "predictedProbability": 41.3330499049905,
-      "homeProbability": 33.164814681468144,
-      "drawProbability": 25.502135413541353,
-      "awayProbability": 41.3330499049905,
+      "predictedProbability": 42.035896220358964,
+      "homeProbability": 32.63836552638366,
+      "drawProbability": 25.325738253257384,
+      "awayProbability": 42.035896220358964,
       "expectedHomeGoals": 1.244,
       "expectedAwayGoals": 1.3064,
       "advisoryMarket": "Away Win To Nil",
@@ -7480,7 +7480,7 @@
       "advisoryProbability": 78.98,
       "advisoryReliabilityScore": 82.58,
       "confidenceLevel": "VERY_LOW",
-      "confidenceScore": 36.75,
+      "confidenceScore": 38.37,
       "dataQualityScore": 69.38,
       "productionModelName": "v1.0-20-80",
       "summary": "2 Selection Policy V2 check(s) failed.",
@@ -7505,7 +7505,7 @@
           "code": "CONFIDENCE",
           "passed": false,
           "label": "Reliability",
-          "detail": "Failed: VERY_LOW (36.8/100); HIGH or VERY_HIGH is required."
+          "detail": "Failed: VERY_LOW (38.4/100); HIGH or VERY_HIGH is required."
         },
         {
           "code": "DATA_QUALITY",
@@ -7517,14 +7517,14 @@
           "code": "PROBABILITY",
           "passed": false,
           "label": "Model probability",
-          "detail": "Failed: 41.3% (minimum 45%)."
+          "detail": "Failed: 42.0% (minimum 45%)."
         }
       ]
     },
     {
       "matchId": 10353,
       "kickoffAt": "2026-10-10T18:45:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -7580,7 +7580,7 @@
     {
       "matchId": 10352,
       "kickoffAt": "2026-10-10T18:45:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -7639,14 +7639,14 @@
     {
       "matchId": 10349,
       "kickoffAt": "2026-10-10T18:45:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
-      "predictedProbability": 62.188,
-      "homeProbability": 62.188,
-      "drawProbability": 19.792,
-      "awayProbability": 18.020000000000003,
+      "predictedProbability": 63.7209103089691,
+      "homeProbability": 63.7209103089691,
+      "drawProbability": 19.467542045795415,
+      "awayProbability": 16.811547645235475,
       "expectedHomeGoals": 2.3192,
       "expectedAwayGoals": 1.0225,
       "advisoryMarket": "Total Goals 4.5",
@@ -7654,7 +7654,7 @@
       "advisoryProbability": 76.25,
       "advisoryReliabilityScore": 82.42,
       "confidenceLevel": "HIGH",
-      "confidenceScore": 76.93,
+      "confidenceScore": 77.76,
       "dataQualityScore": 73.75,
       "productionModelName": "v1.0-20-80",
       "summary": "All Selection Policy V2 publication checks passed.",
@@ -7676,7 +7676,7 @@
           "code": "CONFIDENCE",
           "passed": true,
           "label": "Reliability",
-          "detail": "Passed: HIGH (76.9/100)."
+          "detail": "Passed: HIGH (77.8/100)."
         },
         {
           "code": "DATA_QUALITY",
@@ -7688,14 +7688,14 @@
           "code": "PROBABILITY",
           "passed": true,
           "label": "Model probability",
-          "detail": "Passed: 62.2% (minimum 45%)."
+          "detail": "Passed: 63.7% (minimum 45%)."
         }
       ]
     },
     {
       "matchId": 10350,
       "kickoffAt": "2026-10-10T18:45:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -7751,7 +7751,7 @@
     {
       "matchId": 8600,
       "kickoffAt": "2026-10-10T16:30:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -7807,7 +7807,7 @@
     {
       "matchId": 9673,
       "kickoffAt": "2026-10-10T16:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -7863,7 +7863,7 @@
     {
       "matchId": 10347,
       "kickoffAt": "2026-10-10T15:15:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -7919,7 +7919,7 @@
     {
       "matchId": 8603,
       "kickoffAt": "2026-10-10T14:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -7978,7 +7978,7 @@
     {
       "matchId": 8605,
       "kickoffAt": "2026-10-10T14:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "AWAY",
@@ -8034,7 +8034,7 @@
     {
       "matchId": 8607,
       "kickoffAt": "2026-10-10T14:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -8090,7 +8090,7 @@
     {
       "matchId": 8608,
       "kickoffAt": "2026-10-10T14:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -8149,7 +8149,7 @@
     {
       "matchId": 10032,
       "kickoffAt": "2026-10-10T13:30:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -8205,7 +8205,7 @@
     {
       "matchId": 10034,
       "kickoffAt": "2026-10-10T13:30:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -8261,7 +8261,7 @@
     {
       "matchId": 10037,
       "kickoffAt": "2026-10-10T13:30:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -8317,7 +8317,7 @@
     {
       "matchId": 10036,
       "kickoffAt": "2026-10-10T13:30:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "AWAY",
@@ -8373,7 +8373,7 @@
     {
       "matchId": 10039,
       "kickoffAt": "2026-10-10T13:30:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -8431,7 +8431,7 @@
     {
       "matchId": 10040,
       "kickoffAt": "2026-10-10T13:30:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -8487,7 +8487,7 @@
     {
       "matchId": 10033,
       "kickoffAt": "2026-10-10T13:30:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -8546,7 +8546,7 @@
     {
       "matchId": 10035,
       "kickoffAt": "2026-10-10T13:30:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -8602,7 +8602,7 @@
     {
       "matchId": 10038,
       "kickoffAt": "2026-10-10T13:30:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -8661,7 +8661,7 @@
     {
       "matchId": 9670,
       "kickoffAt": "2026-10-10T13:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -8720,14 +8720,14 @@
     {
       "matchId": 8602,
       "kickoffAt": "2026-10-10T11:30:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
-      "predictedProbability": 71.36,
-      "homeProbability": 71.36,
-      "drawProbability": 17.689999999999994,
-      "awayProbability": 10.95,
+      "predictedProbability": 71.28999999999999,
+      "homeProbability": 71.28999999999999,
+      "drawProbability": 17.717999999999996,
+      "awayProbability": 10.991999999999999,
       "expectedHomeGoals": 2.3198,
       "expectedAwayGoals": 0.6637,
       "advisoryMarket": "Home Team Goals 3.5",
@@ -8769,14 +8769,14 @@
           "code": "PROBABILITY",
           "passed": true,
           "label": "Model probability",
-          "detail": "Passed: 71.4% (minimum 45%)."
+          "detail": "Passed: 71.3% (minimum 45%)."
         }
       ]
     },
     {
       "matchId": 10355,
       "kickoffAt": "2026-10-09T18:45:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -8832,7 +8832,7 @@
     {
       "matchId": 8992,
       "kickoffAt": "2026-09-20T19:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -8891,7 +8891,7 @@
     {
       "matchId": 9665,
       "kickoffAt": "2026-09-20T18:45:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -8947,14 +8947,14 @@
     {
       "matchId": 10346,
       "kickoffAt": "2026-09-20T18:45:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
-      "predictedProbability": 41.33,
-      "homeProbability": 41.33,
-      "drawProbability": 22.183999999999997,
-      "awayProbability": 36.486000000000004,
+      "predictedProbability": 40.225025497450254,
+      "homeProbability": 40.225025497450254,
+      "drawProbability": 22.46351444855514,
+      "awayProbability": 37.31146005399461,
       "expectedHomeGoals": 1.782,
       "expectedAwayGoals": 1.8268,
       "advisoryMarket": "Away Team Goals 2.5",
@@ -8962,7 +8962,7 @@
       "advisoryProbability": 72.55,
       "advisoryReliabilityScore": 86.84,
       "confidenceLevel": "LOW",
-      "confidenceScore": 54.21,
+      "confidenceScore": 51.67,
       "dataQualityScore": 100,
       "productionModelName": "v1.0-20-80",
       "summary": "2 Selection Policy V2 check(s) failed.",
@@ -8987,7 +8987,7 @@
           "code": "CONFIDENCE",
           "passed": false,
           "label": "Reliability",
-          "detail": "Failed: LOW (54.2/100); HIGH or VERY_HIGH is required."
+          "detail": "Failed: LOW (51.7/100); HIGH or VERY_HIGH is required."
         },
         {
           "code": "DATA_QUALITY",
@@ -8999,14 +8999,14 @@
           "code": "PROBABILITY",
           "passed": false,
           "label": "Model probability",
-          "detail": "Failed: 41.3% (minimum 45%)."
+          "detail": "Failed: 40.2% (minimum 45%)."
         }
       ]
     },
     {
       "matchId": 10031,
       "kickoffAt": "2026-09-20T17:30:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -9065,7 +9065,7 @@
     {
       "matchId": 9361,
       "kickoffAt": "2026-09-20T17:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -9124,7 +9124,7 @@
     {
       "matchId": 9357,
       "kickoffAt": "2026-09-20T17:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -9183,7 +9183,7 @@
     {
       "matchId": 8993,
       "kickoffAt": "2026-09-20T16:30:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -9239,7 +9239,7 @@
     {
       "matchId": 8997,
       "kickoffAt": "2026-09-20T16:30:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -9297,7 +9297,7 @@
     {
       "matchId": 9664,
       "kickoffAt": "2026-09-20T16:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -9356,7 +9356,7 @@
     {
       "matchId": 8599,
       "kickoffAt": "2026-09-20T15:30:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -9415,7 +9415,7 @@
     {
       "matchId": 10030,
       "kickoffAt": "2026-09-20T15:30:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -9475,7 +9475,7 @@
     {
       "matchId": 10340,
       "kickoffAt": "2026-09-20T15:15:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "AWAY",
@@ -9531,14 +9531,14 @@
     {
       "matchId": 8990,
       "kickoffAt": "2026-09-20T14:15:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
-      "predictedProbability": 40.4,
-      "homeProbability": 40.4,
-      "drawProbability": 25.502000000000002,
-      "awayProbability": 34.098,
+      "predictedProbability": 40.708,
+      "homeProbability": 40.708,
+      "drawProbability": 25.509999999999998,
+      "awayProbability": 33.782000000000004,
       "expectedHomeGoals": 1.4436,
       "expectedAwayGoals": 1.2458,
       "advisoryMarket": "Home Win To Nil",
@@ -9546,7 +9546,7 @@
       "advisoryProbability": 78.02,
       "advisoryReliabilityScore": 79.58,
       "confidenceLevel": "MEDIUM",
-      "confidenceScore": 55.16,
+      "confidenceScore": 55.95,
       "dataQualityScore": 100,
       "productionModelName": "v1.0-20-80",
       "summary": "2 Selection Policy V2 check(s) failed.",
@@ -9571,7 +9571,7 @@
           "code": "CONFIDENCE",
           "passed": false,
           "label": "Reliability",
-          "detail": "Failed: MEDIUM (55.2/100); HIGH or VERY_HIGH is required."
+          "detail": "Failed: MEDIUM (56.0/100); HIGH or VERY_HIGH is required."
         },
         {
           "code": "DATA_QUALITY",
@@ -9583,14 +9583,14 @@
           "code": "PROBABILITY",
           "passed": false,
           "label": "Model probability",
-          "detail": "Failed: 40.4% (minimum 45%)."
+          "detail": "Failed: 40.7% (minimum 45%)."
         }
       ]
     },
     {
       "matchId": 9360,
       "kickoffAt": "2026-09-20T14:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -9648,7 +9648,7 @@
     {
       "matchId": 9356,
       "kickoffAt": "2026-09-20T14:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -9704,7 +9704,7 @@
     {
       "matchId": 10029,
       "kickoffAt": "2026-09-20T13:30:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -9760,7 +9760,7 @@
     {
       "matchId": 9662,
       "kickoffAt": "2026-09-20T13:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -9818,7 +9818,7 @@
     {
       "matchId": 9663,
       "kickoffAt": "2026-09-20T13:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -9877,14 +9877,14 @@
     {
       "matchId": 8598,
       "kickoffAt": "2026-09-20T13:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
-      "predictedProbability": 46.718,
-      "homeProbability": 46.718,
-      "drawProbability": 23.622,
-      "awayProbability": 29.659999999999997,
+      "predictedProbability": 46.296,
+      "homeProbability": 46.296,
+      "drawProbability": 23.674,
+      "awayProbability": 30.03,
       "expectedHomeGoals": 1.7424,
       "expectedAwayGoals": 1.2952,
       "advisoryMarket": "Home Win To Nil",
@@ -9892,7 +9892,7 @@
       "advisoryProbability": 77.41,
       "advisoryReliabilityScore": 79.58,
       "confidenceLevel": "MEDIUM",
-      "confidenceScore": 69.36,
+      "confidenceScore": 68.34,
       "dataQualityScore": 100,
       "productionModelName": "v1.0-20-80",
       "summary": "1 Selection Policy V2 check(s) failed.",
@@ -9916,7 +9916,7 @@
           "code": "CONFIDENCE",
           "passed": false,
           "label": "Reliability",
-          "detail": "Failed: MEDIUM (69.4/100); HIGH or VERY_HIGH is required."
+          "detail": "Failed: MEDIUM (68.3/100); HIGH or VERY_HIGH is required."
         },
         {
           "code": "DATA_QUALITY",
@@ -9928,14 +9928,14 @@
           "code": "PROBABILITY",
           "passed": true,
           "label": "Model probability",
-          "detail": "Passed: 46.7% (minimum 45%)."
+          "detail": "Passed: 46.3% (minimum 45%)."
         }
       ]
     },
     {
       "matchId": 10343,
       "kickoffAt": "2026-09-20T13:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -9991,7 +9991,7 @@
     {
       "matchId": 8594,
       "kickoffAt": "2026-09-20T13:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -10047,7 +10047,7 @@
     {
       "matchId": 8596,
       "kickoffAt": "2026-09-20T13:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -10103,7 +10103,7 @@
     {
       "matchId": 8998,
       "kickoffAt": "2026-09-20T12:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -10161,14 +10161,14 @@
     {
       "matchId": 9661,
       "kickoffAt": "2026-09-20T10:30:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
-      "predictedProbability": 45.583659565956594,
-      "homeProbability": 28.264183418341833,
-      "drawProbability": 26.152157015701572,
-      "awayProbability": 45.583659565956594,
+      "predictedProbability": 45.464772654647724,
+      "homeProbability": 28.401526684015266,
+      "drawProbability": 26.133700661337013,
+      "awayProbability": 45.464772654647724,
       "expectedHomeGoals": 1.014,
       "expectedAwayGoals": 1.3985,
       "advisoryMarket": "Away Win To Nil",
@@ -10176,7 +10176,7 @@
       "advisoryProbability": 72.69,
       "advisoryReliabilityScore": 82.58,
       "confidenceLevel": "MEDIUM",
-      "confidenceScore": 69,
+      "confidenceScore": 68.68,
       "dataQualityScore": 100,
       "productionModelName": "v1.0-20-80",
       "summary": "1 Selection Policy V2 check(s) failed.",
@@ -10200,7 +10200,7 @@
           "code": "CONFIDENCE",
           "passed": false,
           "label": "Reliability",
-          "detail": "Failed: MEDIUM (69.0/100); HIGH or VERY_HIGH is required."
+          "detail": "Failed: MEDIUM (68.7/100); HIGH or VERY_HIGH is required."
         },
         {
           "code": "DATA_QUALITY",
@@ -10212,14 +10212,14 @@
           "code": "PROBABILITY",
           "passed": true,
           "label": "Model probability",
-          "detail": "Passed: 45.6% (minimum 45%)."
+          "detail": "Passed: 45.5% (minimum 45%)."
         }
       ]
     },
     {
       "matchId": 8994,
       "kickoffAt": "2026-09-19T19:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "AWAY",
@@ -10275,7 +10275,7 @@
     {
       "matchId": 9660,
       "kickoffAt": "2026-09-19T18:45:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -10334,7 +10334,7 @@
     {
       "matchId": 10342,
       "kickoffAt": "2026-09-19T18:45:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -10393,7 +10393,7 @@
     {
       "matchId": 10338,
       "kickoffAt": "2026-09-19T18:45:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -10452,7 +10452,7 @@
     {
       "matchId": 10339,
       "kickoffAt": "2026-09-19T18:45:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -10508,7 +10508,7 @@
     {
       "matchId": 10345,
       "kickoffAt": "2026-09-19T18:45:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -10567,14 +10567,14 @@
     {
       "matchId": 9358,
       "kickoffAt": "2026-09-19T17:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "AWAY",
-      "predictedProbability": 47.71721307869213,
-      "homeProbability": 27.769263873612637,
-      "drawProbability": 24.513523047695227,
-      "awayProbability": 47.71721307869213,
+      "predictedProbability": 47.34,
+      "homeProbability": 28.060000000000002,
+      "drawProbability": 24.6,
+      "awayProbability": 47.34,
       "expectedHomeGoals": 1.0922,
       "expectedAwayGoals": 1.6296,
       "advisoryMarket": "Away Team Goals 2.5",
@@ -10582,7 +10582,7 @@
       "advisoryProbability": 77.68,
       "advisoryReliabilityScore": 86.84,
       "confidenceLevel": "HIGH",
-      "confidenceScore": 72.79,
+      "confidenceScore": 71.92,
       "dataQualityScore": 100,
       "productionModelName": "v1.0-20-80",
       "summary": "All Selection Policy V2 publication checks passed.",
@@ -10604,7 +10604,7 @@
           "code": "CONFIDENCE",
           "passed": true,
           "label": "Reliability",
-          "detail": "Passed: HIGH (72.8/100)."
+          "detail": "Passed: HIGH (71.9/100)."
         },
         {
           "code": "DATA_QUALITY",
@@ -10616,14 +10616,14 @@
           "code": "PROBABILITY",
           "passed": true,
           "label": "Model probability",
-          "detail": "Passed: 47.7% (minimum 45%)."
+          "detail": "Passed: 47.3% (minimum 45%)."
         }
       ]
     },
     {
       "matchId": 9355,
       "kickoffAt": "2026-09-19T17:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -10679,7 +10679,7 @@
     {
       "matchId": 8995,
       "kickoffAt": "2026-09-19T16:30:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -10738,7 +10738,7 @@
     {
       "matchId": 8597,
       "kickoffAt": "2026-09-19T16:30:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -10797,7 +10797,7 @@
     {
       "matchId": 10028,
       "kickoffAt": "2026-09-19T16:30:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -10856,7 +10856,7 @@
     {
       "matchId": 9659,
       "kickoffAt": "2026-09-19T16:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -10915,7 +10915,7 @@
     {
       "matchId": 10344,
       "kickoffAt": "2026-09-19T15:15:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -10974,7 +10974,7 @@
     {
       "matchId": 8991,
       "kickoffAt": "2026-09-19T14:15:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -11033,7 +11033,7 @@
     {
       "matchId": 9362,
       "kickoffAt": "2026-09-19T14:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -11091,7 +11091,7 @@
     {
       "matchId": 9363,
       "kickoffAt": "2026-09-19T14:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -11149,7 +11149,7 @@
     {
       "matchId": 8592,
       "kickoffAt": "2026-09-19T14:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -11208,7 +11208,7 @@
     {
       "matchId": 8593,
       "kickoffAt": "2026-09-19T14:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -11264,22 +11264,22 @@
     {
       "matchId": 8595,
       "kickoffAt": "2026-09-19T14:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
-      "predictedProbability": 39.48917839489179,
-      "homeProbability": 33.58454933584549,
-      "drawProbability": 26.926272269262718,
-      "awayProbability": 39.48917839489179,
+      "predictedProbability": 40.0032298000323,
+      "homeProbability": 33.10050093100501,
+      "drawProbability": 26.89626926896269,
+      "awayProbability": 40.0032298000323,
       "expectedHomeGoals": 1.057,
       "expectedAwayGoals": 1.3094,
       "advisoryMarket": "Away Win To Nil",
       "advisorySelection": "NO",
       "advisoryProbability": 74.63,
       "advisoryReliabilityScore": 82.58,
-      "confidenceLevel": "LOW",
-      "confidenceScore": 54.26,
+      "confidenceLevel": "MEDIUM",
+      "confidenceScore": 55.54,
       "dataQualityScore": 100,
       "productionModelName": "v1.0-20-80",
       "summary": "2 Selection Policy V2 check(s) failed.",
@@ -11304,7 +11304,7 @@
           "code": "CONFIDENCE",
           "passed": false,
           "label": "Reliability",
-          "detail": "Failed: LOW (54.3/100); HIGH or VERY_HIGH is required."
+          "detail": "Failed: MEDIUM (55.5/100); HIGH or VERY_HIGH is required."
         },
         {
           "code": "DATA_QUALITY",
@@ -11316,14 +11316,14 @@
           "code": "PROBABILITY",
           "passed": false,
           "label": "Model probability",
-          "detail": "Failed: 39.5% (minimum 45%)."
+          "detail": "Failed: 40.0% (minimum 45%)."
         }
       ]
     },
     {
       "matchId": 10025,
       "kickoffAt": "2026-09-19T13:30:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -11382,7 +11382,7 @@
     {
       "matchId": 10024,
       "kickoffAt": "2026-09-19T13:30:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -11441,7 +11441,7 @@
     {
       "matchId": 10026,
       "kickoffAt": "2026-09-19T13:30:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -11499,7 +11499,7 @@
     {
       "matchId": 10027,
       "kickoffAt": "2026-09-19T13:30:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -11555,7 +11555,7 @@
     {
       "matchId": 9658,
       "kickoffAt": "2026-09-19T13:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -11614,7 +11614,7 @@
     {
       "matchId": 9657,
       "kickoffAt": "2026-09-19T13:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -11673,7 +11673,7 @@
     {
       "matchId": 8999,
       "kickoffAt": "2026-09-19T12:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -11729,7 +11729,7 @@
     {
       "matchId": 8591,
       "kickoffAt": "2026-09-19T11:30:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "AWAY",
@@ -11785,7 +11785,7 @@
     {
       "matchId": 8996,
       "kickoffAt": "2026-09-18T19:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -11841,7 +11841,7 @@
     {
       "matchId": 8590,
       "kickoffAt": "2026-09-18T19:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -11899,7 +11899,7 @@
     {
       "matchId": 10341,
       "kickoffAt": "2026-09-18T18:45:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -11958,7 +11958,7 @@
     {
       "matchId": 9656,
       "kickoffAt": "2026-09-18T18:45:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "AWAY",
@@ -12014,7 +12014,7 @@
     {
       "matchId": 10023,
       "kickoffAt": "2026-09-18T18:30:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -12070,7 +12070,7 @@
     {
       "matchId": 9359,
       "kickoffAt": "2026-09-18T17:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -12129,7 +12129,7 @@
     {
       "matchId": 8983,
       "kickoffAt": "2026-09-17T19:30:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -12188,7 +12188,7 @@
     {
       "matchId": 38472,
       "kickoffAt": "2026-09-17T19:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -12248,7 +12248,7 @@
     {
       "matchId": 38502,
       "kickoffAt": "2026-09-17T19:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -12306,7 +12306,7 @@
     {
       "matchId": 38520,
       "kickoffAt": "2026-09-17T19:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -12364,7 +12364,7 @@
     {
       "matchId": 38497,
       "kickoffAt": "2026-09-17T19:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -12422,7 +12422,7 @@
     {
       "matchId": 38434,
       "kickoffAt": "2026-09-17T19:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -12481,7 +12481,7 @@
     {
       "matchId": 38490,
       "kickoffAt": "2026-09-17T19:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -12540,7 +12540,7 @@
     {
       "matchId": 38468,
       "kickoffAt": "2026-09-17T19:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -12599,7 +12599,7 @@
     {
       "matchId": 8986,
       "kickoffAt": "2026-09-17T17:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -12655,7 +12655,7 @@
     {
       "matchId": 38540,
       "kickoffAt": "2026-09-17T16:45:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -12713,7 +12713,7 @@
     {
       "matchId": 38549,
       "kickoffAt": "2026-09-17T16:45:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -12771,7 +12771,7 @@
     {
       "matchId": 8981,
       "kickoffAt": "2026-09-16T19:30:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -12827,7 +12827,7 @@
     {
       "matchId": 8984,
       "kickoffAt": "2026-09-16T19:30:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -14049,7 +14049,7 @@
     {
       "matchId": 38485,
       "kickoffAt": "2026-09-16T19:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -16145,7 +16145,7 @@
     {
       "matchId": 38456,
       "kickoffAt": "2026-09-16T19:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -17603,7 +17603,7 @@
     {
       "matchId": 38534,
       "kickoffAt": "2026-09-16T19:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -17662,7 +17662,7 @@
     {
       "matchId": 38509,
       "kickoffAt": "2026-09-16T19:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -17721,7 +17721,7 @@
     {
       "matchId": 38545,
       "kickoffAt": "2026-09-16T19:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -17779,7 +17779,7 @@
     {
       "matchId": 38506,
       "kickoffAt": "2026-09-16T19:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -17837,7 +17837,7 @@
     {
       "matchId": 38515,
       "kickoffAt": "2026-09-16T19:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -17895,7 +17895,7 @@
     {
       "matchId": 8987,
       "kickoffAt": "2026-09-16T17:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -17953,22 +17953,22 @@
     {
       "matchId": 8982,
       "kickoffAt": "2026-09-16T17:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
-      "predictedProbability": 62.454,
-      "homeProbability": 62.454,
-      "drawProbability": 21.08,
-      "awayProbability": 16.466,
+      "predictedProbability": 63.9871299129913,
+      "homeProbability": 63.9871299129913,
+      "drawProbability": 20.90245104510451,
+      "awayProbability": 15.11041904190419,
       "expectedHomeGoals": 1.9953,
       "expectedAwayGoals": 0.7732,
       "advisoryMarket": "Double Chance",
       "advisorySelection": "12",
-      "advisoryProbability": 78.92,
+      "advisoryProbability": 79.1,
       "advisoryReliabilityScore": 77.39,
       "confidenceLevel": "VERY_HIGH",
-      "confidenceScore": 95.88,
+      "confidenceScore": 96.72,
       "dataQualityScore": 100,
       "productionModelName": "v1.0-20-80",
       "summary": "All Selection Policy V2 publication checks passed.",
@@ -17990,7 +17990,7 @@
           "code": "CONFIDENCE",
           "passed": true,
           "label": "Reliability",
-          "detail": "Passed: VERY_HIGH (95.9/100)."
+          "detail": "Passed: VERY_HIGH (96.7/100)."
         },
         {
           "code": "DATA_QUALITY",
@@ -18002,14 +18002,14 @@
           "code": "PROBABILITY",
           "passed": true,
           "label": "Model probability",
-          "detail": "Passed: 62.5% (minimum 45%)."
+          "detail": "Passed: 64.0% (minimum 45%)."
         }
       ]
     },
     {
       "matchId": 38563,
       "kickoffAt": "2026-09-16T16:45:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -18068,7 +18068,7 @@
     {
       "matchId": 38559,
       "kickoffAt": "2026-09-16T16:45:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -18126,7 +18126,7 @@
     {
       "matchId": 8989,
       "kickoffAt": "2026-09-15T19:30:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "AWAY",
@@ -18182,7 +18182,7 @@
     {
       "matchId": 8985,
       "kickoffAt": "2026-09-15T18:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -18238,7 +18238,7 @@
     {
       "matchId": 8988,
       "kickoffAt": "2026-09-15T17:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -18294,7 +18294,7 @@
     {
       "matchId": 8589,
       "kickoffAt": "2026-09-14T19:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -18352,7 +18352,7 @@
     {
       "matchId": 8972,
       "kickoffAt": "2026-09-14T19:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -18408,7 +18408,7 @@
     {
       "matchId": 9655,
       "kickoffAt": "2026-09-14T18:45:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -18464,7 +18464,7 @@
     {
       "matchId": 9351,
       "kickoffAt": "2026-09-14T17:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "AWAY",
@@ -18520,7 +18520,7 @@
     {
       "matchId": 9652,
       "kickoffAt": "2026-09-14T16:30:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -18576,7 +18576,7 @@
     {
       "matchId": 9650,
       "kickoffAt": "2026-09-14T16:30:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "AWAY",
@@ -18632,14 +18632,14 @@
     {
       "matchId": 8978,
       "kickoffAt": "2026-09-13T19:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
-      "predictedProbability": 45.372,
-      "homeProbability": 45.372,
-      "drawProbability": 23.29,
-      "awayProbability": 31.338,
+      "predictedProbability": 43.72,
+      "homeProbability": 43.72,
+      "drawProbability": 23.304000000000002,
+      "awayProbability": 32.976,
       "expectedHomeGoals": 1.7458,
       "expectedAwayGoals": 1.4623,
       "advisoryMarket": "Total Goals 4.5",
@@ -18647,12 +18647,13 @@
       "advisoryProbability": 78.15,
       "advisoryReliabilityScore": 82.42,
       "confidenceLevel": "MEDIUM",
-      "confidenceScore": 65.6,
+      "confidenceScore": 61.41,
       "dataQualityScore": 100,
       "productionModelName": "v1.0-20-80",
-      "summary": "1 Selection Policy V2 check(s) failed.",
+      "summary": "2 Selection Policy V2 check(s) failed.",
       "failedCodes": [
-        "CONFIDENCE"
+        "CONFIDENCE",
+        "PROBABILITY"
       ],
       "checks": [
         {
@@ -18671,7 +18672,7 @@
           "code": "CONFIDENCE",
           "passed": false,
           "label": "Reliability",
-          "detail": "Failed: MEDIUM (65.6/100); HIGH or VERY_HIGH is required."
+          "detail": "Failed: MEDIUM (61.4/100); HIGH or VERY_HIGH is required."
         },
         {
           "code": "DATA_QUALITY",
@@ -18681,23 +18682,23 @@
         },
         {
           "code": "PROBABILITY",
-          "passed": true,
+          "passed": false,
           "label": "Model probability",
-          "detail": "Passed: 45.4% (minimum 45%)."
+          "detail": "Failed: 43.7% (minimum 45%)."
         }
       ]
     },
     {
       "matchId": 10337,
       "kickoffAt": "2026-09-13T18:45:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "AWAY",
-      "predictedProbability": 47.548,
-      "homeProbability": 29.358,
-      "drawProbability": 23.093999999999998,
-      "awayProbability": 47.548,
+      "predictedProbability": 50.248000000000005,
+      "homeProbability": 26.736000000000004,
+      "drawProbability": 23.016,
+      "awayProbability": 50.248000000000005,
       "expectedHomeGoals": 1.2375,
       "expectedAwayGoals": 1.8268,
       "advisoryMarket": "Away Team Goals 2.5",
@@ -18705,7 +18706,7 @@
       "advisoryProbability": 72.55,
       "advisoryReliabilityScore": 86.84,
       "confidenceLevel": "HIGH",
-      "confidenceScore": 70.94,
+      "confidenceScore": 77.74,
       "dataQualityScore": 100,
       "productionModelName": "v1.0-20-80",
       "summary": "All Selection Policy V2 publication checks passed.",
@@ -18727,7 +18728,7 @@
           "code": "CONFIDENCE",
           "passed": true,
           "label": "Reliability",
-          "detail": "Passed: HIGH (70.9/100)."
+          "detail": "Passed: HIGH (77.7/100)."
         },
         {
           "code": "DATA_QUALITY",
@@ -18739,14 +18740,14 @@
           "code": "PROBABILITY",
           "passed": true,
           "label": "Model probability",
-          "detail": "Passed: 47.5% (minimum 45%)."
+          "detail": "Passed: 50.2% (minimum 45%)."
         }
       ]
     },
     {
       "matchId": 9648,
       "kickoffAt": "2026-09-13T18:45:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -18805,14 +18806,14 @@
     {
       "matchId": 9348,
       "kickoffAt": "2026-09-13T17:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
-      "predictedProbability": 71.99290710928908,
-      "homeProbability": 71.99290710928908,
-      "drawProbability": 17.319528847115286,
-      "awayProbability": 10.687564043595641,
+      "predictedProbability": 73.652,
+      "homeProbability": 73.652,
+      "drawProbability": 16.988,
+      "awayProbability": 9.360000000000001,
       "expectedHomeGoals": 2.3687,
       "expectedAwayGoals": 0.6142,
       "advisoryMarket": "Home Team Goals 3.5",
@@ -18854,14 +18855,14 @@
           "code": "PROBABILITY",
           "passed": true,
           "label": "Model probability",
-          "detail": "Passed: 72.0% (minimum 45%)."
+          "detail": "Passed: 73.7% (minimum 45%)."
         }
       ]
     },
     {
       "matchId": 9352,
       "kickoffAt": "2026-09-13T17:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -18919,7 +18920,7 @@
     {
       "matchId": 8977,
       "kickoffAt": "2026-09-13T16:30:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -18978,28 +18979,26 @@
     {
       "matchId": 9653,
       "kickoffAt": "2026-09-13T16:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
-      "decision": "FILTERED",
-      "eligible": false,
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "decision": "PUBLISHED",
+      "eligible": true,
       "predictedOutcome": "HOME",
-      "predictedProbability": 46.066,
-      "homeProbability": 46.066,
-      "drawProbability": 23.945999999999998,
-      "awayProbability": 29.988000000000003,
+      "predictedProbability": 47.02101149885012,
+      "homeProbability": 47.02101149885012,
+      "drawProbability": 23.899536446355363,
+      "awayProbability": 29.079452054794526,
       "expectedHomeGoals": 1.6685,
       "expectedAwayGoals": 1.2822,
       "advisoryMarket": "Home Win To Nil",
       "advisorySelection": "NO",
       "advisoryProbability": 77.49,
       "advisoryReliabilityScore": 79.58,
-      "confidenceLevel": "MEDIUM",
-      "confidenceScore": 68.02,
+      "confidenceLevel": "HIGH",
+      "confidenceScore": 70.41,
       "dataQualityScore": 100,
       "productionModelName": "v1.0-20-80",
-      "summary": "1 Selection Policy V2 check(s) failed.",
-      "failedCodes": [
-        "CONFIDENCE"
-      ],
+      "summary": "All Selection Policy V2 publication checks passed.",
+      "failedCodes": [],
       "checks": [
         {
           "code": "MODEL",
@@ -19015,9 +19014,9 @@
         },
         {
           "code": "CONFIDENCE",
-          "passed": false,
+          "passed": true,
           "label": "Reliability",
-          "detail": "Failed: MEDIUM (68.0/100); HIGH or VERY_HIGH is required."
+          "detail": "Passed: HIGH (70.4/100)."
         },
         {
           "code": "DATA_QUALITY",
@@ -19029,14 +19028,14 @@
           "code": "PROBABILITY",
           "passed": true,
           "label": "Model probability",
-          "detail": "Passed: 46.1% (minimum 45%)."
+          "detail": "Passed: 47.0% (minimum 45%)."
         }
       ]
     },
     {
       "matchId": 10022,
       "kickoffAt": "2026-09-13T15:30:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "AWAY",
@@ -19092,7 +19091,7 @@
     {
       "matchId": 8588,
       "kickoffAt": "2026-09-13T15:30:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -19151,7 +19150,7 @@
     {
       "matchId": 10336,
       "kickoffAt": "2026-09-13T15:15:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -19210,7 +19209,7 @@
     {
       "matchId": 8975,
       "kickoffAt": "2026-09-13T14:15:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "AWAY",
@@ -19266,7 +19265,7 @@
     {
       "matchId": 9350,
       "kickoffAt": "2026-09-13T14:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -19325,7 +19324,7 @@
     {
       "matchId": 10021,
       "kickoffAt": "2026-09-13T13:30:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -19381,7 +19380,7 @@
     {
       "matchId": 9651,
       "kickoffAt": "2026-09-13T13:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -19440,7 +19439,7 @@
     {
       "matchId": 10335,
       "kickoffAt": "2026-09-13T13:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -19499,7 +19498,7 @@
     {
       "matchId": 8587,
       "kickoffAt": "2026-09-13T13:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -19558,7 +19557,7 @@
     {
       "matchId": 8974,
       "kickoffAt": "2026-09-13T12:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -19614,7 +19613,7 @@
     {
       "matchId": 8976,
       "kickoffAt": "2026-09-12T19:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -19670,14 +19669,14 @@
     {
       "matchId": 8586,
       "kickoffAt": "2026-09-12T19:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "AWAY",
-      "predictedProbability": 46.501022665010225,
-      "homeProbability": 26.005174260051746,
-      "drawProbability": 27.493803074938032,
-      "awayProbability": 46.501022665010225,
+      "predictedProbability": 47.79183638363837,
+      "homeProbability": 24.927887388738874,
+      "drawProbability": 27.280276227622764,
+      "awayProbability": 47.79183638363837,
       "expectedHomeGoals": 0.8293,
       "expectedAwayGoals": 1.3138,
       "advisoryMarket": "Away Win To Nil",
@@ -19685,7 +19684,7 @@
       "advisoryProbability": 68.1,
       "advisoryReliabilityScore": 82.05,
       "confidenceLevel": "HIGH",
-      "confidenceScore": 71.19,
+      "confidenceScore": 73.4,
       "dataQualityScore": 100,
       "productionModelName": "v1.0-20-80",
       "summary": "All Selection Policy V2 publication checks passed.",
@@ -19707,7 +19706,7 @@
           "code": "CONFIDENCE",
           "passed": true,
           "label": "Reliability",
-          "detail": "Passed: HIGH (71.2/100)."
+          "detail": "Passed: HIGH (73.4/100)."
         },
         {
           "code": "DATA_QUALITY",
@@ -19719,14 +19718,14 @@
           "code": "PROBABILITY",
           "passed": true,
           "label": "Model probability",
-          "detail": "Passed: 46.5% (minimum 45%)."
+          "detail": "Passed: 47.8% (minimum 45%)."
         }
       ]
     },
     {
       "matchId": 9649,
       "kickoffAt": "2026-09-12T18:45:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -19782,7 +19781,7 @@
     {
       "matchId": 10334,
       "kickoffAt": "2026-09-12T18:45:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -19841,7 +19840,7 @@
     {
       "matchId": 10331,
       "kickoffAt": "2026-09-12T18:45:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -19900,7 +19899,7 @@
     {
       "matchId": 10332,
       "kickoffAt": "2026-09-12T18:45:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -19956,7 +19955,7 @@
     {
       "matchId": 10333,
       "kickoffAt": "2026-09-12T18:45:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -20015,7 +20014,7 @@
     {
       "matchId": 9347,
       "kickoffAt": "2026-09-12T17:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "AWAY",
@@ -20071,7 +20070,7 @@
     {
       "matchId": 9349,
       "kickoffAt": "2026-09-12T17:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -20127,7 +20126,7 @@
     {
       "matchId": 8971,
       "kickoffAt": "2026-09-12T16:30:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -20183,7 +20182,7 @@
     {
       "matchId": 10020,
       "kickoffAt": "2026-09-12T16:30:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -20241,7 +20240,7 @@
     {
       "matchId": 8585,
       "kickoffAt": "2026-09-12T16:30:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "AWAY",
@@ -20297,7 +20296,7 @@
     {
       "matchId": 9654,
       "kickoffAt": "2026-09-12T16:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -20355,7 +20354,7 @@
     {
       "matchId": 10330,
       "kickoffAt": "2026-09-12T15:15:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -20411,7 +20410,7 @@
     {
       "matchId": 8979,
       "kickoffAt": "2026-09-12T14:15:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -20467,7 +20466,7 @@
     {
       "matchId": 9354,
       "kickoffAt": "2026-09-12T14:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -20525,7 +20524,7 @@
     {
       "matchId": 9353,
       "kickoffAt": "2026-09-12T14:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -20584,7 +20583,7 @@
     {
       "matchId": 8580,
       "kickoffAt": "2026-09-12T14:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -20640,7 +20639,7 @@
     {
       "matchId": 8582,
       "kickoffAt": "2026-09-12T14:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -20699,7 +20698,7 @@
     {
       "matchId": 8583,
       "kickoffAt": "2026-09-12T14:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -20757,7 +20756,7 @@
     {
       "matchId": 8584,
       "kickoffAt": "2026-09-12T14:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -20816,22 +20815,22 @@
     {
       "matchId": 8581,
       "kickoffAt": "2026-09-12T14:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
-      "predictedProbability": 58.585158884111586,
-      "homeProbability": 58.585158884111586,
-      "drawProbability": 22.794198580141984,
-      "awayProbability": 18.620642535746423,
+      "predictedProbability": 60.987158884111594,
+      "homeProbability": 60.987158884111594,
+      "drawProbability": 22.396198580141988,
+      "awayProbability": 16.616642535746426,
       "expectedHomeGoals": 1.8297,
       "expectedAwayGoals": 0.8463,
       "advisoryMarket": "Double Chance",
       "advisorySelection": "12",
-      "advisoryProbability": 77.21,
+      "advisoryProbability": 77.6,
       "advisoryReliabilityScore": 77.39,
       "confidenceLevel": "VERY_HIGH",
-      "confidenceScore": 93.77,
+      "confidenceScore": 95.08,
       "dataQualityScore": 100,
       "productionModelName": "v1.0-20-80",
       "summary": "All Selection Policy V2 publication checks passed.",
@@ -20853,7 +20852,7 @@
           "code": "CONFIDENCE",
           "passed": true,
           "label": "Reliability",
-          "detail": "Passed: VERY_HIGH (93.8/100)."
+          "detail": "Passed: VERY_HIGH (95.1/100)."
         },
         {
           "code": "DATA_QUALITY",
@@ -20865,14 +20864,14 @@
           "code": "PROBABILITY",
           "passed": true,
           "label": "Model probability",
-          "detail": "Passed: 58.6% (minimum 45%)."
+          "detail": "Passed: 61.0% (minimum 45%)."
         }
       ]
     },
     {
       "matchId": 10019,
       "kickoffAt": "2026-09-12T13:30:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -20931,7 +20930,7 @@
     {
       "matchId": 10016,
       "kickoffAt": "2026-09-12T13:30:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -20990,7 +20989,7 @@
     {
       "matchId": 10018,
       "kickoffAt": "2026-09-12T13:30:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -21049,7 +21048,7 @@
     {
       "matchId": 10017,
       "kickoffAt": "2026-09-12T13:30:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -21105,7 +21104,7 @@
     {
       "matchId": 10015,
       "kickoffAt": "2026-09-12T13:30:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -21161,7 +21160,7 @@
     {
       "matchId": 9647,
       "kickoffAt": "2026-09-12T13:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "AWAY",
@@ -21217,7 +21216,7 @@
     {
       "matchId": 8980,
       "kickoffAt": "2026-09-12T12:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -21275,7 +21274,7 @@
     {
       "matchId": 8973,
       "kickoffAt": "2026-09-11T19:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -21334,7 +21333,7 @@
     {
       "matchId": 9646,
       "kickoffAt": "2026-09-11T18:45:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -21393,7 +21392,7 @@
     {
       "matchId": 10329,
       "kickoffAt": "2026-09-11T18:45:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -21449,7 +21448,7 @@
     {
       "matchId": 10014,
       "kickoffAt": "2026-09-11T18:30:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -21507,7 +21506,7 @@
     {
       "matchId": 9346,
       "kickoffAt": "2026-09-11T17:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -21563,22 +21562,22 @@
     {
       "matchId": 38306,
       "kickoffAt": "2026-09-10T19:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
-      "predictedProbability": 64.382,
-      "homeProbability": 64.382,
-      "drawProbability": 18.73,
-      "awayProbability": 16.887999999999998,
-      "expectedHomeGoals": 2.5112,
-      "expectedAwayGoals": 1.2183,
+      "predictedProbability": 64.174,
+      "homeProbability": 64.174,
+      "drawProbability": 18.794,
+      "awayProbability": 17.032,
+      "expectedHomeGoals": 2.5015,
+      "expectedAwayGoals": 1.2228,
       "advisoryMarket": "Home Team Goals 3.5",
       "advisorySelection": "UNDER",
-      "advisoryProbability": 76.63,
+      "advisoryProbability": 76.82,
       "advisoryReliabilityScore": 90.3,
       "confidenceLevel": "VERY_HIGH",
-      "confidenceScore": 96.94,
+      "confidenceScore": 96.82,
       "dataQualityScore": 100,
       "productionModelName": "v1.0-20-80",
       "summary": "All Selection Policy V2 publication checks passed.",
@@ -21600,7 +21599,7 @@
           "code": "CONFIDENCE",
           "passed": true,
           "label": "Reliability",
-          "detail": "Passed: VERY_HIGH (96.9/100)."
+          "detail": "Passed: VERY_HIGH (96.8/100)."
         },
         {
           "code": "DATA_QUALITY",
@@ -21612,29 +21611,29 @@
           "code": "PROBABILITY",
           "passed": true,
           "label": "Model probability",
-          "detail": "Passed: 64.4% (minimum 45%)."
+          "detail": "Passed: 64.2% (minimum 45%)."
         }
       ]
     },
     {
       "matchId": 38276,
       "kickoffAt": "2026-09-10T19:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
-      "predictedProbability": 45.044805119488046,
-      "homeProbability": 45.044805119488046,
-      "drawProbability": 24.11753784621538,
-      "awayProbability": 30.837657034296573,
-      "expectedHomeGoals": 1.5689,
-      "expectedAwayGoals": 1.4067,
+      "predictedProbability": 45.308805119488056,
+      "homeProbability": 45.308805119488056,
+      "drawProbability": 24.10153784621538,
+      "awayProbability": 30.589657034296568,
+      "expectedHomeGoals": 1.5767,
+      "expectedAwayGoals": 1.4,
       "advisoryMarket": "Home Team Goals 0.5",
       "advisorySelection": "OVER",
-      "advisoryProbability": 79.15,
+      "advisoryProbability": 79.31,
       "advisoryReliabilityScore": 79.35,
       "confidenceLevel": "VERY_LOW",
-      "confidenceScore": 26.97,
+      "confidenceScore": 27.63,
       "dataQualityScore": 47.5,
       "productionModelName": "v1.0-20-80",
       "summary": "1 Selection Policy V2 check(s) failed.",
@@ -21658,7 +21657,7 @@
           "code": "CONFIDENCE",
           "passed": false,
           "label": "Reliability",
-          "detail": "Failed: VERY_LOW (27.0/100); HIGH or VERY_HIGH is required."
+          "detail": "Failed: VERY_LOW (27.6/100); HIGH or VERY_HIGH is required."
         },
         {
           "code": "DATA_QUALITY",
@@ -21670,29 +21669,29 @@
           "code": "PROBABILITY",
           "passed": true,
           "label": "Model probability",
-          "detail": "Passed: 45.0% (minimum 45%)."
+          "detail": "Passed: 45.3% (minimum 45%)."
         }
       ]
     },
     {
       "matchId": 38379,
       "kickoffAt": "2026-09-10T19:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
-      "predictedProbability": 41.27299869986999,
-      "homeProbability": 35.7951395139514,
-      "drawProbability": 22.93186178617862,
-      "awayProbability": 41.27299869986999,
-      "expectedHomeGoals": 1.6473,
-      "expectedAwayGoals": 1.6055,
+      "predictedProbability": 41.078,
+      "homeProbability": 35.992000000000004,
+      "drawProbability": 22.93,
+      "awayProbability": 41.078,
+      "expectedHomeGoals": 1.6536,
+      "expectedAwayGoals": 1.6,
       "advisoryMarket": "Away Team Goals 2.5",
       "advisorySelection": "UNDER",
-      "advisoryProbability": 78.3,
+      "advisoryProbability": 78.44,
       "advisoryReliabilityScore": 86.84,
       "confidenceLevel": "VERY_LOW",
-      "confidenceScore": 23.12,
+      "confidenceScore": 22.62,
       "dataQualityScore": 56.25,
       "productionModelName": "v1.0-20-80",
       "summary": "2 Selection Policy V2 check(s) failed.",
@@ -21717,7 +21716,7 @@
           "code": "CONFIDENCE",
           "passed": false,
           "label": "Reliability",
-          "detail": "Failed: VERY_LOW (23.1/100); HIGH or VERY_HIGH is required."
+          "detail": "Failed: VERY_LOW (22.6/100); HIGH or VERY_HIGH is required."
         },
         {
           "code": "DATA_QUALITY",
@@ -21729,29 +21728,29 @@
           "code": "PROBABILITY",
           "passed": false,
           "label": "Model probability",
-          "detail": "Failed: 41.3% (minimum 45%)."
+          "detail": "Failed: 41.1% (minimum 45%)."
         }
       ]
     },
     {
       "matchId": 38407,
       "kickoffAt": "2026-09-10T19:00:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
-      "predictedProbability": 56.2,
-      "homeProbability": 56.2,
-      "drawProbability": 22.982,
-      "awayProbability": 20.817999999999998,
-      "expectedHomeGoals": 1.7911,
-      "expectedAwayGoals": 0.9622,
+      "predictedProbability": 56.472,
+      "homeProbability": 56.472,
+      "drawProbability": 22.917999999999996,
+      "awayProbability": 20.61,
+      "expectedHomeGoals": 1.7989,
+      "expectedAwayGoals": 0.9556,
       "advisoryMarket": "Double Chance",
       "advisorySelection": "1X",
-      "advisoryProbability": 79.18,
+      "advisoryProbability": 79.39,
       "advisoryReliabilityScore": 76.68,
       "confidenceLevel": "LOW",
-      "confidenceScore": 52.07,
+      "confidenceScore": 52.55,
       "dataQualityScore": 47.5,
       "productionModelName": "v1.0-20-80",
       "summary": "1 Selection Policy V2 check(s) failed.",
@@ -21775,7 +21774,7 @@
           "code": "CONFIDENCE",
           "passed": false,
           "label": "Reliability",
-          "detail": "Failed: LOW (52.1/100); HIGH or VERY_HIGH is required."
+          "detail": "Failed: LOW (52.5/100); HIGH or VERY_HIGH is required."
         },
         {
           "code": "DATA_QUALITY",
@@ -21787,29 +21786,29 @@
           "code": "PROBABILITY",
           "passed": true,
           "label": "Model probability",
-          "detail": "Passed: 56.2% (minimum 45%)."
+          "detail": "Passed: 56.5% (minimum 45%)."
         }
       ]
     },
     {
       "matchId": 38390,
       "kickoffAt": "2026-09-10T16:45:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
-      "predictedProbability": 52.91400000000001,
-      "homeProbability": 52.91400000000001,
-      "drawProbability": 23.372000000000003,
-      "awayProbability": 23.714,
-      "expectedHomeGoals": 1.76,
-      "expectedAwayGoals": 0.8883,
+      "predictedProbability": 53.122,
+      "homeProbability": 53.122,
+      "drawProbability": 23.316000000000003,
+      "awayProbability": 23.561999999999998,
+      "expectedHomeGoals": 1.7658,
+      "expectedAwayGoals": 0.8833,
       "advisoryMarket": "Double Chance",
       "advisorySelection": "12",
-      "advisoryProbability": 76.63,
+      "advisoryProbability": 76.68,
       "advisoryReliabilityScore": 77.39,
       "confidenceLevel": "MEDIUM",
-      "confidenceScore": 55.17,
+      "confidenceScore": 55.64,
       "dataQualityScore": 60.63,
       "productionModelName": "v1.0-20-80",
       "summary": "1 Selection Policy V2 check(s) failed.",
@@ -21833,7 +21832,7 @@
           "code": "CONFIDENCE",
           "passed": false,
           "label": "Reliability",
-          "detail": "Failed: MEDIUM (55.2/100); HIGH or VERY_HIGH is required."
+          "detail": "Failed: MEDIUM (55.6/100); HIGH or VERY_HIGH is required."
         },
         {
           "code": "DATA_QUALITY",
@@ -21845,29 +21844,29 @@
           "code": "PROBABILITY",
           "passed": true,
           "label": "Model probability",
-          "detail": "Passed: 52.9% (minimum 45%)."
+          "detail": "Passed: 53.1% (minimum 45%)."
         }
       ]
     },
     {
       "matchId": 38323,
       "kickoffAt": "2026-09-10T16:45:00.000Z",
-      "evaluatedAt": "2026-09-09T20:40:38.762Z",
+      "evaluatedAt": "2026-09-10T08:40:32.407Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
-      "predictedProbability": 47.664,
-      "homeProbability": 47.664,
-      "drawProbability": 21.304000000000002,
-      "awayProbability": 31.032,
-      "expectedHomeGoals": 2.1682,
-      "expectedAwayGoals": 1.5933,
+      "predictedProbability": 47.6,
+      "homeProbability": 47.6,
+      "drawProbability": 21.312,
+      "awayProbability": 31.087999999999997,
+      "expectedHomeGoals": 2.1656,
+      "expectedAwayGoals": 1.5946,
       "advisoryMarket": "Away Team Goals 2.5",
       "advisorySelection": "UNDER",
-      "advisoryProbability": 78.61,
+      "advisoryProbability": 78.58,
       "advisoryReliabilityScore": 86.84,
       "confidenceLevel": "MEDIUM",
-      "confidenceScore": 58.58,
+      "confidenceScore": 58.42,
       "dataQualityScore": 82.5,
       "productionModelName": "v1.0-20-80",
       "summary": "1 Selection Policy V2 check(s) failed.",
@@ -21891,7 +21890,7 @@
           "code": "CONFIDENCE",
           "passed": false,
           "label": "Reliability",
-          "detail": "Failed: MEDIUM (58.6/100); HIGH or VERY_HIGH is required."
+          "detail": "Failed: MEDIUM (58.4/100); HIGH or VERY_HIGH is required."
         },
         {
           "code": "DATA_QUALITY",
@@ -21903,7 +21902,7 @@
           "code": "PROBABILITY",
           "passed": true,
           "label": "Model probability",
-          "detail": "Passed: 47.7% (minimum 45%)."
+          "detail": "Passed: 47.6% (minimum 45%)."
         }
       ]
     },
