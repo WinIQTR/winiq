@@ -1,7 +1,1948 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-07T08:41:36.610Z",
+  "generatedAt": "2026-09-09T20:41:36.886Z",
   "predictions": [
+    {
+      "matchId": 9015,
+      "kickoffAt": "2026-10-18T15:00:00.000Z",
+      "dataMode": "LIVE",
+      "leagueApiId": 140,
+      "leagueName": "La Liga",
+      "homeTeam": "Real Madrid",
+      "awayTeam": "Sevilla",
+      "homeTeamLogo": "https://media.api-sports.io/football/teams/541.png",
+      "homeRecentResults": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "W"
+      ],
+      "awayRecentResults": [
+        "W",
+        "W",
+        "L",
+        "D"
+      ],
+      "popularMarketsSummary": [
+        {
+          "label": "Maç Sonucu (1X2)",
+          "supported": true,
+          "market": "Match Result",
+          "selection": "HOME",
+          "probability": 69.62,
+          "fairOdds": 1.44
+        },
+        {
+          "label": "Çifte Şans (1X, X2, 12)",
+          "supported": true,
+          "market": "Double Chance",
+          "selection": "1X",
+          "probability": 86.82,
+          "fairOdds": 1.15
+        },
+        {
+          "label": "2.5 Gol Alt/Üst",
+          "supported": true,
+          "market": "Total Goals 2.5",
+          "selection": "OVER",
+          "probability": 69.8,
+          "fairOdds": 1.43
+        },
+        {
+          "label": "Karşılıklı Gol (KG / BTTS)",
+          "supported": true,
+          "market": "Both Teams To Score",
+          "selection": "YES",
+          "probability": 58.32,
+          "fairOdds": 1.71
+        },
+        {
+          "label": "Asya Handikap",
+          "supported": true,
+          "market": "Asian Handicap (Home +1.5)",
+          "selection": "HOME",
+          "probability": 96.07,
+          "fairOdds": 1.04
+        },
+        {
+          "label": "Toplam Gol",
+          "supported": true,
+          "market": "Total Goals 0.5",
+          "selection": "OVER",
+          "probability": 97.32,
+          "fairOdds": 1.03
+        },
+        {
+          "label": "İlk Yarı Sonucu",
+          "supported": true,
+          "market": "İlk Yarı Sonucu",
+          "selection": "HOME",
+          "probability": 54.75,
+          "fairOdds": 1.83,
+          "isEstimate": true
+        },
+        {
+          "label": "Takım Golü Alt/Üst",
+          "supported": true,
+          "market": "Away Team Goals 3.5",
+          "selection": "UNDER",
+          "probability": 98.17,
+          "fairOdds": 1.02
+        },
+        {
+          "label": "Kart Bahisleri",
+          "supported": true,
+          "market": "Toplam Kart 4.5",
+          "selection": "OVER",
+          "probability": 70.36,
+          "fairOdds": 1.42,
+          "isEstimate": true
+        },
+        {
+          "label": "Korner Alt/Üst",
+          "supported": true,
+          "market": "Toplam Korner 9.5",
+          "selection": "OVER",
+          "probability": 63.18,
+          "fairOdds": 1.58,
+          "isEstimate": true
+        },
+        {
+          "label": "Oyuncu Golü (kim gol atar)",
+          "supported": true,
+          "market": "Oyuncu Golü (Kim Gol Atar)",
+          "selection": "Kylian Mbappé",
+          "probability": 69.15,
+          "fairOdds": 1.45,
+          "isEstimate": true
+        },
+        {
+          "label": "Devre/Maç",
+          "supported": true,
+          "market": "Devre/Maç",
+          "selection": "HOME/HOME",
+          "probability": 32.42,
+          "fairOdds": 3.08,
+          "isEstimate": true
+        },
+        {
+          "label": "Doğru Skor",
+          "supported": true,
+          "market": "Correct Score",
+          "selection": "2-0",
+          "probability": 9.4,
+          "fairOdds": 10.64
+        },
+        {
+          "label": "Ofsayt Alt/Üst",
+          "supported": true,
+          "market": "Toplam Ofsayt 3.5",
+          "selection": "UNDER",
+          "probability": 64.72,
+          "fairOdds": 1.55,
+          "isEstimate": true
+        },
+        {
+          "label": "Şut Alt/Üst",
+          "supported": true,
+          "market": "Toplam İsabetli Şut 8.5",
+          "selection": "OVER",
+          "probability": 88.82,
+          "fairOdds": 1.13,
+          "isEstimate": true
+        }
+      ],
+      "awayTeamLogo": "https://media.api-sports.io/football/teams/536.png",
+      "homeProbability": 69.62319431943193,
+      "drawProbability": 17.194445844584457,
+      "awayProbability": 13.182359835983599,
+      "predictedOutcome": "HOME",
+      "predictedProbability": 69.62319431943193,
+      "confidenceScore": 99.79,
+      "confidenceLevel": "VERY_HIGH",
+      "productionCandidateType": "PRIMARY_HOME",
+      "productionScore": 89.29,
+      "dataQualityScore": 100,
+      "probabilityGap": 52.43,
+      "fairOdds": 1.44,
+      "leagueMatches": 500,
+      "homeVenueMatches": 20,
+      "awayVenueMatches": 20,
+      "drawAuditWouldApply": false,
+      "mlFallback": false,
+      "productionModelName": "v1.0-20-80",
+      "topPicksModelName": "historical-reliability-top-picks",
+      "topPicksModelVersion": "v1.1-diversified",
+      "selectionPolicyVersion": "selection-policy-v2",
+      "expectedHomeGoals": 2.6462,
+      "expectedAwayGoals": 0.9905,
+      "popularPicks": [
+        {
+          "rank": 1,
+          "key": "match_result_home",
+          "category": "MATCH_RESULT",
+          "market": "Match Result",
+          "selection": "HOME",
+          "probability": 69.62,
+          "fairOdds": 1.44,
+          "reliabilityScore": 58.3,
+          "pickScore": 78.38,
+          "historicalHitRate": 45.12,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 45.12,
+          "thresholdSamples": 2367,
+          "tier": "LOW",
+          "reasons": [
+            "Supported by a large historical sample."
+          ]
+        }
+      ],
+      "topPicks": [
+        {
+          "rank": 1,
+          "key": "home_team_goals_under_3.5",
+          "category": "TEAM_GOALS",
+          "market": "Home Team Goals 3.5",
+          "selection": "UNDER",
+          "probability": 73.97,
+          "fairOdds": 1.35,
+          "reliabilityScore": 90.3,
+          "pickScore": 85.22,
+          "historicalHitRate": 91.25,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 91.25,
+          "thresholdSamples": 2344,
+          "tier": "VERY_HIGH",
+          "reasons": [
+            "The model probability is high.",
+            "Historical prediction-to-outcome calibration is strong.",
+            "Supported by a large historical sample.",
+            "Benzer güven seviyesinde tarihsel başarı %91.25."
+          ]
+        },
+        {
+          "rank": 2,
+          "key": "total_goals_under_4.5",
+          "category": "TOTAL_GOALS",
+          "market": "Total Goals 4.5",
+          "selection": "UNDER",
+          "probability": 71.28,
+          "fairOdds": 1.4,
+          "reliabilityScore": 82.42,
+          "pickScore": 80.6,
+          "historicalHitRate": 82.76,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 82.87,
+          "thresholdSamples": 2183,
+          "tier": "HIGH",
+          "reasons": [
+            "The model probability is high.",
+            "Historical prediction-to-outcome calibration is strong.",
+            "Supported by a large historical sample.",
+            "Benzer güven seviyesinde tarihsel başarı %82.87."
+          ]
+        },
+        {
+          "rank": 3,
+          "key": "home_win_to_nil_no",
+          "category": "WIN_TO_NIL",
+          "market": "Home Win To Nil",
+          "selection": "NO",
+          "probability": 65.54,
+          "fairOdds": 1.53,
+          "reliabilityScore": 78.65,
+          "pickScore": 76.61,
+          "historicalHitRate": 76.38,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 76.38,
+          "thresholdSamples": 2367,
+          "tier": "HIGH",
+          "reasons": [
+            "Historical prediction-to-outcome calibration is strong.",
+            "Supported by a large historical sample."
+          ]
+        },
+        {
+          "rank": 4,
+          "key": "away_team_goals_under_1.5",
+          "category": "TEAM_GOALS",
+          "market": "Away Team Goals 1.5",
+          "selection": "UNDER",
+          "probability": 73.93,
+          "fairOdds": 1.35,
+          "reliabilityScore": 70.04,
+          "pickScore": 76.09,
+          "historicalHitRate": 63.46,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 68.88,
+          "thresholdSamples": 903,
+          "tier": "MEDIUM",
+          "reasons": [
+            "The model probability is high.",
+            "Historical prediction-to-outcome calibration is strong.",
+            "Supported by a large historical sample."
+          ]
+        },
+        {
+          "rank": 5,
+          "key": "away_team_goals_over_0.5",
+          "category": "TEAM_GOALS",
+          "market": "Away Team Goals 0.5",
+          "selection": "OVER",
+          "probability": 62.86,
+          "fairOdds": 1.59,
+          "reliabilityScore": 74.09,
+          "pickScore": 73.48,
+          "historicalHitRate": 70.3,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 70.3,
+          "thresholdSamples": 2367,
+          "tier": "MEDIUM",
+          "reasons": [
+            "Historical prediction-to-outcome calibration is strong.",
+            "Supported by a large historical sample."
+          ]
+        },
+        {
+          "rank": 6,
+          "key": "total_goals_over_2.5",
+          "category": "TOTAL_GOALS",
+          "market": "Total Goals 2.5",
+          "selection": "OVER",
+          "probability": 69.8,
+          "fairOdds": 1.43,
+          "reliabilityScore": 60.66,
+          "pickScore": 70.22,
+          "historicalHitRate": 54.75,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 54.75,
+          "thresholdSamples": 2367,
+          "tier": "MEDIUM",
+          "reasons": [
+            "Supported by a large historical sample."
+          ]
+        },
+        {
+          "rank": 7,
+          "key": "match_result_home",
+          "category": "MATCH_RESULT",
+          "market": "Match Result",
+          "selection": "HOME",
+          "probability": 69.62,
+          "fairOdds": 1.44,
+          "reliabilityScore": 58.3,
+          "pickScore": 69.08,
+          "historicalHitRate": 45.12,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 45.12,
+          "thresholdSamples": 2367,
+          "tier": "LOW",
+          "reasons": [
+            "Supported by a large historical sample."
+          ]
+        }
+      ],
+      "marketCount": 64,
+      "homeRating": 71.28,
+      "awayRating": 50.15,
+      "homeAttack": 51.25,
+      "awayAttack": 31.94,
+      "homeDefense": 68.76,
+      "awayDefense": 54.9,
+      "homeForm": 71.09,
+      "awayForm": 50.8,
+      "homeFitness": 100,
+      "awayFitness": 100,
+      "ratingDifference": 21.13,
+      "ratingEdge": "STRONG_HOME",
+      "warnings": [
+        "Bazı feature değerleri eksiktir. Ev sahibi: 6, deplasman: 6.",
+        "Bu v0.1 olasılık modeli henüz geçmiş sonuçlarla kalibre edilmemiştir.",
+        "708 eksik feature değeri ZERO yöntemiyle dolduruldu.",
+        "Production 1X2: %20 doÄŸrulanmÄ±ÅŸ ML + %80 Poisson kullanÄ±ldÄ±.",
+        "DRAW Decision Layer production override yapmaz; yalnÄ±z audit sinyalidir.",
+        "Experimental DRAW audit: minimum DRAW %23, maximum gap 14, wouldApply=NO.",
+        "Production confidence: 99.79/100, VERY_HIGH.",
+        "Kalibrasyon ve rating hattÄ± legacy/audit amacÄ±yla korunur; final olasÄ±lÄ±ÄŸÄ± deÄŸiÅŸtirmez.",
+        "TakÄ±mlardan en az biri iÃ§in Rating Engine xG kategorisi eksik.",
+        "Confidence: Poisson historical veri kapsamı yeterli seviyededir.",
+        "Confidence: 1X2 ayrışması güçlü: 52.43 puan.",
+        "Match Result, Double Chance, and Draw No Bet were updated with the final Prediction Engine V2 probabilities.",
+        "Instead of the requested 50 picks, 7 distinct and sufficiently reliable picks were found. No weaker selections were added just to fill the list.",
+        "Instead of the requested 10 picks, 7 distinct and sufficiently reliable picks were found. No weaker selections were added just to fill the list."
+      ],
+      "settlementStatus": "PENDING",
+      "finalHomeScore": null,
+      "finalAwayScore": null
+    },
+    {
+      "matchId": 9017,
+      "kickoffAt": "2026-10-18T15:00:00.000Z",
+      "dataMode": "LIVE",
+      "leagueApiId": 140,
+      "leagueName": "La Liga",
+      "homeTeam": "Deportivo La Coruna",
+      "awayTeam": "Levante",
+      "homeTeamLogo": "https://media.api-sports.io/football/teams/544.png",
+      "homeRecentResults": [
+        "D",
+        "D",
+        "W",
+        "W"
+      ],
+      "awayRecentResults": [
+        "L",
+        "D",
+        "W",
+        "D"
+      ],
+      "popularMarketsSummary": [
+        {
+          "label": "Maç Sonucu (1X2)",
+          "supported": true,
+          "market": "Match Result",
+          "selection": "HOME",
+          "probability": 57.72,
+          "fairOdds": 1.73
+        },
+        {
+          "label": "Çifte Şans (1X, X2, 12)",
+          "supported": true,
+          "market": "Double Chance",
+          "selection": "1X",
+          "probability": 80.62,
+          "fairOdds": 1.24
+        },
+        {
+          "label": "2.5 Gol Alt/Üst",
+          "supported": true,
+          "market": "Total Goals 2.5",
+          "selection": "OVER",
+          "probability": 51.04,
+          "fairOdds": 1.96
+        },
+        {
+          "label": "Karşılıklı Gol (KG / BTTS)",
+          "supported": true,
+          "market": "Both Teams To Score",
+          "selection": "YES",
+          "probability": 50.06,
+          "fairOdds": 2
+        },
+        {
+          "label": "Asya Handikap",
+          "supported": true,
+          "market": "Asian Handicap (Home +1.5)",
+          "selection": "HOME",
+          "probability": 93.81,
+          "fairOdds": 1.07
+        },
+        {
+          "label": "Toplam Gol",
+          "supported": true,
+          "market": "Total Goals 5.5",
+          "selection": "UNDER",
+          "probability": 94.4,
+          "fairOdds": 1.06
+        },
+        {
+          "label": "İlk Yarı Sonucu",
+          "supported": true,
+          "market": "İlk Yarı Sonucu",
+          "selection": "HOME",
+          "probability": 42.5,
+          "fairOdds": 2.35,
+          "isEstimate": true
+        },
+        {
+          "label": "Takım Golü Alt/Üst",
+          "supported": true,
+          "market": "Away Team Goals 3.5",
+          "selection": "UNDER",
+          "probability": 98.59,
+          "fairOdds": 1.01
+        },
+        {
+          "label": "Kart Bahisleri",
+          "supported": true,
+          "market": "Toplam Kart 4.5",
+          "selection": "UNDER",
+          "probability": 72.54,
+          "fairOdds": 1.38,
+          "isEstimate": true
+        },
+        {
+          "label": "Korner Alt/Üst",
+          "supported": true,
+          "market": "Toplam Korner 9.5",
+          "selection": "UNDER",
+          "probability": 91.61,
+          "fairOdds": 1.09,
+          "isEstimate": true
+        },
+        {
+          "label": "Oyuncu Golü (kim gol atar)",
+          "supported": true,
+          "market": "Oyuncu Golü (Kim Gol Atar)",
+          "selection": "P. Aubameyang",
+          "probability": 70.03,
+          "fairOdds": 1.43,
+          "isEstimate": true
+        },
+        {
+          "label": "Devre/Maç",
+          "supported": true,
+          "market": "Devre/Maç",
+          "selection": "HOME/HOME",
+          "probability": 19.82,
+          "fairOdds": 5.05,
+          "isEstimate": true
+        },
+        {
+          "label": "Doğru Skor",
+          "supported": true,
+          "market": "Correct Score",
+          "selection": "1-0",
+          "probability": 11.92,
+          "fairOdds": 8.39
+        },
+        {
+          "label": "Ofsayt Alt/Üst",
+          "supported": true,
+          "market": "Toplam Ofsayt 3.5",
+          "selection": "UNDER",
+          "probability": 68.45,
+          "fairOdds": 1.46,
+          "isEstimate": true
+        },
+        {
+          "label": "Şut Alt/Üst",
+          "supported": true,
+          "market": "Toplam İsabetli Şut 8.5",
+          "selection": "UNDER",
+          "probability": 94.22,
+          "fairOdds": 1.06,
+          "isEstimate": true
+        }
+      ],
+      "awayTeamLogo": "https://media.api-sports.io/football/teams/539.png",
+      "homeProbability": 57.716,
+      "drawProbability": 22.899999999999995,
+      "awayProbability": 19.383999999999997,
+      "predictedOutcome": "HOME",
+      "predictedProbability": 57.716,
+      "confidenceScore": 74.3,
+      "confidenceLevel": "HIGH",
+      "productionCandidateType": "PRIMARY_HOME",
+      "productionScore": 70.96,
+      "dataQualityScore": 73.75,
+      "probabilityGap": 34.82,
+      "fairOdds": 1.73,
+      "leagueMatches": 500,
+      "homeVenueMatches": 2,
+      "awayVenueMatches": 20,
+      "drawAuditWouldApply": false,
+      "mlFallback": false,
+      "productionModelName": "v1.0-20-80",
+      "topPicksModelName": "historical-reliability-top-picks",
+      "topPicksModelVersion": "v1.1-diversified",
+      "selectionPolicyVersion": "selection-policy-v2",
+      "expectedHomeGoals": 1.8074,
+      "expectedAwayGoals": 0.9143,
+      "popularPicks": [
+        {
+          "rank": 1,
+          "key": "match_result_home",
+          "category": "MATCH_RESULT",
+          "market": "Match Result",
+          "selection": "HOME",
+          "probability": 57.72,
+          "fairOdds": 1.73,
+          "reliabilityScore": 58.3,
+          "pickScore": 74.81,
+          "historicalHitRate": 45.12,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 45.12,
+          "thresholdSamples": 2367,
+          "tier": "LOW",
+          "reasons": [
+            "Supported by a large historical sample."
+          ]
+        },
+        {
+          "rank": 2,
+          "key": "double_chance_12",
+          "category": "DOUBLE_CHANCE",
+          "market": "Double Chance",
+          "selection": "12",
+          "probability": 77.1,
+          "fairOdds": 1.3,
+          "reliabilityScore": 77.39,
+          "pickScore": 75.85,
+          "historicalHitRate": 77.06,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 77.14,
+          "thresholdSamples": 2266,
+          "tier": "HIGH",
+          "reasons": [
+            "The model probability is high.",
+            "Supported by a large historical sample."
+          ]
+        }
+      ],
+      "topPicks": [
+        {
+          "rank": 1,
+          "key": "double_chance_12",
+          "category": "DOUBLE_CHANCE",
+          "market": "Double Chance",
+          "selection": "12",
+          "probability": 77.1,
+          "fairOdds": 1.3,
+          "reliabilityScore": 77.39,
+          "pickScore": 80.67,
+          "historicalHitRate": 77.06,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 77.14,
+          "thresholdSamples": 2266,
+          "tier": "HIGH",
+          "reasons": [
+            "The model probability is high.",
+            "Supported by a large historical sample."
+          ]
+        },
+        {
+          "rank": 2,
+          "key": "total_goals_over_1.5",
+          "category": "TOTAL_GOALS",
+          "market": "Total Goals 1.5",
+          "selection": "OVER",
+          "probability": 75.46,
+          "fairOdds": 1.33,
+          "reliabilityScore": 77.22,
+          "pickScore": 79.93,
+          "historicalHitRate": 77.02,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 77.18,
+          "thresholdSamples": 1832,
+          "tier": "HIGH",
+          "reasons": [
+            "The model probability is high.",
+            "Supported by a large historical sample."
+          ]
+        },
+        {
+          "rank": 3,
+          "key": "home_team_goals_under_2.5",
+          "category": "TEAM_GOALS",
+          "market": "Home Team Goals 2.5",
+          "selection": "UNDER",
+          "probability": 73.06,
+          "fairOdds": 1.37,
+          "reliabilityScore": 79.11,
+          "pickScore": 79.82,
+          "historicalHitRate": 78.07,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 79.37,
+          "thresholdSamples": 1953,
+          "tier": "HIGH",
+          "reasons": [
+            "The model probability is high.",
+            "Historical prediction-to-outcome calibration is strong.",
+            "Supported by a large historical sample."
+          ]
+        },
+        {
+          "rank": 4,
+          "key": "away_team_goals_under_1.5",
+          "category": "TEAM_GOALS",
+          "market": "Away Team Goals 1.5",
+          "selection": "UNDER",
+          "probability": 76.73,
+          "fairOdds": 1.3,
+          "reliabilityScore": 70.04,
+          "pickScore": 77.21,
+          "historicalHitRate": 63.46,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 68.88,
+          "thresholdSamples": 903,
+          "tier": "MEDIUM",
+          "reasons": [
+            "The model probability is high.",
+            "Historical prediction-to-outcome calibration is strong.",
+            "Supported by a large historical sample."
+          ]
+        },
+        {
+          "rank": 5,
+          "key": "home_win_to_nil_no",
+          "category": "WIN_TO_NIL",
+          "market": "Home Win To Nil",
+          "selection": "NO",
+          "probability": 66.51,
+          "fairOdds": 1.5,
+          "reliabilityScore": 78.65,
+          "pickScore": 77,
+          "historicalHitRate": 76.38,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 76.38,
+          "thresholdSamples": 2367,
+          "tier": "HIGH",
+          "reasons": [
+            "Historical prediction-to-outcome calibration is strong.",
+            "Supported by a large historical sample."
+          ]
+        },
+        {
+          "rank": 6,
+          "key": "total_goals_under_3.5",
+          "category": "TOTAL_GOALS",
+          "market": "Total Goals 3.5",
+          "selection": "UNDER",
+          "probability": 71.12,
+          "fairOdds": 1.41,
+          "reliabilityScore": 70.82,
+          "pickScore": 75.31,
+          "historicalHitRate": 66.96,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 70.22,
+          "thresholdSamples": 1192,
+          "tier": "MEDIUM",
+          "reasons": [
+            "The model probability is high.",
+            "Supported by a large historical sample."
+          ]
+        },
+        {
+          "rank": 7,
+          "key": "dnb_home",
+          "category": "DRAW_NO_BET",
+          "market": "Draw No Bet",
+          "selection": "HOME",
+          "probability": 74.86,
+          "fairOdds": 1.34,
+          "reliabilityScore": 64.49,
+          "pickScore": 73.96,
+          "historicalHitRate": 58.55,
+          "historicalSamples": 1824,
+          "thresholdHitRate": 70.48,
+          "thresholdSamples": 481,
+          "tier": "MEDIUM",
+          "reasons": [
+            "The model probability is high.",
+            "Historical prediction-to-outcome calibration is strong."
+          ]
+        }
+      ],
+      "marketCount": 64,
+      "homeRating": 59.81,
+      "awayRating": 47.05,
+      "homeAttack": 47.2,
+      "awayAttack": 30,
+      "homeDefense": 58.75,
+      "awayDefense": 60.05,
+      "homeForm": 64.8,
+      "awayForm": 45.4,
+      "homeFitness": 100,
+      "awayFitness": 100,
+      "ratingDifference": 12.76,
+      "ratingEdge": "HOME",
+      "warnings": [
+        "Ev sahibinin iç saha geçmiş maç sayısı düşük: 2.",
+        "Bazı feature değerleri eksiktir. Ev sahibi: 6, deplasman: 6.",
+        "Bu v0.1 olasılık modeli henüz geçmiş sonuçlarla kalibre edilmemiştir.",
+        "Kalibrasyon örnek sayısı sınırlıdır; düzeltilmiş yüzdeler dikkatli yorumlanmalıdır.",
+        "708 eksik feature değeri ZERO yöntemiyle dolduruldu.",
+        "Production 1X2: %20 doÄŸrulanmÄ±ÅŸ ML + %80 Poisson kullanÄ±ldÄ±.",
+        "DRAW Decision Layer production override yapmaz; yalnÄ±z audit sinyalidir.",
+        "Experimental DRAW audit: minimum DRAW %23, maximum gap 14, wouldApply=NO.",
+        "Production confidence: 74.3/100, HIGH.",
+        "Kalibrasyon ve rating hattÄ± legacy/audit amacÄ±yla korunur; final olasÄ±lÄ±ÄŸÄ± deÄŸiÅŸtirmez.",
+        "TakÄ±mlardan en az biri iÃ§in Rating Engine xG kategorisi eksik.",
+        "Confidence: Ev sahibinin iç saha örneklemi çok düşük (2).",
+        "Confidence: 1X2 ayrışması güçlü: 34.82 puan.",
+        "Match Result, Double Chance, and Draw No Bet were updated with the final Prediction Engine V2 probabilities.",
+        "Instead of the requested 50 picks, 9 distinct and sufficiently reliable picks were found. No weaker selections were added just to fill the list.",
+        "Instead of the requested 10 picks, 7 distinct and sufficiently reliable picks were found. No weaker selections were added just to fill the list."
+      ],
+      "settlementStatus": "PENDING",
+      "finalHomeScore": null,
+      "finalAwayScore": null
+    },
+    {
+      "matchId": 8611,
+      "kickoffAt": "2026-10-18T13:00:00.000Z",
+      "dataMode": "LIVE",
+      "leagueApiId": 39,
+      "leagueName": "Premier League",
+      "homeTeam": "Bournemouth",
+      "awayTeam": "Sunderland",
+      "homeTeamLogo": "https://media.api-sports.io/football/teams/35.png",
+      "homeRecentResults": [
+        "L",
+        "D",
+        "D"
+      ],
+      "awayRecentResults": [
+        "L",
+        "W",
+        "D"
+      ],
+      "popularMarketsSummary": [
+        {
+          "label": "Maç Sonucu (1X2)",
+          "supported": true,
+          "market": "Match Result",
+          "selection": "HOME",
+          "probability": 50.09,
+          "fairOdds": 2
+        },
+        {
+          "label": "Çifte Şans (1X, X2, 12)",
+          "supported": true,
+          "market": "Double Chance",
+          "selection": "1X",
+          "probability": 75.98,
+          "fairOdds": 1.32
+        },
+        {
+          "label": "2.5 Gol Alt/Üst",
+          "supported": true,
+          "market": "Total Goals 2.5",
+          "selection": "UNDER",
+          "probability": 58.32,
+          "fairOdds": 1.71
+        },
+        {
+          "label": "Karşılıklı Gol (KG / BTTS)",
+          "supported": true,
+          "market": "Both Teams To Score",
+          "selection": "NO",
+          "probability": 55.44,
+          "fairOdds": 1.8
+        },
+        {
+          "label": "Asya Handikap",
+          "supported": true,
+          "market": "Asian Handicap (Home +1.5)",
+          "selection": "HOME",
+          "probability": 93.11,
+          "fairOdds": 1.07
+        },
+        {
+          "label": "Toplam Gol",
+          "supported": true,
+          "market": "Total Goals 5.5",
+          "selection": "UNDER",
+          "probability": 96.81,
+          "fairOdds": 1.03
+        },
+        {
+          "label": "İlk Yarı Sonucu",
+          "supported": true,
+          "market": "İlk Yarı Sonucu",
+          "selection": "DRAW",
+          "probability": 44.31,
+          "fairOdds": 2.26,
+          "isEstimate": true
+        },
+        {
+          "label": "Takım Golü Alt/Üst",
+          "supported": true,
+          "market": "Away Team Goals 3.5",
+          "selection": "UNDER",
+          "probability": 98.87,
+          "fairOdds": 1.01
+        },
+        {
+          "label": "Kart Bahisleri",
+          "supported": true,
+          "market": "Toplam Kart 4.5",
+          "selection": "UNDER",
+          "probability": 56.4,
+          "fairOdds": 1.77,
+          "isEstimate": true
+        },
+        {
+          "label": "Korner Alt/Üst",
+          "supported": true,
+          "market": "Toplam Korner 9.5",
+          "selection": "UNDER",
+          "probability": 58.74,
+          "fairOdds": 1.7,
+          "isEstimate": true
+        },
+        {
+          "label": "Oyuncu Golü (kim gol atar)",
+          "supported": true,
+          "market": "Oyuncu Golü (Kim Gol Atar)",
+          "selection": "M. Tavernier",
+          "probability": 63.13,
+          "fairOdds": 1.58,
+          "isEstimate": true
+        },
+        {
+          "label": "Devre/Maç",
+          "supported": true,
+          "market": "Devre/Maç",
+          "selection": "DRAW/HOME",
+          "probability": 18.28,
+          "fairOdds": 5.47,
+          "isEstimate": true
+        },
+        {
+          "label": "Doğru Skor",
+          "supported": true,
+          "market": "Correct Score",
+          "selection": "1-0",
+          "probability": 14.28,
+          "fairOdds": 7
+        },
+        {
+          "label": "Ofsayt Alt/Üst",
+          "supported": true,
+          "market": "Toplam Ofsayt 3.5",
+          "selection": "UNDER",
+          "probability": 57.3,
+          "fairOdds": 1.75,
+          "isEstimate": true
+        },
+        {
+          "label": "Şut Alt/Üst",
+          "supported": true,
+          "market": "Toplam İsabetli Şut 8.5",
+          "selection": "OVER",
+          "probability": 54.43,
+          "fairOdds": 1.84,
+          "isEstimate": true
+        }
+      ],
+      "awayTeamLogo": "https://media.api-sports.io/football/teams/746.png",
+      "homeProbability": 50.09082588258826,
+      "drawProbability": 25.8904906490649,
+      "awayProbability": 24.018683468346833,
+      "predictedOutcome": "HOME",
+      "predictedProbability": 50.09082588258826,
+      "confidenceScore": 78.34,
+      "confidenceLevel": "HIGH",
+      "productionCandidateType": "PRIMARY_HOME",
+      "productionScore": 73.02,
+      "dataQualityScore": 100,
+      "probabilityGap": 24.2,
+      "fairOdds": 2,
+      "leagueMatches": 500,
+      "homeVenueMatches": 20,
+      "awayVenueMatches": 20,
+      "drawAuditWouldApply": false,
+      "mlFallback": false,
+      "productionModelName": "v1.0-20-80",
+      "topPicksModelName": "historical-reliability-top-picks",
+      "topPicksModelVersion": "v1.1-diversified",
+      "selectionPolicyVersion": "selection-policy-v2",
+      "expectedHomeGoals": 1.4965,
+      "expectedAwayGoals": 0.8541,
+      "popularPicks": [
+        {
+          "rank": 1,
+          "key": "double_chance_1x",
+          "category": "DOUBLE_CHANCE",
+          "market": "Double Chance",
+          "selection": "1X",
+          "probability": 75.98,
+          "fairOdds": 1.32,
+          "reliabilityScore": 76.68,
+          "pickScore": 75.3,
+          "historicalHitRate": 68.06,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 74.39,
+          "thresholdSamples": 1222,
+          "tier": "HIGH",
+          "reasons": [
+            "The model probability is high.",
+            "Historical prediction-to-outcome calibration is strong.",
+            "Supported by a large historical sample."
+          ]
+        }
+      ],
+      "topPicks": [
+        {
+          "rank": 1,
+          "key": "home_team_goals_over_0.5",
+          "category": "TEAM_GOALS",
+          "market": "Home Team Goals 0.5",
+          "selection": "OVER",
+          "probability": 77.59,
+          "fairOdds": 1.29,
+          "reliabilityScore": 79.35,
+          "pickScore": 81.75,
+          "historicalHitRate": 76.51,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 78.39,
+          "thresholdSamples": 1897,
+          "tier": "HIGH",
+          "reasons": [
+            "The model probability is high.",
+            "Historical prediction-to-outcome calibration is strong.",
+            "Supported by a large historical sample."
+          ]
+        },
+        {
+          "rank": 2,
+          "key": "double_chance_1x",
+          "category": "DOUBLE_CHANCE",
+          "market": "Double Chance",
+          "selection": "1X",
+          "probability": 75.98,
+          "fairOdds": 1.32,
+          "reliabilityScore": 76.68,
+          "pickScore": 79.9,
+          "historicalHitRate": 68.06,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 74.39,
+          "thresholdSamples": 1222,
+          "tier": "HIGH",
+          "reasons": [
+            "The model probability is high.",
+            "Historical prediction-to-outcome calibration is strong.",
+            "Supported by a large historical sample."
+          ]
+        },
+        {
+          "rank": 3,
+          "key": "total_goals_under_3.5",
+          "category": "TOTAL_GOALS",
+          "market": "Total Goals 3.5",
+          "selection": "UNDER",
+          "probability": 78.97,
+          "fairOdds": 1.27,
+          "reliabilityScore": 70.82,
+          "pickScore": 78.45,
+          "historicalHitRate": 66.96,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 70.22,
+          "thresholdSamples": 1192,
+          "tier": "MEDIUM",
+          "reasons": [
+            "The model probability is high.",
+            "Supported by a large historical sample."
+          ]
+        },
+        {
+          "rank": 4,
+          "key": "away_team_goals_under_1.5",
+          "category": "TEAM_GOALS",
+          "market": "Away Team Goals 1.5",
+          "selection": "UNDER",
+          "probability": 78.93,
+          "fairOdds": 1.27,
+          "reliabilityScore": 70.04,
+          "pickScore": 78.09,
+          "historicalHitRate": 63.46,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 68.88,
+          "thresholdSamples": 903,
+          "tier": "MEDIUM",
+          "reasons": [
+            "The model probability is high.",
+            "Historical prediction-to-outcome calibration is strong.",
+            "Supported by a large historical sample."
+          ]
+        },
+        {
+          "rank": 5,
+          "key": "home_win_to_nil_no",
+          "category": "WIN_TO_NIL",
+          "market": "Home Win To Nil",
+          "selection": "NO",
+          "probability": 66.97,
+          "fairOdds": 1.49,
+          "reliabilityScore": 78.65,
+          "pickScore": 77.18,
+          "historicalHitRate": 76.38,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 76.38,
+          "thresholdSamples": 2367,
+          "tier": "HIGH",
+          "reasons": [
+            "Historical prediction-to-outcome calibration is strong.",
+            "Supported by a large historical sample."
+          ]
+        },
+        {
+          "rank": 6,
+          "key": "total_goals_over_1.5",
+          "category": "TOTAL_GOALS",
+          "market": "Total Goals 1.5",
+          "selection": "OVER",
+          "probability": 68.03,
+          "fairOdds": 1.47,
+          "reliabilityScore": 77.14,
+          "pickScore": 76.93,
+          "historicalHitRate": 77.02,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 77.02,
+          "thresholdSamples": 2367,
+          "tier": "HIGH",
+          "reasons": [
+            "Supported by a large historical sample."
+          ]
+        },
+        {
+          "rank": 7,
+          "key": "dnb_home",
+          "category": "DRAW_NO_BET",
+          "market": "Draw No Bet",
+          "selection": "HOME",
+          "probability": 67.59,
+          "fairOdds": 1.48,
+          "reliabilityScore": 66.3,
+          "pickScore": 71.87,
+          "historicalHitRate": 58.55,
+          "historicalSamples": 1824,
+          "thresholdHitRate": 58.55,
+          "thresholdSamples": 1824,
+          "tier": "MEDIUM",
+          "reasons": [
+            "Historical prediction-to-outcome calibration is strong.",
+            "Supported by a large historical sample."
+          ]
+        }
+      ],
+      "marketCount": 64,
+      "homeRating": 52.12,
+      "awayRating": 52.88,
+      "homeAttack": 30.87,
+      "awayAttack": 33.88,
+      "homeDefense": 58.62,
+      "awayDefense": 62.62,
+      "homeForm": 47.63,
+      "awayForm": 55.18,
+      "homeFitness": 100,
+      "awayFitness": 100,
+      "ratingDifference": -0.76,
+      "ratingEdge": "BALANCED",
+      "warnings": [
+        "Bazı feature değerleri eksiktir. Ev sahibi: 6, deplasman: 6.",
+        "Bu v0.1 olasılık modeli henüz geçmiş sonuçlarla kalibre edilmemiştir.",
+        "Kalibrasyon örnek sayısı sınırlıdır; düzeltilmiş yüzdeler dikkatli yorumlanmalıdır.",
+        "708 eksik feature değeri ZERO yöntemiyle dolduruldu.",
+        "Production 1X2: %20 doÄŸrulanmÄ±ÅŸ ML + %80 Poisson kullanÄ±ldÄ±.",
+        "DRAW Decision Layer production override yapmaz; yalnÄ±z audit sinyalidir.",
+        "Experimental DRAW audit: minimum DRAW %23, maximum gap 14, wouldApply=NO.",
+        "Production confidence: 78.34/100, HIGH.",
+        "Kalibrasyon ve rating hattÄ± legacy/audit amacÄ±yla korunur; final olasÄ±lÄ±ÄŸÄ± deÄŸiÅŸtirmez.",
+        "Rating dÃ¼zeltmesi uygulanmadÄ±: Rating farkı anlamlı düzeltme eşiğinin altında.",
+        "TakÄ±mlardan en az biri iÃ§in Rating Engine xG kategorisi eksik.",
+        "Confidence: Poisson historical veri kapsamı yeterli seviyededir.",
+        "Confidence: 1X2 ayrışması güçlü: 24.2 puan.",
+        "Match Result, Double Chance, and Draw No Bet were updated with the final Prediction Engine V2 probabilities.",
+        "Instead of the requested 50 picks, 10 distinct and sufficiently reliable picks were found. No weaker selections were added just to fill the list.",
+        "Instead of the requested 10 picks, 7 distinct and sufficiently reliable picks were found. No weaker selections were added just to fill the list."
+      ],
+      "settlementStatus": "PENDING",
+      "finalHomeScore": null,
+      "finalAwayScore": null
+    },
+    {
+      "matchId": 9681,
+      "kickoffAt": "2026-10-18T13:00:00.000Z",
+      "dataMode": "LIVE",
+      "leagueApiId": 135,
+      "leagueName": "Serie A",
+      "homeTeam": "Fiorentina",
+      "awayTeam": "Como",
+      "homeTeamLogo": "https://media.api-sports.io/football/teams/502.png",
+      "homeRecentResults": [
+        "L",
+        "L",
+        "L"
+      ],
+      "awayRecentResults": [
+        "D",
+        "W",
+        "W"
+      ],
+      "popularMarketsSummary": [
+        {
+          "label": "Maç Sonucu (1X2)",
+          "supported": true,
+          "market": "Match Result",
+          "selection": "AWAY",
+          "probability": 57.26,
+          "fairOdds": 1.75
+        },
+        {
+          "label": "Çifte Şans (1X, X2, 12)",
+          "supported": true,
+          "market": "Double Chance",
+          "selection": "X2",
+          "probability": 80.72,
+          "fairOdds": 1.24
+        },
+        {
+          "label": "2.5 Gol Alt/Üst",
+          "supported": true,
+          "market": "Total Goals 2.5",
+          "selection": "UNDER",
+          "probability": 54.24,
+          "fairOdds": 1.84
+        },
+        {
+          "label": "Karşılıklı Gol (KG / BTTS)",
+          "supported": true,
+          "market": "Both Teams To Score",
+          "selection": "NO",
+          "probability": 54.18,
+          "fairOdds": 1.85
+        },
+        {
+          "label": "Asya Handikap",
+          "supported": true,
+          "market": "Asian Handicap (Home -1.5)",
+          "selection": "AWAY",
+          "probability": 94.33,
+          "fairOdds": 1.06
+        },
+        {
+          "label": "Toplam Gol",
+          "supported": true,
+          "market": "Total Goals 5.5",
+          "selection": "UNDER",
+          "probability": 95.91,
+          "fairOdds": 1.04
+        },
+        {
+          "label": "İlk Yarı Sonucu",
+          "supported": true,
+          "market": "İlk Yarı Sonucu",
+          "selection": "DRAW",
+          "probability": 42.11,
+          "fairOdds": 2.37,
+          "isEstimate": true
+        },
+        {
+          "label": "Takım Golü Alt/Üst",
+          "supported": true,
+          "market": "Home Team Goals 3.5",
+          "selection": "UNDER",
+          "probability": 98.98,
+          "fairOdds": 1.01
+        },
+        {
+          "label": "Kart Bahisleri",
+          "supported": true,
+          "market": "Toplam Kart 4.5",
+          "selection": "UNDER",
+          "probability": 94.73,
+          "fairOdds": 1.06,
+          "isEstimate": true
+        },
+        {
+          "label": "Korner Alt/Üst",
+          "supported": true,
+          "market": "Toplam Korner 9.5",
+          "selection": "OVER",
+          "probability": 72.73,
+          "fairOdds": 1.37,
+          "isEstimate": true
+        },
+        {
+          "label": "Oyuncu Golü (kim gol atar)",
+          "supported": true,
+          "market": "Oyuncu Golü (Kim Gol Atar)",
+          "selection": "Mateo Pellegrino",
+          "probability": 56.33,
+          "fairOdds": 1.78,
+          "isEstimate": true
+        },
+        {
+          "label": "Devre/Maç",
+          "supported": true,
+          "market": "Devre/Maç",
+          "selection": "DRAW/AWAY",
+          "probability": 19.16,
+          "fairOdds": 5.22,
+          "isEstimate": true
+        },
+        {
+          "label": "Doğru Skor",
+          "supported": true,
+          "market": "Correct Score",
+          "selection": "0-1",
+          "probability": 13.7,
+          "fairOdds": 7.3
+        },
+        {
+          "label": "Ofsayt Alt/Üst",
+          "supported": false,
+          "unsupportedReason": "En az üç iç/dış saha maçında ofsayt istatistiği birikmesi gerekiyor."
+        },
+        {
+          "label": "Şut Alt/Üst",
+          "supported": true,
+          "market": "Toplam İsabetli Şut 8.5",
+          "selection": "OVER",
+          "probability": 82.19,
+          "fairOdds": 1.22,
+          "isEstimate": true
+        }
+      ],
+      "awayTeamLogo": "https://media.api-sports.io/football/teams/895.png",
+      "homeProbability": 19.277539446055396,
+      "drawProbability": 23.463582441755825,
+      "awayProbability": 57.258878112188796,
+      "predictedOutcome": "AWAY",
+      "predictedProbability": 57.258878112188796,
+      "confidenceScore": 91.85,
+      "confidenceLevel": "VERY_HIGH",
+      "productionCandidateType": "REVIEW_AWAY",
+      "productionScore": 82.19,
+      "dataQualityScore": 100,
+      "probabilityGap": 33.8,
+      "fairOdds": 1.75,
+      "leagueMatches": 500,
+      "homeVenueMatches": 20,
+      "awayVenueMatches": 20,
+      "drawAuditWouldApply": false,
+      "mlFallback": false,
+      "productionModelName": "v1.0-20-80",
+      "topPicksModelName": "historical-reliability-top-picks",
+      "topPicksModelVersion": "v1.1-diversified",
+      "selectionPolicyVersion": "selection-policy-v2",
+      "expectedHomeGoals": 0.8284,
+      "expectedAwayGoals": 1.6807,
+      "popularPicks": [
+        {
+          "rank": 1,
+          "key": "match_result_away",
+          "category": "MATCH_RESULT",
+          "market": "Match Result",
+          "selection": "AWAY",
+          "probability": 57.26,
+          "fairOdds": 1.75,
+          "reliabilityScore": 55.45,
+          "pickScore": 73.81,
+          "historicalHitRate": 31.94,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 31.94,
+          "thresholdSamples": 2367,
+          "tier": "LOW",
+          "reasons": [
+            "Historical prediction-to-outcome calibration is strong.",
+            "Supported by a large historical sample."
+          ]
+        },
+        {
+          "rank": 2,
+          "key": "double_chance_12",
+          "category": "DOUBLE_CHANCE",
+          "market": "Double Chance",
+          "selection": "12",
+          "probability": 76.54,
+          "fairOdds": 1.31,
+          "reliabilityScore": 77.39,
+          "pickScore": 75.68,
+          "historicalHitRate": 77.06,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 77.14,
+          "thresholdSamples": 2266,
+          "tier": "HIGH",
+          "reasons": [
+            "The model probability is high.",
+            "Supported by a large historical sample."
+          ]
+        }
+      ],
+      "topPicks": [
+        {
+          "rank": 1,
+          "key": "away_team_goals_under_2.5",
+          "category": "TEAM_GOALS",
+          "market": "Away Team Goals 2.5",
+          "selection": "UNDER",
+          "probability": 76.37,
+          "fairOdds": 1.31,
+          "reliabilityScore": 86.84,
+          "pickScore": 84.62,
+          "historicalHitRate": 85.59,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 86.86,
+          "thresholdSamples": 2177,
+          "tier": "VERY_HIGH",
+          "reasons": [
+            "The model probability is high.",
+            "Historical prediction-to-outcome calibration is strong.",
+            "Supported by a large historical sample.",
+            "Benzer güven seviyesinde tarihsel başarı %86.86."
+          ]
+        },
+        {
+          "rank": 2,
+          "key": "double_chance_12",
+          "category": "DOUBLE_CHANCE",
+          "market": "Double Chance",
+          "selection": "12",
+          "probability": 76.54,
+          "fairOdds": 1.31,
+          "reliabilityScore": 77.39,
+          "pickScore": 80.44,
+          "historicalHitRate": 77.06,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 77.14,
+          "thresholdSamples": 2266,
+          "tier": "HIGH",
+          "reasons": [
+            "The model probability is high.",
+            "Supported by a large historical sample."
+          ]
+        },
+        {
+          "rank": 3,
+          "key": "total_goals_over_1.5",
+          "category": "TOTAL_GOALS",
+          "market": "Total Goals 1.5",
+          "selection": "OVER",
+          "probability": 71.41,
+          "fairOdds": 1.4,
+          "reliabilityScore": 77.22,
+          "pickScore": 78.31,
+          "historicalHitRate": 77.02,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 77.18,
+          "thresholdSamples": 1832,
+          "tier": "HIGH",
+          "reasons": [
+            "The model probability is high.",
+            "Supported by a large historical sample."
+          ]
+        },
+        {
+          "rank": 4,
+          "key": "away_win_to_nil_no",
+          "category": "WIN_TO_NIL",
+          "market": "Away Win To Nil",
+          "selection": "NO",
+          "probability": 64.47,
+          "fairOdds": 1.55,
+          "reliabilityScore": 82.05,
+          "pickScore": 77.71,
+          "historicalHitRate": 82.59,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 82.59,
+          "thresholdSamples": 2367,
+          "tier": "HIGH",
+          "reasons": [
+            "Supported by a large historical sample.",
+            "Benzer güven seviyesinde tarihsel başarı %82.59."
+          ]
+        },
+        {
+          "rank": 5,
+          "key": "total_goals_under_3.5",
+          "category": "TOTAL_GOALS",
+          "market": "Total Goals 3.5",
+          "selection": "UNDER",
+          "probability": 75.7,
+          "fairOdds": 1.32,
+          "reliabilityScore": 70.82,
+          "pickScore": 77.15,
+          "historicalHitRate": 66.96,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 70.22,
+          "thresholdSamples": 1192,
+          "tier": "MEDIUM",
+          "reasons": [
+            "The model probability is high.",
+            "Supported by a large historical sample."
+          ]
+        },
+        {
+          "rank": 6,
+          "key": "dnb_away",
+          "category": "DRAW_NO_BET",
+          "market": "Draw No Bet",
+          "selection": "AWAY",
+          "probability": 74.81,
+          "fairOdds": 1.34,
+          "reliabilityScore": 62.55,
+          "pickScore": 73.07,
+          "historicalHitRate": 41.45,
+          "historicalSamples": 1824,
+          "thresholdHitRate": 77.1,
+          "thresholdSamples": 131,
+          "tier": "MEDIUM",
+          "reasons": [
+            "The model probability is high.",
+            "Historical prediction-to-outcome calibration is strong."
+          ]
+        },
+        {
+          "rank": 7,
+          "key": "home_team_goals_under_1.5",
+          "category": "TEAM_GOALS",
+          "market": "Home Team Goals 1.5",
+          "selection": "UNDER",
+          "probability": 79.86,
+          "fairOdds": 1.25,
+          "reliabilityScore": 57.95,
+          "pickScore": 73.02,
+          "historicalHitRate": 53.82,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 66.78,
+          "thresholdSamples": 295,
+          "tier": "LOW",
+          "reasons": [
+            "The model probability is high."
+          ]
+        }
+      ],
+      "marketCount": 64,
+      "homeRating": 43.17,
+      "awayRating": 66.19,
+      "homeAttack": 17.38,
+      "awayAttack": 38.44,
+      "homeDefense": 51.24,
+      "awayDefense": 75.67,
+      "homeForm": 35.01,
+      "awayForm": 66.8,
+      "homeFitness": 100,
+      "awayFitness": 100,
+      "ratingDifference": -23.02,
+      "ratingEdge": "STRONG_AWAY",
+      "warnings": [
+        "Bazı feature değerleri eksiktir. Ev sahibi: 6, deplasman: 6.",
+        "Bu v0.1 olasılık modeli henüz geçmiş sonuçlarla kalibre edilmemiştir.",
+        "Kalibrasyon örnek sayısı sınırlıdır; düzeltilmiş yüzdeler dikkatli yorumlanmalıdır.",
+        "708 eksik feature değeri ZERO yöntemiyle dolduruldu.",
+        "Production 1X2: %20 doÄŸrulanmÄ±ÅŸ ML + %80 Poisson kullanÄ±ldÄ±.",
+        "DRAW Decision Layer production override yapmaz; yalnÄ±z audit sinyalidir.",
+        "Experimental DRAW audit: minimum DRAW %23, maximum gap 14, wouldApply=NO.",
+        "Production confidence: 91.85/100, VERY_HIGH.",
+        "Kalibrasyon ve rating hattÄ± legacy/audit amacÄ±yla korunur; final olasÄ±lÄ±ÄŸÄ± deÄŸiÅŸtirmez.",
+        "TakÄ±mlardan en az biri iÃ§in Rating Engine xG kategorisi eksik.",
+        "Confidence: Poisson historical veri kapsamı yeterli seviyededir.",
+        "Confidence: 1X2 ayrışması güçlü: 33.8 puan.",
+        "Match Result, Double Chance, and Draw No Bet were updated with the final Prediction Engine V2 probabilities.",
+        "Instead of the requested 50 picks, 10 distinct and sufficiently reliable picks were found. No weaker selections were added just to fill the list.",
+        "Instead of the requested 10 picks, 7 distinct and sufficiently reliable picks were found. No weaker selections were added just to fill the list."
+      ],
+      "settlementStatus": "PENDING",
+      "finalHomeScore": null,
+      "finalAwayScore": null
+    },
+    {
+      "matchId": 8616,
+      "kickoffAt": "2026-10-18T13:00:00.000Z",
+      "dataMode": "LIVE",
+      "leagueApiId": 39,
+      "leagueName": "Premier League",
+      "homeTeam": "Brighton",
+      "awayTeam": "Crystal Palace",
+      "homeTeamLogo": "https://media.api-sports.io/football/teams/51.png",
+      "homeRecentResults": [
+        "D",
+        "W",
+        "W",
+        "L",
+        "D"
+      ],
+      "awayRecentResults": [
+        "L",
+        "L",
+        "W"
+      ],
+      "popularMarketsSummary": [
+        {
+          "label": "Maç Sonucu (1X2)",
+          "supported": true,
+          "market": "Match Result",
+          "selection": "HOME",
+          "probability": 54.27,
+          "fairOdds": 1.84
+        },
+        {
+          "label": "Çifte Şans (1X, X2, 12)",
+          "supported": true,
+          "market": "Double Chance",
+          "selection": "1X",
+          "probability": 77.76,
+          "fairOdds": 1.29
+        },
+        {
+          "label": "2.5 Gol Alt/Üst",
+          "supported": true,
+          "market": "Total Goals 2.5",
+          "selection": "OVER",
+          "probability": 52.15,
+          "fairOdds": 1.92
+        },
+        {
+          "label": "Karşılıklı Gol (KG / BTTS)",
+          "supported": true,
+          "market": "Both Teams To Score",
+          "selection": "YES",
+          "probability": 53.51,
+          "fairOdds": 1.87
+        },
+        {
+          "label": "Asya Handikap",
+          "supported": true,
+          "market": "Asian Handicap (Home +1.5)",
+          "selection": "HOME",
+          "probability": 91.22,
+          "fairOdds": 1.1
+        },
+        {
+          "label": "Toplam Gol",
+          "supported": true,
+          "market": "Total Goals 5.5",
+          "selection": "UNDER",
+          "probability": 93.97,
+          "fairOdds": 1.06
+        },
+        {
+          "label": "İlk Yarı Sonucu",
+          "supported": true,
+          "market": "İlk Yarı Sonucu",
+          "selection": "DRAW",
+          "probability": 40.36,
+          "fairOdds": 2.48,
+          "isEstimate": true
+        },
+        {
+          "label": "Takım Golü Alt/Üst",
+          "supported": true,
+          "market": "Away Team Goals 3.5",
+          "selection": "UNDER",
+          "probability": 97.7,
+          "fairOdds": 1.02
+        },
+        {
+          "label": "Kart Bahisleri",
+          "supported": true,
+          "market": "Toplam Kart 4.5",
+          "selection": "UNDER",
+          "probability": 75.65,
+          "fairOdds": 1.32,
+          "isEstimate": true
+        },
+        {
+          "label": "Korner Alt/Üst",
+          "supported": true,
+          "market": "Toplam Korner 9.5",
+          "selection": "UNDER",
+          "probability": 79.52,
+          "fairOdds": 1.26,
+          "isEstimate": true
+        },
+        {
+          "label": "Oyuncu Golü (kim gol atar)",
+          "supported": true,
+          "market": "Oyuncu Golü (Kim Gol Atar)",
+          "selection": "T. Mitchell",
+          "probability": 50.76,
+          "fairOdds": 1.97,
+          "isEstimate": true
+        },
+        {
+          "label": "Devre/Maç",
+          "supported": true,
+          "market": "Devre/Maç",
+          "selection": "DRAW/HOME",
+          "probability": 17.11,
+          "fairOdds": 5.84,
+          "isEstimate": true
+        },
+        {
+          "label": "Doğru Skor",
+          "supported": true,
+          "market": "Correct Score",
+          "selection": "1-1",
+          "probability": 11.41,
+          "fairOdds": 8.76
+        },
+        {
+          "label": "Ofsayt Alt/Üst",
+          "supported": false,
+          "unsupportedReason": "En az üç iç/dış saha maçında ofsayt istatistiği birikmesi gerekiyor."
+        },
+        {
+          "label": "Şut Alt/Üst",
+          "supported": true,
+          "market": "Toplam İsabetli Şut 8.5",
+          "selection": "OVER",
+          "probability": 54.43,
+          "fairOdds": 1.84,
+          "isEstimate": true
+        }
+      ],
+      "awayTeamLogo": "https://media.api-sports.io/football/teams/52.png",
+      "homeProbability": 54.27000000000001,
+      "drawProbability": 23.491999999999997,
+      "awayProbability": 22.238,
+      "predictedOutcome": "HOME",
+      "predictedProbability": 54.27000000000001,
+      "confidenceScore": 87.2,
+      "confidenceLevel": "VERY_HIGH",
+      "productionCandidateType": "PRIMARY_HOME",
+      "productionScore": 79.51,
+      "dataQualityScore": 100,
+      "probabilityGap": 30.78,
+      "fairOdds": 1.84,
+      "leagueMatches": 500,
+      "homeVenueMatches": 20,
+      "awayVenueMatches": 20,
+      "drawAuditWouldApply": false,
+      "mlFallback": false,
+      "productionModelName": "v1.0-20-80",
+      "topPicksModelName": "historical-reliability-top-picks",
+      "topPicksModelVersion": "v1.1-diversified",
+      "selectionPolicyVersion": "selection-policy-v2",
+      "expectedHomeGoals": 1.7036,
+      "expectedAwayGoals": 1.0628,
+      "popularPicks": [
+        {
+          "rank": 1,
+          "key": "match_result_home",
+          "category": "MATCH_RESULT",
+          "market": "Match Result",
+          "selection": "HOME",
+          "probability": 54.27,
+          "fairOdds": 1.84,
+          "reliabilityScore": 58.3,
+          "pickScore": 73.77,
+          "historicalHitRate": 45.12,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 45.12,
+          "thresholdSamples": 2367,
+          "tier": "LOW",
+          "reasons": [
+            "Supported by a large historical sample."
+          ]
+        },
+        {
+          "rank": 2,
+          "key": "double_chance_1x",
+          "category": "DOUBLE_CHANCE",
+          "market": "Double Chance",
+          "selection": "1X",
+          "probability": 77.76,
+          "fairOdds": 1.29,
+          "reliabilityScore": 76.68,
+          "pickScore": 75.83,
+          "historicalHitRate": 68.06,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 74.39,
+          "thresholdSamples": 1222,
+          "tier": "HIGH",
+          "reasons": [
+            "The model probability is high.",
+            "Historical prediction-to-outcome calibration is strong.",
+            "Supported by a large historical sample."
+          ]
+        }
+      ],
+      "topPicks": [
+        {
+          "rank": 1,
+          "key": "home_team_goals_under_2.5",
+          "category": "TEAM_GOALS",
+          "market": "Home Team Goals 2.5",
+          "selection": "UNDER",
+          "probability": 75.77,
+          "fairOdds": 1.32,
+          "reliabilityScore": 79.11,
+          "pickScore": 80.91,
+          "historicalHitRate": 78.07,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 79.37,
+          "thresholdSamples": 1953,
+          "tier": "HIGH",
+          "reasons": [
+            "The model probability is high.",
+            "Historical prediction-to-outcome calibration is strong.",
+            "Supported by a large historical sample."
+          ]
+        },
+        {
+          "rank": 2,
+          "key": "double_chance_1x",
+          "category": "DOUBLE_CHANCE",
+          "market": "Double Chance",
+          "selection": "1X",
+          "probability": 77.76,
+          "fairOdds": 1.29,
+          "reliabilityScore": 76.68,
+          "pickScore": 80.61,
+          "historicalHitRate": 68.06,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 74.39,
+          "thresholdSamples": 1222,
+          "tier": "HIGH",
+          "reasons": [
+            "The model probability is high.",
+            "Historical prediction-to-outcome calibration is strong.",
+            "Supported by a large historical sample."
+          ]
+        },
+        {
+          "rank": 3,
+          "key": "total_goals_over_1.5",
+          "category": "TOTAL_GOALS",
+          "market": "Total Goals 1.5",
+          "selection": "OVER",
+          "probability": 76.27,
+          "fairOdds": 1.31,
+          "reliabilityScore": 77.22,
+          "pickScore": 80.26,
+          "historicalHitRate": 77.02,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 77.18,
+          "thresholdSamples": 1832,
+          "tier": "HIGH",
+          "reasons": [
+            "The model probability is high.",
+            "Supported by a large historical sample."
+          ]
+        },
+        {
+          "rank": 4,
+          "key": "home_win_to_nil_no",
+          "category": "WIN_TO_NIL",
+          "market": "Home Win To Nil",
+          "selection": "NO",
+          "probability": 71.75,
+          "fairOdds": 1.39,
+          "reliabilityScore": 79.58,
+          "pickScore": 79.51,
+          "historicalHitRate": 76.38,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 78.24,
+          "thresholdSamples": 1834,
+          "tier": "HIGH",
+          "reasons": [
+            "The model probability is high.",
+            "Historical prediction-to-outcome calibration is strong.",
+            "Supported by a large historical sample."
+          ]
+        },
+        {
+          "rank": 5,
+          "key": "away_team_goals_under_1.5",
+          "category": "TEAM_GOALS",
+          "market": "Away Team Goals 1.5",
+          "selection": "UNDER",
+          "probability": 71.28,
+          "fairOdds": 1.4,
+          "reliabilityScore": 70.04,
+          "pickScore": 75.03,
+          "historicalHitRate": 63.46,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 68.88,
+          "thresholdSamples": 903,
+          "tier": "MEDIUM",
+          "reasons": [
+            "The model probability is high.",
+            "Historical prediction-to-outcome calibration is strong.",
+            "Supported by a large historical sample."
+          ]
+        },
+        {
+          "rank": 6,
+          "key": "total_goals_under_3.5",
+          "category": "TOTAL_GOALS",
+          "market": "Total Goals 3.5",
+          "selection": "UNDER",
+          "probability": 70.08,
+          "fairOdds": 1.43,
+          "reliabilityScore": 70.82,
+          "pickScore": 74.9,
+          "historicalHitRate": 66.96,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 70.22,
+          "thresholdSamples": 1192,
+          "tier": "MEDIUM",
+          "reasons": [
+            "The model probability is high.",
+            "Supported by a large historical sample."
+          ]
+        },
+        {
+          "rank": 7,
+          "key": "away_team_goals_over_0.5",
+          "category": "TEAM_GOALS",
+          "market": "Away Team Goals 0.5",
+          "selection": "OVER",
+          "probability": 65.45,
+          "fairOdds": 1.53,
+          "reliabilityScore": 74.09,
+          "pickScore": 74.52,
+          "historicalHitRate": 70.3,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 70.3,
+          "thresholdSamples": 2367,
+          "tier": "MEDIUM",
+          "reasons": [
+            "Historical prediction-to-outcome calibration is strong.",
+            "Supported by a large historical sample."
+          ]
+        },
+        {
+          "rank": 8,
+          "key": "dnb_home",
+          "category": "DRAW_NO_BET",
+          "market": "Draw No Bet",
+          "selection": "HOME",
+          "probability": 70.93,
+          "fairOdds": 1.41,
+          "reliabilityScore": 64.49,
+          "pickScore": 72.39,
+          "historicalHitRate": 58.55,
+          "historicalSamples": 1824,
+          "thresholdHitRate": 70.48,
+          "thresholdSamples": 481,
+          "tier": "MEDIUM",
+          "reasons": [
+            "The model probability is high.",
+            "Historical prediction-to-outcome calibration is strong."
+          ]
+        }
+      ],
+      "marketCount": 64,
+      "homeRating": 61.79,
+      "awayRating": 42.51,
+      "homeAttack": 50.38,
+      "awayAttack": 27.38,
+      "homeDefense": 69.38,
+      "awayDefense": 43.14,
+      "homeForm": 50.99,
+      "awayForm": 40.1,
+      "homeFitness": 100,
+      "awayFitness": 100,
+      "ratingDifference": 19.28,
+      "ratingEdge": "STRONG_HOME",
+      "warnings": [
+        "Bazı feature değerleri eksiktir. Ev sahibi: 6, deplasman: 6.",
+        "Bu v0.1 olasılık modeli henüz geçmiş sonuçlarla kalibre edilmemiştir.",
+        "Kalibrasyon örnek sayısı sınırlıdır; düzeltilmiş yüzdeler dikkatli yorumlanmalıdır.",
+        "708 eksik feature değeri ZERO yöntemiyle dolduruldu.",
+        "Production 1X2: %20 doÄŸrulanmÄ±ÅŸ ML + %80 Poisson kullanÄ±ldÄ±.",
+        "DRAW Decision Layer production override yapmaz; yalnÄ±z audit sinyalidir.",
+        "Experimental DRAW audit: minimum DRAW %23, maximum gap 14, wouldApply=NO.",
+        "Production confidence: 87.2/100, VERY_HIGH.",
+        "Kalibrasyon ve rating hattÄ± legacy/audit amacÄ±yla korunur; final olasÄ±lÄ±ÄŸÄ± deÄŸiÅŸtirmez.",
+        "TakÄ±mlardan en az biri iÃ§in Rating Engine xG kategorisi eksik.",
+        "Confidence: Poisson historical veri kapsamı yeterli seviyededir.",
+        "Confidence: 1X2 ayrışması güçlü: 30.78 puan.",
+        "Match Result, Double Chance, and Draw No Bet were updated with the final Prediction Engine V2 probabilities.",
+        "Instead of the requested 50 picks, 10 distinct and sufficiently reliable picks were found. No weaker selections were added just to fill the list.",
+        "Instead of the requested 10 picks, 8 distinct and sufficiently reliable picks were found. No weaker selections were added just to fill the list."
+      ],
+      "settlementStatus": "PENDING",
+      "finalHomeScore": null,
+      "finalAwayScore": null
+    },
     {
       "matchId": 9374,
       "kickoffAt": "2026-10-18T12:00:00.000Z",
@@ -406,6 +2347,1221 @@
         "Match Result, Double Chance, and Draw No Bet were updated with the final Prediction Engine V2 probabilities.",
         "Instead of the requested 50 picks, 10 distinct and sufficiently reliable picks were found. No weaker selections were added just to fill the list.",
         "Instead of the requested 10 picks, 8 distinct and sufficiently reliable picks were found. No weaker selections were added just to fill the list."
+      ],
+      "settlementStatus": "PENDING",
+      "finalHomeScore": null,
+      "finalAwayScore": null
+    },
+    {
+      "matchId": 9373,
+      "kickoffAt": "2026-10-18T12:00:00.000Z",
+      "dataMode": "LIVE",
+      "leagueApiId": 203,
+      "leagueName": "Süper Lig",
+      "homeTeam": "Başakşehir",
+      "awayTeam": "Gaziantep FK",
+      "homeTeamLogo": "https://media.api-sports.io/football/teams/564.png",
+      "homeRecentResults": [
+        "L",
+        "W",
+        "L",
+        "D",
+        "L"
+      ],
+      "awayRecentResults": [
+        "D",
+        "W",
+        "L"
+      ],
+      "popularMarketsSummary": [
+        {
+          "label": "Maç Sonucu (1X2)",
+          "supported": true,
+          "market": "Match Result",
+          "selection": "HOME",
+          "probability": 57.95,
+          "fairOdds": 1.73
+        },
+        {
+          "label": "Çifte Şans (1X, X2, 12)",
+          "supported": true,
+          "market": "Double Chance",
+          "selection": "1X",
+          "probability": 79.71,
+          "fairOdds": 1.25
+        },
+        {
+          "label": "2.5 Gol Alt/Üst",
+          "supported": true,
+          "market": "Total Goals 2.5",
+          "selection": "OVER",
+          "probability": 59.02,
+          "fairOdds": 1.69
+        },
+        {
+          "label": "Karşılıklı Gol (KG / BTTS)",
+          "supported": true,
+          "market": "Both Teams To Score",
+          "selection": "YES",
+          "probability": 56.42,
+          "fairOdds": 1.77
+        },
+        {
+          "label": "Asya Handikap",
+          "supported": true,
+          "market": "Asian Handicap (Home +1.5)",
+          "selection": "HOME",
+          "probability": 93.06,
+          "fairOdds": 1.07
+        },
+        {
+          "label": "Toplam Gol",
+          "supported": true,
+          "market": "Total Goals 0.5",
+          "selection": "OVER",
+          "probability": 95.33,
+          "fairOdds": 1.05
+        },
+        {
+          "label": "İlk Yarı Sonucu",
+          "supported": true,
+          "market": "İlk Yarı Sonucu",
+          "selection": "HOME",
+          "probability": 44.33,
+          "fairOdds": 2.26,
+          "isEstimate": true
+        },
+        {
+          "label": "Takım Golü Alt/Üst",
+          "supported": true,
+          "market": "Away Team Goals 3.5",
+          "selection": "UNDER",
+          "probability": 97.76,
+          "fairOdds": 1.02
+        },
+        {
+          "label": "Kart Bahisleri",
+          "supported": true,
+          "market": "Toplam Kart 4.5",
+          "selection": "UNDER",
+          "probability": 62.88,
+          "fairOdds": 1.59,
+          "isEstimate": true
+        },
+        {
+          "label": "Korner Alt/Üst",
+          "supported": true,
+          "market": "Toplam Korner 9.5",
+          "selection": "UNDER",
+          "probability": 50.03,
+          "fairOdds": 2,
+          "isEstimate": true
+        },
+        {
+          "label": "Oyuncu Golü (kim gol atar)",
+          "supported": true,
+          "market": "Oyuncu Golü (Kim Gol Atar)",
+          "selection": "E. Shomurodov",
+          "probability": 80.06,
+          "fairOdds": 1.25,
+          "isEstimate": true
+        },
+        {
+          "label": "Devre/Maç",
+          "supported": true,
+          "market": "Devre/Maç",
+          "selection": "HOME/HOME",
+          "probability": 21.41,
+          "fairOdds": 4.67,
+          "isEstimate": true
+        },
+        {
+          "label": "Doğru Skor",
+          "supported": true,
+          "market": "Correct Score",
+          "selection": "2-1",
+          "probability": 9.99,
+          "fairOdds": 10.01
+        },
+        {
+          "label": "Ofsayt Alt/Üst",
+          "supported": true,
+          "market": "Toplam Ofsayt 3.5",
+          "selection": "OVER",
+          "probability": 68.5,
+          "fairOdds": 1.46,
+          "isEstimate": true
+        },
+        {
+          "label": "Şut Alt/Üst",
+          "supported": true,
+          "market": "Toplam İsabetli Şut 8.5",
+          "selection": "UNDER",
+          "probability": 72.91,
+          "fairOdds": 1.37,
+          "isEstimate": true
+        }
+      ],
+      "awayTeamLogo": "https://media.api-sports.io/football/teams/3573.png",
+      "homeProbability": 57.946,
+      "drawProbability": 21.766000000000005,
+      "awayProbability": 20.288000000000004,
+      "predictedOutcome": "HOME",
+      "predictedProbability": 57.946,
+      "confidenceScore": 93.43,
+      "confidenceLevel": "VERY_HIGH",
+      "productionCandidateType": "PRIMARY_HOME",
+      "productionScore": 82.98,
+      "dataQualityScore": 100,
+      "probabilityGap": 36.18,
+      "fairOdds": 1.73,
+      "leagueMatches": 500,
+      "homeVenueMatches": 20,
+      "awayVenueMatches": 20,
+      "drawAuditWouldApply": false,
+      "mlFallback": false,
+      "productionModelName": "v1.0-20-80",
+      "topPicksModelName": "historical-reliability-top-picks",
+      "topPicksModelVersion": "v1.1-diversified",
+      "selectionPolicyVersion": "selection-policy-v2",
+      "expectedHomeGoals": 2.0155,
+      "expectedAwayGoals": 1.0539,
+      "popularPicks": [
+        {
+          "rank": 1,
+          "key": "match_result_home",
+          "category": "MATCH_RESULT",
+          "market": "Match Result",
+          "selection": "HOME",
+          "probability": 57.95,
+          "fairOdds": 1.73,
+          "reliabilityScore": 58.3,
+          "pickScore": 74.88,
+          "historicalHitRate": 45.12,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 45.12,
+          "thresholdSamples": 2367,
+          "tier": "LOW",
+          "reasons": [
+            "Supported by a large historical sample."
+          ]
+        },
+        {
+          "rank": 2,
+          "key": "double_chance_1x",
+          "category": "DOUBLE_CHANCE",
+          "market": "Double Chance",
+          "selection": "1X",
+          "probability": 79.71,
+          "fairOdds": 1.25,
+          "reliabilityScore": 76.68,
+          "pickScore": 76.42,
+          "historicalHitRate": 68.06,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 74.39,
+          "thresholdSamples": 1222,
+          "tier": "HIGH",
+          "reasons": [
+            "The model probability is high.",
+            "Historical prediction-to-outcome calibration is strong.",
+            "Supported by a large historical sample."
+          ]
+        }
+      ],
+      "topPicks": [
+        {
+          "rank": 1,
+          "key": "double_chance_1x",
+          "category": "DOUBLE_CHANCE",
+          "market": "Double Chance",
+          "selection": "1X",
+          "probability": 79.71,
+          "fairOdds": 1.25,
+          "reliabilityScore": 76.68,
+          "pickScore": 81.39,
+          "historicalHitRate": 68.06,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 74.39,
+          "thresholdSamples": 1222,
+          "tier": "HIGH",
+          "reasons": [
+            "The model probability is high.",
+            "Historical prediction-to-outcome calibration is strong.",
+            "Supported by a large historical sample."
+          ]
+        },
+        {
+          "rank": 2,
+          "key": "home_win_to_nil_no",
+          "category": "WIN_TO_NIL",
+          "market": "Home Win To Nil",
+          "selection": "NO",
+          "probability": 69.81,
+          "fairOdds": 1.43,
+          "reliabilityScore": 78.65,
+          "pickScore": 78.32,
+          "historicalHitRate": 76.38,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 76.38,
+          "thresholdSamples": 2367,
+          "tier": "HIGH",
+          "reasons": [
+            "Historical prediction-to-outcome calibration is strong.",
+            "Supported by a large historical sample."
+          ]
+        },
+        {
+          "rank": 3,
+          "key": "home_team_goals_under_2.5",
+          "category": "TEAM_GOALS",
+          "market": "Home Team Goals 2.5",
+          "selection": "UNDER",
+          "probability": 67.57,
+          "fairOdds": 1.48,
+          "reliabilityScore": 78.46,
+          "pickScore": 77.33,
+          "historicalHitRate": 78.07,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 78.07,
+          "thresholdSamples": 2367,
+          "tier": "HIGH",
+          "reasons": [
+            "Historical prediction-to-outcome calibration is strong.",
+            "Supported by a large historical sample."
+          ]
+        },
+        {
+          "rank": 4,
+          "key": "away_team_goals_under_1.5",
+          "category": "TEAM_GOALS",
+          "market": "Away Team Goals 1.5",
+          "selection": "UNDER",
+          "probability": 71.6,
+          "fairOdds": 1.4,
+          "reliabilityScore": 70.04,
+          "pickScore": 75.16,
+          "historicalHitRate": 63.46,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 68.88,
+          "thresholdSamples": 903,
+          "tier": "MEDIUM",
+          "reasons": [
+            "The model probability is high.",
+            "Historical prediction-to-outcome calibration is strong.",
+            "Supported by a large historical sample."
+          ]
+        },
+        {
+          "rank": 5,
+          "key": "away_team_goals_over_0.5",
+          "category": "TEAM_GOALS",
+          "market": "Away Team Goals 0.5",
+          "selection": "OVER",
+          "probability": 65.14,
+          "fairOdds": 1.54,
+          "reliabilityScore": 74.09,
+          "pickScore": 74.4,
+          "historicalHitRate": 70.3,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 70.3,
+          "thresholdSamples": 2367,
+          "tier": "MEDIUM",
+          "reasons": [
+            "Historical prediction-to-outcome calibration is strong.",
+            "Supported by a large historical sample."
+          ]
+        },
+        {
+          "rank": 6,
+          "key": "dnb_home",
+          "category": "DRAW_NO_BET",
+          "market": "Draw No Bet",
+          "selection": "HOME",
+          "probability": 74.07,
+          "fairOdds": 1.35,
+          "reliabilityScore": 64.49,
+          "pickScore": 73.65,
+          "historicalHitRate": 58.55,
+          "historicalSamples": 1824,
+          "thresholdHitRate": 70.48,
+          "thresholdSamples": 481,
+          "tier": "MEDIUM",
+          "reasons": [
+            "The model probability is high.",
+            "Historical prediction-to-outcome calibration is strong."
+          ]
+        },
+        {
+          "rank": 7,
+          "key": "total_goals_under_3.5",
+          "category": "TOTAL_GOALS",
+          "market": "Total Goals 3.5",
+          "selection": "UNDER",
+          "probability": 63.48,
+          "fairOdds": 1.58,
+          "reliabilityScore": 69.18,
+          "pickScore": 71.53,
+          "historicalHitRate": 66.96,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 66.96,
+          "thresholdSamples": 2367,
+          "tier": "MEDIUM",
+          "reasons": [
+            "Supported by a large historical sample."
+          ]
+        }
+      ],
+      "marketCount": 64,
+      "homeRating": 51.91,
+      "awayRating": 41.65,
+      "homeAttack": 31.75,
+      "awayAttack": 22.81,
+      "homeDefense": 57.52,
+      "awayDefense": 55.95,
+      "homeForm": 42.56,
+      "awayForm": 32.37,
+      "homeFitness": 100,
+      "awayFitness": 100,
+      "ratingDifference": 10.26,
+      "ratingEdge": "HOME",
+      "warnings": [
+        "Bazı feature değerleri eksiktir. Ev sahibi: 6, deplasman: 6.",
+        "Bu v0.1 olasılık modeli henüz geçmiş sonuçlarla kalibre edilmemiştir.",
+        "Kalibrasyon örnek sayısı sınırlıdır; düzeltilmiş yüzdeler dikkatli yorumlanmalıdır.",
+        "708 eksik feature değeri ZERO yöntemiyle dolduruldu.",
+        "Production 1X2: %20 doÄŸrulanmÄ±ÅŸ ML + %80 Poisson kullanÄ±ldÄ±.",
+        "DRAW Decision Layer production override yapmaz; yalnÄ±z audit sinyalidir.",
+        "Experimental DRAW audit: minimum DRAW %23, maximum gap 14, wouldApply=NO.",
+        "Production confidence: 93.43/100, VERY_HIGH.",
+        "Kalibrasyon ve rating hattÄ± legacy/audit amacÄ±yla korunur; final olasÄ±lÄ±ÄŸÄ± deÄŸiÅŸtirmez.",
+        "TakÄ±mlardan en az biri iÃ§in Rating Engine xG kategorisi eksik.",
+        "Confidence: Poisson historical veri kapsamı yeterli seviyededir.",
+        "Confidence: 1X2 ayrışması güçlü: 36.18 puan.",
+        "Match Result, Double Chance, and Draw No Bet were updated with the final Prediction Engine V2 probabilities.",
+        "Instead of the requested 50 picks, 9 distinct and sufficiently reliable picks were found. No weaker selections were added just to fill the list.",
+        "Instead of the requested 10 picks, 7 distinct and sufficiently reliable picks were found. No weaker selections were added just to fill the list."
+      ],
+      "settlementStatus": "PENDING",
+      "finalHomeScore": null,
+      "finalAwayScore": null
+    },
+    {
+      "matchId": 9379,
+      "kickoffAt": "2026-10-18T12:00:00.000Z",
+      "dataMode": "LIVE",
+      "leagueApiId": 203,
+      "leagueName": "Süper Lig",
+      "homeTeam": "Amed",
+      "awayTeam": "Konyaspor",
+      "homeTeamLogo": "https://media.api-sports.io/football/teams/3579.png",
+      "homeRecentResults": [
+        "W",
+        "L",
+        "W",
+        "D"
+      ],
+      "awayRecentResults": [
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "popularMarketsSummary": [
+        {
+          "label": "Maç Sonucu (1X2)",
+          "supported": true,
+          "market": "Match Result",
+          "selection": "HOME",
+          "probability": 61.79,
+          "fairOdds": 1.62
+        },
+        {
+          "label": "Çifte Şans (1X, X2, 12)",
+          "supported": true,
+          "market": "Double Chance",
+          "selection": "1X",
+          "probability": 82.44,
+          "fairOdds": 1.21
+        },
+        {
+          "label": "2.5 Gol Alt/Üst",
+          "supported": true,
+          "market": "Total Goals 2.5",
+          "selection": "OVER",
+          "probability": 60.5,
+          "fairOdds": 1.65
+        },
+        {
+          "label": "Karşılıklı Gol (KG / BTTS)",
+          "supported": true,
+          "market": "Both Teams To Score",
+          "selection": "YES",
+          "probability": 56.59,
+          "fairOdds": 1.77
+        },
+        {
+          "label": "Asya Handikap",
+          "supported": true,
+          "market": "Asian Handicap (Home +1.5)",
+          "selection": "HOME",
+          "probability": 93.69,
+          "fairOdds": 1.07
+        },
+        {
+          "label": "Toplam Gol",
+          "supported": true,
+          "market": "Total Goals 0.5",
+          "selection": "OVER",
+          "probability": 95.64,
+          "fairOdds": 1.05
+        },
+        {
+          "label": "İlk Yarı Sonucu",
+          "supported": true,
+          "market": "İlk Yarı Sonucu",
+          "selection": "HOME",
+          "probability": 46,
+          "fairOdds": 2.17,
+          "isEstimate": true
+        },
+        {
+          "label": "Takım Golü Alt/Üst",
+          "supported": true,
+          "market": "Away Team Goals 3.5",
+          "selection": "UNDER",
+          "probability": 97.88,
+          "fairOdds": 1.02
+        },
+        {
+          "label": "Kart Bahisleri",
+          "supported": true,
+          "market": "Toplam Kart 4.5",
+          "selection": "OVER",
+          "probability": 51.46,
+          "fairOdds": 1.94,
+          "isEstimate": true
+        },
+        {
+          "label": "Korner Alt/Üst",
+          "supported": true,
+          "market": "Toplam Korner 9.5",
+          "selection": "UNDER",
+          "probability": 77.64,
+          "fairOdds": 1.29,
+          "isEstimate": true
+        },
+        {
+          "label": "Oyuncu Golü (kim gol atar)",
+          "supported": true,
+          "market": "Oyuncu Golü (Kim Gol Atar)",
+          "selection": "D. Sabia",
+          "probability": 56.89,
+          "fairOdds": 1.76,
+          "isEstimate": true
+        },
+        {
+          "label": "Devre/Maç",
+          "supported": true,
+          "market": "Devre/Maç",
+          "selection": "HOME/HOME",
+          "probability": 23.04,
+          "fairOdds": 4.34,
+          "isEstimate": true
+        },
+        {
+          "label": "Doğru Skor",
+          "supported": true,
+          "market": "Correct Score",
+          "selection": "2-1",
+          "probability": 9.99,
+          "fairOdds": 10.01
+        },
+        {
+          "label": "Ofsayt Alt/Üst",
+          "supported": true,
+          "market": "Toplam Ofsayt 3.5",
+          "selection": "UNDER",
+          "probability": 70.3,
+          "fairOdds": 1.42,
+          "isEstimate": true
+        },
+        {
+          "label": "Şut Alt/Üst",
+          "supported": true,
+          "market": "Toplam İsabetli Şut 8.5",
+          "selection": "UNDER",
+          "probability": 69.6,
+          "fairOdds": 1.44,
+          "isEstimate": true
+        }
+      ],
+      "awayTeamLogo": "https://media.api-sports.io/football/teams/607.png",
+      "homeProbability": 61.794,
+      "drawProbability": 20.650000000000006,
+      "awayProbability": 17.556,
+      "predictedOutcome": "HOME",
+      "predictedProbability": 61.794,
+      "confidenceScore": 76.71,
+      "confidenceLevel": "HIGH",
+      "productionCandidateType": "PRIMARY_HOME",
+      "productionScore": 73.23,
+      "dataQualityScore": 73.75,
+      "probabilityGap": 41.14,
+      "fairOdds": 1.62,
+      "leagueMatches": 500,
+      "homeVenueMatches": 2,
+      "awayVenueMatches": 20,
+      "drawAuditWouldApply": false,
+      "mlFallback": false,
+      "productionModelName": "v1.0-20-80",
+      "topPicksModelName": "historical-reliability-top-picks",
+      "topPicksModelVersion": "v1.1-diversified",
+      "selectionPolicyVersion": "selection-policy-v2",
+      "expectedHomeGoals": 2.1035,
+      "expectedAwayGoals": 1.0361,
+      "popularPicks": [
+        {
+          "rank": 1,
+          "key": "match_result_home",
+          "category": "MATCH_RESULT",
+          "market": "Match Result",
+          "selection": "HOME",
+          "probability": 61.79,
+          "fairOdds": 1.62,
+          "reliabilityScore": 58.3,
+          "pickScore": 76.03,
+          "historicalHitRate": 45.12,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 45.12,
+          "thresholdSamples": 2367,
+          "tier": "LOW",
+          "reasons": [
+            "Supported by a large historical sample."
+          ]
+        },
+        {
+          "rank": 2,
+          "key": "double_chance_12",
+          "category": "DOUBLE_CHANCE",
+          "market": "Double Chance",
+          "selection": "12",
+          "probability": 79.35,
+          "fairOdds": 1.26,
+          "reliabilityScore": 77.39,
+          "pickScore": 76.52,
+          "historicalHitRate": 77.06,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 77.14,
+          "thresholdSamples": 2266,
+          "tier": "HIGH",
+          "reasons": [
+            "The model probability is high.",
+            "Supported by a large historical sample."
+          ]
+        }
+      ],
+      "topPicks": [
+        {
+          "rank": 1,
+          "key": "total_goals_under_4.5",
+          "category": "TOTAL_GOALS",
+          "market": "Total Goals 4.5",
+          "selection": "UNDER",
+          "probability": 79.61,
+          "fairOdds": 1.26,
+          "reliabilityScore": 82.42,
+          "pickScore": 83.93,
+          "historicalHitRate": 82.76,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 82.87,
+          "thresholdSamples": 2183,
+          "tier": "HIGH",
+          "reasons": [
+            "The model probability is high.",
+            "Historical prediction-to-outcome calibration is strong.",
+            "Supported by a large historical sample.",
+            "Benzer güven seviyesinde tarihsel başarı %82.87."
+          ]
+        },
+        {
+          "rank": 2,
+          "key": "double_chance_12",
+          "category": "DOUBLE_CHANCE",
+          "market": "Double Chance",
+          "selection": "12",
+          "probability": 79.35,
+          "fairOdds": 1.26,
+          "reliabilityScore": 77.39,
+          "pickScore": 81.57,
+          "historicalHitRate": 77.06,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 77.14,
+          "thresholdSamples": 2266,
+          "tier": "HIGH",
+          "reasons": [
+            "The model probability is high.",
+            "Supported by a large historical sample."
+          ]
+        },
+        {
+          "rank": 3,
+          "key": "home_win_to_nil_no",
+          "category": "WIN_TO_NIL",
+          "market": "Home Win To Nil",
+          "selection": "NO",
+          "probability": 68.87,
+          "fairOdds": 1.45,
+          "reliabilityScore": 78.65,
+          "pickScore": 77.94,
+          "historicalHitRate": 76.38,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 76.38,
+          "thresholdSamples": 2367,
+          "tier": "HIGH",
+          "reasons": [
+            "Historical prediction-to-outcome calibration is strong.",
+            "Supported by a large historical sample."
+          ]
+        },
+        {
+          "rank": 4,
+          "key": "home_team_goals_under_2.5",
+          "category": "TEAM_GOALS",
+          "market": "Home Team Goals 2.5",
+          "selection": "UNDER",
+          "probability": 65.25,
+          "fairOdds": 1.53,
+          "reliabilityScore": 78.46,
+          "pickScore": 76.4,
+          "historicalHitRate": 78.07,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 78.07,
+          "thresholdSamples": 2367,
+          "tier": "HIGH",
+          "reasons": [
+            "Historical prediction-to-outcome calibration is strong.",
+            "Supported by a large historical sample."
+          ]
+        },
+        {
+          "rank": 5,
+          "key": "away_team_goals_under_1.5",
+          "category": "TEAM_GOALS",
+          "market": "Away Team Goals 1.5",
+          "selection": "UNDER",
+          "probability": 72.26,
+          "fairOdds": 1.38,
+          "reliabilityScore": 70.04,
+          "pickScore": 75.42,
+          "historicalHitRate": 63.46,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 68.88,
+          "thresholdSamples": 903,
+          "tier": "MEDIUM",
+          "reasons": [
+            "The model probability is high.",
+            "Historical prediction-to-outcome calibration is strong.",
+            "Supported by a large historical sample."
+          ]
+        },
+        {
+          "rank": 6,
+          "key": "dnb_home",
+          "category": "DRAW_NO_BET",
+          "market": "Draw No Bet",
+          "selection": "HOME",
+          "probability": 77.88,
+          "fairOdds": 1.28,
+          "reliabilityScore": 64.49,
+          "pickScore": 75.17,
+          "historicalHitRate": 58.55,
+          "historicalSamples": 1824,
+          "thresholdHitRate": 70.48,
+          "thresholdSamples": 481,
+          "tier": "MEDIUM",
+          "reasons": [
+            "The model probability is high.",
+            "Historical prediction-to-outcome calibration is strong."
+          ]
+        },
+        {
+          "rank": 7,
+          "key": "away_team_goals_over_0.5",
+          "category": "TEAM_GOALS",
+          "market": "Away Team Goals 0.5",
+          "selection": "OVER",
+          "probability": 64.51,
+          "fairOdds": 1.55,
+          "reliabilityScore": 74.09,
+          "pickScore": 74.14,
+          "historicalHitRate": 70.3,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 70.3,
+          "thresholdSamples": 2367,
+          "tier": "MEDIUM",
+          "reasons": [
+            "Historical prediction-to-outcome calibration is strong.",
+            "Supported by a large historical sample."
+          ]
+        },
+        {
+          "rank": 8,
+          "key": "total_goals_under_3.5",
+          "category": "TOTAL_GOALS",
+          "market": "Total Goals 3.5",
+          "selection": "UNDER",
+          "probability": 61.97,
+          "fairOdds": 1.61,
+          "reliabilityScore": 69.18,
+          "pickScore": 70.92,
+          "historicalHitRate": 66.96,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 66.96,
+          "thresholdSamples": 2367,
+          "tier": "MEDIUM",
+          "reasons": [
+            "Supported by a large historical sample."
+          ]
+        },
+        {
+          "rank": 9,
+          "key": "match_result_home",
+          "category": "MATCH_RESULT",
+          "market": "Match Result",
+          "selection": "HOME",
+          "probability": 61.79,
+          "fairOdds": 1.62,
+          "reliabilityScore": 58.3,
+          "pickScore": 65.95,
+          "historicalHitRate": 45.12,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 45.12,
+          "thresholdSamples": 2367,
+          "tier": "LOW",
+          "reasons": [
+            "Supported by a large historical sample."
+          ]
+        }
+      ],
+      "marketCount": 64,
+      "homeRating": 62.5,
+      "awayRating": 36.92,
+      "homeAttack": 41.3,
+      "awayAttack": 21.75,
+      "homeDefense": 62.92,
+      "awayDefense": 44.48,
+      "homeForm": 57.56,
+      "awayForm": 22.46,
+      "homeFitness": 100,
+      "awayFitness": 100,
+      "ratingDifference": 25.58,
+      "ratingEdge": "STRONG_HOME",
+      "warnings": [
+        "Ev sahibinin iç saha geçmiş maç sayısı düşük: 2.",
+        "Bazı feature değerleri eksiktir. Ev sahibi: 6, deplasman: 6.",
+        "Bu v0.1 olasılık modeli henüz geçmiş sonuçlarla kalibre edilmemiştir.",
+        "708 eksik feature değeri ZERO yöntemiyle dolduruldu.",
+        "Production 1X2: %20 doÄŸrulanmÄ±ÅŸ ML + %80 Poisson kullanÄ±ldÄ±.",
+        "DRAW Decision Layer production override yapmaz; yalnÄ±z audit sinyalidir.",
+        "Experimental DRAW audit: minimum DRAW %23, maximum gap 14, wouldApply=NO.",
+        "Production confidence: 76.71/100, HIGH.",
+        "Kalibrasyon ve rating hattÄ± legacy/audit amacÄ±yla korunur; final olasÄ±lÄ±ÄŸÄ± deÄŸiÅŸtirmez.",
+        "TakÄ±mlardan en az biri iÃ§in Rating Engine xG kategorisi eksik.",
+        "Confidence: Ev sahibinin iç saha örneklemi çok düşük (2).",
+        "Confidence: 1X2 ayrışması güçlü: 41.14 puan.",
+        "Match Result, Double Chance, and Draw No Bet were updated with the final Prediction Engine V2 probabilities.",
+        "Instead of the requested 50 picks, 10 distinct and sufficiently reliable picks were found. No weaker selections were added just to fill the list.",
+        "Instead of the requested 10 picks, 9 distinct and sufficiently reliable picks were found. No weaker selections were added just to fill the list."
+      ],
+      "settlementStatus": "PENDING",
+      "finalHomeScore": null,
+      "finalAwayScore": null
+    },
+    {
+      "matchId": 9375,
+      "kickoffAt": "2026-10-18T12:00:00.000Z",
+      "dataMode": "LIVE",
+      "leagueApiId": 203,
+      "leagueName": "Süper Lig",
+      "homeTeam": "Gençlerbirliği S.K.",
+      "awayTeam": "Galatasaray",
+      "homeTeamLogo": "https://media.api-sports.io/football/teams/997.png",
+      "homeRecentResults": [
+        "W",
+        "W",
+        "D",
+        "L"
+      ],
+      "awayRecentResults": [
+        "D",
+        "W",
+        "W",
+        "W"
+      ],
+      "popularMarketsSummary": [
+        {
+          "label": "Maç Sonucu (1X2)",
+          "supported": true,
+          "market": "Match Result",
+          "selection": "AWAY",
+          "probability": 58.5,
+          "fairOdds": 1.71
+        },
+        {
+          "label": "Çifte Şans (1X, X2, 12)",
+          "supported": true,
+          "market": "Double Chance",
+          "selection": "X2",
+          "probability": 79.86,
+          "fairOdds": 1.25
+        },
+        {
+          "label": "2.5 Gol Alt/Üst",
+          "supported": true,
+          "market": "Total Goals 2.5",
+          "selection": "OVER",
+          "probability": 55.27,
+          "fairOdds": 1.81
+        },
+        {
+          "label": "Karşılıklı Gol (KG / BTTS)",
+          "supported": true,
+          "market": "Both Teams To Score",
+          "selection": "YES",
+          "probability": 50.79,
+          "fairOdds": 1.97
+        },
+        {
+          "label": "Asya Handikap",
+          "supported": true,
+          "market": "Asian Handicap (Home -1.5)",
+          "selection": "AWAY",
+          "probability": 95.07,
+          "fairOdds": 1.05
+        },
+        {
+          "label": "Toplam Gol",
+          "supported": true,
+          "market": "Total Goals 0.5",
+          "selection": "OVER",
+          "probability": 94.49,
+          "fairOdds": 1.06
+        },
+        {
+          "label": "İlk Yarı Sonucu",
+          "supported": true,
+          "market": "İlk Yarı Sonucu",
+          "selection": "AWAY",
+          "probability": 46.65,
+          "fairOdds": 2.14,
+          "isEstimate": true
+        },
+        {
+          "label": "Takım Golü Alt/Üst",
+          "supported": true,
+          "market": "Home Team Goals 3.5",
+          "selection": "UNDER",
+          "probability": 98.75,
+          "fairOdds": 1.01
+        },
+        {
+          "label": "Kart Bahisleri",
+          "supported": true,
+          "market": "Toplam Kart 4.5",
+          "selection": "UNDER",
+          "probability": 81.53,
+          "fairOdds": 1.23,
+          "isEstimate": true
+        },
+        {
+          "label": "Korner Alt/Üst",
+          "supported": true,
+          "market": "Toplam Korner 9.5",
+          "selection": "UNDER",
+          "probability": 68.52,
+          "fairOdds": 1.46,
+          "isEstimate": true
+        },
+        {
+          "label": "Oyuncu Golü (kim gol atar)",
+          "supported": true,
+          "market": "Oyuncu Golü (Kim Gol Atar)",
+          "selection": "V. Osimhen",
+          "probability": 63.61,
+          "fairOdds": 1.57,
+          "isEstimate": true
+        },
+        {
+          "label": "Devre/Maç",
+          "supported": true,
+          "market": "Devre/Maç",
+          "selection": "AWAY/AWAY",
+          "probability": 23.84,
+          "fairOdds": 4.19,
+          "isEstimate": true
+        },
+        {
+          "label": "Doğru Skor",
+          "supported": true,
+          "market": "Correct Score",
+          "selection": "0-2",
+          "probability": 11.26,
+          "fairOdds": 8.88
+        },
+        {
+          "label": "Ofsayt Alt/Üst",
+          "supported": true,
+          "market": "Toplam Ofsayt 3.5",
+          "selection": "OVER",
+          "probability": 69.81,
+          "fairOdds": 1.43,
+          "isEstimate": true
+        },
+        {
+          "label": "Şut Alt/Üst",
+          "supported": true,
+          "market": "Toplam İsabetli Şut 8.5",
+          "selection": "OVER",
+          "probability": 87.51,
+          "fairOdds": 1.14,
+          "isEstimate": true
+        }
+      ],
+      "awayTeamLogo": "https://media.api-sports.io/football/teams/645.png",
+      "homeProbability": 20.142,
+      "drawProbability": 21.356,
+      "awayProbability": 58.501999999999995,
+      "predictedOutcome": "AWAY",
+      "predictedProbability": 58.501999999999995,
+      "confidenceScore": 93.73,
+      "confidenceLevel": "VERY_HIGH",
+      "productionCandidateType": "REVIEW_AWAY",
+      "productionScore": 83.28,
+      "dataQualityScore": 100,
+      "probabilityGap": 37.15,
+      "fairOdds": 1.71,
+      "leagueMatches": 500,
+      "homeVenueMatches": 18,
+      "awayVenueMatches": 20,
+      "drawAuditWouldApply": false,
+      "mlFallback": false,
+      "productionModelName": "v1.0-20-80",
+      "topPicksModelName": "historical-reliability-top-picks",
+      "topPicksModelVersion": "v1.1-diversified",
+      "selectionPolicyVersion": "selection-policy-v2",
+      "expectedHomeGoals": 0.8817,
+      "expectedAwayGoals": 2.0217,
+      "popularPicks": [
+        {
+          "rank": 1,
+          "key": "match_result_away",
+          "category": "MATCH_RESULT",
+          "market": "Match Result",
+          "selection": "AWAY",
+          "probability": 58.5,
+          "fairOdds": 1.71,
+          "reliabilityScore": 55.45,
+          "pickScore": 74.19,
+          "historicalHitRate": 31.94,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 31.94,
+          "thresholdSamples": 2367,
+          "tier": "LOW",
+          "reasons": [
+            "Historical prediction-to-outcome calibration is strong.",
+            "Supported by a large historical sample."
+          ]
+        },
+        {
+          "rank": 2,
+          "key": "double_chance_12",
+          "category": "DOUBLE_CHANCE",
+          "market": "Double Chance",
+          "selection": "12",
+          "probability": 78.64,
+          "fairOdds": 1.27,
+          "reliabilityScore": 77.39,
+          "pickScore": 76.31,
+          "historicalHitRate": 77.06,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 77.14,
+          "thresholdSamples": 2266,
+          "tier": "HIGH",
+          "reasons": [
+            "The model probability is high.",
+            "Supported by a large historical sample."
+          ]
+        }
+      ],
+      "topPicks": [
+        {
+          "rank": 1,
+          "key": "double_chance_12",
+          "category": "DOUBLE_CHANCE",
+          "market": "Double Chance",
+          "selection": "12",
+          "probability": 78.64,
+          "fairOdds": 1.27,
+          "reliabilityScore": 77.39,
+          "pickScore": 81.28,
+          "historicalHitRate": 77.06,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 77.14,
+          "thresholdSamples": 2266,
+          "tier": "HIGH",
+          "reasons": [
+            "The model probability is high.",
+            "Supported by a large historical sample."
+          ]
+        },
+        {
+          "rank": 2,
+          "key": "total_goals_over_1.5",
+          "category": "TOTAL_GOALS",
+          "market": "Total Goals 1.5",
+          "selection": "OVER",
+          "probability": 78.49,
+          "fairOdds": 1.27,
+          "reliabilityScore": 77.22,
+          "pickScore": 81.15,
+          "historicalHitRate": 77.02,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 77.18,
+          "thresholdSamples": 1832,
+          "tier": "HIGH",
+          "reasons": [
+            "The model probability is high.",
+            "Supported by a large historical sample."
+          ]
+        },
+        {
+          "rank": 3,
+          "key": "away_team_goals_under_2.5",
+          "category": "TEAM_GOALS",
+          "market": "Away Team Goals 2.5",
+          "selection": "UNDER",
+          "probability": 67.4,
+          "fairOdds": 1.48,
+          "reliabilityScore": 86.2,
+          "pickScore": 80.75,
+          "historicalHitRate": 85.59,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 85.59,
+          "thresholdSamples": 2367,
+          "tier": "VERY_HIGH",
+          "reasons": [
+            "Historical prediction-to-outcome calibration is strong.",
+            "Supported by a large historical sample.",
+            "Benzer güven seviyesinde tarihsel başarı %85.59."
+          ]
+        },
+        {
+          "rank": 4,
+          "key": "away_win_to_nil_no",
+          "category": "WIN_TO_NIL",
+          "market": "Away Win To Nil",
+          "selection": "NO",
+          "probability": 64.1,
+          "fairOdds": 1.56,
+          "reliabilityScore": 82.05,
+          "pickScore": 77.56,
+          "historicalHitRate": 82.59,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 82.59,
+          "thresholdSamples": 2367,
+          "tier": "HIGH",
+          "reasons": [
+            "Supported by a large historical sample.",
+            "Benzer güven seviyesinde tarihsel başarı %82.59."
+          ]
+        },
+        {
+          "rank": 5,
+          "key": "total_goals_under_3.5",
+          "category": "TOTAL_GOALS",
+          "market": "Total Goals 3.5",
+          "selection": "UNDER",
+          "probability": 67.21,
+          "fairOdds": 1.49,
+          "reliabilityScore": 69.18,
+          "pickScore": 73.02,
+          "historicalHitRate": 66.96,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 66.96,
+          "thresholdSamples": 2367,
+          "tier": "MEDIUM",
+          "reasons": [
+            "Supported by a large historical sample."
+          ]
+        },
+        {
+          "rank": 6,
+          "key": "dnb_away",
+          "category": "DRAW_NO_BET",
+          "market": "Draw No Bet",
+          "selection": "AWAY",
+          "probability": 74.39,
+          "fairOdds": 1.34,
+          "reliabilityScore": 62.55,
+          "pickScore": 72.9,
+          "historicalHitRate": 41.45,
+          "historicalSamples": 1824,
+          "thresholdHitRate": 77.1,
+          "thresholdSamples": 131,
+          "tier": "MEDIUM",
+          "reasons": [
+            "The model probability is high.",
+            "Historical prediction-to-outcome calibration is strong."
+          ]
+        },
+        {
+          "rank": 7,
+          "key": "home_team_goals_under_1.5",
+          "category": "TEAM_GOALS",
+          "market": "Home Team Goals 1.5",
+          "selection": "UNDER",
+          "probability": 77.92,
+          "fairOdds": 1.28,
+          "reliabilityScore": 57.95,
+          "pickScore": 72.25,
+          "historicalHitRate": 53.82,
+          "historicalSamples": 2367,
+          "thresholdHitRate": 66.78,
+          "thresholdSamples": 295,
+          "tier": "LOW",
+          "reasons": [
+            "The model probability is high."
+          ]
+        }
+      ],
+      "marketCount": 64,
+      "homeRating": 53.56,
+      "awayRating": 62.45,
+      "homeAttack": 30.19,
+      "awayAttack": 53.88,
+      "homeDefense": 57.67,
+      "awayDefense": 55.95,
+      "homeForm": 55.98,
+      "awayForm": 63.9,
+      "homeFitness": 100,
+      "awayFitness": 100,
+      "ratingDifference": -8.89,
+      "ratingEdge": "AWAY",
+      "warnings": [
+        "Bazı feature değerleri eksiktir. Ev sahibi: 6, deplasman: 6.",
+        "Bu v0.1 olasılık modeli henüz geçmiş sonuçlarla kalibre edilmemiştir.",
+        "708 eksik feature değeri ZERO yöntemiyle dolduruldu.",
+        "Production 1X2: %20 doÄŸrulanmÄ±ÅŸ ML + %80 Poisson kullanÄ±ldÄ±.",
+        "DRAW Decision Layer production override yapmaz; yalnÄ±z audit sinyalidir.",
+        "Experimental DRAW audit: minimum DRAW %23, maximum gap 14, wouldApply=NO.",
+        "Production confidence: 93.73/100, VERY_HIGH.",
+        "Kalibrasyon ve rating hattÄ± legacy/audit amacÄ±yla korunur; final olasÄ±lÄ±ÄŸÄ± deÄŸiÅŸtirmez.",
+        "TakÄ±mlardan en az biri iÃ§in Rating Engine xG kategorisi eksik.",
+        "Confidence: Poisson historical veri kapsamı yeterli seviyededir.",
+        "Confidence: 1X2 ayrışması güçlü: 37.15 puan.",
+        "Match Result, Double Chance, and Draw No Bet were updated with the final Prediction Engine V2 probabilities.",
+        "Instead of the requested 50 picks, 10 distinct and sufficiently reliable picks were found. No weaker selections were added just to fill the list.",
+        "Instead of the requested 10 picks, 7 distinct and sufficiently reliable picks were found. No weaker selections were added just to fill the list."
       ],
       "settlementStatus": "PENDING",
       "finalHomeScore": null,
@@ -44606,7 +47762,7 @@
         "Instead of the requested 50 picks, 3 distinct and sufficiently reliable picks were found. No weaker selections were added just to fill the list.",
         "Instead of the requested 10 picks, 2 distinct and sufficiently reliable picks were found. No weaker selections were added just to fill the list."
       ],
-      "settlementStatus": "PENDING",
+      "settlementStatus": "VOID",
       "finalHomeScore": null,
       "finalAwayScore": null
     },
@@ -48777,9 +51933,9 @@
         "Instead of the requested 50 picks, 5 distinct and sufficiently reliable picks were found. No weaker selections were added just to fill the list.",
         "Instead of the requested 10 picks, 3 distinct and sufficiently reliable picks were found. No weaker selections were added just to fill the list."
       ],
-      "settlementStatus": "PENDING",
-      "finalHomeScore": null,
-      "finalAwayScore": null
+      "settlementStatus": "WON",
+      "finalHomeScore": 3,
+      "finalAwayScore": 2
     },
     {
       "matchId": 38352,
@@ -64461,9 +67617,9 @@
         "Match Result, Double Chance, and Draw No Bet were updated with the final Prediction Engine V2 probabilities.",
         "Instead of the requested 50 picks, 11 distinct and sufficiently reliable picks were found. No weaker selections were added just to fill the list."
       ],
-      "settlementStatus": "PENDING",
-      "finalHomeScore": null,
-      "finalAwayScore": null,
+      "settlementStatus": "WON",
+      "finalHomeScore": 2,
+      "finalAwayScore": 3,
       "popularMarketsSummary": [
         {
           "label": "Kart Bahisleri",
@@ -67085,7 +70241,7 @@
         "Match Result, Double Chance, and Draw No Bet were updated with the final Prediction Engine V2 probabilities.",
         "Instead of the requested 50 picks, 11 distinct and sufficiently reliable picks were found. No weaker selections were added just to fill the list."
       ],
-      "settlementStatus": "PENDING",
+      "settlementStatus": "VOID",
       "finalHomeScore": null,
       "finalAwayScore": null
     },

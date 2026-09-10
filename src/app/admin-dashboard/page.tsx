@@ -28,7 +28,7 @@ import {
 } from "@/lib/selection-policy-explanation";
 
 import {
-  selectTodaysStrongestPredictions,
+  selectStrongestDashboardPredictions,
 } from "@/lib/daily-strongest-predictions";
 
 function formatPercentage(
@@ -72,10 +72,32 @@ export default async function HomePage() {
         "REVIEW_AWAY",
     );
 
-  const strongestPredictions =
-    selectTodaysStrongestPredictions(
+  const strongestSelection =
+    selectStrongestDashboardPredictions(
       primaryHomeCandidates,
+      predictions,
     );
+
+  const strongestPredictions =
+    strongestSelection.predictions;
+
+  const strongestHeading =
+    strongestSelection.mode === "STRICT_TODAY"
+      ? "Today's Strongest Fixtures"
+      : strongestSelection.mode === "BEST_TODAY"
+        ? "Today's Best Available Fixtures"
+        : strongestSelection.mode === "UPCOMING"
+          ? "Strongest Upcoming Fixtures"
+          : "Best Available Fixtures";
+
+  const strongestDescription =
+    strongestSelection.mode === "STRICT_TODAY"
+      ? `Today in Türkiye time, ordered by kickoff. HOME outcome only, at least ${SELECTION_POLICY_V2_THRESHOLDS.minimumProbability}% probability, HIGH/VERY HIGH reliability, and ${SELECTION_POLICY_V2_THRESHOLDS.minimumDataQuality}+ data quality.`
+      : strongestSelection.mode === "BEST_TODAY"
+        ? "No fixture met every strict publication rule today. Showing today's highest-scoring available model candidates instead."
+        : strongestSelection.mode === "UPCOMING"
+          ? "No suitable fixture is scheduled today. Showing the highest-scoring candidates from the upcoming fixture window."
+          : "Showing the highest-scoring candidates currently available in the published snapshot.";
 
   const veryHighConfidenceCount =
     predictions.filter(
@@ -208,11 +230,11 @@ export default async function HomePage() {
                 </p>
 
                 <h2>
-                  Today&apos;s Strongest Fixtures
+                  {strongestHeading}
                 </h2>
 
                 <p className="dashboard-muted">
-                  {`Today in Türkiye time, ordered by kickoff. HOME outcome only, at least ${SELECTION_POLICY_V2_THRESHOLDS.minimumProbability}% probability, HIGH/VERY HIGH reliability, and ${SELECTION_POLICY_V2_THRESHOLDS.minimumDataQuality}+ data quality.`}
+                  {strongestDescription}
                 </p>
               </div>
 

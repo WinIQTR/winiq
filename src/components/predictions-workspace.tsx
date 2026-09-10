@@ -95,30 +95,30 @@ function toIstanbulDateKey(
   return `${getPart("year")}-${getPart("month")}-${getPart("day")}`;
 }
 
-function shiftDateKey(
-  dateKey: string,
-  dayDifference: number,
-): string {
-  const [
-    year,
-    month,
-    day,
-  ] = dateKey
-    .split("-")
-    .map(Number);
+function getPredictionDateKeys(
+  predictions: DashboardPrediction[],
+): string[] {
+  return [...new Set(
+    predictions.map((prediction) =>
+      toIstanbulDateKey(prediction.kickoffAt),
+    ),
+  )].sort();
+}
 
-  const value =
-    new Date(
-      Date.UTC(
-        year,
-        month - 1,
-        day + dayDifference,
-      ),
-    );
+function getClosestAvailableDateKey(
+  dateKeys: string[],
+  requestedDateKey: string,
+): string | null {
+  if (dateKeys.length === 0) return null;
+  if (dateKeys.includes(requestedDateKey)) return requestedDateKey;
 
-  return value
-    .toISOString()
-    .slice(0, 10);
+  const requestedTime = Date.parse(`${requestedDateKey}T12:00:00Z`);
+
+  return [...dateKeys].sort((first, second) => {
+    const firstDistance = Math.abs(Date.parse(`${first}T12:00:00Z`) - requestedTime);
+    const secondDistance = Math.abs(Date.parse(`${second}T12:00:00Z`) - requestedTime);
+    return firstDistance - secondDistance || first.localeCompare(second);
+  })[0] ?? null;
 }
 
 function formatCalendarDate(
@@ -529,12 +529,23 @@ export function PredictionsWorkspace({
       new Date(),
     );
 
+  const predictionDateKeys = useMemo(
+    () => getPredictionDateKeys(predictions),
+    [predictions],
+  );
+
+  const defaultPredictionDateKey =
+    getClosestAvailableDateKey(predictionDateKeys, todayDateKey) ?? todayDateKey;
+
   const [
     selectedDateKey,
     setSelectedDateKey,
   ] =
-    useState<string>(
-      todayDateKey,
+    useState<string>(() =>
+      getClosestAvailableDateKey(
+        getPredictionDateKeys(predictions),
+        todayDateKey,
+      ) ?? todayDateKey,
     );
 
   const [
@@ -625,7 +636,7 @@ export function PredictionsWorkspace({
    * =========================================================
    */
 
-  const filteredPredictions =
+  const selectedDatePredictions =
     useMemo(
       () => {
         let result =
@@ -678,9 +689,20 @@ export function PredictionsWorkspace({
               selectedDateKey,
           );
 
-        /*
-         * QUICK FILTER
-         */
+        result.sort(
+          (first, second) =>
+            first.kickoffAt.getTime() - second.kickoffAt.getTime(),
+        );
+
+        return result;
+      },
+      [predictions, selectedDateKey, selectedLeague, teamSearch, locale],
+    );
+
+  const filteredPredictions =
+    useMemo(
+      () => {
+        let result = [...selectedDatePredictions];
 
         if (
           quickFilter ===
@@ -793,14 +815,25 @@ export function PredictionsWorkspace({
         return result;
       },
       [
-        predictions,
         quickFilter,
-        selectedDateKey,
-        selectedLeague,
-        teamSearch,
-        locale,
+        selectedDatePredictions,
       ],
     );
+
+  const isQuickFilterRelaxed =
+    filteredPredictions.length === 0 &&
+    selectedDatePredictions.length > 0 &&
+    quickFilter !== "ALL";
+
+  const visibleRecommendedPredictions = isQuickFilterRelaxed
+    ? [...selectedDatePredictions]
+        .sort(
+          (first, second) =>
+            (second.topPicks[0]?.pickScore ?? 0) -
+            (first.topPicks[0]?.pickScore ?? 0),
+        )
+        .slice(0, 5)
+    : filteredPredictions;
 
   const predictionByMatchId =
     useMemo(
@@ -939,12 +972,12 @@ export function PredictionsWorkspace({
 
   const visibleMatchesCount =
     workspaceView === "RECOMMENDED"
-      ? filteredPredictions.length
+      ? visibleRecommendedPredictions.length
       : visibleArchiveFixtures.length;
 
   const visiblePublishedCount =
     workspaceView === "RECOMMENDED"
-      ? filteredPredictions.length
+      ? visibleRecommendedPredictions.length
       : visibleArchiveFixtures.filter((fixture) =>
           predictionByMatchId.has(fixture.matchId),
         ).length;
@@ -953,14 +986,14 @@ export function PredictionsWorkspace({
     selectedLeague !== "ALL" ||
     teamSearch.trim().length > 0 ||
     quickFilter !== "ALL" ||
-    selectedDateKey !== todayDateKey ||
+    selectedDateKey !== defaultPredictionDateKey ||
     fixtureWindowWeeks !== 1;
 
   const resetFilters = () => {
     setSelectedLeague("ALL");
     setTeamSearch("");
     setQuickFilter("ALL");
-    setSelectedDateKey(todayDateKey);
+    setSelectedDateKey(defaultPredictionDateKey);
     setFixtureWindowWeeks(1);
   };
 
@@ -1253,15 +1286,11 @@ export function PredictionsWorkspace({
             type="button"
             className={styles.arrowButton}
             aria-label="Previous day"
-            onClick={() =>
-              setSelectedDateKey(
-                (current) =>
-                  shiftDateKey(
-                    current,
-                    -1,
-                  ),
-              )
-            }
+            disabled={predictionDateKeys.indexOf(selectedDateKey) <= 0}
+            onClick={() => {
+              const index = predictionDateKeys.indexOf(selectedDateKey);
+              if (index > 0) setSelectedDateKey(predictionDateKeys[index - 1]!);
+            }}
           >
             ‹
           </button>
@@ -1301,8 +1330,10 @@ export function PredictionsWorkspace({
                     .value
                 ) {
                   setSelectedDateKey(
-                    event.target
-                      .value,
+                    getClosestAvailableDateKey(
+                      predictionDateKeys,
+                      event.target.value,
+                    ) ?? event.target.value,
                   );
                 }
               }}
@@ -1313,27 +1344,28 @@ export function PredictionsWorkspace({
             type="button"
             className={styles.arrowButton}
             aria-label="Next day"
-            onClick={() =>
-              setSelectedDateKey(
-                (current) =>
-                  shiftDateKey(
-                    current,
-                    1,
-                  ),
-              )
+            disabled={
+              predictionDateKeys.indexOf(selectedDateKey) ===
+              predictionDateKeys.length - 1
             }
+            onClick={() => {
+              const index = predictionDateKeys.indexOf(selectedDateKey);
+              if (index >= 0 && index < predictionDateKeys.length - 1) {
+                setSelectedDateKey(predictionDateKeys[index + 1]!);
+              }
+            }}
           >
             ›
           </button>
           </div>
 
-          {selectedDateKey !== todayDateKey && (
+          {selectedDateKey !== defaultPredictionDateKey && (
             <button
               type="button"
               className={styles.todayButton}
-              onClick={() => setSelectedDateKey(todayDateKey)}
+              onClick={() => setSelectedDateKey(defaultPredictionDateKey)}
             >
-              Back to Today
+              {locale === "tr" ? "En yakın maç günü" : "Nearest match day"}
             </button>
           )}
         </div>
@@ -1342,23 +1374,33 @@ export function PredictionsWorkspace({
       )}
 
       {workspaceView === "RECOMMENDED" && (
-      filteredPredictions.length === 0 ? (
+      visibleRecommendedPredictions.length === 0 ? (
         <section className="empty-state">
           <h2>
-            No matches found
+            {locale === "tr" ? "Maç bulunamadı" : "No matches found"}
           </h2>
 
           <p>
-            No matches are available for this date.
-            Use the arrows to move between days or select
-            another date from the calendar.
+            {locale === "tr"
+              ? "Bu arama veya lig filtresine uyan yayımlanmış tahmin bulunamadı. Filtreleri temizleyerek mevcut önerileri görebilirsiniz."
+              : "No published prediction matches this search or league filter. Clear the filters to see available recommendations."}
           </p>
         </section>
       ) : (
         <div className="predictions-workspace">
+          {isQuickFilterRelaxed ? (
+            <div className={styles.recommendationFallbackNotice} role="status">
+              <strong>{locale === "tr" ? "En iyi mevcut öneriler" : "Best available recommendations"}</strong>
+              <span>
+                {locale === "tr"
+                  ? "Seçtiğiniz kalite filtresini geçen maç olmadığı için bu günün puanı en yüksek 5 tahmini gösteriliyor."
+                  : "No match passed the selected quality filter, so the five highest-rated picks for this day are shown."}
+              </span>
+            </div>
+          ) : null}
           <ExpandablePredictionList
             predictions={
-              filteredPredictions
+              visibleRecommendedPredictions
             }
             showCandidateType
           />

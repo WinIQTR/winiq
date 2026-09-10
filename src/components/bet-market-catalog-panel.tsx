@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+
 import type {
   BetMarketGroup,
   BetMarketSettlement,
@@ -55,6 +57,7 @@ export function BetMarketCatalogPanel({
   finalAwayScore?: number | null;
   accessPlan?: MembershipPlanName;
 }) {
+  const [activeTier, setActiveTier] = useState<"ALL" | BetMarketTier>("ALL");
   const hasFinalScore = finalHomeScore !== null && finalAwayScore !== null;
   const availableCount = groups.filter((groupItem) => groupItem.available).length;
   const strongCount = groups.filter((groupItem) => groupItem.options[0]?.tier === "STRONG").length;
@@ -72,6 +75,19 @@ export function BetMarketCatalogPanel({
     ? groups.filter((groupItem) => canAccessBetMarket(accessPlan, groupItem.number))
     : groups;
   const accessibleAvailableCount = accessibleGroups.filter((groupItem) => groupItem.available).length;
+  const visibleGroups = groups.filter((groupItem) =>
+    activeTier === "ALL" || groupItem.options[0]?.tier === activeTier,
+  );
+  const bestOpportunities = accessibleGroups
+    .filter((groupItem) => groupItem.available && groupItem.options[0]?.tier === "STRONG")
+    .sort((left, right) => (right.options[0]?.score ?? 0) - (left.options[0]?.score ?? 0))
+    .slice(0, 3);
+  const tierFilters: Array<{ key: "ALL" | BetMarketTier; count: number; label: string }> = [
+    { key: "ALL", count: accessPlan ? accessibleGroups.length : groups.length, label: locale === "tr" ? "Tümü" : "All" },
+    { key: "STRONG", count: strongCount, label: locale === "tr" ? "Güçlü" : "Strong" },
+    { key: "MEDIUM", count: mediumCount, label: locale === "tr" ? "Orta" : "Medium" },
+    { key: "WEAK", count: weakCount, label: locale === "tr" ? "Zayıf" : "Weak" },
+  ];
 
   return (
     <section className={styles.marketCatalog}>
@@ -113,7 +129,7 @@ export function BetMarketCatalogPanel({
         </div>
       </header>
 
-      <div className={styles.marketCatalogLegend}>
+      {hasFinalScore ? <div className={styles.marketCatalogLegend}>
         {hasFinalScore ? (
           <>
             <span className={styles.legendWon}>{locale === "tr" ? "Yeşil • Kazandı" : "Green • Won"}</span>
@@ -129,10 +145,51 @@ export function BetMarketCatalogPanel({
             <span className={styles.legendUnavailable}>{locale === "tr" ? "Gri • Veri bekleniyor" : "Grey • Waiting for data"}</span>
           </>
         )}
-      </div>
+      </div> : (
+        <div className={styles.marketTierFilters} role="group" aria-label={locale === "tr" ? "Pazar gücü filtresi" : "Market strength filter"}>
+          {tierFilters.map((filter) => (
+            <button
+              className={activeTier === filter.key ? styles.marketTierFilterActive : styles.marketTierFilter}
+              key={filter.key}
+              onClick={() => setActiveTier(filter.key)}
+              type="button"
+            >
+              <span>{filter.label}</span>
+              <b>{filter.count}</b>
+            </button>
+          ))}
+        </div>
+      )}
+
+      {!hasFinalScore && bestOpportunities.length > 0 ? (
+        <section className={styles.marketBestOpportunities}>
+          <header>
+            <span aria-hidden="true">✦</span>
+            <div>
+              <strong>{locale === "tr" ? "En iyi fırsatlar" : "Best opportunities"}</strong>
+              <small>{locale === "tr" ? "Tüm pazarlardaki en güçlü 3 seçim" : "Top 3 strongest picks from all markets"}</small>
+            </div>
+          </header>
+          <div>
+            {bestOpportunities.map((groupItem, index) => {
+              const option = groupItem.options[0];
+              return option ? (
+                <article key={groupItem.number}>
+                  <span>#{index + 1}</span>
+                  <div>
+                    <strong>{option.selection}</strong>
+                    <div className={styles.marketOpportunityMeter}><i style={{ width: `${Math.max(0, Math.min(100, option.score))}%` }} /></div>
+                  </div>
+                  <b>{option.score.toFixed(1)}<small>/100</small></b>
+                </article>
+              ) : null;
+            })}
+          </div>
+        </section>
+      ) : null}
 
       <div className={styles.marketGroupList}>
-        {groups.map((marketGroup) => {
+        {visibleGroups.map((marketGroup) => {
           const unlocked = !accessPlan || canAccessBetMarket(accessPlan, marketGroup.number);
           const requiredPlan = requiredPlanForBetMarket(marketGroup.number);
           const bestOption = marketGroup.options[0];
@@ -158,7 +215,6 @@ export function BetMarketCatalogPanel({
               <summary>
                 <span className={styles.marketNumber}>{String(marketGroup.number).padStart(2, "0")}</span>
                 <span className={styles.marketTitle}>
-                  <small>{locale === "tr" ? "PAZAR" : "MARKET"}</small>
                   <b>{marketGroup.title}</b>
                 </span>
                 {!unlocked ? (
@@ -176,11 +232,10 @@ export function BetMarketCatalogPanel({
                 ) : bestOption ? (
                   <>
                     <span className={styles.marketBestSelection}>
-                      <small>{locale === "tr" ? "ÖNE ÇIKAN SEÇİM" : "TOP SELECTION"}</small>
                       <strong>{bestOption.selection}</strong>
                     </span>
                     <span className={styles.marketScore}>
-                      <small>{locale === "tr" ? "PUAN" : "SCORE"}</small>
+                      <span className={styles.marketScoreMeter} aria-hidden="true"><i style={{ width: `${Math.max(0, Math.min(100, bestOption.score))}%` }} /></span>
                       <span><b>{bestOption.score.toFixed(1)}</b>/100</span>
                     </span>
                     <span className={`${styles.marketTier} ${bestSettlement ? getSettlementClass(bestSettlement) : ""}`}>
