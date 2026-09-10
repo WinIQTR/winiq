@@ -57,7 +57,8 @@ export function BetMarketCatalogPanel({
   finalAwayScore?: number | null;
   accessPlan?: MembershipPlanName;
 }) {
-  const [activeTier, setActiveTier] = useState<"ALL" | BetMarketTier>("ALL");
+  type MarketFilter = "ALL" | BetMarketTier | "STRONG_150";
+  const [activeTier, setActiveTier] = useState<MarketFilter>("ALL");
   const hasFinalScore = finalHomeScore !== null && finalAwayScore !== null;
   const availableCount = groups.filter((groupItem) => groupItem.available).length;
   const strongCount = groups.filter((groupItem) => groupItem.options[0]?.tier === "STRONG").length;
@@ -75,16 +76,34 @@ export function BetMarketCatalogPanel({
     ? groups.filter((groupItem) => canAccessBetMarket(accessPlan, groupItem.number))
     : groups;
   const accessibleAvailableCount = accessibleGroups.filter((groupItem) => groupItem.available).length;
-  const visibleGroups = groups.filter((groupItem) =>
-    activeTier === "ALL" || groupItem.options[0]?.tier === activeTier,
-  );
+  const isStrong150 = (groupItem: BetMarketGroup) =>
+    groupItem.available &&
+    groupItem.options[0]?.tier === "STRONG" &&
+    (groupItem.options[0]?.fairOdds ?? 0) >= 1.5;
+  const strong150Count = accessibleGroups.filter(isStrong150).length;
+  const visibleGroups = groups.filter((groupItem) => {
+    if (activeTier === "ALL") return true;
+    if (activeTier === "STRONG_150") {
+      return isStrong150(groupItem) &&
+        (!accessPlan || canAccessBetMarket(accessPlan, groupItem.number));
+    }
+    return groupItem.options[0]?.tier === activeTier;
+  });
+  const highestOddsStrongGroup = accessibleGroups
+    .filter((groupItem) => groupItem.available && groupItem.options[0]?.tier === "STRONG")
+    .reduce<BetMarketGroup | null>((highest, groupItem) =>
+      !highest || (groupItem.options[0]?.fairOdds ?? 0) > (highest.options[0]?.fairOdds ?? 0)
+        ? groupItem
+        : highest,
+    null);
   const bestOpportunities = accessibleGroups
     .filter((groupItem) => groupItem.available && groupItem.options[0]?.tier === "STRONG")
     .sort((left, right) => (right.options[0]?.score ?? 0) - (left.options[0]?.score ?? 0))
     .slice(0, 3);
-  const tierFilters: Array<{ key: "ALL" | BetMarketTier; count: number; label: string }> = [
+  const tierFilters: Array<{ key: MarketFilter; count: number; label: string }> = [
     { key: "ALL", count: accessPlan ? accessibleGroups.length : groups.length, label: locale === "tr" ? "Tümü" : "All" },
     { key: "STRONG", count: strongCount, label: locale === "tr" ? "Güçlü" : "Strong" },
+    { key: "STRONG_150", count: strong150Count, label: locale === "tr" ? "Güçlü 1.50+" : "Strong 1.50+" },
     { key: "MEDIUM", count: mediumCount, label: locale === "tr" ? "Orta" : "Medium" },
     { key: "WEAK", count: weakCount, label: locale === "tr" ? "Zayıf" : "Weak" },
   ];
@@ -173,14 +192,15 @@ export function BetMarketCatalogPanel({
           <div>
             {bestOpportunities.map((groupItem, index) => {
               const option = groupItem.options[0];
+              const isHighestOdds = highestOddsStrongGroup?.number === groupItem.number;
               return option ? (
-                <article key={groupItem.number}>
+                <article className={isHighestOdds ? styles.marketHighestOddsCard : undefined} key={groupItem.number}>
                   <span>#{index + 1}</span>
                   <div>
                     <strong>{option.selection}</strong>
                     <div className={styles.marketOpportunityMeter}><i style={{ width: `${Math.max(0, Math.min(100, option.score))}%` }} /></div>
                   </div>
-                  <b>{option.score.toFixed(1)}<small>/100</small></b>
+                  <b>{isHighestOdds ? "★ " : ""}{option.score.toFixed(1)}<small>/100</small><small className={styles.marketOpportunityOdds}>{locale === "tr" ? "Adil oran" : "Fair odds"} {option.fairOdds.toFixed(2)}</small></b>
                 </article>
               ) : null;
             })}
@@ -193,6 +213,7 @@ export function BetMarketCatalogPanel({
           const unlocked = !accessPlan || canAccessBetMarket(accessPlan, marketGroup.number);
           const requiredPlan = requiredPlanForBetMarket(marketGroup.number);
           const bestOption = marketGroup.options[0];
+          const isHighestOddsStrong = !hasFinalScore && unlocked && highestOddsStrongGroup?.number === marketGroup.number;
           const bestSettlement = bestOption && hasFinalScore
             ? settleBetMarketOption(bestOption.key, finalHomeScore, finalAwayScore)
             : null;
@@ -206,7 +227,7 @@ export function BetMarketCatalogPanel({
 
           return (
             <details
-              className={`${styles.marketGroup} ${tone} ${!unlocked ? styles.marketGroupLocked : ""}`}
+              className={`${styles.marketGroup} ${tone} ${!unlocked ? styles.marketGroupLocked : ""} ${isHighestOddsStrong ? styles.marketHighestOddsCard : ""}`}
               key={marketGroup.number}
               onToggle={(event) => {
                 if (!unlocked) event.currentTarget.open = false;
@@ -232,6 +253,7 @@ export function BetMarketCatalogPanel({
                     <span className={styles.marketIdentity}>
                       <small>{marketGroup.title}</small>
                       <strong>{bestOption.selection}</strong>
+                      {isHighestOddsStrong ? <b className={styles.marketHighestOddsBadge}>★ {locale === "tr" ? "EN YÜKSEK ADİL ORAN" : "HIGHEST FAIR ODDS"} · {bestOption.fairOdds.toFixed(2)}</b> : null}
                     </span>
                     <span className={styles.marketScore}>
                       <span className={styles.marketScoreMeter} aria-hidden="true"><i style={{ width: `${Math.max(0, Math.min(100, bestOption.score))}%` }} /></span>

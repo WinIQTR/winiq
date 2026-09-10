@@ -42,6 +42,23 @@
 .panel p { font-size:.84rem; line-height:1.55; }
 .memberCard,.priceCard,.requestCard { border-color:rgba(105,151,215,.18); background:rgba(5,19,36,.58); box-shadow:inset 0 1px rgba(255,255,255,.025); }
 .memberCard:hover,.priceCard:hover,.requestCard:hover { border-color:rgba(79,140,255,.4); }
+.heading { display:flex; align-items:flex-start; justify-content:space-between; gap:16px; }
+.eyebrow { color:#6daaff; font-size:.68rem; font-weight:900; letter-spacing:.11em; }
+.paymentCount { flex:0 0 auto; border:1px solid rgb(52 211 153 / 32%); border-radius:999px; padding:7px 10px; background:rgb(16 185 129 / 10%); color:#6ee7b7; font-size:.72rem; font-weight:900; }
+.paymentGrid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:11px; }
+.paymentGrid article { display:grid; min-width:0; gap:12px; padding:16px; border:1px solid #29415f; border-radius:14px; background:#08182c; }
+.paymentGrid article>div { display:grid; gap:4px; }
+.paymentGrid b { color:#eff6ff; font-size:1rem; }
+.paymentGrid span,.paymentGrid small { color:#7891b0; font-size:.72rem; overflow-wrap:anywhere; }
+.paymentGrid strong { width:fit-content; border-radius:999px; padding:5px 8px; font-size:.62rem; letter-spacing:.06em; }
+.paymentActive { border-color:rgb(52 211 153 / 34%)!important; }
+.paymentActive strong { background:rgb(16 185 129 / 14%); color:#6ee7b7; }
+.paymentWaiting strong { background:rgb(245 158 11 / 14%); color:#fcd34d; }
+.paymentFlow { display:flex; align-items:center; justify-content:center; gap:10px; margin-top:14px; padding:13px; border-radius:12px; background:rgb(5 18 34 / 62%); color:#91a8c5; font-size:.74rem; }
+.paymentFlow span { display:flex; align-items:center; gap:7px; }
+.paymentFlow b { display:grid; width:22px; height:22px; place-items:center; border-radius:7px; background:rgb(37 99 235 / 20%); color:#9fc5ff; }
+.paymentFlow i { color:#3e5d82; font-style:normal; }
+@media (max-width:900px) { .paymentGrid{grid-template-columns:1fr;} .paymentFlow{align-items:stretch;flex-direction:column}.paymentFlow i{display:none} }
 .createForm input,.createForm select,.accessForm input,.accessForm select,.securityActions input,.priceCard input,.requestForm input { border-color:rgba(103,148,211,.25); background:#07162a; transition:border-color .18s,box-shadow .18s; }
 .createForm input:focus,.createForm select:focus,.accessForm input:focus,.accessForm select:focus,.priceCard input:focus,.requestForm input:focus { outline:0; border-color:#4f8cff; box-shadow:0 0 0 3px rgba(79,140,255,.12); }
 .createForm button,.accessForm button,.securityActions button,.priceCard button,.requestForm button { border-radius:10px; background:linear-gradient(135deg,#3475ef,#2455c9); box-shadow:0 8px 20px rgba(24,78,183,.18); }

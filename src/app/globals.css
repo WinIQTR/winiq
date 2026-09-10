@@ -1741,6 +1741,21 @@ h2 {
 .member-upgrade-action button { min-height: 43px; border: 0; border-radius: 10px; background: #2864e8; color: white; font-weight: 850; cursor: pointer; }
 .member-upgrade-action button:disabled { opacity: .55; }
 .member-upgrade-action span { color: #9fc5f5; font-size: 12px; }
+.member-payment-box { display:grid; gap:10px; margin-top:4px; padding:13px; border:1px solid #29415f; border-radius:13px; background:#08182c; }
+.member-payment-heading { display:grid; gap:3px; }
+.member-payment-heading strong { color:#eff6ff; font-size:14px; }
+.member-payment-heading small { color:#7f96b5; font-size:11px; }
+.member-payment-methods { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:7px; }
+.member-payment-methods>a,.member-payment-methods>button { display:grid; min-width:0; gap:3px; border:1px solid #31527c; border-radius:10px; padding:10px; background:#102640; color:#dbeafe; text-align:left; text-decoration:none; cursor:pointer; }
+.member-payment-methods b { font-size:12px; }
+.member-payment-methods span { overflow:hidden; color:#8eb1dd; font-size:10px; text-overflow:ellipsis; white-space:nowrap; }
+.member-bank-details { display:grid; gap:6px; padding-top:9px; border-top:1px solid #203957; }
+.member-bank-details>span { display:flex; align-items:center; justify-content:space-between; gap:10px; }
+.member-bank-details small { color:#7189a8; font-size:10px; }
+.member-bank-details b,.member-bank-details button { color:#c9dcf5; font-size:10px; }
+.member-bank-details button { border:0; background:transparent; cursor:pointer; }
+.member-payment-pending { color:#f0bd58!important; }
+@media(max-width:520px){.member-payment-methods{grid-template-columns:1fr}}
 
 @media (max-width: 720px) {
   .login-card { padding: 26px 20px; }

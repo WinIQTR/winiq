@@ -1,13 +1,13 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-10T08:40:32.407Z",
+  "generatedAt": "2026-09-10T14:40:33.107Z",
   "selectionPolicyVersion": "selection-policy-v2",
   "automaticModelChangeAllowed": false,
   "records": [
     {
       "matchId": 9019,
       "kickoffAt": "2026-10-18T15:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -65,7 +65,7 @@
     {
       "matchId": 9017,
       "kickoffAt": "2026-10-18T15:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -121,7 +121,7 @@
     {
       "matchId": 9016,
       "kickoffAt": "2026-10-18T15:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -179,7 +179,7 @@
     {
       "matchId": 9015,
       "kickoffAt": "2026-10-18T15:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -235,7 +235,7 @@
     {
       "matchId": 9013,
       "kickoffAt": "2026-10-18T15:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -294,7 +294,7 @@
     {
       "matchId": 8618,
       "kickoffAt": "2026-10-18T13:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -353,7 +353,7 @@
     {
       "matchId": 8611,
       "kickoffAt": "2026-10-18T13:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -409,7 +409,7 @@
     {
       "matchId": 9681,
       "kickoffAt": "2026-10-18T13:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "AWAY",
@@ -465,7 +465,7 @@
     {
       "matchId": 10356,
       "kickoffAt": "2026-10-18T13:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -524,7 +524,7 @@
     {
       "matchId": 8616,
       "kickoffAt": "2026-10-18T13:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -580,7 +580,7 @@
     {
       "matchId": 9374,
       "kickoffAt": "2026-10-18T12:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -636,7 +636,7 @@
     {
       "matchId": 9373,
       "kickoffAt": "2026-10-18T12:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -692,7 +692,7 @@
     {
       "matchId": 9381,
       "kickoffAt": "2026-10-18T12:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -751,7 +751,7 @@
     {
       "matchId": 9380,
       "kickoffAt": "2026-10-18T12:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -809,7 +809,7 @@
     {
       "matchId": 9379,
       "kickoffAt": "2026-10-18T12:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -865,7 +865,7 @@
     {
       "matchId": 9378,
       "kickoffAt": "2026-10-18T12:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -923,7 +923,7 @@
     {
       "matchId": 9377,
       "kickoffAt": "2026-10-18T12:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -982,7 +982,7 @@
     {
       "matchId": 9375,
       "kickoffAt": "2026-10-18T12:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "AWAY",
@@ -1038,7 +1038,7 @@
     {
       "matchId": 9376,
       "kickoffAt": "2026-10-18T12:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -1097,7 +1097,7 @@
     {
       "matchId": 9677,
       "kickoffAt": "2026-10-18T10:30:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -1156,7 +1156,7 @@
     {
       "matchId": 9679,
       "kickoffAt": "2026-10-17T18:45:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -1212,7 +1212,7 @@
     {
       "matchId": 10361,
       "kickoffAt": "2026-10-17T18:45:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "AWAY",
@@ -1268,7 +1268,7 @@
     {
       "matchId": 10357,
       "kickoffAt": "2026-10-17T18:45:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -1324,7 +1324,7 @@
     {
       "matchId": 8610,
       "kickoffAt": "2026-10-17T16:30:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -1382,7 +1382,7 @@
     {
       "matchId": 9680,
       "kickoffAt": "2026-10-17T16:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "AWAY",
@@ -1438,7 +1438,7 @@
     {
       "matchId": 10359,
       "kickoffAt": "2026-10-17T15:15:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -1497,7 +1497,7 @@
     {
       "matchId": 8617,
       "kickoffAt": "2026-10-17T14:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -1553,7 +1553,7 @@
     {
       "matchId": 8612,
       "kickoffAt": "2026-10-17T14:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -1612,7 +1612,7 @@
     {
       "matchId": 8615,
       "kickoffAt": "2026-10-17T14:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -1668,7 +1668,7 @@
     {
       "matchId": 10048,
       "kickoffAt": "2026-10-17T13:30:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "AWAY",
@@ -1724,7 +1724,7 @@
     {
       "matchId": 10046,
       "kickoffAt": "2026-10-17T13:30:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -1783,7 +1783,7 @@
     {
       "matchId": 10047,
       "kickoffAt": "2026-10-17T13:30:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "AWAY",
@@ -1839,7 +1839,7 @@
     {
       "matchId": 10049,
       "kickoffAt": "2026-10-17T13:30:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -1897,7 +1897,7 @@
     {
       "matchId": 10041,
       "kickoffAt": "2026-10-17T13:30:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -1953,7 +1953,7 @@
     {
       "matchId": 10044,
       "kickoffAt": "2026-10-17T13:30:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -2009,7 +2009,7 @@
     {
       "matchId": 10043,
       "kickoffAt": "2026-10-17T13:30:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -2068,7 +2068,7 @@
     {
       "matchId": 10045,
       "kickoffAt": "2026-10-17T13:30:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -2124,7 +2124,7 @@
     {
       "matchId": 10042,
       "kickoffAt": "2026-10-17T13:30:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -2183,7 +2183,7 @@
     {
       "matchId": 9683,
       "kickoffAt": "2026-10-17T13:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -2241,7 +2241,7 @@
     {
       "matchId": 8613,
       "kickoffAt": "2026-10-17T11:30:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -2300,7 +2300,7 @@
     {
       "matchId": 9682,
       "kickoffAt": "2026-10-16T18:45:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -2359,7 +2359,7 @@
     {
       "matchId": 10364,
       "kickoffAt": "2026-10-16T18:45:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -2418,7 +2418,7 @@
     {
       "matchId": 38495,
       "kickoffAt": "2026-10-15T19:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -2477,7 +2477,7 @@
     {
       "matchId": 38450,
       "kickoffAt": "2026-10-15T19:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -2536,7 +2536,7 @@
     {
       "matchId": 38542,
       "kickoffAt": "2026-10-15T19:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -2592,7 +2592,7 @@
     {
       "matchId": 38432,
       "kickoffAt": "2026-10-15T19:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -2650,7 +2650,7 @@
     {
       "matchId": 38442,
       "kickoffAt": "2026-10-15T19:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -2708,7 +2708,7 @@
     {
       "matchId": 38447,
       "kickoffAt": "2026-10-15T19:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -2768,7 +2768,7 @@
     {
       "matchId": 38462,
       "kickoffAt": "2026-10-15T19:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -2824,7 +2824,7 @@
     {
       "matchId": 46672,
       "kickoffAt": "2026-10-15T19:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -2882,7 +2882,7 @@
     {
       "matchId": 46671,
       "kickoffAt": "2026-10-15T19:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -2941,7 +2941,7 @@
     {
       "matchId": 46670,
       "kickoffAt": "2026-10-15T19:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -2999,7 +2999,7 @@
     {
       "matchId": 46669,
       "kickoffAt": "2026-10-15T19:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -3055,7 +3055,7 @@
     {
       "matchId": 46668,
       "kickoffAt": "2026-10-15T19:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -3114,7 +3114,7 @@
     {
       "matchId": 46667,
       "kickoffAt": "2026-10-15T19:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -3172,7 +3172,7 @@
     {
       "matchId": 46666,
       "kickoffAt": "2026-10-15T19:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -3231,7 +3231,7 @@
     {
       "matchId": 46673,
       "kickoffAt": "2026-10-15T19:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -3290,7 +3290,7 @@
     {
       "matchId": 38527,
       "kickoffAt": "2026-10-15T19:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -3349,7 +3349,7 @@
     {
       "matchId": 38483,
       "kickoffAt": "2026-10-15T19:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -3409,7 +3409,7 @@
     {
       "matchId": 38476,
       "kickoffAt": "2026-10-15T19:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -3467,7 +3467,7 @@
     {
       "matchId": 38532,
       "kickoffAt": "2026-10-15T16:45:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -3526,7 +3526,7 @@
     {
       "matchId": 38437,
       "kickoffAt": "2026-10-15T16:45:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -3584,7 +3584,7 @@
     {
       "matchId": 38522,
       "kickoffAt": "2026-10-15T16:45:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -3642,7 +3642,7 @@
     {
       "matchId": 46663,
       "kickoffAt": "2026-10-15T16:45:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -3701,7 +3701,7 @@
     {
       "matchId": 38477,
       "kickoffAt": "2026-10-15T16:45:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -3760,7 +3760,7 @@
     {
       "matchId": 38555,
       "kickoffAt": "2026-10-15T16:45:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -3819,7 +3819,7 @@
     {
       "matchId": 38571,
       "kickoffAt": "2026-10-15T16:45:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -3878,7 +3878,7 @@
     {
       "matchId": 38458,
       "kickoffAt": "2026-10-15T16:45:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -3936,7 +3936,7 @@
     {
       "matchId": 38568,
       "kickoffAt": "2026-10-15T16:45:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -3995,7 +3995,7 @@
     {
       "matchId": 46665,
       "kickoffAt": "2026-10-15T16:45:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -4053,7 +4053,7 @@
     {
       "matchId": 46664,
       "kickoffAt": "2026-10-15T16:45:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -4111,7 +4111,7 @@
     {
       "matchId": 46656,
       "kickoffAt": "2026-10-15T16:45:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -4169,7 +4169,7 @@
     {
       "matchId": 46657,
       "kickoffAt": "2026-10-15T16:45:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -4228,7 +4228,7 @@
     {
       "matchId": 46658,
       "kickoffAt": "2026-10-15T16:45:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -4286,7 +4286,7 @@
     {
       "matchId": 46659,
       "kickoffAt": "2026-10-15T16:45:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -4344,7 +4344,7 @@
     {
       "matchId": 46660,
       "kickoffAt": "2026-10-15T16:45:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -4400,7 +4400,7 @@
     {
       "matchId": 46661,
       "kickoffAt": "2026-10-15T16:45:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -4460,7 +4460,7 @@
     {
       "matchId": 46662,
       "kickoffAt": "2026-10-15T16:45:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -4518,7 +4518,7 @@
     {
       "matchId": 38397,
       "kickoffAt": "2026-10-14T19:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -4576,7 +4576,7 @@
     {
       "matchId": 38338,
       "kickoffAt": "2026-10-14T19:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -4632,7 +4632,7 @@
     {
       "matchId": 38285,
       "kickoffAt": "2026-10-14T19:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -4691,7 +4691,7 @@
     {
       "matchId": 38371,
       "kickoffAt": "2026-10-14T19:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -4750,7 +4750,7 @@
     {
       "matchId": 38375,
       "kickoffAt": "2026-10-14T19:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -4809,7 +4809,7 @@
     {
       "matchId": 38347,
       "kickoffAt": "2026-10-14T19:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -4868,7 +4868,7 @@
     {
       "matchId": 38291,
       "kickoffAt": "2026-10-14T19:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -4924,7 +4924,7 @@
     {
       "matchId": 38328,
       "kickoffAt": "2026-10-14T16:45:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -4983,7 +4983,7 @@
     {
       "matchId": 38409,
       "kickoffAt": "2026-10-14T16:45:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -5042,7 +5042,7 @@
     {
       "matchId": 38401,
       "kickoffAt": "2026-10-13T19:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -5101,7 +5101,7 @@
     {
       "matchId": 38357,
       "kickoffAt": "2026-10-13T19:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -5159,7 +5159,7 @@
     {
       "matchId": 38396,
       "kickoffAt": "2026-10-13T19:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -5218,7 +5218,7 @@
     {
       "matchId": 38319,
       "kickoffAt": "2026-10-13T19:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -5277,7 +5277,7 @@
     {
       "matchId": 38363,
       "kickoffAt": "2026-10-13T19:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -5335,7 +5335,7 @@
     {
       "matchId": 38281,
       "kickoffAt": "2026-10-13T19:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -5391,7 +5391,7 @@
     {
       "matchId": 38352,
       "kickoffAt": "2026-10-13T19:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -5447,7 +5447,7 @@
     {
       "matchId": 38416,
       "kickoffAt": "2026-10-13T16:45:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -5503,7 +5503,7 @@
     {
       "matchId": 38302,
       "kickoffAt": "2026-10-13T16:45:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -5561,7 +5561,7 @@
     {
       "matchId": 8609,
       "kickoffAt": "2026-10-12T19:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -5620,7 +5620,7 @@
     {
       "matchId": 9672,
       "kickoffAt": "2026-10-12T18:45:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -5678,7 +5678,7 @@
     {
       "matchId": 9671,
       "kickoffAt": "2026-10-12T16:30:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -5734,7 +5734,7 @@
     {
       "matchId": 9668,
       "kickoffAt": "2026-10-11T18:45:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -5793,7 +5793,7 @@
     {
       "matchId": 10354,
       "kickoffAt": "2026-10-11T18:45:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -5851,7 +5851,7 @@
     {
       "matchId": 9667,
       "kickoffAt": "2026-10-11T16:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "AWAY",
@@ -5907,7 +5907,7 @@
     {
       "matchId": 8601,
       "kickoffAt": "2026-10-11T15:30:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -5966,7 +5966,7 @@
     {
       "matchId": 10351,
       "kickoffAt": "2026-10-11T15:15:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -6022,7 +6022,7 @@
     {
       "matchId": 9001,
       "kickoffAt": "2026-10-11T15:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -6080,7 +6080,7 @@
     {
       "matchId": 9000,
       "kickoffAt": "2026-10-11T15:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -6136,7 +6136,7 @@
     {
       "matchId": 9004,
       "kickoffAt": "2026-10-11T15:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -6194,7 +6194,7 @@
     {
       "matchId": 9005,
       "kickoffAt": "2026-10-11T15:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -6250,7 +6250,7 @@
     {
       "matchId": 9009,
       "kickoffAt": "2026-10-11T15:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -6308,7 +6308,7 @@
     {
       "matchId": 9008,
       "kickoffAt": "2026-10-11T15:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -6367,7 +6367,7 @@
     {
       "matchId": 9007,
       "kickoffAt": "2026-10-11T15:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -6423,7 +6423,7 @@
     {
       "matchId": 9003,
       "kickoffAt": "2026-10-11T15:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -6479,7 +6479,7 @@
     {
       "matchId": 9006,
       "kickoffAt": "2026-10-11T15:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -6538,7 +6538,7 @@
     {
       "matchId": 9002,
       "kickoffAt": "2026-10-11T15:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -6597,7 +6597,7 @@
     {
       "matchId": 9674,
       "kickoffAt": "2026-10-11T13:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "AWAY",
@@ -6653,7 +6653,7 @@
     {
       "matchId": 9666,
       "kickoffAt": "2026-10-11T13:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -6709,7 +6709,7 @@
     {
       "matchId": 10348,
       "kickoffAt": "2026-10-11T13:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -6768,7 +6768,7 @@
     {
       "matchId": 8604,
       "kickoffAt": "2026-10-11T13:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -6827,7 +6827,7 @@
     {
       "matchId": 8606,
       "kickoffAt": "2026-10-11T13:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -6886,7 +6886,7 @@
     {
       "matchId": 9369,
       "kickoffAt": "2026-10-11T12:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "AWAY",
@@ -6942,7 +6942,7 @@
     {
       "matchId": 9366,
       "kickoffAt": "2026-10-11T12:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -6998,7 +6998,7 @@
     {
       "matchId": 9365,
       "kickoffAt": "2026-10-11T12:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -7056,7 +7056,7 @@
     {
       "matchId": 9364,
       "kickoffAt": "2026-10-11T12:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -7112,7 +7112,7 @@
     {
       "matchId": 9371,
       "kickoffAt": "2026-10-11T12:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -7171,7 +7171,7 @@
     {
       "matchId": 9367,
       "kickoffAt": "2026-10-11T12:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -7229,7 +7229,7 @@
     {
       "matchId": 9368,
       "kickoffAt": "2026-10-11T12:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -7288,7 +7288,7 @@
     {
       "matchId": 9372,
       "kickoffAt": "2026-10-11T12:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -7347,7 +7347,7 @@
     {
       "matchId": 9370,
       "kickoffAt": "2026-10-11T12:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -7406,7 +7406,7 @@
     {
       "matchId": 9675,
       "kickoffAt": "2026-10-11T10:30:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -7465,7 +7465,7 @@
     {
       "matchId": 9669,
       "kickoffAt": "2026-10-10T18:45:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -7524,7 +7524,7 @@
     {
       "matchId": 10353,
       "kickoffAt": "2026-10-10T18:45:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -7580,7 +7580,7 @@
     {
       "matchId": 10352,
       "kickoffAt": "2026-10-10T18:45:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -7639,7 +7639,7 @@
     {
       "matchId": 10349,
       "kickoffAt": "2026-10-10T18:45:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -7695,7 +7695,7 @@
     {
       "matchId": 10350,
       "kickoffAt": "2026-10-10T18:45:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -7751,7 +7751,7 @@
     {
       "matchId": 8600,
       "kickoffAt": "2026-10-10T16:30:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -7807,7 +7807,7 @@
     {
       "matchId": 9673,
       "kickoffAt": "2026-10-10T16:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -7863,7 +7863,7 @@
     {
       "matchId": 10347,
       "kickoffAt": "2026-10-10T15:15:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -7919,7 +7919,7 @@
     {
       "matchId": 8603,
       "kickoffAt": "2026-10-10T14:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -7978,7 +7978,7 @@
     {
       "matchId": 8605,
       "kickoffAt": "2026-10-10T14:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "AWAY",
@@ -8034,7 +8034,7 @@
     {
       "matchId": 8607,
       "kickoffAt": "2026-10-10T14:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -8090,7 +8090,7 @@
     {
       "matchId": 8608,
       "kickoffAt": "2026-10-10T14:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -8149,7 +8149,7 @@
     {
       "matchId": 10032,
       "kickoffAt": "2026-10-10T13:30:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -8205,7 +8205,7 @@
     {
       "matchId": 10034,
       "kickoffAt": "2026-10-10T13:30:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -8261,7 +8261,7 @@
     {
       "matchId": 10037,
       "kickoffAt": "2026-10-10T13:30:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -8317,7 +8317,7 @@
     {
       "matchId": 10036,
       "kickoffAt": "2026-10-10T13:30:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "AWAY",
@@ -8373,7 +8373,7 @@
     {
       "matchId": 10039,
       "kickoffAt": "2026-10-10T13:30:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -8431,7 +8431,7 @@
     {
       "matchId": 10040,
       "kickoffAt": "2026-10-10T13:30:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -8487,7 +8487,7 @@
     {
       "matchId": 10033,
       "kickoffAt": "2026-10-10T13:30:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -8546,7 +8546,7 @@
     {
       "matchId": 10035,
       "kickoffAt": "2026-10-10T13:30:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -8602,7 +8602,7 @@
     {
       "matchId": 10038,
       "kickoffAt": "2026-10-10T13:30:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -8661,7 +8661,7 @@
     {
       "matchId": 9670,
       "kickoffAt": "2026-10-10T13:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -8720,7 +8720,7 @@
     {
       "matchId": 8602,
       "kickoffAt": "2026-10-10T11:30:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -8776,7 +8776,7 @@
     {
       "matchId": 10355,
       "kickoffAt": "2026-10-09T18:45:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -8832,7 +8832,7 @@
     {
       "matchId": 8992,
       "kickoffAt": "2026-09-20T19:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -8891,7 +8891,7 @@
     {
       "matchId": 9665,
       "kickoffAt": "2026-09-20T18:45:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -8947,7 +8947,7 @@
     {
       "matchId": 10346,
       "kickoffAt": "2026-09-20T18:45:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -9006,7 +9006,7 @@
     {
       "matchId": 10031,
       "kickoffAt": "2026-09-20T17:30:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -9065,7 +9065,7 @@
     {
       "matchId": 9361,
       "kickoffAt": "2026-09-20T17:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -9124,7 +9124,7 @@
     {
       "matchId": 9357,
       "kickoffAt": "2026-09-20T17:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -9183,7 +9183,7 @@
     {
       "matchId": 8993,
       "kickoffAt": "2026-09-20T16:30:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -9239,7 +9239,7 @@
     {
       "matchId": 8997,
       "kickoffAt": "2026-09-20T16:30:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -9297,7 +9297,7 @@
     {
       "matchId": 9664,
       "kickoffAt": "2026-09-20T16:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -9356,7 +9356,7 @@
     {
       "matchId": 8599,
       "kickoffAt": "2026-09-20T15:30:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -9415,7 +9415,7 @@
     {
       "matchId": 10030,
       "kickoffAt": "2026-09-20T15:30:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -9475,7 +9475,7 @@
     {
       "matchId": 10340,
       "kickoffAt": "2026-09-20T15:15:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "AWAY",
@@ -9531,7 +9531,7 @@
     {
       "matchId": 8990,
       "kickoffAt": "2026-09-20T14:15:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -9590,7 +9590,7 @@
     {
       "matchId": 9360,
       "kickoffAt": "2026-09-20T14:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -9648,7 +9648,7 @@
     {
       "matchId": 9356,
       "kickoffAt": "2026-09-20T14:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -9704,7 +9704,7 @@
     {
       "matchId": 10029,
       "kickoffAt": "2026-09-20T13:30:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -9760,7 +9760,7 @@
     {
       "matchId": 9662,
       "kickoffAt": "2026-09-20T13:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -9818,7 +9818,7 @@
     {
       "matchId": 9663,
       "kickoffAt": "2026-09-20T13:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -9877,7 +9877,7 @@
     {
       "matchId": 8598,
       "kickoffAt": "2026-09-20T13:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -9935,7 +9935,7 @@
     {
       "matchId": 10343,
       "kickoffAt": "2026-09-20T13:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -9991,7 +9991,7 @@
     {
       "matchId": 8594,
       "kickoffAt": "2026-09-20T13:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -10047,7 +10047,7 @@
     {
       "matchId": 8596,
       "kickoffAt": "2026-09-20T13:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -10103,7 +10103,7 @@
     {
       "matchId": 8998,
       "kickoffAt": "2026-09-20T12:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -10161,7 +10161,7 @@
     {
       "matchId": 9661,
       "kickoffAt": "2026-09-20T10:30:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -10219,7 +10219,7 @@
     {
       "matchId": 8994,
       "kickoffAt": "2026-09-19T19:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "AWAY",
@@ -10275,7 +10275,7 @@
     {
       "matchId": 9660,
       "kickoffAt": "2026-09-19T18:45:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -10334,7 +10334,7 @@
     {
       "matchId": 10342,
       "kickoffAt": "2026-09-19T18:45:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -10393,7 +10393,7 @@
     {
       "matchId": 10338,
       "kickoffAt": "2026-09-19T18:45:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -10452,7 +10452,7 @@
     {
       "matchId": 10339,
       "kickoffAt": "2026-09-19T18:45:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -10508,7 +10508,7 @@
     {
       "matchId": 10345,
       "kickoffAt": "2026-09-19T18:45:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -10567,7 +10567,7 @@
     {
       "matchId": 9358,
       "kickoffAt": "2026-09-19T17:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "AWAY",
@@ -10623,7 +10623,7 @@
     {
       "matchId": 9355,
       "kickoffAt": "2026-09-19T17:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -10679,7 +10679,7 @@
     {
       "matchId": 8995,
       "kickoffAt": "2026-09-19T16:30:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -10738,7 +10738,7 @@
     {
       "matchId": 8597,
       "kickoffAt": "2026-09-19T16:30:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -10797,7 +10797,7 @@
     {
       "matchId": 10028,
       "kickoffAt": "2026-09-19T16:30:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -10856,7 +10856,7 @@
     {
       "matchId": 9659,
       "kickoffAt": "2026-09-19T16:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -10915,7 +10915,7 @@
     {
       "matchId": 10344,
       "kickoffAt": "2026-09-19T15:15:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -10974,7 +10974,7 @@
     {
       "matchId": 8991,
       "kickoffAt": "2026-09-19T14:15:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -11033,7 +11033,7 @@
     {
       "matchId": 9362,
       "kickoffAt": "2026-09-19T14:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -11091,7 +11091,7 @@
     {
       "matchId": 9363,
       "kickoffAt": "2026-09-19T14:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -11149,7 +11149,7 @@
     {
       "matchId": 8592,
       "kickoffAt": "2026-09-19T14:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -11208,7 +11208,7 @@
     {
       "matchId": 8593,
       "kickoffAt": "2026-09-19T14:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -11264,7 +11264,7 @@
     {
       "matchId": 8595,
       "kickoffAt": "2026-09-19T14:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -11323,7 +11323,7 @@
     {
       "matchId": 10025,
       "kickoffAt": "2026-09-19T13:30:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -11382,7 +11382,7 @@
     {
       "matchId": 10024,
       "kickoffAt": "2026-09-19T13:30:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -11441,7 +11441,7 @@
     {
       "matchId": 10026,
       "kickoffAt": "2026-09-19T13:30:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -11499,7 +11499,7 @@
     {
       "matchId": 10027,
       "kickoffAt": "2026-09-19T13:30:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -11555,7 +11555,7 @@
     {
       "matchId": 9658,
       "kickoffAt": "2026-09-19T13:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -11614,7 +11614,7 @@
     {
       "matchId": 9657,
       "kickoffAt": "2026-09-19T13:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -11673,7 +11673,7 @@
     {
       "matchId": 8999,
       "kickoffAt": "2026-09-19T12:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -11729,7 +11729,7 @@
     {
       "matchId": 8591,
       "kickoffAt": "2026-09-19T11:30:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "AWAY",
@@ -11785,7 +11785,7 @@
     {
       "matchId": 8996,
       "kickoffAt": "2026-09-18T19:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -11841,7 +11841,7 @@
     {
       "matchId": 8590,
       "kickoffAt": "2026-09-18T19:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -11899,7 +11899,7 @@
     {
       "matchId": 10341,
       "kickoffAt": "2026-09-18T18:45:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -11958,7 +11958,7 @@
     {
       "matchId": 9656,
       "kickoffAt": "2026-09-18T18:45:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "AWAY",
@@ -12014,7 +12014,7 @@
     {
       "matchId": 10023,
       "kickoffAt": "2026-09-18T18:30:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -12070,7 +12070,7 @@
     {
       "matchId": 9359,
       "kickoffAt": "2026-09-18T17:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -12129,7 +12129,7 @@
     {
       "matchId": 8983,
       "kickoffAt": "2026-09-17T19:30:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -12188,7 +12188,7 @@
     {
       "matchId": 38472,
       "kickoffAt": "2026-09-17T19:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -12248,7 +12248,7 @@
     {
       "matchId": 38502,
       "kickoffAt": "2026-09-17T19:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -12306,7 +12306,7 @@
     {
       "matchId": 38520,
       "kickoffAt": "2026-09-17T19:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -12364,7 +12364,7 @@
     {
       "matchId": 38497,
       "kickoffAt": "2026-09-17T19:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -12422,7 +12422,7 @@
     {
       "matchId": 38434,
       "kickoffAt": "2026-09-17T19:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -12481,7 +12481,7 @@
     {
       "matchId": 38490,
       "kickoffAt": "2026-09-17T19:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -12540,7 +12540,7 @@
     {
       "matchId": 38468,
       "kickoffAt": "2026-09-17T19:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -12599,7 +12599,7 @@
     {
       "matchId": 8986,
       "kickoffAt": "2026-09-17T17:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -12655,7 +12655,7 @@
     {
       "matchId": 38540,
       "kickoffAt": "2026-09-17T16:45:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -12713,7 +12713,7 @@
     {
       "matchId": 38549,
       "kickoffAt": "2026-09-17T16:45:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -12771,7 +12771,7 @@
     {
       "matchId": 8981,
       "kickoffAt": "2026-09-16T19:30:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -12827,7 +12827,7 @@
     {
       "matchId": 8984,
       "kickoffAt": "2026-09-16T19:30:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -14049,7 +14049,7 @@
     {
       "matchId": 38485,
       "kickoffAt": "2026-09-16T19:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -16145,7 +16145,7 @@
     {
       "matchId": 38456,
       "kickoffAt": "2026-09-16T19:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -17603,7 +17603,7 @@
     {
       "matchId": 38534,
       "kickoffAt": "2026-09-16T19:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -17662,7 +17662,7 @@
     {
       "matchId": 38509,
       "kickoffAt": "2026-09-16T19:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -17721,7 +17721,7 @@
     {
       "matchId": 38545,
       "kickoffAt": "2026-09-16T19:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -17779,7 +17779,7 @@
     {
       "matchId": 38506,
       "kickoffAt": "2026-09-16T19:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -17837,7 +17837,7 @@
     {
       "matchId": 38515,
       "kickoffAt": "2026-09-16T19:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -17895,7 +17895,7 @@
     {
       "matchId": 8987,
       "kickoffAt": "2026-09-16T17:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -17953,7 +17953,7 @@
     {
       "matchId": 8982,
       "kickoffAt": "2026-09-16T17:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -18009,7 +18009,7 @@
     {
       "matchId": 38563,
       "kickoffAt": "2026-09-16T16:45:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -18068,7 +18068,7 @@
     {
       "matchId": 38559,
       "kickoffAt": "2026-09-16T16:45:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -18126,7 +18126,7 @@
     {
       "matchId": 8989,
       "kickoffAt": "2026-09-15T19:30:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "AWAY",
@@ -18182,7 +18182,7 @@
     {
       "matchId": 8985,
       "kickoffAt": "2026-09-15T18:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -18238,7 +18238,7 @@
     {
       "matchId": 8988,
       "kickoffAt": "2026-09-15T17:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -18294,7 +18294,7 @@
     {
       "matchId": 8589,
       "kickoffAt": "2026-09-14T19:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -18352,7 +18352,7 @@
     {
       "matchId": 8972,
       "kickoffAt": "2026-09-14T19:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -18408,7 +18408,7 @@
     {
       "matchId": 9655,
       "kickoffAt": "2026-09-14T18:45:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -18464,7 +18464,7 @@
     {
       "matchId": 9351,
       "kickoffAt": "2026-09-14T17:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "AWAY",
@@ -18520,7 +18520,7 @@
     {
       "matchId": 9652,
       "kickoffAt": "2026-09-14T16:30:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -18576,7 +18576,7 @@
     {
       "matchId": 9650,
       "kickoffAt": "2026-09-14T16:30:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "AWAY",
@@ -18632,7 +18632,7 @@
     {
       "matchId": 8978,
       "kickoffAt": "2026-09-13T19:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -18691,7 +18691,7 @@
     {
       "matchId": 10337,
       "kickoffAt": "2026-09-13T18:45:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "AWAY",
@@ -18747,7 +18747,7 @@
     {
       "matchId": 9648,
       "kickoffAt": "2026-09-13T18:45:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -18806,7 +18806,7 @@
     {
       "matchId": 9348,
       "kickoffAt": "2026-09-13T17:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -18862,7 +18862,7 @@
     {
       "matchId": 9352,
       "kickoffAt": "2026-09-13T17:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -18920,7 +18920,7 @@
     {
       "matchId": 8977,
       "kickoffAt": "2026-09-13T16:30:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -18979,7 +18979,7 @@
     {
       "matchId": 9653,
       "kickoffAt": "2026-09-13T16:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -19035,7 +19035,7 @@
     {
       "matchId": 10022,
       "kickoffAt": "2026-09-13T15:30:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "AWAY",
@@ -19091,7 +19091,7 @@
     {
       "matchId": 8588,
       "kickoffAt": "2026-09-13T15:30:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -19150,7 +19150,7 @@
     {
       "matchId": 10336,
       "kickoffAt": "2026-09-13T15:15:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -19209,7 +19209,7 @@
     {
       "matchId": 8975,
       "kickoffAt": "2026-09-13T14:15:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "AWAY",
@@ -19265,7 +19265,7 @@
     {
       "matchId": 9350,
       "kickoffAt": "2026-09-13T14:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -19324,7 +19324,7 @@
     {
       "matchId": 10021,
       "kickoffAt": "2026-09-13T13:30:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -19380,7 +19380,7 @@
     {
       "matchId": 9651,
       "kickoffAt": "2026-09-13T13:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -19439,7 +19439,7 @@
     {
       "matchId": 10335,
       "kickoffAt": "2026-09-13T13:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -19498,7 +19498,7 @@
     {
       "matchId": 8587,
       "kickoffAt": "2026-09-13T13:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -19557,7 +19557,7 @@
     {
       "matchId": 8974,
       "kickoffAt": "2026-09-13T12:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -19613,7 +19613,7 @@
     {
       "matchId": 8976,
       "kickoffAt": "2026-09-12T19:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -19669,7 +19669,7 @@
     {
       "matchId": 8586,
       "kickoffAt": "2026-09-12T19:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "AWAY",
@@ -19725,7 +19725,7 @@
     {
       "matchId": 9649,
       "kickoffAt": "2026-09-12T18:45:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -19781,7 +19781,7 @@
     {
       "matchId": 10334,
       "kickoffAt": "2026-09-12T18:45:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -19840,7 +19840,7 @@
     {
       "matchId": 10331,
       "kickoffAt": "2026-09-12T18:45:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -19899,7 +19899,7 @@
     {
       "matchId": 10332,
       "kickoffAt": "2026-09-12T18:45:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -19955,7 +19955,7 @@
     {
       "matchId": 10333,
       "kickoffAt": "2026-09-12T18:45:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -20014,7 +20014,7 @@
     {
       "matchId": 9347,
       "kickoffAt": "2026-09-12T17:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "AWAY",
@@ -20070,7 +20070,7 @@
     {
       "matchId": 9349,
       "kickoffAt": "2026-09-12T17:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -20126,7 +20126,7 @@
     {
       "matchId": 8971,
       "kickoffAt": "2026-09-12T16:30:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -20182,7 +20182,7 @@
     {
       "matchId": 10020,
       "kickoffAt": "2026-09-12T16:30:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -20240,7 +20240,7 @@
     {
       "matchId": 8585,
       "kickoffAt": "2026-09-12T16:30:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "AWAY",
@@ -20296,7 +20296,7 @@
     {
       "matchId": 9654,
       "kickoffAt": "2026-09-12T16:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -20354,7 +20354,7 @@
     {
       "matchId": 10330,
       "kickoffAt": "2026-09-12T15:15:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -20410,7 +20410,7 @@
     {
       "matchId": 8979,
       "kickoffAt": "2026-09-12T14:15:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -20466,7 +20466,7 @@
     {
       "matchId": 9354,
       "kickoffAt": "2026-09-12T14:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -20524,7 +20524,7 @@
     {
       "matchId": 9353,
       "kickoffAt": "2026-09-12T14:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -20583,7 +20583,7 @@
     {
       "matchId": 8580,
       "kickoffAt": "2026-09-12T14:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -20639,7 +20639,7 @@
     {
       "matchId": 8582,
       "kickoffAt": "2026-09-12T14:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -20698,7 +20698,7 @@
     {
       "matchId": 8583,
       "kickoffAt": "2026-09-12T14:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -20756,7 +20756,7 @@
     {
       "matchId": 8584,
       "kickoffAt": "2026-09-12T14:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -20815,7 +20815,7 @@
     {
       "matchId": 8581,
       "kickoffAt": "2026-09-12T14:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -20871,7 +20871,7 @@
     {
       "matchId": 10019,
       "kickoffAt": "2026-09-12T13:30:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -20930,7 +20930,7 @@
     {
       "matchId": 10016,
       "kickoffAt": "2026-09-12T13:30:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -20989,7 +20989,7 @@
     {
       "matchId": 10018,
       "kickoffAt": "2026-09-12T13:30:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -21048,7 +21048,7 @@
     {
       "matchId": 10017,
       "kickoffAt": "2026-09-12T13:30:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -21104,7 +21104,7 @@
     {
       "matchId": 10015,
       "kickoffAt": "2026-09-12T13:30:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -21160,7 +21160,7 @@
     {
       "matchId": 9647,
       "kickoffAt": "2026-09-12T13:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "AWAY",
@@ -21216,7 +21216,7 @@
     {
       "matchId": 8980,
       "kickoffAt": "2026-09-12T12:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -21274,7 +21274,7 @@
     {
       "matchId": 8973,
       "kickoffAt": "2026-09-11T19:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -21333,7 +21333,7 @@
     {
       "matchId": 9646,
       "kickoffAt": "2026-09-11T18:45:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -21392,7 +21392,7 @@
     {
       "matchId": 10329,
       "kickoffAt": "2026-09-11T18:45:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -21448,7 +21448,7 @@
     {
       "matchId": 10014,
       "kickoffAt": "2026-09-11T18:30:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -21506,7 +21506,7 @@
     {
       "matchId": 9346,
       "kickoffAt": "2026-09-11T17:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -21562,7 +21562,7 @@
     {
       "matchId": 38306,
       "kickoffAt": "2026-09-10T19:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "PUBLISHED",
       "eligible": true,
       "predictedOutcome": "HOME",
@@ -21618,7 +21618,7 @@
     {
       "matchId": 38276,
       "kickoffAt": "2026-09-10T19:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -21676,7 +21676,7 @@
     {
       "matchId": 38379,
       "kickoffAt": "2026-09-10T19:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "AWAY",
@@ -21735,7 +21735,7 @@
     {
       "matchId": 38407,
       "kickoffAt": "2026-09-10T19:00:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -21793,7 +21793,7 @@
     {
       "matchId": 38390,
       "kickoffAt": "2026-09-10T16:45:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",
@@ -21851,7 +21851,7 @@
     {
       "matchId": 38323,
       "kickoffAt": "2026-09-10T16:45:00.000Z",
-      "evaluatedAt": "2026-09-10T08:40:32.407Z",
+      "evaluatedAt": "2026-09-10T14:40:33.107Z",
       "decision": "FILTERED",
       "eligible": false,
       "predictedOutcome": "HOME",

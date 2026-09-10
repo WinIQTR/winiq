@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import styles from "@/app/admin/members/admin-members.module.css";
 import { DEFAULT_MEMBERSHIP_PRICES } from "@/lib/membership-commerce";
 import { MEMBERSHIP_PLAN_LABELS } from "@/lib/membership-access";
+import type { MembershipPaymentSettings } from "@/lib/membership-payment-settings";
 
 type MemberRow = {
   id: string;
@@ -53,10 +54,11 @@ async function sendTo(path: string, body: unknown) {
   return response.json() as Promise<{ success: boolean; message: string }>;
 }
 
-export function AdminMembersManager({ members, upgradeRequests, prices }: {
+export function AdminMembersManager({ members, upgradeRequests, prices, paymentSettings }: {
   members: MemberRow[];
   upgradeRequests: UpgradeRequestRow[];
   prices: PlanPriceRow[];
+  paymentSettings: MembershipPaymentSettings;
 }) {
   const router = useRouter();
   const [message, setMessage] = useState("");
@@ -132,6 +134,19 @@ export function AdminMembersManager({ members, upgradeRequests, prices }: {
           <label className={styles.wide}>Geçici şifre<input name="password" type="password" minLength={12} required /></label>
           <button disabled={busy}>Üye oluştur</button>
         </form>
+      </section>
+
+      <section className={`${styles.panel} ${styles.paymentPanel}`}>
+        <div className={styles.heading}>
+          <div><span className={styles.eyebrow}>ÖDEME MERKEZİ</span><h2>Ödeme bağlantıları</h2><p>Üyelerin paket ekranında görünen Türkiye ve yurt dışı ödeme kanalları.</p></div>
+          <span className={styles.paymentCount}>{[paymentSettings.ininalUrl, paymentSettings.wiseUrl, paymentSettings.bankIban].filter(Boolean).length}/3 aktif</span>
+        </div>
+        <div className={styles.paymentGrid}>
+          <article className={paymentSettings.ininalUrl ? styles.paymentActive : styles.paymentWaiting}><div><b>İninal</b><span>Türkiye · Sanal POS / ödeme bağlantısı</span></div><strong>{paymentSettings.ininalUrl ? "AKTİF" : "KURULUM BEKLİYOR"}</strong><small>ININAL_PAYMENT_URL</small></article>
+          <article className={paymentSettings.bankIban ? styles.paymentActive : styles.paymentWaiting}><div><b>Banka havalesi</b><span>Türkiye · TL hesabı</span></div><strong>{paymentSettings.bankIban ? "AKTİF" : "KURULUM BEKLİYOR"}</strong><small>BANK_TRANSFER_IBAN + PAYMENT_ACCOUNT_NAME</small></article>
+          <article className={paymentSettings.wiseUrl ? styles.paymentActive : styles.paymentWaiting}><div><b>Wise</b><span>Yurt dışı · EUR ödeme bağlantısı</span></div><strong>{paymentSettings.wiseUrl ? "AKTİF" : "KURULUM BEKLİYOR"}</strong><small>WISE_PAYMENT_URL</small></article>
+        </div>
+        <div className={styles.paymentFlow}><span><b>1</b> Üye paketini seçer</span><i>→</i><span><b>2</b> Talep ve referans oluşur</span><i>→</i><span><b>3</b> Ödeme yapılır</span><i>→</i><span><b>4</b> Siz onaylayıp üyeliği açarsınız</span></div>
       </section>
 
       <section className={styles.panel}>

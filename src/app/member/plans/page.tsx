@@ -13,6 +13,7 @@ import { MEMBERSHIP_PLAN_LABELS, type MembershipPlanName } from "@/lib/membershi
 import { MEMBERSHIP_PLAN_MARKET_LIMITS } from "@/lib/membership-access";
 import { prisma } from "@/lib/prisma";
 import { daysRemainingUntil } from "@/lib/time";
+import { getMembershipPaymentSettings } from "@/lib/membership-payment-settings";
 
 const PLANS: MembershipPlanName[] = ["BASIC", "ANALYSIS", "PROFESSIONAL"];
 
@@ -26,6 +27,7 @@ export default async function MembershipPlansPage() {
   const remainingDays = user.membershipEndsAt
     ? daysRemainingUntil(user.membershipEndsAt)
     : null;
+  const payment = getMembershipPaymentSettings();
 
   return (
     <main className="member-shell member-plans-shell">
@@ -65,7 +67,7 @@ export default async function MembershipPlansPage() {
               </div>
               <ul>{MEMBERSHIP_PLAN_FEATURES[plan].map((feature) => <li key={feature}>{feature}</li>)}</ul>
               {current ? <b className="member-current-label">Mevcut paketiniz</b> : null}
-              {upgrade ? <MembershipPlanSelector requestedPlan={plan} /> : null}
+              {upgrade ? <MembershipPlanSelector requestedPlan={plan} priceTry={formatPrice(price.priceTryCents, "TRY")} priceEur={formatPrice(price.priceEurCents, "EUR")} payment={payment} memberReference={user.id.slice(-8).toUpperCase()} /> : null}
             </article>
           );
         })}

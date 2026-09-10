@@ -2,9 +2,11 @@ import { AdminMembersManager } from "@/components/admin-members-manager";
 import { PageShell } from "@/components/page-shell";
 import { requireAdmin } from "@/lib/auth-session";
 import { prisma } from "@/lib/prisma";
+import { getMembershipPaymentSettings } from "@/lib/membership-payment-settings";
 
 export default async function AdminMembersPage() {
   await requireAdmin();
+  const paymentSettings = getMembershipPaymentSettings();
   const [members, upgradeRequests, prices] = await Promise.all([prisma.appUser.findMany({
     where: { role: "MEMBER" },
     orderBy: { createdAt: "desc" },
@@ -60,7 +62,7 @@ export default async function AdminMembersPage() {
         plan: price.plan,
         priceTry: price.priceTryCents / 100,
         priceEur: price.priceEurCents / 100,
-      }))} />
+      }))} paymentSettings={paymentSettings} />
     </PageShell>
   );
 }
