@@ -21,6 +21,213 @@
   --radius: 20px;
 }
 
+/* Smart match-card system — shared by predictions and dashboard lists. */
+.prediction-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.prediction-entry,
+.prediction-clickable {
+  min-width: 0;
+}
+
+.prediction-card-smart {
+  display: block;
+  min-height: 0;
+  overflow: hidden;
+  padding: 0;
+  border: 1px solid rgba(56, 101, 160, 0.55);
+  border-radius: 16px;
+  background: linear-gradient(145deg, rgba(10, 31, 55, 0.98), rgba(7, 24, 43, 0.99));
+  box-shadow: 0 16px 38px rgba(0, 0, 0, 0.18);
+}
+
+.prediction-card-smart:hover {
+  transform: translateY(-1px);
+  border-color: rgba(61, 142, 246, 0.7);
+}
+
+.smart-match-meta {
+  display: flex;
+  min-height: 43px;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 14px;
+  border-bottom: 1px solid rgba(54, 85, 126, 0.48);
+  color: #87a4ca;
+}
+
+.smart-match-meta > span:first-child {
+  color: #67a9ff;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.smart-match-meta > strong {
+  margin-right: auto;
+  color: #c7d5e9;
+  font-size: 11px;
+}
+
+.smart-match-meta .prediction-result-badge {
+  padding: 4px 7px;
+  font-size: 8px;
+}
+
+.smart-match-main {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(235px, 0.9fr);
+  gap: 12px;
+  align-items: center;
+  padding: 14px;
+}
+
+.smart-team-matchup {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+}
+
+.smart-team-matchup .prediction-team {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 9px;
+}
+
+.smart-team-matchup .prediction-team:last-child {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+.smart-team-matchup .prediction-team > div {
+  min-width: 0;
+}
+
+.smart-team-matchup .prediction-team strong {
+  display: block;
+  overflow: hidden;
+  color: #f2f6fc;
+  font-size: 13px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.smart-team-matchup .team-logo,
+.smart-team-matchup .team-logo-placeholder {
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px;
+  object-fit: contain;
+}
+
+.smart-best-pick {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid rgba(48, 211, 153, 0.58);
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(12, 69, 69, 0.64), rgba(8, 32, 53, 0.86));
+}
+
+.smart-pick-copy {
+  display: grid;
+  gap: 4px;
+}
+
+.smart-pick-copy > span {
+  color: #50e6ad;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
+.smart-pick-copy > strong {
+  color: #f3f8ff;
+  font-size: 13px;
+  line-height: 1.25;
+}
+
+.smart-pick-copy > small {
+  color: #8098b9;
+  font-size: 9px;
+}
+
+.smart-pick-score {
+  display: grid;
+  min-width: 70px;
+  place-content: center;
+  gap: 5px;
+  border-left: 1px solid rgba(84, 119, 153, 0.45);
+  padding-left: 12px;
+  text-align: center;
+}
+
+.smart-pick-score > strong {
+  color: #58efb5;
+  font-size: 22px;
+}
+
+.smart-pick-score .prediction-confidence-badge {
+  padding: 4px 7px;
+  font-size: 8px;
+}
+
+.smart-outcome-strip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 14px 12px;
+}
+
+.smart-outcome-strip > span {
+  border: 1px solid rgba(55, 83, 122, 0.5);
+  border-radius: 999px;
+  padding: 4px 8px;
+  color: #7390b6;
+  font-size: 9px;
+}
+
+.smart-outcome-strip b { color: #bfd0e7; }
+.smart-outcome-strip > strong { margin-left: auto; color: #91a7c4; font-size: 10px; }
+
+.prediction-entry .match-analysis-toggle {
+  width: calc(100% - 28px);
+  min-height: 38px;
+  margin: -51px 14px 13px auto;
+  border: 1px solid rgba(63, 137, 245, 0.68);
+  border-radius: 9px;
+  padding: 8px 11px;
+  background: rgba(25, 76, 143, 0.44);
+  color: #d9e8ff;
+  font-size: 10px;
+  pointer-events: none;
+}
+
+.prediction-entry .prediction-inline-analysis {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 1180px) {
+  .prediction-list { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 680px) {
+  .smart-match-main { grid-template-columns: 1fr; }
+  .smart-match-meta { flex-wrap: wrap; }
+  .smart-match-meta > strong { order: 3; width: 100%; }
+  .smart-team-matchup .prediction-team { flex-direction: column; text-align: center; }
+  .smart-team-matchup .prediction-team:last-child { flex-direction: column; text-align: center; }
+  .smart-best-pick { grid-template-columns: minmax(0, 1fr) auto; }
+  .smart-outcome-strip { flex-wrap: wrap; }
+}
+
 * {
   box-sizing: border-box;
 }
@@ -10417,4 +10624,25 @@ body .topbar .subtitle {
   .selected-team-count strong {
     font-size: 27px;
   }
+}
+
+/* Final cascade for the shared smart match-card layout. */
+.prediction-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.prediction-card-pro.prediction-card-smart {
+  display: block;
+  min-height: 0;
+  padding: 0;
+}
+
+.prediction-card-smart .prediction-team {
+  display: flex;
+}
+
+@media (max-width: 1180px) {
+  .prediction-list { grid-template-columns: 1fr; }
 }

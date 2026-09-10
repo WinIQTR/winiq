@@ -1824,6 +1824,182 @@
   }
 }
 
+/* Approved smart fixture system — Predictions, All Matches and Results. */
+.smartNavigation {
+  margin-bottom: 0;
+  border: 1px solid rgb(55 91 140 / 58%);
+  border-bottom: 0;
+  border-radius: 16px 16px 0 0;
+  padding: 14px 14px 10px;
+  background: linear-gradient(145deg, rgb(11 34 62 / 96%), rgb(8 26 47 / 94%));
+}
+
+.viewSwitch { width: min(100%, 680px); }
+
+.smartNavigation + .weekWindow,
+.smartNavigation + .smartToolbar,
+.weekWindow + .smartToolbar {
+  border-radius: 0;
+}
+
+.weekWindow {
+  margin-bottom: 0;
+  border-right-color: rgb(55 91 140 / 58%);
+  border-left-color: rgb(55 91 140 / 58%);
+}
+
+.smartToolbar {
+  border-color: rgb(55 91 140 / 58%);
+  border-radius: 0 0 16px 16px !important;
+  background: linear-gradient(145deg, rgb(10 30 54 / 96%), rgb(7 23 42 / 94%));
+}
+
+.fixtureArchive {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.fixtureArchiveDivider {
+  grid-column: 1 / -1;
+}
+
+.fixtureCard,
+.finishedWorkspace .fixtureCard {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(230px, .92fr);
+  grid-template-areas:
+    "meta decision"
+    "teams decision"
+    "markets markets";
+  gap: 10px 14px;
+  align-items: center;
+  overflow: hidden;
+  padding: 0;
+  border-radius: 16px;
+  background: linear-gradient(145deg, rgb(10 31 55 / 98%), rgb(7 24 43 / 99%));
+  box-shadow: 0 16px 38px rgb(0 0 0 / 18%);
+}
+
+.fixtureCardPublished,
+.finishedWorkspace .fixtureCardPublished {
+  border-color: rgb(48 211 153 / 48%);
+  background: linear-gradient(145deg, rgb(9 43 53 / 98%), rgb(7 24 43 / 99%));
+}
+
+.fixtureCardAdvisory {
+  border-color: rgb(245 184 65 / 46%);
+  background: linear-gradient(145deg, rgb(44 39 20 / 76%), rgb(7 24 43 / 99%) 58%);
+}
+
+.fixtureMeta {
+  grid-area: meta;
+  min-height: 42px;
+  flex-direction: row;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 14px;
+  border-bottom: 1px solid rgb(54 85 126 / 48%);
+}
+
+.fixtureMeta strong {
+  color: #c7d5e9;
+  font-size: 10px;
+}
+
+.fixtureTeams {
+  grid-area: teams;
+  min-height: 88px;
+  padding: 10px 14px 15px;
+}
+
+.fixtureTeams strong { font-size: 12px; }
+.fixtureTeams img { width: 40px; height: 40px; flex-basis: 40px; }
+
+.fixtureDecision {
+  grid-area: decision;
+  align-self: stretch;
+  display: flex;
+  justify-content: center;
+  margin: 10px 10px 10px 0;
+  border: 1px solid rgb(48 211 153 / 52%);
+  border-radius: 12px;
+  padding: 12px;
+  background: linear-gradient(135deg, rgb(12 69 69 / 58%), rgb(8 32 53 / 82%));
+}
+
+.fixtureCardAdvisory .fixtureDecision {
+  border-color: rgb(245 184 65 / 52%);
+  background: linear-gradient(135deg, rgb(89 65 13 / 34%), rgb(23 32 48 / 82%));
+}
+
+.fixtureDecision > strong {
+  color: #8298b7;
+  font-size: 9px;
+  text-transform: uppercase;
+}
+
+.publishedReason,
+.filteredReason {
+  width: 100%;
+}
+
+.publishedReason {
+  grid-template-columns: 1fr auto;
+  gap: 7px 10px;
+}
+
+.publishedReason::before,
+.filteredReason::before {
+  color: #50e6ad;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: .08em;
+  content: "★  EN İYİ ÖNERİ";
+}
+
+.fixtureCardAdvisory .filteredReason::before {
+  color: #ffd15b;
+  content: "★  MODEL DEĞERLENDİRMESİ";
+}
+
+.publishedReason > strong {
+  grid-column: 1 / -1;
+  white-space: normal;
+}
+
+.publishedBadge { grid-column: 2; grid-row: 1; }
+.publishedBetDetails,
+.advisoryBetDetails { grid-column: 1 / -1; }
+
+.fullWidthMarketDetails {
+  grid-area: markets;
+  margin: 0 10px 10px;
+}
+
+.fullWidthMarketDetails > summary {
+  min-height: 38px;
+  border-color: rgb(55 111 185 / 65%);
+  background: rgb(19 57 105 / 43%);
+  color: #d9e8ff;
+}
+
+@media (max-width: 1280px) {
+  .fixtureArchive { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 720px) {
+  .smartNavigation { padding: 10px; }
+  .viewSwitch { grid-template-columns: 1fr; }
+  .fixtureCard,
+  .finishedWorkspace .fixtureCard {
+    grid-template-columns: 1fr;
+    grid-template-areas: "meta" "teams" "decision" "markets";
+  }
+  .fixtureDecision { margin: 0 10px; }
+  .fixtureTeams { min-height: 78px; }
+}
+
 .calendarArea {
   display: flex;
   width: min(100%, 620px);

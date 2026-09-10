@@ -1018,7 +1018,7 @@ export function PredictionsWorkspace({
     <div className={workspaceMode === "FINISHED_RESULTS" ? styles.finishedWorkspace : undefined}>
       {workspaceMode === "PREDICTIONS" ? (
       <section className={styles.smartNavigation}>
-        <div className={`${styles.viewSwitch} ${styles.viewSwitchTwo}`} role="tablist" aria-label="Match views">
+        <div className={styles.viewSwitch} role="tablist" aria-label="Match views">
           <button
             type="button"
             role="tab"
@@ -1048,6 +1048,21 @@ export function PredictionsWorkspace({
             <strong>{locale === "tr" ? "Tüm Maçlar" : "All Matches"}</strong>
             <span>{windowedUpcomingFixtures.length}</span>
           </button>
+
+          <button
+            type="button"
+            role="tab"
+            aria-selected={workspaceView === "FINISHED"}
+            className={
+              workspaceView === "FINISHED"
+                ? styles.viewButtonActive
+                : styles.viewButton
+            }
+            onClick={() => setWorkspaceView("FINISHED")}
+          >
+            <strong>{locale === "tr" ? "Biten Maçlar" : "Finished"}</strong>
+            <span>{allFinishedFixtures.length}</span>
+          </button>
         </div>
 
         <p className={styles.viewExplanation}>
@@ -1059,7 +1074,9 @@ export function PredictionsWorkspace({
               ? locale === "tr"
                 ? "Yalnız henüz başlamamış maçlar. Yeşil resmî öneri, sarı model değerlendirmesidir."
                 : "Upcoming, not-started matches only. Green is official; amber is guidance."
-              : ""}
+              : locale === "tr"
+                ? "Tamamlanan maçlar ve yayımlanmış tahmin sonuçları."
+                : "Completed fixtures and published prediction results."}
         </p>
       </section>
       ) : (

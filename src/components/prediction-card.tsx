@@ -249,31 +249,6 @@ function getConfidenceClass(
   }
 }
 
-function getHighestOutcome(
-  home: number,
-  draw: number,
-  away: number,
-):
-  | "HOME"
-  | "DRAW"
-  | "AWAY" {
-  if (
-    home >= draw &&
-    home >= away
-  ) {
-    return "HOME";
-  }
-
-  if (
-    away >= home &&
-    away >= draw
-  ) {
-    return "AWAY";
-  }
-
-  return "DRAW";
-}
-
 function TeamLogo({
   logo,
   team,
@@ -366,13 +341,6 @@ export function PredictionCard({
   finalAwayScore,
 }: PredictionCardProps) {
   const { locale, t } = useLanguage();
-  const highestOutcome =
-    getHighestOutcome(
-      homeProbability,
-      drawProbability,
-      awayProbability,
-    );
-
   const resultPresentation =
     getResultPresentation(
       kickoffAt,
@@ -388,218 +356,47 @@ export function PredictionCard({
     finalAwayScore !== null;
 
   return (
-    <article className="prediction-card-pro">
-      <div className="prediction-date-column">
-        <span className="date-icon">
-          ◫
-        </span>
+    <article className="prediction-card-pro prediction-card-smart">
+      <header className="smart-match-meta">
+        <span>{leagueName ?? (locale === "tr" ? "FUTBOL" : "FOOTBALL")}</span>
+        <strong>{formatDate(kickoffAt, locale)} · {formatTime(kickoffAt, locale)}</strong>
+        <span className={resultPresentation.className}>{t(resultPresentation.label)}</span>
+      </header>
 
-        <div>
-          <strong>
-            {formatDate(
-              kickoffAt,
-              locale,
-            )}
-          </strong>
-
-          <span>
-            {formatTime(
-              kickoffAt,
-              locale,
-            )}
-          </span>
-
-          {leagueName && (
-            <span>
-              {leagueName}
-            </span>
-          )}
-        </div>
-      </div>
-
-      <div className="prediction-match-column">
-        <div className="prediction-team-matchup">
+      <div className="smart-match-main">
+        <div className="smart-team-matchup">
           <div className="prediction-team">
-            <TeamLogo
-              logo={
-                homeTeamLogo
-              }
-              team={
-                homeTeam
-              }
-            />
-
-            <strong>
-              {homeTeam}
-            </strong>
-
-            <FormIcons results={homeRecentResults} />
+            <TeamLogo logo={homeTeamLogo} team={homeTeam} />
+            <div><strong>{homeTeam}</strong><FormIcons results={homeRecentResults} /></div>
           </div>
-
-          <span className="versus">
-            VS
-          </span>
-
+          <span className="versus">VS</span>
           <div className="prediction-team">
-            <TeamLogo
-              logo={
-                awayTeamLogo
-              }
-              team={
-                awayTeam
-              }
-            />
-
-            <strong>
-              {awayTeam}
-            </strong>
-
-            <FormIcons results={awayRecentResults} />
+            <TeamLogo logo={awayTeamLogo} team={awayTeam} />
+            <div><strong>{awayTeam}</strong><FormIcons results={awayRecentResults} /></div>
           </div>
         </div>
 
-        <div className="prediction-best-pick">
-          Top Pick:{" "}
-          <strong>
-            {t(bestPick)}
-          </strong>
-
-          {bestPickProbability !==
-            undefined && (
-            <>
-              {" • "}
-              %
-              {bestPickProbability.toFixed(
-                1,
-              )}
-            </>
-          )}
-        </div>
-
-        {expectedHomeGoals !==
-          undefined &&
-          expectedAwayGoals !==
-            undefined && (
-            <div className="prediction-best-pick">
-              xG:{" "}
-              <strong>
-                {expectedHomeGoals.toFixed(
-                  2,
-                )}
-                {" - "}
-                {expectedAwayGoals.toFixed(
-                  2,
-                )}
-              </strong>
-            </div>
-          )}
+        <section className="smart-best-pick">
+          <div className="smart-pick-copy">
+            <span>★ {locale === "tr" ? "EN İYİ ÖNERİ" : "BEST PICK"}</span>
+            <strong>{t(bestPick)}</strong>
+            {expectedHomeGoals !== undefined && expectedAwayGoals !== undefined ? (
+              <small>xG {expectedHomeGoals.toFixed(2)} – {expectedAwayGoals.toFixed(2)}</small>
+            ) : null}
+          </div>
+          <div className="smart-pick-score">
+            <strong>%{(bestPickProbability ?? confidenceScore ?? 0).toFixed(0)}</strong>
+            <span className={getConfidenceClass(confidence)}>{t(confidence)}</span>
+          </div>
+        </section>
       </div>
 
-      <div className="prediction-outcomes">
-        <div className="prediction-outcomes-header">
-          <span>
-            {locale === "tr"
-              ? "MAÇ SONUCU OLASILIKLARI"
-              : "MATCH RESULT PROBABILITIES"}
-          </span>
-          <b>1X2</b>
-        </div>
-        <div
-          className={
-            highestOutcome ===
-            "HOME"
-              ? "outcome-box outcome-box-active"
-              : "outcome-box"
-          }
-        >
-          <span>{locale === "tr" ? "MS 1 · EV SAHİBİ" : "1 · HOME"}</span>
-
-          <strong>
-            %
-            {homeProbability.toFixed(
-              1,
-            )}
-          </strong>
-        </div>
-
-        <div
-          className={
-            highestOutcome ===
-            "DRAW"
-              ? "outcome-box outcome-box-active"
-              : "outcome-box"
-          }
-        >
-          <span>{locale === "tr" ? "MS 0 · BERABERLİK" : "X · DRAW"}</span>
-
-          <strong>
-            %
-            {drawProbability.toFixed(
-              1,
-            )}
-          </strong>
-        </div>
-
-        <div
-          className={
-            highestOutcome ===
-            "AWAY"
-              ? "outcome-box outcome-box-active"
-              : "outcome-box"
-          }
-        >
-          <span>{locale === "tr" ? "MS 2 · DEPLASMAN" : "2 · AWAY"}</span>
-
-          <strong>
-            %
-            {awayProbability.toFixed(
-              1,
-            )}
-          </strong>
-        </div>
-      </div>
-
-      <div className="prediction-confidence-column">
-        <span
-          className={
-            getConfidenceClass(
-              confidence,
-            )
-          }
-        >
-          {t(confidence)}
-        </span>
-
-        {confidenceScore !==
-          undefined && (
-          <small>
-            Top Pick Confidence:{" "}
-            {confidenceScore.toFixed(
-              0,
-            )}
-            /100
-          </small>
-        )}
-
-        <span
-          className={
-            resultPresentation.className
-          }
-        >
-          {
-            t(resultPresentation.label)
-          }
-        </span>
-
-        {hasFinalScore && (
-          <small>
-            Final Score:{" "}
-            {finalHomeScore}
-            {" - "}
-            {finalAwayScore}
-          </small>
-        )}
-      </div>
+      <footer className="smart-outcome-strip">
+        <span>1 <b>%{homeProbability.toFixed(1)}</b></span>
+        <span>X <b>%{drawProbability.toFixed(1)}</b></span>
+        <span>2 <b>%{awayProbability.toFixed(1)}</b></span>
+        {hasFinalScore ? <strong>{locale === "tr" ? "Skor" : "Score"}: {finalHomeScore} – {finalAwayScore}</strong> : null}
+      </footer>
     </article>
   );
 }
