@@ -21,21 +21,21 @@ export const MEMBERSHIP_PLAN_FEATURES: Record<MembershipPlanName, readonly strin
     "Günün yayımlanmış tahminleri",
     "1X2, gol ve karşılıklı gol olasılıkları",
     "Takım formu ve temel karşılaştırma",
-    "Günlük akıllı kupon ve sonuç geçmişi",
+    "Tahmin seviyesi ve sonuç başarı özeti",
   ],
   ANALYSIS: [
     "Temel paketteki her şey",
     "19 bahis pazarı ve bütün seçenekler",
     "Oyuncu, kadro, sakatlık ve hakem analizi",
     "xG, risk gerekçesi ve alternatif seçimler",
-    "30 günlük performans ve haftalık kuponlar",
+    "Geçmiş performans, adil oran ve ayrıntılı karşılaştırma",
   ],
   PROFESSIONAL: [
     "Analiz paketindeki her şey",
     "27 bahis pazarının tamamı",
     "Korner, kart, ofsayt, şut ve oyuncu pazarları",
     "Adil oran, veri kalitesi, piyasa farkı ve EV",
-    "Profesyonel filtreler, sürpriz kuponlar ve tam analiz",
+    "Fikstür, oyuncular, gol krallığı ve tam analiz",
   ],
 };
 

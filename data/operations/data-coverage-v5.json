@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-10T14:27:02.890Z",
+  "generatedAt": "2026-09-11T03:30:48.839Z",
   "seasonYear": 2026,
   "api": {
     "state": "CONNECTED",
@@ -14,13 +14,13 @@
   "totals": {
     "leagues": 9,
     "fixtures": 2882,
-    "finished": 622,
-    "scheduled": 2260,
+    "finished": 628,
+    "scheduled": 2254,
     "live": 0,
     "postponedOrCancelled": 0,
     "missingFinalScores": 0,
-    "publishedCandidates": 281,
-    "lastDatabaseUpdateAt": "2026-09-10T14:26:21.411Z"
+    "publishedCandidates": 282,
+    "lastDatabaseUpdateAt": "2026-09-11T03:30:10.576Z"
   },
   "leagues": [
     {
@@ -33,7 +33,7 @@
       "postponedOrCancelled": 0,
       "missingFinalScores": 0,
       "publishedCandidates": 27,
-      "lastDatabaseUpdateAt": "2026-09-10T14:26:19.528Z"
+      "lastDatabaseUpdateAt": "2026-09-11T03:30:08.170Z"
     },
     {
       "leagueApiId": 140,
@@ -44,8 +44,8 @@
       "live": 0,
       "postponedOrCancelled": 0,
       "missingFinalScores": 0,
-      "publishedCandidates": 43,
-      "lastDatabaseUpdateAt": "2026-09-10T14:26:17.630Z"
+      "publishedCandidates": 44,
+      "lastDatabaseUpdateAt": "2026-09-11T03:30:05.763Z"
     },
     {
       "leagueApiId": 61,
@@ -57,7 +57,7 @@
       "postponedOrCancelled": 0,
       "missingFinalScores": 0,
       "publishedCandidates": 30,
-      "lastDatabaseUpdateAt": "2026-09-10T14:26:20.153Z"
+      "lastDatabaseUpdateAt": "2026-09-11T03:30:08.996Z"
     },
     {
       "leagueApiId": 39,
@@ -69,7 +69,7 @@
       "postponedOrCancelled": 0,
       "missingFinalScores": 0,
       "publishedCandidates": 32,
-      "lastDatabaseUpdateAt": "2026-09-10T14:26:16.980Z"
+      "lastDatabaseUpdateAt": "2026-09-11T03:30:04.831Z"
     },
     {
       "leagueApiId": 135,
@@ -81,7 +81,7 @@
       "postponedOrCancelled": 0,
       "missingFinalScores": 0,
       "publishedCandidates": 33,
-      "lastDatabaseUpdateAt": "2026-09-10T14:26:18.894Z"
+      "lastDatabaseUpdateAt": "2026-09-11T03:30:07.414Z"
     },
     {
       "leagueApiId": 203,
@@ -93,19 +93,19 @@
       "postponedOrCancelled": 0,
       "missingFinalScores": 0,
       "publishedCandidates": 32,
-      "lastDatabaseUpdateAt": "2026-09-10T14:26:18.260Z"
+      "lastDatabaseUpdateAt": "2026-09-11T03:30:06.635Z"
     },
     {
       "leagueApiId": 2,
       "leagueName": "UEFA Champions League",
       "fixtures": 234,
-      "finished": 102,
-      "scheduled": 132,
+      "finished": 108,
+      "scheduled": 126,
       "live": 0,
       "postponedOrCancelled": 0,
       "missingFinalScores": 0,
       "publishedCandidates": 58,
-      "lastDatabaseUpdateAt": "2026-09-10T14:26:20.794Z"
+      "lastDatabaseUpdateAt": "2026-09-11T03:30:09.820Z"
     },
     {
       "leagueApiId": 848,
@@ -129,7 +129,7 @@
       "postponedOrCancelled": 0,
       "missingFinalScores": 0,
       "publishedCandidates": 12,
-      "lastDatabaseUpdateAt": "2026-09-10T14:26:21.411Z"
+      "lastDatabaseUpdateAt": "2026-09-11T03:30:10.576Z"
     }
   ],
   "production": {

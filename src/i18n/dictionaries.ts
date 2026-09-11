@@ -361,7 +361,6 @@ const entries: TranslationEntry[] = [
   { en: "90%+ MODEL PICKS", tr: "%90+ MODEL TAHMİNLERİ" },
   { en: "RELIABILITY PERFORMANCE", tr: "GÜVENİLİRLİK PERFORMANSI" },
   { en: "VALIDATION SUMMARY", tr: "DOĞRULAMA ÖZETİ" },
-  { en: "WIN", tr: "KAZANDI" },
   { en: "LOSS", tr: "KAYBETTİ" },
   { en: "Excluded", tr: "Dahil Değil" },
   { en: "LEAGUE PERFORMANCE", tr: "LİG PERFORMANSI" },

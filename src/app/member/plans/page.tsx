@@ -1,7 +1,6 @@
-import Link from "next/link";
-
 import { MembershipPlanSelector } from "@/components/membership-plan-selector";
-import { LanguageSwitcher } from "@/components/language-switcher";
+import { MemberPortalHeader } from "@/components/member-smart-dashboard";
+import member from "@/components/member-smart-dashboard.module.css";
 import { requireMember } from "@/lib/auth-session";
 import {
   DEFAULT_MEMBERSHIP_PRICES,
@@ -30,14 +29,15 @@ export default async function MembershipPlansPage() {
   const payment = getMembershipPaymentSettings();
 
   return (
-    <main className="member-shell member-plans-shell">
+    <main className={`${member.shell} member-plans-shell`}>
+      <MemberPortalHeader plan={user.plan} active="plans"/>
+      <div className={member.page}>
       <header className="member-header">
         <div>
           <p className="member-eyebrow">ÜYELİK PAKETLERİ</p>
           <h1>Paketinizi karşılaştırın</h1>
           <p>Mevcut paketiniz: {MEMBERSHIP_PLAN_LABELS[user.plan]}</p>
         </div>
-        <div className="member-actions"><LanguageSwitcher /><Link className="member-back-link" href="/member">Tahminlere dön</Link></div>
       </header>
 
       <section className={`membership-expiry ${remainingDays !== null && remainingDays <= 7 ? "membership-expiry-warning" : ""}`}>
@@ -76,6 +76,7 @@ export default async function MembershipPlansPage() {
       <section className="member-notice">
         Talep gönderildiğinde yönetici sizinle iletişime geçer. Ödeme alınmadan paket otomatik etkinleştirilmez.
       </section>
+      </div>
     </main>
   );
 }

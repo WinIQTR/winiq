@@ -1,617 +1,91 @@
+import Image from "next/image";
 import Link from "next/link";
 
-import {
-  MetricCard,
-} from "@/components/metric-card";
-
-import {
-  PageShell,
-} from "@/components/page-shell";
-
-import {
-  ExpandablePredictionList,
-} from "@/components/expandable-prediction-list";
-
-import {
-  ACTIVE_SEASON_YEAR,
-  isDateInSeason,
-} from "@/config/season";
-
-import {
-  loadDashboardPredictionSnapshot,
-} from "@/lib/prediction-dashboard-snapshot";
-
+import { PageShell } from "@/components/page-shell";
+import { ACTIVE_SEASON_YEAR, isDateInSeason } from "@/config/season";
 import { requireAdmin } from "@/lib/auth-session";
+import { selectStrongestDashboardPredictions } from "@/lib/daily-strongest-predictions";
+import { loadDashboardPredictionSnapshot } from "@/lib/prediction-dashboard-snapshot";
+import { getPredictionLabel, type DashboardPrediction } from "@/lib/prediction-dashboard-shared";
 
-import {
-  SELECTION_POLICY_V2_THRESHOLDS,
-} from "@/lib/selection-policy-explanation";
+import styles from "./admin-dashboard.module.css";
 
-import {
-  selectStrongestDashboardPredictions,
-} from "@/lib/daily-strongest-predictions";
+const TURKEY_TIME_ZONE = "Europe/Istanbul";
 
-function formatPercentage(
-  value: number,
-): string {
-  return `${value.toFixed(1)}%`;
+function formatTime(value: Date): string {
+  return new Intl.DateTimeFormat("tr-TR", { timeZone: TURKEY_TIME_ZONE, day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" }).format(value);
 }
 
-export default async function HomePage() {
-  await requireAdmin();
-
-  const snapshotPredictions =
-    await loadDashboardPredictionSnapshot(
-      5_000,
-    );
-
-  const predictions =
-    snapshotPredictions.filter(
-      (prediction) =>
-        isDateInSeason(
-          prediction.kickoffAt,
-          ACTIVE_SEASON_YEAR,
-        ),
-    );
-
-  const primaryHomeCandidates =
-    predictions.filter(
-      (
-        prediction,
-      ) =>
-        prediction.productionCandidateType ===
-        "PRIMARY_HOME",
-    );
-
-  const reviewAwayCandidates =
-    predictions.filter(
-      (
-        prediction,
-      ) =>
-        prediction.productionCandidateType ===
-        "REVIEW_AWAY",
-    );
-
-  const strongestSelection =
-    selectStrongestDashboardPredictions(
-      primaryHomeCandidates,
-      predictions,
-    );
-
-  const strongestPredictions =
-    strongestSelection.predictions;
-
-  const strongestHeading =
-    strongestSelection.mode === "STRICT_TODAY"
-      ? "Today's Strongest Fixtures"
-      : strongestSelection.mode === "BEST_TODAY"
-        ? "Today's Best Available Fixtures"
-        : strongestSelection.mode === "UPCOMING"
-          ? "Strongest Upcoming Fixtures"
-          : "Best Available Fixtures";
-
-  const strongestDescription =
-    strongestSelection.mode === "STRICT_TODAY"
-      ? `Today in Türkiye time, ordered by kickoff. HOME outcome only, at least ${SELECTION_POLICY_V2_THRESHOLDS.minimumProbability}% probability, HIGH/VERY HIGH reliability, and ${SELECTION_POLICY_V2_THRESHOLDS.minimumDataQuality}+ data quality.`
-      : strongestSelection.mode === "BEST_TODAY"
-        ? "No fixture met every strict publication rule today. Showing today's highest-scoring available model candidates instead."
-        : strongestSelection.mode === "UPCOMING"
-          ? "No suitable fixture is scheduled today. Showing the highest-scoring candidates from the upcoming fixture window."
-          : "Showing the highest-scoring candidates currently available in the published snapshot.";
-
-  const veryHighConfidenceCount =
-    predictions.filter(
-      (
-        prediction,
-      ) =>
-        prediction.confidenceLevel ===
-        "VERY_HIGH",
-    ).length;
-
-  const highConfidenceCount =
-    predictions.filter(
-      (
-        prediction,
-      ) =>
-        prediction.confidenceLevel ===
-          "HIGH" ||
-        prediction.confidenceLevel ===
-          "VERY_HIGH",
-    ).length;
-
-  const averageConfidence =
-    predictions.length >
-    0
-      ? predictions.reduce(
-          (
-            total,
-            prediction,
-          ) =>
-            total +
-            prediction.confidenceScore,
-          0,
-        ) /
-        predictions.length
-      : 0;
-
-  const averagePredictionProbability =
-    predictions.length >
-    0
-      ? predictions.reduce(
-          (
-            total,
-            prediction,
-          ) =>
-            total +
-            prediction.predictedProbability,
-          0,
-        ) /
-        predictions.length
-      : 0;
-
-  return (
-    <PageShell>
-      <header className="topbar dashboard-topbar">
-        <div>
-          <p className="eyebrow">
-            AI FOOTBALL PREDICTIONS
-            {" • "}
-            {ACTIVE_SEASON_YEAR}
-          </p>
-
-          <h1>
-            Prediction Dashboard
-          </h1>
-
-          <p className="subtitle">
-            Production candidates from upcoming fixtures, validated by the
-            20% ML / 80% Poisson model and Selection Policy V2.
-          </p>
-        </div>
-
-        <span className="mode-badge">
-          PUBLISHED DATA
-        </span>
-      </header>
-
-      <section className="metric-grid dashboard-metrics">
-        <MetricCard
-          label="Production Candidates"
-          value={
-            predictions.length
-          }
-          description={`${primaryHomeCandidates.length} primary HOME candidates`}
-        />
-
-        <MetricCard
-          label="High Reliability"
-          value={
-            highConfidenceCount
-          }
-          description={`${veryHighConfidenceCount} very high`}
-        />
-
-        <MetricCard
-          label="Average Reliability"
-          value={
-            formatPercentage(
-              averageConfidence,
-            )
-          }
-          description="Combined model reliability"
-        />
-
-        <MetricCard
-          label="Average Probability"
-          value={
-            formatPercentage(
-              averagePredictionProbability,
-            )
-          }
-          description="Final 1X2 probability"
-        />
-
-        <MetricCard
-          label="AWAY Review"
-          value={
-            reviewAwayCandidates.length
-          }
-          description="Limited holdout sample"
-        />
-      </section>
-
-      <section className="dashboard-main-grid">
-        <div className="dashboard-primary-column">
-          <article className="dashboard-section">
-            <div className="dashboard-section-header">
-              <div>
-                <p className="eyebrow">
-                  TOP PREDICTIONS
-                </p>
-
-                <h2>
-                  {strongestHeading}
-                </h2>
-
-                <p className="dashboard-muted">
-                  {strongestDescription}
-                </p>
-              </div>
-
-              <Link
-                href="/predictions"
-                className="dashboard-link"
-              >
-                View All Predictions →
-              </Link>
-            </div>
-
-            {strongestPredictions.length ===
-            0 ? (
-              <div className="empty-state">
-                <h2>
-                  No Strong Predictions Today
-                </h2>
-
-                <p>
-                  No primary HOME candidate meets the publication criteria
-                  today in Türkiye time.
-                </p>
-
-                <p>
-                  Run the archive job after refreshing fixtures to publish the
-                  next dashboard snapshot.
-                </p>
-              </div>
-            ) : (
-              <div className="dashboard-prediction-list">
-                <ExpandablePredictionList
-                  predictions={
-                    strongestPredictions
-                  }
-                />
-              </div>
-            )}
-          </article>
-        </div>
-
-        <aside className="dashboard-side-column">
-          <article className="dashboard-panel">
-            <div className="dashboard-panel-heading">
-              <div>
-                <p className="eyebrow">
-                  LIVE PIPELINE
-                </p>
-
-                <h2>
-                  Active Prediction Pipeline
-                </h2>
-              </div>
-
-              <Link
-                href="/predictions"
-                className="dashboard-link"
-              >
-                Open →
-              </Link>
-            </div>
-
-            <div className="dashboard-validation-block">
-              <span>
-                Prediction Flow
-              </span>
-
-              <strong>
-                %20 ML
-                {" → "}
-                %80 Poisson
-                {" → "}
-                Policy V2
-              </strong>
-
-              <small>
-                DRAW is audit-only and does not change the production outcome.
-              </small>
-            </div>
-
-            <div className="dashboard-rule-grid">
-              <div>
-                <span>
-                  Active Season
-                </span>
-
-                <strong>
-                  {ACTIVE_SEASON_YEAR}
-                </strong>
-              </div>
-
-              <div>
-                <span>
-                  Total Candidates
-                </span>
-
-                <strong>
-                  {predictions.length}
-                </strong>
-              </div>
-
-              <div>
-                <span>
-                  Primary HOME
-                </span>
-
-                <strong>
-                  {primaryHomeCandidates.length}
-                </strong>
-              </div>
-
-              <div>
-                <span>
-                  AWAY Review
-                </span>
-
-                <strong>
-                  {reviewAwayCandidates.length}
-                </strong>
-              </div>
-            </div>
-          </article>
-
-          <article className="dashboard-panel">
-            <div className="dashboard-panel-heading">
-              <div>
-                <p className="eyebrow">
-                  MARKET STRUCTURE
-                </p>
-
-                <h2>
-                  Publication Filter
-                </h2>
-              </div>
-            </div>
-
-            <div className="dashboard-performance-list">
-              <div>
-                  <span>
-                  Prediction Outcome
-                </span>
-
-                <strong>
-                  HOME / AWAY
-                </strong>
-              </div>
-
-              <div>
-                <span>
-                  Minimum Probability
-                </span>
-
-                <strong>
-                  {SELECTION_POLICY_V2_THRESHOLDS.minimumProbability}%
-                </strong>
-              </div>
-
-              <div>
-                <span>
-                  Reliability Tier
-                </span>
-
-                <strong>
-                  HIGH / VERY_HIGH
-                </strong>
-              </div>
-
-              <div>
-                <span>
-                  Data Quality
-                </span>
-
-                <strong>
-                  {SELECTION_POLICY_V2_THRESHOLDS.minimumDataQuality} minimum
-                </strong>
-              </div>
-
-              <div>
-                <span>
-                  DRAW
-                </span>
-
-                <strong>
-                  Audit only
-                </strong>
-              </div>
-            </div>
-          </article>
-
-          <article className="dashboard-panel">
-            <p className="eyebrow">
-              MODEL HEALTH
-            </p>
-
-            <h2>
-              System Status
-            </h2>
-
-            <div className="dashboard-system-status">
-              <div>
-                <span className="status-dot" />
-
-                <span>
-                  PostgreSQL
-                </span>
-
-                <strong>
-                  Active
-                </strong>
-              </div>
-
-              <div>
-                <span className="status-dot" />
-
-                <span>
-                  Feature Engine
-                </span>
-
-                <strong>
-                  V2
-                </strong>
-              </div>
-
-              <div>
-                <span className="status-dot" />
-
-                <span>
-                  Rating Engine
-                </span>
-
-                <strong>
-                  V2
-                </strong>
-              </div>
-
-              <div>
-                <span className="status-dot" />
-
-                <span>
-                  Prediction Engine
-                </span>
-
-                <strong>
-                  20/80 Production
-                </strong>
-              </div>
-
-              <div>
-                <span className="status-dot" />
-
-                <span>
-                  Market Engine
-                </span>
-
-                <strong>
-                  Active
-                </strong>
-              </div>
-
-              <div>
-                <span className="status-dot" />
-
-                <span>
-                  Top Picks
-                </span>
-
-                <strong>
-                  Selection Policy V2
-                </strong>
-              </div>
-
-              <div>
-                <span className="status-dot" />
-
-                <span>
-                  API-Football
-                </span>
-
-                <strong>
-                  Connected
-                </strong>
-              </div>
-            </div>
-          </article>
-
-          <article className="dashboard-panel">
-            <p className="eyebrow">
-              CONFIDENCE
-            </p>
-
-            <h2>
-              Reliability Distribution
-            </h2>
-
-            <div className="dashboard-performance-list">
-              <div>
-                <span>
-                  Very High
-                </span>
-
-                <strong>
-                  {
-                    predictions.filter(
-                      (
-                        prediction,
-                      ) =>
-                        prediction.confidenceLevel ===
-                        "VERY_HIGH",
-                    ).length
-                  }
-                </strong>
-              </div>
-
-              <div>
-                <span>
-                  High
-                </span>
-
-                <strong>
-                  {
-                    predictions.filter(
-                      (
-                        prediction,
-                      ) =>
-                        prediction.confidenceLevel ===
-                        "HIGH",
-                    ).length
-                  }
-                </strong>
-              </div>
-
-              <div>
-                <span>
-                  Medium
-                </span>
-
-                <strong>
-                  {
-                    predictions.filter(
-                      (
-                        prediction,
-                      ) =>
-                        prediction.confidenceLevel ===
-                        "MEDIUM",
-                    ).length
-                  }
-                </strong>
-              </div>
-
-              <div>
-                <span>
-                  Low
-                </span>
-
-                <strong>
-                  {
-                    predictions.filter(
-                      (
-                        prediction,
-                      ) =>
-                        prediction.confidenceLevel ===
-                          "LOW" ||
-                        prediction.confidenceLevel ===
-                          "VERY_LOW",
-                    ).length
-                  }
-                </strong>
-              </div>
-            </div>
-          </article>
-        </aside>
-      </section>
-
-      <div className="dashboard-disclaimer">
-        Odds shown here are fair odds calculated from model probabilities, not
-        bookmaker prices. Value Bet comparisons will appear separately after
-        live bookmaker odds are connected.
+function translateSelection(value: string): string {
+  return value.replace(/Home Team Goals/gi, "Ev sahibi takım golü").replace(/Away Team Goals/gi, "Deplasman takım golü").replace(/Total Goals/gi, "Toplam gol").replace(/Both Teams To Score/gi, "Karşılıklı gol").replace(/Under/gi, "Alt").replace(/Over/gi, "Üst").replace(/Home/gi, "Ev sahibi").replace(/Away/gi, "Deplasman").replace(/Draw/gi, "Beraberlik");
+}
+
+function fairOdds(prediction: DashboardPrediction): number {
+  return prediction.predictedProbability > 0 ? 100 / prediction.predictedProbability : 0;
+}
+
+function outcomeLabel(prediction: DashboardPrediction): string {
+  if (prediction.predictedOutcome === "HOME") return "1 (Ev sahibi)";
+  if (prediction.predictedOutcome === "AWAY") return "2 (Deplasman)";
+  return "X (Beraberlik)";
+}
+
+function TeamLogo({ src, name }: { src: string | null; name: string }) {
+  return src ? <Image src={src} alt={`${name} logosu`} width={42} height={42} /> : <span className={styles.logoFallback}>{name.slice(0, 2).toUpperCase()}</span>;
+}
+
+function PredictionRow({ prediction }: { prediction: DashboardPrediction }) {
+  const reasons = prediction.topPicks[0]?.reasons.slice(0, 2) ?? [];
+  return <article className={styles.matchCard}>
+    <div className={styles.matchMain}>
+      <div className={styles.matchMeta}><strong>{prediction.leagueName}</strong><span>{formatTime(prediction.kickoffAt)}</span></div>
+      <div className={styles.teams}>
+        <div><TeamLogo src={prediction.homeTeamLogo} name={prediction.homeTeam}/><strong>{prediction.homeTeam}</strong></div><b>–</b>
+        <div><TeamLogo src={prediction.awayTeamLogo} name={prediction.awayTeam}/><strong>{prediction.awayTeam}</strong></div>
       </div>
-    </PageShell>
-  );
+      <div className={styles.probabilities}>
+        <span>1 <b>%{prediction.homeProbability.toFixed(0)}</b><i style={{width:`${prediction.homeProbability}%`}}/></span>
+        <span>X <b>%{prediction.drawProbability.toFixed(0)}</b><i style={{width:`${prediction.drawProbability}%`}}/></span>
+        <span>2 <b>%{prediction.awayProbability.toFixed(0)}</b><i style={{width:`${prediction.awayProbability}%`}}/></span>
+      </div>
+      <div className={styles.xg}><span>Beklenen gol</span><strong>{(prediction.expectedHomeGoals + prediction.expectedAwayGoals).toFixed(1)}</strong></div>
+      <div className={styles.choice}><span className={styles.strongBadge}>GÜÇLÜ</span><small>En iyi seçim</small><strong>{translateSelection(getPredictionLabel(prediction))}</strong></div>
+      <div className={styles.confidence}><span>Güven</span><strong>%{prediction.confidenceScore.toFixed(0)}</strong></div>
+      <div className={styles.odds}><span>Adil oran</span><strong>{fairOdds(prediction).toFixed(2)}</strong></div>
+    </div>
+    <div className={styles.reasonBar}><strong>⌄ &nbsp; Neden bu tahmin?</strong>{reasons.length ? reasons.map((reason) => <span key={reason}>◆ {reason}</span>) : <span>◆ Model olasılığı, güven ve veri kalitesi birlikte değerlendirildi.</span>}<Link href={`/predictions?match=${prediction.matchId}`}>Analizi gör →</Link></div>
+  </article>;
+}
+
+export default async function AdminDashboardPage() {
+  await requireAdmin();
+  const now = new Date();
+  const archive = await loadDashboardPredictionSnapshot(5_000);
+  const predictions = archive.filter((item) => isDateInSeason(item.kickoffAt, ACTIVE_SEASON_YEAR)).filter((item) => item.kickoffAt >= now && (item.settlementStatus === undefined || item.settlementStatus === "PENDING"));
+  const primary = predictions.filter((item) => item.productionCandidateType === "PRIMARY_HOME");
+  const selected = selectStrongestDashboardPredictions(primary, predictions).predictions;
+  const strongest = selected[0] ?? [...predictions].sort((a,b) => b.productionScore-a.productionScore)[0];
+  const featured = selected.slice(0, 3);
+  const highConfidence = predictions.filter((item) => item.confidenceScore >= 70);
+  const strong150 = highConfidence.filter((item) => fairOdds(item) >= 1.5).sort((a,b) => b.confidenceScore-a.confidenceScore).slice(0, 5);
+  const averageConfidence = predictions.length ? predictions.reduce((sum,item)=>sum+item.confidenceScore,0)/predictions.length : 0;
+  const averageProbability = predictions.length ? predictions.reduce((sum,item)=>sum+item.predictedProbability,0)/predictions.length : 0;
+  const popular = ["HOME","DRAW","AWAY"].map(outcome=>({outcome,count:predictions.filter(item=>item.predictedOutcome===outcome).length})).sort((a,b)=>b.count-a.count)[0]?.outcome;
+  const popularLabel = popular === "HOME" ? "Ev Sahibi" : popular === "AWAY" ? "Deplasman" : "Beraberlik";
+
+  return <PageShell><main className={styles.page}>
+    <header className={styles.hero}><div><p><i/> AI FUTBOL TAHMİNLERİ · CANLI VERİ</p><h1>Tahmin Merkezi</h1><span>Yapay zekâ destekli en güçlü maç tahminleri, tek ekranda.</span></div><aside><small>DAHA FAZLA ANALİZ</small><small>DAHA FAZLA KAZANÇ</small><i/></aside></header>
+    <section className={styles.metrics}>
+      <article><span>▣</span><div><small>Yaklaşan maç</small><strong>{predictions.length}</strong></div></article><article><span>♢</span><div><small>Yüksek güven</small><strong>{highConfidence.length}</strong></div></article><article><span>▥</span><div><small>Ortalama güven</small><strong>%{averageConfidence.toFixed(0)}</strong></div></article><article><span>◎</span><div><small>Ortalama tahmin</small><strong>%{averageProbability.toFixed(0)}</strong></div></article><article><span>♟</span><div><small>Popüler seçim</small><strong>{popularLabel}</strong></div></article>
+    </section>
+    <div className={styles.layout}>
+      <section className={styles.predictionPanel}><header><div><h2>EN GÜÇLÜ TAHMİNLER</h2><p>En güçlü yaklaşan maçlar</p></div><Link href="/predictions">Tüm tahminler →</Link></header><div className={styles.matchList}>{featured.length ? featured.map(item=><PredictionRow prediction={item} key={item.matchId}/>) : <div className={styles.empty}>Yaklaşan güçlü tahmin bulunamadı. Veri yenilendiğinde burada gösterilecek.</div>}</div></section>
+      <aside className={styles.side}>
+        <section className={styles.featured}><header><span>★</span><div><h2>BUGÜNÜN ÖNE ÇIKANI</h2><p>En güçlü yaklaşan tahmin</p></div></header>{strongest ? <><div className={styles.featuredTeam}><TeamLogo src={strongest.predictedOutcome==="AWAY"?strongest.awayTeamLogo:strongest.homeTeamLogo} name={strongest.predictedOutcome==="AWAY"?strongest.awayTeam:strongest.homeTeam}/><div><strong>{strongest.predictedOutcome==="AWAY"?strongest.awayTeam:strongest.homeTeam}</strong><span>{outcomeLabel(strongest)}</span></div><b>GÜÇLÜ</b></div><div className={styles.featuredStats}><span>Güven <b>%{strongest.confidenceScore.toFixed(0)}</b></span><span>Oran <b>{fairOdds(strongest).toFixed(2)}</b></span><span>Beklenen gol <b>{(strongest.expectedHomeGoals+strongest.expectedAwayGoals).toFixed(1)}</b></span></div><Link href={`/predictions?match=${strongest.matchId}`}>▥ &nbsp; Analizi Gör →</Link></> : <div className={styles.empty}>Veri bekleniyor</div>}</section>
+        <section className={styles.strongOdds}><header><span>♢</span><div><h2>GÜÇLÜ 1.50+ SEÇİMLER</h2><p>Yüksek oranlı, güvenilir tahminler</p></div><Link href="/predictions">Tümünü Gör →</Link></header><ol>{strong150.length ? strong150.map((item,index)=><li key={item.matchId}><span>{index+1}</span><div><strong>{item.homeTeam} – {item.awayTeam}</strong><small>{outcomeLabel(item)}</small></div><b>{fairOdds(item).toFixed(2)}</b><em>%{item.confidenceScore.toFixed(0)}</em></li>) : <li className={styles.noOdds}>1.50 üzeri güçlü seçim bulunamadı.</li>}</ol></section>
+        <section className={styles.modelStatus}><header><span>◉</span><h2>MODEL DURUMU</h2><b><i/> Canlı ve aktif</b></header><div><span>Son veri kontrolü <b>Şimdi</b></span><span>Analiz edilen maç <b>{archive.length.toLocaleString("tr-TR")}</b></span><span>Tüm sistemler <b>Aktif</b></span></div><aside>✓ <span><strong>Model normal çalışıyor</strong><small>En güncel verilerle tahmin üretiliyor.</small></span></aside></section>
+      </aside>
+    </div>
+    <footer className={styles.footer}><b>WINIQ</b><span>Daha akıllı tahminler. Daha büyük fırsatlar.</span><small>Futbol bir oyundur, istatistikler yol gösterir.</small></footer>
+  </main></PageShell>;
 }
