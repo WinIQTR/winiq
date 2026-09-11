@@ -10685,3 +10685,9 @@ body .topbar .subtitle {
 .prediction-card-smart .prediction-team {
   display: flex;
 }
+/* WINIQ ortak okunabilirlik ve responsive ölçek sistemi */
+:root{--w-size-body:15px;--w-size-small:13px;--w-size-label:12px}
+body{font-size:var(--w-size-body)}
+@media (max-width:1024px){body{font-size:14px}.sidebar{width:220px}}
+@media (max-width:768px){body{font-size:14px}.sidebar{width:100%;position:relative}.page-shell{display:block}.sidebar .nav{display:flex;overflow-x:auto}.sidebar .nav-item{white-space:nowrap}}
+@media (max-width:430px){body{font-size:14px}.member-shell{overflow-x:hidden}.member-page h1{font-size:clamp(30px,9vw,42px)}}

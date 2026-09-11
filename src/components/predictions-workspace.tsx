@@ -62,7 +62,7 @@ type FixtureWindowWeeks = 1 | 2 | 3;
 type QuickFilter =
   | "ALL"
   | "TOP_5"
-  | "OVER_60"
+  | "FAIR_ODDS"
   | "HIGH_CONFIDENCE"
   | "HOME"
   | "AWAY";
@@ -738,21 +738,16 @@ export function PredictionsWorkspace({
 
         if (
           quickFilter ===
-          "OVER_60"
+          "FAIR_ODDS"
         ) {
           result =
             result.filter(
               (
                 prediction,
               ) =>
-                (
-                  prediction
-                    .topPicks[0]
-                    ?.probability ??
-                  0
-                ) >=
-                60,
+                (prediction.topPicks[0]?.fairOdds ?? 0) > 0,
             );
+          result.sort((first, second) => (second.topPicks[0]?.fairOdds ?? 0) - (first.topPicks[0]?.fairOdds ?? 0));
         }
 
         if (
@@ -799,8 +794,8 @@ export function PredictionsWorkspace({
         }
 
         if (
-          quickFilter !==
-          "TOP_5"
+        quickFilter !==
+        "TOP_5" && quickFilter !== "FAIR_ODDS"
         ) {
           result.sort(
             (
@@ -1226,17 +1221,17 @@ export function PredictionsWorkspace({
           type="button"
           className={
             quickFilter ===
-            "OVER_60"
+            "FAIR_ODDS"
               ? "quick-filter quick-filter-active"
               : "quick-filter"
           }
           onClick={() =>
             setQuickFilter(
-              "OVER_60",
+              "FAIR_ODDS",
             )
           }
         >
-          %60+
+          En yüksek adil oran
         </button>
 
         <button

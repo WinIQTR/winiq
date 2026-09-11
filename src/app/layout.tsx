@@ -16,8 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Bet Project AI",
-  description: "AI football prediction and model performance platform",
+  title: "WINIQ · AI Futbol Tahminleri",
+  description: "WINIQ profesyonel futbol verileri, fikstür ve tahmin merkezi",
 };
 
 export const viewport: Viewport = {
@@ -33,7 +33,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="tr"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">

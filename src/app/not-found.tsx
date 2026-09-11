@@ -5,7 +5,7 @@ export default function NotFound() {
     <main className="login-shell">
       <section className="login-card" aria-live="polite">
         <div className="login-mark">AI</div>
-        <p className="member-eyebrow">BET PROJECT</p>
+        <p className="member-eyebrow">WINIQ</p>
         <h1>Sayfa bulunamadı</h1>
         <p>Aradığınız sayfa taşınmış veya hiç var olmamış olabilir.</p>
         <Link

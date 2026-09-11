@@ -100,11 +100,11 @@ export function AppSidebar() {
 
           <div>
             <strong>
-              Bet Project
+              WINIQ
             </strong>
 
             <span>
-              Football Prediction
+              AI Futbol Merkezi
             </span>
           </div>
         </div>

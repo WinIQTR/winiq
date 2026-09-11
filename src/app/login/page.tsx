@@ -7,7 +7,7 @@ export default function LoginPage() {
       <section className="login-card">
         <div className="login-language"><LanguageSwitcher /></div>
         <div className="login-mark">AI</div>
-        <p className="member-eyebrow">BET PROJECT</p>
+        <p className="member-eyebrow">WINIQ</p>
         <h1>Üye girişi</h1>
         <p>Günlük futbol tahminlerinize güvenli biçimde ulaşın.</p>
         <LoginForm />

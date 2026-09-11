@@ -33,7 +33,8 @@ export const MEMBERSHIP_PLAN_FEATURES: Record<MembershipPlanName, readonly strin
   PROFESSIONAL: [
     "Analiz paketindeki her şey",
     "27 bahis pazarının tamamı",
-    "Korner, kart, ofsayt, şut ve oyuncu pazarları",
+    "Toplam gol aralığı, ilk gol ve kesin skor",
+    "Korner aralıkları, kart, ofsayt, şut ve oyuncu golü",
     "Adil oran, veri kalitesi, piyasa farkı ve EV",
     "Fikstür, oyuncular, gol krallığı ve tam analiz",
   ],
