@@ -154,6 +154,26 @@ function sumProbability(
     );
 }
 
+function calculateTotalGoalRanges(scores: ScoreProbability[]): MarketSelection[] {
+  const ranges: Array<[string, number, number | null]> = [["0-1", 0, 1], ["2-3", 2, 3], ["4-5", 4, 5], ["+6", 6, null]];
+  return ranges.map(([label, min, max]) => createSelection({
+    key: `total_goals_range_${label.replace("+", "plus").replace("-", "_")}`,
+    category: "TOTAL_GOALS", market: "Toplam Gol Aralığı", selection: label,
+    probability: sumProbability(scores, score => { const total = score.homeGoals + score.awayGoals; return total >= min && (max === null || total <= max); }),
+  }));
+}
+
+function calculateFirstGoalTeam(scores: ScoreProbability[]): MarketSelection[] {
+  const home = sumProbability(scores, s => s.homeGoals > 0 && s.awayGoals === 0) + sumProbability(scores, s => s.homeGoals > 0 && s.awayGoals > 0) * 0.5;
+  const away = sumProbability(scores, s => s.awayGoals > 0 && s.homeGoals === 0) + sumProbability(scores, s => s.homeGoals > 0 && s.awayGoals > 0) * 0.5;
+  const none = sumProbability(scores, s => s.homeGoals === 0 && s.awayGoals === 0);
+  return [
+    createSelection({ key: "first_goal_home", category: "MATCH_RESULT", market: "İlk Golü Atan Takım", selection: "HOME", probability: home }),
+    createSelection({ key: "first_goal_away", category: "MATCH_RESULT", market: "İlk Golü Atan Takım", selection: "AWAY", probability: away }),
+    createSelection({ key: "first_goal_none", category: "MATCH_RESULT", market: "İlk Golü Atan Takım", selection: "NONE", probability: none }),
+  ];
+}
+
 /*
  * ============================================================
  * MATCH RESULT
@@ -1165,6 +1185,10 @@ export function calculateMarketsFromGoalModel(
       ...calculateTotalGoals(
         scores,
       ),
+
+      ...calculateTotalGoalRanges(scores),
+
+      ...calculateFirstGoalTeam(scores),
 
       ...calculateTeamGoals(
         scores,

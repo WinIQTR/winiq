@@ -178,6 +178,16 @@ export async function calculateCardsCornersMarkets(
   if (homeCorners !== null && awayCorners !== null) {
     const lambda = homeCorners + awayCorners;
 
+    // Kullanıcı dostu toplam korner aralıkları.
+    const ranges: Array<[string, number, number | null]> = [["0-8", 0, 8], ["9-11", 9, 11], ["+12", 12, null]];
+    for (const [label, min, max] of ranges) {
+      let probability = 0;
+      for (let count = 0; count <= 30; count += 1) {
+        if (count >= min && (max === null || count <= max)) probability += poissonProbability(count, lambda);
+      }
+      selections.push(createSelection(`corners_range_${label.replace("+", "plus").replace("-", "_")}`, "CORNERS", "Toplam Korner Aralığı", label, probability));
+    }
+
     for (const line of CORNER_LINES) {
       const { over, under } = overUnderProbability(line, lambda);
 

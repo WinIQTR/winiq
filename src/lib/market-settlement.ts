@@ -158,6 +158,13 @@ export function settleMarketSelection(options: {
     }
   }
 
+  const totalGoalsRangeMatch = /^total_goals_range_(0_1|2_3|4_5|plus6)$/.exec(marketKey);
+  if (totalGoalsRangeMatch) {
+    const ranges: Record<string, [number, number | null]> = { "0_1": [0, 1], "2_3": [2, 3], "4_5": [4, 5], plus6: [6, null] };
+    const [min, max] = ranges[totalGoalsRangeMatch[1]];
+    return wonIf(totalGoals >= min && (max === null || totalGoals <= max));
+  }
+
   const teamGoalsMatch =
     /^(home|away)_team_goals_(over|under)_(\d+(?:\.\d+)?)$/.exec(
       marketKey,
