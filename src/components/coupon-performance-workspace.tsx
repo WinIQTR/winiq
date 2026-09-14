@@ -55,6 +55,15 @@ function percent(value: number | null): string {
   return value === null ? "—" : `%${value.toFixed(1)}`;
 }
 
+const PROBABILITY_BANDS = [
+  { key: "0_49", label: "%0–49", min: 0, max: 50 },
+  { key: "50_59", label: "%50–59", min: 50, max: 60 },
+  { key: "60_69", label: "%60–69", min: 60, max: 70 },
+  { key: "70_79", label: "%70–79", min: 70, max: 80 },
+  { key: "80_89", label: "%80–89", min: 80, max: 90 },
+  { key: "90_100", label: "%90–100", min: 90, max: 101 },
+];
+
 export function CouponPerformanceWorkspace({
   rows,
   report,
@@ -70,6 +79,12 @@ export function CouponPerformanceWorkspace({
     (window === "ALL" || row.window === window) &&
     (result === "ALL" || row.result === result),
   ), [band, result, rows, window]);
+  const probabilitySummary = useMemo(() => PROBABILITY_BANDS.map((bucket) => {
+    const bucketRows = visible.filter((row) => row.combinedModelProbability >= bucket.min && row.combinedModelProbability < bucket.max);
+    const settled = bucketRows.filter((row) => row.result === "WON" || row.result === "LOST");
+    const won = bucketRows.filter((row) => row.result === "WON").length;
+    return { ...bucket, total: bucketRows.length, settled: settled.length, won, lost: bucketRows.filter((row) => row.result === "LOST").length, rate: settled.length ? won / settled.length * 100 : null };
+  }), [visible]);
 
   return <div className={styles.workspace}>
     <header className={styles.hero}>
@@ -90,6 +105,16 @@ export function CouponPerformanceWorkspace({
       {report.byBand.map((item) => <article className={styles[`band${item.key}`]} key={item.key}>
         <span>{BAND_LABEL[item.key] ?? item.key}</span><strong>{percent(item.summary.winRate)}</strong><small>{item.summary.won} kazandı · {item.summary.lost} kaybetti</small>
       </article>)}
+    </section>
+
+    <section className={styles.probabilitySummary}>
+      <header><div><span>MODEL KALİBRASYONU</span><h2>Birleşik model yüzdesi ne kadar isabetli?</h2></div><small>Başarı oranı yalnızca sonuçlanan ve iade olmayan kuponlardan hesaplanır.</small></header>
+      <div className={styles.probabilityGrid}>{probabilitySummary.map((item) => <article key={item.key}>
+        <div><strong>{item.label}</strong><span>{item.total} kupon</span></div>
+        <b>{percent(item.rate)}</b>
+        <small>{item.settled ? `${item.won} kazandı · ${item.lost} kaybetti · ${item.settled} sonuçlandı` : "Henüz sonuçlanan kupon yok"}</small>
+        <i><em style={{ width: `${item.rate ?? 0}%` }} /></i>
+      </article>)}</div>
     </section>
 
     <section className={styles.filters}>

@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "currentLevel": "CRITICAL",
-  "firstSeenAt": "2026-09-07T03:31:12.579Z",
-  "lastObservedAt": "2026-09-11T03:31:18.081Z",
-  "lastNotifiedAt": "2026-09-11T03:31:18.081Z",
-  "notificationCount": 14
+  "currentLevel": "WARNING",
+  "firstSeenAt": "2026-09-14T03:31:16.046Z",
+  "lastObservedAt": "2026-09-14T03:31:16.046Z",
+  "lastNotifiedAt": "2026-09-14T03:31:16.046Z",
+  "notificationCount": 17
 }

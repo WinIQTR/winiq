@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-11T03:30:48.839Z",
+  "generatedAt": "2026-09-14T03:30:47.180Z",
   "seasonYear": 2026,
   "api": {
     "state": "CONNECTED",
@@ -14,78 +14,42 @@
   "totals": {
     "leagues": 9,
     "fixtures": 2882,
-    "finished": 628,
-    "scheduled": 2254,
+    "finished": 679,
+    "scheduled": 2203,
     "live": 0,
     "postponedOrCancelled": 0,
     "missingFinalScores": 0,
-    "publishedCandidates": 282,
-    "lastDatabaseUpdateAt": "2026-09-11T03:30:10.576Z"
+    "publishedCandidates": 295,
+    "lastDatabaseUpdateAt": "2026-09-14T03:30:08.831Z"
   },
   "leagues": [
     {
       "leagueApiId": 78,
       "leagueName": "Bundesliga",
       "fixtures": 306,
-      "finished": 18,
-      "scheduled": 288,
-      "live": 0,
-      "postponedOrCancelled": 0,
-      "missingFinalScores": 0,
-      "publishedCandidates": 27,
-      "lastDatabaseUpdateAt": "2026-09-11T03:30:08.170Z"
-    },
-    {
-      "leagueApiId": 140,
-      "leagueName": "La Liga",
-      "fixtures": 380,
-      "finished": 41,
-      "scheduled": 339,
-      "live": 0,
-      "postponedOrCancelled": 0,
-      "missingFinalScores": 0,
-      "publishedCandidates": 44,
-      "lastDatabaseUpdateAt": "2026-09-11T03:30:05.763Z"
-    },
-    {
-      "leagueApiId": 61,
-      "leagueName": "Ligue 1",
-      "fixtures": 306,
       "finished": 27,
       "scheduled": 279,
       "live": 0,
       "postponedOrCancelled": 0,
       "missingFinalScores": 0,
-      "publishedCandidates": 30,
-      "lastDatabaseUpdateAt": "2026-09-11T03:30:08.996Z"
+      "publishedCandidates": 27,
+      "lastDatabaseUpdateAt": "2026-09-14T03:30:06.947Z"
     },
     {
-      "leagueApiId": 39,
-      "leagueName": "Premier League",
+      "leagueApiId": 140,
+      "leagueName": "La Liga",
       "fixtures": 380,
-      "finished": 30,
-      "scheduled": 350,
+      "finished": 50,
+      "scheduled": 330,
       "live": 0,
       "postponedOrCancelled": 0,
       "missingFinalScores": 0,
-      "publishedCandidates": 32,
-      "lastDatabaseUpdateAt": "2026-09-11T03:30:04.831Z"
+      "publishedCandidates": 46,
+      "lastDatabaseUpdateAt": "2026-09-14T03:30:04.891Z"
     },
     {
-      "leagueApiId": 135,
-      "leagueName": "Serie A",
-      "fixtures": 380,
-      "finished": 30,
-      "scheduled": 350,
-      "live": 0,
-      "postponedOrCancelled": 0,
-      "missingFinalScores": 0,
-      "publishedCandidates": 33,
-      "lastDatabaseUpdateAt": "2026-09-11T03:30:07.414Z"
-    },
-    {
-      "leagueApiId": 203,
-      "leagueName": "Süper Lig",
+      "leagueApiId": 61,
+      "leagueName": "Ligue 1",
       "fixtures": 306,
       "finished": 36,
       "scheduled": 270,
@@ -93,7 +57,43 @@
       "postponedOrCancelled": 0,
       "missingFinalScores": 0,
       "publishedCandidates": 32,
-      "lastDatabaseUpdateAt": "2026-09-11T03:30:06.635Z"
+      "lastDatabaseUpdateAt": "2026-09-14T03:30:07.579Z"
+    },
+    {
+      "leagueApiId": 39,
+      "leagueName": "Premier League",
+      "fixtures": 380,
+      "finished": 39,
+      "scheduled": 341,
+      "live": 0,
+      "postponedOrCancelled": 0,
+      "missingFinalScores": 0,
+      "publishedCandidates": 34,
+      "lastDatabaseUpdateAt": "2026-09-14T03:30:04.162Z"
+    },
+    {
+      "leagueApiId": 135,
+      "leagueName": "Serie A",
+      "fixtures": 380,
+      "finished": 37,
+      "scheduled": 343,
+      "live": 0,
+      "postponedOrCancelled": 0,
+      "missingFinalScores": 0,
+      "publishedCandidates": 35,
+      "lastDatabaseUpdateAt": "2026-09-14T03:30:06.289Z"
+    },
+    {
+      "leagueApiId": 203,
+      "leagueName": "Süper Lig",
+      "fixtures": 306,
+      "finished": 44,
+      "scheduled": 262,
+      "live": 0,
+      "postponedOrCancelled": 0,
+      "missingFinalScores": 0,
+      "publishedCandidates": 34,
+      "lastDatabaseUpdateAt": "2026-09-14T03:30:05.553Z"
     },
     {
       "leagueApiId": 2,
@@ -104,8 +104,8 @@
       "live": 0,
       "postponedOrCancelled": 0,
       "missingFinalScores": 0,
-      "publishedCandidates": 58,
-      "lastDatabaseUpdateAt": "2026-09-11T03:30:09.820Z"
+      "publishedCandidates": 59,
+      "lastDatabaseUpdateAt": "2026-09-14T03:30:08.214Z"
     },
     {
       "leagueApiId": 848,
@@ -116,7 +116,7 @@
       "live": 0,
       "postponedOrCancelled": 0,
       "missingFinalScores": 0,
-      "publishedCandidates": 14,
+      "publishedCandidates": 16,
       "lastDatabaseUpdateAt": "2026-09-07T05:55:42.728Z"
     },
     {
@@ -129,7 +129,7 @@
       "postponedOrCancelled": 0,
       "missingFinalScores": 0,
       "publishedCandidates": 12,
-      "lastDatabaseUpdateAt": "2026-09-11T03:30:10.576Z"
+      "lastDatabaseUpdateAt": "2026-09-14T03:30:08.831Z"
     }
   ],
   "production": {

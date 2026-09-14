@@ -37,6 +37,10 @@ const items = [
     href: "/smart-picks",
     label: "Smart Picks",
   },
+  {
+    href: "/special",
+    label: "Special List",
+  },
 
   {
     href: "/evaluation",

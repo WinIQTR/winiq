@@ -119,15 +119,24 @@ export default async function ProfessionalDataPage({ searchParams }: { searchPar
     standingMap.set(home.id,home); standingMap.set(away.id,away);
   }
   const standings=[...standingMap.values()].sort((a,b)=>b.points-a.points||(b.gf-b.ga)-(a.gf-a.ga)||b.gf-a.gf);
+  const standingMovement = (teamId:number) => {
+    const last = finishedMatches.filter(match => match.homeTeamId === teamId || match.awayTeamId === teamId).sort((a,b)=>b.kickoffAt.getTime()-a.kickoffAt.getTime())[0];
+    if (!last || last.homeScore === null || last.awayScore === null) return 0;
+    const home = last.homeTeamId === teamId;
+    const own = home ? last.homeScore : last.awayScore;
+    const opp = home ? last.awayScore : last.homeScore;
+    return own > opp ? 1 : own < opp ? -1 : 0;
+  };
 
   const title = view === "fixtures" ? "Fikstür" : view === "players" ? "Oyuncu Merkezi" : view === "scorers" ? "Gol Krallığı" : "Puan Durumu";
   const description = view === "fixtures" ? "Önceki, mevcut ve gelecek haftanın maçları." : view === "players" ? "Aktif oyuncuların sezon performansları." : view === "scorers" ? "Gol, asist ve dakika verileriyle hücum liderleri." : "Seçili ligin güncel sonuçlardan hesaplanan sıralaması.";
 
   return <main className={member.shell}>
     <MemberPortalHeader plan={user.plan} active={view}/>
+    <nav className={styles.sourceLinks} aria-label="Profesyonel veri merkezleri"><Link href={`/teams${leagueFilter ? `?league=${leagues.find(item=>item.id===leagueFilter)?.apiId ?? ""}` : ""}`}>Takım profilleri ve gelişmiş puan durumu →</Link><Link href={`/fixtures${leagueFilter ? `?league=${leagues.find(item=>item.id===leagueFilter)?.apiId ?? ""}` : ""}`}>Fikstür, skorlar ve maç detayları →</Link></nav><nav className={styles.standingModeLinks} aria-label="Puan durumu görünümü"><span>Tablo görünümü</span><Link data-active={standingMode === "overall"} href={`/member/professional?view=standings&league=${leagueFilter}`}>Genel</Link><Link data-active={standingMode === "home"} href={`/member/professional?view=standings&league=${leagueFilter}&table=home`}>İç saha</Link><Link data-active={standingMode === "away"} href={`/member/professional?view=standings&league=${leagueFilter}&table=away`}>Deplasman</Link></nav>
     <div className={member.page}>
       <section className={member.welcome}><div><p><i/> WINIQ · PROFESYONEL VERİ MERKEZİ</p><h1>{title}</h1><span>{description}</span></div></section>
-      <nav className={styles.tabs}>{(["fixtures", "players", "scorers", "standings"] as View[]).map(item => <Link data-active={item === view} href={`/member/professional?view=${item}`} key={item}>{item === "fixtures" ? "Fikstür" : item === "players" ? "Oyuncular" : item === "scorers" ? "Gol Krallığı" : "Puan Durumu"}</Link>)}</nav>
+      <nav className={styles.tabs}>{(["fixtures", "players", "scorers", "standings"] as View[]).map(item => <Link data-active={item === view} href={`/member/professional?view=${item}`} key={item}>{item === "fixtures" ? "Fikstür" : item === "players" ? "Oyuncular" : item === "scorers" ? "Gol Krallığı" : "Puan Durumu"}</Link>)}<Link href="/member/professional/special">Special List</Link></nav>
       <nav className={styles.leagueTabs}><Link data-active={!leagueFilter} href={`/member/professional?view=${view}`}>TÜMÜ<span>Tüm ligler</span></Link>{leagues.map(league=>{const meta=ACTIVE_COMPETITIONS.find(item=>item.apiId===league.apiId);return <Link data-active={league.id===leagueFilter} href={`/member/professional?view=${view}&league=${league.id}`} key={league.id}>{meta?.shortName??league.name.slice(0,3).toUpperCase()}<span>{league.name}</span></Link>})}</nav>
       {view === "fixtures" ? <><nav className={styles.weekTabs}>{[[-1,"← Önceki Hafta"],[0,"Bu Hafta"],[1,"Gelecek Hafta →"]].map(([value,label])=><Link data-active={week===Number(value)} href={`/member/professional?view=fixtures&week=${value}${leagueFilter?`&league=${leagueFilter}`:""}${teamFilter?`&team=${teamFilter}`:""}`} key={value}>{label}</Link>)}</nav><form className={styles.filters} action="/member/professional"><input type="hidden" name="view" value="fixtures"/><input type="hidden" name="week" value={week}/><label><span>Lig</span><select name="league" defaultValue={leagueFilter}><option value="0">Tüm ligler</option>{leagues.map(league=><option value={league.id} key={league.id}>{league.name}</option>)}</select></label><label><span>Takım</span><select name="team" defaultValue={teamFilter}><option value="00">Tüm takımlar</option>{teams.map(team=><option value={team.id} key={team.id}>{team.name}</option>)}</select></label><button type="submit">Listeyi getir</button><Link href="/member/professional?view=fixtures">Temizle</Link></form><section className={styles.panel}><header><div><h2>{week===-1?"Önceki hafta":week===1?"Gelecek hafta":"Bu haftanın maçları"}</h2><small>{formatDate(weekStart)} – {formatDate(new Date(weekEnd.getTime()-1))}</small></div><span>{fixtures.length} karşılaşma</span></header><div className={styles.fixtureList}>{fixtures.map(match => {
         const homeForm = recentForm(match.homeTeamId, match.kickoffAt), awayForm = recentForm(match.awayTeamId, match.kickoffAt);

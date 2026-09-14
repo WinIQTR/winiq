@@ -11,6 +11,8 @@ import styles from "./member-smart-dashboard.module.css";
 
 const TURKEY_TIME_ZONE = "Europe/Istanbul";
 const formatTime = (date: Date) => new Intl.DateTimeFormat("tr-TR", { timeZone:TURKEY_TIME_ZONE, day:"2-digit", month:"short", hour:"2-digit", minute:"2-digit" }).format(date);
+const dateKey = (date: Date) => new Intl.DateTimeFormat("en-CA", {timeZone:TURKEY_TIME_ZONE,year:"numeric",month:"2-digit",day:"2-digit"}).format(date);
+const dateLabel = (date: Date) => new Intl.DateTimeFormat("tr-TR", {timeZone:TURKEY_TIME_ZONE,weekday:"short",day:"2-digit",month:"short"}).format(date);
 const fairOdds = (prediction: DashboardPrediction) => prediction.predictedProbability > 0 ? 100 / prediction.predictedProbability : 0;
 const outcomeLabel = (prediction: DashboardPrediction) => prediction.predictedOutcome === "HOME" ? "1 (Ev sahibi)" : prediction.predictedOutcome === "AWAY" ? "2 (Deplasman)" : "X (Beraberlik)";
 const translate = (value:string) => value.replace(/Home Team Goals/gi,"Ev sahibi takım golü").replace(/Away Team Goals/gi,"Deplasman takım golü").replace(/Total Goals/gi,"Toplam gol").replace(/Both Teams To Score/gi,"Karşılıklı gol").replace(/Under/gi,"Alt").replace(/Over/gi,"Üst").replace(/Home/gi,"Ev sahibi").replace(/Away/gi,"Deplasman").replace(/Draw/gi,"Beraberlik");
@@ -28,12 +30,13 @@ export function MemberPortalHeader({plan,preview=false,active="home"}:{plan:Memb
   return <header className={styles.topbar}><Link href={home} className={styles.brand} aria-label="WINIQ" data-no-translate>WIN<span>IQ</span></Link><nav><Link data-active={active==="home"} href={home}>Ana Sayfa</Link><Link data-active={active==="predictions"} href="/member/predictions">Tahminler</Link>{plan==="PROFESSIONAL"?<><Link data-active={active==="fixtures"} href="/member/professional?view=fixtures">Fikstür</Link><Link data-active={active==="players"} href="/member/professional?view=players">Oyuncular</Link><Link data-active={active==="scorers"} href="/member/professional?view=scorers">Gol Krallığı</Link><Link data-active={active==="standings"} href="/member/professional?view=standings">Puan Durumu</Link></>:null}<Link data-active={active==="plans"} href={planLink}>Paketler</Link></nav><div className={styles.actions}><LanguageSwitcher/><span className={styles.plan}>♛ {MEMBERSHIP_PLAN_LABELS[plan]}</span>{!preview?<LogoutButton/>:null}</div></header>;
 }
 
-export function MemberPredictionRow({prediction,plan,href}:{prediction:DashboardPrediction;plan:MembershipPlanName;href:string}) {
+export function MemberPredictionRow({prediction,plan,href,recommended=false}:{prediction:DashboardPrediction;plan:MembershipPlanName;href:string;recommended?:boolean}) {
   const reasons=prediction.topPicks[0]?.reasons.slice(0,2)??[];
-  return <article className={dashboard.matchCard}>
-    <div className={dashboard.matchMain}>
+  const formIcons=(results?: ("W"|"D"|"L")[]) => <span className={styles.formIcons}>{(results??[]).slice(0,5).map((result,index)=><i data-result={result} key={index}>{result === "W" ? "G" : result === "D" ? "B" : "M"}</i>)}</span>;
+  return <article className={`${dashboard.matchCard} ${recommended?styles.recommendedMatch:""}`}>
+      <div className={dashboard.matchMain}>
       <div className={dashboard.matchMeta}><strong>{prediction.leagueName}</strong><span>{formatTime(prediction.kickoffAt)}</span></div>
-      <div className={dashboard.teams}><div><TeamLogo src={prediction.homeTeamLogo} name={prediction.homeTeam}/><strong>{prediction.homeTeam}</strong></div><b>–</b><div><TeamLogo src={prediction.awayTeamLogo} name={prediction.awayTeam}/><strong>{prediction.awayTeam}</strong></div></div>
+      <div className={dashboard.teams}><div><TeamLogo src={prediction.homeTeamLogo} name={prediction.homeTeam}/><strong>{prediction.homeTeam}</strong>{formIcons(prediction.homeRecentResults)}</div><b>–</b><div><TeamLogo src={prediction.awayTeamLogo} name={prediction.awayTeam}/><strong>{prediction.awayTeam}</strong>{formIcons(prediction.awayRecentResults)}</div></div>
       {plan!=="BASIC"?<div className={dashboard.probabilities}><span>1 <b>%{prediction.homeProbability.toFixed(0)}</b><i style={{width:`${prediction.homeProbability}%`}}/></span><span>X <b>%{prediction.drawProbability.toFixed(0)}</b><i style={{width:`${prediction.drawProbability}%`}}/></span><span>2 <b>%{prediction.awayProbability.toFixed(0)}</b><i style={{width:`${prediction.awayProbability}%`}}/></span></div>:<div className={styles.locked}>◇ 1/X/2 Analiz paketinde</div>}
       {plan==="PROFESSIONAL"?<div className={dashboard.xg}><span>Beklenen gol</span><strong>{(prediction.expectedHomeGoals+prediction.expectedAwayGoals).toFixed(1)}</strong></div>:<div className={styles.locked}>◇ xG Profesyonel pakette</div>}
       <div className={dashboard.choice}><span className={dashboard.strongBadge}>GÜÇLÜ</span><small>En iyi seçim</small><strong>{translate(getPredictionLabel(prediction))}</strong></div>
@@ -50,14 +53,18 @@ function planMessage(plan:MembershipPlanName) {
   return "27 pazarın tamamı, profesyonel göstergeler ve gelişmiş karar araçları.";
 }
 
-export function MemberSmartDashboard({name,plan,predictions,preview=false,performance}:{name:string;plan:MembershipPlanName;predictions:DashboardPrediction[];preview?:boolean;performance?:MemberPerformance}) {
-  const sorted=[...predictions].sort((a,b)=>b.confidenceScore-a.confidenceScore);
+export function MemberSmartDashboard({name,plan,predictions,preview=false,selectedDate,performance}:{name:string;plan:MembershipPlanName;predictions:DashboardPrediction[];preview?:boolean;selectedDate?:string;performance?:MemberPerformance}) {
+  const todayDate = new Date(); todayDate.setHours(12, 0, 0, 0);
+  const dayKeys=Array.from({length:14},(_,index)=>{const day=new Date(todayDate);day.setDate(todayDate.getDate()+index);return dateKey(day);});
+  const activeDate=selectedDate && dayKeys.includes(selectedDate) ? selectedDate : dateKey(todayDate);
+  const visiblePredictions=activeDate ? predictions.filter(item=>dateKey(item.kickoffAt)===activeDate) : predictions;
+  const sorted=[...visiblePredictions].sort((a,b)=>b.confidenceScore-a.confidenceScore);
   const strongest=sorted[0];
   const featured=sorted.slice(0,3);
-  const strong=predictions.filter(item=>item.confidenceScore>=70);
+  const strong=visiblePredictions.filter(item=>item.confidenceScore>=70);
   const strong150=strong.filter(item=>fairOdds(item)>=1.5).sort((a,b)=>b.confidenceScore-a.confidenceScore).slice(0,5);
-  const average=predictions.length?predictions.reduce((sum,item)=>sum+item.confidenceScore,0)/predictions.length:0;
-  const averagePrediction=predictions.length?predictions.reduce((sum,item)=>sum+item.predictedProbability,0)/predictions.length:0;
+  const average=visiblePredictions.length?visiblePredictions.reduce((sum,item)=>sum+item.confidenceScore,0)/visiblePredictions.length:0;
+  const averagePrediction=visiblePredictions.length?visiblePredictions.reduce((sum,item)=>sum+item.predictedProbability,0)/visiblePredictions.length:0;
   const matchHref=(id:number)=>preview?`/admin/members/preview/matches/${id}?plan=${plan}`:`/member/matches/${id}`;
   const plansHref=preview?`/admin/members/preview?plan=${plan}#paket`:"/member/plans";
   return <main className={`${styles.shell} member-plan-${plan.toLowerCase()}`}>
@@ -66,8 +73,8 @@ export function MemberSmartDashboard({name,plan,predictions,preview=false,perfor
     <div className={styles.page}>
       <section className={styles.welcome}><div><p><i/> AI FUTBOL TAHMİNLERİ · ÜYE MERKEZİ</p><h1>Tahmin Merkezi</h1><span>Merhaba {name}. {planMessage(plan)}</span></div><div className={styles.quick}><Link href="/member/predictions">Tüm Tahminler</Link>{!preview?<Link href="/member/messages">Mesajlar</Link>:null}<Link href={plansHref}>Paketim</Link></div></section>
       <section className={dashboard.metrics}><article><span>▣</span><div><small>Yaklaşan maç</small><strong>{predictions.length}</strong></div></article><article><span>♢</span><div><small>Yüksek güven</small><strong>{strong.length}</strong></div></article><article><span>▥</span><div><small>Ortalama güven</small><strong>%{average.toFixed(0)}</strong></div></article><article><span>◎</span><div><small>Ortalama tahmin</small><strong>%{averagePrediction.toFixed(0)}</strong></div></article><article><span>♟</span><div><small>Açık pazar</small><strong>{MEMBERSHIP_PLAN_MARKET_LIMITS[plan]}</strong></div></article></section>
-      <div className={dashboard.layout}>
-        <section className={dashboard.predictionPanel}><header><div><h2>EN GÜÇLÜ TAHMİNLER</h2><p>En güçlü yaklaşan maçlar</p></div><Link href="/member/predictions">Tüm tahminler →</Link></header><div className={dashboard.matchList}>{featured.length?featured.map(item=><MemberPredictionRow prediction={item} plan={plan} href={matchHref(item.matchId)} key={item.matchId}/>):<div className={dashboard.empty}>Yeni tahminler veri işlemi tamamlandığında burada görünür.</div>}</div></section>
+      <section className={styles.dateNavigator}><header><div><small>14 GÜNLÜK TAHMİN PROGRAMI</small><strong>Maç gününü seçin</strong></div><span>{visiblePredictions.length} maç</span></header><nav>{dayKeys.map(key=><Link data-active={key===activeDate} href={`/member?date=${key}`} key={key}><b>{dateLabel(new Date(`${key}T12:00:00`)).split(" ")[0]}</b><strong>{dateLabel(new Date(`${key}T12:00:00`)).replace(/^\S+\s/,"")}</strong><small>{key===dateKey(new Date())?"BUGÜN":`${predictions.filter(item=>dateKey(item.kickoffAt)===key).length} maç`}</small></Link>)}</nav></section><div className={dashboard.layout}>
+        <section className={dashboard.predictionPanel}><header><div><h2>GÜNÜN TÜM MAÇLARI</h2><p>Önerilen seçimler altın çerçeveyle vurgulanır</p></div><Link href="/member/predictions">Tüm tahminler →</Link></header><div className={dashboard.matchList}>{visiblePredictions.length?visiblePredictions.map(item=><MemberPredictionRow prediction={item} recommended={featured.some(feature=>feature.matchId===item.matchId)} plan={plan} href={matchHref(item.matchId)} key={item.matchId}/>):<div className={dashboard.empty}>Bu gün için maç bulunamadı.</div>}</div></section>
         <aside className={dashboard.side}>
           <section className={dashboard.featured}><header><span>★</span><div><h2>BUGÜNÜN ÖNE ÇIKANI</h2><p>En güçlü yaklaşan tahmin</p></div></header>{strongest?<><div className={dashboard.featuredTeam}><TeamLogo src={strongest.predictedOutcome==="AWAY"?strongest.awayTeamLogo:strongest.homeTeamLogo} name={strongest.predictedOutcome==="AWAY"?strongest.awayTeam:strongest.homeTeam}/><div><strong>{strongest.predictedOutcome==="AWAY"?strongest.awayTeam:strongest.homeTeam}</strong><span>{outcomeLabel(strongest)}</span></div><b>GÜÇLÜ</b></div><div className={dashboard.featuredStats}><span>Güven <b>%{strongest.confidenceScore.toFixed(0)}</b></span><span>Oran <b>{plan!=="BASIC"?fairOdds(strongest).toFixed(2):"🔒"}</b></span><span>xG <b>{plan==="PROFESSIONAL"?(strongest.expectedHomeGoals+strongest.expectedAwayGoals).toFixed(1):"🔒"}</b></span></div><Link href={matchHref(strongest.matchId)}>▥ &nbsp; Analizi Gör →</Link></>:<div className={dashboard.empty}>Veri bekleniyor</div>}</section>
           <section className={dashboard.strongOdds}><header><span>♢</span><div><h2>GÜÇLÜ 1.50+ SEÇİMLER</h2><p>Yüksek oranlı, güvenilir tahminler</p></div></header>{plan!=="BASIC"?<ol>{strong150.length?strong150.map((item,index)=><li key={item.matchId}><span>{index+1}</span><div><strong>{item.homeTeam} – {item.awayTeam}</strong><small>{outcomeLabel(item)}</small></div><b>{fairOdds(item).toFixed(2)}</b><em>%{item.confidenceScore.toFixed(0)}</em></li>):<li className={dashboard.noOdds}>1.50 üzeri güçlü seçim bulunamadı.</li>}</ol>:<div className={styles.upgrade}>Güçlü 1.50+ listesi Analiz ve Profesyonel üyelikte açılır.<Link href={plansHref}>Paketi yükselt →</Link></div>}</section>

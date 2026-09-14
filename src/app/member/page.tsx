@@ -31,17 +31,18 @@ function performanceOf(predictions: Awaited<ReturnType<typeof loadDashboardPredi
   return { strong: band("STRONG"), medium: band("MEDIUM"), weak: band("WEAK") };
 }
 
-export default async function MemberPage() {
+export default async function MemberPage({searchParams}: {searchParams?: Promise<{date?: string}>}) {
   const user = await requireMember();
+  const query = searchParams ? await searchParams : {};
   const now = new Date();
-  const today = dateKey(now);
   const allPredictions = await loadDashboardPredictionSnapshot(5_000);
+  const rangeStart = new Date(now); rangeStart.setHours(0, 0, 0, 0);
+  const rangeEnd = new Date(rangeStart); rangeEnd.setDate(rangeEnd.getDate() + 14);
   const upcoming = allPredictions
-    .filter((item) => item.kickoffAt >= now)
+    .filter((item) => item.kickoffAt >= rangeStart && item.kickoffAt < rangeEnd)
     .filter((item) => item.settlementStatus === undefined || item.settlementStatus === "PENDING")
     .sort((a, b) => a.kickoffAt.getTime() - b.kickoffAt.getTime());
-  const todayPredictions = upcoming.filter((item) => dateKey(item.kickoffAt) === today);
-  const predictions = (todayPredictions.length ? todayPredictions : upcoming).slice(0, 48);
+  const predictions = upcoming.slice(0, 200);
 
-  return <MemberSmartDashboard name={user.name} plan={user.plan} predictions={predictions} performance={performanceOf(allPredictions)} />;
+  return <MemberSmartDashboard name={user.name} plan={user.plan} predictions={predictions} selectedDate={query.date} performance={performanceOf(allPredictions)} />;
 }

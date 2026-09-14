@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "createdAt": "2026-09-14T03:31:16.046Z",
+  "channel": "LOCAL_OUTBOX",
+  "severity": "WARNING",
+  "reason": "DEGRADATION",
+  "title": "Bet Project Production Health: WARNING",
+  "message": "Production model health is WARNING. Snapshot=HEALTHY. Odds=WARNING. Drift=STABLE. Automatic model changes remain disabled.",
+  "acknowledged": false,
+  "production": {
+    "champion": "20% ML / 80% Poisson",
+    "automaticModelChangeAllowed": false
+  }
+}

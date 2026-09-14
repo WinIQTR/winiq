@@ -307,6 +307,8 @@ a {
   flex-direction: column;
   justify-content: space-between;
 }
+.sidebar > div:first-child{min-height:0;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#2f6983 transparent;padding-right:4px}
+.sidebar > div:first-child::-webkit-scrollbar{width:6px}.sidebar > div:first-child::-webkit-scrollbar-thumb{border-radius:99px;background:#2f6983}.sidebar > div:first-child::-webkit-scrollbar-track{background:transparent}
 
 .brand {
   display: flex;
@@ -10691,3 +10693,46 @@ body{font-size:var(--w-size-body)}
 @media (max-width:1024px){body{font-size:14px}.sidebar{width:220px}}
 @media (max-width:768px){body{font-size:14px}.sidebar{width:100%;position:relative}.page-shell{display:block}.sidebar .nav{display:flex;overflow-x:auto}.sidebar .nav-item{white-space:nowrap}}
 @media (max-width:430px){body{font-size:14px}.member-shell{overflow-x:hidden}.member-page h1{font-size:clamp(30px,9vw,42px)}}
+
+/* WINIQ ortak kontrol dili: admin ve üye ekranlarında buton/select tutarlılığı */
+.app-shell button,
+.app-shell select,
+.app-shell input[type="text"],
+.app-shell input[type="search"]{
+  font:inherit;
+  transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease, filter .2s ease;
+}
+.app-shell button:not([class]),
+.app-shell button[class*="primary"],
+.app-shell button[class*="run-all"],
+.app-shell button[class*="save"]{
+  min-height:42px;
+  padding:10px 17px;
+  border:1px solid #39d7a2;
+  border-radius:11px;
+  background:linear-gradient(135deg,#42e3a4,#27c7bd);
+  color:#061722;
+  font-weight:900;
+  cursor:pointer;
+  box-shadow:0 8px 22px rgba(50,218,170,.14);
+}
+.app-shell button:not([class]):hover,
+.app-shell button[class*="primary"]:hover,
+.app-shell button[class*="run-all"]:hover,
+.app-shell button[class*="save"]:hover{transform:translateY(-1px);filter:brightness(1.07)}
+.app-shell button:disabled{cursor:not-allowed;opacity:.55;transform:none;filter:none}
+.app-shell select{
+  min-height:42px;
+  appearance:auto;
+  padding:10px 42px 10px 14px;
+  border:1px solid #2c526c;
+  border-radius:11px;
+  outline:none;
+  background:#091f33;
+  color:#edf8ff;
+  font-weight:700;
+}
+.app-shell select:focus,
+.app-shell input[type="text"]:focus,
+.app-shell input[type="search"]:focus{border-color:#4fe0ba;box-shadow:0 0 0 3px rgba(79,224,186,.12);outline:none}
+.app-shell label select{width:100%}
