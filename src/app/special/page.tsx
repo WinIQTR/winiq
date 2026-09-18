@@ -62,13 +62,7 @@ export default async function SpecialPage({searchParams}:{searchParams?:Promise<
 
   const rawMatches=all.filter(p=>isDateInSeason(p.kickoffAt,ACTIVE_SEASON_YEAR)&&(range==="day"?dayKey(p.kickoffAt)===todayKey:p.kickoffAt<end&&p.kickoffAt>=now)&&(p.settlementStatus===undefined||p.settlementStatus==="PENDING"));
   const occupied=new Set<string>(); const seenMatchIds=new Set<number>();
-  // Not: homeTeamId/awayTeamId alanları DashboardPrediction tipinde
-  // opsiyonel olduğu için (ve bazı dağıtım/deploy senaryolarında bu
-  // alanları ekleyen paylaşılan tip dosyası güncellenmemiş olabilir),
-  // burada güvenli bir runtime erişimi kullanılıyor — tip tanımı eksik
-  // olsa bile derleme hatası vermez, sadece isim bazlı eşleştirmeye
-  // geri düşer.
-  const teamKey=(p:DashboardPrediction,side:"home"|"away")=>{const record=p as DashboardPrediction & {homeTeamId?:number|null;awayTeamId?:number|null}; const id=side==="home"?record.homeTeamId:record.awayTeamId; if(id!=null) return `id:${id}`; return `name:${(side==="home"?p.homeTeam:p.awayTeam).trim().toLocaleLowerCase("tr-TR")}`;};
+  const teamKey=(p:DashboardPrediction,side:"home"|"away")=>{const id=side==="home"?p.homeTeamId:p.awayTeamId; if(id!=null) return `id:${id}`; return `name:${(side==="home"?p.homeTeam:p.awayTeam).trim().toLocaleLowerCase("tr-TR")}`;};
   const matches=[...rawMatches].sort((a,b)=>b.confidenceScore-a.confidenceScore).filter(p=>{if(seenMatchIds.has(p.matchId)) return false; const day=dayKey(p.kickoffAt);const teams=[teamKey(p,"home"),teamKey(p,"away")];if(teams.some(t=>occupied.has(`${day}|${t}`))) return false;seenMatchIds.add(p.matchId);teams.forEach(t=>occupied.add(`${day}|${t}`));return true;});
 
   const marketMap=new Map<string,string>([["DRAW","Beraberlik (X)"]]);

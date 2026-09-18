@@ -79,6 +79,9 @@ export type DashboardPrediction = {
   homeTeam: string;
   awayTeam: string;
 
+  homeTeamId?: number;
+  awayTeamId?: number;
+
   homeTeamLogo: string | null;
   awayTeamLogo: string | null;
 

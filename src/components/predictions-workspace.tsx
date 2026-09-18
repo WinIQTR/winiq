@@ -529,10 +529,7 @@ export function PredictionsWorkspace({
       new Date(),
     );
 
-  const predictionDateKeys = useMemo(
-    () => getPredictionDateKeys(predictions),
-    [predictions],
-  );
+  const predictionDateKeys = getPredictionDateKeys(predictions);
 
   const defaultPredictionDateKey =
     getClosestAvailableDateKey(predictionDateKeys, todayDateKey) ?? todayDateKey;
@@ -1541,14 +1538,15 @@ export function PredictionsWorkspace({
                       )}
                       <strong>{fixture.homeTeam}</strong>
                       {fixture.homeForm && fixture.homeForm.length > 0 && (
-                        <span className={styles.formIcons}>
+                        <span className="form-result-badge">
                           {fixture.homeForm.map((result, i) => (
-                            <span
+                            <i
                               key={i}
-                              className={`${styles.formDot} ${styles[`formDot${result}`]}`}
+                              className="form-result-dot"
+                              data-result={result}
                             >
-                              {result}
-                            </span>
+                              {result === "W" ? "G" : result === "D" ? "B" : "M"}
+                            </i>
                           ))}
                         </span>
                       )}
@@ -1567,14 +1565,15 @@ export function PredictionsWorkspace({
                       )}
                       <strong>{fixture.awayTeam}</strong>
                       {fixture.awayForm && fixture.awayForm.length > 0 && (
-                        <span className={styles.formIcons}>
+                        <span className="form-result-badge">
                           {fixture.awayForm.map((result, i) => (
-                            <span
+                            <i
                               key={i}
-                              className={`${styles.formDot} ${styles[`formDot${result}`]}`}
+                              className="form-result-dot"
+                              data-result={result}
                             >
-                              {result}
-                            </span>
+                              {result === "W" ? "G" : result === "D" ? "B" : "M"}
+                            </i>
                           ))}
                         </span>
                       )}
@@ -1638,15 +1637,15 @@ export function PredictionsWorkspace({
                                 >
                                   <div>
                                     <span>0{pickIndex + 1}</span>
-                                    <small>{pick.market}</small>
+                                    <small>Bahis türü · {pick.market}</small>
                                   </div>
-                                  <strong>{pick.selection}</strong>
+                                  <strong>Seçim: {pick.selection}</strong>
                                   <div className={styles.publishedBetNumbers}>
                                     <span>
                                       Model <b>%{pick.probability.toFixed(1)}</b>
                                     </span>
                                     <span>
-                                      {locale === "tr" ? "Adil oran" : "Fair odds"}{" "}
+                                      {locale === "tr" ? "Bu seçime ait adil oran" : "Fair odds for this pick"}{" "}
                                       <b>{pick.fairOdds?.toFixed(2) ?? "—"}</b>
                                     </span>
                                     <span>
@@ -1762,15 +1761,15 @@ export function PredictionsWorkspace({
                                       >
                                         <div>
                                           <span>0{optionIndex + 1}</span>
-                                          <small>{option.market}</small>
+                                          <small>Bahis türü · {option.market}</small>
                                         </div>
-                                        <strong>{option.selection}</strong>
+                                        <strong>Seçim: {option.selection}</strong>
                                         <div className={styles.advisoryBetNumbers}>
                                           <span>
                                             Model <b>%{option.probability.toFixed(1)}</b>
                                           </span>
                                           <span>
-                                            {locale === "tr" ? "Adil oran" : "Fair odds"}{" "}
+                                            {locale === "tr" ? "Bu seçime ait adil oran" : "Fair odds for this pick"}{" "}
                                             <b>{option.fairOdds.toFixed(2)}</b>
                                           </span>
                                         </div>

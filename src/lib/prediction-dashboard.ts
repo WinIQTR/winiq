@@ -684,6 +684,28 @@ async function calculateDashboardPredictions(): Promise<
         MAXIMUM_MATCH_SCAN,
     });
 
+  // A team cannot have two scheduled fixtures on the same calendar day.
+  // Imported feeds occasionally contain a stale/duplicated fixture with a
+  // different API id; discard the lower-priority duplicate before generating
+  // predictions so it can never enter the published snapshot.
+  const occupiedTeamDays = new Set<string>();
+  const validMatches = matches.filter((match) => {
+    const day = new Intl.DateTimeFormat("en-CA", {
+      timeZone: "Europe/Istanbul",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    }).format(match.kickoffAt);
+    const teams = [match.homeTeam.name, match.awayTeam.name].map((team) =>
+      team.trim().toLocaleLowerCase("tr-TR"),
+    );
+    if (teams.some((team) => occupiedTeamDays.has(`${day}|${team}`))) {
+      return false;
+    }
+    teams.forEach((team) => occupiedTeamDays.add(`${day}|${team}`));
+    return true;
+  });
+
   const teamFormMap =
     await buildTeamFormMap(
       activeSeasonYear,
@@ -697,7 +719,7 @@ async function calculateDashboardPredictions(): Promise<
 
   const predictionResults =
     await mapWithConcurrency(
-      matches,
+      validMatches,
       WEB_PREDICTION_CONCURRENCY,
       async (
         match,
@@ -968,6 +990,12 @@ const popularPicks =
           match
             .awayTeam
             .name,
+
+        homeTeamId:
+          match.homeTeamId,
+
+        awayTeamId:
+          match.awayTeamId,
 
         homeTeamLogo:
           match

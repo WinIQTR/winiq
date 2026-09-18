@@ -100,7 +100,5 @@ export async function requireMember(): Promise<AuthenticatedUser> {
   const user = await getCurrentUser();
 
   if (!user) redirect("/login");
-  if (user.role === "ADMIN") redirect("/admin-dashboard");
-
   return user;
 }

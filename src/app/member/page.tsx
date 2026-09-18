@@ -6,17 +6,6 @@ import { loadDashboardPredictionSnapshot } from "@/lib/prediction-dashboard-snap
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
-const TURKEY_TIME_ZONE = "Europe/Istanbul";
-
-function dateKey(date: Date): string {
-  return new Intl.DateTimeFormat("en-CA", {
-    timeZone: TURKEY_TIME_ZONE,
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-  }).format(date);
-}
-
 function performanceOf(predictions: Awaited<ReturnType<typeof loadDashboardPredictionSnapshot>>): MemberPerformance {
   const rows = buildMarketPerformanceArchive(predictions, { from: new Date(0), to: new Date() });
   const band = (tier: "STRONG" | "MEDIUM" | "WEAK") => {

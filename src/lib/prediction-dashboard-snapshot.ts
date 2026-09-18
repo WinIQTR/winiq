@@ -271,5 +271,14 @@ export async function loadDashboardPredictionSnapshot(
     throw new Error("limit must be a positive integer.");
   }
 
-  return readDashboardPredictionSnapshot(limit);
+  const predictions = await readDashboardPredictionSnapshot(limit);
+  const byTeamDate = new Map<string, ProductionDashboardPrediction>();
+  for (const prediction of [...predictions].sort((a, b) => b.confidenceScore - a.confidenceScore)) {
+    const day = new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Istanbul", year: "numeric", month: "2-digit", day: "2-digit" }).format(prediction.kickoffAt);
+    const teams = [prediction.homeTeam.trim().toLocaleLowerCase("tr-TR"), prediction.awayTeam.trim().toLocaleLowerCase("tr-TR")];
+    if (teams.some((team) => byTeamDate.has(`${day}|${team}`))) continue;
+    byTeamDate.set(`${day}|${teams[0]}`, prediction);
+    byTeamDate.set(`${day}|${teams[1]}`, prediction);
+  }
+  return [...new Set(byTeamDate.values())].sort((a, b) => b.kickoffAt.getTime() - a.kickoffAt.getTime()).slice(0, limit);
 }

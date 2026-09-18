@@ -85,6 +85,15 @@ export function CouponPerformanceWorkspace({
     const won = bucketRows.filter((row) => row.result === "WON").length;
     return { ...bucket, total: bucketRows.length, settled: settled.length, won, lost: bucketRows.filter((row) => row.result === "LOST").length, rate: settled.length ? won / settled.length * 100 : null };
   }), [visible]);
+  const legProbabilitySummary = useMemo(() => {
+    const legs = visible.flatMap((row) => row.legs);
+    return PROBABILITY_BANDS.map((bucket) => {
+      const bucketRows = legs.filter((leg) => leg.modelProbability >= bucket.min && leg.modelProbability < bucket.max);
+      const settled = bucketRows.filter((leg) => leg.result === "WON" || leg.result === "LOST");
+      const won = bucketRows.filter((leg) => leg.result === "WON").length;
+      return { ...bucket, total: bucketRows.length, settled: settled.length, won, lost: bucketRows.filter((leg) => leg.result === "LOST").length, rate: settled.length ? won / settled.length * 100 : null };
+    });
+  }, [visible]);
 
   return <div className={styles.workspace}>
     <header className={styles.hero}>
@@ -116,6 +125,15 @@ export function CouponPerformanceWorkspace({
         <i><em style={{ width: `${item.rate ?? 0}%` }} /></i>
       </article>)}</div>
     </section>
+    <section className={styles.probabilitySummary}>
+      <header><div><span>MAÇ / BAHİS BAZINDA KALİBRASYON</span><h2>Tekil maç olasılığı ne kadar isabetli?</h2></div><small>Bu bölüm kupon yüzdesinden bağımsız olarak her maçtaki bahis modelini ölçer.</small></header>
+      <div className={styles.probabilityGrid}>{legProbabilitySummary.map((item) => <article key={item.key}>
+        <div><strong>{item.label}</strong><span>{item.total} bahis</span></div>
+        <b>{percent(item.rate)}</b>
+        <small>{item.settled ? `${item.won} kazandı · ${item.lost} kaybetti · ${item.settled} sonuçlandı` : "Henüz sonuçlanan bahis yok"}</small>
+        <i><em style={{ width: `${item.rate ?? 0}%` }} /></i>
+      </article>)}</div>
+    </section>
 
     <section className={styles.filters}>
       <label>Kupon türü<select value={band} onChange={(event) => setBand(event.target.value)}><option value="ALL">Tümü</option><option value="SAFE">Yüksek Güven</option><option value="BALANCED">Dengeli</option><option value="SURPRISE">Sürpriz</option><option value="WEAK">Zayıf / Önerilmez</option></select></label>
@@ -138,7 +156,7 @@ export function CouponPerformanceWorkspace({
           <span>{String(index + 1).padStart(2, "0")}</span>
           <div><small>{leg.leagueName} · {date(leg.kickoffAt)}</small><strong>{leg.homeTeam} – {leg.awayTeam}</strong></div>
           <div><small>{leg.market}</small><strong>{leg.selection} · {leg.odds.toFixed(2)}</strong></div>
-          <div><small>Model</small><strong>%{leg.modelProbability.toFixed(1)}</strong></div>
+          <div><small>Tekil maç modeli</small><strong>%{leg.modelProbability.toFixed(1)}</strong></div>
           <div><small>Skor</small><strong>{leg.actualHomeScore === null || leg.actualAwayScore === null ? "—" : `${leg.actualHomeScore} – ${leg.actualAwayScore}`}</strong></div>
           <em className={styles[`leg${leg.result}`]}>{RESULT_LABEL[leg.result]}</em>
         </article>)}</div>

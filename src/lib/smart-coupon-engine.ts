@@ -405,11 +405,12 @@ function createForPolicy(
 
 export function buildSmartCouponCenter(
   rows: readonly ValueBetDashboardRow[],
-  options?: { now?: Date; historicalRows?: readonly ValueBetDashboardRow[] },
+  options?: { now?: Date; historicalRows?: readonly ValueBetDashboardRow[]; horizonDays?: number },
 ): SmartCouponCenter {
   const now = options?.now ?? new Date();
+  const horizonDays = Math.max(7, Math.min(28, options?.horizonDays ?? 7));
   const histories = buildHistoricalMap(options?.historicalRows ?? []);
-  const weeklyEnd = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
+  const weeklyEnd = new Date(now.getTime() + horizonDays * 24 * 60 * 60 * 1000);
   const rejectionBreakdown: SmartCouponCenter["rejectionBreakdown"] = {
     startedOrFinished: 0,
     outsideSevenDays: 0,

@@ -32,7 +32,7 @@ export function MemberPortalHeader({plan,preview=false,active="home"}:{plan:Memb
 
 export function MemberPredictionRow({prediction,plan,href,recommended=false}:{prediction:DashboardPrediction;plan:MembershipPlanName;href:string;recommended?:boolean}) {
   const reasons=prediction.topPicks[0]?.reasons.slice(0,2)??[];
-  const formIcons=(results?: ("W"|"D"|"L")[]) => <span className={styles.formIcons}>{(results??[]).slice(0,5).map((result,index)=><i data-result={result} key={index}>{result === "W" ? "G" : result === "D" ? "B" : "M"}</i>)}</span>;
+  const formIcons=(results?: ("W"|"D"|"L")[]) => <span className="form-result-badge">{(results??[]).slice(0,5).map((result,index)=><i className="form-result-dot" data-result={result} key={index}>{result === "W" ? "G" : result === "D" ? "B" : "M"}</i>)}</span>;
   return <article className={`${dashboard.matchCard} ${recommended?styles.recommendedMatch:""}`}>
       <div className={dashboard.matchMain}>
       <div className={dashboard.matchMeta}><strong>{prediction.leagueName}</strong><span>{formatTime(prediction.kickoffAt)}</span></div>

@@ -27,6 +27,10 @@ const items = [
     href: "/coupons",
     label: "Smart Coupons",
   },
+  {
+    href: "/guaranteed-coupons",
+    label: "Garanti Kupon",
+  },
 
   {
     href: "/coupon-performance",
@@ -40,6 +44,10 @@ const items = [
   {
     href: "/special",
     label: "Special List",
+  },
+  {
+    href: "/mobile",
+    label: "Mobile",
   },
 
   {

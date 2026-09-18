@@ -61,11 +61,7 @@
 .identity div { min-width:0; }
 .identity strong,.identity small { display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
 .identity small { color:#718ba7; font-size:11px; margin-top:3px; }
-.form { display:flex; gap:3px; }
-.form i { width:19px; height:19px; border-radius:5px; display:grid; place-items:center; font-style:normal; font-size:10px; background:#1c3550; }
-.form i[data-result="W"] { border:1px solid rgb(52 211 153 / 30%); background:rgb(16 185 129 / 20%); color:#6ee7b7; }
-.form i[data-result="D"] { border:1px solid rgb(245 158 11 / 30%); background:rgb(245 158 11 / 17%); color:#fcd34d; }
-.form i[data-result="L"] { border:1px solid rgb(248 113 113 / 30%); background:rgb(239 68 68 / 18%); color:#fca5a5; }
+
 .valueBest { color:#51e6aa!important; font-weight:900; text-shadow:0 0 16px rgb(52 211 153 / 25%); }
 .valueWorst { color:#ff8994!important; font-weight:850; }
 .rankUp,.rankDown,.rankSame { width:fit-content; border-radius:999px; padding:4px 7px; font-size:10px; font-weight:900; }

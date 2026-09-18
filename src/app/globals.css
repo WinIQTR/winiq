@@ -10736,3 +10736,14 @@ body{font-size:var(--w-size-body)}
 .app-shell input[type="text"]:focus,
 .app-shell input[type="search"]:focus{border-color:#4fe0ba;box-shadow:0 0 0 3px rgba(79,224,186,.12);outline:none}
 .app-shell label select{width:100%}
+
+/* Paylaşılan form sonucu rozeti (W/D/L) — tüm sayfalarda (admin: teams/fixtures,
+   üye: professional/member dashboard) aynı tasarım için tek kaynak. Önceden
+   4 farklı dosyada birbirinden farklı boyut/çerçeve ile tanımlanmıştı. */
+.form-result-badge{display:flex;gap:4px;align-items:center}
+.form-result-dot{width:19px;height:19px;display:grid;place-items:center;border-radius:5px;font-style:normal;font-size:10px;font-weight:900;color:#9db6ca;background:#1c3550;border:1px solid transparent}
+.form-result-dot[data-result="W"]{border-color:rgb(52 211 153 / 30%);background:rgb(16 185 129 / 20%);color:#6ee7b7}
+.form-result-dot[data-result="D"]{border-color:rgb(245 158 11 / 30%);background:rgb(245 158 11 / 17%);color:#fcd34d}
+.form-result-dot[data-result="L"]{border-color:rgb(248 113 113 / 30%);background:rgb(239 68 68 / 18%);color:#fca5a5}
+.form-result-missing{width:19px;height:19px;display:grid;place-items:center;border-radius:5px;font-style:normal;font-size:10px;font-weight:900;color:#4c6178;background:rgb(28 53 80 / 40%);border:1px dashed rgb(148 163 184 / 20%)}
+@media(max-width:760px){.form-result-dot,.form-result-missing{width:17px;height:17px;font-size:9px}}

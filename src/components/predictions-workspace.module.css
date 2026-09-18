@@ -401,9 +401,14 @@
 .fixtureTeams > div {
   display: flex;
   min-width: 0;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   align-items: center;
   gap: 9px;
+}
+
+.fixtureTeams > div :global(.form-result-badge) {
+  flex-basis: 100%;
+  margin-top: 2px;
 }
 
 .fixtureTeams > div:last-child {
@@ -432,37 +437,8 @@
   text-transform: uppercase;
 }
 
-.formIcons {
-  display: flex;
-  flex: 0 0 auto;
-  gap: 3px;
-}
-
-.fixtureTeams > div:last-child .formIcons {
+.fixtureTeams > div:last-child :global(.form-result-badge) {
   justify-content: flex-end;
-}
-
-.formDot {
-  width: 15px;
-  height: 15px;
-  display: grid;
-  place-items: center;
-  border-radius: 4px;
-  font-size: 8px;
-  font-weight: 800;
-  color: #0b1220;
-}
-
-.formDotW {
-  background: #22c55e;
-}
-
-.formDotD {
-  background: #eab308;
-}
-
-.formDotL {
-  background: #ef4444;
 }
 
 .fixtureDecision {
@@ -936,6 +912,13 @@
   flex-wrap: wrap;
   gap: 6px;
 }
+.publishedBetNumbers span:nth-child(2) {
+  border: 1px solid rgb(52 211 153 / 48%);
+  background: rgb(5 55 43 / 82%);
+  color: #b9f8da;
+  font-weight: 800;
+}
+.publishedBetNumbers span:nth-child(2) b { font-size: 11px; }
 
 .publishedBetNumbers span {
   padding: 4px 6px;
@@ -1076,6 +1059,12 @@
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
+}
+.advisoryBetNumbers span:nth-child(2) {
+  border: 1px solid rgb(245 158 11 / 50%);
+  background: rgb(71 48 9 / 70%);
+  color: #ffe0a0;
+  font-weight: 800;
 }
 
 .advisoryBetNumbers span {
