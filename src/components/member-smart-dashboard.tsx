@@ -5,6 +5,7 @@ import dashboard from "@/app/admin-dashboard/admin-dashboard.module.css";
 import { LogoutButton } from "@/components/logout-button";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { MEMBERSHIP_PLAN_LABELS, MEMBERSHIP_PLAN_MARKET_LIMITS, type MembershipPlanName } from "@/lib/membership-access";
+import { BET_MARKET_COUNT } from "@/lib/bet-market-catalog";
 import { getPredictionLabel, type DashboardPrediction } from "@/lib/prediction-dashboard-shared";
 
 import styles from "./member-smart-dashboard.module.css";
@@ -32,7 +33,7 @@ export function MemberPortalHeader({plan,preview=false,active="home"}:{plan:Memb
 
 export function MemberPredictionRow({prediction,plan,href,recommended=false}:{prediction:DashboardPrediction;plan:MembershipPlanName;href:string;recommended?:boolean}) {
   const reasons=prediction.topPicks[0]?.reasons.slice(0,2)??[];
-  const formIcons=(results?: ("W"|"D"|"L")[]) => <span className="form-result-badge">{(results??[]).slice(0,5).map((result,index)=><i className="form-result-dot" data-result={result} key={index}>{result === "W" ? "G" : result === "D" ? "B" : "M"}</i>)}</span>;
+  const formIcons=(results?: ("W"|"D"|"L")[]) => <span className={styles.formIcons}>{(results??[]).slice(0,5).map((result,index)=><i data-result={result} key={index}>{result === "W" ? "G" : result === "D" ? "B" : "M"}</i>)}</span>;
   return <article className={`${dashboard.matchCard} ${recommended?styles.recommendedMatch:""}`}>
       <div className={dashboard.matchMain}>
       <div className={dashboard.matchMeta}><strong>{prediction.leagueName}</strong><span>{formatTime(prediction.kickoffAt)}</span></div>
@@ -50,7 +51,7 @@ export function MemberPredictionRow({prediction,plan,href,recommended=false}:{pr
 function planMessage(plan:MembershipPlanName) {
   if(plan==="BASIC")return "6 temel pazarda sade ve anlaşılır tahminler.";
   if(plan==="ANALYSIS")return "19 pazar, ayrıntılı olasılıklar ve karşılaştırmalı analiz.";
-  return "27 pazarın tamamı, profesyonel göstergeler ve gelişmiş karar araçları.";
+  return `${BET_MARKET_COUNT} pazarın tamamı, profesyonel göstergeler ve gelişmiş karar araçları.`;
 }
 
 export function MemberSmartDashboard({name,plan,predictions,preview=false,selectedDate,performance}:{name:string;plan:MembershipPlanName;predictions:DashboardPrediction[];preview?:boolean;selectedDate?:string;performance?:MemberPerformance}) {
@@ -78,10 +79,10 @@ export function MemberSmartDashboard({name,plan,predictions,preview=false,select
         <aside className={dashboard.side}>
           <section className={dashboard.featured}><header><span>★</span><div><h2>BUGÜNÜN ÖNE ÇIKANI</h2><p>En güçlü yaklaşan tahmin</p></div></header>{strongest?<><div className={dashboard.featuredTeam}><TeamLogo src={strongest.predictedOutcome==="AWAY"?strongest.awayTeamLogo:strongest.homeTeamLogo} name={strongest.predictedOutcome==="AWAY"?strongest.awayTeam:strongest.homeTeam}/><div><strong>{strongest.predictedOutcome==="AWAY"?strongest.awayTeam:strongest.homeTeam}</strong><span>{outcomeLabel(strongest)}</span></div><b>GÜÇLÜ</b></div><div className={dashboard.featuredStats}><span>Güven <b>%{strongest.confidenceScore.toFixed(0)}</b></span><span>Oran <b>{plan!=="BASIC"?fairOdds(strongest).toFixed(2):"🔒"}</b></span><span>xG <b>{plan==="PROFESSIONAL"?(strongest.expectedHomeGoals+strongest.expectedAwayGoals).toFixed(1):"🔒"}</b></span></div><Link href={matchHref(strongest.matchId)}>▥ &nbsp; Analizi Gör →</Link></>:<div className={dashboard.empty}>Veri bekleniyor</div>}</section>
           <section className={dashboard.strongOdds}><header><span>♢</span><div><h2>GÜÇLÜ 1.50+ SEÇİMLER</h2><p>Yüksek oranlı, güvenilir tahminler</p></div></header>{plan!=="BASIC"?<ol>{strong150.length?strong150.map((item,index)=><li key={item.matchId}><span>{index+1}</span><div><strong>{item.homeTeam} – {item.awayTeam}</strong><small>{outcomeLabel(item)}</small></div><b>{fairOdds(item).toFixed(2)}</b><em>%{item.confidenceScore.toFixed(0)}</em></li>):<li className={dashboard.noOdds}>1.50 üzeri güçlü seçim bulunamadı.</li>}</ol>:<div className={styles.upgrade}>Güçlü 1.50+ listesi Analiz ve Profesyonel üyelikte açılır.<Link href={plansHref}>Paketi yükselt →</Link></div>}</section>
-          <section className={dashboard.modelStatus}><header><span>◉</span><h2>MODEL DURUMU</h2><b><i/> Canlı ve aktif</b></header><div><span>Üyelik <b>{MEMBERSHIP_PLAN_LABELS[plan]}</b></span><span>Açık pazar <b>{MEMBERSHIP_PLAN_MARKET_LIMITS[plan]}/27</b></span><span>Tüm sistemler <b>Aktif</b></span></div><aside>✓ <span><strong>Model normal çalışıyor</strong><small>Güncel verilerle tahmin üretiliyor.</small></span></aside></section>
+          <section className={dashboard.modelStatus}><header><span>◉</span><h2>MODEL DURUMU</h2><b><i/> Canlı ve aktif</b></header><div><span>Üyelik <b>{MEMBERSHIP_PLAN_LABELS[plan]}</b></span><span>Açık pazar <b>{MEMBERSHIP_PLAN_MARKET_LIMITS[plan]}/{BET_MARKET_COUNT}</b></span><span>Tüm sistemler <b>Aktif</b></span></div><aside>✓ <span><strong>Model normal çalışıyor</strong><small>Güncel verilerle tahmin üretiliyor.</small></span></aside></section>
         </aside>
       </div>
-      <section className={styles.performance}><header><div><small>GERÇEKLEŞMİŞ SONUÇLAR · TÜM BAHİS PAZARLARI</small><h2>Güçlü, Orta ve Zayıf seçimlerin tutma oranı</h2></div><p>Her maçtaki 27 pazarın en güçlü seçimi; yalnız doğrulanabilen sonuçlar oran hesabına katılır.</p></header><div>{([['Güçlü',performance?.strong],['Orta',performance?.medium],['Zayıf',performance?.weak]] as const).map(([label,item])=><article data-level={label} key={label}><span>{label}</span><strong>{item?.rate===null||item===undefined?'—':`%${item.rate.toFixed(1)}`}</strong><i><b style={{width:`${item?.rate??0}%`}}/></i><div className={styles.performanceStats}><span><b>{item?.wins??0}</b>Kazandı</span><span><b>{item?.losses??0}</b>Kaybetti</span><span><b>{item?.samples??0}</b>Değerlendirildi</span></div><small>Toplam {item?.total??0} pazar seçimi{item?.voids?` · ${item.voids} iade`:''}{item?.unavailable?` · ${item.unavailable} veri bekliyor`:''}</small></article>)}</div></section>
+      <section className={styles.performance}><header><div><small>GERÇEKLEŞMİŞ SONUÇLAR · TÜM BAHİS PAZARLARI</small><h2>Güçlü, Orta ve Zayıf seçimlerin tutma oranı</h2></div><p>Her maçtaki {BET_MARKET_COUNT} pazarın en güçlü seçimi; yalnız doğrulanabilen sonuçlar oran hesabına katılır.</p></header><div>{([['Güçlü',performance?.strong],['Orta',performance?.medium],['Zayıf',performance?.weak]] as const).map(([label,item])=><article data-level={label} key={label}><span>{label}</span><strong>{item?.rate===null||item===undefined?'—':`%${item.rate.toFixed(1)}`}</strong><i><b style={{width:`${item?.rate??0}%`}}/></i><div className={styles.performanceStats}><span><b>{item?.wins??0}</b>Kazandı</span><span><b>{item?.losses??0}</b>Kaybetti</span><span><b>{item?.samples??0}</b>Değerlendirildi</span></div><small>Toplam {item?.total??0} pazar seçimi{item?.voids?` · ${item.voids} iade`:''}{item?.unavailable?` · ${item.unavailable} veri bekliyor`:''}</small></article>)}</div></section>
       <section className={styles.scope}><div><small>PAKETİNİZ</small><h2>{MEMBERSHIP_PLAN_LABELS[plan]} üyelik kapsamı</h2><p>{MEMBERSHIP_PLAN_MARKET_LIMITS[plan]} pazar erişimi aktif. Mevcut paket haklarınız ve bütün bağlantılar korundu.</p></div><Link href={plansHref}>{plan==="PROFESSIONAL"?"Paket ayrıntıları":"Paketleri karşılaştır"}</Link></section>
       <footer className={dashboard.footer}><b>WINIQ</b><span>Veriyi görün, kararınızı kendiniz verin.</span><small>Tahminler bilgi amaçlıdır; kupon veya kazanç garantisi sunulmaz.</small></footer>
     </div>

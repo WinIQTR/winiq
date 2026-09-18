@@ -22,6 +22,9 @@ export type BetMarketGroup = {
   options: BetMarketOption[];
 };
 
+/** Number of market groups exposed by the catalogue. Keep UI and membership labels in sync. */
+export const BET_MARKET_COUNT = 30;
+
 export type BetMarketCatalogInput = {
   matchId: number;
   homeTeam: string;
@@ -391,6 +394,22 @@ export function buildBetMarketCatalog(input: BetMarketCatalogInput): BetMarketGr
     ];
   };
 
+  const firstHalfBtts = bttsOptions(firstHalf, "İY", true);
+  const firstHalfTeamGoals: RawOption[] = [];
+  for (const [side, team, goalKey] of [
+    ["EV", input.homeTeam, "home"],
+    ["DEP", input.awayTeam, "away"],
+  ] as const) {
+    for (const line of [0.5, 1.5] as const) {
+      if (!firstHalf.length) break;
+      const under = sum(firstHalf, (cell) => cell[goalKey] < line) * 100;
+      firstHalfTeamGoals.push(
+        { key: `iy-${side}-${line}-alt`, selection: `${team} İY ${line} ALT`, probability: under, estimated: true },
+        { key: `iy-${side}-${line}-ust`, selection: `${team} İY ${line} ÜST`, probability: 100 - under, estimated: true },
+      );
+    }
+  }
+
   const resultAndTotal: RawOption[] = [];
   if (full.length) {
     for (const [result, predicate] of [
@@ -548,5 +567,8 @@ export function buildBetMarketCatalog(input: BetMarketCatalogInput): BetMarketGr
     playerGoals.length ? group(25, tr ? "Oyuncu Gol Bahisleri" : "Player Goals", playerGoals, confidence) : unavailable(25, tr ? "Oyuncu Gol Bahisleri" : "Player Goals", noPlayerData),
     unavailable(26, tr ? "Diğer Oyuncu Bahisleri" : "Other Player Markets", noPlayerData),
     group(27, tr ? "Bahis Oluşturucu" : "Bet Builder", builder, confidence, noModelData),
+    group(28, tr ? "İlk Yarı Karşılıklı Gol" : "First-Half Both Teams to Score", firstHalfBtts, confidence, noModelData),
+    group(29, tr ? "İlk Yarı Takım Golü" : "First-Half Team Goals", firstHalfTeamGoals, confidence, noModelData),
+    group(30, tr ? "İlk Yarı Alt / Üst (1.5–2.5)" : "First-Half Over / Under (1.5–2.5)", halfTotals.filter((option) => option.key.includes("1.5") || option.key.includes("2.5")), confidence, noModelData),
   ];
 }

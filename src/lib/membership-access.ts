@@ -72,7 +72,7 @@ export const MEMBERSHIP_PLAN_LABELS: Record<MembershipPlanName, string> = {
 export const MEMBERSHIP_PLAN_MARKET_LIMITS: Record<MembershipPlanName, number> = {
   BASIC: 6,
   ANALYSIS: 19,
-  PROFESSIONAL: 27,
+  PROFESSIONAL: 30,
 };
 
 const BASIC_MARKET_NUMBERS = new Set([1, 2, 5, 7, 8, 14]);
@@ -85,7 +85,7 @@ export function canAccessBetMarket(
   plan: MembershipPlanName,
   marketNumber: number,
 ): boolean {
-  if (plan === "PROFESSIONAL") return marketNumber >= 1 && marketNumber <= 27;
+  if (plan === "PROFESSIONAL") return marketNumber >= 1 && marketNumber <= 30;
   if (plan === "ANALYSIS") return ANALYSIS_MARKET_NUMBERS.has(marketNumber);
   return BASIC_MARKET_NUMBERS.has(marketNumber);
 }

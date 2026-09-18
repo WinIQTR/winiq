@@ -8,6 +8,7 @@ import type {
   BetMarketTier,
 } from "@/lib/bet-market-catalog";
 import { settleBetMarketOption } from "@/lib/bet-market-catalog";
+import { BET_MARKET_COUNT } from "@/lib/bet-market-catalog";
 import {
   canAccessBetMarket,
   MEMBERSHIP_PLAN_LABELS,
@@ -117,7 +118,7 @@ export function BetMarketCatalogPanel({
               ? locale === "tr"
                 ? `${MEMBERSHIP_PLAN_LABELS[accessPlan].toLocaleUpperCase("tr-TR")} • ${MEMBERSHIP_PLAN_MARKET_LIMITS[accessPlan]} PAZAR ERİŞİMİ`
                 : `${MEMBERSHIP_PLAN_LABELS[accessPlan].toUpperCase()} • ${MEMBERSHIP_PLAN_MARKET_LIMITS[accessPlan]} MARKET ACCESS`
-              : locale === "tr" ? "27 PAZARLIK MAÇ ANALİZİ" : "27-MARKET MATCH ANALYSIS"}
+              : locale === "tr" ? `${BET_MARKET_COUNT} PAZARLIK MAÇ ANALİZİ` : `${BET_MARKET_COUNT}-MARKET MATCH ANALYSIS`}
           </span>
           <strong>{locale === "tr" ? "Tüm Bahis Pazarları" : "All Betting Markets"}</strong>
           <small>

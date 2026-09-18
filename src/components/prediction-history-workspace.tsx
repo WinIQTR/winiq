@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import { useLanguage } from "@/components/language-provider";
 import styles from "./prediction-history-workspace.module.css";
+import { BET_MARKET_COUNT } from "@/lib/bet-market-catalog";
 
 type PredictionSettlement = "WON" | "LOST" | "VOID";
 
@@ -193,8 +194,8 @@ export function PredictionHistoryWorkspace({
           <h2>{tr ? "Sonuçlanmış Tahminler" : "Settled Prediction Results"}</h2>
           <p className="smart-history-description">
             {tr
-              ? "Yayımlanmış seçimler maç bazında tek satırda özetlenir. Satırı açarak tahmin sonuçlarını, 27 pazarın tamamı için ayrı sonuç ekranını kullanarak tüm seçenekleri inceleyin."
-              : "Published picks are summarized in one row per match. Expand a row for pick results, or use the dedicated results page for all 27 markets."}
+              ? `Yayımlanmış seçimler maç bazında tek satırda özetlenir. Satırı açarak tahmin sonuçlarını, ${BET_MARKET_COUNT} pazarın tamamı için ayrı sonuç ekranını kullanarak tüm seçenekleri inceleyin.`
+              : `Published picks are summarized in one row per match. Expand a row for pick results, or use the dedicated results page for all ${BET_MARKET_COUNT} markets.`}
           </p>
         </div>
         <div className={styles.headingActions}>
@@ -202,7 +203,7 @@ export function PredictionHistoryWorkspace({
             {groupedMatches.length} {tr ? "maç" : "matches"}
           </span>
           <Link className={styles.resultsLink} href="/prediction-results">
-            {tr ? "27 PAZAR SONUÇLARI" : "27-MARKET RESULTS"}
+            {tr ? `${BET_MARKET_COUNT} PAZAR SONUÇLARI` : `${BET_MARKET_COUNT}-MARKET RESULTS`}
             <span aria-hidden="true">→</span>
           </Link>
         </div>
