@@ -1,0 +1,15 @@
+[build]
+  command = "pnpm run build"
+  publish = ".next"
+
+[functions]
+  # Dashboard picks are file snapshots written by the Windows refresh job.
+  # Include them in the serverless bundle so www.winiq.net can read them.
+  included_files = [
+    "data/production-dashboard-snapshot.json",
+    "data/production-selection-audit-v5.json",
+    "data/value-bet-dashboard-snapshot.json"
+  ]
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
