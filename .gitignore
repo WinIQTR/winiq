@@ -1,1 +1,11 @@
-.env
+﻿.env
+.env.*
+!.env.example
+!.env*.example
+node_modules/
+.next/
+data/
+logs/
+reports/
+*.log
+tsconfig.tsbuildinfo
