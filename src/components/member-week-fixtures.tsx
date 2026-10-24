@@ -1,6 +1,9 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 
+import { useLanguage } from "@/components/language-provider";
 import { MatchFormTip } from "@/components/match-form-tip";
 import { LeagueMark } from "@/lib/league-marks";
 import { dayPartLabel, getMatchDayPart } from "@/lib/match-daypart";
@@ -47,25 +50,32 @@ export type WeekFixtureRow = {
   weather: MatchWeatherSummary | null;
 };
 
-function formatKickoffParts(date: Date) {
-  const dayMonth = new Intl.DateTimeFormat("tr-TR", {
+function formatKickoffParts(date: Date, locale: "tr" | "en") {
+  const lang = locale === "tr" ? "tr-TR" : "en-GB";
+  const dayMonth = new Intl.DateTimeFormat(lang, {
     timeZone: "Europe/Istanbul",
     day: "numeric",
     month: "short",
   }).format(date);
-  const time = new Intl.DateTimeFormat("tr-TR", {
+  const time = new Intl.DateTimeFormat(lang, {
     timeZone: "Europe/Istanbul",
     hour: "2-digit",
     minute: "2-digit",
   }).format(date);
-  const weekday = new Intl.DateTimeFormat("tr-TR", {
+  const weekday = new Intl.DateTimeFormat(lang, {
     timeZone: "Europe/Istanbul",
     weekday: "short",
   }).format(date);
   return { dayMonth, time, weekday };
 }
 
-function FormDots({ results }: { results: Array<"W" | "D" | "L"> }) {
+function FormDots({
+  results,
+  locale,
+}: {
+  results: Array<"W" | "D" | "L">;
+  locale: "tr" | "en";
+}) {
   return (
     <span className={styles.form} aria-label="Form">
       {Array.from({ length: 5 }, (_, index) => {
@@ -77,9 +87,17 @@ function FormDots({ results }: { results: Array<"W" | "D" | "L"> }) {
             </i>
           );
         }
+        const mark =
+          locale === "en"
+            ? result
+            : result === "W"
+              ? "G"
+              : result === "D"
+                ? "B"
+                : "M";
         return (
           <i className={styles.formDot} data-result={result} key={index}>
-            {result === "W" ? "G" : result === "D" ? "B" : "M"}
+            {mark}
           </i>
         );
       })}
@@ -152,7 +170,15 @@ function styleClass(tone: RefereeStyleTone | undefined) {
   return styles.styleUnknown;
 }
 
-function TeamBlock({ team }: { team: WeekFixtureRow["home"] }) {
+function TeamBlock({
+  team,
+  locale,
+  t,
+}: {
+  team: WeekFixtureRow["home"];
+  locale: "tr" | "en";
+  t: (source: string) => string;
+}) {
   return (
     <div className={styles.team}>
       <div className={styles.teamHead}>
@@ -164,19 +190,21 @@ function TeamBlock({ team }: { team: WeekFixtureRow["home"] }) {
         <div className={styles.teamMeta}>
           <b title={team.name}>{team.name}</b>
           <div className={styles.badges}>
-            {team.isLeader ? <em className={styles.leader}>★ Lider</em> : null}
+            {team.isLeader ? <em className={styles.leader}>★ {t("Leader")}</em> : null}
             {team.isHot ? (
-              <em className={styles.hot} title="Taraftar atmosferiyle öne çıkan takım">
+              <em className={styles.hot} title={t("Club with a strong fan atmosphere")}>
                 🔥
               </em>
             ) : null}
             {team.favoritePct != null ? (
-              <em className={styles.favorite}>◆ Favori %{team.favoritePct.toFixed(0)}</em>
+              <em className={styles.favorite}>
+                ◆ {t("Favourite")} %{team.favoritePct.toFixed(0)}
+              </em>
             ) : null}
           </div>
         </div>
       </div>
-      <FormDots results={team.form} />
+      <FormDots results={team.form} locale={locale} />
     </div>
   );
 }
@@ -190,6 +218,7 @@ export function MemberWeekFixtures({
   rangeLabel: string;
   rows: WeekFixtureRow[];
 }) {
+  const { locale, t } = useLanguage();
   return (
     <section className={styles.panel}>
       <header className={styles.header}>
@@ -210,24 +239,24 @@ export function MemberWeekFixtures({
             <circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" strokeWidth="1.6" />
             <path d="M12 8v8M9 11l6 2M9 13l6-2" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
           </svg>
-          {rows.length} karşılaşma
+          {rows.length} {t("fixtures count")}
         </span>
       </header>
 
       <div className={styles.list}>
         {rows.length === 0 ? (
-          <div className={styles.empty}>Bu hafta için maç bulunamadı.</div>
+          <div className={styles.empty}>{t("No matches found for this week.")}</div>
         ) : (
           rows.map((row) => {
-            const stadium = row.venueName ?? "Stadyum bekleniyor";
+            const stadium = row.venueName ?? t("Stadium pending");
             const capacity = row.venueCapacity
-              ? `${row.venueCapacity.toLocaleString("tr-TR")} kişi`
+              ? `${row.venueCapacity.toLocaleString(locale === "tr" ? "tr-TR" : "en-GB")} ${t("people")}`
               : null;
             const referee = row.referee?.trim() || null;
             const profile = row.refereeProfile;
             const weather = row.weather;
             const dayPart = getMatchDayPart(row.kickoffAt);
-            const { dayMonth, time, weekday } = formatKickoffParts(row.kickoffAt);
+            const { dayMonth, time, weekday } = formatKickoffParts(row.kickoffAt, locale);
             const refereeHref = referee
               ? `/member/referees/${encodeURIComponent(slugifyRefereeName(referee))}`
               : null;
@@ -252,9 +281,9 @@ export function MemberWeekFixtures({
                 </div>
 
                 <div className={styles.matchup}>
-                  <TeamBlock team={row.home} />
+                  <TeamBlock team={row.home} locale={locale} t={t} />
                   <i className={styles.vs}>VS</i>
-                  <TeamBlock team={row.away} />
+                  <TeamBlock team={row.away} locale={locale} t={t} />
                 </div>
 
                 <div className={styles.metaCols}>
@@ -271,7 +300,7 @@ export function MemberWeekFixtures({
                       </svg>
                     </span>
                     <div className={styles.metaCopy}>
-                      <small>Stadyum</small>
+                      <small>{t("Stadium")}</small>
                       <b title={stadium}>{stadium}</b>
                       {capacity ? (
                         <em className={styles.capacity}>
@@ -296,26 +325,26 @@ export function MemberWeekFixtures({
                       </svg>
                     </span>
                     <div className={styles.metaCopy}>
-                      <small>Hakem</small>
+                      <small>{t("Referee")}</small>
                       {referee && refereeHref ? (
                         <Link className={styles.refereeLink} href={refereeHref} title={referee}>
                           {referee}
                         </Link>
                       ) : (
-                        <b className={styles.pending}>Atama henüz açıklanmadı</b>
+                        <b className={styles.pending}>{t("Assignment not announced yet")}</b>
                       )}
                       {referee ? (
                         profile && profile.matches > 0 && profile.averageCards != null ? (
                           <em className={`${styles.refereeMeta} ${styleClass(profile.style)}`}>
-                            {profile.styleLabel.tr}
+                            {locale === "en" ? profile.styleLabel.en : profile.styleLabel.tr}
                             {" · "}
-                            {profile.averageCards.toFixed(1)} kart/maç
+                            {profile.averageCards.toFixed(1)} {t("cards/match")}
                             {" · "}
-                            {profile.matches} maç
+                            {profile.matches} {t("matches")}
                           </em>
                         ) : (
                           <em className={`${styles.refereeMeta} ${styles.styleUnknown}`}>
-                            Profil bekleniyor
+                            {t("Profile pending")}
                           </em>
                         )
                       ) : null}
@@ -327,12 +356,12 @@ export function MemberWeekFixtures({
                       <WeatherIcon icon={weather?.icon ?? "cloud"} />
                     </span>
                     <div className={styles.metaCopy}>
-                      <small>Hava</small>
+                      <small>{t("Weather")}</small>
                       <b className={weather ? undefined : styles.pending} title={weather?.text ?? undefined}>
-                        {weather?.text ?? "Tahmin maç gününe yakın güncellenir"}
+                        {weather?.text ?? t("Forecast updates closer to match day")}
                       </b>
                       <em className={styles.dayPart} data-part={dayPart}>
-                        {dayPartLabel(dayPart, "tr")}
+                        {dayPartLabel(dayPart, locale)}
                       </em>
                     </div>
                   </div>

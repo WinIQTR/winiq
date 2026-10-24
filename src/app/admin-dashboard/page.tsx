@@ -74,7 +74,7 @@ export default async function AdminDashboardPage() {
   const popularLabel = popular === "HOME" ? "Ev Sahibi" : popular === "AWAY" ? "Deplasman" : "Beraberlik";
 
   return <PageShell><main className={styles.page}>
-    <header className={styles.hero}><div><p><i/> AI FUTBOL TAHMİNLERİ · CANLI VERİ</p><h1>Tahmin Merkezi</h1><span>Yapay zekâ destekli en güçlü maç tahminleri, tek ekranda.</span></div><aside><small>DAHA FAZLA ANALİZ</small><small>DAHA FAZLA KAZANÇ</small><i/></aside></header>
+    <header className={styles.hero}><div><p><i/> AI FOOTBALL PREDICTIONS · LIVE DATA</p><h1>Prediction centre</h1><span>AI-powered strongest match predictions on one screen.</span></div><aside><small>MORE ANALYSIS</small><small>MORE EDGE</small><i/></aside></header>
     <section className={styles.metrics}>
       <article><span>▣</span><div><small>Yaklaşan maç</small><strong>{predictions.length}</strong></div></article><article><span>♢</span><div><small>Yüksek güven</small><strong>{highConfidence.length}</strong></div></article><article><span>▥</span><div><small>Ortalama güven</small><strong>%{averageConfidence.toFixed(0)}</strong></div></article><article><span>◎</span><div><small>Ortalama tahmin</small><strong>%{averageProbability.toFixed(0)}</strong></div></article><article><span>♟</span><div><small>Popüler seçim</small><strong>{popularLabel}</strong></div></article>
     </section>

@@ -15,7 +15,8 @@ import {
   requiredPlanForBetMarket,
   type MembershipPlanName,
 } from "@/lib/membership-access";
-import { LOCK_HINT } from "@/lib/membership-lock-copy";
+import { translateUiText } from "@/i18n/dictionaries";
+import { lockHintText } from "@/lib/membership-lock-copy";
 
 import styles from "./predictions-workspace.module.css";
 
@@ -282,10 +283,10 @@ export function BetMarketCatalogPanel({
                 {!unlocked ? (
                   <div className={styles.marketUpgradePrompt}>
                     <div>
-                      <strong>{locale === "tr" ? LOCK_HINT.marketLocked : "This market opens on Analysis or Professional"}</strong>
-                      <span>{locale === "tr" ? LOCK_HINT.marketLockedDetail : "Upgrade your plan to see the selection and probability."}</span>
+                      <strong>{lockHintText("marketLocked", locale)}</strong>
+                      <span>{lockHintText("marketLockedDetail", locale)}</span>
                     </div>
-                    <a href="/member/plans">{locale === "tr" ? "Paketi yükselt →" : "Upgrade plan →"}</a>
+                    <a href="/member/plans">{translateUiText("Upgrade plan →", locale)}</a>
                   </div>
                 ) : marketGroup.available ? (
                   <div className={styles.marketOptionGrid}>

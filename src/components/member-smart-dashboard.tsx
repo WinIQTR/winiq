@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
@@ -6,6 +8,7 @@ import cards from "@/components/member-match-cards.module.css";
 import shell from "@/components/member-shell.module.css";
 import { LogoutButton } from "@/components/logout-button";
 import { LanguageSwitcher } from "@/components/language-switcher";
+import { useLanguage } from "@/components/language-provider";
 import { MemberMobileNav } from "@/components/member-mobile-nav";
 import { MemberPredictionsBoard } from "@/components/member-predictions-board";
 import { ACTIVE_SEASON_YEAR } from "@/config/season";
@@ -15,6 +18,7 @@ import {
   type MembershipPlanName,
 } from "@/lib/membership-access";
 import { LOCK_HINT } from "@/lib/membership-lock-copy";
+import { localizePickText } from "@/lib/member-match-insight";
 import { getPredictionLabel, type DashboardPrediction } from "@/lib/prediction-dashboard-shared";
 
 import styles from "./member-smart-dashboard.module.css";
@@ -44,18 +48,6 @@ const initialsOf = (name: string) => {
   if (parts.length === 1) return parts[0]!.slice(0, 2).toUpperCase();
   return `${parts[0]![0] ?? ""}${parts[1]![0] ?? ""}`.toUpperCase();
 };
-const translate = (value: string) =>
-  value
-    .replace(/Home Team Goals/gi, "Ev sahibi takım golü")
-    .replace(/Away Team Goals/gi, "Deplasman takım golü")
-    .replace(/Total Goals/gi, "Toplam gol")
-    .replace(/Both Teams To Score/gi, "Karşılıklı gol")
-    .replace(/Under/gi, "Alt")
-    .replace(/Over/gi, "Üst")
-    .replace(/Home/gi, "Ev sahibi")
-    .replace(/Away/gi, "Deplasman")
-    .replace(/Draw/gi, "Beraberlik");
-
 function TeamLogo({ src, name, size = 28 }: { src: string | null; name: string; size?: number }) {
   if (src) {
     return <Image src={src} alt="" width={size} height={size} />;
@@ -210,6 +202,7 @@ export function MemberPortalHeader({
   active?: MemberNavActive;
   memberName?: string;
 }) {
+  const { t } = useLanguage();
   const homeHref = preview ? `/admin/members/preview?plan=${plan}` : "/member";
   const planLink = preview ? `/admin/members/preview?plan=${plan}#paket` : "/member/plans";
   const canValue =
@@ -272,9 +265,11 @@ export function MemberPortalHeader({
     <div className={shell.chrome}>
       {preview ? (
         <div className={shell.preview}>
-          <span>YÖNETİCİ ÖNİZLEMESİ</span>
-          <strong>{MEMBERSHIP_PLAN_LABELS[plan]} üye görünümü</strong>
-          <Link href="/admin/members">Önizlemeden çık</Link>
+          <span>{t("Administrator preview")}</span>
+          <strong>
+            {MEMBERSHIP_PLAN_LABELS[plan]} {t("member preview")}
+          </strong>
+          <Link href="/admin/members">{t("Exit preview")}</Link>
         </div>
       ) : null}
       <header className={shell.topbar}>
@@ -284,7 +279,9 @@ export function MemberPortalHeader({
             WIN<span>IQ</span>
           </Link>
           <div className={shell.brandMeta}>
-            <small>AI Football Predictions • {ACTIVE_SEASON_YEAR}</small>
+            <small>
+              {t("AI Football Predictions")} • {ACTIVE_SEASON_YEAR}
+            </small>
           </div>
         </div>
 
@@ -341,10 +338,11 @@ export function MemberPortalHeader({
 }
 
 export function LockHint({ children, href }: { children: string; href: string }) {
+  const { t } = useLanguage();
   return (
     <div className={styles.lockCard}>
       <span>{children}</span>
-      <Link href={href}>Paketi yükselt →</Link>
+      <Link href={href}>{t("Upgrade plan →")}</Link>
     </div>
   );
 }
@@ -362,6 +360,7 @@ export function MemberPredictionRow({
   recommended?: boolean;
   plansHref?: string;
 }) {
+  const { t, locale } = useLanguage();
   const reasons = prediction.topPicks[0]?.reasons.slice(0, 2) ?? [];
   const formIcons = (results?: ("W" | "D" | "L")[]) => (
     <span className="form-result-badge">
@@ -409,12 +408,12 @@ export function MemberPredictionRow({
             </span>
           </div>
         ) : (
-          <LockHint href={plansHref}>{LOCK_HINT.probabilities}</LockHint>
+          <LockHint href={plansHref}>{t(LOCK_HINT.probabilities)}</LockHint>
         )}
         <div className={cards.choice}>
           <span className={cards.strongBadge}>{pickBadge(prediction).label}</span>
           <small>En iyi seçim</small>
-          <strong>{translate(getPredictionLabel(prediction))}</strong>
+          <strong>{localizePickText(getPredictionLabel(prediction), locale, t)}</strong>
         </div>
         <div className={cards.confidence}>
           <span>Güven</span>
@@ -426,7 +425,7 @@ export function MemberPredictionRow({
             <strong>{fairOdds(prediction).toFixed(2)}</strong>
           </div>
         ) : (
-          <LockHint href={plansHref}>{LOCK_HINT.modelOdds}</LockHint>
+          <LockHint href={plansHref}>{t(LOCK_HINT.modelOdds)}</LockHint>
         )}
       </div>
       <div className={cards.reasonBar}>

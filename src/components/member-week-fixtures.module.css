@@ -1,7 +1,10 @@
+/* Analizler / Fikstür match list — light mockup cards. Neon greens preserved. */
+
 .panel {
-  border: 1px solid #1d3a51;
+  border: 1px solid #e2e8f0;
   border-radius: 18px;
-  background: linear-gradient(180deg, #0a1c2e 0%, #071525 100%);
+  background: #ffffff;
+  box-shadow: 0 4px 16px rgba(15, 35, 70, 0.08);
   overflow: hidden;
 }
 
@@ -11,7 +14,7 @@
   justify-content: space-between;
   gap: 16px;
   padding: 20px 22px;
-  border-bottom: 1px solid #1d3a51;
+  border-bottom: 1px solid #e8eef5;
 }
 
 .headerCopy {
@@ -27,8 +30,8 @@
   width: 42px;
   height: 42px;
   border-radius: 12px;
-  background: #12385f;
-  color: #6eb6ff;
+  background: rgba(37, 99, 235, 0.12);
+  color: #2563eb;
   flex: 0 0 auto;
 }
 
@@ -39,7 +42,7 @@
 
 .header h2 {
   margin: 0;
-  color: #f4f9ff;
+  color: #0b1f3a;
   font-size: 22px;
   font-weight: 800;
   letter-spacing: -0.02em;
@@ -48,7 +51,7 @@
 .header small {
   display: block;
   margin-top: 4px;
-  color: #7f9db5;
+  color: #6b7c93;
   font-size: 13px;
 }
 
@@ -58,9 +61,9 @@
   gap: 8px;
   border-radius: 999px;
   padding: 9px 14px;
-  background: rgba(45, 209, 127, 0.12);
-  border: 1px solid rgba(67, 227, 161, 0.35);
-  color: #43e3a1;
+  background: rgba(67, 227, 161, 0.14);
+  border: 1px solid rgba(67, 227, 161, 0.45);
+  color: #0d8f5a;
   font-weight: 800;
   font-size: 13px;
   white-space: nowrap;
@@ -69,6 +72,7 @@
 .countChip svg {
   width: 16px;
   height: 16px;
+  color: #43e3a1;
 }
 
 .list {
@@ -81,15 +85,16 @@
   gap: 18px;
   align-items: center;
   padding: 16px 20px;
-  border-bottom: 1px solid #173249;
+  border-bottom: 1px solid #eef2f7;
   min-width: 0;
+  background: #fff;
 }
 
 .formTip {
   grid-column: 1 / -1;
   margin: 0;
   padding-top: 2px;
-  color: #9eb6ce;
+  color: #6b7c93;
 }
 
 .row:last-child {
@@ -106,10 +111,12 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  color: #8eabc2;
+  color: #6b7c93;
   font-size: 11px;
   font-weight: 700;
   min-width: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
 .leagueHead span {
@@ -143,7 +150,7 @@
 }
 
 .dateDay {
-  color: #f4f9ff;
+  color: #0b1f3a;
   font-size: 16px;
   font-weight: 800;
   letter-spacing: -0.02em;
@@ -151,13 +158,13 @@
 }
 
 .dateTime {
-  color: #7eb6ff;
+  color: #2563eb;
   font-size: 13px;
   font-weight: 800;
 }
 
 .weekday {
-  color: #6f91ab;
+  color: #6b7c93;
   font-size: 11px;
   text-transform: capitalize;
   letter-spacing: 0.04em;
@@ -178,8 +185,8 @@
   height: 28px;
   margin: 0 auto;
   border-radius: 8px;
-  background: #123553;
-  color: #7eb0d4;
+  background: #eef3f9;
+  color: #5b6f88;
   font-size: 11px;
   font-style: normal;
   font-weight: 900;
@@ -210,7 +217,7 @@
 }
 
 .teamMeta b {
-  color: #f2f7fc;
+  color: #0b1f3a;
   font-size: 14px;
   line-height: 1.2;
   overflow: hidden;
@@ -238,20 +245,20 @@
 }
 
 .leader {
-  color: #ffd35d;
-  background: #3c3114;
-  border: 1px solid #6e5715;
+  color: #9a6b08;
+  background: #fff6de;
+  border: 1px solid #f0d48a;
 }
 
 .hot {
   padding: 2px 4px;
-  background: #34201d;
+  background: #ffe8e4;
 }
 
 .favorite {
-  color: #76c8ff;
-  background: #0a324c;
-  border: 1px solid #2f91d0;
+  color: #1d4ed8;
+  background: #e8f0ff;
+  border: 1px solid #bfd3ff;
 }
 
 .form {
@@ -287,8 +294,8 @@
 }
 
 .formEmpty {
-  background: #122536;
-  color: #5f7d94;
+  background: #e8eef5;
+  color: #8aa0b8;
 }
 
 .metaCols {
@@ -306,7 +313,7 @@
   min-width: 0;
   max-width: 100%;
   padding-left: 10px;
-  border-left: 1px solid #1c3a50;
+  border-left: 1px solid #e5ebf3;
   overflow: hidden;
 }
 
@@ -315,7 +322,7 @@
   place-items: center;
   width: 26px;
   height: 26px;
-  color: #8eb4d2;
+  color: #7a8fa8;
   flex: 0 0 auto;
 }
 
@@ -334,7 +341,7 @@
 
 .metaCopy small {
   display: block;
-  color: #7a98b0;
+  color: #6b7c93;
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.04em;
@@ -345,7 +352,7 @@
 .refereeLink {
   display: block;
   margin: 0;
-  color: #eef5fb;
+  color: #0b1f3a;
   font-size: 12px;
   font-weight: 800;
   line-height: 1.3;
@@ -356,12 +363,12 @@
 }
 
 .refereeLink {
-  color: #8ec8ff;
+  color: #2563eb;
   text-decoration: none;
 }
 
 .refereeLink:hover {
-  color: #c5e2ff;
+  color: #1d4ed8;
   text-decoration: underline;
 }
 
@@ -384,7 +391,8 @@
 }
 
 .capacity {
-  color: #43e3a1;
+  /* neon green accent on capacity — keep hue */
+  color: #0d8f5a;
 }
 
 .fanIcon {
@@ -395,39 +403,39 @@
 }
 
 .refereeMeta {
-  color: #9bb4c8;
+  color: #6b7c93;
 }
 
 .styleHard {
-  color: #ff7885 !important;
+  color: #dc2626 !important;
 }
 
 .styleSoft {
-  color: #6ee7b7 !important;
+  color: #0d8f5a !important;
 }
 
 .styleLenient {
-  color: #f2bf50 !important;
+  color: #b45309 !important;
 }
 
 .styleUnknown {
-  color: #7f9db5 !important;
+  color: #6b7c93 !important;
 }
 
 .dayPart {
-  color: #9db8ce;
+  color: #6b7c93;
 }
 
 .dayPart[data-part="day"] {
-  color: #f0c65c;
+  color: #b45309;
 }
 
 .dayPart[data-part="night"] {
-  color: #9eb7ff;
+  color: #2563eb;
 }
 
 .pending {
-  color: #8aa4b8 !important;
+  color: #8aa0b8 !important;
   font-weight: 600 !important;
   white-space: normal !important;
 }
@@ -437,14 +445,14 @@
   width: 28px;
   height: 28px;
   border-radius: 8px;
-  background: #12283c;
-  border: 1px solid #1e3b52;
+  background: #eef3f9;
+  border: 1px solid #d5deea;
   flex: 0 0 auto;
 }
 
 .empty {
   padding: 36px 22px;
-  color: #7f9db5;
+  color: #6b7c93;
   text-align: center;
 }
 
@@ -481,6 +489,6 @@
     padding-left: 0;
     border-left: 0;
     padding-top: 8px;
-    border-top: 1px solid #173249;
+    border-top: 1px solid #e8eef5;
   }
 }

@@ -54,26 +54,26 @@ export default async function MembershipPlansPage() {
       <div className={member.page}>
       <header className="member-header">
         <div>
-          <p className="member-eyebrow">ÜYELİK PAKETLERİ</p>
-          <h1>Paketinizi karşılaştırın</h1>
-          <p>Mevcut paketiniz: {MEMBERSHIP_PLAN_LABELS[user.plan]}</p>
+          <p className="member-eyebrow">MEMBERSHIP PLANS</p>
+          <h1>Compare your plan</h1>
+          <p>Your current plan: {MEMBERSHIP_PLAN_LABELS[user.plan]}</p>
         </div>
       </header>
 
       <section className={`membership-expiry ${remainingDays !== null && remainingDays <= 7 ? "membership-expiry-warning" : ""}`}>
         {remainingDays === null
-          ? "Üyeliğiniz için bir bitiş tarihi tanımlanmamış."
+          ? "No membership end date is set for your account."
           : remainingDays === 0
-            ? "Üyeliğiniz bugün sona eriyor."
-            : `Üyeliğinizin bitmesine ${remainingDays} gün kaldı.`}
+            ? "Your membership ends today."
+            : `${remainingDays} days left on your membership.`}
       </section>
 
       <section className={member.scope}>
         <div>
-          <small>ÖRNEK SENARYO</small>
-          <h2>Bugünkü bir maçta ne görürsünüz?</h2>
+          <small>EXAMPLE SCENARIO</small>
+          <h2>What do you see on a match today?</h2>
           <p>
-            Temel: önerilen seçim · Analiz: 1/X/2 + model oranı · Profesyonel: xG, gerekçe ve {MEMBERSHIP_PLAN_MARKET_LIMITS.PROFESSIONAL} pazarın tamamı.
+            Basic: recommended pick · Analysis: 1/X/2 + model odds · Professional: xG, rationale, and all {MEMBERSHIP_PLAN_MARKET_LIMITS.PROFESSIONAL} markets.
           </p>
         </div>
       </section>
@@ -89,14 +89,14 @@ export default async function MembershipPlansPage() {
           const upgrade = isHigherPlan(user.plan, plan);
           return (
             <article className={`member-plan-card member-plan-card-${plan.toLowerCase()} ${current ? "member-plan-current" : ""}`} key={plan}>
-              {plan === "ANALYSIS" ? <b className="member-popular-label">EN POPÜLER</b> : null}
-              <div><p className="member-eyebrow">{MEMBERSHIP_PLAN_MARKET_LIMITS[plan]} PAZAR</p><h2>{MEMBERSHIP_PLAN_LABELS[plan]}</h2></div>
+              {plan === "ANALYSIS" ? <b className="member-popular-label">MOST POPULAR</b> : null}
+              <div><p className="member-eyebrow">{MEMBERSHIP_PLAN_MARKET_LIMITS[plan]} MARKETS</p><h2>{MEMBERSHIP_PLAN_LABELS[plan]}</h2></div>
               <div className="member-plan-prices">
                 <strong>{formatPrice(price.priceTryCents, "TRY")} <small>/ ay</small></strong>
                 <span>{formatPrice(price.priceEurCents, "EUR")} / ay</span>
               </div>
               <ul>{MEMBERSHIP_PLAN_FEATURES[plan].map((feature) => <li key={feature}>{feature}</li>)}</ul>
-              {current ? <b className="member-current-label">Mevcut paketiniz</b> : null}
+              {current ? <b className="member-current-label">Your current plan</b> : null}
               {upgrade ? <MembershipPlanSelector requestedPlan={plan} priceTry={formatPrice(price.priceTryCents, "TRY")} priceEur={formatPrice(price.priceEurCents, "EUR")} payment={payment} memberReference={user.id.slice(-8).toUpperCase()} /> : null}
             </article>
           );
@@ -104,7 +104,7 @@ export default async function MembershipPlansPage() {
       </section>
 
       <section className="member-notice">
-        Talep gönderildiğinde yönetici sizinle iletişime geçer. Ödeme alınmadan paket otomatik etkinleştirilmez.
+        After you submit a request, an administrator will contact you. Plans are not activated automatically without payment.
       </section>
 
       <MemberNotificationSettings initial={notifySettings} />

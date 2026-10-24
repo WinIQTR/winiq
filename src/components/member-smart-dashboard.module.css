@@ -1,45 +1,57 @@
 .shell {
+  --mh-neon: #43e3a1;
+  --mh-neon-cta: #31d996;
+  --mh-page: #f4f6f8;
+  --mh-card: #ffffff;
+  --mh-text: #0b1f3a;
+  --mh-muted: #6b7c93;
+  --mh-blue: #2563eb;
+  --mh-border: #e2e8f0;
+  --mh-shadow: 0 4px 16px rgba(15, 35, 70, 0.08);
   min-height: 100vh;
-  background: #070f1c;
-  color: #e6edf3;
+  background: var(--mh-page);
+  color: var(--mh-text);
 }
 
 .page {
   display: grid;
   gap: 16px;
   padding: 20px clamp(14px, 2vw, 32px) 32px;
-  background: #070f1c;
+  background: var(--mh-page);
 }
 
 .welcome {
   display: flex;
-  min-height: 120px;
+  min-height: auto;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  border: 1px solid #19334b;
-  border-radius: 16px;
-  padding: 22px 24px;
-  background: linear-gradient(120deg, #081827, #07131e);
+  border: 0;
+  border-radius: 0;
+  padding: 8px 0 4px;
+  background: transparent;
+  box-shadow: none;
 }
 
 .welcome p {
   margin: 0 0 7px;
-  color: #9eb6cc;
+  color: var(--mh-muted);
   font-size: 11px;
   letter-spacing: 0.08em;
 }
 
 .welcome h1 {
   margin: 0;
+  color: var(--mh-text);
   font-size: clamp(28px, 3.5vw, 42px);
   line-height: 1.05;
+  font-weight: 850;
 }
 
 .welcome div > span {
   display: block;
   margin-top: 8px;
-  color: #aebfd1;
+  color: var(--mh-muted);
   font-size: 14px;
 }
 

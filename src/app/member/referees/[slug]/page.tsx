@@ -4,6 +4,7 @@ import { notFound, redirect } from "next/navigation";
 import { MemberPortalHeader } from "@/components/member-smart-dashboard";
 import member from "@/components/member-smart-dashboard.module.css";
 import { ACTIVE_SEASON_YEAR } from "@/config/season";
+import { readAppLocale } from "@/lib/app-locale-server";
 import { requireMember } from "@/lib/auth-session";
 import { prisma } from "@/lib/prisma";
 import {
@@ -19,8 +20,8 @@ import styles from "./referee.module.css";
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
-function formatKickoff(date: Date) {
-  return new Intl.DateTimeFormat("tr-TR", {
+function formatKickoff(date: Date, locale: "tr" | "en") {
+  return new Intl.DateTimeFormat(locale === "tr" ? "tr-TR" : "en-GB", {
     timeZone: "Europe/Istanbul",
     day: "2-digit",
     month: "short",
@@ -43,6 +44,7 @@ export default async function MemberRefereePage({
   params: Promise<{ slug: string }>;
 }) {
   const user = await requireMember();
+  const locale = await readAppLocale();
   const localReviewBypass = process.env.NODE_ENV !== "production";
   if (user.plan !== "PROFESSIONAL" && !localReviewBypass) redirect("/member/plans");
 
@@ -116,20 +118,20 @@ export default async function MemberRefereePage({
       <MemberPortalHeader plan={user.plan} active="fixtures" />
       <div className={member.page}>
         <nav className={styles.back}>
-          <Link href="/member/professional">← Analizler / Bu haftanın maçları</Link>
+          <Link href="/member/professional">← Analyses / This week&apos;s matches</Link>
         </nav>
 
         <section className={styles.hero}>
           <div>
-            <p>Hakem profili</p>
+            <p>Referee profile</p>
             <h1>{profile.name}</h1>
             <span>
-              Sezon {ACTIVE_SEASON_YEAR} · bitmiş maçlardaki kart & faul toplamları (API-Football
-              fixtures + fixtures/statistics; ayrı hakem kariyer endpoint’i yok)
+              Season {ACTIVE_SEASON_YEAR} · card and foul totals from finished matches (API-Football
+              fixtures + statistics; no dedicated referee career endpoint)
             </span>
           </div>
           <div className={`${styles.badge} ${toneClass(profile.style)}`}>
-            {profile.styleLabel.tr}
+            {locale === "en" ? profile.styleLabel.en : profile.styleLabel.tr}
           </div>
         </section>
 
@@ -177,7 +179,7 @@ export default async function MemberRefereePage({
             <div className={styles.table}>
               {profile.recent.map((match) => (
                 <div className={styles.row} key={match.id}>
-                  <small>{formatKickoff(match.kickoffAt)}</small>
+                  <small>{formatKickoff(match.kickoffAt, locale)}</small>
                   <b>
                     {match.homeTeam} {match.homeScore ?? "–"}–{match.awayScore ?? "–"}{" "}
                     {match.awayTeam}

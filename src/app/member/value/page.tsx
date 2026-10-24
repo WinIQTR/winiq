@@ -6,6 +6,7 @@ import {
   MemberValueOpportunities,
   type MemberValueOpportunity,
 } from "@/components/member-value-opportunities";
+import { readAppLocale } from "@/lib/app-locale-server";
 import { requireMember } from "@/lib/auth-session";
 import { hasMembershipPermission } from "@/lib/membership-access";
 import { loadDashboardPredictionSnapshot } from "@/lib/prediction-dashboard-snapshot";
@@ -16,7 +17,7 @@ export const revalidate = 0;
 
 const TZ = "Europe/Istanbul";
 
-function formatKickoffLabel(date: Date) {
+function formatKickoffLabel(date: Date, locale: "tr" | "en" = "en") {
   const todayKey = new Intl.DateTimeFormat("en-CA", {
     timeZone: TZ,
     year: "numeric",
@@ -29,15 +30,15 @@ function formatKickoffLabel(date: Date) {
     month: "2-digit",
     day: "2-digit",
   }).format(date);
-  const time = new Intl.DateTimeFormat("tr-TR", {
+  const time = new Intl.DateTimeFormat(locale === "tr" ? "tr-TR" : "en-GB", {
     timeZone: TZ,
     hour: "2-digit",
     minute: "2-digit",
   }).format(date);
 
-  if (dayKey === todayKey) return `Bugün ${time}`;
+  if (dayKey === todayKey) return locale === "tr" ? `Bugün ${time}` : `Today ${time}`;
 
-  const day = new Intl.DateTimeFormat("tr-TR", {
+  const day = new Intl.DateTimeFormat(locale === "tr" ? "tr-TR" : "en-GB", {
     timeZone: TZ,
     weekday: "short",
     day: "numeric",
@@ -48,6 +49,7 @@ function formatKickoffLabel(date: Date) {
 
 export default async function MemberValuePage() {
   const user = await requireMember();
+  const locale = await readAppLocale();
   if (
     !hasMembershipPermission(user.plan, "VALUE_BETS") &&
     !hasMembershipPermission(user.plan, "SMART_PICKS")
@@ -83,7 +85,7 @@ export default async function MemberValuePage() {
       awayTeamLogo: item.awayTeamLogo,
       leagueName: item.leagueName,
       kickoffIso: item.kickoffAt.toISOString(),
-      kickoffLabel: formatKickoffLabel(item.kickoffAt),
+      kickoffLabel: formatKickoffLabel(item.kickoffAt, locale),
       market: top?.market ?? "Match result",
       selection: top?.selection ?? item.predictedOutcome,
       marketLabel: getPredictionLabel(item),

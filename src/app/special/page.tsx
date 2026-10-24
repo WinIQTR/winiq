@@ -4,7 +4,9 @@ import {
   buildSpecialListLabels,
 } from "@/components/special-list-view";
 import { translateUiText } from "@/i18n/dictionaries";
+import { readAppLocale } from "@/lib/app-locale-server";
 import { requireAdmin } from "@/lib/auth-session";
+import { matchesDayPartFilter, parseDayPartFilter } from "@/lib/daypart-filter";
 import { buildMatchFormTip } from "@/lib/member-match-insight";
 import {
   applySpecialChipFilters,
@@ -33,9 +35,11 @@ export default async function SpecialPage({
     maxProb?: string;
     pMin?: string;
     odds?: string;
+    daypart?: string;
   }>;
 }) {
   await requireAdmin();
+  const locale = await readAppLocale();
   const q = await searchParams;
   const range = q?.range === "week" ? "week" : "day";
   const market = q?.market || "ALL";
@@ -46,6 +50,7 @@ export default async function SpecialPage({
   const maxProb = q?.maxProb ? Number(q.maxProb) : null;
   const probMin = parseSpecialProbMin(q?.pMin);
   const oddsBand = parseSpecialOddsBand(q?.odds);
+  const dayPart = parseDayPartFilter(q?.daypart);
 
   const { predictions, source } = await loadSpecialListPredictions();
   const matches = filterSpecialMatches(predictions, range);
@@ -57,9 +62,9 @@ export default async function SpecialPage({
       { sortDate, sortProb, sortOdds },
     ),
     { probMin, oddsBand },
-  );
+  ).filter((item) => matchesDayPartFilter(item.prediction.kickoffAt, dayPart));
 
-  const tipTranslate = (sourceText: string) => translateUiText(sourceText, "tr");
+  const tipTranslate = (sourceText: string) => translateUiText(sourceText, locale);
   const tipsByKey: Record<string, string | null> = {};
   for (const item of rows) {
     const key = `${item.prediction.matchId}|${item.marketKey}|${item.selection}`;
@@ -97,9 +102,10 @@ export default async function SpecialPage({
         source={source}
         matchHref={(matchId) => `/predictions?match=${matchId}`}
         labels={labels}
-        locale="en"
+        locale={locale}
         probMin={probMin}
         oddsBand={oddsBand}
+        dayPart={dayPart}
         adminExtras={{
           sortDate,
           sortProb,

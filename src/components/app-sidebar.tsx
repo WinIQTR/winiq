@@ -6,47 +6,47 @@ type NavGroup = { title: string; items: NavItem[] };
 
 const groups: NavGroup[] = [
   {
-    title: "Canlı",
+    title: "Live",
     items: [
-      { href: "/admin-dashboard", label: "Kontrol paneli" },
-      { href: "/predictions", label: "Tahminler" },
-      { href: "/special", label: "Özel liste" },
-      { href: "/value-bets", label: "Değer bahisleri" },
+      { href: "/admin-dashboard", label: "Dashboard" },
+      { href: "/predictions", label: "Predictions" },
+      { href: "/special", label: "Special list" },
+      { href: "/value-bets", label: "Value bets" },
     ],
   },
   {
-    title: "Performans",
+    title: "Performance",
     items: [
-      { href: "/prediction-results", label: "Tahmin sonuçları" },
-      { href: "/match-result-performance", label: "Pazar performansı" },
-      { href: "/coupons", label: "Kupon merkezi" },
-      { href: "/evaluation", label: "Model performansı" },
+      { href: "/prediction-results", label: "Prediction results" },
+      { href: "/match-result-performance", label: "Market performance" },
+      { href: "/coupons", label: "Coupon centre" },
+      { href: "/evaluation", label: "Model Performance" },
     ],
   },
   {
-    title: "Veri",
+    title: "Data",
     items: [
-      { href: "/fixtures", label: "Fikstür" },
-      { href: "/teams", label: "Takımlar" },
-      { href: "/players", label: "Oyuncular" },
-      { href: "/top-scorers", label: "Gol krallığı" },
-      { href: "/admin/data-coverage", label: "Veri kapsamı" },
-      { href: "/operations", label: "Operasyon" },
+      { href: "/fixtures", label: "Fixtures" },
+      { href: "/teams", label: "Teams" },
+      { href: "/players", label: "Players" },
+      { href: "/top-scorers", label: "Top scorers" },
+      { href: "/admin/data-coverage", label: "Data coverage" },
+      { href: "/operations", label: "Operations" },
     ],
   },
   {
-    title: "Üyelik",
+    title: "Membership",
     items: [
-      { href: "/admin/members", label: "Üyeler" },
-      { href: "/admin/messages", label: "Gelen kutusu" },
+      { href: "/admin/members", label: "Members" },
+      { href: "/admin/messages", label: "Inbox" },
     ],
   },
   {
-    title: "Sistem",
+    title: "System",
     items: [
-      { href: "/admin", label: "Sistem sağlığı" },
-      { href: "/admin-dashboard/mobile", label: "Mobil önizleme" },
-      { href: "/settings", label: "Ayarlar" },
+      { href: "/admin", label: "System health" },
+      { href: "/admin-dashboard/mobile", label: "Mobile preview" },
+      { href: "/settings", label: "Settings" },
     ],
   },
 ];
@@ -61,7 +61,7 @@ export function AppSidebar() {
           </div>
           <div>
             <strong data-no-translate>WINIQ</strong>
-            <span>Yönetim merkezi</span>
+            <span>Admin centre</span>
           </div>
         </div>
 
@@ -82,7 +82,7 @@ export function AppSidebar() {
       <div className="sidebar-footer">
         <div className="sidebar-status">
           <span className="status-dot" />
-          Sistem çevrimiçi
+          System online
         </div>
         <LogoutButton />
       </div>

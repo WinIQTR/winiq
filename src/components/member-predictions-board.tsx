@@ -13,7 +13,14 @@ import {
 } from "@/lib/prediction-dashboard-shared";
 import { buildMatchCardInsight, localizePickText } from "@/lib/member-match-insight";
 import { type MembershipPlanName } from "@/lib/membership-access";
+import {
+  dayPartFilterLabel,
+  matchesDayPartFilter,
+  type DayPartFilter,
+} from "@/lib/daypart-filter";
 import { LOCK_HINT } from "@/lib/membership-lock-copy";
+
+import daypartStyles from "./daypart-filter-chips.module.css";
 
 import styles from "./member-predictions-board.module.css";
 
@@ -27,6 +34,7 @@ type DraftFilters = {
   league: string;
   market: string;
   confidence: ConfidenceFilter;
+  daypart: DayPartFilter;
 };
 
 type PerformanceBand = {
@@ -346,6 +354,7 @@ export function MemberPredictionsBoard({
     league: "ALL",
     market: "ALL",
     confidence: "ALL",
+    daypart: "ALL",
   };
 
   const [draft, setDraft] = useState<DraftFilters>(emptyDraft);
@@ -445,6 +454,7 @@ export function MemberPredictionsBoard({
         return false;
       }
       if (applied.confidence === "LOW" && item.confidenceScore >= 40) return false;
+      if (!matchesDayPartFilter(item.kickoffAt, applied.daypart)) return false;
       return true;
     });
   }, [upcoming, applied]);
@@ -485,13 +495,15 @@ export function MemberPredictionsBoard({
     draft.date !== applied.date ||
     draft.league !== applied.league ||
     draft.market !== applied.market ||
-    draft.confidence !== applied.confidence;
+    draft.confidence !== applied.confidence ||
+    draft.daypart !== applied.daypart;
 
   const hasActiveFilters =
     applied.date !== today ||
     applied.league !== "ALL" ||
     applied.market !== "ALL" ||
-    applied.confidence !== "ALL";
+    applied.confidence !== "ALL" ||
+    applied.daypart !== "ALL";
 
   const applyFilters = () => {
     setApplied(draft);
@@ -500,7 +512,13 @@ export function MemberPredictionsBoard({
   };
 
   const clearFilters = () => {
-    const next = { date: today, league: "ALL", market: "ALL", confidence: "ALL" as const };
+    const next = {
+      date: today,
+      league: "ALL",
+      market: "ALL",
+      confidence: "ALL" as const,
+      daypart: "ALL" as const,
+    };
     setDraft(next);
     setApplied(next);
     setPage(1);
@@ -647,6 +665,22 @@ export function MemberPredictionsBoard({
                 ))}
               </select>
             </label>
+            <div className={styles.field} role="group" aria-label={t("Day / night")}>
+              <span>{t("Day / night")}</span>
+              <div className={daypartStyles.row}>
+                {(["ALL", "day", "night"] as DayPartFilter[]).map((option) => (
+                  <button
+                    key={option}
+                    type="button"
+                    className={daypartStyles.chip}
+                    data-active={draft.daypart === option ? "true" : undefined}
+                    onClick={() => setDraft((prev) => ({ ...prev, daypart: option }))}
+                  >
+                    {dayPartFilterLabel(option, locale)}
+                  </button>
+                ))}
+              </div>
+            </div>
             <label className={styles.field}>
               <span>{t("Confidence Score")}</span>
               <select
@@ -743,7 +777,7 @@ export function MemberPredictionsBoard({
                           <strong className={styles.oddsValue}>{odds > 0 ? odds.toFixed(2) : "—"}</strong>
                         ) : (
                           <span className={styles.lock}>
-                            <Link href={plansHref}>{LOCK_HINT.modelOdds}</Link>
+                            <Link href={plansHref}>{t(LOCK_HINT.modelOdds)}</Link>
                           </span>
                         )}
                       </div>

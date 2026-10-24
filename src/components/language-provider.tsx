@@ -14,8 +14,9 @@ import {
   translateUiText,
   type AppLocale,
 } from "@/i18n/dictionaries";
+import { APP_LOCALE_COOKIE } from "@/lib/app-locale";
 
-const STORAGE_KEY = "bet-project-language";
+const STORAGE_KEY = APP_LOCALE_COOKIE;
 
 type LanguageContextValue = {
   locale: AppLocale;
@@ -127,6 +128,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     document.documentElement.lang = locale;
     window.localStorage.setItem(STORAGE_KEY, locale);
+    document.cookie = `${STORAGE_KEY}=${locale}; path=/; max-age=31536000; samesite=lax`;
     translateSubtree(document.body, locale);
 
     const observer = new MutationObserver((mutations) => {
