@@ -934,6 +934,19 @@ entries.push(
   { en: "No matches found for this week.", tr: "Bu hafta için maç bulunamadı." },
   { en: "Leader", tr: "Lider" },
   { en: "people", tr: "kişi" },
+  { en: "Strict", tr: "Sert" },
+  { en: "Soft", tr: "Yumuşak" },
+  { en: "Lenient", tr: "Toleranslı" },
+  { en: "Profile pending", tr: "Profil bekleniyor" },
+  { en: "Day match", tr: "Gündüz maçı" },
+  { en: "Night match", tr: "Gece maçı" },
+  { en: "Referee profile", tr: "Hakem profili" },
+  { en: "cards/match", tr: "kart/maç" },
+  { en: "Recent matches officiated", tr: "Son yönettiği maçlar" },
+  { en: "Stadium pending", tr: "Stadyum bekleniyor" },
+  { en: "Yellow / Red", tr: "Sarı / Kırmızı" },
+  { en: "Avg. fouls", tr: "Ort. faul" },
+  { en: "Avg. card load", tr: "Ort. kart yükü" },
 );
 
 const exactCaseLookup = new Map<string, TranslationEntry>();

@@ -10,6 +10,7 @@ import { ACTIVE_COMPETITIONS } from "@/config/competitions";
 import { requireMember } from "@/lib/auth-session";
 import { resolveMatchWeatherBatch } from "@/lib/match-weather";
 import { prisma } from "@/lib/prisma";
+import { buildRefereeProfileMap } from "@/lib/referee-profile";
 import { hasHotSupport } from "@/lib/team-display";
 import { loadDashboardPredictionSnapshot } from "@/lib/prediction-dashboard-snapshot";
 import { syncMissingFixtureReferees } from "@/lib/sync-fixture-referees";
@@ -129,6 +130,14 @@ export default async function ProfessionalDataPage({ searchParams }: { searchPar
         )
       : new Map();
 
+  const refereeProfiles =
+    view === "fixtures"
+      ? buildRefereeProfileMap(
+          fixtures.map((match) => match.referee),
+          finishedMatches,
+        )
+      : new Map();
+
   const weekFixtureRows: WeekFixtureRow[] =
     view === "fixtures"
       ? fixtures.map((match) => {
@@ -136,13 +145,24 @@ export default async function ProfessionalDataPage({ searchParams }: { searchPar
           const awayForm = recentForm(match.awayTeamId, match.kickoffAt);
           const leader = leaderBySeason.get(match.seasonId);
           const prediction = predictionByMatch.get(match.id);
+          const refereeName = match.referee?.trim() || null;
+          const profile = refereeName ? refereeProfiles.get(refereeName) ?? null : null;
           return {
             id: match.id,
             kickoffAt: match.kickoffAt,
-            referee: match.referee,
+            referee: refereeName,
+            refereeProfile: profile
+              ? {
+                  matches: profile.matches,
+                  averageCards: profile.averageCards,
+                  style: profile.style,
+                  styleLabel: profile.styleLabel,
+                }
+              : null,
             venueName: match.venueName ?? match.homeTeam.venueName,
             venueCapacity: match.homeTeam.venueCapacity,
             leagueName: match.season.league.name,
+            leagueApiId: match.season.league.apiId ?? null,
             leagueLogoUrl: match.season.league.logoUrl,
             home: {
               id: match.homeTeamId,

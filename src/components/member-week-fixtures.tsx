@@ -1,6 +1,11 @@
 import Image from "next/image";
+import Link from "next/link";
 
+import { LeagueMark } from "@/lib/league-marks";
+import { dayPartLabel, getMatchDayPart } from "@/lib/match-daypart";
 import type { MatchWeatherSummary } from "@/lib/match-weather";
+import type { RefereeProfile, RefereeStyleTone } from "@/lib/referee-profile";
+import { slugifyRefereeName } from "@/lib/referee-profile";
 
 import styles from "./member-week-fixtures.module.css";
 
@@ -8,9 +13,14 @@ export type WeekFixtureRow = {
   id: number;
   kickoffAt: Date;
   referee: string | null;
+  refereeProfile: Pick<
+    RefereeProfile,
+    "matches" | "averageCards" | "style" | "styleLabel"
+  > | null;
   venueName: string | null;
   venueCapacity: number | null;
   leagueName: string;
+  leagueApiId: number | null;
   leagueLogoUrl: string | null;
   home: {
     id: number;
@@ -33,21 +43,22 @@ export type WeekFixtureRow = {
   weather: MatchWeatherSummary | null;
 };
 
-function formatKickoff(date: Date) {
-  return new Intl.DateTimeFormat("tr-TR", {
+function formatKickoffParts(date: Date) {
+  const dayMonth = new Intl.DateTimeFormat("tr-TR", {
     timeZone: "Europe/Istanbul",
     day: "numeric",
     month: "short",
+  }).format(date);
+  const time = new Intl.DateTimeFormat("tr-TR", {
+    timeZone: "Europe/Istanbul",
     hour: "2-digit",
     minute: "2-digit",
   }).format(date);
-}
-
-function formatWeekday(date: Date) {
-  return new Intl.DateTimeFormat("tr-TR", {
+  const weekday = new Intl.DateTimeFormat("tr-TR", {
     timeZone: "Europe/Istanbul",
     weekday: "short",
   }).format(date);
+  return { dayMonth, time, weekday };
 }
 
 function FormDots({ results }: { results: Array<"W" | "D" | "L"> }) {
@@ -101,19 +112,6 @@ function WeatherIcon({ icon }: { icon: MatchWeatherSummary["icon"] }) {
       </svg>
     );
   }
-  if (icon === "wind") {
-    return (
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path
-          d="M4 12h12a2.5 2.5 0 1 0-2.5-2.5M4 16h9a2 2 0 1 1-2 2M4 8h7a1.8 1.8 0 1 0-1.8-1.8"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.6"
-          strokeLinecap="round"
-        />
-      </svg>
-    );
-  }
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true">
       <path
@@ -127,11 +125,30 @@ function WeatherIcon({ icon }: { icon: MatchWeatherSummary["icon"] }) {
   );
 }
 
-function TeamBlock({
-  team,
-}: {
-  team: WeekFixtureRow["home"];
-}) {
+function FanIcon() {
+  return (
+    <svg className={styles.fanIcon} viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        d="M12 2.8c2.8 3.4 4.2 5.8 4.2 8.1A4.2 4.2 0 0 1 12 15.1 4.2 4.2 0 0 1 7.8 10.9C7.8 8.6 9.2 6.2 12 2.8z"
+        fill="currentColor"
+      />
+      <path
+        d="M12 15.1c1.5 0 2.7 1.1 2.7 2.6 0 1.8-1.4 3.5-2.7 3.5s-2.7-1.7-2.7-3.5c0-1.5 1.2-2.6 2.7-2.6z"
+        fill="#ffd1a1"
+        opacity="0.9"
+      />
+    </svg>
+  );
+}
+
+function styleClass(tone: RefereeStyleTone | undefined) {
+  if (tone === "hard") return styles.styleHard;
+  if (tone === "soft") return styles.styleSoft;
+  if (tone === "lenient") return styles.styleLenient;
+  return styles.styleUnknown;
+}
+
+function TeamBlock({ team }: { team: WeekFixtureRow["home"] }) {
   return (
     <div className={styles.team}>
       <div className={styles.teamHead}>
@@ -141,7 +158,7 @@ function TeamBlock({
           <span className={styles.logoFallback} />
         )}
         <div className={styles.teamMeta}>
-          <b>{team.name}</b>
+          <b title={team.name}>{team.name}</b>
           <div className={styles.badges}>
             {team.isLeader ? <em className={styles.leader}>★ Lider</em> : null}
             {team.isHot ? (
@@ -181,7 +198,7 @@ export function MemberWeekFixtures({
           </span>
           <div>
             <h2>{title}</h2>
-            <small data-i18n-date={undefined}>{rangeLabel}</small>
+            <small>{rangeLabel}</small>
           </div>
         </div>
         <span className={styles.countChip}>
@@ -203,25 +220,31 @@ export function MemberWeekFixtures({
               ? `${row.venueCapacity.toLocaleString("tr-TR")} kişi`
               : null;
             const referee = row.referee?.trim() || null;
+            const profile = row.refereeProfile;
             const weather = row.weather;
+            const dayPart = getMatchDayPart(row.kickoffAt);
+            const { dayMonth, time, weekday } = formatKickoffParts(row.kickoffAt);
+            const refereeHref = referee
+              ? `/member/referees/${encodeURIComponent(slugifyRefereeName(referee))}`
+              : null;
 
             return (
               <article className={styles.row} key={row.id}>
                 <div className={styles.leagueCol}>
                   <div className={styles.leagueHead}>
-                    {row.leagueLogoUrl ? (
-                      <Image src={row.leagueLogoUrl} alt="" width={28} height={28} />
-                    ) : (
-                      <span className={styles.logoFallback} />
-                    )}
-                    <span>{row.leagueName}</span>
+                    <LeagueMark
+                      apiId={row.leagueApiId}
+                      name={row.leagueName}
+                      logoUrl={row.leagueLogoUrl}
+                      className={styles.leagueMark}
+                    />
+                    <span title={row.leagueName}>{row.leagueName}</span>
                   </div>
-                  <strong>
-                    <span data-i18n-date={row.kickoffAt.toISOString()} data-i18n-date-type="datetime">
-                      {formatKickoff(row.kickoffAt)}
-                    </span>
-                  </strong>
-                  <small>{formatWeekday(row.kickoffAt)}</small>
+                  <div className={styles.dateBlock}>
+                    <strong className={styles.dateDay}>{dayMonth}</strong>
+                    <b className={styles.dateTime}>{time}</b>
+                  </div>
+                  <small className={styles.weekday}>{weekday}</small>
                 </div>
 
                 <div className={styles.matchup}>
@@ -243,10 +266,15 @@ export function MemberWeekFixtures({
                         />
                       </svg>
                     </span>
-                    <div>
+                    <div className={styles.metaCopy}>
                       <small>Stadyum</small>
-                      <b>{stadium}</b>
-                      {capacity ? <em>{capacity}</em> : null}
+                      <b title={stadium}>{stadium}</b>
+                      {capacity ? (
+                        <em className={styles.capacity}>
+                          <FanIcon />
+                          {capacity}
+                        </em>
+                      ) : null}
                     </div>
                   </div>
 
@@ -263,11 +291,30 @@ export function MemberWeekFixtures({
                         <circle cx="12" cy="13" r="7" fill="none" stroke="currentColor" strokeWidth="1.5" />
                       </svg>
                     </span>
-                    <div>
+                    <div className={styles.metaCopy}>
                       <small>Hakem</small>
-                      <b className={referee ? undefined : styles.pending}>
-                        {referee ?? "Atama henüz açıklanmadı"}
-                      </b>
+                      {referee && refereeHref ? (
+                        <Link className={styles.refereeLink} href={refereeHref} title={referee}>
+                          {referee}
+                        </Link>
+                      ) : (
+                        <b className={styles.pending}>Atama henüz açıklanmadı</b>
+                      )}
+                      {referee ? (
+                        profile && profile.matches > 0 && profile.averageCards != null ? (
+                          <em className={`${styles.refereeMeta} ${styleClass(profile.style)}`}>
+                            {profile.styleLabel.tr}
+                            {" · "}
+                            {profile.averageCards.toFixed(1)} kart/maç
+                            {" · "}
+                            {profile.matches} maç
+                          </em>
+                        ) : (
+                          <em className={`${styles.refereeMeta} ${styles.styleUnknown}`}>
+                            Profil bekleniyor
+                          </em>
+                        )
+                      ) : null}
                     </div>
                   </div>
 
@@ -275,11 +322,14 @@ export function MemberWeekFixtures({
                     <span className={styles.metaIcon} aria-hidden="true">
                       <WeatherIcon icon={weather?.icon ?? "cloud"} />
                     </span>
-                    <div>
+                    <div className={styles.metaCopy}>
                       <small>Hava</small>
-                      <b className={weather ? undefined : styles.pending}>
+                      <b className={weather ? undefined : styles.pending} title={weather?.text ?? undefined}>
                         {weather?.text ?? "Tahmin maç gününe yakın güncellenir"}
                       </b>
+                      <em className={styles.dayPart} data-part={dayPart}>
+                        {dayPartLabel(dayPart, "tr")}
+                      </em>
                     </div>
                   </div>
                 </div>
