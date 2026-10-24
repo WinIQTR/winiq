@@ -25,7 +25,6 @@
 .filters select{background:#fff;border-color:#d5deea;color:#0b1f3a}
 .panel{background:#fff;border-color:#e2e8f0;box-shadow:0 4px 16px rgba(15,35,70,.08)}
 .tabs{background:#fff;border-color:#e2e8f0}
-.daypartRow{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:0 0 12px}
 
 /* ===== Dark theme professional / Analizler ===== */
 :global(html[data-theme="dark"] .tabs),
