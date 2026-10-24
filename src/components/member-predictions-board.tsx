@@ -81,14 +81,52 @@ function translatePick(value: string) {
 }
 
 function confidenceMeta(score: number) {
+  const filled = Math.min(5, Math.max(1, Math.round(score / 20)));
   const level = getUiConfidence(score);
   if (level === "Very High" || level === "High") {
-    return { label: "High", kind: "high" as const, filled: score >= 90 ? 4 : 3 };
+    return { label: "High", kind: "high" as const, filled: Math.max(filled, 4) };
   }
   if (level === "Medium") {
-    return { label: "Medium", kind: "med" as const, filled: 2 };
+    return {
+      label: score >= 55 ? "Medium-High" : "Medium",
+      kind: "med" as const,
+      filled: Math.max(filled, 3),
+    };
   }
-  return { label: "Low", kind: "low" as const, filled: 1 };
+  return { label: "Low", kind: "low" as const, filled };
+}
+
+function pickChip(prediction: DashboardPrediction) {
+  const top = prediction.topPicks[0];
+  if (top) {
+    const marketRaw = top.market || "Match result";
+    const market = /total\s*goals/i.test(marketRaw)
+      ? "Total Goals"
+      : /match\s*result|1x2|full\s*time/i.test(marketRaw)
+        ? "Match result"
+        : translatePick(marketRaw);
+    return { market, tip: translatePick(top.selection || getPredictionLabel(prediction)) };
+  }
+  if (prediction.predictedOutcome === "HOME") {
+    return { market: "Match result", tip: `1 (${prediction.homeTeam})` };
+  }
+  if (prediction.predictedOutcome === "AWAY") {
+    return { market: "Match result", tip: `2 (${prediction.awayTeam})` };
+  }
+  return { market: "Match result", tip: "X" };
+}
+
+function leagueFlagCode(leagueName: string) {
+  const name = leagueName.toLowerCase();
+  if (name.includes("premier") || name.includes("england") || name.includes("efl")) return "EN";
+  if (name.includes("bundesliga") || name.includes("germany")) return "DE";
+  if (name.includes("serie a") || name.includes("italy")) return "IT";
+  if (name.includes("laliga") || name.includes("la liga") || name.includes("spain")) return "ES";
+  if (name.includes("ligue") || name.includes("france")) return "FR";
+  if (name.includes("süper") || name.includes("super lig") || name.includes("turkey")) return "TR";
+  if (name.includes("eredivisie") || name.includes("netherlands")) return "NL";
+  if (name.includes("champions") || name.includes("europa") || name.includes("uefa")) return "EU";
+  return leagueName.slice(0, 2).toUpperCase();
 }
 
 function isFinished(prediction: DashboardPrediction) {
@@ -156,9 +194,9 @@ function IconDoc() {
     </svg>
   );
 }
-function IconClock() {
+function IconClock({ size = 18 }: { size?: number }) {
   return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden>
       <circle cx="12" cy="12" r="8.5" stroke="currentColor" strokeWidth="1.8" />
       <path d="M12 7.5V12l3 2" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
     </svg>
@@ -573,51 +611,54 @@ export function MemberPredictionsBoard({
                 const conf = confidenceMeta(item.confidenceScore);
                 const odds = fairOdds(item);
                 const probability = pickProbability(item);
-                const pickLabel = translatePick(getPredictionLabel(item));
+                const chip = pickChip(item);
                 return (
                   <article className={styles.card} key={item.matchId}>
                     <div className={styles.cardHead}>
                       <div className={styles.league}>
-                        <span className={styles.leagueFlag}>{item.leagueName.slice(0, 2).toUpperCase()}</span>
+                        <span className={styles.leagueFlag}>{leagueFlagCode(item.leagueName)}</span>
                         <span>{item.leagueName}</span>
                       </div>
                       <time className={styles.kick} dateTime={asDate(item.kickoffAt).toISOString()}>
+                        <IconClock size={14} />
                         {formatKickLabel(item.kickoffAt)}
                       </time>
                     </div>
 
-                    <div className={styles.matchup}>
-                      <div className={styles.team}>
-                        <TeamLogo src={item.homeTeamLogo} name={item.homeTeam} />
-                        <strong>{item.homeTeam}</strong>
+                    <div className={styles.cardBody}>
+                      <div className={styles.matchup}>
+                        <div className={styles.team}>
+                          <TeamLogo src={item.homeTeamLogo} name={item.homeTeam} />
+                          <strong>{item.homeTeam}</strong>
+                        </div>
+                        <span className={styles.versus}>VS</span>
+                        <div className={styles.team}>
+                          <TeamLogo src={item.awayTeamLogo} name={item.awayTeam} />
+                          <strong>{item.awayTeam}</strong>
+                        </div>
                       </div>
-                      <span className={styles.versus}>VS</span>
-                      <div className={styles.team}>
-                        <TeamLogo src={item.awayTeamLogo} name={item.awayTeam} />
-                        <strong>{item.awayTeam}</strong>
-                      </div>
-                    </div>
 
-                    <div className={styles.metrics}>
-                      <div className={styles.metric}>
-                        <span>{t("Match result")}</span>
-                        <strong>{pickLabel}</strong>
+                      <div className={styles.pickChip}>
+                        <span>{t(chip.market)}</span>
+                        <strong>{chip.tip}</strong>
                       </div>
+
                       <div className={styles.metric}>
                         <span>{t("Model probability")}</span>
                         {showOdds ? (
-                          <div className={styles.probRow}>
-                            <strong>%{probability.toFixed(0)}</strong>
+                          <>
+                            <strong className={styles.probValue}>%{probability.toFixed(0)}</strong>
                             <span className={styles.bar} aria-hidden>
                               <i style={{ width: `${Math.min(100, Math.max(0, probability))}%` }} />
                             </span>
-                          </div>
+                          </>
                         ) : (
                           <span className={styles.lock}>—</span>
                         )}
                       </div>
+
                       <div className={styles.metric}>
-                        <span>{t("Odds")}</span>
+                        <span>{t("Odds (decimal)")}</span>
                         {showOdds ? (
                           <strong className={styles.oddsValue}>{odds > 0 ? odds.toFixed(2) : "—"}</strong>
                         ) : (
@@ -626,10 +667,11 @@ export function MemberPredictionsBoard({
                           </span>
                         )}
                       </div>
+
                       <div className={styles.metric}>
                         <span>{t("Confidence Score")}</span>
                         <span
-                          className={`${styles.confBadge} ${
+                          className={`${styles.confPill} ${
                             conf.kind === "high"
                               ? styles.confHigh
                               : conf.kind === "med"
@@ -638,11 +680,11 @@ export function MemberPredictionsBoard({
                           }`}
                         >
                           {t(conf.label)}
-                          <span className={styles.confMeter} aria-hidden>
-                            {[1, 2, 3, 4].map((step) => (
-                              <i key={step} data-on={step <= conf.filled} />
-                            ))}
-                          </span>
+                        </span>
+                        <span className={styles.confMeter} aria-hidden>
+                          {[1, 2, 3, 4, 5].map((step) => (
+                            <i key={step} data-on={step <= conf.filled} />
+                          ))}
                         </span>
                       </div>
                     </div>
