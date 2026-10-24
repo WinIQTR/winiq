@@ -49,14 +49,79 @@ type FinishedMatchInput = {
   teamStatistics: StatRow[];
 };
 
+/** Drop trailing ", Country" suffixes that API-Football sometimes appends. */
+export function stripRefereeCountrySuffix(name: string): string {
+  const trimmed = name.trim();
+  const comma = trimmed.indexOf(",");
+  return (comma >= 0 ? trimmed.slice(0, comma) : trimmed).trim();
+}
+
+function refereeTokens(name: string): string[] {
+  return stripRefereeCountrySuffix(name)
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLocaleLowerCase("en-US")
+    .replace(/\./g, " ")
+    .split(/[^a-z0-9]+/)
+    .filter(Boolean);
+}
+
+function tokenCompatible(a: string, b: string): boolean {
+  if (a === b) return true;
+  if (a.length === 1 && b.startsWith(a)) return true;
+  if (b.length === 1 && a.startsWith(b)) return true;
+  return false;
+}
+
+/**
+ * API-Football returns both "S. Barrott" and "Samuel Barrott" (sometimes with
+ * ", England"). Exact string equality fails — match on surname + given initials.
+ */
+export function refereeNamesMatch(a: string, b: string): boolean {
+  const left = refereeTokens(a);
+  const right = refereeTokens(b);
+  if (!left.length || !right.length) return false;
+  if (left.join(" ") === right.join(" ")) return true;
+
+  const lastLeft = left[left.length - 1];
+  const lastRight = right[right.length - 1];
+  if (lastLeft !== lastRight) return false;
+
+  const givenLeft = left.slice(0, -1);
+  const givenRight = right.slice(0, -1);
+  if (!givenLeft.length || !givenRight.length) {
+    return givenLeft.length === 0 && givenRight.length === 0;
+  }
+
+  const shorter = givenLeft.length <= givenRight.length ? givenLeft : givenRight;
+  const longer = givenLeft.length <= givenRight.length ? givenRight : givenLeft;
+  return shorter.every((token, index) => tokenCompatible(token, longer[index]!));
+}
+
 export function slugifyRefereeName(name: string): string {
-  return name
+  return stripRefereeCountrySuffix(name)
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
     .toLocaleLowerCase("en-US")
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "")
     .slice(0, 80);
+}
+
+/** Prefer the longest non-country form for display (full name over initials). */
+export function preferRefereeDisplayName(
+  preferred: string,
+  aliases: Array<string | null | undefined>,
+): string {
+  const cleanedPreferred = stripRefereeCountrySuffix(preferred);
+  let best = cleanedPreferred;
+  for (const alias of aliases) {
+    if (!alias?.trim()) continue;
+    if (!refereeNamesMatch(cleanedPreferred, alias)) continue;
+    const cleaned = stripRefereeCountrySuffix(alias);
+    if (cleaned.length > best.length) best = cleaned;
+  }
+  return best;
 }
 
 function styleFromAverage(average: number | null): {
@@ -94,9 +159,14 @@ export function buildRefereeProfile(
   name: string,
   finishedMatches: FinishedMatchInput[],
 ): RefereeProfile {
-  const trimmed = name.trim();
+  const trimmed = stripRefereeCountrySuffix(name.trim());
   const officiated = finishedMatches
-    .filter((match) => match.referee?.trim() === trimmed && match.teamStatistics.length > 0)
+    .filter(
+      (match) =>
+        Boolean(match.referee?.trim()) &&
+        refereeNamesMatch(trimmed, match.referee!) &&
+        match.teamStatistics.length > 0,
+    )
     .sort((a, b) => b.kickoffAt.getTime() - a.kickoffAt.getTime());
 
   let yellowCards = 0;
@@ -122,7 +192,6 @@ export function buildRefereeProfile(
     };
   });
 
-  // Full career totals for averages (not only recent slice)
   for (const match of officiated.slice(12)) {
     const totals = cardsFromStats(match.teamStatistics);
     yellowCards += totals.yellow;
@@ -134,10 +203,14 @@ export function buildRefereeProfile(
   const averageCards = matches ? (yellowCards + redCards * 2) / matches : null;
   const averageFouls = matches ? fouls / matches : null;
   const { style, styleLabel } = styleFromAverage(averageCards);
+  const displayName = preferRefereeDisplayName(
+    trimmed,
+    finishedMatches.map((match) => match.referee),
+  );
 
   return {
-    name: trimmed,
-    slug: slugifyRefereeName(trimmed),
+    name: displayName,
+    slug: slugifyRefereeName(displayName),
     matches,
     averageCards,
     averageFouls,
@@ -159,4 +232,28 @@ export function buildRefereeProfileMap(
     map.set(name, buildRefereeProfile(name, finishedMatches));
   }
   return map;
+}
+
+export function findRefereeNameForSlug(
+  slug: string,
+  names: Array<string | null | undefined>,
+): string | null {
+  const cleaned = names
+    .map((name) => name?.trim())
+    .filter((name): name is string => Boolean(name));
+
+  const exact = cleaned.find((name) => slugifyRefereeName(name) === slug);
+  if (exact) {
+    return preferRefereeDisplayName(exact, cleaned);
+  }
+
+  // Cross-slug: week link may be "samuel-barrott" while DB only has "S. Barrott".
+  for (const name of cleaned) {
+    const display = preferRefereeDisplayName(name, cleaned);
+    if (slugifyRefereeName(display) === slug || slugifyRefereeName(name) === slug) {
+      return display;
+    }
+  }
+
+  return null;
 }

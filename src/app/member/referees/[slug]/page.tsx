@@ -8,9 +8,11 @@ import { requireMember } from "@/lib/auth-session";
 import { prisma } from "@/lib/prisma";
 import {
   buildRefereeProfile,
-  slugifyRefereeName,
+  findRefereeNameForSlug,
+  refereeNamesMatch,
   type RefereeStyleTone,
 } from "@/lib/referee-profile";
+import { syncRefereeMatchStatistics } from "@/lib/sync-referee-match-statistics";
 
 import styles from "./referee.module.css";
 
@@ -47,7 +49,6 @@ export default async function MemberRefereePage({
   const { slug: rawSlug } = await params;
   const slug = decodeURIComponent(rawSlug);
 
-  // Resolve display name from any fixture (upcoming refs may have no finished sample yet).
   const nameRows = await prisma.match.findMany({
     where: {
       season: { year: ACTIVE_SEASON_YEAR },
@@ -55,21 +56,46 @@ export default async function MemberRefereePage({
     },
     select: { referee: true },
     distinct: ["referee"],
-    take: 3_000,
+    take: 5_000,
   });
 
-  const matchedName = nameRows
+  const allNames = nameRows
     .map((row) => row.referee?.trim())
-    .filter((name): name is string => Boolean(name))
-    .find((name) => slugifyRefereeName(name) === slug);
+    .filter((name): name is string => Boolean(name));
 
+  const matchedName = findRefereeNameForSlug(slug, allNames);
   if (!matchedName) notFound();
 
-  const finished = await prisma.match.findMany({
+  const finishedCandidates = await prisma.match.findMany({
     where: {
       season: { year: ACTIVE_SEASON_YEAR },
       status: "FINISHED",
-      referee: matchedName,
+      referee: { not: null },
+    },
+    orderBy: { kickoffAt: "desc" },
+    take: 2_000,
+    select: {
+      id: true,
+      apiId: true,
+      referee: true,
+      homeTeamId: true,
+      awayTeamId: true,
+      _count: { select: { teamStatistics: true } },
+    },
+  });
+
+  const aliased = finishedCandidates.filter(
+    (match) => match.referee && refereeNamesMatch(matchedName!, match.referee),
+  );
+
+  const missingStats = aliased.filter((match) => match._count.teamStatistics < 2);
+  if (missingStats.length) {
+    await syncRefereeMatchStatistics(missingStats, { maxMatches: 8 });
+  }
+
+  const finished = await prisma.match.findMany({
+    where: {
+      id: { in: aliased.map((match) => match.id) },
     },
     orderBy: { kickoffAt: "desc" },
     take: 80,
@@ -98,8 +124,8 @@ export default async function MemberRefereePage({
             <p>Hakem profili</p>
             <h1>{profile.name}</h1>
             <span>
-              Sezon {ACTIVE_SEASON_YEAR} · yönettiği maç istatistiklerinden (DB / API-Football kart &
-              faul)
+              Sezon {ACTIVE_SEASON_YEAR} · bitmiş maçlardaki kart & faul toplamları (API-Football
+              fixtures + fixtures/statistics; ayrı hakem kariyer endpoint’i yok)
             </span>
           </div>
           <div className={`${styles.badge} ${toneClass(profile.style)}`}>
@@ -140,7 +166,9 @@ export default async function MemberRefereePage({
               <small>
                 {profile.recent.length
                   ? "Kart ve faul toplamları her iki takım istatistiklerinden."
-                  : "Bu hakem için sezon içinde istatistikli maç bulunamadı."}
+                  : aliased.length
+                    ? "Bu hakem için bitmiş maç var ama istatistik satırı henüz yok / API boş."
+                    : "Bu hakem için aktif sezonda bitmiş maç yok (yalnızca yaklaşan atama)."}
               </small>
             </div>
             <span>{profile.recent.length}</span>
@@ -163,7 +191,9 @@ export default async function MemberRefereePage({
             </div>
           ) : (
             <div className={styles.empty}>
-              Profil bekleniyor — henüz doğrulanmış maç istatistiği yok.
+              {aliased.length
+                ? "Profil bekleniyor — maç istatistikleri henüz doğrulanamadı."
+                : "Profil bekleniyor — bu sezonda yönettiği bitmiş maç yok."}
             </div>
           )}
         </section>
