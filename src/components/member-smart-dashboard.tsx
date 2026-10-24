@@ -172,7 +172,7 @@ export type MemberNavActive =
   | "plans"
   | "alerts";
 
-function railActive(
+function navActive(
   active: MemberNavActive,
 ): "home" | "value" | "analyses" | "results" | "predictions" | "messages" | "plans" {
   if (active === "home") return "home";
@@ -207,17 +207,26 @@ export function MemberPortalHeader({
       : canValue
         ? "/member/value"
         : "/member/predictions";
-  const statsHref = preview ? homeHref : "/member/results";
+  const teamsHref = preview ? homeHref : "/member/results";
   const predictionsHref = preview ? homeHref : "/member/predictions";
   const messagesHref = preview ? homeHref : "/member/messages";
-  const current = railActive(active);
+  const current = navActive(active);
 
-  const navItems = [
-    { href: homeHref, label: "Home page", active: current === "home" },
-    { href: valueHref, label: "Opportunities", active: current === "value" },
-    { href: analysesHref, label: "Analyses", active: current === "analyses" },
-    { href: predictionsHref, label: "Match calendar", active: current === "predictions" },
-    { href: statsHref, label: "Teams", active: current === "results" },
+  const primaryNav = [
+    { href: homeHref, label: "Home page", active: current === "home", icon: <IconHome /> },
+    { href: valueHref, label: "Opportunities", active: current === "value", icon: <IconChart /> },
+    { href: analysesHref, label: "Analyses", active: current === "analyses", icon: <IconTrophy /> },
+    {
+      href: predictionsHref,
+      label: "Match calendar",
+      active: current === "predictions",
+      icon: <IconCalendar />,
+    },
+    { href: teamsHref, label: "Teams", active: current === "results", icon: <IconUsers /> },
+  ];
+
+  const drawerItems = [
+    ...primaryNav.map(({ href, label, active: isActive }) => ({ href, label, active: isActive })),
     { href: messagesHref, label: "Messages", active: current === "messages" },
     { href: planLink, label: "Settings", active: current === "plans" },
   ];
@@ -231,55 +240,56 @@ export function MemberPortalHeader({
           <Link href="/admin/members">Önizlemeden çık</Link>
         </div>
       ) : null}
-      <aside className={shell.rail} aria-label="Member menu">
-        <Link className={shell.railLink} href={homeHref} data-active={current === "home"} title="Home page" aria-label="Home page">
-          <IconHome />
-          <span>Home page</span>
-        </Link>
-        <Link className={shell.railLink} href={valueHref} data-active={current === "value"} title="Opportunities" aria-label="Opportunities">
-          <IconChart />
-          <span>Opportunities</span>
-        </Link>
-        <Link className={shell.railLink} href={analysesHref} data-active={current === "analyses"} title="Analyses" aria-label="Analyses">
-          <IconTrophy />
-          <span>Analyses</span>
-        </Link>
-        <Link className={shell.railLink} href={predictionsHref} data-active={current === "predictions"} title="Match calendar" aria-label="Match calendar">
-          <IconCalendar />
-          <span>Match calendar</span>
-        </Link>
-        <Link className={shell.railLink} href={statsHref} data-active={current === "results"} title="Teams" aria-label="Teams">
-          <IconUsers />
-          <span>Teams</span>
-        </Link>
-        <span className={shell.railSpacer} />
-        <Link className={shell.railLink} href={planLink} data-active={current === "plans"} title="Settings" aria-label="Settings">
-          <IconGear />
-          <span>Settings</span>
-        </Link>
-      </aside>
       <header className={shell.topbar}>
-        <MemberMobileNav items={navItems} />
-        <Link href={homeHref} className={shell.brand} aria-label="WINIQ" data-no-translate>
-          WIN<span>IQ</span>
-        </Link>
-        <div className={shell.brandMeta}>
-          <small>AI Football Predictions • {ACTIVE_SEASON_YEAR}</small>
+        <div className={shell.brandBlock}>
+          <MemberMobileNav items={drawerItems} />
+          <Link href={homeHref} className={shell.brand} aria-label="WINIQ" data-no-translate>
+            WIN<span>IQ</span>
+          </Link>
+          <div className={shell.brandMeta}>
+            <small>AI Football Predictions • {ACTIVE_SEASON_YEAR}</small>
+          </div>
         </div>
+
+        <nav className={shell.centerNav} aria-label="Member menu">
+          {primaryNav.map((item) => (
+            <Link
+              key={item.label}
+              href={item.href}
+              className={shell.navLink}
+              data-active={item.active}
+              aria-current={item.active ? "page" : undefined}
+            >
+              {item.icon}
+              <span>{item.label}</span>
+            </Link>
+          ))}
+        </nav>
+
         <div className={shell.topActions}>
-          <LanguageSwitcher />
+          <LanguageSwitcher hideLabel />
           <Link className={shell.iconBtn} href={predictionsHref} aria-label="Search">
             <IconSearch />
           </Link>
-          <Link className={shell.iconBtn} href={preview ? homeHref : "/member/plans#alerts"} aria-label="Notifications">
+          <Link
+            className={shell.iconBtn}
+            href={preview ? homeHref : "/member/plans#alerts"}
+            aria-label="Notifications"
+          >
             <IconBell />
           </Link>
-          <span className={shell.planChip}>{MEMBERSHIP_PLAN_LABELS[plan]}</span>
+          <Link className={shell.planChip} href={planLink}>
+            {MEMBERSHIP_PLAN_LABELS[plan]}
+          </Link>
           {memberName ? (
             <span className={shell.avatar} title={memberName} aria-label={memberName}>
               {initialsOf(memberName)}
             </span>
-          ) : null}
+          ) : (
+            <span className={shell.avatar} aria-hidden>
+              ÜY
+            </span>
+          )}
           {!preview ? <LogoutButton /> : null}
         </div>
       </header>

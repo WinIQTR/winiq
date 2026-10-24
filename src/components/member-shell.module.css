@@ -1,74 +1,29 @@
-/* Member portal chrome — dark navy + blue/green. WINIQ .brand styles stay untouched. */
+/* Member portal chrome — top horizontal nav. WINIQ .brand styles stay untouched. */
 
 .chrome {
   display: contents;
 }
 
-.rail {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 40;
-  display: flex;
-  width: 84px;
-  height: 100vh;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  padding: 16px 0 14px;
-  border-right: 1px solid rgba(56, 90, 140, 0.35);
-  background: #050b16;
-}
-
-.railLink {
-  display: grid;
-  width: 68px;
-  min-height: 54px;
-  place-items: center;
-  gap: 4px;
-  border-radius: 12px;
-  padding: 8px 4px;
-  color: #7f96b8;
-  text-decoration: none;
-  transition: background 140ms ease, color 140ms ease;
-}
-
-.railLink span {
-  max-width: 100%;
-  overflow: hidden;
-  color: inherit;
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  text-align: center;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.railLink:hover {
-  background: rgba(36, 72, 120, 0.35);
-  color: #c5d7f2;
-}
-
-.railLink[data-active="true"] {
-  background: linear-gradient(145deg, #1d6fd6, #1558ad);
-  color: #f8fbff;
-  box-shadow: 0 8px 18px rgba(21, 88, 173, 0.35);
-}
-
-.railSpacer {
-  flex: 1;
-}
-
 .topbar {
-  display: flex;
-  min-height: 68px;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
-  gap: 14px;
-  margin-left: 84px;
+  gap: 16px;
+  min-height: 72px;
   border-bottom: 1px solid rgba(56, 90, 140, 0.35);
   padding: 0 clamp(14px, 2.4vw, 36px);
-  background: rgba(5, 12, 24, 0.92);
+  background: rgba(5, 12, 24, 0.96);
+  backdrop-filter: blur(10px);
+}
+
+.brandBlock {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 12px;
 }
 
 /* Keep existing WINIQ logo typography exactly */
@@ -99,11 +54,59 @@
   text-transform: uppercase;
 }
 
+.centerNav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.centerNav::-webkit-scrollbar {
+  display: none;
+}
+
+.navLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 42px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 0 14px;
+  color: #8aa3c4;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 140ms ease, background 140ms ease, border-color 140ms ease, box-shadow 140ms ease;
+}
+
+.navLink svg {
+  flex: 0 0 auto;
+}
+
+.navLink:hover {
+  color: #dbe7f8;
+  background: rgba(36, 72, 120, 0.28);
+}
+
+.navLink[data-active="true"] {
+  border-color: rgba(59, 130, 246, 0.75);
+  background: linear-gradient(145deg, rgba(29, 78, 216, 0.42), rgba(15, 40, 90, 0.72));
+  color: #f8fbff;
+  box-shadow:
+    0 0 0 1px rgba(59, 130, 246, 0.25),
+    0 0 18px rgba(37, 99, 235, 0.35);
+}
+
 .topActions {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-left: auto;
+  gap: 8px;
+  justify-self: end;
 }
 
 .menuBtn {
@@ -125,15 +128,17 @@
   height: 38px;
   place-items: center;
   border: 1px solid rgba(70, 100, 145, 0.45);
-  border-radius: 11px;
+  border-radius: 999px;
   background: rgba(12, 24, 42, 0.8);
   color: #9bb3d4;
   text-decoration: none;
 }
 
-.iconBtn:hover {
+.iconBtn:hover,
+.iconBtn:focus-visible {
   color: #e8eef8;
-  border-color: rgba(66, 180, 210, 0.55);
+  border-color: rgba(59, 130, 246, 0.65);
+  outline: none;
 }
 
 .avatar {
@@ -156,13 +161,17 @@
   color: #9ec9ff;
   font-size: 11px;
   font-weight: 700;
+  text-decoration: none;
+}
+
+.planChip:hover {
+  border-color: rgba(59, 130, 246, 0.55);
 }
 
 .preview {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-left: 84px;
   border-bottom: 1px solid rgba(245, 184, 65, 0.28);
   padding: 10px clamp(14px, 2.2vw, 34px);
   background: rgba(245, 184, 65, 0.08);
@@ -180,7 +189,6 @@
   inset: 0;
   z-index: 80;
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
 }
 
 .drawerBackdrop {
@@ -258,25 +266,36 @@
 }
 
 .drawerList a[data-active="true"] {
-  background: linear-gradient(145deg, #1d6fd6, #1558ad);
+  border: 1px solid rgba(59, 130, 246, 0.65);
+  background: linear-gradient(145deg, rgba(29, 78, 216, 0.42), rgba(15, 40, 90, 0.72));
   color: #fff;
+  box-shadow: 0 0 16px rgba(37, 99, 235, 0.28);
+}
+
+@media (max-width: 1100px) {
+  .brandMeta {
+    display: none;
+  }
+
+  .navLink span {
+    display: none;
+  }
+
+  .navLink {
+    padding: 0 11px;
+  }
 }
 
 @media (max-width: 860px) {
-  .rail {
-    display: none;
+  .topbar {
+    grid-template-columns: auto auto minmax(0, 1fr);
   }
 
   .menuBtn {
     display: grid;
   }
 
-  .topbar,
-  .preview {
-    margin-left: 0;
-  }
-
-  .brandMeta {
+  .centerNav {
     display: none;
   }
 

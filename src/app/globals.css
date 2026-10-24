@@ -455,6 +455,27 @@ a {
   box-shadow: 0 5px 14px rgba(37, 99, 235, 0.24);
 }
 
+.language-switcher-compact {
+  width: auto;
+  gap: 0;
+}
+
+.language-switcher-compact .language-switcher-options {
+  display: inline-flex;
+  grid-template-columns: none;
+  min-width: 0;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 999px;
+}
+
+.language-switcher-compact .language-option {
+  min-width: 36px;
+  min-height: 32px;
+  border-radius: 999px;
+  font-size: 11px;
+}
+
 .status-dot {
   display: inline-block;
   width: 8px;
