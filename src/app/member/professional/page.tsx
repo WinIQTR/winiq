@@ -27,7 +27,10 @@ const positionName = (value:string) => ({GOALKEEPER:"Kaleci",DEFENDER:"Defans",M
 
 export default async function ProfessionalDataPage({ searchParams }: { searchParams: Promise<{ view?: string; league?: string; team?: string; position?: string; q?: string; week?: string; stage?: string; table?: string }> }) {
   const user = await requireMember();
-  if (user.plan !== "PROFESSIONAL") redirect("/member/plans");
+  // Local review: allow any logged-in member to open the redesigned Analizler list.
+  // Production still requires PROFESSIONAL.
+  const localReviewBypass = process.env.NODE_ENV !== "production";
+  if (user.plan !== "PROFESSIONAL" && !localReviewBypass) redirect("/member/plans");
   const params = await searchParams;
   const requested = params.view as View | undefined;
   const view: View = requested && validViews.has(requested) ? requested : "fixtures";
@@ -204,6 +207,11 @@ export default async function ProfessionalDataPage({ searchParams }: { searchPar
 
   return <main className={member.shell}>
     <MemberPortalHeader plan={user.plan} active={view}/>
+    {localReviewBypass && user.plan !== "PROFESSIONAL" ? (
+      <div className={styles.localReviewBanner} role="status">
+        Lokal inceleme: bu sayfa development’ta tüm üye paketlerine açık. Canlıda yalnız Profesyonel.
+      </div>
+    ) : null}
     <nav className={styles.sourceLinks} aria-label="Profesyonel veri merkezleri"><Link href={`/teams${leagueFilter ? `?league=${leagues.find(item=>item.id===leagueFilter)?.apiId ?? ""}` : ""}`}>Takım profilleri ve gelişmiş puan durumu →</Link><Link href={`/fixtures${leagueFilter ? `?league=${leagues.find(item=>item.id===leagueFilter)?.apiId ?? ""}` : ""}`}>Fikstür, skorlar ve maç detayları →</Link></nav><nav className={styles.standingModeLinks} aria-label="Puan durumu görünümü"><span>Tablo görünümü</span><Link data-active={standingMode === "overall"} href={`/member/professional?view=standings&league=${leagueFilter}`}>Genel</Link><Link data-active={standingMode === "home"} href={`/member/professional?view=standings&league=${leagueFilter}&table=home`}>İç saha</Link><Link data-active={standingMode === "away"} href={`/member/professional?view=standings&league=${leagueFilter}&table=away`}>Deplasman</Link></nav>
     <div className={member.page}>
       <section className={member.welcome}><div><p><i/> WINIQ · PROFESYONEL VERİ MERKEZİ</p><h1>{title}</h1><span>{description}</span></div></section>

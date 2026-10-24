@@ -200,9 +200,12 @@ export function MemberPortalHeader({
   const canValue =
     hasMembershipPermission(plan, "VALUE_BETS") || hasMembershipPermission(plan, "SMART_PICKS");
   const valueHref = preview ? homeHref : canValue ? "/member/value" : "/member/plans";
+  // Local review: Analizler always opens the week-fixtures redesign.
+  // Production keeps plan-gated destinations.
+  const localReviewBypass = process.env.NODE_ENV !== "production";
   const analysesHref = preview
     ? homeHref
-    : plan === "PROFESSIONAL"
+    : plan === "PROFESSIONAL" || localReviewBypass
       ? "/member/professional"
       : canValue
         ? "/member/value"
