@@ -404,6 +404,9 @@ export function MemberSmartDashboard({
   plan,
   predictions,
   preview = false,
+  selectedDate,
+  performance,
+  updatedAtIso,
 }: {
   name: string;
   plan: MembershipPlanName;
@@ -411,12 +414,14 @@ export function MemberSmartDashboard({
   preview?: boolean;
   selectedDate?: string;
   performance?: MemberPerformance;
+  updatedAtIso?: string;
 }) {
   const matchPathPrefix = preview
     ? "/admin/members/preview/matches"
     : "/member/matches";
   const matchQuery = preview ? `?plan=${plan}` : "";
   const plansHref = preview ? `/admin/members/preview?plan=${plan}#paket` : "/member/plans";
+  const couponsHref = preview ? plansHref : "/member/coupons";
 
   return (
     <main className={`${styles.shell} member-plan-${plan.toLowerCase()}`}>
@@ -428,6 +433,10 @@ export function MemberSmartDashboard({
           matchPathPrefix={matchPathPrefix}
           matchQuery={matchQuery}
           plansHref={plansHref}
+          couponsHref={couponsHref}
+          selectedDate={selectedDate}
+          updatedAtIso={updatedAtIso}
+          performance={performance}
         />
       </div>
     </main>

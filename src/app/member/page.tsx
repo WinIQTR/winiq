@@ -1,7 +1,12 @@
+import { readFile } from "node:fs/promises";
+
 import { MemberSmartDashboard, type MemberPerformance } from "@/components/member-smart-dashboard";
 import { requireMember } from "@/lib/auth-session";
 import { buildMarketPerformanceArchive } from "@/lib/market-performance-archive";
-import { loadDashboardPredictionSnapshot } from "@/lib/prediction-dashboard-snapshot";
+import {
+  loadDashboardPredictionSnapshot,
+  PREDICTION_DASHBOARD_SNAPSHOT_PATH,
+} from "@/lib/prediction-dashboard-snapshot";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -28,6 +33,20 @@ function performanceOf(predictions: Awaited<ReturnType<typeof loadDashboardPredi
   return { strong: band("STRONG"), medium: band("MEDIUM"), weak: band("WEAK") };
 }
 
+async function snapshotGeneratedAtIso() {
+  try {
+    const raw = JSON.parse(await readFile(PREDICTION_DASHBOARD_SNAPSHOT_PATH, "utf8")) as {
+      generatedAt?: string;
+    };
+    if (raw.generatedAt && !Number.isNaN(new Date(raw.generatedAt).getTime())) {
+      return raw.generatedAt;
+    }
+  } catch {
+    /* fall through */
+  }
+  return new Date().toISOString();
+}
+
 export default async function MemberPage({
   searchParams,
 }: {
@@ -35,8 +54,10 @@ export default async function MemberPage({
 }) {
   const user = await requireMember();
   const query = searchParams ? await searchParams : {};
-  const allPredictions = await loadDashboardPredictionSnapshot(5_000);
-  // Full snapshot feeds Recommended / All / Finished tabs (client filters).
+  const [allPredictions, updatedAtIso] = await Promise.all([
+    loadDashboardPredictionSnapshot(5_000),
+    snapshotGeneratedAtIso(),
+  ]);
   const predictions = allPredictions
     .slice()
     .sort((a, b) => a.kickoffAt.getTime() - b.kickoffAt.getTime())
@@ -49,6 +70,7 @@ export default async function MemberPage({
       predictions={predictions}
       selectedDate={query.date}
       performance={performanceOf(allPredictions)}
+      updatedAtIso={updatedAtIso}
     />
   );
 }
