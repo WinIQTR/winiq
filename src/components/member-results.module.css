@@ -433,3 +433,63 @@
     justify-content: center;
   }
 }
+
+/* Light theme white surfaces */
+:global(html[data-theme="light"]) .hero,
+:global(html:not([data-theme])) .hero,
+:global(html[data-theme="light"]) .panel,
+:global(html:not([data-theme])) .panel,
+:global(html[data-theme="light"]) .card,
+:global(html:not([data-theme])) .card,
+:global(html[data-theme="light"]) .filters,
+:global(html:not([data-theme])) .filters,
+:global(html[data-theme="light"]) .row,
+:global(html:not([data-theme])) .row,
+:global(html[data-theme="light"]) .statCard,
+:global(html:not([data-theme])) .statCard {
+  background: #ffffff !important;
+  border-color: #e5e7eb !important;
+  color: #0b1f3a;
+  box-shadow: 0 2px 10px rgba(15, 35, 70, 0.04);
+}
+
+:global(html[data-theme="light"]) .hero h1,
+:global(html:not([data-theme])) .hero h1 {
+  color: #0b1f3a !important;
+}
+
+:global(html[data-theme="light"]) .summaryCard,
+:global(html:not([data-theme])) .summaryCard,
+:global(html[data-theme="light"]) .field input,
+:global(html[data-theme="light"]) .field select,
+:global(html:not([data-theme])) .field input,
+:global(html:not([data-theme])) .field select,
+:global(html[data-theme="light"]) .sectionHead,
+:global(html:not([data-theme])) .sectionHead {
+  background: #ffffff !important;
+  border-color: #e5e7eb !important;
+  color: #0b1f3a !important;
+}
+
+:global(html[data-theme="light"]) .heroCopy p,
+:global(html:not([data-theme])) .heroCopy p,
+:global(html[data-theme="light"]) .sectionHead p,
+:global(html:not([data-theme])) .sectionHead p,
+:global(html[data-theme="light"]) .sectionHead small,
+:global(html:not([data-theme])) .sectionHead small,
+:global(html[data-theme="light"]) .field span,
+:global(html:not([data-theme])) .field span {
+  color: #6b7280 !important;
+}
+
+:global(html[data-theme="light"]) .heroCopy h1,
+:global(html:not([data-theme])) .heroCopy h1,
+:global(html[data-theme="light"]) .sectionHead h2,
+:global(html:not([data-theme])) .sectionHead h2 {
+  color: #0b1f3a !important;
+}
+
+:global(html[data-theme="light"]) .barTrack,
+:global(html:not([data-theme])) .barTrack {
+  background: #e5e7eb !important;
+}

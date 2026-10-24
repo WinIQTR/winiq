@@ -804,3 +804,298 @@
     white-space: normal;
   }
 }
+
+/* ── Light theme (white mockup) — dark rules above stay default for data-theme=dark ── */
+:global(html[data-theme="light"]) .root,
+:global(html:not([data-theme])) .root {
+  --sl-bg: #f8f9fb;
+  --sl-panel: #ffffff;
+  --sl-panel-2: #f9fafb;
+  --sl-border: #e5e7eb;
+  --sl-text: #0b1f3a;
+  --sl-muted: #6b7280;
+  --sl-teal: #0d9488;
+  --sl-teal-deep: #0f766e;
+  --sl-green: #059669;
+  --sl-blue: #2563eb;
+  color: var(--sl-text);
+}
+
+:global(html[data-theme="light"]) .root[data-surface="admin"],
+:global(html:not([data-theme])) .root[data-surface="admin"] {
+  background: var(--sl-bg);
+}
+
+:global(html[data-theme="light"]) .hero,
+:global(html:not([data-theme])) .hero {
+  border-color: #e5e7eb;
+  background: #ffffff;
+  box-shadow: 0 4px 16px rgba(15, 35, 70, 0.05);
+}
+
+:global(html[data-theme="light"]) .heroVisual::before,
+:global(html:not([data-theme])) .heroVisual::before {
+  background:
+    radial-gradient(circle at 82% 28%, rgba(20, 184, 166, 0.12), transparent 28%),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0.7) 55%, rgba(248, 250, 252, 0.2) 100%);
+}
+
+:global(html[data-theme="light"]) .heroPitch,
+:global(html:not([data-theme])) .heroPitch {
+  background:
+    radial-gradient(ellipse at 50% 110%, rgba(167, 243, 208, 0.45), transparent 55%),
+    linear-gradient(180deg, rgba(236, 253, 245, 0.65), rgba(209, 250, 229, 0.35));
+  box-shadow: inset 0 0 0 1px rgba(16, 185, 129, 0.18);
+}
+
+:global(html[data-theme="light"]) .eyebrow,
+:global(html:not([data-theme])) .eyebrow {
+  color: #6b7280;
+}
+
+:global(html[data-theme="light"]) .heroCopy h1,
+:global(html:not([data-theme])) .heroCopy h1 {
+  color: #0b1f3a;
+}
+
+:global(html[data-theme="light"]) .lead,
+:global(html:not([data-theme])) .lead {
+  color: #4b5563;
+}
+
+:global(html[data-theme="light"]) .blurb,
+:global(html:not([data-theme])) .blurb {
+  color: #6b7280;
+}
+
+:global(html[data-theme="light"]) .countCard,
+:global(html:not([data-theme])) .countCard {
+  border-color: rgba(20, 184, 166, 0.45);
+  background: #f0fdfa;
+  color: #0b1f3a;
+  box-shadow: none;
+}
+
+:global(html[data-theme="light"]) .benefits li,
+:global(html:not([data-theme])) .benefits li {
+  color: #374151;
+}
+
+:global(html[data-theme="light"]) .filters,
+:global(html:not([data-theme])) .filters,
+:global(html[data-theme="light"]) .chipPanel,
+:global(html:not([data-theme])) .chipPanel,
+:global(html[data-theme="light"]) .section,
+:global(html:not([data-theme])) .section {
+  border-color: #e5e7eb;
+  background: #ffffff;
+  box-shadow: 0 2px 10px rgba(15, 35, 70, 0.04);
+}
+
+:global(html[data-theme="light"]) .field label,
+:global(html:not([data-theme])) .field label,
+:global(html[data-theme="light"]) .chipLabel,
+:global(html:not([data-theme])) .chipLabel {
+  color: #6b7280;
+}
+
+:global(html[data-theme="light"]) .selectWrap select,
+:global(html:not([data-theme])) .selectWrap select,
+:global(html[data-theme="light"]) .adminExtras input[type="number"],
+:global(html:not([data-theme])) .adminExtras input[type="number"] {
+  border-color: #e5e7eb;
+  background: #f9fafb;
+  color: #0b1f3a;
+}
+
+:global(html[data-theme="light"]) .selectWrap svg,
+:global(html:not([data-theme])) .selectWrap svg {
+  color: #9ca3af;
+}
+
+:global(html[data-theme="light"]) .found,
+:global(html:not([data-theme])) .found {
+  border-color: rgba(16, 185, 129, 0.35);
+  background: #ecfdf5;
+  color: #047857;
+}
+
+:global(html[data-theme="light"]) .adminExtras,
+:global(html:not([data-theme])) .adminExtras {
+  border-top-color: #e5e7eb;
+}
+
+:global(html[data-theme="light"]) .adminExtras label,
+:global(html:not([data-theme])) .adminExtras label {
+  color: #4b5563;
+}
+
+:global(html[data-theme="light"]) .sectionHead,
+:global(html:not([data-theme])) .sectionHead {
+  border-bottom-color: #e5e7eb;
+}
+
+:global(html[data-theme="light"]) .sectionHead h2,
+:global(html:not([data-theme])) .sectionHead h2 {
+  color: #0b1f3a;
+}
+
+:global(html[data-theme="light"]) .row,
+:global(html:not([data-theme])) .row {
+  border-bottom-color: #e5e7eb;
+  background: #ffffff;
+}
+
+:global(html[data-theme="light"]) .rank,
+:global(html:not([data-theme])) .rank {
+  background: #f3f4f6;
+  border-color: #e5e7eb;
+  color: #374151;
+}
+
+:global(html[data-theme="light"]) .meta small,
+:global(html:not([data-theme])) .meta small {
+  color: #6b7280;
+}
+
+:global(html[data-theme="light"]) .meta time,
+:global(html:not([data-theme])) .meta time {
+  color: #4b5563;
+}
+
+:global(html[data-theme="light"]) .logo,
+:global(html:not([data-theme])) .logo,
+:global(html[data-theme="light"]) .logoFallback,
+:global(html:not([data-theme])) .logoFallback {
+  background: #f9fafb;
+  border-color: #e5e7eb;
+  color: #6b7280;
+}
+
+:global(html[data-theme="light"]) .vs,
+:global(html:not([data-theme])) .vs {
+  color: #9ca3af;
+}
+
+:global(html[data-theme="light"]) .teamNames,
+:global(html:not([data-theme])) .teamNames {
+  color: #0b1f3a;
+}
+
+:global(html[data-theme="light"]) .pick span,
+:global(html[data-theme="light"]) .model span,
+:global(html[data-theme="light"]) .odds span,
+:global(html:not([data-theme])) .pick span,
+:global(html:not([data-theme])) .model span,
+:global(html:not([data-theme])) .odds span {
+  color: #9ca3af;
+}
+
+:global(html[data-theme="light"]) .pick b,
+:global(html:not([data-theme])) .pick b {
+  color: #0d9488;
+}
+
+:global(html[data-theme="light"]) .pick strong,
+:global(html:not([data-theme])) .pick strong {
+  color: #0b1f3a;
+}
+
+:global(html[data-theme="light"]) .model strong,
+:global(html:not([data-theme])) .model strong {
+  color: #0d9488;
+}
+
+:global(html[data-theme="light"]) .conf[data-level="very-high"],
+:global(html:not([data-theme])) .conf[data-level="very-high"] {
+  background: #ecfdf5;
+  border-color: rgba(16, 185, 129, 0.4);
+  color: #047857;
+}
+
+:global(html[data-theme="light"]) .conf[data-level="high"],
+:global(html:not([data-theme])) .conf[data-level="high"] {
+  background: #f0fdfa;
+  border-color: rgba(20, 184, 166, 0.4);
+  color: #0f766e;
+}
+
+:global(html[data-theme="light"]) .conf[data-level="medium"],
+:global(html:not([data-theme])) .conf[data-level="medium"] {
+  background: #fffbeb;
+  border-color: rgba(245, 158, 11, 0.4);
+  color: #b45309;
+}
+
+:global(html[data-theme="light"]) .conf[data-level="low"],
+:global(html:not([data-theme])) .conf[data-level="low"] {
+  background: #fef2f2;
+  border-color: rgba(239, 68, 68, 0.35);
+  color: #b91c1c;
+}
+
+:global(html[data-theme="light"]) .odds strong,
+:global(html:not([data-theme])) .odds strong {
+  color: #0b1f3a;
+}
+
+:global(html[data-theme="light"]) .tipWrap :global(p),
+:global(html:not([data-theme])) .tipWrap :global(p) {
+  color: #2563eb;
+}
+
+:global(html[data-theme="light"]) .analyze,
+:global(html:not([data-theme])) .analyze {
+  border-color: #bfdbfe;
+  background: #ffffff;
+  color: #0b1f3a;
+}
+
+:global(html[data-theme="light"]) .analyze:hover,
+:global(html:not([data-theme])) .analyze:hover {
+  border-color: #60a5fa;
+  color: #1e3a8a;
+  background: #eff6ff;
+}
+
+:global(html[data-theme="light"]) .empty,
+:global(html:not([data-theme])) .empty,
+:global(html[data-theme="light"]) .sourceNote,
+:global(html:not([data-theme])) .sourceNote {
+  color: #6b7280;
+}
+
+:global(html[data-theme="light"]) .chip,
+:global(html:not([data-theme])) .chip {
+  border-color: #e5e7eb;
+  background: #ffffff;
+  color: #374151;
+}
+
+:global(html[data-theme="light"]) .chip:hover,
+:global(html:not([data-theme])) .chip:hover {
+  border-color: rgba(20, 184, 166, 0.55);
+  color: #0f766e;
+  background: #f0fdfa;
+}
+
+:global(html[data-theme="light"]) .chip[data-active="true"],
+:global(html:not([data-theme])) .chip[data-active="true"] {
+  border-color: transparent;
+  background: linear-gradient(135deg, #2ee6c2, #14b8a6);
+  color: #042018;
+  box-shadow: 0 0 12px rgba(46, 230, 194, 0.22);
+}
+
+@media (max-width: 860px) {
+  :global(html[data-theme="light"]) .row,
+  :global(html:not([data-theme])) .row {
+    border-color: #e5e7eb;
+    background: #ffffff;
+  }
+
+  :global(html[data-theme="light"]) .row:last-child,
+  :global(html:not([data-theme])) .row:last-child {
+    border-bottom-color: #e5e7eb;
+  }
+}

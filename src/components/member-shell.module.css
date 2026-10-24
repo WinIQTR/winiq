@@ -1,6 +1,5 @@
-/* Member portal chrome — light mockup: deep navy top bar, light pages under it.
-   WINIQ .brand typography stays; neon IQ green #3fb950 preserved.
-   Special List keeps its own dark cyan content below this chrome. */
+/* Member portal chrome. Dark: navy topbar. Light: white topbar (mockup).
+   WINIQ .brand typography stays; neon IQ green #3fb950 preserved. */
 
 .chrome {
   display: contents;
@@ -15,7 +14,7 @@
   align-items: center;
   gap: 16px;
   min-height: 72px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid var(--mh-topbar-border, rgba(255, 255, 255, 0.08));
   padding: 0 clamp(14px, 2.4vw, 36px);
   background: var(--mh-topbar);
   backdrop-filter: blur(10px);
@@ -308,25 +307,62 @@
   }
 }
 
-/* Light mobile: white chrome (mockup). Dark keeps navy topbar. */
-@media (max-width: 860px) {
-  :global(html[data-theme="light"] .topbar),
-  :global(html:not([data-theme]) .topbar) {
-    background: #fff;
-    border-bottom: 1px solid var(--mh-border);
-  }
+/* Light theme: white topbar + navy text (all breakpoints). Dark unchanged. */
+:global(html[data-theme="light"]) .brand,
+:global(html:not([data-theme])) .brand {
+  color: var(--mh-navy);
+}
 
-  :global(html[data-theme="light"] .brand),
-  :global(html:not([data-theme]) .brand) {
-    color: var(--mh-navy);
-  }
+:global(html[data-theme="light"]) .brandMeta small,
+:global(html:not([data-theme])) .brandMeta small {
+  color: #6b7280;
+}
 
-  :global(html[data-theme="light"] .menuBtn),
-  :global(html:not([data-theme]) .menuBtn),
-  :global(html[data-theme="light"] .iconBtn),
-  :global(html:not([data-theme]) .iconBtn) {
-    border-color: var(--mh-border);
-    background: var(--mh-page);
-    color: #3d4f66;
-  }
+:global(html[data-theme="light"]) .navLink:hover,
+:global(html:not([data-theme])) .navLink:hover {
+  color: var(--mh-navy);
+}
+
+:global(html[data-theme="light"]) .navLink[data-active="true"],
+:global(html:not([data-theme])) .navLink[data-active="true"] {
+  border-color: transparent;
+  background: var(--mh-blue);
+  color: #ffffff;
+  box-shadow: none;
+}
+
+:global(html[data-theme="light"]) .menuBtn,
+:global(html:not([data-theme])) .menuBtn,
+:global(html[data-theme="light"]) .iconBtn,
+:global(html:not([data-theme])) .iconBtn {
+  border-color: var(--mh-border);
+  background: var(--mh-card-soft, #f9fafb);
+  color: #374151;
+}
+
+:global(html[data-theme="light"]) .iconBtn:hover,
+:global(html:not([data-theme])) .iconBtn:hover,
+:global(html[data-theme="light"]) .iconBtn:focus-visible,
+:global(html:not([data-theme])) .iconBtn:focus-visible {
+  color: var(--mh-navy);
+  border-color: #93c5fd;
+  background: #eff6ff;
+}
+
+:global(html[data-theme="light"]) .planChip,
+:global(html:not([data-theme])) .planChip {
+  border-color: var(--mh-border);
+  color: var(--mh-navy);
+  background: #ffffff;
+}
+
+:global(html[data-theme="light"]) .planChip:hover,
+:global(html:not([data-theme])) .planChip:hover {
+  border-color: #93c5fd;
+}
+
+:global(html[data-theme="light"]) .avatar,
+:global(html:not([data-theme])) .avatar {
+  border-color: #93c5fd;
+  background: linear-gradient(145deg, #3b82f6, #2563eb);
 }

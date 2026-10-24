@@ -470,3 +470,110 @@
     width: 100%;
   }
 }
+
+/* Light theme white surfaces — dark defaults above unchanged when data-theme=dark */
+:global(html[data-theme="light"]) .quick a,
+:global(html:not([data-theme])) .quick a {
+  border-color: #e5e7eb;
+  background: #ffffff;
+  color: #374151;
+}
+
+:global(html[data-theme="light"]) .quick a:first-child,
+:global(html:not([data-theme])) .quick a:first-child {
+  border-color: rgba(46, 204, 126, 0.55);
+  color: #059669;
+  background: #ecfdf5;
+}
+
+:global(html[data-theme="light"]) .metricsCompact article,
+:global(html:not([data-theme])) .metricsCompact article,
+:global(html[data-theme="light"]) .dateNavigator,
+:global(html:not([data-theme])) .dateNavigator,
+:global(html[data-theme="light"]) .planChip,
+:global(html:not([data-theme])) .planChip,
+:global(html[data-theme="light"]) .scope,
+:global(html:not([data-theme])) .scope,
+:global(html[data-theme="light"]) .performance,
+:global(html:not([data-theme])) .performance,
+:global(html[data-theme="light"]) .performance article,
+:global(html:not([data-theme])) .performance article {
+  border-color: #e5e7eb;
+  background: #ffffff;
+  box-shadow: 0 2px 10px rgba(15, 35, 70, 0.04);
+}
+
+:global(html[data-theme="light"]) .metricsCompact small,
+:global(html:not([data-theme])) .metricsCompact small,
+:global(html[data-theme="light"]) .metricsCompact span,
+:global(html:not([data-theme])) .metricsCompact span {
+  color: #6b7280;
+}
+
+:global(html[data-theme="light"]) .metricsCompact strong,
+:global(html:not([data-theme])) .metricsCompact strong,
+:global(html[data-theme="light"]) .dateNavigator header strong,
+:global(html:not([data-theme])) .dateNavigator header strong,
+:global(html[data-theme="light"]) .performanceStats span b,
+:global(html:not([data-theme])) .performanceStats span b {
+  color: #0b1f3a;
+}
+
+:global(html[data-theme="light"]) .dateNavigator header,
+:global(html:not([data-theme])) .dateNavigator header {
+  border-bottom-color: #e5e7eb;
+}
+
+:global(html[data-theme="light"]) .dateNavigator header small,
+:global(html:not([data-theme])) .dateNavigator header small {
+  color: #2563eb;
+}
+
+:global(html[data-theme="light"]) .dateMinimal a,
+:global(html[data-theme="light"]) .dateMinimal > span,
+:global(html:not([data-theme])) .dateMinimal a,
+:global(html:not([data-theme])) .dateMinimal > span,
+:global(html[data-theme="light"]) .dateMinimal select,
+:global(html:not([data-theme])) .dateMinimal select {
+  border-color: #e5e7eb;
+  background: #f9fafb;
+  color: #0b1f3a;
+}
+
+:global(html[data-theme="light"]) .dateMinimal label,
+:global(html:not([data-theme])) .dateMinimal label {
+  color: #6b7280;
+}
+
+:global(html[data-theme="light"]) .lockCard,
+:global(html:not([data-theme])) .lockCard,
+:global(html[data-theme="light"]) .upgrade,
+:global(html:not([data-theme])) .upgrade {
+  border-color: #d1d5db;
+  color: #6b7280;
+  background: #f9fafb;
+}
+
+:global(html[data-theme="light"]) .preview,
+:global(html:not([data-theme])) .preview {
+  background: #eff6ff;
+  color: #1e3a8a;
+}
+
+:global(html[data-theme="light"]) .scope p,
+:global(html:not([data-theme])) .scope p,
+:global(html[data-theme="light"]) .performanceStats span,
+:global(html:not([data-theme])) .performanceStats span {
+  color: #6b7280;
+}
+
+:global(html[data-theme="light"]) .performance article > i,
+:global(html:not([data-theme])) .performance article > i {
+  background: #e5e7eb;
+}
+
+:global(html[data-theme="light"]) .performanceStats span,
+:global(html:not([data-theme])) .performanceStats span {
+  border-color: #e5e7eb;
+  background: #f9fafb;
+}

@@ -494,42 +494,42 @@
 }
 
 /* ===== Dark theme: restore navy/cyan member look ===== */
-:global(html[data-theme="dark"] .panel) {
+:global(html[data-theme="dark"]) .panel {
   border-color: #1d3a51;
   background: linear-gradient(180deg, #0a1c2e 0%, #071525 100%);
   box-shadow: none;
 }
-:global(html[data-theme="dark"] .header) {
+:global(html[data-theme="dark"]) .header {
   border-bottom-color: #1d3a51;
 }
-:global(html[data-theme="dark"] .header) h2 { color: #f4f9ff; }
-:global(html[data-theme="dark"] .header) small,
-:global(html[data-theme="dark"] .leagueHead),
-:global(html[data-theme="dark"] .weekday),
-:global(html[data-theme="dark"] .metaCopy) small,
-:global(html[data-theme="dark"] .empty),
-:global(html[data-theme="dark"] .formTip),
-:global(html[data-theme="dark"] .refereeMeta) { color: #7f9db5; }
-:global(html[data-theme="dark"] .row) {
+:global(html[data-theme="dark"]) .header h2 { color: #f4f9ff; }
+:global(html[data-theme="dark"]) .header small,
+:global(html[data-theme="dark"]) .leagueHead,
+:global(html[data-theme="dark"]) .weekday,
+:global(html[data-theme="dark"]) .metaCopy small,
+:global(html[data-theme="dark"]) .empty,
+:global(html[data-theme="dark"]) .formTip,
+:global(html[data-theme="dark"]) .refereeMeta { color: #7f9db5; }
+:global(html[data-theme="dark"]) .row {
   border-bottom-color: #173249;
   background: transparent;
 }
-:global(html[data-theme="dark"] .dateDay),
-:global(html[data-theme="dark"] .teamMeta) b,
-:global(html[data-theme="dark"] .metaCopy) b { color: #f2f7fc; }
-:global(html[data-theme="dark"] .dateTime) { color: #7eb6ff; }
-:global(html[data-theme="dark"] .vs) {
+:global(html[data-theme="dark"]) .dateDay,
+:global(html[data-theme="dark"]) .teamMeta b,
+:global(html[data-theme="dark"]) .metaCopy b { color: #f2f7fc; }
+:global(html[data-theme="dark"]) .dateTime { color: #7eb6ff; }
+:global(html[data-theme="dark"]) .vs {
   background: #123553;
   color: #7eb0d4;
 }
-:global(html[data-theme="dark"] .meta) { border-left-color: #1c3a50; }
-:global(html[data-theme="dark"] .refereeLink) { color: #8ec8ff; }
-:global(html[data-theme="dark"] .capacity) { color: #43e3a1; }
-:global(html[data-theme="dark"] .calendarIcon) {
+:global(html[data-theme="dark"]) .meta { border-left-color: #1c3a50; }
+:global(html[data-theme="dark"]) .refereeLink { color: #8ec8ff; }
+:global(html[data-theme="dark"]) .capacity { color: #43e3a1; }
+:global(html[data-theme="dark"]) .calendarIcon {
   background: #12385f;
   color: #6eb6ff;
 }
-:global(html[data-theme="dark"] .countChip) {
+:global(html[data-theme="dark"]) .countChip {
   background: rgba(45, 209, 127, 0.12);
   border-color: rgba(67, 227, 161, 0.35);
   color: #43e3a1;

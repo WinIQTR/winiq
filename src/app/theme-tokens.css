@@ -1,4 +1,4 @@
-/* Member / shared appearance tokens. data-theme on <html>. Neon greens preserved. */
+/* Appearance tokens. data-theme on <html>. Neon greens preserved in both themes. */
 
 html {
   --mh-neon: #43e3a1;
@@ -6,37 +6,78 @@ html {
   --mh-logo-green: #3fb950;
   --mh-blue: #2563eb;
   --mh-blue-soft: rgba(37, 99, 235, 0.12);
+  --mh-teal: #14b8a6;
+  --mh-teal-bright: #2ee6c2;
 }
 
+/* Light = white tones (mockup). Default when unset. */
 html[data-theme="light"],
 html:not([data-theme]) {
-  --mh-navy: #0b1b33;
-  --mh-page: #f4f6f8;
+  color-scheme: light;
+
+  /* Member chrome */
+  --mh-navy: #0b1f3a;
+  --mh-page: #f8f9fb;
   --mh-card: #ffffff;
+  --mh-card-soft: #f9fafb;
   --mh-text: #0b1f3a;
-  --mh-muted: #6b7c93;
-  --mh-border: #e2e8f0;
-  --mh-shadow: 0 4px 16px rgba(15, 35, 70, 0.08);
-  --mh-topbar: linear-gradient(180deg, #0b1b33 0%, #0a1830 100%);
-  --mh-topbar-text: #a8bdd8;
-  --mh-topbar-text-active: #f8fbff;
+  --mh-muted: #6b7280;
+  --mh-border: #e5e7eb;
+  --mh-border-strong: #d1d5db;
+  --mh-shadow: 0 4px 16px rgba(15, 35, 70, 0.06);
+  --mh-topbar: #ffffff;
+  --mh-topbar-border: #e5e7eb;
+  --mh-topbar-text: #0b1f3a;
+  --mh-topbar-text-active: #ffffff;
+  --mh-topbar-hover: rgba(37, 99, 235, 0.08);
   --mh-chip-bg: #ffffff;
-  --mh-chip-border: #d5deea;
-  --mh-chip-text: #3d4f66;
+  --mh-chip-border: #e5e7eb;
+  --mh-chip-text: #374151;
+
+  /* Remap shared admin / globals tokens (do not edit dark :root defaults) */
+  --background: #f8f9fb;
+  --panel: #ffffff;
+  --panel-soft: #f9fafb;
+  --panel-hover: #f3f4f6;
+  --border: #e5e7eb;
+  --text: #0b1f3a;
+  --secondary: #6b7280;
+  --muted: #6b7280;
+  --blue-soft: rgba(37, 99, 235, 0.1);
+  --green-soft: rgba(34, 197, 94, 0.12);
+  --orange-soft: rgba(245, 158, 11, 0.12);
+  --red-soft: rgba(239, 68, 68, 0.1);
 }
 
+/* Dark = existing navy/cyan look — leave visual language intact */
 html[data-theme="dark"] {
+  color-scheme: dark;
+
   --mh-navy: #050d18;
   --mh-page: #070f1c;
   --mh-card: #0f1a2c;
+  --mh-card-soft: #0a1526;
   --mh-text: #eef4ff;
   --mh-muted: #8aa3c4;
   --mh-border: rgba(70, 110, 170, 0.38);
+  --mh-border-strong: rgba(70, 100, 145, 0.55);
   --mh-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
   --mh-topbar: rgba(5, 12, 24, 0.96);
+  --mh-topbar-border: rgba(255, 255, 255, 0.08);
   --mh-topbar-text: #8aa3c4;
   --mh-topbar-text-active: #f8fbff;
+  --mh-topbar-hover: rgba(255, 255, 255, 0.08);
   --mh-chip-bg: #0a1526;
   --mh-chip-border: rgba(70, 100, 145, 0.45);
   --mh-chip-text: #d7e7ff;
+
+  /* Keep :root dark globals when dark theme is explicit */
+  --background: #07101f;
+  --panel: #0d1829;
+  --panel-soft: #111f33;
+  --panel-hover: #15263d;
+  --border: rgba(148, 163, 184, 0.14);
+  --text: #f8fafc;
+  --secondary: #94a3b8;
+  --muted: #64748b;
 }

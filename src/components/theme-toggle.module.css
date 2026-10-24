@@ -30,21 +30,19 @@
   box-shadow: 0 1px 2px rgba(15, 35, 70, 0.12);
 }
 
-/* Light mobile topbar is white — adapt toggle chrome there */
-@media (max-width: 860px) {
-  :global(html[data-theme="light"] .toggle),
-  :global(html:not([data-theme]) .toggle) {
-    border-color: #d5deea;
-    background: #f4f6f8;
-  }
+/* Light theme (white topbar / admin chrome) */
+:global(html[data-theme="light"]) .toggle,
+:global(html:not([data-theme])) .toggle {
+  border-color: #e5e7eb;
+  background: #f9fafb;
+}
 
-  :global(html[data-theme="light"] .option),
-  :global(html:not([data-theme]) .option) {
-    color: #5b6f88;
-  }
+:global(html[data-theme="light"]) .option,
+:global(html:not([data-theme])) .option {
+  color: #6b7280;
+}
 
-  :global(html[data-theme="light"] .option:hover),
-  :global(html:not([data-theme]) .option:hover) {
-    color: #0b1f3a;
-  }
+:global(html[data-theme="light"]) .option:hover,
+:global(html:not([data-theme])) .option:hover {
+  color: #0b1f3a;
 }

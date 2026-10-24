@@ -1041,8 +1041,8 @@
 }
 
 /* Light theme: member home board follows page tokens */
-:global(html[data-theme="light"] .board),
-:global(html:not([data-theme]) .board) {
+:global(html[data-theme="light"]) .board,
+:global(html:not([data-theme])) .board {
   --mh-card: #ffffff;
   --mh-card-2: #f8fafc;
   --mh-border: #e2e8f0;
@@ -1053,30 +1053,30 @@
   --mh-green: #43e3a1;
   --mh-green-soft: rgba(67, 227, 161, 0.16);
 }
-:global(html[data-theme="light"] .hero),
-:global(html:not([data-theme]) .hero) {
+:global(html[data-theme="light"]) .hero,
+:global(html:not([data-theme])) .hero {
   background:
     linear-gradient(105deg, rgba(255,255,255,0.96) 0%, rgba(244,246,248,0.92) 55%, rgba(232,240,255,0.9) 100%),
     #ffffff;
   border-color: #e2e8f0;
   box-shadow: 0 4px 16px rgba(15, 35, 70, 0.06);
 }
-:global(html[data-theme="light"] .titleRow) h1,
-:global(html:not([data-theme]) .titleRow) h1,
-:global(html[data-theme="light"] .pickChip) strong,
-:global(html:not([data-theme]) .pickChip) strong,
-:global(html[data-theme="light"] .probValue),
-:global(html:not([data-theme]) .probValue),
-:global(html[data-theme="light"] .oddsValue),
-:global(html:not([data-theme]) .oddsValue) {
+:global(html[data-theme="light"]) .titleRow h1,
+:global(html:not([data-theme])) .titleRow h1,
+:global(html[data-theme="light"]) .pickChip strong,
+:global(html:not([data-theme])) .pickChip strong,
+:global(html[data-theme="light"]) .probValue,
+:global(html:not([data-theme])) .probValue,
+:global(html[data-theme="light"]) .oddsValue,
+:global(html:not([data-theme])) .oddsValue {
   color: #0b1f3a !important;
 }
-:global(html[data-theme="light"] .card),
-:global(html:not([data-theme]) .card),
-:global(html[data-theme="light"] .statCard),
-:global(html:not([data-theme]) .statCard),
-:global(html[data-theme="light"] .filters),
-:global(html:not([data-theme]) .filters) {
+:global(html[data-theme="light"]) .card,
+:global(html:not([data-theme])) .card,
+:global(html[data-theme="light"]) .statCard,
+:global(html:not([data-theme])) .statCard,
+:global(html[data-theme="light"]) .filters,
+:global(html:not([data-theme])) .filters {
   background: #fff;
   border-color: #e2e8f0;
   box-shadow: 0 4px 16px rgba(15, 35, 70, 0.06);

@@ -1,0 +1,222 @@
+/*
+ * Light-theme surface polish for shared admin chrome + hardcoded dark cards.
+ * Dark theme rules are NOT modified here — only html[data-theme="light"] (+ unset).
+ */
+
+html[data-theme="light"] body,
+html:not([data-theme]) body {
+  background: var(--background);
+  color: var(--text);
+}
+
+html[data-theme="light"] .sidebar,
+html:not([data-theme]) .sidebar {
+  background: #ffffff;
+  border-right-color: #e5e7eb;
+  color: #0b1f3a;
+  box-shadow: 4px 0 24px rgba(15, 35, 70, 0.04);
+}
+
+html[data-theme="light"] .sidebar > div:first-child,
+html:not([data-theme]) .sidebar > div:first-child {
+  scrollbar-color: #cbd5e1 transparent;
+}
+
+html[data-theme="light"] .sidebar > div:first-child::-webkit-scrollbar-thumb,
+html:not([data-theme]) .sidebar > div:first-child::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+}
+
+html[data-theme="light"] .sidebar-link,
+html:not([data-theme]) .sidebar-link {
+  color: #374151;
+}
+
+html[data-theme="light"] .sidebar-link:hover,
+html:not([data-theme]) .sidebar-link:hover {
+  background: #f3f4f6;
+  color: #0b1f3a;
+}
+
+html[data-theme="light"] .sidebar-link.active,
+html:not([data-theme]) .sidebar-link.active {
+  background: rgba(37, 99, 235, 0.12);
+  color: #1d4ed8;
+  border-color: rgba(37, 99, 235, 0.35);
+}
+
+html[data-theme="light"] .sidebar-footer,
+html:not([data-theme]) .sidebar-footer {
+  border-top-color: #e5e7eb;
+  color: #6b7280;
+}
+
+html[data-theme="light"] .sidebar-status,
+html:not([data-theme]) .sidebar-status {
+  background: #f9fafb;
+  border-color: #e5e7eb;
+  color: #374151;
+}
+
+html[data-theme="light"] .page-shell,
+html:not([data-theme]) .page-shell,
+html[data-theme="light"] .page-content,
+html:not([data-theme]) .page-content,
+html[data-theme="light"] main.page,
+html:not([data-theme]) main.page {
+  background: #f8f9fb;
+  color: #0b1f3a;
+}
+
+/* Prediction / dashboard cards that hardcode navy gradients */
+html[data-theme="light"] .prediction-card-smart,
+html:not([data-theme]) .prediction-card-smart {
+  border-color: #e5e7eb;
+  background: #ffffff;
+  box-shadow: 0 4px 16px rgba(15, 35, 70, 0.06);
+}
+
+html[data-theme="light"] .smart-match-meta,
+html:not([data-theme]) .smart-match-meta {
+  border-bottom-color: #e5e7eb;
+  color: #6b7280;
+}
+
+html[data-theme="light"] .smart-match-meta > span:first-child,
+html:not([data-theme]) .smart-match-meta > span:first-child {
+  color: #2563eb;
+}
+
+html[data-theme="light"] .smart-match-meta > strong,
+html:not([data-theme]) .smart-match-meta > strong {
+  color: #0b1f3a;
+}
+
+html[data-theme="light"] .dashboard-panel,
+html:not([data-theme]) .dashboard-panel,
+html[data-theme="light"] .dashboard-metrics .metric-card,
+html:not([data-theme]) .dashboard-metrics .metric-card {
+  background: #ffffff !important;
+  border-color: #e5e7eb !important;
+  color: #0b1f3a;
+}
+
+html[data-theme="light"] .dashboard-rule-grid > div,
+html:not([data-theme]) .dashboard-rule-grid > div {
+  background: #f9fafb !important;
+  border-color: #e5e7eb !important;
+}
+
+html[data-theme="light"] .fixture-week-panel,
+html:not([data-theme]) .fixture-week-panel,
+html[data-theme="light"] .smart-history-match,
+html:not([data-theme]) .smart-history-match {
+  background: #ffffff !important;
+  border-color: #e5e7eb !important;
+}
+
+html[data-theme="light"] .fixtures-league-link,
+html:not([data-theme]) .fixtures-league-link {
+  background: #ffffff;
+  border-color: #e5e7eb;
+  color: #374151;
+}
+
+html[data-theme="light"] .fixtures-league-link:hover,
+html[data-theme="light"] .fixtures-league-link-active,
+html:not([data-theme]) .fixtures-league-link:hover,
+html:not([data-theme]) .fixtures-league-link-active {
+  color: #1d4ed8;
+  border-color: #93c5fd;
+  background: #eff6ff;
+}
+
+/* Language switcher on white chrome */
+html[data-theme="light"] .language-switcher-options,
+html:not([data-theme]) .language-switcher-options {
+  border-color: #e5e7eb;
+  background: #f9fafb;
+}
+
+html[data-theme="light"] .language-option,
+html:not([data-theme]) .language-option {
+  color: #4b5563;
+}
+
+html[data-theme="light"] .language-option-active,
+html:not([data-theme]) .language-option-active {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+/* Soften common dark translucent panels in light */
+html[data-theme="light"] .panel,
+html:not([data-theme]) .panel,
+html[data-theme="light"] .card,
+html:not([data-theme]) .card {
+  --panel-local-bg: #ffffff;
+}
+
+html[data-theme="light"] .logout-button,
+html:not([data-theme]) .logout-button {
+  border-color: #0b1f3a;
+  background: #0b1f3a;
+  color: #ffffff;
+}
+
+html[data-theme="light"] .logout-button:hover,
+html:not([data-theme]) .logout-button:hover {
+  background: #152a4f;
+  border-color: #152a4f;
+}
+
+/* Plans / notices (globals classes on member shell) */
+html[data-theme="light"] .membership-expiry,
+html:not([data-theme]) .membership-expiry {
+  border-color: #bfdbfe;
+  background: #eff6ff;
+  color: #1e3a8a;
+}
+
+html[data-theme="light"] .membership-expiry-warning,
+html:not([data-theme]) .membership-expiry-warning {
+  border-color: #fcd34d;
+  background: #fffbeb;
+  color: #92400e;
+}
+
+html[data-theme="light"] .member-plan-card,
+html:not([data-theme]) .member-plan-card,
+html[data-theme="light"] .member-plan-card-analysis,
+html:not([data-theme]) .member-plan-card-analysis,
+html[data-theme="light"] .member-plan-card-professional,
+html:not([data-theme]) .member-plan-card-professional {
+  border-color: #e5e7eb;
+  background: #ffffff;
+  color: #0b1f3a;
+  box-shadow: 0 2px 12px rgba(15, 35, 70, 0.05);
+}
+
+html[data-theme="light"] .member-plan-card ul,
+html:not([data-theme]) .member-plan-card ul {
+  color: #4b5563;
+}
+
+html[data-theme="light"] .member-notice,
+html:not([data-theme]) .member-notice {
+  border-color: #e5e7eb;
+  background: #ffffff;
+  color: #374151;
+}
+
+html[data-theme="light"] .member-header h1,
+html:not([data-theme]) .member-header h1 {
+  color: #0b1f3a;
+}
+
+html[data-theme="light"] .member-header p,
+html:not([data-theme]) .member-header p,
+html[data-theme="light"] .member-eyebrow,
+html:not([data-theme]) .member-eyebrow {
+  color: #6b7280;
+}
