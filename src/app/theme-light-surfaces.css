@@ -220,3 +220,95 @@ html[data-theme="light"] .member-eyebrow,
 html:not([data-theme]) .member-eyebrow {
   color: #6b7280;
 }
+
+/* Login + loading shells: white card, dark text (dark theme CSS untouched) */
+html[data-theme="light"] .login-shell,
+html:not([data-theme]) .login-shell {
+  background:
+    radial-gradient(circle at 78% 72%, rgba(16, 185, 129, 0.08), transparent 34%),
+    repeating-linear-gradient(
+      90deg,
+      #f8f9fb 0 22px,
+      #f3f6f4 22px 44px
+    ),
+    #f8f9fb;
+  color: #0b1f3a;
+}
+
+html[data-theme="light"] .login-card,
+html:not([data-theme]) .login-card {
+  border-color: #e5e7eb;
+  background: #ffffff;
+  color: #0b1f3a;
+  box-shadow: 0 16px 48px rgba(15, 35, 70, 0.08);
+}
+
+html[data-theme="light"] .login-card h1,
+html:not([data-theme]) .login-card h1 {
+  color: #0b1f3a;
+}
+
+html[data-theme="light"] .login-card > p,
+html:not([data-theme]) .login-card > p,
+html[data-theme="light"] .login-card small,
+html:not([data-theme]) .login-card small {
+  color: #6b7280;
+}
+
+html[data-theme="light"] .login-card .member-eyebrow,
+html:not([data-theme]) .login-card .member-eyebrow {
+  color: #2563eb !important;
+}
+
+html[data-theme="light"] .login-form label,
+html:not([data-theme]) .login-form label {
+  color: #374151;
+}
+
+html[data-theme="light"] .login-form input,
+html:not([data-theme]) .login-form input {
+  border-color: #e5e7eb;
+  background: #f9fafb;
+  color: #0b1f3a;
+}
+
+/* Loading card: subtle pitch (mown stripes + center circle) */
+html[data-theme="light"] .loading-card,
+html:not([data-theme]) .loading-card {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  border-color: #e5e7eb;
+  background:
+    radial-gradient(circle at 86% 78%, transparent 0 38px, rgba(13, 148, 136, 0.22) 38px 40px, transparent 41px 56px, rgba(13, 148, 136, 0.14) 56px 58px, transparent 59px),
+    linear-gradient(90deg, transparent 48.8%, rgba(13, 148, 136, 0.16) 48.8%, rgba(13, 148, 136, 0.16) 51.2%, transparent 51.2%),
+    repeating-linear-gradient(
+      90deg,
+      rgba(236, 253, 245, 0.95) 0 20px,
+      rgba(209, 250, 229, 0.55) 20px 40px
+    ),
+    #ffffff;
+  box-shadow: 0 16px 48px rgba(15, 35, 70, 0.08);
+}
+
+html[data-theme="light"] .loading-card::after,
+html:not([data-theme]) .loading-card::after {
+  content: "";
+  position: absolute;
+  right: 10%;
+  bottom: 12%;
+  width: 42%;
+  height: 52%;
+  border: 1px solid rgba(13, 148, 136, 0.2);
+  border-left: 0;
+  border-bottom: 0;
+  border-radius: 0 10px 0 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+html[data-theme="light"] .loading-card > *,
+html:not([data-theme]) .loading-card > * {
+  position: relative;
+  z-index: 1;
+}

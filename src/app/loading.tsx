@@ -1,7 +1,7 @@
 export default function Loading() {
   return (
-    <main className="login-shell">
-      <section className="login-card" aria-live="polite">
+    <main className="login-shell loading-shell">
+      <section className="login-card loading-card" aria-live="polite">
         <div className="login-mark" data-no-translate>
           W
         </div>

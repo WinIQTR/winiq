@@ -829,7 +829,8 @@
 :global(html[data-theme="light"]) .hero,
 :global(html:not([data-theme])) .hero {
   border-color: #e5e7eb;
-  background: #ffffff;
+  background:
+    linear-gradient(105deg, #ffffff 0%, #ffffff 52%, #f0fdf8 78%, #ecfdf5 100%);
   box-shadow: 0 4px 16px rgba(15, 35, 70, 0.05);
 }
 
@@ -842,10 +843,44 @@
 
 :global(html[data-theme="light"]) .heroPitch,
 :global(html:not([data-theme])) .heroPitch {
+  /* Mown-grass vertical stripes (light mint) */
   background:
-    radial-gradient(ellipse at 50% 110%, rgba(167, 243, 208, 0.45), transparent 55%),
-    linear-gradient(180deg, rgba(236, 253, 245, 0.65), rgba(209, 250, 229, 0.35));
-  box-shadow: inset 0 0 0 1px rgba(16, 185, 129, 0.18);
+    radial-gradient(ellipse at 70% 120%, rgba(167, 243, 208, 0.35), transparent 55%),
+    repeating-linear-gradient(
+      90deg,
+      #ecfdf5 0 22px,
+      #d1fae5 22px 44px
+    );
+  box-shadow: inset 0 0 0 1px rgba(16, 185, 129, 0.22);
+}
+
+:global(html[data-theme="light"]) .heroPitch::before,
+:global(html:not([data-theme])) .heroPitch::before {
+  inset: 14% 10% 12%;
+  border: 1.5px solid rgba(13, 148, 136, 0.38);
+  border-radius: 10px;
+  background:
+    /* center spot + circle */
+    radial-gradient(circle at 50% 50%, rgba(13, 148, 136, 0.55) 0 2px, transparent 2.5px),
+    radial-gradient(circle at 50% 50%, transparent 0 16%, rgba(13, 148, 136, 0.35) 16% 17.2%, transparent 17.5%),
+    /* halfway line */
+    linear-gradient(90deg, transparent 49.2%, rgba(13, 148, 136, 0.4) 49.2%, rgba(13, 148, 136, 0.4) 50.8%, transparent 50.8%),
+    transparent;
+}
+
+:global(html[data-theme="light"]) .heroPitch::after,
+:global(html:not([data-theme])) .heroPitch::after {
+  content: "";
+  position: absolute;
+  right: 14%;
+  top: 18%;
+  width: 28%;
+  height: 34%;
+  border: 1.5px solid rgba(13, 148, 136, 0.32);
+  border-left: 0;
+  border-bottom: 0;
+  border-radius: 0 8px 0 0;
+  pointer-events: none;
 }
 
 :global(html[data-theme="light"]) .eyebrow,
