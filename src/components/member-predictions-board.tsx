@@ -10,6 +10,7 @@ import {
   getUiConfidence,
   type DashboardPrediction,
 } from "@/lib/prediction-dashboard-shared";
+import { buildMatchCardInsight, localizePickText } from "@/lib/member-match-insight";
 import { type MembershipPlanName } from "@/lib/membership-access";
 import { LOCK_HINT } from "@/lib/membership-lock-copy";
 
@@ -67,19 +68,6 @@ function pickProbability(prediction: DashboardPrediction) {
   return prediction.topPicks[0]?.probability ?? prediction.predictedProbability;
 }
 
-function translatePick(value: string) {
-  return value
-    .replace(/Home Team Goals/gi, "Ev sahibi takım golü")
-    .replace(/Away Team Goals/gi, "Deplasman takım golü")
-    .replace(/Total Goals/gi, "Toplam gol")
-    .replace(/Both Teams To Score/gi, "Karşılıklı gol")
-    .replace(/Under/gi, "Alt")
-    .replace(/Over/gi, "Üst")
-    .replace(/Home/gi, "Ev sahibi")
-    .replace(/Away/gi, "Deplasman")
-    .replace(/Draw/gi, "Beraberlik");
-}
-
 function confidenceMeta(score: number) {
   const filled = Math.min(5, Math.max(1, Math.round(score / 20)));
   const level = getUiConfidence(score);
@@ -96,24 +84,31 @@ function confidenceMeta(score: number) {
   return { label: "Low", kind: "low" as const, filled };
 }
 
-function pickChip(prediction: DashboardPrediction) {
+function pickChip(
+  prediction: DashboardPrediction,
+  locale: "en" | "tr",
+  t: (source: string) => string,
+) {
   const top = prediction.topPicks[0];
   if (top) {
     const marketRaw = top.market || "Match result";
-    const market = /total\s*goals/i.test(marketRaw)
+    const marketKey = /total\s*goals/i.test(marketRaw)
       ? "Total Goals"
       : /match\s*result|1x2|full\s*time/i.test(marketRaw)
         ? "Match result"
-        : translatePick(marketRaw);
-    return { market, tip: translatePick(top.selection || getPredictionLabel(prediction)) };
+        : marketRaw;
+    return {
+      market: t(marketKey),
+      tip: localizePickText(top.selection || getPredictionLabel(prediction), locale, t),
+    };
   }
   if (prediction.predictedOutcome === "HOME") {
-    return { market: "Match result", tip: `1 (${prediction.homeTeam})` };
+    return { market: t("Match result"), tip: `1 (${prediction.homeTeam})` };
   }
   if (prediction.predictedOutcome === "AWAY") {
-    return { market: "Match result", tip: `2 (${prediction.awayTeam})` };
+    return { market: t("Match result"), tip: `2 (${prediction.awayTeam})` };
   }
-  return { market: "Match result", tip: "X" };
+  return { market: t("Match result"), tip: "X" };
 }
 
 function leagueFlagCode(leagueName: string) {
@@ -140,14 +135,6 @@ function isFinished(prediction: DashboardPrediction) {
 
 function isUpcoming(prediction: DashboardPrediction, now: Date) {
   return asDate(prediction.kickoffAt).getTime() >= now.getTime() && !isFinished(prediction);
-}
-
-function shortAnalysis(prediction: DashboardPrediction) {
-  const reason = prediction.topPicks[0]?.reasons?.[0];
-  if (reason) return reason;
-  const label = translatePick(getPredictionLabel(prediction));
-  const probability = pickProbability(prediction);
-  return `${prediction.homeTeam} – ${prediction.awayTeam}: ${label}. Model probability ${probability.toFixed(0)}%.`;
 }
 
 function TeamLogo({ src, name, size = 40 }: { src: string | null; name: string; size?: number }) {
@@ -569,7 +556,7 @@ export function MemberPredictionsBoard({
                 <option value="ALL">{t("All markets")}</option>
                 {markets.map((market) => (
                   <option key={market} value={market}>
-                    {translatePick(market)}
+                    {localizePickText(market, locale, t)}
                   </option>
                 ))}
               </select>
@@ -611,7 +598,8 @@ export function MemberPredictionsBoard({
                 const conf = confidenceMeta(item.confidenceScore);
                 const odds = fairOdds(item);
                 const probability = pickProbability(item);
-                const chip = pickChip(item);
+                const chip = pickChip(item, locale, t);
+                const insight = buildMatchCardInsight(item, t, locale);
                 return (
                   <article className={styles.card} key={item.matchId}>
                     <div className={styles.cardHead}>
@@ -639,7 +627,7 @@ export function MemberPredictionsBoard({
                       </div>
 
                       <div className={styles.pickChip}>
-                        <span>{t(chip.market)}</span>
+                        <span>{chip.market}</span>
                         <strong>{chip.tip}</strong>
                       </div>
 
@@ -692,7 +680,7 @@ export function MemberPredictionsBoard({
                     <div className={styles.cardFoot}>
                       <p className={styles.analysis}>
                         <IconChart />
-                        <span>{shortAnalysis(item)}</span>
+                        <span>{insight}</span>
                       </p>
                       <Link className={styles.analysisLink} href={matchHref(item.matchId)}>
                         {t("View match analysis")} →
@@ -794,7 +782,7 @@ export function MemberPredictionsBoard({
               </div>
               <div className={styles.sidePick}>
                 <span>{t("Prediction")}</span>
-                <strong>{translatePick(getPredictionLabel(strongest))}</strong>
+                <strong>{localizePickText(getPredictionLabel(strongest), locale, t)}</strong>
               </div>
               <div className={styles.sideMeta}>
                 {showOdds ? (
@@ -805,7 +793,7 @@ export function MemberPredictionsBoard({
                 ) : null}
                 <span className={styles.sideChip}>{t(confidenceMeta(strongest.confidenceScore).label)}</span>
               </div>
-              <p className={styles.sideNote}>{shortAnalysis(strongest)}</p>
+              <p className={styles.sideNote}>{buildMatchCardInsight(strongest, t, locale)}</p>
               <Link className={styles.sideLink} href={matchHref(strongest.matchId)}>
                 {t("View match analysis")} →
               </Link>
@@ -824,7 +812,7 @@ export function MemberPredictionsBoard({
                         <strong>
                           {leg.homeTeam} – {leg.awayTeam}
                         </strong>
-                        <small>{translatePick(getPredictionLabel(leg))}</small>
+                        <small>{localizePickText(getPredictionLabel(leg), locale, t)}</small>
                       </div>
                       <b>{showOdds && fairOdds(leg) > 0 ? fairOdds(leg).toFixed(2) : "—"}</b>
                     </div>
