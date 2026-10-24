@@ -1,13 +1,4 @@
 .shell {
-  --mh-neon: #43e3a1;
-  --mh-neon-cta: #31d996;
-  --mh-page: #f4f6f8;
-  --mh-card: #ffffff;
-  --mh-text: #0b1f3a;
-  --mh-muted: #6b7c93;
-  --mh-blue: #2563eb;
-  --mh-border: #e2e8f0;
-  --mh-shadow: 0 4px 16px rgba(15, 35, 70, 0.08);
   min-height: 100vh;
   background: var(--mh-page);
   color: var(--mh-text);

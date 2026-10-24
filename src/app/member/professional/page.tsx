@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
-import { DayPartFilterChips } from "@/components/daypart-filter-chips";
 import { MemberPortalHeader } from "@/components/member-smart-dashboard";
 import member from "@/components/member-smart-dashboard.module.css";
 import { MemberWeekFixtures, type WeekFixtureRow } from "@/components/member-week-fixtures";
@@ -13,11 +12,6 @@ import { resolveMatchWeatherBatch } from "@/lib/match-weather";
 import { prisma } from "@/lib/prisma";
 import { translateUiText } from "@/i18n/dictionaries";
 import { readAppLocale } from "@/lib/app-locale-server";
-import {
-  matchesDayPartFilter,
-  parseDayPartFilter,
-  type DayPartFilter,
-} from "@/lib/daypart-filter";
 import { buildMatchFormTip } from "@/lib/member-match-insight";
 import { buildRefereeProfileMap } from "@/lib/referee-profile";
 import { hasHotSupport } from "@/lib/team-display";
@@ -35,7 +29,7 @@ const formatDate = (date: Date) => new Intl.DateTimeFormat("tr-TR", { timeZone: 
 type FormResult = "W" | "D" | "L";
 const positionName = (value:string) => ({GOALKEEPER:"Kaleci",DEFENDER:"Defans",MIDFIELDER:"Orta saha",FORWARD:"Forvet",UNKNOWN:"Belirsiz"}[value] ?? "Tümü");
 
-export default async function ProfessionalDataPage({ searchParams }: { searchParams: Promise<{ view?: string; league?: string; team?: string; position?: string; q?: string; week?: string; stage?: string; table?: string; daypart?: string }> }) {
+export default async function ProfessionalDataPage({ searchParams }: { searchParams: Promise<{ view?: string; league?: string; team?: string; position?: string; q?: string; week?: string; stage?: string; table?: string }> }) {
   const user = await requireMember();
   const locale = await readAppLocale();
   // Local review: allow any logged-in member to open the redesigned Analizler list.
@@ -43,7 +37,6 @@ export default async function ProfessionalDataPage({ searchParams }: { searchPar
   const localReviewBypass = process.env.NODE_ENV !== "production";
   if (user.plan !== "PROFESSIONAL" && !localReviewBypass) redirect("/member/plans");
   const params = await searchParams;
-  const dayPart = parseDayPartFilter(params.daypart);
   const requested = params.view as View | undefined;
   const view: View = requested && validViews.has(requested) ? requested : "fixtures";
   const leagueFilter = Number(params.league) || 0;
@@ -114,18 +107,7 @@ export default async function ProfessionalDataPage({ searchParams }: { searchPar
         return own > opponent ? "W" : own < opponent ? "L" : "D";
       });
   const tipTranslate = (source: string) => translateUiText(source, locale);
-  const fixturesForWeek =
-    view === "fixtures"
-      ? fixtures.filter((match) => matchesDayPartFilter(match.kickoffAt, dayPart))
-      : [];
-
-  const fixturesHref = (nextDayPart: DayPartFilter) => {
-    const parts = [`view=fixtures`, `week=${week}`];
-    if (leagueFilter) parts.push(`league=${leagueFilter}`);
-    if (teamFilter) parts.push(`team=${teamFilter}`);
-    if (nextDayPart !== "ALL") parts.push(`daypart=${nextDayPart}`);
-    return `/member/professional?${parts.join("&")}`;
-  };
+  const fixturesForWeek = view === "fixtures" ? fixtures : [];
 
   if (view === "fixtures" && fixtures.length) {
     await syncMissingFixtureReferees(
@@ -274,8 +256,6 @@ export default async function ProfessionalDataPage({ searchParams }: { searchPar
 
   const title = view === "fixtures" ? "Fixture centre" : view === "players" ? "Player centre" : view === "scorers" ? "Top scorers" : "Standings";
   const description = view === "fixtures" ? "Matches from the previous, current and upcoming week." : view === "players" ? "Season performance for active squad players." : view === "scorers" ? "Attack leaders by goals, assists and minutes." : "Standings for the selected league from verified results.";
-  const dayPartQuery = dayPart !== "ALL" ? `&daypart=${dayPart}` : "";
-
   return <main className={member.shell}>
     <MemberPortalHeader plan={user.plan} active={view}/>
     {localReviewBypass && user.plan !== "PROFESSIONAL" ? (
@@ -288,7 +268,7 @@ export default async function ProfessionalDataPage({ searchParams }: { searchPar
       <section className={member.welcome}><div><p><i/> WINIQ · PROFESSIONAL DATA CENTRE</p><h1>{title}</h1><span>{description}</span></div></section>
       <nav className={styles.tabs}>{(["fixtures", "players", "scorers", "standings"] as View[]).map(item => <Link data-active={item === view} href={`/member/professional?view=${item}`} key={item}>{item === "fixtures" ? "Fixture centre" : item === "players" ? "Players" : item === "scorers" ? "Top scorers" : "Standings"}</Link>)}<Link href="/member/professional/special">Special List</Link></nav>
       <nav className={styles.leagueTabs}><Link data-active={!leagueFilter} href={`/member/professional?view=${view}`}>ALL<span>All leagues</span></Link>{leagues.map(league=>{const meta=ACTIVE_COMPETITIONS.find(item=>item.apiId===league.apiId);return <Link data-active={league.id===leagueFilter} href={`/member/professional?view=${view}&league=${league.id}`} key={league.id}>{meta?.shortName??league.name.slice(0,3).toUpperCase()}<span>{league.name}</span></Link>})}</nav>
-      {view === "fixtures" ? <><nav className={styles.weekTabs}>{[[-1,"← Previous week"],[0,"This week"],[1,"Next week →"]].map(([value,label])=><Link data-active={week===Number(value)} href={`/member/professional?view=fixtures&week=${value}${leagueFilter?`&league=${leagueFilter}`:""}${teamFilter?`&team=${teamFilter}`:""}${dayPartQuery}`} key={value}>{label}</Link>)}</nav><div className={styles.daypartRow}><DayPartFilterChips value={dayPart} hrefFor={fixturesHref} ariaLabel="Match day part" /></div><form className={styles.filters} action="/member/professional"><input type="hidden" name="view" value="fixtures"/><input type="hidden" name="week" value={week}/>{dayPart !== "ALL" ? <input type="hidden" name="daypart" value={dayPart} /> : null}<label><span>League</span><select name="league" defaultValue={leagueFilter}><option value="0">All leagues</option>{leagues.map(league=><option value={league.id} key={league.id}>{league.name}</option>)}</select></label><label><span>Team</span><select name="team" defaultValue={teamFilter}><option value="00">All teams</option>{teams.map(team=><option value={team.id} key={team.id}>{team.name}</option>)}</select></label><button type="submit">Fetch list</button><Link href="/member/professional?view=fixtures">Clear</Link></form>
+      {view === "fixtures" ? <><nav className={styles.weekTabs}>{[[-1,"← Previous week"],[0,"This week"],[1,"Next week →"]].map(([value,label])=><Link data-active={week===Number(value)} href={`/member/professional?view=fixtures&week=${value}${leagueFilter?`&league=${leagueFilter}`:""}${teamFilter?`&team=${teamFilter}`:""}`} key={value}>{label}</Link>)}</nav><form className={styles.filters} action="/member/professional"><input type="hidden" name="view" value="fixtures"/><input type="hidden" name="week" value={week}/><label><span>League</span><select name="league" defaultValue={leagueFilter}><option value="0">All leagues</option>{leagues.map(league=><option value={league.id} key={league.id}>{league.name}</option>)}</select></label><label><span>Team</span><select name="team" defaultValue={teamFilter}><option value="00">All teams</option>{teams.map(team=><option value={team.id} key={team.id}>{team.name}</option>)}</select></label><button type="submit">Fetch list</button><Link href="/member/professional?view=fixtures">Clear</Link></form>
       <MemberWeekFixtures
         title={week === -1 ? "Previous week" : week === 1 ? "Next week" : "This week's matches"}
         rangeLabel={`${formatDate(weekStart)} – ${formatDate(new Date(weekEnd.getTime() - 1))}`}

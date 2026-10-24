@@ -1,0 +1,42 @@
+/* Member / shared appearance tokens. data-theme on <html>. Neon greens preserved. */
+
+html {
+  --mh-neon: #43e3a1;
+  --mh-neon-cta: #31d996;
+  --mh-logo-green: #3fb950;
+  --mh-blue: #2563eb;
+  --mh-blue-soft: rgba(37, 99, 235, 0.12);
+}
+
+html[data-theme="light"],
+html:not([data-theme]) {
+  --mh-navy: #0b1b33;
+  --mh-page: #f4f6f8;
+  --mh-card: #ffffff;
+  --mh-text: #0b1f3a;
+  --mh-muted: #6b7c93;
+  --mh-border: #e2e8f0;
+  --mh-shadow: 0 4px 16px rgba(15, 35, 70, 0.08);
+  --mh-topbar: linear-gradient(180deg, #0b1b33 0%, #0a1830 100%);
+  --mh-topbar-text: #a8bdd8;
+  --mh-topbar-text-active: #f8fbff;
+  --mh-chip-bg: #ffffff;
+  --mh-chip-border: #d5deea;
+  --mh-chip-text: #3d4f66;
+}
+
+html[data-theme="dark"] {
+  --mh-navy: #050d18;
+  --mh-page: #070f1c;
+  --mh-card: #0f1a2c;
+  --mh-text: #eef4ff;
+  --mh-muted: #8aa3c4;
+  --mh-border: rgba(70, 110, 170, 0.38);
+  --mh-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  --mh-topbar: rgba(5, 12, 24, 0.96);
+  --mh-topbar-text: #8aa3c4;
+  --mh-topbar-text-active: #f8fbff;
+  --mh-chip-bg: #0a1526;
+  --mh-chip-border: rgba(70, 100, 145, 0.45);
+  --mh-chip-text: #d7e7ff;
+}

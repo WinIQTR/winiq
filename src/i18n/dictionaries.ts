@@ -1081,6 +1081,9 @@ entries.push(
   { en: "Mobile preview", tr: "Mobil önizleme" },
   { en: "Membership", tr: "Üyelik" },
   { en: "System", tr: "Sistem" },
+  { en: "Appearance", tr: "Görünüm" },
+  { en: "Light", tr: "Aydınlık" },
+  { en: "Dark", tr: "Koyu" },
 );
 
 const exactCaseLookup = new Map<string, TranslationEntry>();

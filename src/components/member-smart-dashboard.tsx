@@ -8,6 +8,7 @@ import cards from "@/components/member-match-cards.module.css";
 import shell from "@/components/member-shell.module.css";
 import { LogoutButton } from "@/components/logout-button";
 import { LanguageSwitcher } from "@/components/language-switcher";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { useLanguage } from "@/components/language-provider";
 import { MemberMobileNav } from "@/components/member-mobile-nav";
 import { MemberPredictionsBoard } from "@/components/member-predictions-board";
@@ -307,6 +308,7 @@ export function MemberPortalHeader({
         </nav>
 
         <div className={shell.topActions}>
+          <ThemeToggle />
           <LanguageSwitcher hideLabel />
           <Link className={shell.iconBtn} href={predictionsHref} aria-label="Search">
             <IconSearch />

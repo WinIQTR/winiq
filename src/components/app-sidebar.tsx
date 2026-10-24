@@ -1,5 +1,7 @@
 import Link from "next/link";
+import { LanguageSwitcher } from "@/components/language-switcher";
 import { LogoutButton } from "@/components/logout-button";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 type NavItem = { href: string; label: string };
 type NavGroup = { title: string; items: NavItem[] };
@@ -80,6 +82,10 @@ export function AppSidebar() {
       </div>
 
       <div className="sidebar-footer">
+        <div className="sidebar-utilities" style={{ display: "flex", gap: 8, alignItems: "center", marginBottom: 10 }}>
+          <ThemeToggle />
+          <LanguageSwitcher hideLabel />
+        </div>
         <div className="sidebar-status">
           <span className="status-dot" />
           System online

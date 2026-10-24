@@ -36,13 +36,6 @@ import {
 import {
   buildBetMarketCatalog,
 } from "@/lib/bet-market-catalog";
-import {
-  dayPartFilterLabel,
-  matchesDayPartFilter,
-  type DayPartFilter,
-} from "@/lib/daypart-filter";
-import daypartStyles from "./daypart-filter-chips.module.css";
-
 type PredictionsWorkspaceProps = {
   predictions:
     DashboardPrediction[];
@@ -567,8 +560,6 @@ export function PredictionsWorkspace({
       "",
     );
 
-  const [dayPartFilter, setDayPartFilter] = useState<DayPartFilter>("ALL");
-
   const dataMode =
     predictions[0]
       ?.dataMode ??
@@ -694,10 +685,6 @@ export function PredictionsWorkspace({
               selectedDateKey,
           );
 
-        result = result.filter((prediction) =>
-          matchesDayPartFilter(prediction.kickoffAt, dayPartFilter),
-        );
-
         result.sort(
           (first, second) =>
             first.kickoffAt.getTime() - second.kickoffAt.getTime(),
@@ -705,7 +692,7 @@ export function PredictionsWorkspace({
 
         return result;
       },
-      [predictions, selectedDateKey, selectedLeague, teamSearch, locale, dayPartFilter],
+      [predictions, selectedDateKey, selectedLeague, teamSearch, locale],
     );
 
   const filteredPredictions =
@@ -924,15 +911,13 @@ export function PredictionsWorkspace({
               fixture.awayTeam,
               teamSearch,
               locale,
-            ) &&
-            matchesDayPartFilter(fixture.kickoffAt, dayPartFilter),
+            ),
         ),
       [
         windowedUpcomingFixtures,
         selectedLeague,
         teamSearch,
         locale,
-        dayPartFilter,
       ],
     );
 
@@ -961,15 +946,13 @@ export function PredictionsWorkspace({
               fixture.awayTeam,
               teamSearch,
               locale,
-            ) &&
-            matchesDayPartFilter(fixture.kickoffAt, dayPartFilter),
+            ),
         ),
       [
         allFinishedFixtures,
         selectedLeague,
         teamSearch,
         locale,
-        dayPartFilter,
       ],
     );
 
@@ -995,8 +978,7 @@ export function PredictionsWorkspace({
     teamSearch.trim().length > 0 ||
     quickFilter !== "ALL" ||
     selectedDateKey !== defaultPredictionDateKey ||
-    fixtureWindowWeeks !== 1 ||
-    dayPartFilter !== "ALL";
+    fixtureWindowWeeks !== 1;
 
   const resetFilters = () => {
     setSelectedLeague("ALL");
@@ -1004,7 +986,6 @@ export function PredictionsWorkspace({
     setQuickFilter("ALL");
     setSelectedDateKey(defaultPredictionDateKey);
     setFixtureWindowWeeks(1);
-    setDayPartFilter("ALL");
   };
 
   if (
@@ -1167,20 +1148,6 @@ export function PredictionsWorkspace({
             ))}
           </select>
         </label>
-
-        <div className={daypartStyles.row} role="group" aria-label={locale === "tr" ? "Gündüz / gece" : "Day / night"}>
-          {(["ALL", "day", "night"] as DayPartFilter[]).map((option) => (
-            <button
-              key={option}
-              type="button"
-              className={daypartStyles.chip}
-              data-active={dayPartFilter === option ? "true" : undefined}
-              onClick={() => setDayPartFilter(option)}
-            >
-              {dayPartFilterLabel(option, locale)}
-            </button>
-          ))}
-        </div>
 
         <button
           type="button"

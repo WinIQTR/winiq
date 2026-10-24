@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { MatchFormTip } from "@/components/match-form-tip";
-import { dayPartFilterLabel, type DayPartFilter } from "@/lib/daypart-filter";
 import {
   SPECIAL_ODDS_BANDS,
   SPECIAL_PROB_MIN_CHIPS,
@@ -31,7 +30,6 @@ export type SpecialListViewProps = {
   /** Chip filters (URL: pMin / odds) */
   probMin?: SpecialProbMinChip | null;
   oddsBand?: SpecialOddsBandId | null;
-  dayPart?: DayPartFilter;
   /** Admin-only extras preserved for filters */
   adminExtras?: {
     sortDate: boolean;
@@ -88,7 +86,6 @@ export type SpecialListLabels = {
   odds250300: string;
   odds300p: string;
   specialListFilters: string;
-  matchDayPart: string;
 };
 
 function formatKickoff(value: Date, locale: "tr" | "en") {
@@ -222,14 +219,12 @@ export function SpecialListView({
   locale = "tr",
   probMin = null,
   oddsBand = null,
-  dayPart = "ALL",
   adminExtras,
 }: SpecialListViewProps) {
   const sectionTitle = range === "week" ? labels.sectionWeek : labels.sectionToday;
   const queryBase: Record<string, string | null | undefined> = {
     range,
     market,
-    daypart: dayPart !== "ALL" ? dayPart : null,
     pMin: probMin != null ? String(probMin) : null,
     odds: oddsBand,
     sortDate: adminExtras?.sortDate ? "1" : null,
@@ -297,18 +292,6 @@ export function SpecialListView({
           </div>
         </div>
         <div className={styles.field}>
-          <label htmlFor="sl-daypart">{labels.matchDayPart}</label>
-          <div className={styles.selectWrap}>
-            <IconCalendar />
-            <select id="sl-daypart" name="daypart" defaultValue={dayPart}>
-              <option value="ALL">{labels.filterAll}</option>
-              <option value="day">{dayPartFilterLabel("day", locale === "en" ? "en" : "tr")}</option>
-              <option value="night">{dayPartFilterLabel("night", locale === "en" ? "en" : "tr")}</option>
-            </select>
-            <IconChevron />
-          </div>
-        </div>
-        <div className={styles.field}>
           <label htmlFor="sl-market">{labels.betType}</label>
           <div className={styles.selectWrap}>
             <IconBall />
@@ -368,35 +351,6 @@ export function SpecialListView({
       </form>
 
       <section className={styles.chipPanel} aria-label={labels.specialListFilters}>
-        <div className={styles.chipRow}>
-          <span className={styles.chipLabel}>{labels.matchDayPart}</span>
-          <div className={styles.chips} role="group" aria-label={labels.matchDayPart}>
-            <Link
-              className={styles.chip}
-              data-active={dayPart === "ALL" ? "true" : undefined}
-              href={buildChipHref(action, queryBase, { daypart: null })}
-              scroll={false}
-            >
-              {labels.filterAll}
-            </Link>
-            <Link
-              className={styles.chip}
-              data-active={dayPart === "day" ? "true" : undefined}
-              href={buildChipHref(action, queryBase, { daypart: "day" })}
-              scroll={false}
-            >
-              {dayPartFilterLabel("day", locale === "en" ? "en" : "tr")}
-            </Link>
-            <Link
-              className={styles.chip}
-              data-active={dayPart === "night" ? "true" : undefined}
-              href={buildChipHref(action, queryBase, { daypart: "night" })}
-              scroll={false}
-            >
-              {dayPartFilterLabel("night", locale === "en" ? "en" : "tr")}
-            </Link>
-          </div>
-        </div>
         <div className={styles.chipRow}>
           <span className={styles.chipLabel}>{labels.minModelPct}</span>
           <div className={styles.chips} role="group" aria-label={labels.minModelPct}>
@@ -583,6 +537,5 @@ export function buildSpecialListLabels(_locale: "tr" | "en" = "en"): SpecialList
     odds250300: "2.50–3.00",
     odds300p: "3.00+",
     specialListFilters: "Special List filters",
-    matchDayPart: "Match day part",
   };
 }

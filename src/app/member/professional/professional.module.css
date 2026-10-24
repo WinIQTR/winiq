@@ -26,3 +26,48 @@
 .panel{background:#fff;border-color:#e2e8f0;box-shadow:0 4px 16px rgba(15,35,70,.08)}
 .tabs{background:#fff;border-color:#e2e8f0}
 .daypartRow{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:0 0 12px}
+
+/* ===== Dark theme professional / Analizler ===== */
+:global(html[data-theme="dark"] .tabs),
+:global(html[data-theme="dark"] .panel),
+:global(html[data-theme="dark"] .filters),
+:global(html[data-theme="dark"] .weekTabs),
+:global(html[data-theme="dark"] .sourceLinks),
+:global(html[data-theme="dark"] .teamTabs),
+:global(html[data-theme="dark"] .metrics) article,
+:global(html[data-theme="dark"] .playerCard),
+:global(html[data-theme="dark"] .scorerCard),
+:global(html[data-theme="dark"] .emptyState) {
+  background: #08192a !important;
+  border-color: #1d3b53 !important;
+  box-shadow: none !important;
+}
+:global(html[data-theme="dark"] .panel) h2,
+:global(html[data-theme="dark"] .filters) select,
+:global(html[data-theme="dark"] .historyList) summary b { color: #f7fbff !important; }
+:global(html[data-theme="dark"] .tabs) a,
+:global(html[data-theme="dark"] .weekTabs) a,
+:global(html[data-theme="dark"] .leagueTabs) a,
+:global(html[data-theme="dark"] .sourceLinks) a,
+:global(html[data-theme="dark"] .filters) label>span,
+:global(html[data-theme="dark"] .footer) { color: #9db6ca !important; }
+:global(html[data-theme="dark"] .filters) select {
+  background: #071725 !important;
+  border-color: #28465d !important;
+}
+:global(html[data-theme="dark"] .filters)>a {
+  background: #0a1d2e !important;
+  border-color: #2b4b63 !important;
+  color: #9fbbd0 !important;
+}
+:global(html[data-theme="dark"] .weekTabs) a[data-active="true"] {
+  border-color: #3892ed !important;
+  background: #174b7e !important;
+  color: #fff !important;
+}
+:global(html[data-theme="dark"] .leagueTabs) a[data-active="true"],
+:global(html[data-theme="dark"] .tabs) a[data-active="true"] {
+  border-color: #43e3a1 !important;
+  background: #43e3a1 !important;
+  color: #03150e !important;
+}

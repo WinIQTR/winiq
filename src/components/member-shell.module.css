@@ -3,19 +3,6 @@
    Special List keeps its own dark cyan content below this chrome. */
 
 .chrome {
-  --mh-neon: #43e3a1;
-  --mh-neon-cta: #31d996;
-  --mh-logo-green: #3fb950;
-  --mh-navy: #0b1b33;
-  --mh-navy-2: #122848;
-  --mh-page: #f4f6f8;
-  --mh-card: #ffffff;
-  --mh-text: #0b1f3a;
-  --mh-muted: #6b7c93;
-  --mh-blue: #2563eb;
-  --mh-blue-soft: rgba(37, 99, 235, 0.12);
-  --mh-border: #e2e8f0;
-  --mh-shadow: 0 4px 16px rgba(15, 35, 70, 0.08);
   display: contents;
 }
 
@@ -30,7 +17,7 @@
   min-height: 72px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   padding: 0 clamp(14px, 2.4vw, 36px);
-  background: linear-gradient(180deg, var(--mh-navy) 0%, #0a1830 100%);
+  background: var(--mh-topbar);
   backdrop-filter: blur(10px);
 }
 
@@ -52,7 +39,7 @@
 }
 
 .brand span {
-  color: var(--mh-logo-green);
+  color: var(--mh-logo-green, #3fb950);
 }
 
 .brandMeta {
@@ -91,7 +78,7 @@
   border: 1px solid transparent;
   border-radius: 999px;
   padding: 0 14px;
-  color: #a8bdd8;
+  color: var(--mh-topbar-text);
   font-size: 13px;
   font-weight: 700;
   text-decoration: none;
@@ -115,7 +102,7 @@
 .navLink[data-active="true"] {
   border-color: rgba(59, 130, 246, 0.85);
   background: rgba(37, 99, 235, 0.28);
-  color: #f8fbff;
+  color: var(--mh-topbar-text-active);
   box-shadow: inset 0 -2px 0 var(--mh-blue);
 }
 
@@ -306,19 +293,6 @@
 @media (max-width: 860px) {
   .topbar {
     grid-template-columns: auto auto minmax(0, 1fr);
-    background: #fff;
-    border-bottom: 1px solid var(--mh-border);
-  }
-
-  .brand {
-    color: var(--mh-navy);
-  }
-
-  .menuBtn {
-    display: grid;
-    border-color: var(--mh-border);
-    background: var(--mh-page);
-    color: var(--mh-navy);
   }
 
   .centerNav {
@@ -329,7 +303,28 @@
     display: none;
   }
 
-  .iconBtn {
+  .menuBtn {
+    display: grid;
+  }
+}
+
+/* Light mobile: white chrome (mockup). Dark keeps navy topbar. */
+@media (max-width: 860px) {
+  :global(html[data-theme="light"] .topbar),
+  :global(html:not([data-theme]) .topbar) {
+    background: #fff;
+    border-bottom: 1px solid var(--mh-border);
+  }
+
+  :global(html[data-theme="light"] .brand),
+  :global(html:not([data-theme]) .brand) {
+    color: var(--mh-navy);
+  }
+
+  :global(html[data-theme="light"] .menuBtn),
+  :global(html:not([data-theme]) .menuBtn),
+  :global(html[data-theme="light"] .iconBtn),
+  :global(html:not([data-theme]) .iconBtn) {
     border-color: var(--mh-border);
     background: var(--mh-page);
     color: #3d4f66;
