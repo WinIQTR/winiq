@@ -71,6 +71,16 @@ export function confidenceTier(score: number): "Güçlü" | "Orta" | "Zayıf" {
   return "Zayıf";
 }
 
+/** Mockup-facing confidence labels for Special List rows. */
+export function confidenceLabel(
+  score: number,
+): "very-high" | "high" | "medium" | "low" {
+  if (score >= 80) return "very-high";
+  if (score >= 70) return "high";
+  if (score >= 55) return "medium";
+  return "low";
+}
+
 /**
  * Prefer the precomputed snapshot so Special List never blocks on a cold
  * `calculateDashboardPredictions()` (that path can hang the RSC loading UI).

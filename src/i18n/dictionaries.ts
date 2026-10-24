@@ -524,6 +524,43 @@ entries.push(
     en: "Special List is available on the Professional plan",
     tr: "Special List Profesyonel pakette açılır",
   },
+  {
+    en: "Our AI model's highest-probability match picks.",
+    tr: "Yapay zeka modelimizin en yüksek olasılıklı maç tahminleri.",
+  },
+  {
+    en: "A data-driven shortlist of the strongest model selections for faster analysis.",
+    tr: "Veriye dayalı özel listede modelin en güçlü seçimlerini hızlıca inceleyin.",
+  },
+  { en: "Highest-probability matches from the model", tr: "Modelin en yüksek olasılıklı maçları" },
+  {
+    en: "Analysis based on current form and stats",
+    tr: "Güncel form ve istatistiklere dayalı analiz",
+  },
+  { en: "Faster, easier match analysis", tr: "Daha hızlı ve kolay analiz imkanı" },
+  { en: "Match date", tr: "Maç tarihi" },
+  { en: "Bet type", tr: "Bahis türü" },
+  { en: "All bets · highest probability", tr: "Tüm bahisler · en yüksek olasılık" },
+  { en: "Today's matches", tr: "Bugünün maçları" },
+  { en: "This week's matches", tr: "Haftanın maçları" },
+  { en: "Show list →", tr: "Listeyi göster →" },
+  { en: "selections found", tr: "seçim bulundu" },
+  { en: "selections", tr: "seçim" },
+  {
+    en: "Probability values are model estimates, not guarantees.",
+    tr: "Olasılık değerleri model tahminidir; garanti değildir.",
+  },
+  { en: "Selection", tr: "Seçim" },
+  { en: "Model forecast", tr: "Model tahmini" },
+  { en: "Odds", tr: "Oran" },
+  { en: "View match analysis →", tr: "Maç analizini gör →" },
+  { en: "Very high confidence", tr: "Çok yüksek güven" },
+  { en: "High confidence", tr: "Yüksek güven" },
+  { en: "Medium confidence", tr: "Orta güven" },
+  { en: "Lower confidence", tr: "Düşük güven" },
+  { en: "No picks found for this period and bet type.", tr: "Bu dönem ve bahis türü için seçim bulunamadı." },
+  { en: "Data source: snapshot backup", tr: "Veri kaynağı: snapshot (yedek)" },
+  { en: "Data source: live cache", tr: "Veri kaynağı: canlı önbellek" },
   { en: "Match calendar", tr: "Maç Takvimi" },
   { en: "Messages", tr: "Mesajlar" },
   { en: "Open menu", tr: "Menüyü aç" },
@@ -1020,6 +1057,8 @@ export function translateUiText(source: string, locale: AppLocale): string {
     translated = translated
       .replace(/^(\d+) matches loaded$/i, "$1 maç yüklendi")
       .replace(/^(\d+) matches$/i, "$1 maç")
+      .replace(/^(\d+) selections found$/i, "$1 seçim bulundu")
+      .replace(/^(\d+) selections$/i, "$1 seçim")
       .replace(/^(\d+) picks$/i, "$1 tahmin")
       .replace(/^(\d+) settled decisions$/i, "$1 sonuçlanmış karar")
       .replace(/^(\d+) settled picks$/i, "$1 sonuçlanmış tahmin")
