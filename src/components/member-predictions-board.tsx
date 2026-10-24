@@ -122,14 +122,18 @@ function FormRow({ results }: { results?: ("W" | "D" | "L")[] }) {
 export function MemberPredictionsBoard({
   predictions,
   plan,
-  matchHref,
+  matchPathPrefix = "/member/matches",
+  matchQuery = "",
   plansHref = "/member/plans",
 }: {
   predictions: DashboardPrediction[];
   plan: MembershipPlanName;
-  matchHref: (matchId: number) => string;
+  /** Serializable path prefix — never pass a function across the RSC boundary. */
+  matchPathPrefix?: string;
+  matchQuery?: string;
   plansHref?: string;
 }) {
+  const matchHref = (matchId: number) => `${matchPathPrefix}/${matchId}${matchQuery}`;
   const now = useMemo(() => new Date(), []);
   const showOdds = plan !== "BASIC";
 

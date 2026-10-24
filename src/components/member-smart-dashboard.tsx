@@ -381,8 +381,10 @@ export function MemberSmartDashboard({
   selectedDate?: string;
   performance?: MemberPerformance;
 }) {
-  const matchHref = (id: number) =>
-    preview ? `/admin/members/preview/matches/${id}?plan=${plan}` : `/member/matches/${id}`;
+  const matchPathPrefix = preview
+    ? "/admin/members/preview/matches"
+    : "/member/matches";
+  const matchQuery = preview ? `?plan=${plan}` : "";
   const plansHref = preview ? `/admin/members/preview?plan=${plan}#paket` : "/member/plans";
 
   return (
@@ -392,7 +394,8 @@ export function MemberSmartDashboard({
         <MemberPredictionsBoard
           predictions={predictions}
           plan={plan}
-          matchHref={matchHref}
+          matchPathPrefix={matchPathPrefix}
+          matchQuery={matchQuery}
           plansHref={plansHref}
         />
       </div>
