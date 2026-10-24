@@ -448,6 +448,69 @@
   line-height: 1.25;
 }
 
+.marketsStrip {
+  display: grid;
+  gap: 8px;
+  margin-top: 2px;
+  border-top: 1px solid rgba(56, 90, 140, 0.22);
+  padding-top: 12px;
+}
+
+.marketsStripHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  color: var(--mh-muted);
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.marketsStripHead strong {
+  color: #9ec9ff;
+  font-size: 12px;
+  font-weight: 850;
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
+.marketsChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.marketChip,
+.marketMore {
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+  min-height: 28px;
+  border: 1px solid rgba(90, 130, 190, 0.4);
+  border-radius: 999px;
+  padding: 0 10px;
+  background: rgba(10, 22, 40, 0.88);
+  color: #d7e7ff;
+  font: inherit;
+  font-size: 11.5px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.marketChip:hover,
+.marketMore:hover {
+  border-color: rgba(126, 182, 255, 0.75);
+  color: #f2f8ff;
+  background: rgba(59, 130, 246, 0.16);
+}
+
 .metric {
   display: grid;
   gap: 6px;
@@ -905,6 +968,10 @@
   .cardBody .matchup,
   .cardBody .pickChip {
     grid-column: 1 / -1;
+  }
+
+  .marketsStrip {
+    margin-top: 4px;
   }
 
   .summary {

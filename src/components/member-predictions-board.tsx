@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 
 import { useLanguage } from "@/components/language-provider";
+import { BET_MARKET_COUNT } from "@/lib/bet-market-catalog";
 import {
   getPredictionLabel,
   getUiConfidence,
@@ -58,14 +59,83 @@ function todayKey(now = new Date()) {
   return dateKey(now);
 }
 
-function fairOdds(prediction: DashboardPrediction) {
-  const fromPick = prediction.topPicks[0]?.fairOdds;
-  if (fromPick && fromPick > 0) return fromPick;
+type BoardPick = {
+  market: string;
+  selection: string;
+  probability: number;
+  fairOdds: number | null;
+};
+
+/** Markets available on a match — topPicks + supported popular summary (same sources as Special List). */
+function collectMatchMarkets(prediction: DashboardPrediction): string[] {
+  const names = new Set<string>();
+  for (const pick of prediction.topPicks ?? []) {
+    if (pick.market) names.add(pick.market);
+  }
+  for (const row of prediction.popularMarketsSummary ?? []) {
+    if (row.supported === false || !row.market) continue;
+    names.add(row.market);
+  }
+  return [...names].sort((a, b) => a.localeCompare(b, "en"));
+}
+
+function resolvePrimaryPick(
+  prediction: DashboardPrediction,
+  preferredMarket?: string,
+): BoardPick | null {
+  const preferred =
+    preferredMarket && preferredMarket !== "ALL" ? preferredMarket : null;
+
+  if (preferred) {
+    const fromTop = (prediction.topPicks ?? []).find((pick) => pick.market === preferred);
+    if (fromTop) {
+      return {
+        market: fromTop.market,
+        selection: fromTop.selection,
+        probability: fromTop.probability,
+        fairOdds: fromTop.fairOdds,
+      };
+    }
+    const fromPopular = (prediction.popularMarketsSummary ?? []).find(
+      (row) =>
+        row.supported !== false &&
+        row.market === preferred &&
+        typeof row.probability === "number" &&
+        !!row.selection,
+    );
+    if (fromPopular?.market && fromPopular.selection && fromPopular.probability != null) {
+      return {
+        market: fromPopular.market,
+        selection: fromPopular.selection,
+        probability: fromPopular.probability,
+        fairOdds: fromPopular.fairOdds ?? null,
+      };
+    }
+  }
+
+  const top = prediction.topPicks[0];
+  if (top) {
+    return {
+      market: top.market,
+      selection: top.selection,
+      probability: top.probability,
+      fairOdds: top.fairOdds,
+    };
+  }
+  return null;
+}
+
+function fairOdds(prediction: DashboardPrediction, preferredMarket?: string) {
+  const pick = resolvePrimaryPick(prediction, preferredMarket);
+  if (pick?.fairOdds && pick.fairOdds > 0) return pick.fairOdds;
+  if (pick && pick.probability > 0) return 100 / pick.probability;
   return prediction.predictedProbability > 0 ? 100 / prediction.predictedProbability : 0;
 }
 
-function pickProbability(prediction: DashboardPrediction) {
-  return prediction.topPicks[0]?.probability ?? prediction.predictedProbability;
+function pickProbability(prediction: DashboardPrediction, preferredMarket?: string) {
+  return (
+    resolvePrimaryPick(prediction, preferredMarket)?.probability ?? prediction.predictedProbability
+  );
 }
 
 function confidenceMeta(score: number) {
@@ -84,21 +154,34 @@ function confidenceMeta(score: number) {
   return { label: "Low", kind: "low" as const, filled };
 }
 
+function marketLabelKey(marketRaw: string) {
+  if (/total\s*goals/i.test(marketRaw)) return "Total Goals";
+  if (/match\s*result|1x2|full\s*time/i.test(marketRaw)) return "Match result";
+  if (/both\s*teams\s*to\s*score|karşılıklı/i.test(marketRaw)) return "Both Teams To Score";
+  if (/double\s*chance|çifte\s*şans/i.test(marketRaw)) return "Double Chance";
+  if (/draw\s*no\s*bet|beraberlikte\s*(iade|bahis\s*yok)/i.test(marketRaw)) return "Draw No Bet";
+  if (/asian\s*handicap|handikap/i.test(marketRaw)) return "Asian Handicap";
+  if (/win\s*to\s*nil|gol\s*yemez/i.test(marketRaw)) return "Win To Nil";
+  if (/correct\s*score|kesin\s*skor/i.test(marketRaw)) return "Correct Score";
+  return marketRaw;
+}
+
 function pickChip(
   prediction: DashboardPrediction,
   locale: "en" | "tr",
   t: (source: string) => string,
+  preferredMarket?: string,
 ) {
-  const top = prediction.topPicks[0];
+  const top = resolvePrimaryPick(prediction, preferredMarket);
   if (top) {
-    const marketRaw = top.market || "Match result";
-    const marketKey = /total\s*goals/i.test(marketRaw)
-      ? "Total Goals"
-      : /match\s*result|1x2|full\s*time/i.test(marketRaw)
-        ? "Match result"
-        : marketRaw;
+    const marketKey = marketLabelKey(top.market || "Match result");
+    const translated = t(marketKey);
     return {
-      market: t(marketKey),
+      market: localizePickText(
+        translated !== marketKey ? translated : top.market || marketKey,
+        locale,
+        t,
+      ),
       tip: localizePickText(top.selection || getPredictionLabel(prediction), locale, t),
     };
   }
@@ -110,6 +193,8 @@ function pickChip(
   }
   return { market: t("Match result"), tip: "X" };
 }
+
+const MARKETS_STRIP_LIMIT = 8;
 
 function leagueFlagCode(leagueName: string) {
   const name = leagueName.toLowerCase();
@@ -336,8 +421,7 @@ export function MemberPredictionsBoard({
   const markets = useMemo(() => {
     const names = new Set<string>();
     for (const item of upcoming) {
-      const market = item.topPicks[0]?.market;
-      if (market) names.add(market);
+      for (const market of collectMatchMarkets(item)) names.add(market);
     }
     return [...names].sort((a, b) => a.localeCompare(b, "en"));
   }, [upcoming]);
@@ -353,7 +437,9 @@ export function MemberPredictionsBoard({
     return upcoming.filter((item) => {
       if (applied.date !== "ALL" && dateKey(item.kickoffAt) !== applied.date) return false;
       if (applied.league !== "ALL" && String(item.leagueApiId) !== applied.league) return false;
-      if (applied.market !== "ALL" && (item.topPicks[0]?.market ?? "") !== applied.market) return false;
+      if (applied.market !== "ALL" && !collectMatchMarkets(item).includes(applied.market)) {
+        return false;
+      }
       if (applied.confidence === "HIGH" && item.confidenceScore < 60) return false;
       if (applied.confidence === "MED" && (item.confidenceScore < 40 || item.confidenceScore >= 60)) {
         return false;
@@ -391,7 +477,7 @@ export function MemberPredictionsBoard({
   }, [todayMatches, upcoming]);
 
   const couponOdds = couponLegs.reduce((acc, item) => {
-    const odds = fairOdds(item);
+    const odds = fairOdds(item, applied.market);
     return odds > 0 ? acc * odds : acc;
   }, 1);
 
@@ -429,7 +515,7 @@ export function MemberPredictionsBoard({
   const hitRate = evaluatedSamples ? (evaluatedWins / evaluatedSamples) * 100 : null;
   const avgOdds =
     filtered.length > 0
-      ? filtered.reduce((sum, item) => sum + fairOdds(item), 0) / filtered.length
+      ? filtered.reduce((sum, item) => sum + fairOdds(item, applied.market), 0) / filtered.length
       : null;
 
   return (
@@ -596,10 +682,16 @@ export function MemberPredictionsBoard({
             {pageItems.length ? (
               pageItems.map((item) => {
                 const conf = confidenceMeta(item.confidenceScore);
-                const odds = fairOdds(item);
-                const probability = pickProbability(item);
-                const chip = pickChip(item, locale, t);
+                const odds = fairOdds(item, applied.market);
+                const probability = pickProbability(item, applied.market);
+                const chip = pickChip(item, locale, t, applied.market);
                 const insight = buildMatchCardInsight(item, t, locale);
+                const matchMarkets = collectMatchMarkets(item);
+                const primaryMarket =
+                  resolvePrimaryPick(item, applied.market)?.market ?? matchMarkets[0] ?? "";
+                const otherMarkets = matchMarkets.filter((market) => market !== primaryMarket);
+                const visibleMarkets = otherMarkets.slice(0, MARKETS_STRIP_LIMIT);
+                const hiddenMarketCount = Math.max(0, otherMarkets.length - visibleMarkets.length);
                 return (
                   <article className={styles.card} key={item.matchId}>
                     <div className={styles.cardHead}>
@@ -676,6 +768,41 @@ export function MemberPredictionsBoard({
                         </span>
                       </div>
                     </div>
+
+                    {matchMarkets.length > 1 ? (
+                      <div className={styles.marketsStrip} aria-label={t("Other markets")}>
+                        <div className={styles.marketsStripHead}>
+                          <span>{t("Other markets")}</span>
+                          <strong>
+                            {matchMarkets.length}/{BET_MARKET_COUNT}
+                          </strong>
+                        </div>
+                        <ul className={styles.marketsChips}>
+                          {visibleMarkets.map((market) => (
+                            <li key={market}>
+                              <button
+                                type="button"
+                                className={styles.marketChip}
+                                onClick={() => {
+                                  setDraft((prev) => ({ ...prev, market }));
+                                  setApplied((prev) => ({ ...prev, market }));
+                                  setPage(1);
+                                }}
+                              >
+                                {localizePickText(market, locale, t)}
+                              </button>
+                            </li>
+                          ))}
+                          {hiddenMarketCount > 0 ? (
+                            <li>
+                              <Link className={styles.marketMore} href={matchHref(item.matchId)}>
+                                +{hiddenMarketCount}
+                              </Link>
+                            </li>
+                          ) : null}
+                        </ul>
+                      </div>
+                    ) : null}
 
                     <div className={styles.cardFoot}>
                       <p className={styles.analysis}>
