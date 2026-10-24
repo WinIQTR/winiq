@@ -26,16 +26,18 @@ export function MemberDateDayPicker({
   const hrefByKey = new Map(options.map((option) => [option.key, option.href]));
 
   return (
-    <div className={styles.dateMinimal}>
+    <div className={styles.dateMinimal} data-home-date="true">
       {prevHref ? (
         <Link href={prevHref} aria-label="Önceki gün">
-          ←
+          ‹
         </Link>
       ) : (
-        <span aria-hidden="true">←</span>
+        <span aria-hidden="true">‹</span>
       )}
       <label>
-        Tarih
+        <span className={styles.dateLabelIcon} aria-hidden>
+          📅
+        </span>
         <select
           value={activeDate}
           onChange={(event) => {
@@ -52,10 +54,10 @@ export function MemberDateDayPicker({
       </label>
       {nextHref ? (
         <Link href={nextHref} aria-label="Sonraki gün">
-          →
+          ›
         </Link>
       ) : (
-        <span aria-hidden="true">→</span>
+        <span aria-hidden="true">›</span>
       )}
     </div>
   );
