@@ -519,6 +519,11 @@ entries.push(
   { en: "Home page", tr: "Ana Sayfa" },
   { en: "Opportunities", tr: "Fırsatlar" },
   { en: "Analyses", tr: "Analizler" },
+  { en: "Special List", tr: "Special List" },
+  {
+    en: "Special List is available on the Professional plan",
+    tr: "Special List Profesyonel pakette açılır",
+  },
   { en: "Match calendar", tr: "Maç Takvimi" },
   { en: "Messages", tr: "Mesajlar" },
   { en: "Open menu", tr: "Menüyü aç" },

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { ReactNode } from "react";
 
 import cards from "@/components/member-match-cards.module.css";
 import shell from "@/components/member-shell.module.css";
@@ -92,6 +93,19 @@ function IconChart() {
     </svg>
   );
 }
+function IconStar() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
+      <path
+        d="M12 3.6l2.2 4.6 5 .7-3.6 3.5.9 5-4.5-2.4L7.5 17.4l.9-5L4.8 8.9l5-.7L12 3.6z"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 function IconTrophy() {
   return (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
@@ -174,9 +188,10 @@ export type MemberNavActive =
 
 function navActive(
   active: MemberNavActive,
-): "home" | "value" | "analyses" | "results" | "predictions" | "messages" | "plans" {
+): "home" | "value" | "analyses" | "special" | "results" | "predictions" | "messages" | "plans" {
   if (active === "home") return "home";
   if (active === "value") return "value";
+  if (active === "special") return "special";
   if (active === "predictions" || active === "coupons") return "predictions";
   if (active === "results") return "results";
   if (active === "messages") return "messages";
@@ -210,15 +225,34 @@ export function MemberPortalHeader({
       : canValue
         ? "/member/value"
         : "/member/predictions";
+  const canSpecial = plan === "PROFESSIONAL" || localReviewBypass;
+  const specialHref = preview
+    ? homeHref
+    : canSpecial
+      ? "/member/professional/special"
+      : "/member/plans";
   const teamsHref = preview ? homeHref : "/member/results";
   const predictionsHref = preview ? homeHref : "/member/predictions";
   const messagesHref = preview ? homeHref : "/member/messages";
   const current = navActive(active);
 
-  const primaryNav = [
+  const primaryNav: Array<{
+    href: string;
+    label: string;
+    active: boolean;
+    icon: ReactNode;
+    locked?: boolean;
+  }> = [
     { href: homeHref, label: "Home page", active: current === "home", icon: <IconHome /> },
     { href: valueHref, label: "Opportunities", active: current === "value", icon: <IconChart /> },
     { href: analysesHref, label: "Analyses", active: current === "analyses", icon: <IconTrophy /> },
+    {
+      href: specialHref,
+      label: "Special List",
+      active: current === "special",
+      icon: <IconStar />,
+      locked: !canSpecial && !preview,
+    },
     {
       href: predictionsHref,
       label: "Match calendar",
@@ -261,7 +295,13 @@ export function MemberPortalHeader({
               href={item.href}
               className={shell.navLink}
               data-active={item.active}
+              data-locked={"locked" in item && item.locked ? "true" : undefined}
               aria-current={item.active ? "page" : undefined}
+              title={
+                "locked" in item && item.locked
+                  ? "Special List is available on the Professional plan"
+                  : undefined
+              }
             >
               {item.icon}
               <span>{item.label}</span>

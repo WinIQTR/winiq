@@ -93,6 +93,10 @@
   background: rgba(36, 72, 120, 0.28);
 }
 
+.navLink[data-locked="true"] {
+  opacity: 0.72;
+}
+
 .navLink[data-active="true"] {
   border-color: rgba(59, 130, 246, 0.75);
   background: linear-gradient(145deg, rgba(29, 78, 216, 0.42), rgba(15, 40, 90, 0.72));
