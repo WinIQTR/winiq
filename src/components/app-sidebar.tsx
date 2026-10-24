@@ -2,102 +2,54 @@ import Link from "next/link";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { LogoutButton } from "@/components/logout-button";
 
-const items = [
-  {
-    href: "/admin-dashboard",
-    label: "Dashboard",
-  },
+type NavItem = { href: string; label: string };
+type NavGroup = { title: string; items: NavItem[] };
 
+const groups: NavGroup[] = [
   {
-    href: "/predictions",
-    label: "Predictions",
-  },
-
-  {
-    href: "/prediction-results",
-    label: "Prediction Results",
-  },
-
-  {
-    href: "/match-result-performance",
-    label: "Market Performance",
-  },
-
-  {
-    href: "/coupons",
-    label: "Smart Coupons",
+    title: "Canlı",
+    items: [
+      { href: "/admin-dashboard", label: "Kontrol paneli" },
+      { href: "/predictions", label: "Tahminler" },
+      { href: "/special", label: "Özel liste" },
+      { href: "/value-bets", label: "Değer bahisleri" },
+    ],
   },
   {
-    href: "/guaranteed-coupons",
-    label: "Garanti Kupon",
-  },
-
-  {
-    href: "/coupon-performance",
-    label: "Coupon Performance",
-  },
-
-  {
-    href: "/smart-picks",
-    label: "Smart Picks",
+    title: "Performans",
+    items: [
+      { href: "/prediction-results", label: "Tahmin sonuçları" },
+      { href: "/match-result-performance", label: "Pazar performansı" },
+      { href: "/coupons", label: "Kupon merkezi" },
+      { href: "/coupon-performance", label: "Kupon performansı" },
+      { href: "/evaluation", label: "Model performansı" },
+    ],
   },
   {
-    href: "/special",
-    label: "Special List",
+    title: "Veri",
+    items: [
+      { href: "/fixtures", label: "Fikstür" },
+      { href: "/teams", label: "Takımlar" },
+      { href: "/players", label: "Oyuncular" },
+      { href: "/top-scorers", label: "Gol krallığı" },
+      { href: "/admin/data-coverage", label: "Veri kapsamı" },
+      { href: "/operations", label: "Operasyon" },
+    ],
   },
   {
-    href: "/mobile",
-    label: "Mobile",
+    title: "Üyelik",
+    items: [
+      { href: "/admin/members", label: "Üyeler" },
+      { href: "/admin/messages", label: "Gelen kutusu" },
+    ],
   },
-
   {
-    href: "/evaluation",
-    label: "Model Performance",
-  },
-
-  {
-    href: "/fixtures",
-    label: "Fixtures",
-  },
-
-  {
-    href: "/teams",
-    label: "Teams",
-  },
-
-  {
-    href: "/players",
-    label: "Players",
-  },
-
-  {
-    href: "/top-scorers",
-    label: "Top Scorers",
-  },
-
-  {
-    href: "/admin",
-    label: "Admin",
-  },
-
-  {
-    href: "/admin/members",
-    label: "Members",
-  },
-
-  {
-    href: "/admin/messages",
-    label: "Member Messages",
-  },
-
-  {
-    href: "/admin/data-coverage",
-    label: "Data Coverage",
-  },
-
-  {
-    href: "/settings",
-    label: "Settings",
+    title: "Sistem",
+    items: [
+      { href: "/admin", label: "Sistem sağlığı" },
+      { href: "/admin-dashboard/mobile", label: "Mobil önizleme" },
+      { href: "/settings", label: "Ayarlar" },
+    ],
   },
 ];
 
@@ -106,45 +58,26 @@ export function AppSidebar() {
     <aside className="sidebar">
       <div>
         <div className="brand">
-          <div className="brand-mark">
-            AI
+          <div className="brand-mark" data-no-translate>
+            W
           </div>
-
           <div>
-            <strong>
-              WINIQ
-            </strong>
-
-            <span>
-              AI Futbol Merkezi
-            </span>
+            <strong data-no-translate>WINIQ</strong>
+            <span>Yönetim merkezi</span>
           </div>
         </div>
 
-        <nav className="nav">
-          {items.map(
-            (
-              item,
-              index,
-            ) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="nav-item"
-              >
-                <span>
-                  {String(
-                    index + 1,
-                  ).padStart(
-                    2,
-                    "0",
-                  )}
-                </span>
-
-                {item.label}
-              </Link>
-            ),
-          )}
+        <nav className="nav admin-nav-groups">
+          {groups.map((group) => (
+            <div className="nav-group" key={group.title}>
+              <p className="nav-group-title">{group.title}</p>
+              {group.items.map((item) => (
+                <Link key={item.href} href={item.href} className="nav-item">
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+          ))}
         </nav>
 
         <div className="sidebar-language">
@@ -155,7 +88,7 @@ export function AppSidebar() {
       <div className="sidebar-footer">
         <div className="sidebar-status">
           <span className="status-dot" />
-          System online
+          Sistem çevrimiçi
         </div>
         <LogoutButton />
       </div>

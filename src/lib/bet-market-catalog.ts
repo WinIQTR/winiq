@@ -22,7 +22,7 @@ export type BetMarketGroup = {
   options: BetMarketOption[];
 };
 
-/** Number of market groups exposed by the catalogue. Keep UI and membership labels in sync. */
+/** Catalogue'daki toplam pazar grubu sayısı. UI ve üyelik limitleri bunu kullanır. */
 export const BET_MARKET_COUNT = 30;
 
 export type BetMarketCatalogInput = {
@@ -394,22 +394,6 @@ export function buildBetMarketCatalog(input: BetMarketCatalogInput): BetMarketGr
     ];
   };
 
-  const firstHalfBtts = bttsOptions(firstHalf, "İY", true);
-  const firstHalfTeamGoals: RawOption[] = [];
-  for (const [side, team, goalKey] of [
-    ["EV", input.homeTeam, "home"],
-    ["DEP", input.awayTeam, "away"],
-  ] as const) {
-    for (const line of [0.5, 1.5] as const) {
-      if (!firstHalf.length) break;
-      const under = sum(firstHalf, (cell) => cell[goalKey] < line) * 100;
-      firstHalfTeamGoals.push(
-        { key: `iy-${side}-${line}-alt`, selection: `${team} İY ${line} ALT`, probability: under, estimated: true },
-        { key: `iy-${side}-${line}-ust`, selection: `${team} İY ${line} ÜST`, probability: 100 - under, estimated: true },
-      );
-    }
-  }
-
   const resultAndTotal: RawOption[] = [];
   if (full.length) {
     for (const [result, predicate] of [
@@ -528,6 +512,19 @@ export function buildBetMarketCatalog(input: BetMarketCatalogInput): BetMarketGr
     { key: "builder-x2-o15", selection: "0–2 + 1.5 ÜST", probability: sum(full, (cell) => cell.away >= cell.home && cell.home + cell.away > 1.5) * 100 },
     { key: "builder-btts-o25", selection: "KG VAR + 2.5 ÜST", probability: sum(full, (cell) => cell.home > 0 && cell.away > 0 && cell.home + cell.away > 2.5) * 100 },
   ] : [];
+
+  const firstHalfBtts = bttsOptions(firstHalf, "İY", true);
+  const firstHalfTeamGoals: RawOption[] = [];
+  for (const [side, team, goalKey] of [["EV", input.homeTeam, "home"], ["DEP", input.awayTeam, "away"]] as const) {
+    for (const line of [0.5, 1.5] as const) {
+      if (!firstHalf.length) break;
+      const under = sum(firstHalf, (cell) => cell[goalKey] < line) * 100;
+      firstHalfTeamGoals.push(
+        { key: `iy-${side}-${line}-alt`, selection: `${team} İY ${line} ALT`, probability: under, estimated: true },
+        { key: `iy-${side}-${line}-ust`, selection: `${team} İY ${line} ÜST`, probability: 100 - under, estimated: true },
+      );
+    }
+  }
 
   const corners = bestKnown(input.knownMarkets, ["korner", "corner"]);
   const cards = bestKnown(input.knownMarkets, ["kart", "card"]);

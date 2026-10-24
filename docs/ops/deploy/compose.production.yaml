@@ -1,0 +1,63 @@
+name: bet-project-production
+
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile.production
+      secrets:
+        - production_env
+    env_file:
+      - .env.production
+    environment:
+      NODE_ENV: production
+      HOSTNAME: 0.0.0.0
+      PORT: 3000
+      PRODUCTION_DATA_ROOT: /srv/bet-project-data
+      PRODUCTION_BACKUP_DIR: /srv/bet-project-data/backups/production
+      PRODUCTION_REPORT_DIR: /srv/bet-project-data/reports/production
+      PRODUCTION_HEALTH_STATE_PATH: /srv/bet-project-data/data/operations/model-health-state.json
+      PRODUCTION_HEALTH_LOG_PATH: /srv/bet-project-data/logs/production/model-health-events.jsonl
+      PRODUCTION_NOTIFICATION_DIR: /srv/bet-project-data/notifications/production
+    volumes:
+      - production_data:/srv/bet-project-data
+    expose:
+      - "3000"
+    restart: unless-stopped
+    init: true
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "--silent", "http://127.0.0.1:3000/api/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+
+  caddy:
+    image: caddy:2-alpine
+    env_file:
+      - .env.production
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./Caddyfile.production:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    restart: unless-stopped
+    depends_on:
+      app:
+        condition: service_healthy
+
+secrets:
+  production_env:
+    file: .env.production
+
+volumes:
+  production_data:
+  caddy_data:
+  caddy_config:

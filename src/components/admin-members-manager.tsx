@@ -54,6 +54,12 @@ async function sendTo(path: string, body: unknown) {
   return response.json() as Promise<{ success: boolean; message: string }>;
 }
 
+function daysLeft(iso: string | null): number | null {
+  if (!iso) return null;
+  const end = new Date(iso).getTime();
+  return Math.ceil((end - Date.now()) / 86_400_000);
+}
+
 export function AdminMembersManager({ members, upgradeRequests, prices, paymentSettings }: {
   members: MemberRow[];
   upgradeRequests: UpgradeRequestRow[];
@@ -63,6 +69,17 @@ export function AdminMembersManager({ members, upgradeRequests, prices, paymentS
   const router = useRouter();
   const [message, setMessage] = useState("");
   const [busy, setBusy] = useState(false);
+  const [planFilter, setPlanFilter] = useState<"ALL" | MemberRow["plan"]>("ALL");
+  const [statusFilter, setStatusFilter] = useState<"ALL" | MemberRow["status"]>("ALL");
+  const [query, setQuery] = useState("");
+
+  const filteredMembers = members.filter((member) => {
+    if (planFilter !== "ALL" && member.plan !== planFilter) return false;
+    if (statusFilter !== "ALL" && member.status !== statusFilter) return false;
+    if (!query.trim()) return true;
+    const hay = `${member.name} ${member.email}`.toLowerCase();
+    return hay.includes(query.trim().toLowerCase());
+  });
 
   async function createMember(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -169,7 +186,12 @@ export function AdminMembersManager({ members, upgradeRequests, prices, paymentS
       </section>
 
       <section className={styles.panel}>
-        <div className={styles.heading}><div><h2>Yükseltme talepleri</h2><p>{upgradeRequests.length} aktif talep</p></div></div>
+        <div className={styles.heading}>
+          <div>
+            <h2>Gelen kutusu · yükseltme talepleri</h2>
+            <p>{upgradeRequests.length} aktif talep · mesajlar için <a href="/admin/messages">üye mesajları</a></p>
+          </div>
+        </div>
         <div className={styles.requestList}>
           {upgradeRequests.length === 0 ? <p className={styles.empty}>Bekleyen yükseltme talebi yok.</p> : upgradeRequests.map((request) => (
             <article className={styles.requestCard} key={request.id}>
@@ -198,13 +220,38 @@ export function AdminMembersManager({ members, upgradeRequests, prices, paymentS
       </section>
 
       <section className={styles.panel}>
-        <div className={styles.heading}><div><h2>Üyeler</h2><p>{members.length} kayıtlı üye</p></div></div>
+        <div className={styles.heading}><div><h2>Üyeler</h2><p>{filteredMembers.length} / {members.length} kayıt</p></div></div>
+        <div className={styles.createForm} style={{ marginBottom: 16 }}>
+          <label>Ara<input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Ad veya e-posta" /></label>
+          <label>Paket
+            <select value={planFilter} onChange={(event) => setPlanFilter(event.target.value as typeof planFilter)}>
+              <option value="ALL">Tümü</option>
+              <option value="BASIC">Temel</option>
+              <option value="ANALYSIS">Analiz</option>
+              <option value="PROFESSIONAL">Profesyonel</option>
+            </select>
+          </label>
+          <label>Durum
+            <select value={statusFilter} onChange={(event) => setStatusFilter(event.target.value as typeof statusFilter)}>
+              <option value="ALL">Tümü</option>
+              <option value="ACTIVE">ACTIVE</option>
+              <option value="SUSPENDED">SUSPENDED</option>
+            </select>
+          </label>
+        </div>
         <div className={styles.memberList}>
-          {members.length === 0 ? <p className={styles.empty}>Henüz üye oluşturulmadı.</p> : members.map((member) => (
-            <article className={styles.memberCard} key={member.id}>
+          {filteredMembers.length === 0 ? <p className={styles.empty}>Filtreye uyan üye yok.</p> : filteredMembers.map((member) => {
+            const left = daysLeft(member.membershipEndsAt);
+            const expiring = left !== null && left <= 7;
+            return (
+            <article className={styles.memberCard} key={member.id} style={expiring ? { borderColor: "#f4bd45" } : undefined}>
               <div className={styles.identity}>
                 <strong>{member.name}</strong><span>{member.email}</span><b className={styles.memberPlanBadge}>{MEMBERSHIP_PLAN_LABELS[member.plan]} üyelik</b>
-                <small>Kayıt: {new Date(member.createdAt).toLocaleDateString("tr-TR")} · Aktif oturum: {member.sessionCount}</small>
+                <small>
+                  Kayıt: {new Date(member.createdAt).toLocaleDateString("tr-TR")} · Aktif oturum: {member.sessionCount}
+                  {left === null ? " · Bitiş yok" : left < 0 ? " · Süresi dolmuş" : ` · ${left} gün kaldı`}
+                  {expiring ? " · UYARI" : ""}
+                </small>
               </div>
               <form className={styles.accessForm} onSubmit={(event) => updateAccess(event, member.id)}>
                 <label>Paket<select name="plan" defaultValue={member.plan}><option value="BASIC">Temel</option><option value="ANALYSIS">Analiz</option><option value="PROFESSIONAL">Profesyonel</option></select></label>
@@ -213,6 +260,27 @@ export function AdminMembersManager({ members, upgradeRequests, prices, paymentS
                 <button disabled={busy}>Kaydet</button>
               </form>
               <div className={styles.securityActions}>
+                <button
+                  type="button"
+                  disabled={busy}
+                  onClick={() => {
+                    const base = member.membershipEndsAt ? new Date(member.membershipEndsAt) : new Date();
+                    if (base.getTime() < Date.now()) base.setTime(Date.now());
+                    base.setDate(base.getDate() + 30);
+                    void send("PATCH", {
+                      userId: member.id,
+                      action: "UPDATE_ACCESS",
+                      plan: member.plan,
+                      status: member.status,
+                      membershipEndsAt: base.toISOString().slice(0, 10),
+                    }).then((result) => {
+                      setMessage(result.message);
+                      if (result.success) router.refresh();
+                    });
+                  }}
+                >
+                  +30 gün uzat
+                </button>
                 <input id={`password-${member.id}`} type="password" placeholder="Yeni şifre (12+ karakter)" minLength={12} />
                 <button disabled={busy} onClick={() => {
                   const input = document.getElementById(`password-${member.id}`) as HTMLInputElement | null;
@@ -221,7 +289,8 @@ export function AdminMembersManager({ members, upgradeRequests, prices, paymentS
                 <button disabled={busy} onClick={() => void memberAction(member.id, "REVOKE_SESSIONS")}>Oturumları kapat</button>
               </div>
             </article>
-          ))}
+            );
+          })}
         </div>
       </section>
     </div>

@@ -13,20 +13,15 @@ function resolveSeasonYear(
   fallback:
     number,
 ): number {
-  const normalizedValue =
-    rawValue?.trim();
+  const normalizedValue = rawValue
+    ?.trim()
+    .replace(/^['"]|['"]$/g, "");
 
-  if (
-    !normalizedValue
-  ) {
+  if (!normalizedValue) {
     return fallback;
   }
 
-  const parsedValue =
-    Number.parseInt(
-      normalizedValue,
-      10,
-    );
+  const parsedValue = Number.parseInt(normalizedValue, 10);
 
   if (
     !Number.isInteger(

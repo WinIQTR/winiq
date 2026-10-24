@@ -11,7 +11,6 @@ import {
   type SampleLevel,
 } from "@/lib/market-performance-analytics";
 import styles from "@/app/match-result-performance/match-result-performance.module.css";
-import { BET_MARKET_COUNT } from "@/lib/bet-market-catalog";
 
 type Settlement = "WON" | "LOST" | "VOID" | "DATA_MISSING";
 type Tier = "STRONG" | "MEDIUM" | "WEAK";
@@ -202,7 +201,7 @@ export function MarketPerformanceWorkspace({ marketTypes, rows, seasonLabel }: {
     <>
       <section className={styles.marketSelectorPanel}>
         <div>
-          <span>{BET_MARKET_COUNT} BAHİS TÜRÜ • TEK PERFORMANS MERKEZİ</span>
+          <span>27+ BAHİS TÜRÜ • TEK PERFORMANS MERKEZİ</span>
           <strong>Bahis türünü seçin, beklenen ve gerçek sonucu karşılaştırın</strong>
           <small>Lig, seçim tarafı, veri kalitesi ve yüzde aralıkları aynı ekranda incelenir.</small>
         </div>
@@ -228,7 +227,7 @@ export function MarketPerformanceWorkspace({ marketTypes, rows, seasonLabel }: {
             İade ve veri bekleyen kayıtlar başarı hesabına katılmaz; düşük örneklem açıkça uyarılır.
           </p>
           <div className={styles.heroTags}>
-            <span>PAZAR {String(activeType.number).padStart(2, "0")} / {BET_MARKET_COUNT}</span>
+            <span>PAZAR {String(activeType.number).padStart(2, "0")} / 30</span>
             <span>MODEL AĞIRLIKLARI KİLİTLİ</span><span>ADİL ORAN EŞİĞİ 1.10</span>
           </div>
         </div>

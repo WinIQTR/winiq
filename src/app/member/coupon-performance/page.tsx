@@ -3,5 +3,5 @@ import { requireMember } from "@/lib/auth-session";
 
 export default async function MemberCouponPerformancePage() {
   await requireMember();
-  redirect("/member/predictions");
+  redirect("/member/results");
 }

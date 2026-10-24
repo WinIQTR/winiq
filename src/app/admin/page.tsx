@@ -1,252 +1,77 @@
 import Link from "next/link";
 
+import { PageShell } from "@/components/page-shell";
 import { requireAdmin } from "@/lib/auth-session";
+import { ACTIVE_SEASON_LABEL } from "@/config/season";
 
-import {
-  ACTIVE_SEASON_LABEL,
-  ACTIVE_SEASON_YEAR,
-} from "@/config/season";
-
-const processSteps = [
-  {
-    name: "Lig ve sezon",
-    description:
-      `Canlı üretim sezonu ${ACTIVE_SEASON_LABEL} aktif.`,
-    status: "Hazır",
-  },
-  {
-    name: "Takımlar",
-    description:
-      "20 takım veritabanında kayıtlı.",
-    status: "Hazır",
-  },
-  {
-    name: "Fikstür",
-    description:
-      "Seçili test tarih aralığındaki maçlar.",
-    status: "Kontrol",
-  },
-  {
-    name: "Özellik üretimi",
-    description:
-      "Takım formu, derecelendirme, gol ve xG verileri.",
-    status: "Hazır",
-  },
-  {
-    name: "Tahmin motoru",
-    description:
-      "1X2 olasılık ve kalibrasyon sistemi.",
-    status: "Hazır",
-  },
-];
-
-export default async function AdminPage() {
+export default async function AdminSystemHealthPage() {
   await requireAdmin();
 
-  const apiFootballConfigured =
-    Boolean(
-      process.env.API_FOOTBALL_KEY
-        ?.trim(),
-    );
+  const apiFootballConfigured = Boolean(process.env.API_FOOTBALL_KEY?.trim());
+  const databaseConfigured = Boolean(process.env.DATABASE_URL?.trim());
 
   return (
-    <main className="admin-shell">
-      <header className="admin-header">
+    <PageShell>
+      <header className="topbar dashboard-topbar">
         <div>
-          <Link className="back-link" href="/admin-dashboard">
-            ← Dashboard
-          </Link>
-
-          <p className="eyebrow">SYSTEM CONTROL</p>
-
-          <h1>Yönetim paneli</h1>
-
+          <p className="eyebrow">SİSTEM SAĞLIĞI</p>
+          <h1>Bağlantılar ve durum</h1>
           <p className="subtitle">
-            Veri aktarımı, özellik üretimi ve tahmin
-            işlemleri tek merkezden yönetilir.
+            Canlı üretim sezonu {ACTIVE_SEASON_LABEL}. Operasyonel kontrol paneli ayrıdır.
           </p>
         </div>
-
-        <div className="mode-badge">
-          {ACTIVE_SEASON_LABEL} CANLI MOD
+        <div className="member-actions">
+          <Link className="member-plan-link" href="/admin-dashboard">
+            Kontrol paneline git
+          </Link>
+          <span className="mode-badge">ADMIN</span>
         </div>
       </header>
 
-      <section className="admin-grid">
-        <article className="admin-card admin-card-large">
-          <div className="section-heading">
-            <div>
-              <p className="eyebrow">
-                HIZLI İŞLEM
-              </p>
-
-              <h2>Tüm sistemi çalıştır</h2>
-            </div>
-
-            <span className="system-online">
-              Sistem hazır
-            </span>
-          </div>
-
+      <section className="admin-grid" style={{ padding: "0 24px 32px" }}>
+        <article className="admin-card">
+          <p className="eyebrow">API-FOOTBALL</p>
+          <h2>{apiFootballConfigured ? "Anahtar yüklü" : "Anahtar eksik"}</h2>
           <p className="admin-description">
-            Fikstürü kontrol eder, gerekli
-            özellikleri üretir ve maç tahminlerini
-            günceller.
+            Ultra / season erişimi için ortam değişkeni gerekir. Durum JSON’u admin oturumu ister.
           </p>
-
-          <button
-            className="run-all-button"
-            type="button"
-          >
-            <span>▶</span>
-            Verileri güncelle ve tahminleri oluştur
-          </button>
-
-          <div className="run-note">
-            Demo arayüzünde bu düğme henüz gerçek
-            betiği çalıştırmaz. Sonraki aşamada API
-            rotasına bağlanacaktır.
-          </div>
+          <Link className="member-plan-link" href="/api/football/status">
+            /api/football/status
+          </Link>
         </article>
 
         <article className="admin-card">
-          <p className="eyebrow">AKTİF AYARLAR</p>
-
-          <h2>Veri seçimi</h2>
-
-          <label className="field">
-            <span>Lig</span>
-
-            <select defaultValue="39">
-              <option value="39">
-                Premier League
-              </option>
-            </select>
-          </label>
-
-          <label className="field">
-            <span>Sezon</span>
-
-            <select defaultValue={String(ACTIVE_SEASON_YEAR)}>
-              <option value={String(ACTIVE_SEASON_YEAR)}>
-                {ACTIVE_SEASON_LABEL} — Aktif sezon
-              </option>
-            </select>
-          </label>
-
-          <label className="field">
-            <span>Çalışma modu</span>
-
-            <select defaultValue="live">
-              <option value="live">
-                Canlı üretim modu
-              </option>
-            </select>
-          </label>
+          <p className="eyebrow">VERİTABANI</p>
+          <h2>{databaseConfigured ? "DATABASE_URL tanımlı" : "DATABASE_URL eksik"}</h2>
+          <p className="admin-description">Neon / Postgres bağlantısı tahmin ve üyelik için zorunludur.</p>
+          <Link className="member-plan-link" href="/admin/data-coverage">
+            Veri kapsamı
+          </Link>
         </article>
 
         <article className="admin-card">
-          <p className="eyebrow">BAĞLANTILAR</p>
+          <p className="eyebrow">OPERASYON</p>
+          <h2>Günlük işler</h2>
+          <p className="admin-description">Refresh, snapshot ve bildirim akışları Operasyon ekranından izlenir.</p>
+          <Link className="member-plan-link" href="/operations">
+            Operasyon paneli
+          </Link>
+        </article>
 
-          <h2>Sistem durumu</h2>
-
-          <div className="status-list">
-            <div>
-              <span>
-                <i className="status-dot" />
-                PostgreSQL
-              </span>
-
-              <strong>Bağlı</strong>
-            </div>
-
-            <div>
-              <span>
-                <i className="status-dot" />
-                Prisma
-              </span>
-
-              <strong>Hazır</strong>
-            </div>
-
-            <div>
-              <span>
-                <i
-                  className={
-                    apiFootballConfigured
-                      ? "status-dot"
-                      : "status-dot status-warning"
-                  }
-                />
-                API-Football
-              </span>
-
-              <strong>
-                {apiFootballConfigured
-                  ? "API anahtarı hazır"
-                  : "API anahtarı eksik"}
-              </strong>
-            </div>
-
-            <div>
-              <span>
-                <i className="status-dot" />
-                Tahmin motoru
-              </span>
-
-              <strong>Aktif</strong>
-            </div>
+        <article className="admin-card">
+          <p className="eyebrow">ÜYELİK</p>
+          <h2>Üye ve gelen kutusu</h2>
+          <p className="admin-description">Paket, süre, yükseltme talepleri ve mesajlar.</p>
+          <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
+            <Link className="member-plan-link" href="/admin/members">
+              Üyeler
+            </Link>
+            <Link className="member-plan-link" href="/admin/messages">
+              Gelen kutusu
+            </Link>
           </div>
         </article>
       </section>
-
-      <section className="admin-card process-card">
-        <div className="section-heading">
-          <div>
-            <p className="eyebrow">PIPELINE</p>
-
-            <h2>İşlem aşamaları</h2>
-          </div>
-
-          <button
-            className="secondary-button"
-            type="button"
-          >
-            Logları görüntüle
-          </button>
-        </div>
-
-        <div className="process-list">
-          {processSteps.map((step, index) => (
-            <div
-              className="process-item"
-              key={step.name}
-            >
-              <span className="process-number">
-                {String(index + 1).padStart(
-                  2,
-                  "0",
-                )}
-              </span>
-
-              <div>
-                <strong>{step.name}</strong>
-                <p>{step.description}</p>
-              </div>
-
-              <span
-                className={
-                  step.status === "Kontrol"
-                    ? "process-status process-status-warning"
-                    : "process-status"
-                }
-              >
-                {step.status}
-              </span>
-            </div>
-          ))}
-        </div>
-      </section>
-    </main>
+    </PageShell>
   );
 }

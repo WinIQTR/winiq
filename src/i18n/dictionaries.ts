@@ -673,7 +673,7 @@ entries.push(
   { en: "EVALUATION ERROR", tr: "HESAPLAMA HATASI" },
   { en: "Model audit could not be completed", tr: "Model denetimi tamamlanamadı" },
   { en: "EVALUATION PENDING", tr: "DEĞERLENDİRME BEKLENİYOR" },
-  { en: "Run pnpm run explanations:production to generate exact reasons.", tr: "Kesin nedenleri üretmek için pnpm run explanations:production komutunu çalıştırın." },
+  { en: "Model explanation is unavailable; diagnostic tool or evaluation data is not yet available.", tr: "Model gerekçelendirme açıklaması bulunamadı; teşhis aracı veya model değerlendirmesi henüz hazır değil." },
   { en: "Published predictions are compared with final match results. All figures include only production records. Archived probabilities cannot change when the production model is updated.", tr: "Yayımlanmış tahminler kesin maç sonuçlarıyla karşılaştırılır. Tüm rakamlar yalnız canlı üretim kayıtlarını içerir. Canlı model güncellendiğinde arşivlenmiş olasılıklar değişmez." },
   { en: "HISTORICAL HOLDOUT", tr: "TARİHSEL AYRILMIŞ TEST" },
   { en: "HISTORICAL VALIDATION", tr: "TARİHSEL DOĞRULAMA" },

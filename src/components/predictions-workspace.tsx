@@ -1847,9 +1847,9 @@ export function PredictionsWorkspace({
                                 : "EVALUATION PENDING"}
                             </span>
                             <span>
-                            {locale === "tr"
-                              ? "Kesin nedenleri üretmek için pnpm run explanations:production komutunu çalıştırın."
-                              : "Run pnpm run explanations:production to generate exact reasons."}
+                              {locale === "tr"
+                                ? "Model gerekçelendirme açıklaması bulunamadı; teşhis aracı veya model değerlendirmesi henüz hazır değil."
+                                : "Model explanation is unavailable; diagnostic tool or evaluation data is not yet available."}
                             </span>
                           </>
                         )}
@@ -1864,7 +1864,7 @@ export function PredictionsWorkspace({
                           ? "Tüm pazar sonuçlarını incele"
                           : "Show 27 betting markets and scores"}
                       </span>
-                      <b>{calculatedMarketCount}/27</b>
+                      <b>{calculatedMarketCount}/30</b>
                     </summary>
                     <div className={styles.fullWidthMarketContent}>
                       {publishedPrediction ? (

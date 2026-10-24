@@ -5,6 +5,7 @@ import member from "@/components/member-smart-dashboard.module.css";
 import { requireMember } from "@/lib/auth-session";
 import { loadDashboardPredictionSnapshot } from "@/lib/prediction-dashboard-snapshot";
 import { ACTIVE_SEASON_YEAR, isDateInSeason } from "@/config/season";
+import { buildBetMarketCatalog } from "@/lib/bet-market-catalog";
 import styles from "./special-member.module.css";
 
 const date=(v:Date)=>new Intl.DateTimeFormat("tr-TR",{day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit",timeZone:"Europe/Istanbul"}).format(v);
@@ -17,7 +18,12 @@ export default async function ProfessionalSpecialPage({searchParams}:{searchPara
   const now=new Date(); const end=new Date(now); end.setDate(end.getDate()+(range==="week"?7:1));
   const data=await loadDashboardPredictionSnapshot(20000); const matches=data.filter(p=>isDateInSeason(p.kickoffAt,ACTIVE_SEASON_YEAR)&&p.kickoffAt>=now&&p.kickoffAt<end&&(p.settlementStatus===undefined||p.settlementStatus==="PENDING"));
   const marketMap=new Map<string,string>([["ALL","Tüm bahisler · en yüksek olasılık"]]);
-  for(const p of matches) for(const x of [...(p.popularMarketsSummary??[]),...(p.topPicks??[])]) if(x.market) marketMap.set(x.market,"label" in x?x.label:x.market);
+  // Maçta veri olmasa bile tüm pazar grupları filtrede görünür.
+  for(const p of matches){
+    const catalog=buildBetMarketCatalog({matchId:p.matchId,homeTeam:p.homeTeam,awayTeam:p.awayTeam,homeProbability:p.homeProbability??null,drawProbability:p.drawProbability??null,awayProbability:p.awayProbability??null,expectedHomeGoals:p.expectedHomeGoals??null,expectedAwayGoals:p.expectedAwayGoals??null,confidenceScore:p.confidenceScore,dataQualityScore:p.dataQualityScore??null,knownMarkets:p.popularMarketsSummary??[],locale:"tr"});
+    for(const group of catalog) marketMap.set(`catalog:${group.number}`,`${group.number}. ${group.title}`);
+    for(const x of [...(p.popularMarketsSummary??[]),...(p.topPicks??[])]) if(x.market) marketMap.set(x.market,"label" in x?x.label:x.market);
+  }
   const rows=matches.flatMap(p=>{
     const source=[...(p.popularMarketsSummary??[]),...(p.topPicks??[])].filter(x=>(!('supported' in x)||x.supported!==false)&&typeof x.probability==="number"&&x.market).filter(x=>market==="ALL"||x.market===market);
     const unique=new Map<string,typeof source[number]>();

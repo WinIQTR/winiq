@@ -3,6 +3,7 @@ import path from "node:path";
 import {
   applyCalibration,
   type CalibrationProfile,
+  type CalibrationResult,
 } from "@/modules/calibration-engine";
 import { generateMatchFeatures } from "@/modules/feature-engine";
 import { calculateGoalProbabilities } from "@/modules/goal-probability-engine";
@@ -87,12 +88,20 @@ function getTopPrediction(
 
 async function loadCalibrationProfile(
   profilePath?: string,
-): Promise<CalibrationProfile> {
+): Promise<CalibrationProfile | null> {
   const resolvedPath = profilePath
     ? path.resolve(profilePath)
     : path.resolve("reports", "premier-league-2024-calibration-profile.json");
-  const content = await readFile(resolvedPath, "utf8");
-  return JSON.parse(content) as CalibrationProfile;
+
+  try {
+    const content = await readFile(resolvedPath, "utf8");
+    return JSON.parse(content) as CalibrationProfile;
+  } catch {
+    console.warn(
+      `[calibration] Profil bulunamadı; ham model olasılıkları kullanılacak: ${resolvedPath}`,
+    );
+    return null;
+  }
 }
 
 export async function generateMatchPrediction(options: {
@@ -122,10 +131,21 @@ export async function generateMatchPrediction(options: {
       learnedAttemptPromise,
     ]);
 
-  const calibration = applyCalibration({
-    probabilities: rawResult.probabilities,
-    profile: calibrationProfile,
-  });
+  const calibration = calibrationProfile
+    ? applyCalibration({
+        probabilities: rawResult.probabilities,
+        profile: calibrationProfile,
+      })
+    : {
+        rawProbabilities: rawResult.probabilities,
+        calibratedProbabilities: normalize(rawResult.probabilities),
+        details: {} as CalibrationResult["details"],
+        overallReliabilityScore: 0,
+        profileVersion: "fallback-no-profile",
+        warnings: [
+          "Kalibrasyon profili bulunamadı; ham model olasılıkları kullanıldı.",
+        ],
+      };
   const calibratedPrediction = getTopPrediction(
     calibration.calibratedProbabilities,
   );

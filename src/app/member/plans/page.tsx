@@ -48,6 +48,16 @@ export default async function MembershipPlansPage() {
             : `Üyeliğinizin bitmesine ${remainingDays} gün kaldı.`}
       </section>
 
+      <section className={member.scope}>
+        <div>
+          <small>ÖRNEK SENARYO</small>
+          <h2>Bugünkü bir maçta ne görürsünüz?</h2>
+          <p>
+            Temel: önerilen seçim · Analiz: 1/X/2 + model oranı · Profesyonel: xG, gerekçe ve {MEMBERSHIP_PLAN_MARKET_LIMITS.PROFESSIONAL} pazarın tamamı.
+          </p>
+        </div>
+      </section>
+
       <section className="member-plan-grid">
         {PLANS.map((plan) => {
           const stored = priceMap.get(plan);
@@ -75,6 +85,15 @@ export default async function MembershipPlansPage() {
 
       <section className="member-notice">
         Talep gönderildiğinde yönetici sizinle iletişime geçer. Ödeme alınmadan paket otomatik etkinleştirilmez.
+      </section>
+
+      <section className={member.planChip} id="bildirimler">
+        <small>BİLDİRİMLER</small>
+        <strong>Günün güçlü seçimleri (yakında)</strong>
+        <span style={{ color: "#8ea4b9", fontSize: 12 }}>
+          E-posta / Telegram bildirimleri sonraki sürümde açılacak. Şimdilik Mesajlar üzerinden destek alın.
+        </span>
+        <a href="/member/messages">Mesajlara git →</a>
       </section>
       </div>
     </main>

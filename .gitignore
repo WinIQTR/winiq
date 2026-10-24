@@ -7,5 +7,15 @@ node_modules/
 data/
 logs/
 reports/
+backups/
+notifications/
 *.log
 tsconfig.tsbuildinfo
+
+# Local Netlify folder
+.netlify
+data/operations/netlify-production.env
+
+# Local scratch / archived one-off scripts (not part of app runtime)
+scripts/dev/
+scripts/archive/
