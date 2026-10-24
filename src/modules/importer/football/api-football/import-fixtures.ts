@@ -327,7 +327,9 @@ export async function importFixturesFromApiFootball(
           awayScore,
           statusShort: source.fixture.status.short ?? undefined,
           elapsedMinutes: source.fixture.status.elapsed ?? undefined,
-          referee: source.fixture.referee ?? undefined,
+          ...(source.fixture.referee?.trim()
+            ? { referee: source.fixture.referee.trim() }
+            : {}),
           venueName: source.fixture.venue?.name ?? undefined,
           venueCity: source.fixture.venue?.city ?? undefined,
           halfTimeHomeScore: source.score?.halftime?.home ?? undefined,
@@ -349,7 +351,7 @@ export async function importFixturesFromApiFootball(
           awayScore,
           statusShort: source.fixture.status.short ?? undefined,
           elapsedMinutes: source.fixture.status.elapsed ?? undefined,
-          referee: source.fixture.referee ?? undefined,
+          referee: source.fixture.referee?.trim() || undefined,
           venueName: source.fixture.venue?.name ?? undefined,
           venueCity: source.fixture.venue?.city ?? undefined,
           halfTimeHomeScore: source.score?.halftime?.home ?? undefined,

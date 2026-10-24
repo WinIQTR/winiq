@@ -1,0 +1,366 @@
+.panel {
+  border: 1px solid #1d3a51;
+  border-radius: 18px;
+  background: linear-gradient(180deg, #0a1c2e 0%, #071525 100%);
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 22px;
+  border-bottom: 1px solid #1d3a51;
+}
+
+.headerCopy {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.calendarIcon {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: #12385f;
+  color: #6eb6ff;
+  flex: 0 0 auto;
+}
+
+.calendarIcon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.header h2 {
+  margin: 0;
+  color: #f4f9ff;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.header small {
+  display: block;
+  margin-top: 4px;
+  color: #7f9db5;
+  font-size: 13px;
+}
+
+.countChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 999px;
+  padding: 9px 14px;
+  background: rgba(45, 209, 127, 0.12);
+  border: 1px solid rgba(67, 227, 161, 0.35);
+  color: #43e3a1;
+  font-weight: 800;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.countChip svg {
+  width: 16px;
+  height: 16px;
+}
+
+.list {
+  display: grid;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: minmax(150px, 190px) minmax(420px, 1.15fr) minmax(420px, 1fr);
+  gap: 22px;
+  align-items: center;
+  padding: 18px 22px;
+  border-bottom: 1px solid #173249;
+}
+
+.row:last-child {
+  border-bottom: 0;
+}
+
+.leagueCol {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+
+.leagueHead {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #8eabc2;
+  font-size: 12px;
+  font-weight: 700;
+  min-width: 0;
+}
+
+.leagueHead span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.leagueHead img,
+.teamHead img {
+  object-fit: contain;
+  flex: 0 0 auto;
+}
+
+.leagueCol strong {
+  color: #eaf4fd;
+  font-size: 15px;
+}
+
+.leagueCol small {
+  color: #6f91ab;
+  font-size: 12px;
+  text-transform: capitalize;
+}
+
+.matchup {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 40px minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+}
+
+.vs {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 28px;
+  margin: 0 auto;
+  border-radius: 8px;
+  background: #123553;
+  color: #7eb0d4;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 900;
+}
+
+.team {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+
+.teamHead {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  min-width: 0;
+}
+
+.teamMeta {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+}
+
+.teamMeta b {
+  color: #f2f7fc;
+  font-size: 14px;
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.leader,
+.hot,
+.favorite {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 6px;
+  padding: 2px 6px;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.leader {
+  color: #ffd35d;
+  background: #3c3114;
+  border: 1px solid #6e5715;
+}
+
+.hot {
+  padding: 2px 4px;
+  background: #34201d;
+}
+
+.favorite {
+  color: #76c8ff;
+  background: #0a324c;
+  border: 1px solid #2f91d0;
+}
+
+.form {
+  display: inline-flex;
+  gap: 4px;
+}
+
+.formDot,
+.formEmpty {
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 800;
+}
+
+.formDot[data-result="W"] {
+  background: #1f8f57;
+  color: #e9fff4;
+}
+
+.formDot[data-result="D"] {
+  background: #b87a28;
+  color: #fff6e8;
+}
+
+.formDot[data-result="L"] {
+  background: #b0434f;
+  color: #ffe8eb;
+}
+
+.formEmpty {
+  background: #122536;
+  color: #5f7d94;
+}
+
+.metaCols {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr 1fr;
+  gap: 12px;
+  min-width: 0;
+}
+
+.meta {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  min-width: 0;
+  padding-left: 12px;
+  border-left: 1px solid #1c3a50;
+}
+
+.metaIcon {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  color: #8eb4d2;
+  flex: 0 0 auto;
+}
+
+.metaIcon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.meta small {
+  display: block;
+  color: #7a98b0;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.meta b {
+  display: block;
+  margin-top: 3px;
+  color: #eef5fb;
+  font-size: 12px;
+  line-height: 1.35;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.meta em {
+  display: block;
+  margin-top: 3px;
+  color: #43e3a1;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 700;
+}
+
+.pending {
+  color: #8aa4b8 !important;
+  font-weight: 600 !important;
+  white-space: normal !important;
+}
+
+.logoFallback {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: #12283c;
+  border: 1px solid #1e3b52;
+}
+
+.empty {
+  padding: 36px 22px;
+  color: #7f9db5;
+  text-align: center;
+}
+
+@media (max-width: 1200px) {
+  .row {
+    grid-template-columns: 150px minmax(0, 1fr);
+  }
+
+  .metaCols {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 760px) {
+  .header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .row {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .matchup {
+    grid-template-columns: minmax(0, 1fr) 34px minmax(0, 1fr);
+  }
+
+  .metaCols {
+    grid-template-columns: 1fr;
+  }
+
+  .meta {
+    padding-left: 0;
+    border-left: 0;
+    padding-top: 8px;
+    border-top: 1px solid #173249;
+  }
+}

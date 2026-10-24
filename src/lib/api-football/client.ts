@@ -162,6 +162,7 @@ function getRetryDelay(
 export async function apiFootballRequest<T>(
   endpoint: string,
   parameters: ApiFootballParameters = {},
+  options?: { bypassRateLimit?: boolean },
 ): Promise<ApiFootballResponse<T>> {
   if (!API_FOOTBALL_KEY) {
     throw new ApiFootballError(
@@ -201,7 +202,11 @@ export async function apiFootballRequest<T>(
     attempt <= MAX_RETRY_COUNT;
     attempt += 1
   ) {
-    await waitForRateLimit();
+    if (!options?.bypassRateLimit) {
+      await waitForRateLimit();
+    } else {
+      lastRequestStartedAt = Date.now();
+    }
 
     const response =
       await fetch(

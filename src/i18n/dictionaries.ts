@@ -923,6 +923,17 @@ entries.push(
   { en: "Model confidence score", tr: "Model güven puanı" },
   { en: "Expected goals", tr: "Beklenen gol" },
   { en: "Professional metric", tr: "Profesyonel gösterge" },
+  { en: "This week's matches", tr: "Bu haftanın maçları" },
+  { en: "Previous week", tr: "Önceki hafta" },
+  { en: "Next week", tr: "Gelecek hafta" },
+  { en: "Stadium", tr: "Stadyum" },
+  { en: "Referee", tr: "Hakem" },
+  { en: "Weather", tr: "Hava" },
+  { en: "Assignment not announced yet", tr: "Atama henüz açıklanmadı" },
+  { en: "Forecast updates closer to match day", tr: "Tahmin maç gününe yakın güncellenir" },
+  { en: "No matches found for this week.", tr: "Bu hafta için maç bulunamadı." },
+  { en: "Leader", tr: "Lider" },
+  { en: "people", tr: "kişi" },
 );
 
 const exactCaseLookup = new Map<string, TranslationEntry>();
@@ -1006,6 +1017,7 @@ export function translateUiText(source: string, locale: AppLocale): string {
       .replace(/^Merhaba (.+)\. Yalnız bugünün (?:yayınlanmış|yayımlanmış) seçimleri gösteriliyor\.$/i, "Hello $1. Only today's published selections are shown.")
       .replace(/^Merhaba (.+)$/i, "Hello $1")
       .replace(/^(\d+) karşılaşma$/i, "$1 matches")
+      .replace(/^(\d+) kişi$/i, "$1 people")
       .replace(/^(\d+) pazar$/i, "$1 markets")
       .replace(/^(\d+) cevap bekliyor$/i, "$1 waiting for reply")
       .replace(/^(Temel|Analiz|Profesyonel) üyelik kapsamı$/i, "$1 membership coverage")
