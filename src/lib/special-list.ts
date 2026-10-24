@@ -262,6 +262,59 @@ export function buildSpecialCandidates(
   );
 }
 
+/** Minimum model-% chips: All (null) or ≥N%. */
+export const SPECIAL_PROB_MIN_CHIPS = [50, 60, 70, 80, 90, 100] as const;
+export type SpecialProbMinChip = (typeof SPECIAL_PROB_MIN_CHIPS)[number];
+
+export const SPECIAL_ODDS_BANDS = [
+  { id: "lt120", min: null, max: 1.2 },
+  { id: "120_160", min: 1.2, max: 1.6 },
+  { id: "160_190", min: 1.6, max: 1.9 },
+  { id: "190_250", min: 1.9, max: 2.5 },
+  { id: "250_300", min: 2.5, max: 3.0 },
+  { id: "300p", min: 3.0, max: null },
+] as const;
+
+export type SpecialOddsBandId = (typeof SPECIAL_ODDS_BANDS)[number]["id"];
+
+export function parseSpecialProbMin(value?: string | null): SpecialProbMinChip | null {
+  const n = Number(value);
+  return (SPECIAL_PROB_MIN_CHIPS as readonly number[]).includes(n)
+    ? (n as SpecialProbMinChip)
+    : null;
+}
+
+export function parseSpecialOddsBand(value?: string | null): SpecialOddsBandId | null {
+  return SPECIAL_ODDS_BANDS.some((band) => band.id === value)
+    ? (value as SpecialOddsBandId)
+    : null;
+}
+
+function matchesOddsBand(fairOdds: number, bandId: SpecialOddsBandId): boolean {
+  const band = SPECIAL_ODDS_BANDS.find((item) => item.id === bandId);
+  if (!band || !Number.isFinite(fairOdds) || fairOdds <= 0) return false;
+  if (band.min == null) return fairOdds < (band.max as number);
+  if (band.max == null) return fairOdds >= band.min;
+  return fairOdds >= band.min && fairOdds < band.max;
+}
+
+/** Apply chip filters after candidates are built. */
+export function applySpecialChipFilters(
+  candidates: SpecialListCandidate[],
+  options: {
+    probMin?: SpecialProbMinChip | null;
+    oddsBand?: SpecialOddsBandId | null;
+  },
+): SpecialListCandidate[] {
+  const probMin = options.probMin ?? null;
+  const oddsBand = options.oddsBand ?? null;
+  return candidates.filter((row) => {
+    if (probMin != null && row.probability < probMin) return false;
+    if (oddsBand != null && !matchesOddsBand(row.fairOdds, oddsBand)) return false;
+    return true;
+  });
+}
+
 export function sortSpecialCandidates(
   candidates: SpecialListCandidate[],
   options: { sortDate?: boolean; sortProb?: boolean; sortOdds?: boolean },

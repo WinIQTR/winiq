@@ -7,10 +7,13 @@ import { translateUiText } from "@/i18n/dictionaries";
 import { requireAdmin } from "@/lib/auth-session";
 import { buildMatchFormTip } from "@/lib/member-match-insight";
 import {
+  applySpecialChipFilters,
   buildSpecialCandidates,
   buildSpecialMarketMap,
   filterSpecialMatches,
   loadSpecialListPredictions,
+  parseSpecialOddsBand,
+  parseSpecialProbMin,
   sortSpecialCandidates,
 } from "@/lib/special-list";
 
@@ -28,6 +31,8 @@ export default async function SpecialPage({
     sortOdds?: string;
     minProb?: string;
     maxProb?: string;
+    pMin?: string;
+    odds?: string;
   }>;
 }) {
   await requireAdmin();
@@ -39,14 +44,19 @@ export default async function SpecialPage({
   const sortOdds = q?.sortOdds === "1";
   const minProb = q?.minProb ? Number(q.minProb) : null;
   const maxProb = q?.maxProb ? Number(q.maxProb) : null;
+  const probMin = parseSpecialProbMin(q?.pMin);
+  const oddsBand = parseSpecialOddsBand(q?.odds);
 
   const { predictions, source } = await loadSpecialListPredictions();
   const matches = filterSpecialMatches(predictions, range);
   const marketMap = buildSpecialMarketMap(matches);
 
-  const rows = sortSpecialCandidates(
-    buildSpecialCandidates(matches, market, { minProb, maxProb }),
-    { sortDate, sortProb, sortOdds },
+  const rows = applySpecialChipFilters(
+    sortSpecialCandidates(
+      buildSpecialCandidates(matches, market, { minProb, maxProb }),
+      { sortDate, sortProb, sortOdds },
+    ),
+    { probMin, oddsBand },
   );
 
   const tipTranslate = (sourceText: string) => translateUiText(sourceText, "tr");
@@ -88,6 +98,8 @@ export default async function SpecialPage({
         matchHref={(matchId) => `/predictions?match=${matchId}`}
         labels={labels}
         locale="en"
+        probMin={probMin}
+        oddsBand={oddsBand}
         adminExtras={{
           sortDate,
           sortProb,

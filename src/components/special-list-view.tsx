@@ -3,9 +3,13 @@ import Link from "next/link";
 
 import { MatchFormTip } from "@/components/match-form-tip";
 import {
+  SPECIAL_ODDS_BANDS,
+  SPECIAL_PROB_MIN_CHIPS,
   confidenceLabel,
   type SpecialListCandidate,
   type SpecialListDataSource,
+  type SpecialOddsBandId,
+  type SpecialProbMinChip,
   type SpecialListRange,
 } from "@/lib/special-list";
 
@@ -23,6 +27,9 @@ export type SpecialListViewProps = {
   matchHref: (matchId: number) => string;
   labels: SpecialListLabels;
   locale?: "tr" | "en";
+  /** Chip filters (URL: pMin / odds) */
+  probMin?: SpecialProbMinChip | null;
+  oddsBand?: SpecialOddsBandId | null;
   /** Admin-only extras preserved for filters */
   adminExtras?: {
     sortDate: boolean;
@@ -68,6 +75,16 @@ export type SpecialListLabels = {
   maxProb: string;
   snapshotNote: string;
   liveNote: string;
+  minModelPct: string;
+  oddsRange: string;
+  filterAll: string;
+  probAtLeast: (n: number) => string;
+  oddsLt120: string;
+  odds120160: string;
+  odds160190: string;
+  odds190250: string;
+  odds250300: string;
+  odds300p: string;
 };
 
 function formatKickoff(value: Date, locale: "tr" | "en") {
@@ -157,6 +174,36 @@ function rowKey(item: SpecialListCandidate) {
   return `${item.prediction.matchId}|${item.marketKey}|${item.selection}`;
 }
 
+function oddsBandLabel(id: SpecialOddsBandId, labels: SpecialListLabels) {
+  switch (id) {
+    case "lt120":
+      return labels.oddsLt120;
+    case "120_160":
+      return labels.odds120160;
+    case "160_190":
+      return labels.odds160190;
+    case "190_250":
+      return labels.odds190250;
+    case "250_300":
+      return labels.odds250300;
+    case "300p":
+      return labels.odds300p;
+  }
+}
+
+function buildChipHref(
+  action: string,
+  base: Record<string, string | null | undefined>,
+  patch: Record<string, string | null | undefined>,
+) {
+  const params = new URLSearchParams();
+  for (const [key, value] of Object.entries({ ...base, ...patch })) {
+    if (value != null && value !== "") params.set(key, value);
+  }
+  const text = params.toString();
+  return text ? `${action}?${text}` : action;
+}
+
 export function SpecialListView({
   surface,
   action,
@@ -169,9 +216,28 @@ export function SpecialListView({
   matchHref,
   labels,
   locale = "tr",
+  probMin = null,
+  oddsBand = null,
   adminExtras,
 }: SpecialListViewProps) {
   const sectionTitle = range === "week" ? labels.sectionWeek : labels.sectionToday;
+  const queryBase: Record<string, string | null | undefined> = {
+    range,
+    market,
+    pMin: probMin != null ? String(probMin) : null,
+    odds: oddsBand,
+    sortDate: adminExtras?.sortDate ? "1" : null,
+    sortProb: adminExtras?.sortProb ? "1" : null,
+    sortOdds: adminExtras?.sortOdds ? "1" : null,
+    minProb:
+      adminExtras?.minProb != null && !Number.isNaN(adminExtras.minProb)
+        ? String(adminExtras.minProb)
+        : null,
+    maxProb:
+      adminExtras?.maxProb != null && !Number.isNaN(adminExtras.maxProb)
+        ? String(adminExtras.maxProb)
+        : null,
+  };
 
   return (
     <div className={styles.root} data-surface={surface}>
@@ -211,6 +277,8 @@ export function SpecialListView({
       </section>
 
       <form className={styles.filters} method="get" action={action}>
+        {probMin != null ? <input type="hidden" name="pMin" value={probMin} /> : null}
+        {oddsBand ? <input type="hidden" name="odds" value={oddsBand} /> : null}
         <div className={styles.field}>
           <label htmlFor="sl-range">{labels.matchDate}</label>
           <div className={styles.selectWrap}>
@@ -280,6 +348,57 @@ export function SpecialListView({
           </div>
         ) : null}
       </form>
+
+      <section className={styles.chipPanel} aria-label="Special List filters">
+        <div className={styles.chipRow}>
+          <span className={styles.chipLabel}>{labels.minModelPct}</span>
+          <div className={styles.chips} role="group" aria-label={labels.minModelPct}>
+            <Link
+              className={styles.chip}
+              data-active={probMin == null ? "true" : undefined}
+              href={buildChipHref(action, queryBase, { pMin: null })}
+              scroll={false}
+            >
+              {labels.filterAll}
+            </Link>
+            {SPECIAL_PROB_MIN_CHIPS.map((value) => (
+              <Link
+                key={value}
+                className={styles.chip}
+                data-active={probMin === value ? "true" : undefined}
+                href={buildChipHref(action, queryBase, { pMin: String(value) })}
+                scroll={false}
+              >
+                {labels.probAtLeast(value)}
+              </Link>
+            ))}
+          </div>
+        </div>
+        <div className={styles.chipRow}>
+          <span className={styles.chipLabel}>{labels.oddsRange}</span>
+          <div className={styles.chips} role="group" aria-label={labels.oddsRange}>
+            <Link
+              className={styles.chip}
+              data-active={oddsBand == null ? "true" : undefined}
+              href={buildChipHref(action, queryBase, { odds: null })}
+              scroll={false}
+            >
+              {labels.filterAll}
+            </Link>
+            {SPECIAL_ODDS_BANDS.map((band) => (
+              <Link
+                key={band.id}
+                className={styles.chip}
+                data-active={oddsBand === band.id ? "true" : undefined}
+                href={buildChipHref(action, queryBase, { odds: band.id })}
+                scroll={false}
+              >
+                {oddsBandLabel(band.id, labels)}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {source ? (
         <p className={styles.sourceNote}>
@@ -406,5 +525,15 @@ export function buildSpecialListLabels(_locale: "tr" | "en" = "en"): SpecialList
     maxProb: "Max. %",
     snapshotNote: "Data source: snapshot backup",
     liveNote: "Data source: live cache",
+    minModelPct: "Minimum model %",
+    oddsRange: "Odds range",
+    filterAll: "All",
+    probAtLeast: (n) => `≥${n}%`,
+    oddsLt120: "Under 1.20",
+    odds120160: "1.20–1.60",
+    odds160190: "1.60–1.90",
+    odds190250: "1.90–2.50",
+    odds250300: "2.50–3.00",
+    odds300p: "3.00+",
   };
 }
