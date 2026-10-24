@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "WINIQ · AI Futbol Tahminleri",
+  title: "WINIQ · Futbol Tahminleri",
   description: "WINIQ profesyonel futbol verileri, fikstür ve tahmin merkezi",
 };
 

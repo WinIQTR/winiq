@@ -5,28 +5,30 @@ import { useRouter } from "next/navigation";
 
 import styles from "@/components/member-smart-dashboard.module.css";
 
+export type MemberDateOption = {
+  key: string;
+  href: string;
+  label: string;
+};
+
 export function MemberDateDayPicker({
-  dayKeys,
+  options,
   activeDate,
-  hrefFor,
-  labelFor,
-  isToday,
+  prevHref,
+  nextHref,
 }: {
-  dayKeys: string[];
+  options: MemberDateOption[];
   activeDate: string;
-  hrefFor: (key: string) => string;
-  labelFor: (key: string) => string;
-  isToday: (key: string) => boolean;
+  prevHref: string | null;
+  nextHref: string | null;
 }) {
   const router = useRouter();
-  const index = Math.max(0, dayKeys.indexOf(activeDate));
-  const prev = dayKeys[index - 1];
-  const next = dayKeys[index + 1];
+  const hrefByKey = new Map(options.map((option) => [option.key, option.href]));
 
   return (
     <div className={styles.dateMinimal}>
-      {prev ? (
-        <Link href={hrefFor(prev)} aria-label="Önceki gün">
+      {prevHref ? (
+        <Link href={prevHref} aria-label="Önceki gün">
           ←
         </Link>
       ) : (
@@ -37,18 +39,19 @@ export function MemberDateDayPicker({
         <select
           value={activeDate}
           onChange={(event) => {
-            router.push(hrefFor(event.target.value));
+            const href = hrefByKey.get(event.target.value);
+            if (href) router.push(href);
           }}
         >
-          {dayKeys.map((key) => (
-            <option value={key} key={key}>
-              {isToday(key) ? `Bugün · ${labelFor(key)}` : labelFor(key)}
+          {options.map((option) => (
+            <option value={option.key} key={option.key}>
+              {option.label}
             </option>
           ))}
         </select>
       </label>
-      {next ? (
-        <Link href={hrefFor(next)} aria-label="Sonraki gün">
+      {nextHref ? (
+        <Link href={nextHref} aria-label="Sonraki gün">
           →
         </Link>
       ) : (

@@ -6,8 +6,12 @@ export default function LoginPage() {
     <main className="login-shell">
       <section className="login-card">
         <div className="login-language"><LanguageSwitcher /></div>
-        <div className="login-mark">AI</div>
-        <p className="member-eyebrow">WINIQ</p>
+        <div className="login-mark" data-no-translate>
+          W
+        </div>
+        <p className="member-eyebrow" data-no-translate>
+          WINIQ
+        </p>
         <h1>Üye girişi</h1>
         <p>Günlük futbol tahminlerinize güvenli biçimde ulaşın.</p>
         <LoginForm />

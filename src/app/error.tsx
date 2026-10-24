@@ -19,8 +19,12 @@ export default function ErrorBoundary({
   return (
     <main className="login-shell">
       <section className="login-card" aria-live="assertive">
-        <div className="login-mark">AI</div>
-        <p className="member-eyebrow">WINIQ</p>
+        <div className="login-mark" data-no-translate>
+          W
+        </div>
+        <p className="member-eyebrow" data-no-translate>
+          WINIQ
+        </p>
         <h1>Bir şeyler ters gitti</h1>
         <p>
           Sayfa yüklenirken beklenmedik bir hata oluştu. Sorun devam ederse

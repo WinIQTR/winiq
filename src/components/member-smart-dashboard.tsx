@@ -382,11 +382,25 @@ export function MemberSmartDashboard({
             <span>{visiblePredictions.length} maç</span>
           </header>
           <MemberDateDayPicker
-            dayKeys={dayKeys}
             activeDate={activeDate}
-            hrefFor={homeDateHref}
-            labelFor={(key) => dateLabel(new Date(`${key}T12:00:00`))}
-            isToday={(key) => key === dateKey(new Date())}
+            options={dayKeys.map((key) => ({
+              key,
+              href: homeDateHref(key),
+              label:
+                key === dateKey(new Date())
+                  ? `Bugün · ${dateLabel(new Date(`${key}T12:00:00`))}`
+                  : dateLabel(new Date(`${key}T12:00:00`)),
+            }))}
+            prevHref={
+              dayKeys.indexOf(activeDate) > 0
+                ? homeDateHref(dayKeys[dayKeys.indexOf(activeDate) - 1]!)
+                : null
+            }
+            nextHref={
+              dayKeys.indexOf(activeDate) < dayKeys.length - 1
+                ? homeDateHref(dayKeys[dayKeys.indexOf(activeDate) + 1]!)
+                : null
+            }
           />
         </section>
 
