@@ -305,6 +305,13 @@
   font-weight: 700;
 }
 
+.formTipLine {
+  margin: 0 0 10px;
+  color: #9eb6ce;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
 .signalRow {
   display: flex;
   flex-wrap: wrap;

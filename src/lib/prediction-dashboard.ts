@@ -56,7 +56,7 @@ import {
 } from "@/lib/selection-policy-explanation";
 
 import {
-  buildTeamFormMap,
+  buildTeamFormMaps,
 } from "@/lib/team-recent-form";
 
 import {
@@ -706,8 +706,8 @@ async function calculateDashboardPredictions(): Promise<
     return true;
   });
 
-  const teamFormMap =
-    await buildTeamFormMap(
+  const teamFormMaps =
+    await buildTeamFormMaps(
       activeSeasonYear,
     );
 
@@ -1003,10 +1003,16 @@ const popularPicks =
             .logoUrl,
 
         homeRecentResults:
-          teamFormMap.get(match.homeTeamId) ?? [],
+          teamFormMaps.overall.get(match.homeTeamId) ?? [],
 
         awayRecentResults:
-          teamFormMap.get(match.awayTeamId) ?? [],
+          teamFormMaps.overall.get(match.awayTeamId) ?? [],
+
+        homeVenueResults:
+          teamFormMaps.home.get(match.homeTeamId) ?? [],
+
+        awayVenueResults:
+          teamFormMaps.away.get(match.awayTeamId) ?? [],
 
         popularMarketsSummary,
 

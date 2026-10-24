@@ -2,13 +2,18 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { BetMarketCatalogPanel } from "@/components/bet-market-catalog-panel";
+import { MatchFormTip } from "@/components/match-form-tip";
 import { MemberPortalHeader } from "@/components/member-smart-dashboard";
 import member from "@/components/member-smart-dashboard.module.css";
+import { translateUiText } from "@/i18n/dictionaries";
+import { ACTIVE_SEASON_YEAR } from "@/config/season";
 import { BET_MARKET_COUNT, buildBetMarketCatalog } from "@/lib/bet-market-catalog";
 import { requireMember } from "@/lib/auth-session";
+import { buildMatchFormTip } from "@/lib/member-match-insight";
 import { MEMBERSHIP_PLAN_LABELS, MEMBERSHIP_PLAN_MARKET_LIMITS } from "@/lib/membership-access";
 import { loadDashboardPredictionSnapshot } from "@/lib/prediction-dashboard-snapshot";
 import { getPredictionLabel } from "@/lib/prediction-dashboard-shared";
+import { prisma } from "@/lib/prisma";
 import styles from "./member-match.module.css";
 
 export const dynamic = "force-dynamic";
@@ -52,6 +57,57 @@ export default async function MemberMatchDetailPage({
     )
     .sort((a, b) => b.score - a.score)
     .slice(0, 3);
+
+  const formTip = buildMatchFormTip(
+    {
+      homeTeam: prediction.homeTeam,
+      awayTeam: prediction.awayTeam,
+      homeRecentResults: prediction.homeRecentResults,
+      awayRecentResults: prediction.awayRecentResults,
+      homeVenueResults: prediction.homeVenueResults,
+      awayVenueResults: prediction.awayVenueResults,
+    },
+    (source) => translateUiText(source, "tr"),
+  );
+
+  const h2h =
+    prediction.homeTeamId && prediction.awayTeamId
+      ? await prisma.match.findMany({
+          where: {
+            status: "FINISHED",
+            homeScore: { not: null },
+            OR: [
+              { homeTeamId: prediction.homeTeamId, awayTeamId: prediction.awayTeamId },
+              { homeTeamId: prediction.awayTeamId, awayTeamId: prediction.homeTeamId },
+            ],
+          },
+          orderBy: { kickoffAt: "desc" },
+          take: 5,
+          select: {
+            kickoffAt: true,
+            homeScore: true,
+            awayScore: true,
+            homeTeam: { select: { name: true } },
+            awayTeam: { select: { name: true } },
+          },
+        })
+      : [];
+
+  const standingRows =
+    prediction.leagueApiId && prediction.homeTeamId && prediction.awayTeamId
+      ? await prisma.leagueStanding.findMany({
+          where: {
+            season: {
+              year: ACTIVE_SEASON_YEAR,
+              league: { apiId: prediction.leagueApiId },
+            },
+            teamId: { in: [prediction.homeTeamId, prediction.awayTeamId] },
+          },
+          include: { team: { select: { id: true, name: true } } },
+          orderBy: { rank: "asc" },
+          take: 4,
+        })
+      : [];
 
   return (
     <main className={`${member.shell} member-plan-${user.plan.toLowerCase()}`}>
@@ -109,6 +165,51 @@ export default async function MemberMatchDetailPage({
             </article>
           ) : null}
         </section>
+
+        {formTip ? (
+          <div className={styles.formTipWrap}>
+            <MatchFormTip tip={formTip} />
+          </div>
+        ) : null}
+
+        {h2h.length ? (
+          <section className={styles.h2h}>
+            <h2>Son karşılaşmalar (H2H)</h2>
+            <ul>
+              {h2h.map((match, index) => (
+                <li key={`${match.kickoffAt.toISOString()}-${index}`}>
+                  <span>
+                    {new Intl.DateTimeFormat("tr-TR", {
+                      timeZone: "Europe/Istanbul",
+                      day: "2-digit",
+                      month: "short",
+                      year: "numeric",
+                    }).format(match.kickoffAt)}
+                  </span>
+                  <strong>
+                    {match.homeTeam.name} {match.homeScore}–{match.awayScore} {match.awayTeam.name}
+                  </strong>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ) : null}
+
+        {standingRows.length ? (
+          <section className={styles.h2h}>
+            <h2>Puan durumu (API)</h2>
+            <ul>
+              {standingRows.map((row) => (
+                <li key={row.id}>
+                  <span>#{row.rank}</span>
+                  <strong>
+                    {row.team.name} · {row.points} puan · {row.played} maç
+                  </strong>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ) : null}
 
         <section className={member.scope}>
           <div>

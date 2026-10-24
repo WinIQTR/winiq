@@ -618,9 +618,23 @@ entries.push(
   { en: "{team} won their last {n} matches.", tr: "{team}, son {n} maçını kazandı." },
   { en: "{team} lost their last {n} matches.", tr: "{team}, son {n} maçını kaybetti." },
   { en: "{team} drew their last {n} matches.", tr: "{team}, son {n} maçını berabere bitirdi." },
+  { en: "{team} won their last {n} home matches.", tr: "{team}, son {n} iç saha maçını kazandı." },
+  { en: "{team} lost their last {n} home matches.", tr: "{team}, son {n} iç saha maçını kaybetti." },
+  { en: "{team} drew their last {n} home matches.", tr: "{team}, son {n} iç saha maçını berabere bitirdi." },
+  { en: "{team} won their last {n} away matches.", tr: "{team}, son {n} deplasman maçını kazandı." },
+  { en: "{team} lost their last {n} away matches.", tr: "{team}, son {n} deplasman maçını kaybetti." },
+  { en: "{team} drew their last {n} away matches.", tr: "{team}, son {n} deplasman maçını berabere bitirdi." },
   {
     en: "{team} are unbeaten in their last {n} matches.",
     tr: "{team}, son {n} maçında yenilmedi.",
+  },
+  {
+    en: "{team} are unbeaten in their last {n} home matches.",
+    tr: "{team}, son {n} iç saha maçında yenilmedi.",
+  },
+  {
+    en: "{team} are unbeaten in their last {n} away matches.",
+    tr: "{team}, son {n} deplasman maçında yenilmedi.",
   },
   {
     en: "{team} won {wins} of their last {n} matches.",
@@ -629,6 +643,10 @@ entries.push(
   {
     en: "{team} lost {losses} of their last {n} matches.",
     tr: "{team}, son {n} maçının {losses}'ünü kaybetti.",
+  },
+  {
+    en: "{team} won {wins} of their last {n} home-period matches.",
+    tr: "{team}, son {n} iç saha dönemi maçının {wins}'ünü kazandı.",
   },
   {
     en: "{team} lost {losses} of their last {n} away-period matches.",

@@ -255,6 +255,9 @@ export type SeasonWhereInput = {
   teamSeasons?: Prisma.TeamSeasonListRelationFilter
   dataQualitySnapshots?: Prisma.DataQualitySnapshotListRelationFilter
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceListRelationFilter
+  leagueStandings?: Prisma.LeagueStandingListRelationFilter
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticListRelationFilter
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryListRelationFilter
 }
 
 export type SeasonOrderByWithRelationInput = {
@@ -273,6 +276,9 @@ export type SeasonOrderByWithRelationInput = {
   teamSeasons?: Prisma.TeamSeasonOrderByRelationAggregateInput
   dataQualitySnapshots?: Prisma.DataQualitySnapshotOrderByRelationAggregateInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceOrderByRelationAggregateInput
+  leagueStandings?: Prisma.LeagueStandingOrderByRelationAggregateInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticOrderByRelationAggregateInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryOrderByRelationAggregateInput
 }
 
 export type SeasonWhereUniqueInput = Prisma.AtLeast<{
@@ -295,6 +301,9 @@ export type SeasonWhereUniqueInput = Prisma.AtLeast<{
   teamSeasons?: Prisma.TeamSeasonListRelationFilter
   dataQualitySnapshots?: Prisma.DataQualitySnapshotListRelationFilter
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceListRelationFilter
+  leagueStandings?: Prisma.LeagueStandingListRelationFilter
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticListRelationFilter
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryListRelationFilter
 }, "id" | "leagueId_year">
 
 export type SeasonOrderByWithAggregationInput = {
@@ -341,6 +350,9 @@ export type SeasonCreateInput = {
   teamSeasons?: Prisma.TeamSeasonCreateNestedManyWithoutSeasonInput
   dataQualitySnapshots?: Prisma.DataQualitySnapshotCreateNestedManyWithoutSeasonInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceCreateNestedManyWithoutSeasonInput
+  leagueStandings?: Prisma.LeagueStandingCreateNestedManyWithoutSeasonInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticCreateNestedManyWithoutSeasonInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryCreateNestedManyWithoutSeasonInput
 }
 
 export type SeasonUncheckedCreateInput = {
@@ -358,6 +370,9 @@ export type SeasonUncheckedCreateInput = {
   teamSeasons?: Prisma.TeamSeasonUncheckedCreateNestedManyWithoutSeasonInput
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUncheckedCreateNestedManyWithoutSeasonInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUncheckedCreateNestedManyWithoutSeasonInput
+  leagueStandings?: Prisma.LeagueStandingUncheckedCreateNestedManyWithoutSeasonInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUncheckedCreateNestedManyWithoutSeasonInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUncheckedCreateNestedManyWithoutSeasonInput
 }
 
 export type SeasonUpdateInput = {
@@ -374,6 +389,9 @@ export type SeasonUpdateInput = {
   teamSeasons?: Prisma.TeamSeasonUpdateManyWithoutSeasonNestedInput
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUpdateManyWithoutSeasonNestedInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUpdateManyWithoutSeasonNestedInput
+  leagueStandings?: Prisma.LeagueStandingUpdateManyWithoutSeasonNestedInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUpdateManyWithoutSeasonNestedInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUpdateManyWithoutSeasonNestedInput
 }
 
 export type SeasonUncheckedUpdateInput = {
@@ -391,6 +409,9 @@ export type SeasonUncheckedUpdateInput = {
   teamSeasons?: Prisma.TeamSeasonUncheckedUpdateManyWithoutSeasonNestedInput
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUncheckedUpdateManyWithoutSeasonNestedInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUncheckedUpdateManyWithoutSeasonNestedInput
+  leagueStandings?: Prisma.LeagueStandingUncheckedUpdateManyWithoutSeasonNestedInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUncheckedUpdateManyWithoutSeasonNestedInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUncheckedUpdateManyWithoutSeasonNestedInput
 }
 
 export type SeasonCreateManyInput = {
@@ -615,6 +636,48 @@ export type SeasonUpdateOneRequiredWithoutDataQualitySnapshotsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.SeasonUpdateToOneWithWhereWithoutDataQualitySnapshotsInput, Prisma.SeasonUpdateWithoutDataQualitySnapshotsInput>, Prisma.SeasonUncheckedUpdateWithoutDataQualitySnapshotsInput>
 }
 
+export type SeasonCreateNestedOneWithoutLeagueStandingsInput = {
+  create?: Prisma.XOR<Prisma.SeasonCreateWithoutLeagueStandingsInput, Prisma.SeasonUncheckedCreateWithoutLeagueStandingsInput>
+  connectOrCreate?: Prisma.SeasonCreateOrConnectWithoutLeagueStandingsInput
+  connect?: Prisma.SeasonWhereUniqueInput
+}
+
+export type SeasonUpdateOneRequiredWithoutLeagueStandingsNestedInput = {
+  create?: Prisma.XOR<Prisma.SeasonCreateWithoutLeagueStandingsInput, Prisma.SeasonUncheckedCreateWithoutLeagueStandingsInput>
+  connectOrCreate?: Prisma.SeasonCreateOrConnectWithoutLeagueStandingsInput
+  upsert?: Prisma.SeasonUpsertWithoutLeagueStandingsInput
+  connect?: Prisma.SeasonWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SeasonUpdateToOneWithWhereWithoutLeagueStandingsInput, Prisma.SeasonUpdateWithoutLeagueStandingsInput>, Prisma.SeasonUncheckedUpdateWithoutLeagueStandingsInput>
+}
+
+export type SeasonCreateNestedOneWithoutTeamSeasonApiStatisticsInput = {
+  create?: Prisma.XOR<Prisma.SeasonCreateWithoutTeamSeasonApiStatisticsInput, Prisma.SeasonUncheckedCreateWithoutTeamSeasonApiStatisticsInput>
+  connectOrCreate?: Prisma.SeasonCreateOrConnectWithoutTeamSeasonApiStatisticsInput
+  connect?: Prisma.SeasonWhereUniqueInput
+}
+
+export type SeasonUpdateOneRequiredWithoutTeamSeasonApiStatisticsNestedInput = {
+  create?: Prisma.XOR<Prisma.SeasonCreateWithoutTeamSeasonApiStatisticsInput, Prisma.SeasonUncheckedCreateWithoutTeamSeasonApiStatisticsInput>
+  connectOrCreate?: Prisma.SeasonCreateOrConnectWithoutTeamSeasonApiStatisticsInput
+  upsert?: Prisma.SeasonUpsertWithoutTeamSeasonApiStatisticsInput
+  connect?: Prisma.SeasonWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SeasonUpdateToOneWithWhereWithoutTeamSeasonApiStatisticsInput, Prisma.SeasonUpdateWithoutTeamSeasonApiStatisticsInput>, Prisma.SeasonUncheckedUpdateWithoutTeamSeasonApiStatisticsInput>
+}
+
+export type SeasonCreateNestedOneWithoutPlayerLeaderboardEntriesInput = {
+  create?: Prisma.XOR<Prisma.SeasonCreateWithoutPlayerLeaderboardEntriesInput, Prisma.SeasonUncheckedCreateWithoutPlayerLeaderboardEntriesInput>
+  connectOrCreate?: Prisma.SeasonCreateOrConnectWithoutPlayerLeaderboardEntriesInput
+  connect?: Prisma.SeasonWhereUniqueInput
+}
+
+export type SeasonUpdateOneRequiredWithoutPlayerLeaderboardEntriesNestedInput = {
+  create?: Prisma.XOR<Prisma.SeasonCreateWithoutPlayerLeaderboardEntriesInput, Prisma.SeasonUncheckedCreateWithoutPlayerLeaderboardEntriesInput>
+  connectOrCreate?: Prisma.SeasonCreateOrConnectWithoutPlayerLeaderboardEntriesInput
+  upsert?: Prisma.SeasonUpsertWithoutPlayerLeaderboardEntriesInput
+  connect?: Prisma.SeasonWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SeasonUpdateToOneWithWhereWithoutPlayerLeaderboardEntriesInput, Prisma.SeasonUpdateWithoutPlayerLeaderboardEntriesInput>, Prisma.SeasonUncheckedUpdateWithoutPlayerLeaderboardEntriesInput>
+}
+
 export type SeasonCreateWithoutLeagueInput = {
   year: number
   startDate?: Date | string | null
@@ -628,6 +691,9 @@ export type SeasonCreateWithoutLeagueInput = {
   teamSeasons?: Prisma.TeamSeasonCreateNestedManyWithoutSeasonInput
   dataQualitySnapshots?: Prisma.DataQualitySnapshotCreateNestedManyWithoutSeasonInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceCreateNestedManyWithoutSeasonInput
+  leagueStandings?: Prisma.LeagueStandingCreateNestedManyWithoutSeasonInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticCreateNestedManyWithoutSeasonInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryCreateNestedManyWithoutSeasonInput
 }
 
 export type SeasonUncheckedCreateWithoutLeagueInput = {
@@ -644,6 +710,9 @@ export type SeasonUncheckedCreateWithoutLeagueInput = {
   teamSeasons?: Prisma.TeamSeasonUncheckedCreateNestedManyWithoutSeasonInput
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUncheckedCreateNestedManyWithoutSeasonInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUncheckedCreateNestedManyWithoutSeasonInput
+  leagueStandings?: Prisma.LeagueStandingUncheckedCreateNestedManyWithoutSeasonInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUncheckedCreateNestedManyWithoutSeasonInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUncheckedCreateNestedManyWithoutSeasonInput
 }
 
 export type SeasonCreateOrConnectWithoutLeagueInput = {
@@ -699,6 +768,9 @@ export type SeasonCreateWithoutPlayerMatchPerformancesInput = {
   playerImpactScores?: Prisma.PlayerImpactScoreCreateNestedManyWithoutSeasonInput
   teamSeasons?: Prisma.TeamSeasonCreateNestedManyWithoutSeasonInput
   dataQualitySnapshots?: Prisma.DataQualitySnapshotCreateNestedManyWithoutSeasonInput
+  leagueStandings?: Prisma.LeagueStandingCreateNestedManyWithoutSeasonInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticCreateNestedManyWithoutSeasonInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryCreateNestedManyWithoutSeasonInput
 }
 
 export type SeasonUncheckedCreateWithoutPlayerMatchPerformancesInput = {
@@ -715,6 +787,9 @@ export type SeasonUncheckedCreateWithoutPlayerMatchPerformancesInput = {
   playerImpactScores?: Prisma.PlayerImpactScoreUncheckedCreateNestedManyWithoutSeasonInput
   teamSeasons?: Prisma.TeamSeasonUncheckedCreateNestedManyWithoutSeasonInput
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUncheckedCreateNestedManyWithoutSeasonInput
+  leagueStandings?: Prisma.LeagueStandingUncheckedCreateNestedManyWithoutSeasonInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUncheckedCreateNestedManyWithoutSeasonInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUncheckedCreateNestedManyWithoutSeasonInput
 }
 
 export type SeasonCreateOrConnectWithoutPlayerMatchPerformancesInput = {
@@ -746,6 +821,9 @@ export type SeasonUpdateWithoutPlayerMatchPerformancesInput = {
   playerImpactScores?: Prisma.PlayerImpactScoreUpdateManyWithoutSeasonNestedInput
   teamSeasons?: Prisma.TeamSeasonUpdateManyWithoutSeasonNestedInput
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUpdateManyWithoutSeasonNestedInput
+  leagueStandings?: Prisma.LeagueStandingUpdateManyWithoutSeasonNestedInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUpdateManyWithoutSeasonNestedInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUpdateManyWithoutSeasonNestedInput
 }
 
 export type SeasonUncheckedUpdateWithoutPlayerMatchPerformancesInput = {
@@ -762,6 +840,9 @@ export type SeasonUncheckedUpdateWithoutPlayerMatchPerformancesInput = {
   playerImpactScores?: Prisma.PlayerImpactScoreUncheckedUpdateManyWithoutSeasonNestedInput
   teamSeasons?: Prisma.TeamSeasonUncheckedUpdateManyWithoutSeasonNestedInput
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUncheckedUpdateManyWithoutSeasonNestedInput
+  leagueStandings?: Prisma.LeagueStandingUncheckedUpdateManyWithoutSeasonNestedInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUncheckedUpdateManyWithoutSeasonNestedInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUncheckedUpdateManyWithoutSeasonNestedInput
 }
 
 export type SeasonCreateWithoutMatchesInput = {
@@ -777,6 +858,9 @@ export type SeasonCreateWithoutMatchesInput = {
   teamSeasons?: Prisma.TeamSeasonCreateNestedManyWithoutSeasonInput
   dataQualitySnapshots?: Prisma.DataQualitySnapshotCreateNestedManyWithoutSeasonInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceCreateNestedManyWithoutSeasonInput
+  leagueStandings?: Prisma.LeagueStandingCreateNestedManyWithoutSeasonInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticCreateNestedManyWithoutSeasonInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryCreateNestedManyWithoutSeasonInput
 }
 
 export type SeasonUncheckedCreateWithoutMatchesInput = {
@@ -793,6 +877,9 @@ export type SeasonUncheckedCreateWithoutMatchesInput = {
   teamSeasons?: Prisma.TeamSeasonUncheckedCreateNestedManyWithoutSeasonInput
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUncheckedCreateNestedManyWithoutSeasonInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUncheckedCreateNestedManyWithoutSeasonInput
+  leagueStandings?: Prisma.LeagueStandingUncheckedCreateNestedManyWithoutSeasonInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUncheckedCreateNestedManyWithoutSeasonInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUncheckedCreateNestedManyWithoutSeasonInput
 }
 
 export type SeasonCreateOrConnectWithoutMatchesInput = {
@@ -824,6 +911,9 @@ export type SeasonUpdateWithoutMatchesInput = {
   teamSeasons?: Prisma.TeamSeasonUpdateManyWithoutSeasonNestedInput
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUpdateManyWithoutSeasonNestedInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUpdateManyWithoutSeasonNestedInput
+  leagueStandings?: Prisma.LeagueStandingUpdateManyWithoutSeasonNestedInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUpdateManyWithoutSeasonNestedInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUpdateManyWithoutSeasonNestedInput
 }
 
 export type SeasonUncheckedUpdateWithoutMatchesInput = {
@@ -840,6 +930,9 @@ export type SeasonUncheckedUpdateWithoutMatchesInput = {
   teamSeasons?: Prisma.TeamSeasonUncheckedUpdateManyWithoutSeasonNestedInput
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUncheckedUpdateManyWithoutSeasonNestedInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUncheckedUpdateManyWithoutSeasonNestedInput
+  leagueStandings?: Prisma.LeagueStandingUncheckedUpdateManyWithoutSeasonNestedInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUncheckedUpdateManyWithoutSeasonNestedInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUncheckedUpdateManyWithoutSeasonNestedInput
 }
 
 export type SeasonCreateWithoutPlayerSeasonStatisticsInput = {
@@ -855,6 +948,9 @@ export type SeasonCreateWithoutPlayerSeasonStatisticsInput = {
   teamSeasons?: Prisma.TeamSeasonCreateNestedManyWithoutSeasonInput
   dataQualitySnapshots?: Prisma.DataQualitySnapshotCreateNestedManyWithoutSeasonInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceCreateNestedManyWithoutSeasonInput
+  leagueStandings?: Prisma.LeagueStandingCreateNestedManyWithoutSeasonInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticCreateNestedManyWithoutSeasonInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryCreateNestedManyWithoutSeasonInput
 }
 
 export type SeasonUncheckedCreateWithoutPlayerSeasonStatisticsInput = {
@@ -871,6 +967,9 @@ export type SeasonUncheckedCreateWithoutPlayerSeasonStatisticsInput = {
   teamSeasons?: Prisma.TeamSeasonUncheckedCreateNestedManyWithoutSeasonInput
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUncheckedCreateNestedManyWithoutSeasonInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUncheckedCreateNestedManyWithoutSeasonInput
+  leagueStandings?: Prisma.LeagueStandingUncheckedCreateNestedManyWithoutSeasonInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUncheckedCreateNestedManyWithoutSeasonInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUncheckedCreateNestedManyWithoutSeasonInput
 }
 
 export type SeasonCreateOrConnectWithoutPlayerSeasonStatisticsInput = {
@@ -902,6 +1001,9 @@ export type SeasonUpdateWithoutPlayerSeasonStatisticsInput = {
   teamSeasons?: Prisma.TeamSeasonUpdateManyWithoutSeasonNestedInput
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUpdateManyWithoutSeasonNestedInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUpdateManyWithoutSeasonNestedInput
+  leagueStandings?: Prisma.LeagueStandingUpdateManyWithoutSeasonNestedInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUpdateManyWithoutSeasonNestedInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUpdateManyWithoutSeasonNestedInput
 }
 
 export type SeasonUncheckedUpdateWithoutPlayerSeasonStatisticsInput = {
@@ -918,6 +1020,9 @@ export type SeasonUncheckedUpdateWithoutPlayerSeasonStatisticsInput = {
   teamSeasons?: Prisma.TeamSeasonUncheckedUpdateManyWithoutSeasonNestedInput
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUncheckedUpdateManyWithoutSeasonNestedInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUncheckedUpdateManyWithoutSeasonNestedInput
+  leagueStandings?: Prisma.LeagueStandingUncheckedUpdateManyWithoutSeasonNestedInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUncheckedUpdateManyWithoutSeasonNestedInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUncheckedUpdateManyWithoutSeasonNestedInput
 }
 
 export type SeasonCreateWithoutPlayerImpactScoresInput = {
@@ -933,6 +1038,9 @@ export type SeasonCreateWithoutPlayerImpactScoresInput = {
   teamSeasons?: Prisma.TeamSeasonCreateNestedManyWithoutSeasonInput
   dataQualitySnapshots?: Prisma.DataQualitySnapshotCreateNestedManyWithoutSeasonInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceCreateNestedManyWithoutSeasonInput
+  leagueStandings?: Prisma.LeagueStandingCreateNestedManyWithoutSeasonInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticCreateNestedManyWithoutSeasonInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryCreateNestedManyWithoutSeasonInput
 }
 
 export type SeasonUncheckedCreateWithoutPlayerImpactScoresInput = {
@@ -949,6 +1057,9 @@ export type SeasonUncheckedCreateWithoutPlayerImpactScoresInput = {
   teamSeasons?: Prisma.TeamSeasonUncheckedCreateNestedManyWithoutSeasonInput
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUncheckedCreateNestedManyWithoutSeasonInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUncheckedCreateNestedManyWithoutSeasonInput
+  leagueStandings?: Prisma.LeagueStandingUncheckedCreateNestedManyWithoutSeasonInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUncheckedCreateNestedManyWithoutSeasonInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUncheckedCreateNestedManyWithoutSeasonInput
 }
 
 export type SeasonCreateOrConnectWithoutPlayerImpactScoresInput = {
@@ -980,6 +1091,9 @@ export type SeasonUpdateWithoutPlayerImpactScoresInput = {
   teamSeasons?: Prisma.TeamSeasonUpdateManyWithoutSeasonNestedInput
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUpdateManyWithoutSeasonNestedInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUpdateManyWithoutSeasonNestedInput
+  leagueStandings?: Prisma.LeagueStandingUpdateManyWithoutSeasonNestedInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUpdateManyWithoutSeasonNestedInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUpdateManyWithoutSeasonNestedInput
 }
 
 export type SeasonUncheckedUpdateWithoutPlayerImpactScoresInput = {
@@ -996,6 +1110,9 @@ export type SeasonUncheckedUpdateWithoutPlayerImpactScoresInput = {
   teamSeasons?: Prisma.TeamSeasonUncheckedUpdateManyWithoutSeasonNestedInput
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUncheckedUpdateManyWithoutSeasonNestedInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUncheckedUpdateManyWithoutSeasonNestedInput
+  leagueStandings?: Prisma.LeagueStandingUncheckedUpdateManyWithoutSeasonNestedInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUncheckedUpdateManyWithoutSeasonNestedInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUncheckedUpdateManyWithoutSeasonNestedInput
 }
 
 export type SeasonCreateWithoutTeamSeasonsInput = {
@@ -1011,6 +1128,9 @@ export type SeasonCreateWithoutTeamSeasonsInput = {
   playerImpactScores?: Prisma.PlayerImpactScoreCreateNestedManyWithoutSeasonInput
   dataQualitySnapshots?: Prisma.DataQualitySnapshotCreateNestedManyWithoutSeasonInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceCreateNestedManyWithoutSeasonInput
+  leagueStandings?: Prisma.LeagueStandingCreateNestedManyWithoutSeasonInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticCreateNestedManyWithoutSeasonInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryCreateNestedManyWithoutSeasonInput
 }
 
 export type SeasonUncheckedCreateWithoutTeamSeasonsInput = {
@@ -1027,6 +1147,9 @@ export type SeasonUncheckedCreateWithoutTeamSeasonsInput = {
   playerImpactScores?: Prisma.PlayerImpactScoreUncheckedCreateNestedManyWithoutSeasonInput
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUncheckedCreateNestedManyWithoutSeasonInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUncheckedCreateNestedManyWithoutSeasonInput
+  leagueStandings?: Prisma.LeagueStandingUncheckedCreateNestedManyWithoutSeasonInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUncheckedCreateNestedManyWithoutSeasonInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUncheckedCreateNestedManyWithoutSeasonInput
 }
 
 export type SeasonCreateOrConnectWithoutTeamSeasonsInput = {
@@ -1058,6 +1181,9 @@ export type SeasonUpdateWithoutTeamSeasonsInput = {
   playerImpactScores?: Prisma.PlayerImpactScoreUpdateManyWithoutSeasonNestedInput
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUpdateManyWithoutSeasonNestedInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUpdateManyWithoutSeasonNestedInput
+  leagueStandings?: Prisma.LeagueStandingUpdateManyWithoutSeasonNestedInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUpdateManyWithoutSeasonNestedInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUpdateManyWithoutSeasonNestedInput
 }
 
 export type SeasonUncheckedUpdateWithoutTeamSeasonsInput = {
@@ -1074,6 +1200,9 @@ export type SeasonUncheckedUpdateWithoutTeamSeasonsInput = {
   playerImpactScores?: Prisma.PlayerImpactScoreUncheckedUpdateManyWithoutSeasonNestedInput
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUncheckedUpdateManyWithoutSeasonNestedInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUncheckedUpdateManyWithoutSeasonNestedInput
+  leagueStandings?: Prisma.LeagueStandingUncheckedUpdateManyWithoutSeasonNestedInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUncheckedUpdateManyWithoutSeasonNestedInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUncheckedUpdateManyWithoutSeasonNestedInput
 }
 
 export type SeasonCreateWithoutDataQualitySnapshotsInput = {
@@ -1089,6 +1218,9 @@ export type SeasonCreateWithoutDataQualitySnapshotsInput = {
   playerImpactScores?: Prisma.PlayerImpactScoreCreateNestedManyWithoutSeasonInput
   teamSeasons?: Prisma.TeamSeasonCreateNestedManyWithoutSeasonInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceCreateNestedManyWithoutSeasonInput
+  leagueStandings?: Prisma.LeagueStandingCreateNestedManyWithoutSeasonInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticCreateNestedManyWithoutSeasonInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryCreateNestedManyWithoutSeasonInput
 }
 
 export type SeasonUncheckedCreateWithoutDataQualitySnapshotsInput = {
@@ -1105,6 +1237,9 @@ export type SeasonUncheckedCreateWithoutDataQualitySnapshotsInput = {
   playerImpactScores?: Prisma.PlayerImpactScoreUncheckedCreateNestedManyWithoutSeasonInput
   teamSeasons?: Prisma.TeamSeasonUncheckedCreateNestedManyWithoutSeasonInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUncheckedCreateNestedManyWithoutSeasonInput
+  leagueStandings?: Prisma.LeagueStandingUncheckedCreateNestedManyWithoutSeasonInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUncheckedCreateNestedManyWithoutSeasonInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUncheckedCreateNestedManyWithoutSeasonInput
 }
 
 export type SeasonCreateOrConnectWithoutDataQualitySnapshotsInput = {
@@ -1136,6 +1271,9 @@ export type SeasonUpdateWithoutDataQualitySnapshotsInput = {
   playerImpactScores?: Prisma.PlayerImpactScoreUpdateManyWithoutSeasonNestedInput
   teamSeasons?: Prisma.TeamSeasonUpdateManyWithoutSeasonNestedInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUpdateManyWithoutSeasonNestedInput
+  leagueStandings?: Prisma.LeagueStandingUpdateManyWithoutSeasonNestedInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUpdateManyWithoutSeasonNestedInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUpdateManyWithoutSeasonNestedInput
 }
 
 export type SeasonUncheckedUpdateWithoutDataQualitySnapshotsInput = {
@@ -1152,6 +1290,279 @@ export type SeasonUncheckedUpdateWithoutDataQualitySnapshotsInput = {
   playerImpactScores?: Prisma.PlayerImpactScoreUncheckedUpdateManyWithoutSeasonNestedInput
   teamSeasons?: Prisma.TeamSeasonUncheckedUpdateManyWithoutSeasonNestedInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUncheckedUpdateManyWithoutSeasonNestedInput
+  leagueStandings?: Prisma.LeagueStandingUncheckedUpdateManyWithoutSeasonNestedInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUncheckedUpdateManyWithoutSeasonNestedInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUncheckedUpdateManyWithoutSeasonNestedInput
+}
+
+export type SeasonCreateWithoutLeagueStandingsInput = {
+  year: number
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  isCurrent?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  league: Prisma.LeagueCreateNestedOneWithoutSeasonsInput
+  matches?: Prisma.MatchCreateNestedManyWithoutSeasonInput
+  playerSeasonStatistics?: Prisma.PlayerSeasonStatisticCreateNestedManyWithoutSeasonInput
+  playerImpactScores?: Prisma.PlayerImpactScoreCreateNestedManyWithoutSeasonInput
+  teamSeasons?: Prisma.TeamSeasonCreateNestedManyWithoutSeasonInput
+  dataQualitySnapshots?: Prisma.DataQualitySnapshotCreateNestedManyWithoutSeasonInput
+  playerMatchPerformances?: Prisma.PlayerMatchPerformanceCreateNestedManyWithoutSeasonInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticCreateNestedManyWithoutSeasonInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryCreateNestedManyWithoutSeasonInput
+}
+
+export type SeasonUncheckedCreateWithoutLeagueStandingsInput = {
+  id?: number
+  leagueId: number
+  year: number
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  isCurrent?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  matches?: Prisma.MatchUncheckedCreateNestedManyWithoutSeasonInput
+  playerSeasonStatistics?: Prisma.PlayerSeasonStatisticUncheckedCreateNestedManyWithoutSeasonInput
+  playerImpactScores?: Prisma.PlayerImpactScoreUncheckedCreateNestedManyWithoutSeasonInput
+  teamSeasons?: Prisma.TeamSeasonUncheckedCreateNestedManyWithoutSeasonInput
+  dataQualitySnapshots?: Prisma.DataQualitySnapshotUncheckedCreateNestedManyWithoutSeasonInput
+  playerMatchPerformances?: Prisma.PlayerMatchPerformanceUncheckedCreateNestedManyWithoutSeasonInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUncheckedCreateNestedManyWithoutSeasonInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUncheckedCreateNestedManyWithoutSeasonInput
+}
+
+export type SeasonCreateOrConnectWithoutLeagueStandingsInput = {
+  where: Prisma.SeasonWhereUniqueInput
+  create: Prisma.XOR<Prisma.SeasonCreateWithoutLeagueStandingsInput, Prisma.SeasonUncheckedCreateWithoutLeagueStandingsInput>
+}
+
+export type SeasonUpsertWithoutLeagueStandingsInput = {
+  update: Prisma.XOR<Prisma.SeasonUpdateWithoutLeagueStandingsInput, Prisma.SeasonUncheckedUpdateWithoutLeagueStandingsInput>
+  create: Prisma.XOR<Prisma.SeasonCreateWithoutLeagueStandingsInput, Prisma.SeasonUncheckedCreateWithoutLeagueStandingsInput>
+  where?: Prisma.SeasonWhereInput
+}
+
+export type SeasonUpdateToOneWithWhereWithoutLeagueStandingsInput = {
+  where?: Prisma.SeasonWhereInput
+  data: Prisma.XOR<Prisma.SeasonUpdateWithoutLeagueStandingsInput, Prisma.SeasonUncheckedUpdateWithoutLeagueStandingsInput>
+}
+
+export type SeasonUpdateWithoutLeagueStandingsInput = {
+  year?: Prisma.IntFieldUpdateOperationsInput | number
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isCurrent?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  league?: Prisma.LeagueUpdateOneRequiredWithoutSeasonsNestedInput
+  matches?: Prisma.MatchUpdateManyWithoutSeasonNestedInput
+  playerSeasonStatistics?: Prisma.PlayerSeasonStatisticUpdateManyWithoutSeasonNestedInput
+  playerImpactScores?: Prisma.PlayerImpactScoreUpdateManyWithoutSeasonNestedInput
+  teamSeasons?: Prisma.TeamSeasonUpdateManyWithoutSeasonNestedInput
+  dataQualitySnapshots?: Prisma.DataQualitySnapshotUpdateManyWithoutSeasonNestedInput
+  playerMatchPerformances?: Prisma.PlayerMatchPerformanceUpdateManyWithoutSeasonNestedInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUpdateManyWithoutSeasonNestedInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUpdateManyWithoutSeasonNestedInput
+}
+
+export type SeasonUncheckedUpdateWithoutLeagueStandingsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  leagueId?: Prisma.IntFieldUpdateOperationsInput | number
+  year?: Prisma.IntFieldUpdateOperationsInput | number
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isCurrent?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  matches?: Prisma.MatchUncheckedUpdateManyWithoutSeasonNestedInput
+  playerSeasonStatistics?: Prisma.PlayerSeasonStatisticUncheckedUpdateManyWithoutSeasonNestedInput
+  playerImpactScores?: Prisma.PlayerImpactScoreUncheckedUpdateManyWithoutSeasonNestedInput
+  teamSeasons?: Prisma.TeamSeasonUncheckedUpdateManyWithoutSeasonNestedInput
+  dataQualitySnapshots?: Prisma.DataQualitySnapshotUncheckedUpdateManyWithoutSeasonNestedInput
+  playerMatchPerformances?: Prisma.PlayerMatchPerformanceUncheckedUpdateManyWithoutSeasonNestedInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUncheckedUpdateManyWithoutSeasonNestedInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUncheckedUpdateManyWithoutSeasonNestedInput
+}
+
+export type SeasonCreateWithoutTeamSeasonApiStatisticsInput = {
+  year: number
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  isCurrent?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  league: Prisma.LeagueCreateNestedOneWithoutSeasonsInput
+  matches?: Prisma.MatchCreateNestedManyWithoutSeasonInput
+  playerSeasonStatistics?: Prisma.PlayerSeasonStatisticCreateNestedManyWithoutSeasonInput
+  playerImpactScores?: Prisma.PlayerImpactScoreCreateNestedManyWithoutSeasonInput
+  teamSeasons?: Prisma.TeamSeasonCreateNestedManyWithoutSeasonInput
+  dataQualitySnapshots?: Prisma.DataQualitySnapshotCreateNestedManyWithoutSeasonInput
+  playerMatchPerformances?: Prisma.PlayerMatchPerformanceCreateNestedManyWithoutSeasonInput
+  leagueStandings?: Prisma.LeagueStandingCreateNestedManyWithoutSeasonInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryCreateNestedManyWithoutSeasonInput
+}
+
+export type SeasonUncheckedCreateWithoutTeamSeasonApiStatisticsInput = {
+  id?: number
+  leagueId: number
+  year: number
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  isCurrent?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  matches?: Prisma.MatchUncheckedCreateNestedManyWithoutSeasonInput
+  playerSeasonStatistics?: Prisma.PlayerSeasonStatisticUncheckedCreateNestedManyWithoutSeasonInput
+  playerImpactScores?: Prisma.PlayerImpactScoreUncheckedCreateNestedManyWithoutSeasonInput
+  teamSeasons?: Prisma.TeamSeasonUncheckedCreateNestedManyWithoutSeasonInput
+  dataQualitySnapshots?: Prisma.DataQualitySnapshotUncheckedCreateNestedManyWithoutSeasonInput
+  playerMatchPerformances?: Prisma.PlayerMatchPerformanceUncheckedCreateNestedManyWithoutSeasonInput
+  leagueStandings?: Prisma.LeagueStandingUncheckedCreateNestedManyWithoutSeasonInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUncheckedCreateNestedManyWithoutSeasonInput
+}
+
+export type SeasonCreateOrConnectWithoutTeamSeasonApiStatisticsInput = {
+  where: Prisma.SeasonWhereUniqueInput
+  create: Prisma.XOR<Prisma.SeasonCreateWithoutTeamSeasonApiStatisticsInput, Prisma.SeasonUncheckedCreateWithoutTeamSeasonApiStatisticsInput>
+}
+
+export type SeasonUpsertWithoutTeamSeasonApiStatisticsInput = {
+  update: Prisma.XOR<Prisma.SeasonUpdateWithoutTeamSeasonApiStatisticsInput, Prisma.SeasonUncheckedUpdateWithoutTeamSeasonApiStatisticsInput>
+  create: Prisma.XOR<Prisma.SeasonCreateWithoutTeamSeasonApiStatisticsInput, Prisma.SeasonUncheckedCreateWithoutTeamSeasonApiStatisticsInput>
+  where?: Prisma.SeasonWhereInput
+}
+
+export type SeasonUpdateToOneWithWhereWithoutTeamSeasonApiStatisticsInput = {
+  where?: Prisma.SeasonWhereInput
+  data: Prisma.XOR<Prisma.SeasonUpdateWithoutTeamSeasonApiStatisticsInput, Prisma.SeasonUncheckedUpdateWithoutTeamSeasonApiStatisticsInput>
+}
+
+export type SeasonUpdateWithoutTeamSeasonApiStatisticsInput = {
+  year?: Prisma.IntFieldUpdateOperationsInput | number
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isCurrent?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  league?: Prisma.LeagueUpdateOneRequiredWithoutSeasonsNestedInput
+  matches?: Prisma.MatchUpdateManyWithoutSeasonNestedInput
+  playerSeasonStatistics?: Prisma.PlayerSeasonStatisticUpdateManyWithoutSeasonNestedInput
+  playerImpactScores?: Prisma.PlayerImpactScoreUpdateManyWithoutSeasonNestedInput
+  teamSeasons?: Prisma.TeamSeasonUpdateManyWithoutSeasonNestedInput
+  dataQualitySnapshots?: Prisma.DataQualitySnapshotUpdateManyWithoutSeasonNestedInput
+  playerMatchPerformances?: Prisma.PlayerMatchPerformanceUpdateManyWithoutSeasonNestedInput
+  leagueStandings?: Prisma.LeagueStandingUpdateManyWithoutSeasonNestedInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUpdateManyWithoutSeasonNestedInput
+}
+
+export type SeasonUncheckedUpdateWithoutTeamSeasonApiStatisticsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  leagueId?: Prisma.IntFieldUpdateOperationsInput | number
+  year?: Prisma.IntFieldUpdateOperationsInput | number
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isCurrent?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  matches?: Prisma.MatchUncheckedUpdateManyWithoutSeasonNestedInput
+  playerSeasonStatistics?: Prisma.PlayerSeasonStatisticUncheckedUpdateManyWithoutSeasonNestedInput
+  playerImpactScores?: Prisma.PlayerImpactScoreUncheckedUpdateManyWithoutSeasonNestedInput
+  teamSeasons?: Prisma.TeamSeasonUncheckedUpdateManyWithoutSeasonNestedInput
+  dataQualitySnapshots?: Prisma.DataQualitySnapshotUncheckedUpdateManyWithoutSeasonNestedInput
+  playerMatchPerformances?: Prisma.PlayerMatchPerformanceUncheckedUpdateManyWithoutSeasonNestedInput
+  leagueStandings?: Prisma.LeagueStandingUncheckedUpdateManyWithoutSeasonNestedInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUncheckedUpdateManyWithoutSeasonNestedInput
+}
+
+export type SeasonCreateWithoutPlayerLeaderboardEntriesInput = {
+  year: number
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  isCurrent?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  league: Prisma.LeagueCreateNestedOneWithoutSeasonsInput
+  matches?: Prisma.MatchCreateNestedManyWithoutSeasonInput
+  playerSeasonStatistics?: Prisma.PlayerSeasonStatisticCreateNestedManyWithoutSeasonInput
+  playerImpactScores?: Prisma.PlayerImpactScoreCreateNestedManyWithoutSeasonInput
+  teamSeasons?: Prisma.TeamSeasonCreateNestedManyWithoutSeasonInput
+  dataQualitySnapshots?: Prisma.DataQualitySnapshotCreateNestedManyWithoutSeasonInput
+  playerMatchPerformances?: Prisma.PlayerMatchPerformanceCreateNestedManyWithoutSeasonInput
+  leagueStandings?: Prisma.LeagueStandingCreateNestedManyWithoutSeasonInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticCreateNestedManyWithoutSeasonInput
+}
+
+export type SeasonUncheckedCreateWithoutPlayerLeaderboardEntriesInput = {
+  id?: number
+  leagueId: number
+  year: number
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  isCurrent?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  matches?: Prisma.MatchUncheckedCreateNestedManyWithoutSeasonInput
+  playerSeasonStatistics?: Prisma.PlayerSeasonStatisticUncheckedCreateNestedManyWithoutSeasonInput
+  playerImpactScores?: Prisma.PlayerImpactScoreUncheckedCreateNestedManyWithoutSeasonInput
+  teamSeasons?: Prisma.TeamSeasonUncheckedCreateNestedManyWithoutSeasonInput
+  dataQualitySnapshots?: Prisma.DataQualitySnapshotUncheckedCreateNestedManyWithoutSeasonInput
+  playerMatchPerformances?: Prisma.PlayerMatchPerformanceUncheckedCreateNestedManyWithoutSeasonInput
+  leagueStandings?: Prisma.LeagueStandingUncheckedCreateNestedManyWithoutSeasonInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUncheckedCreateNestedManyWithoutSeasonInput
+}
+
+export type SeasonCreateOrConnectWithoutPlayerLeaderboardEntriesInput = {
+  where: Prisma.SeasonWhereUniqueInput
+  create: Prisma.XOR<Prisma.SeasonCreateWithoutPlayerLeaderboardEntriesInput, Prisma.SeasonUncheckedCreateWithoutPlayerLeaderboardEntriesInput>
+}
+
+export type SeasonUpsertWithoutPlayerLeaderboardEntriesInput = {
+  update: Prisma.XOR<Prisma.SeasonUpdateWithoutPlayerLeaderboardEntriesInput, Prisma.SeasonUncheckedUpdateWithoutPlayerLeaderboardEntriesInput>
+  create: Prisma.XOR<Prisma.SeasonCreateWithoutPlayerLeaderboardEntriesInput, Prisma.SeasonUncheckedCreateWithoutPlayerLeaderboardEntriesInput>
+  where?: Prisma.SeasonWhereInput
+}
+
+export type SeasonUpdateToOneWithWhereWithoutPlayerLeaderboardEntriesInput = {
+  where?: Prisma.SeasonWhereInput
+  data: Prisma.XOR<Prisma.SeasonUpdateWithoutPlayerLeaderboardEntriesInput, Prisma.SeasonUncheckedUpdateWithoutPlayerLeaderboardEntriesInput>
+}
+
+export type SeasonUpdateWithoutPlayerLeaderboardEntriesInput = {
+  year?: Prisma.IntFieldUpdateOperationsInput | number
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isCurrent?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  league?: Prisma.LeagueUpdateOneRequiredWithoutSeasonsNestedInput
+  matches?: Prisma.MatchUpdateManyWithoutSeasonNestedInput
+  playerSeasonStatistics?: Prisma.PlayerSeasonStatisticUpdateManyWithoutSeasonNestedInput
+  playerImpactScores?: Prisma.PlayerImpactScoreUpdateManyWithoutSeasonNestedInput
+  teamSeasons?: Prisma.TeamSeasonUpdateManyWithoutSeasonNestedInput
+  dataQualitySnapshots?: Prisma.DataQualitySnapshotUpdateManyWithoutSeasonNestedInput
+  playerMatchPerformances?: Prisma.PlayerMatchPerformanceUpdateManyWithoutSeasonNestedInput
+  leagueStandings?: Prisma.LeagueStandingUpdateManyWithoutSeasonNestedInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUpdateManyWithoutSeasonNestedInput
+}
+
+export type SeasonUncheckedUpdateWithoutPlayerLeaderboardEntriesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  leagueId?: Prisma.IntFieldUpdateOperationsInput | number
+  year?: Prisma.IntFieldUpdateOperationsInput | number
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isCurrent?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  matches?: Prisma.MatchUncheckedUpdateManyWithoutSeasonNestedInput
+  playerSeasonStatistics?: Prisma.PlayerSeasonStatisticUncheckedUpdateManyWithoutSeasonNestedInput
+  playerImpactScores?: Prisma.PlayerImpactScoreUncheckedUpdateManyWithoutSeasonNestedInput
+  teamSeasons?: Prisma.TeamSeasonUncheckedUpdateManyWithoutSeasonNestedInput
+  dataQualitySnapshots?: Prisma.DataQualitySnapshotUncheckedUpdateManyWithoutSeasonNestedInput
+  playerMatchPerformances?: Prisma.PlayerMatchPerformanceUncheckedUpdateManyWithoutSeasonNestedInput
+  leagueStandings?: Prisma.LeagueStandingUncheckedUpdateManyWithoutSeasonNestedInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUncheckedUpdateManyWithoutSeasonNestedInput
 }
 
 export type SeasonCreateManyLeagueInput = {
@@ -1177,6 +1588,9 @@ export type SeasonUpdateWithoutLeagueInput = {
   teamSeasons?: Prisma.TeamSeasonUpdateManyWithoutSeasonNestedInput
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUpdateManyWithoutSeasonNestedInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUpdateManyWithoutSeasonNestedInput
+  leagueStandings?: Prisma.LeagueStandingUpdateManyWithoutSeasonNestedInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUpdateManyWithoutSeasonNestedInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUpdateManyWithoutSeasonNestedInput
 }
 
 export type SeasonUncheckedUpdateWithoutLeagueInput = {
@@ -1193,6 +1607,9 @@ export type SeasonUncheckedUpdateWithoutLeagueInput = {
   teamSeasons?: Prisma.TeamSeasonUncheckedUpdateManyWithoutSeasonNestedInput
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUncheckedUpdateManyWithoutSeasonNestedInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUncheckedUpdateManyWithoutSeasonNestedInput
+  leagueStandings?: Prisma.LeagueStandingUncheckedUpdateManyWithoutSeasonNestedInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUncheckedUpdateManyWithoutSeasonNestedInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUncheckedUpdateManyWithoutSeasonNestedInput
 }
 
 export type SeasonUncheckedUpdateManyWithoutLeagueInput = {
@@ -1217,6 +1634,9 @@ export type SeasonCountOutputType = {
   teamSeasons: number
   dataQualitySnapshots: number
   playerMatchPerformances: number
+  leagueStandings: number
+  teamSeasonApiStatistics: number
+  playerLeaderboardEntries: number
 }
 
 export type SeasonCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1226,6 +1646,9 @@ export type SeasonCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions
   teamSeasons?: boolean | SeasonCountOutputTypeCountTeamSeasonsArgs
   dataQualitySnapshots?: boolean | SeasonCountOutputTypeCountDataQualitySnapshotsArgs
   playerMatchPerformances?: boolean | SeasonCountOutputTypeCountPlayerMatchPerformancesArgs
+  leagueStandings?: boolean | SeasonCountOutputTypeCountLeagueStandingsArgs
+  teamSeasonApiStatistics?: boolean | SeasonCountOutputTypeCountTeamSeasonApiStatisticsArgs
+  playerLeaderboardEntries?: boolean | SeasonCountOutputTypeCountPlayerLeaderboardEntriesArgs
 }
 
 /**
@@ -1280,6 +1703,27 @@ export type SeasonCountOutputTypeCountPlayerMatchPerformancesArgs<ExtArgs extend
   where?: Prisma.PlayerMatchPerformanceWhereInput
 }
 
+/**
+ * SeasonCountOutputType without action
+ */
+export type SeasonCountOutputTypeCountLeagueStandingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeagueStandingWhereInput
+}
+
+/**
+ * SeasonCountOutputType without action
+ */
+export type SeasonCountOutputTypeCountTeamSeasonApiStatisticsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TeamSeasonApiStatisticWhereInput
+}
+
+/**
+ * SeasonCountOutputType without action
+ */
+export type SeasonCountOutputTypeCountPlayerLeaderboardEntriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PlayerLeaderboardEntryWhereInput
+}
+
 
 export type SeasonSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1297,6 +1741,9 @@ export type SeasonSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   teamSeasons?: boolean | Prisma.Season$teamSeasonsArgs<ExtArgs>
   dataQualitySnapshots?: boolean | Prisma.Season$dataQualitySnapshotsArgs<ExtArgs>
   playerMatchPerformances?: boolean | Prisma.Season$playerMatchPerformancesArgs<ExtArgs>
+  leagueStandings?: boolean | Prisma.Season$leagueStandingsArgs<ExtArgs>
+  teamSeasonApiStatistics?: boolean | Prisma.Season$teamSeasonApiStatisticsArgs<ExtArgs>
+  playerLeaderboardEntries?: boolean | Prisma.Season$playerLeaderboardEntriesArgs<ExtArgs>
   _count?: boolean | Prisma.SeasonCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["season"]>
 
@@ -1344,6 +1791,9 @@ export type SeasonInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   teamSeasons?: boolean | Prisma.Season$teamSeasonsArgs<ExtArgs>
   dataQualitySnapshots?: boolean | Prisma.Season$dataQualitySnapshotsArgs<ExtArgs>
   playerMatchPerformances?: boolean | Prisma.Season$playerMatchPerformancesArgs<ExtArgs>
+  leagueStandings?: boolean | Prisma.Season$leagueStandingsArgs<ExtArgs>
+  teamSeasonApiStatistics?: boolean | Prisma.Season$teamSeasonApiStatisticsArgs<ExtArgs>
+  playerLeaderboardEntries?: boolean | Prisma.Season$playerLeaderboardEntriesArgs<ExtArgs>
   _count?: boolean | Prisma.SeasonCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type SeasonIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1363,6 +1813,9 @@ export type $SeasonPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     teamSeasons: Prisma.$TeamSeasonPayload<ExtArgs>[]
     dataQualitySnapshots: Prisma.$DataQualitySnapshotPayload<ExtArgs>[]
     playerMatchPerformances: Prisma.$PlayerMatchPerformancePayload<ExtArgs>[]
+    leagueStandings: Prisma.$LeagueStandingPayload<ExtArgs>[]
+    teamSeasonApiStatistics: Prisma.$TeamSeasonApiStatisticPayload<ExtArgs>[]
+    playerLeaderboardEntries: Prisma.$PlayerLeaderboardEntryPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1774,6 +2227,9 @@ export interface Prisma__SeasonClient<T, Null = never, ExtArgs extends runtime.T
   teamSeasons<T extends Prisma.Season$teamSeasonsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Season$teamSeasonsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TeamSeasonPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   dataQualitySnapshots<T extends Prisma.Season$dataQualitySnapshotsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Season$dataQualitySnapshotsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DataQualitySnapshotPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   playerMatchPerformances<T extends Prisma.Season$playerMatchPerformancesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Season$playerMatchPerformancesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PlayerMatchPerformancePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  leagueStandings<T extends Prisma.Season$leagueStandingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Season$leagueStandingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeagueStandingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  teamSeasonApiStatistics<T extends Prisma.Season$teamSeasonApiStatisticsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Season$teamSeasonApiStatisticsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TeamSeasonApiStatisticPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  playerLeaderboardEntries<T extends Prisma.Season$playerLeaderboardEntriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Season$playerLeaderboardEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PlayerLeaderboardEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2353,6 +2809,78 @@ export type Season$playerMatchPerformancesArgs<ExtArgs extends runtime.Types.Ext
   take?: number
   skip?: number
   distinct?: Prisma.PlayerMatchPerformanceScalarFieldEnum | Prisma.PlayerMatchPerformanceScalarFieldEnum[]
+}
+
+/**
+ * Season.leagueStandings
+ */
+export type Season$leagueStandingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LeagueStanding
+   */
+  select?: Prisma.LeagueStandingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LeagueStanding
+   */
+  omit?: Prisma.LeagueStandingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeagueStandingInclude<ExtArgs> | null
+  where?: Prisma.LeagueStandingWhereInput
+  orderBy?: Prisma.LeagueStandingOrderByWithRelationInput | Prisma.LeagueStandingOrderByWithRelationInput[]
+  cursor?: Prisma.LeagueStandingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LeagueStandingScalarFieldEnum | Prisma.LeagueStandingScalarFieldEnum[]
+}
+
+/**
+ * Season.teamSeasonApiStatistics
+ */
+export type Season$teamSeasonApiStatisticsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TeamSeasonApiStatistic
+   */
+  select?: Prisma.TeamSeasonApiStatisticSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TeamSeasonApiStatistic
+   */
+  omit?: Prisma.TeamSeasonApiStatisticOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TeamSeasonApiStatisticInclude<ExtArgs> | null
+  where?: Prisma.TeamSeasonApiStatisticWhereInput
+  orderBy?: Prisma.TeamSeasonApiStatisticOrderByWithRelationInput | Prisma.TeamSeasonApiStatisticOrderByWithRelationInput[]
+  cursor?: Prisma.TeamSeasonApiStatisticWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TeamSeasonApiStatisticScalarFieldEnum | Prisma.TeamSeasonApiStatisticScalarFieldEnum[]
+}
+
+/**
+ * Season.playerLeaderboardEntries
+ */
+export type Season$playerLeaderboardEntriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PlayerLeaderboardEntry
+   */
+  select?: Prisma.PlayerLeaderboardEntrySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PlayerLeaderboardEntry
+   */
+  omit?: Prisma.PlayerLeaderboardEntryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PlayerLeaderboardEntryInclude<ExtArgs> | null
+  where?: Prisma.PlayerLeaderboardEntryWhereInput
+  orderBy?: Prisma.PlayerLeaderboardEntryOrderByWithRelationInput | Prisma.PlayerLeaderboardEntryOrderByWithRelationInput[]
+  cursor?: Prisma.PlayerLeaderboardEntryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PlayerLeaderboardEntryScalarFieldEnum | Prisma.PlayerLeaderboardEntryScalarFieldEnum[]
 }
 
 /**

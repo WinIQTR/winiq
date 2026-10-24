@@ -90,6 +90,10 @@ export default async function MemberValuePage() {
       modelOdds,
       confidenceScore: item.confidenceScore,
       href: `/member/matches/${item.matchId}`,
+      homeRecentResults: item.homeRecentResults,
+      awayRecentResults: item.awayRecentResults,
+      homeVenueResults: item.homeVenueResults,
+      awayVenueResults: item.awayVenueResults,
     };
   });
 

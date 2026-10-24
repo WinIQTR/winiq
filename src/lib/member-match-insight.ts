@@ -1,24 +1,42 @@
 import type { AppLocale } from "@/i18n/dictionaries";
 import type { DashboardPrediction } from "@/lib/prediction-dashboard-shared";
 
-type Translate = (source: string) => string;
-type FormResult = "W" | "D" | "L";
+export type Translate = (source: string) => string;
+export type FormResult = "W" | "D" | "L";
 
 const GENERIC_REASON =
   /model probability is high|calibration is strong|large historical sample|reliability/i;
 
-function streakFrom(results: FormResult[] | undefined): { result: FormResult; count: number } | null {
+export type MatchFormTipInput = {
+  homeTeam: string;
+  awayTeam: string;
+  /** Overall recent results, oldest → newest (or newest-first — streak reads from start). */
+  homeRecentResults?: FormResult[] | null;
+  awayRecentResults?: FormResult[] | null;
+  /** Home-only period (for the home team). */
+  homeVenueResults?: FormResult[] | null;
+  /** Away-only period (for the away team). */
+  awayVenueResults?: FormResult[] | null;
+};
+
+/**
+ * Streak helper: prefers the most recent run.
+ * Accepts either oldest→newest or newest→first; we always evaluate from the end.
+ */
+function streakFrom(results: FormResult[] | undefined | null): { result: FormResult; count: number } | null {
   if (!results?.length) return null;
-  const first = results[0]!;
+  const chronological = [...results];
+  // Evaluate from most recent
+  const last = chronological[chronological.length - 1]!;
   let count = 0;
-  for (const result of results) {
-    if (result !== first) break;
+  for (let i = chronological.length - 1; i >= 0; i -= 1) {
+    if (chronological[i] !== last) break;
     count += 1;
   }
-  return count > 0 ? { result: first, count } : null;
+  return count > 0 ? { result: last, count } : null;
 }
 
-function countsIn(results: FormResult[] | undefined) {
+function countsIn(results: FormResult[] | undefined | null) {
   const list = results ?? [];
   return {
     n: list.length,
@@ -32,53 +50,78 @@ function injuryNote(warnings: string[] | undefined, t: Translate): string | null
   if (!warnings?.length) return null;
   const hit = warnings.find((w) => /injur|sakat|unavailable player|eksik oyuncu/i.test(w));
   if (!hit) return null;
-  // Prefer a short localized wrapper; keep concrete names from the warning when short.
   const trimmed = hit.replace(/\s+/g, " ").trim();
   if (trimmed.length <= 110) return trimmed;
   return t("Key squad availability notes apply for this fixture.");
 }
 
+type FormSide = "overall" | "home" | "away";
+
 function formLine(
   team: string,
-  results: FormResult[] | undefined,
-  side: "home" | "away",
+  results: FormResult[] | undefined | null,
+  side: FormSide,
   t: Translate,
 ): string | null {
+  if (!results?.length) return null;
+
   const streak = streakFrom(results);
   const stats = countsIn(results);
+
+  const wonLast =
+    side === "home"
+      ? "{team} won their last {n} home matches."
+      : side === "away"
+        ? "{team} won their last {n} away matches."
+        : "{team} won their last {n} matches.";
+  const lostLast =
+    side === "home"
+      ? "{team} lost their last {n} home matches."
+      : side === "away"
+        ? "{team} lost their last {n} away matches."
+        : "{team} lost their last {n} matches.";
+  const drewLast =
+    side === "home"
+      ? "{team} drew their last {n} home matches."
+      : side === "away"
+        ? "{team} drew their last {n} away matches."
+        : "{team} drew their last {n} matches.";
+
   if (streak && streak.count >= 3) {
     if (streak.result === "W") {
-      return t("{team} won their last {n} matches.")
-        .replace("{team}", team)
-        .replace("{n}", String(streak.count));
+      return t(wonLast).replace("{team}", team).replace("{n}", String(streak.count));
     }
     if (streak.result === "L") {
-      return t("{team} lost their last {n} matches.")
-        .replace("{team}", team)
-        .replace("{n}", String(streak.count));
+      return t(lostLast).replace("{team}", team).replace("{n}", String(streak.count));
     }
-    return t("{team} drew their last {n} matches.")
-      .replace("{team}", team)
-      .replace("{n}", String(streak.count));
+    return t(drewLast).replace("{team}", team).replace("{n}", String(streak.count));
   }
 
   if (streak && streak.count === 2 && streak.result === "W") {
-    return t("{team} won their last {n} matches.")
-      .replace("{team}", team)
-      .replace("{n}", "2");
+    return t(wonLast).replace("{team}", team).replace("{n}", "2");
   }
 
   if (stats.n >= 4) {
     const unbeaten = stats.losses === 0;
     if (unbeaten && stats.wins >= 2) {
-      return t("{team} are unbeaten in their last {n} matches.")
-        .replace("{team}", team)
-        .replace("{n}", String(stats.n));
+      const key =
+        side === "home"
+          ? "{team} are unbeaten in their last {n} home matches."
+          : side === "away"
+            ? "{team} are unbeaten in their last {n} away matches."
+            : "{team} are unbeaten in their last {n} matches.";
+      return t(key).replace("{team}", team).replace("{n}", String(stats.n));
     }
     if (side === "away" && stats.losses >= 3) {
       return t("{team} lost {losses} of their last {n} away-period matches.")
         .replace("{team}", team)
         .replace("{losses}", String(stats.losses))
+        .replace("{n}", String(stats.n));
+    }
+    if (side === "home" && stats.wins >= 3) {
+      return t("{team} won {wins} of their last {n} home-period matches.")
+        .replace("{team}", team)
+        .replace("{wins}", String(stats.wins))
         .replace("{n}", String(stats.n));
     }
     if (stats.wins >= 3) {
@@ -114,26 +157,51 @@ function goalsLine(prediction: DashboardPrediction, t: Translate): string | null
 }
 
 /**
+ * Form/streak tip only. Returns null when there is no honest signal.
+ * Prefers venue-period tips when they are stronger than overall streaks.
+ */
+export function buildMatchFormTip(input: MatchFormTipInput, t: Translate): string | null {
+  const homeVenue = formLine(input.homeTeam, input.homeVenueResults, "home", t);
+  const awayVenue = formLine(input.awayTeam, input.awayVenueResults, "away", t);
+  const homeOverall = formLine(input.homeTeam, input.homeRecentResults, "overall", t);
+  const awayOverall = formLine(input.awayTeam, input.awayRecentResults, "overall", t);
+
+  const home = homeVenue ?? homeOverall;
+  const away = awayVenue ?? awayOverall;
+
+  if (home && away) {
+    const combined = `${home} ${away}`;
+    if (combined.length <= 150) return combined;
+    // Prefer the longer / more specific venue tip when combining would clutter.
+    if (homeVenue && !awayVenue) return home;
+    if (awayVenue && !homeVenue) return away;
+    return home.length >= away.length ? home : away;
+  }
+  return home ?? away;
+}
+
+/**
  * One-line match insight for member cards.
  * Priority: form streaks → goals expectation → injury warning → non-generic reason → fallback.
- * Uses only fields already present on DashboardPrediction (API-Football derived snapshot).
  */
 export function buildMatchCardInsight(
   prediction: DashboardPrediction,
   t: Translate,
   _locale: AppLocale,
-): string {
-  const homeForm = formLine(prediction.homeTeam, prediction.homeRecentResults, "home", t);
-  const awayForm = formLine(prediction.awayTeam, prediction.awayRecentResults, "away", t);
-
-  if (homeForm && awayForm) {
-    // Keep one short combined line when both sides have a clear signal.
-    const combined = `${homeForm} ${awayForm}`;
-    if (combined.length <= 140) return combined;
-    return homeForm;
-  }
-  if (homeForm) return homeForm;
-  if (awayForm) return awayForm;
+  options?: { omitWhenEmpty?: boolean },
+): string | null {
+  const form = buildMatchFormTip(
+    {
+      homeTeam: prediction.homeTeam,
+      awayTeam: prediction.awayTeam,
+      homeRecentResults: prediction.homeRecentResults,
+      awayRecentResults: prediction.awayRecentResults,
+      homeVenueResults: prediction.homeVenueResults,
+      awayVenueResults: prediction.awayVenueResults,
+    },
+    t,
+  );
+  if (form) return form;
 
   const goals = goalsLine(prediction, t);
   if (goals) return goals;
@@ -144,6 +212,7 @@ export function buildMatchCardInsight(
   const reason = prediction.topPicks[0]?.reasons?.find((item) => item && !GENERIC_REASON.test(item));
   if (reason) return reason;
 
+  if (options?.omitWhenEmpty) return null;
   return t("Form and market signals are limited for this fixture; open the analysis for detail.");
 }
 

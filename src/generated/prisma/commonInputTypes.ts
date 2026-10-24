@@ -670,6 +670,23 @@ export type EnumDataAvailabilityStatusWithAggregatesFilter<$PrismaModel = never>
   _max?: Prisma.NestedEnumDataAvailabilityStatusFilter<$PrismaModel>
 }
 
+export type EnumPlayerLeaderboardKindFilter<$PrismaModel = never> = {
+  equals?: $Enums.PlayerLeaderboardKind | Prisma.EnumPlayerLeaderboardKindFieldRefInput<$PrismaModel>
+  in?: $Enums.PlayerLeaderboardKind[] | Prisma.ListEnumPlayerLeaderboardKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PlayerLeaderboardKind[] | Prisma.ListEnumPlayerLeaderboardKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPlayerLeaderboardKindFilter<$PrismaModel> | $Enums.PlayerLeaderboardKind
+}
+
+export type EnumPlayerLeaderboardKindWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PlayerLeaderboardKind | Prisma.EnumPlayerLeaderboardKindFieldRefInput<$PrismaModel>
+  in?: $Enums.PlayerLeaderboardKind[] | Prisma.ListEnumPlayerLeaderboardKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PlayerLeaderboardKind[] | Prisma.ListEnumPlayerLeaderboardKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPlayerLeaderboardKindWithAggregatesFilter<$PrismaModel> | $Enums.PlayerLeaderboardKind
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPlayerLeaderboardKindFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPlayerLeaderboardKindFilter<$PrismaModel>
+}
+
 export type NestedStringFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
@@ -1288,6 +1305,23 @@ export type NestedEnumDataAvailabilityStatusWithAggregatesFilter<$PrismaModel = 
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumDataAvailabilityStatusFilter<$PrismaModel>
   _max?: Prisma.NestedEnumDataAvailabilityStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumPlayerLeaderboardKindFilter<$PrismaModel = never> = {
+  equals?: $Enums.PlayerLeaderboardKind | Prisma.EnumPlayerLeaderboardKindFieldRefInput<$PrismaModel>
+  in?: $Enums.PlayerLeaderboardKind[] | Prisma.ListEnumPlayerLeaderboardKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PlayerLeaderboardKind[] | Prisma.ListEnumPlayerLeaderboardKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPlayerLeaderboardKindFilter<$PrismaModel> | $Enums.PlayerLeaderboardKind
+}
+
+export type NestedEnumPlayerLeaderboardKindWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PlayerLeaderboardKind | Prisma.EnumPlayerLeaderboardKindFieldRefInput<$PrismaModel>
+  in?: $Enums.PlayerLeaderboardKind[] | Prisma.ListEnumPlayerLeaderboardKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PlayerLeaderboardKind[] | Prisma.ListEnumPlayerLeaderboardKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPlayerLeaderboardKindWithAggregatesFilter<$PrismaModel> | $Enums.PlayerLeaderboardKind
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPlayerLeaderboardKindFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPlayerLeaderboardKindFilter<$PrismaModel>
 }
 
 

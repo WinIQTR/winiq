@@ -2,17 +2,34 @@ import { prisma } from "@/lib/prisma";
 
 export type FormResult = "W" | "D" | "L";
 
+export type TeamFormMaps = {
+  overall: Map<number, FormResult[]>;
+  home: Map<number, FormResult[]>;
+  away: Map<number, FormResult[]>;
+};
+
+function pushResult(map: Map<number, FormResult[]>, teamId: number, result: FormResult) {
+  const existing = map.get(teamId);
+  if (existing) existing.push(result);
+  else map.set(teamId, [result]);
+}
+
+function trimMaps(maps: TeamFormMaps, lastN: number) {
+  for (const map of [maps.overall, maps.home, maps.away]) {
+    for (const [teamId, results] of map) {
+      map.set(teamId, results.slice(-lastN));
+    }
+  }
+}
+
 /**
- * Verilen sezon için tüm bitmiş maçları tek seferde çekip her takımın
- * son 5 maçtaki performansını (kronolojik sırayla) hesaplar.
- *
- * Tek bir toplu sorgu kullanır; her fikstür için ayrı ayrı sorgu
- * atmaz (N+1 önlenir).
+ * One DB query → overall / home / away form strips (oldest→newest, trimmed to lastN).
  */
-export async function buildTeamFormMap(
+export async function buildTeamFormMaps(
   seasonYear: number,
   before: Date = new Date(),
-): Promise<Map<number, FormResult[]>> {
+  lastN = 5,
+): Promise<TeamFormMaps> {
   const finishedMatches = await prisma.match.findMany({
     where: {
       status: "FINISHED",
@@ -28,40 +45,49 @@ export async function buildTeamFormMap(
       awayScore: true,
       kickoffAt: true,
     },
-    orderBy: {
-      kickoffAt: "asc",
-    },
+    orderBy: { kickoffAt: "asc" },
   });
 
-  const formMap = new Map<number, FormResult[]>();
-
-  const pushResult = (teamId: number, result: FormResult) => {
-    const existing = formMap.get(teamId);
-    if (existing) {
-      existing.push(result);
-    } else {
-      formMap.set(teamId, [result]);
-    }
+  const maps: TeamFormMaps = {
+    overall: new Map(),
+    home: new Map(),
+    away: new Map(),
   };
 
   for (const match of finishedMatches) {
     if (match.homeScore === null || match.awayScore === null) continue;
 
+    let homeResult: FormResult;
+    let awayResult: FormResult;
     if (match.homeScore > match.awayScore) {
-      pushResult(match.homeTeamId, "W");
-      pushResult(match.awayTeamId, "L");
+      homeResult = "W";
+      awayResult = "L";
     } else if (match.awayScore > match.homeScore) {
-      pushResult(match.homeTeamId, "L");
-      pushResult(match.awayTeamId, "W");
+      homeResult = "L";
+      awayResult = "W";
     } else {
-      pushResult(match.homeTeamId, "D");
-      pushResult(match.awayTeamId, "D");
+      homeResult = "D";
+      awayResult = "D";
     }
+
+    pushResult(maps.overall, match.homeTeamId, homeResult);
+    pushResult(maps.overall, match.awayTeamId, awayResult);
+    pushResult(maps.home, match.homeTeamId, homeResult);
+    pushResult(maps.away, match.awayTeamId, awayResult);
   }
 
-  for (const [teamId, results] of formMap) {
-    formMap.set(teamId, results.slice(-5));
-  }
+  trimMaps(maps, lastN);
+  return maps;
+}
 
-  return formMap;
+/**
+ * Verilen sezon için tüm bitmiş maçları tek seferde çekip her takımın
+ * son 5 maçtaki performansını (kronolojik sırayla) hesaplar.
+ */
+export async function buildTeamFormMap(
+  seasonYear: number,
+  before: Date = new Date(),
+): Promise<Map<number, FormResult[]>> {
+  const maps = await buildTeamFormMaps(seasonYear, before, 5);
+  return maps.overall;
 }

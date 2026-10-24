@@ -87,6 +87,10 @@ export type DashboardPrediction = {
 
   homeRecentResults?: ("W" | "D" | "L")[];
   awayRecentResults?: ("W" | "D" | "L")[];
+  /** Home team's last home-period results (oldest → newest). */
+  homeVenueResults?: ("W" | "D" | "L")[];
+  /** Away team's last away-period results (oldest → newest). */
+  awayVenueResults?: ("W" | "D" | "L")[];
 
   popularMarketsSummary?: PopularMarketRow[];
 

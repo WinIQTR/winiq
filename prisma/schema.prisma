@@ -286,6 +286,7 @@ model League {
   country     Country?     @relation(fields: [countryId], references: [id])
   seasons     Season[]
   teamSeasons TeamSeason[]
+  playerLeaderboardEntries PlayerLeaderboardEntry[]
 
   @@index([countryId])
 }
@@ -307,6 +308,9 @@ model Season {
   teamSeasons             TeamSeason[]
   dataQualitySnapshots    DataQualitySnapshot[]
   playerMatchPerformances PlayerMatchPerformance[]
+  leagueStandings         LeagueStanding[]
+  teamSeasonApiStatistics TeamSeasonApiStatistic[]
+  playerLeaderboardEntries PlayerLeaderboardEntry[]
 
   @@unique([leagueId, year])
   @@index([isCurrent])
@@ -406,6 +410,10 @@ model Team {
   dataQualitySnapshots    DataQualitySnapshot[]
   playerMatchPerformances PlayerMatchPerformance[]
   matchStatistics         MatchTeamStatistic[]
+  leagueStandings         LeagueStanding[]
+  matchEvents             MatchEvent[]
+  teamSeasonApiStatistics TeamSeasonApiStatistic[]
+  playerLeaderboardEntries PlayerLeaderboardEntry[]
 
   @@index([countryId])
 }
@@ -449,6 +457,7 @@ model Match {
   smartPickHistory     SmartPickHistory[]
   valueBetHistory      ValueBetHistory[]
   smartCouponLegs      SmartCouponLegHistory[]
+  matchEvents          MatchEvent[]
 
   oddsSnapshots OddsSnapshot[]
 
@@ -490,6 +499,7 @@ model Player {
   lineupEntries     LineupPlayer[]
   impactScores      PlayerImpactScore[]
   matchPerformances PlayerMatchPerformance[]
+  leaderboardEntries PlayerLeaderboardEntry[]
 
   @@index([teamId])
   @@index([countryId])
@@ -1249,4 +1259,112 @@ model OddsSelection {
   @@index([selectionKey])
   @@index([decimalOdds])
   @@index([impliedProbability])
+}
+
+/// Cached API-Football /standings row (Neon).
+model LeagueStanding {
+  id            Int      @id @default(autoincrement())
+  seasonId      Int
+  teamId        Int
+  rank          Int
+  points        Int
+  played        Int
+  won           Int
+  drawn         Int
+  lost          Int
+  goalsFor      Int
+  goalsAgainst  Int
+  goalDiff      Int
+  form          String?
+  groupName     String   @default("")
+  description   String?
+  sourceUpdatedAt DateTime @default(now())
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  season Season @relation(fields: [seasonId], references: [id], onDelete: Cascade)
+  team   Team   @relation(fields: [teamId], references: [id], onDelete: Cascade)
+
+  @@unique([seasonId, teamId, groupName])
+  @@index([seasonId, rank])
+  @@index([teamId])
+}
+
+/// Cached API-Football /fixtures/events row.
+model MatchEvent {
+  id          Int      @id @default(autoincrement())
+  matchId     Int
+  teamId      Int?
+  elapsed     Int
+  extra       Int?
+  type        String
+  detail      String?
+  playerName  String?
+  assistName  String?
+  source      String   @default("API_FOOTBALL")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  match Match @relation(fields: [matchId], references: [id], onDelete: Cascade)
+  team  Team? @relation(fields: [teamId], references: [id])
+
+  @@index([matchId, elapsed])
+  @@index([matchId, type])
+  @@index([teamId])
+}
+
+/// Compact cache of API-Football /teams/statistics for a season.
+model TeamSeasonApiStatistic {
+  id              Int      @id @default(autoincrement())
+  teamId          Int
+  seasonId        Int
+  form            String?
+  played          Int?
+  wins            Int?
+  draws           Int?
+  losses          Int?
+  goalsFor        Int?
+  goalsAgainst    Int?
+  cleanSheet      Int?
+  failedToScore   Int?
+  payloadJson     Json?
+  sourceUpdatedAt DateTime @default(now())
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  team   Team   @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  season Season @relation(fields: [seasonId], references: [id], onDelete: Cascade)
+
+  @@unique([teamId, seasonId])
+  @@index([seasonId])
+}
+
+enum PlayerLeaderboardKind {
+  TOP_SCORERS
+  TOP_ASSISTS
+  TOP_YELLOW
+  TOP_RED
+}
+
+/// Cached API-Football players/top* lists.
+model PlayerLeaderboardEntry {
+  id              Int                   @id @default(autoincrement())
+  seasonId        Int
+  leagueId        Int
+  kind            PlayerLeaderboardKind
+  rank            Int
+  playerId        Int
+  teamId          Int?
+  value           Int
+  sourceUpdatedAt DateTime              @default(now())
+  createdAt       DateTime              @default(now())
+  updatedAt       DateTime              @updatedAt
+
+  season Season @relation(fields: [seasonId], references: [id], onDelete: Cascade)
+  league League @relation(fields: [leagueId], references: [id], onDelete: Cascade)
+  player Player @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  team   Team?  @relation(fields: [teamId], references: [id])
+
+  @@unique([seasonId, leagueId, kind, playerId])
+  @@index([seasonId, leagueId, kind, rank])
 }

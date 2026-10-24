@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { MatchFormTip } from "@/components/match-form-tip";
 import { LeagueMark } from "@/lib/league-marks";
 import { dayPartLabel, getMatchDayPart } from "@/lib/match-daypart";
 import type { MatchWeatherSummary } from "@/lib/match-weather";
@@ -22,11 +23,13 @@ export type WeekFixtureRow = {
   leagueName: string;
   leagueApiId: number | null;
   leagueLogoUrl: string | null;
+  formTip?: string | null;
   home: {
     id: number;
     name: string;
     logoUrl: string | null;
     form: Array<"W" | "D" | "L">;
+    homeForm?: Array<"W" | "D" | "L">;
     isLeader: boolean;
     isHot: boolean;
     favoritePct: number | null;
@@ -36,6 +39,7 @@ export type WeekFixtureRow = {
     name: string;
     logoUrl: string | null;
     form: Array<"W" | "D" | "L">;
+    awayForm?: Array<"W" | "D" | "L">;
     isLeader: boolean;
     isHot: boolean;
     favoritePct: number | null;
@@ -333,6 +337,8 @@ export function MemberWeekFixtures({
                     </div>
                   </div>
                 </div>
+
+                <MatchFormTip className={styles.formTip} tip={row.formTip} />
               </article>
             );
           })

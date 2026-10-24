@@ -5,6 +5,8 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 
 import { useLanguage } from "@/components/language-provider";
+import { MatchFormTip } from "@/components/match-form-tip";
+import { buildMatchFormTip, type FormResult } from "@/lib/member-match-insight";
 
 import styles from "./member-value-opportunities.module.css";
 
@@ -23,6 +25,10 @@ export type MemberValueOpportunity = {
   modelOdds: number | null;
   confidenceScore: number;
   href: string;
+  homeRecentResults?: FormResult[];
+  awayRecentResults?: FormResult[];
+  homeVenueResults?: FormResult[];
+  awayVenueResults?: FormResult[];
 };
 
 type SortKey = "confidence" | "odds" | "kickoff";
@@ -285,6 +291,21 @@ export function MemberValueOpportunities({
                     </div>
                   </div>
                 </div>
+
+                <MatchFormTip
+                  tip={buildMatchFormTip(
+                    {
+                      homeTeam: item.homeTeam,
+                      awayTeam: item.awayTeam,
+                      homeRecentResults: item.homeRecentResults,
+                      awayRecentResults: item.awayRecentResults,
+                      homeVenueResults: item.homeVenueResults,
+                      awayVenueResults: item.awayVenueResults,
+                    },
+                    t,
+                  )}
+                  className={styles.formTip}
+                />
 
                 <Link className={styles.cta} href={item.href}>
                   {t("View match analysis")} →

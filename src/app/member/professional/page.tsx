@@ -10,6 +10,8 @@ import { ACTIVE_COMPETITIONS } from "@/config/competitions";
 import { requireMember } from "@/lib/auth-session";
 import { resolveMatchWeatherBatch } from "@/lib/match-weather";
 import { prisma } from "@/lib/prisma";
+import { translateUiText } from "@/i18n/dictionaries";
+import { buildMatchFormTip } from "@/lib/member-match-insight";
 import { buildRefereeProfileMap } from "@/lib/referee-profile";
 import { hasHotSupport } from "@/lib/team-display";
 import { loadDashboardPredictionSnapshot } from "@/lib/prediction-dashboard-snapshot";
@@ -87,12 +89,22 @@ export default async function ProfessionalDataPage({ searchParams }: { searchPar
     const current = leaderBySeason.get(seasonId);
     if (current === undefined || value > (points.get(`${seasonId}:${current}`) ?? -1)) leaderBySeason.set(seasonId, teamId);
   }
-  const recentForm = (teamId: number, kickoffAt: Date): FormResult[] => finishedMatches.filter(match => match.kickoffAt < kickoffAt && (match.homeTeamId === teamId || match.awayTeamId === teamId) && match.homeScore !== null && match.awayScore !== null).slice(-5).map(match => {
-    const home = match.homeTeamId === teamId;
-    const own = home ? match.homeScore! : match.awayScore!;
-    const opponent = home ? match.awayScore! : match.homeScore!;
-    return own > opponent ? "W" : own < opponent ? "L" : "D";
-  });
+  const recentForm = (teamId: number, kickoffAt: Date, side: "any" | "home" | "away" = "any"): FormResult[] =>
+    finishedMatches
+      .filter((match) => {
+        if (match.kickoffAt >= kickoffAt || match.homeScore === null || match.awayScore === null) return false;
+        if (side === "home") return match.homeTeamId === teamId;
+        if (side === "away") return match.awayTeamId === teamId;
+        return match.homeTeamId === teamId || match.awayTeamId === teamId;
+      })
+      .slice(-5)
+      .map((match) => {
+        const home = match.homeTeamId === teamId;
+        const own = home ? match.homeScore! : match.awayScore!;
+        const opponent = home ? match.awayScore! : match.homeScore!;
+        return own > opponent ? "W" : own < opponent ? "L" : "D";
+      });
+  const tipTranslate = (source: string) => translateUiText(source, "tr");
   if (view === "fixtures" && fixtures.length) {
     await syncMissingFixtureReferees(
       fixtures.map((match) => ({
@@ -143,10 +155,23 @@ export default async function ProfessionalDataPage({ searchParams }: { searchPar
       ? fixtures.map((match) => {
           const homeForm = recentForm(match.homeTeamId, match.kickoffAt);
           const awayForm = recentForm(match.awayTeamId, match.kickoffAt);
+          const homeVenueForm = recentForm(match.homeTeamId, match.kickoffAt, "home");
+          const awayVenueForm = recentForm(match.awayTeamId, match.kickoffAt, "away");
           const leader = leaderBySeason.get(match.seasonId);
           const prediction = predictionByMatch.get(match.id);
           const refereeName = match.referee?.trim() || null;
           const profile = refereeName ? refereeProfiles.get(refereeName) ?? null : null;
+          const formTip = buildMatchFormTip(
+            {
+              homeTeam: match.homeTeam.name,
+              awayTeam: match.awayTeam.name,
+              homeRecentResults: homeForm,
+              awayRecentResults: awayForm,
+              homeVenueResults: homeVenueForm,
+              awayVenueResults: awayVenueForm,
+            },
+            tipTranslate,
+          );
           return {
             id: match.id,
             kickoffAt: match.kickoffAt,
@@ -164,11 +189,13 @@ export default async function ProfessionalDataPage({ searchParams }: { searchPar
             leagueName: match.season.league.name,
             leagueApiId: match.season.league.apiId ?? null,
             leagueLogoUrl: match.season.league.logoUrl,
+            formTip,
             home: {
               id: match.homeTeamId,
               name: match.homeTeam.name,
               logoUrl: match.homeTeam.logoUrl,
               form: homeForm,
+              homeForm: homeVenueForm,
               isLeader: leader === match.homeTeamId,
               isHot: hasHotSupport(match.homeTeam.name),
               favoritePct:
@@ -179,6 +206,7 @@ export default async function ProfessionalDataPage({ searchParams }: { searchPar
               name: match.awayTeam.name,
               logoUrl: match.awayTeam.logoUrl,
               form: awayForm,
+              awayForm: awayVenueForm,
               isLeader: leader === match.awayTeamId,
               isHot: hasHotSupport(match.awayTeam.name),
               favoritePct:

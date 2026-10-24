@@ -355,6 +355,10 @@ export type TeamWhereInput = {
   dataQualitySnapshots?: Prisma.DataQualitySnapshotListRelationFilter
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceListRelationFilter
   matchStatistics?: Prisma.MatchTeamStatisticListRelationFilter
+  leagueStandings?: Prisma.LeagueStandingListRelationFilter
+  matchEvents?: Prisma.MatchEventListRelationFilter
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticListRelationFilter
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryListRelationFilter
 }
 
 export type TeamOrderByWithRelationInput = {
@@ -391,6 +395,10 @@ export type TeamOrderByWithRelationInput = {
   dataQualitySnapshots?: Prisma.DataQualitySnapshotOrderByRelationAggregateInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceOrderByRelationAggregateInput
   matchStatistics?: Prisma.MatchTeamStatisticOrderByRelationAggregateInput
+  leagueStandings?: Prisma.LeagueStandingOrderByRelationAggregateInput
+  matchEvents?: Prisma.MatchEventOrderByRelationAggregateInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticOrderByRelationAggregateInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryOrderByRelationAggregateInput
 }
 
 export type TeamWhereUniqueInput = Prisma.AtLeast<{
@@ -430,6 +438,10 @@ export type TeamWhereUniqueInput = Prisma.AtLeast<{
   dataQualitySnapshots?: Prisma.DataQualitySnapshotListRelationFilter
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceListRelationFilter
   matchStatistics?: Prisma.MatchTeamStatisticListRelationFilter
+  leagueStandings?: Prisma.LeagueStandingListRelationFilter
+  matchEvents?: Prisma.MatchEventListRelationFilter
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticListRelationFilter
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryListRelationFilter
 }, "id" | "apiId">
 
 export type TeamOrderByWithAggregationInput = {
@@ -514,6 +526,10 @@ export type TeamCreateInput = {
   dataQualitySnapshots?: Prisma.DataQualitySnapshotCreateNestedManyWithoutTeamInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceCreateNestedManyWithoutTeamInput
   matchStatistics?: Prisma.MatchTeamStatisticCreateNestedManyWithoutTeamInput
+  leagueStandings?: Prisma.LeagueStandingCreateNestedManyWithoutTeamInput
+  matchEvents?: Prisma.MatchEventCreateNestedManyWithoutTeamInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticCreateNestedManyWithoutTeamInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryCreateNestedManyWithoutTeamInput
 }
 
 export type TeamUncheckedCreateInput = {
@@ -549,6 +565,10 @@ export type TeamUncheckedCreateInput = {
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUncheckedCreateNestedManyWithoutTeamInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUncheckedCreateNestedManyWithoutTeamInput
   matchStatistics?: Prisma.MatchTeamStatisticUncheckedCreateNestedManyWithoutTeamInput
+  leagueStandings?: Prisma.LeagueStandingUncheckedCreateNestedManyWithoutTeamInput
+  matchEvents?: Prisma.MatchEventUncheckedCreateNestedManyWithoutTeamInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUncheckedCreateNestedManyWithoutTeamInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUncheckedCreateNestedManyWithoutTeamInput
 }
 
 export type TeamUpdateInput = {
@@ -583,6 +603,10 @@ export type TeamUpdateInput = {
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUpdateManyWithoutTeamNestedInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUpdateManyWithoutTeamNestedInput
   matchStatistics?: Prisma.MatchTeamStatisticUpdateManyWithoutTeamNestedInput
+  leagueStandings?: Prisma.LeagueStandingUpdateManyWithoutTeamNestedInput
+  matchEvents?: Prisma.MatchEventUpdateManyWithoutTeamNestedInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUpdateManyWithoutTeamNestedInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUpdateManyWithoutTeamNestedInput
 }
 
 export type TeamUncheckedUpdateInput = {
@@ -618,6 +642,10 @@ export type TeamUncheckedUpdateInput = {
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUncheckedUpdateManyWithoutTeamNestedInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUncheckedUpdateManyWithoutTeamNestedInput
   matchStatistics?: Prisma.MatchTeamStatisticUncheckedUpdateManyWithoutTeamNestedInput
+  leagueStandings?: Prisma.LeagueStandingUncheckedUpdateManyWithoutTeamNestedInput
+  matchEvents?: Prisma.MatchEventUncheckedUpdateManyWithoutTeamNestedInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUncheckedUpdateManyWithoutTeamNestedInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUncheckedUpdateManyWithoutTeamNestedInput
 }
 
 export type TeamCreateManyInput = {
@@ -1026,6 +1054,66 @@ export type TeamUpdateOneRequiredWithoutMatchStatisticsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.TeamUpdateToOneWithWhereWithoutMatchStatisticsInput, Prisma.TeamUpdateWithoutMatchStatisticsInput>, Prisma.TeamUncheckedUpdateWithoutMatchStatisticsInput>
 }
 
+export type TeamCreateNestedOneWithoutLeagueStandingsInput = {
+  create?: Prisma.XOR<Prisma.TeamCreateWithoutLeagueStandingsInput, Prisma.TeamUncheckedCreateWithoutLeagueStandingsInput>
+  connectOrCreate?: Prisma.TeamCreateOrConnectWithoutLeagueStandingsInput
+  connect?: Prisma.TeamWhereUniqueInput
+}
+
+export type TeamUpdateOneRequiredWithoutLeagueStandingsNestedInput = {
+  create?: Prisma.XOR<Prisma.TeamCreateWithoutLeagueStandingsInput, Prisma.TeamUncheckedCreateWithoutLeagueStandingsInput>
+  connectOrCreate?: Prisma.TeamCreateOrConnectWithoutLeagueStandingsInput
+  upsert?: Prisma.TeamUpsertWithoutLeagueStandingsInput
+  connect?: Prisma.TeamWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TeamUpdateToOneWithWhereWithoutLeagueStandingsInput, Prisma.TeamUpdateWithoutLeagueStandingsInput>, Prisma.TeamUncheckedUpdateWithoutLeagueStandingsInput>
+}
+
+export type TeamCreateNestedOneWithoutMatchEventsInput = {
+  create?: Prisma.XOR<Prisma.TeamCreateWithoutMatchEventsInput, Prisma.TeamUncheckedCreateWithoutMatchEventsInput>
+  connectOrCreate?: Prisma.TeamCreateOrConnectWithoutMatchEventsInput
+  connect?: Prisma.TeamWhereUniqueInput
+}
+
+export type TeamUpdateOneWithoutMatchEventsNestedInput = {
+  create?: Prisma.XOR<Prisma.TeamCreateWithoutMatchEventsInput, Prisma.TeamUncheckedCreateWithoutMatchEventsInput>
+  connectOrCreate?: Prisma.TeamCreateOrConnectWithoutMatchEventsInput
+  upsert?: Prisma.TeamUpsertWithoutMatchEventsInput
+  disconnect?: Prisma.TeamWhereInput | boolean
+  delete?: Prisma.TeamWhereInput | boolean
+  connect?: Prisma.TeamWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TeamUpdateToOneWithWhereWithoutMatchEventsInput, Prisma.TeamUpdateWithoutMatchEventsInput>, Prisma.TeamUncheckedUpdateWithoutMatchEventsInput>
+}
+
+export type TeamCreateNestedOneWithoutTeamSeasonApiStatisticsInput = {
+  create?: Prisma.XOR<Prisma.TeamCreateWithoutTeamSeasonApiStatisticsInput, Prisma.TeamUncheckedCreateWithoutTeamSeasonApiStatisticsInput>
+  connectOrCreate?: Prisma.TeamCreateOrConnectWithoutTeamSeasonApiStatisticsInput
+  connect?: Prisma.TeamWhereUniqueInput
+}
+
+export type TeamUpdateOneRequiredWithoutTeamSeasonApiStatisticsNestedInput = {
+  create?: Prisma.XOR<Prisma.TeamCreateWithoutTeamSeasonApiStatisticsInput, Prisma.TeamUncheckedCreateWithoutTeamSeasonApiStatisticsInput>
+  connectOrCreate?: Prisma.TeamCreateOrConnectWithoutTeamSeasonApiStatisticsInput
+  upsert?: Prisma.TeamUpsertWithoutTeamSeasonApiStatisticsInput
+  connect?: Prisma.TeamWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TeamUpdateToOneWithWhereWithoutTeamSeasonApiStatisticsInput, Prisma.TeamUpdateWithoutTeamSeasonApiStatisticsInput>, Prisma.TeamUncheckedUpdateWithoutTeamSeasonApiStatisticsInput>
+}
+
+export type TeamCreateNestedOneWithoutPlayerLeaderboardEntriesInput = {
+  create?: Prisma.XOR<Prisma.TeamCreateWithoutPlayerLeaderboardEntriesInput, Prisma.TeamUncheckedCreateWithoutPlayerLeaderboardEntriesInput>
+  connectOrCreate?: Prisma.TeamCreateOrConnectWithoutPlayerLeaderboardEntriesInput
+  connect?: Prisma.TeamWhereUniqueInput
+}
+
+export type TeamUpdateOneWithoutPlayerLeaderboardEntriesNestedInput = {
+  create?: Prisma.XOR<Prisma.TeamCreateWithoutPlayerLeaderboardEntriesInput, Prisma.TeamUncheckedCreateWithoutPlayerLeaderboardEntriesInput>
+  connectOrCreate?: Prisma.TeamCreateOrConnectWithoutPlayerLeaderboardEntriesInput
+  upsert?: Prisma.TeamUpsertWithoutPlayerLeaderboardEntriesInput
+  disconnect?: Prisma.TeamWhereInput | boolean
+  delete?: Prisma.TeamWhereInput | boolean
+  connect?: Prisma.TeamWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TeamUpdateToOneWithWhereWithoutPlayerLeaderboardEntriesInput, Prisma.TeamUpdateWithoutPlayerLeaderboardEntriesInput>, Prisma.TeamUncheckedUpdateWithoutPlayerLeaderboardEntriesInput>
+}
+
 export type TeamCreateWithoutCountryInput = {
   apiId: number
   name: string
@@ -1057,6 +1145,10 @@ export type TeamCreateWithoutCountryInput = {
   dataQualitySnapshots?: Prisma.DataQualitySnapshotCreateNestedManyWithoutTeamInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceCreateNestedManyWithoutTeamInput
   matchStatistics?: Prisma.MatchTeamStatisticCreateNestedManyWithoutTeamInput
+  leagueStandings?: Prisma.LeagueStandingCreateNestedManyWithoutTeamInput
+  matchEvents?: Prisma.MatchEventCreateNestedManyWithoutTeamInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticCreateNestedManyWithoutTeamInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryCreateNestedManyWithoutTeamInput
 }
 
 export type TeamUncheckedCreateWithoutCountryInput = {
@@ -1091,6 +1183,10 @@ export type TeamUncheckedCreateWithoutCountryInput = {
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUncheckedCreateNestedManyWithoutTeamInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUncheckedCreateNestedManyWithoutTeamInput
   matchStatistics?: Prisma.MatchTeamStatisticUncheckedCreateNestedManyWithoutTeamInput
+  leagueStandings?: Prisma.LeagueStandingUncheckedCreateNestedManyWithoutTeamInput
+  matchEvents?: Prisma.MatchEventUncheckedCreateNestedManyWithoutTeamInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUncheckedCreateNestedManyWithoutTeamInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUncheckedCreateNestedManyWithoutTeamInput
 }
 
 export type TeamCreateOrConnectWithoutCountryInput = {
@@ -1174,6 +1270,10 @@ export type TeamCreateWithoutPlayerMatchPerformancesInput = {
   teamSeasons?: Prisma.TeamSeasonCreateNestedManyWithoutTeamInput
   dataQualitySnapshots?: Prisma.DataQualitySnapshotCreateNestedManyWithoutTeamInput
   matchStatistics?: Prisma.MatchTeamStatisticCreateNestedManyWithoutTeamInput
+  leagueStandings?: Prisma.LeagueStandingCreateNestedManyWithoutTeamInput
+  matchEvents?: Prisma.MatchEventCreateNestedManyWithoutTeamInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticCreateNestedManyWithoutTeamInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryCreateNestedManyWithoutTeamInput
 }
 
 export type TeamUncheckedCreateWithoutPlayerMatchPerformancesInput = {
@@ -1208,6 +1308,10 @@ export type TeamUncheckedCreateWithoutPlayerMatchPerformancesInput = {
   teamSeasons?: Prisma.TeamSeasonUncheckedCreateNestedManyWithoutTeamInput
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUncheckedCreateNestedManyWithoutTeamInput
   matchStatistics?: Prisma.MatchTeamStatisticUncheckedCreateNestedManyWithoutTeamInput
+  leagueStandings?: Prisma.LeagueStandingUncheckedCreateNestedManyWithoutTeamInput
+  matchEvents?: Prisma.MatchEventUncheckedCreateNestedManyWithoutTeamInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUncheckedCreateNestedManyWithoutTeamInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUncheckedCreateNestedManyWithoutTeamInput
 }
 
 export type TeamCreateOrConnectWithoutPlayerMatchPerformancesInput = {
@@ -1257,6 +1361,10 @@ export type TeamUpdateWithoutPlayerMatchPerformancesInput = {
   teamSeasons?: Prisma.TeamSeasonUpdateManyWithoutTeamNestedInput
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUpdateManyWithoutTeamNestedInput
   matchStatistics?: Prisma.MatchTeamStatisticUpdateManyWithoutTeamNestedInput
+  leagueStandings?: Prisma.LeagueStandingUpdateManyWithoutTeamNestedInput
+  matchEvents?: Prisma.MatchEventUpdateManyWithoutTeamNestedInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUpdateManyWithoutTeamNestedInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUpdateManyWithoutTeamNestedInput
 }
 
 export type TeamUncheckedUpdateWithoutPlayerMatchPerformancesInput = {
@@ -1291,6 +1399,10 @@ export type TeamUncheckedUpdateWithoutPlayerMatchPerformancesInput = {
   teamSeasons?: Prisma.TeamSeasonUncheckedUpdateManyWithoutTeamNestedInput
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUncheckedUpdateManyWithoutTeamNestedInput
   matchStatistics?: Prisma.MatchTeamStatisticUncheckedUpdateManyWithoutTeamNestedInput
+  leagueStandings?: Prisma.LeagueStandingUncheckedUpdateManyWithoutTeamNestedInput
+  matchEvents?: Prisma.MatchEventUncheckedUpdateManyWithoutTeamNestedInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUncheckedUpdateManyWithoutTeamNestedInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUncheckedUpdateManyWithoutTeamNestedInput
 }
 
 export type TeamCreateWithoutHomeMatchesInput = {
@@ -1324,6 +1436,10 @@ export type TeamCreateWithoutHomeMatchesInput = {
   dataQualitySnapshots?: Prisma.DataQualitySnapshotCreateNestedManyWithoutTeamInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceCreateNestedManyWithoutTeamInput
   matchStatistics?: Prisma.MatchTeamStatisticCreateNestedManyWithoutTeamInput
+  leagueStandings?: Prisma.LeagueStandingCreateNestedManyWithoutTeamInput
+  matchEvents?: Prisma.MatchEventCreateNestedManyWithoutTeamInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticCreateNestedManyWithoutTeamInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryCreateNestedManyWithoutTeamInput
 }
 
 export type TeamUncheckedCreateWithoutHomeMatchesInput = {
@@ -1358,6 +1474,10 @@ export type TeamUncheckedCreateWithoutHomeMatchesInput = {
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUncheckedCreateNestedManyWithoutTeamInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUncheckedCreateNestedManyWithoutTeamInput
   matchStatistics?: Prisma.MatchTeamStatisticUncheckedCreateNestedManyWithoutTeamInput
+  leagueStandings?: Prisma.LeagueStandingUncheckedCreateNestedManyWithoutTeamInput
+  matchEvents?: Prisma.MatchEventUncheckedCreateNestedManyWithoutTeamInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUncheckedCreateNestedManyWithoutTeamInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUncheckedCreateNestedManyWithoutTeamInput
 }
 
 export type TeamCreateOrConnectWithoutHomeMatchesInput = {
@@ -1396,6 +1516,10 @@ export type TeamCreateWithoutAwayMatchesInput = {
   dataQualitySnapshots?: Prisma.DataQualitySnapshotCreateNestedManyWithoutTeamInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceCreateNestedManyWithoutTeamInput
   matchStatistics?: Prisma.MatchTeamStatisticCreateNestedManyWithoutTeamInput
+  leagueStandings?: Prisma.LeagueStandingCreateNestedManyWithoutTeamInput
+  matchEvents?: Prisma.MatchEventCreateNestedManyWithoutTeamInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticCreateNestedManyWithoutTeamInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryCreateNestedManyWithoutTeamInput
 }
 
 export type TeamUncheckedCreateWithoutAwayMatchesInput = {
@@ -1430,6 +1554,10 @@ export type TeamUncheckedCreateWithoutAwayMatchesInput = {
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUncheckedCreateNestedManyWithoutTeamInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUncheckedCreateNestedManyWithoutTeamInput
   matchStatistics?: Prisma.MatchTeamStatisticUncheckedCreateNestedManyWithoutTeamInput
+  leagueStandings?: Prisma.LeagueStandingUncheckedCreateNestedManyWithoutTeamInput
+  matchEvents?: Prisma.MatchEventUncheckedCreateNestedManyWithoutTeamInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUncheckedCreateNestedManyWithoutTeamInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUncheckedCreateNestedManyWithoutTeamInput
 }
 
 export type TeamCreateOrConnectWithoutAwayMatchesInput = {
@@ -1479,6 +1607,10 @@ export type TeamUpdateWithoutHomeMatchesInput = {
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUpdateManyWithoutTeamNestedInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUpdateManyWithoutTeamNestedInput
   matchStatistics?: Prisma.MatchTeamStatisticUpdateManyWithoutTeamNestedInput
+  leagueStandings?: Prisma.LeagueStandingUpdateManyWithoutTeamNestedInput
+  matchEvents?: Prisma.MatchEventUpdateManyWithoutTeamNestedInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUpdateManyWithoutTeamNestedInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUpdateManyWithoutTeamNestedInput
 }
 
 export type TeamUncheckedUpdateWithoutHomeMatchesInput = {
@@ -1513,6 +1645,10 @@ export type TeamUncheckedUpdateWithoutHomeMatchesInput = {
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUncheckedUpdateManyWithoutTeamNestedInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUncheckedUpdateManyWithoutTeamNestedInput
   matchStatistics?: Prisma.MatchTeamStatisticUncheckedUpdateManyWithoutTeamNestedInput
+  leagueStandings?: Prisma.LeagueStandingUncheckedUpdateManyWithoutTeamNestedInput
+  matchEvents?: Prisma.MatchEventUncheckedUpdateManyWithoutTeamNestedInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUncheckedUpdateManyWithoutTeamNestedInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUncheckedUpdateManyWithoutTeamNestedInput
 }
 
 export type TeamUpsertWithoutAwayMatchesInput = {
@@ -1557,6 +1693,10 @@ export type TeamUpdateWithoutAwayMatchesInput = {
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUpdateManyWithoutTeamNestedInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUpdateManyWithoutTeamNestedInput
   matchStatistics?: Prisma.MatchTeamStatisticUpdateManyWithoutTeamNestedInput
+  leagueStandings?: Prisma.LeagueStandingUpdateManyWithoutTeamNestedInput
+  matchEvents?: Prisma.MatchEventUpdateManyWithoutTeamNestedInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUpdateManyWithoutTeamNestedInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUpdateManyWithoutTeamNestedInput
 }
 
 export type TeamUncheckedUpdateWithoutAwayMatchesInput = {
@@ -1591,6 +1731,10 @@ export type TeamUncheckedUpdateWithoutAwayMatchesInput = {
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUncheckedUpdateManyWithoutTeamNestedInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUncheckedUpdateManyWithoutTeamNestedInput
   matchStatistics?: Prisma.MatchTeamStatisticUncheckedUpdateManyWithoutTeamNestedInput
+  leagueStandings?: Prisma.LeagueStandingUncheckedUpdateManyWithoutTeamNestedInput
+  matchEvents?: Prisma.MatchEventUncheckedUpdateManyWithoutTeamNestedInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUncheckedUpdateManyWithoutTeamNestedInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUncheckedUpdateManyWithoutTeamNestedInput
 }
 
 export type TeamCreateWithoutPlayersInput = {
@@ -1624,6 +1768,10 @@ export type TeamCreateWithoutPlayersInput = {
   dataQualitySnapshots?: Prisma.DataQualitySnapshotCreateNestedManyWithoutTeamInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceCreateNestedManyWithoutTeamInput
   matchStatistics?: Prisma.MatchTeamStatisticCreateNestedManyWithoutTeamInput
+  leagueStandings?: Prisma.LeagueStandingCreateNestedManyWithoutTeamInput
+  matchEvents?: Prisma.MatchEventCreateNestedManyWithoutTeamInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticCreateNestedManyWithoutTeamInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryCreateNestedManyWithoutTeamInput
 }
 
 export type TeamUncheckedCreateWithoutPlayersInput = {
@@ -1658,6 +1806,10 @@ export type TeamUncheckedCreateWithoutPlayersInput = {
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUncheckedCreateNestedManyWithoutTeamInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUncheckedCreateNestedManyWithoutTeamInput
   matchStatistics?: Prisma.MatchTeamStatisticUncheckedCreateNestedManyWithoutTeamInput
+  leagueStandings?: Prisma.LeagueStandingUncheckedCreateNestedManyWithoutTeamInput
+  matchEvents?: Prisma.MatchEventUncheckedCreateNestedManyWithoutTeamInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUncheckedCreateNestedManyWithoutTeamInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUncheckedCreateNestedManyWithoutTeamInput
 }
 
 export type TeamCreateOrConnectWithoutPlayersInput = {
@@ -1707,6 +1859,10 @@ export type TeamUpdateWithoutPlayersInput = {
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUpdateManyWithoutTeamNestedInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUpdateManyWithoutTeamNestedInput
   matchStatistics?: Prisma.MatchTeamStatisticUpdateManyWithoutTeamNestedInput
+  leagueStandings?: Prisma.LeagueStandingUpdateManyWithoutTeamNestedInput
+  matchEvents?: Prisma.MatchEventUpdateManyWithoutTeamNestedInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUpdateManyWithoutTeamNestedInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUpdateManyWithoutTeamNestedInput
 }
 
 export type TeamUncheckedUpdateWithoutPlayersInput = {
@@ -1741,6 +1897,10 @@ export type TeamUncheckedUpdateWithoutPlayersInput = {
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUncheckedUpdateManyWithoutTeamNestedInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUncheckedUpdateManyWithoutTeamNestedInput
   matchStatistics?: Prisma.MatchTeamStatisticUncheckedUpdateManyWithoutTeamNestedInput
+  leagueStandings?: Prisma.LeagueStandingUncheckedUpdateManyWithoutTeamNestedInput
+  matchEvents?: Prisma.MatchEventUncheckedUpdateManyWithoutTeamNestedInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUncheckedUpdateManyWithoutTeamNestedInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUncheckedUpdateManyWithoutTeamNestedInput
 }
 
 export type TeamCreateWithoutPlayerSeasonStatisticsInput = {
@@ -1774,6 +1934,10 @@ export type TeamCreateWithoutPlayerSeasonStatisticsInput = {
   dataQualitySnapshots?: Prisma.DataQualitySnapshotCreateNestedManyWithoutTeamInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceCreateNestedManyWithoutTeamInput
   matchStatistics?: Prisma.MatchTeamStatisticCreateNestedManyWithoutTeamInput
+  leagueStandings?: Prisma.LeagueStandingCreateNestedManyWithoutTeamInput
+  matchEvents?: Prisma.MatchEventCreateNestedManyWithoutTeamInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticCreateNestedManyWithoutTeamInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryCreateNestedManyWithoutTeamInput
 }
 
 export type TeamUncheckedCreateWithoutPlayerSeasonStatisticsInput = {
@@ -1808,6 +1972,10 @@ export type TeamUncheckedCreateWithoutPlayerSeasonStatisticsInput = {
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUncheckedCreateNestedManyWithoutTeamInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUncheckedCreateNestedManyWithoutTeamInput
   matchStatistics?: Prisma.MatchTeamStatisticUncheckedCreateNestedManyWithoutTeamInput
+  leagueStandings?: Prisma.LeagueStandingUncheckedCreateNestedManyWithoutTeamInput
+  matchEvents?: Prisma.MatchEventUncheckedCreateNestedManyWithoutTeamInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUncheckedCreateNestedManyWithoutTeamInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUncheckedCreateNestedManyWithoutTeamInput
 }
 
 export type TeamCreateOrConnectWithoutPlayerSeasonStatisticsInput = {
@@ -1857,6 +2025,10 @@ export type TeamUpdateWithoutPlayerSeasonStatisticsInput = {
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUpdateManyWithoutTeamNestedInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUpdateManyWithoutTeamNestedInput
   matchStatistics?: Prisma.MatchTeamStatisticUpdateManyWithoutTeamNestedInput
+  leagueStandings?: Prisma.LeagueStandingUpdateManyWithoutTeamNestedInput
+  matchEvents?: Prisma.MatchEventUpdateManyWithoutTeamNestedInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUpdateManyWithoutTeamNestedInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUpdateManyWithoutTeamNestedInput
 }
 
 export type TeamUncheckedUpdateWithoutPlayerSeasonStatisticsInput = {
@@ -1891,6 +2063,10 @@ export type TeamUncheckedUpdateWithoutPlayerSeasonStatisticsInput = {
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUncheckedUpdateManyWithoutTeamNestedInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUncheckedUpdateManyWithoutTeamNestedInput
   matchStatistics?: Prisma.MatchTeamStatisticUncheckedUpdateManyWithoutTeamNestedInput
+  leagueStandings?: Prisma.LeagueStandingUncheckedUpdateManyWithoutTeamNestedInput
+  matchEvents?: Prisma.MatchEventUncheckedUpdateManyWithoutTeamNestedInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUncheckedUpdateManyWithoutTeamNestedInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUncheckedUpdateManyWithoutTeamNestedInput
 }
 
 export type TeamCreateWithoutInjuriesInput = {
@@ -1924,6 +2100,10 @@ export type TeamCreateWithoutInjuriesInput = {
   dataQualitySnapshots?: Prisma.DataQualitySnapshotCreateNestedManyWithoutTeamInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceCreateNestedManyWithoutTeamInput
   matchStatistics?: Prisma.MatchTeamStatisticCreateNestedManyWithoutTeamInput
+  leagueStandings?: Prisma.LeagueStandingCreateNestedManyWithoutTeamInput
+  matchEvents?: Prisma.MatchEventCreateNestedManyWithoutTeamInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticCreateNestedManyWithoutTeamInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryCreateNestedManyWithoutTeamInput
 }
 
 export type TeamUncheckedCreateWithoutInjuriesInput = {
@@ -1958,6 +2138,10 @@ export type TeamUncheckedCreateWithoutInjuriesInput = {
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUncheckedCreateNestedManyWithoutTeamInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUncheckedCreateNestedManyWithoutTeamInput
   matchStatistics?: Prisma.MatchTeamStatisticUncheckedCreateNestedManyWithoutTeamInput
+  leagueStandings?: Prisma.LeagueStandingUncheckedCreateNestedManyWithoutTeamInput
+  matchEvents?: Prisma.MatchEventUncheckedCreateNestedManyWithoutTeamInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUncheckedCreateNestedManyWithoutTeamInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUncheckedCreateNestedManyWithoutTeamInput
 }
 
 export type TeamCreateOrConnectWithoutInjuriesInput = {
@@ -2007,6 +2191,10 @@ export type TeamUpdateWithoutInjuriesInput = {
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUpdateManyWithoutTeamNestedInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUpdateManyWithoutTeamNestedInput
   matchStatistics?: Prisma.MatchTeamStatisticUpdateManyWithoutTeamNestedInput
+  leagueStandings?: Prisma.LeagueStandingUpdateManyWithoutTeamNestedInput
+  matchEvents?: Prisma.MatchEventUpdateManyWithoutTeamNestedInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUpdateManyWithoutTeamNestedInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUpdateManyWithoutTeamNestedInput
 }
 
 export type TeamUncheckedUpdateWithoutInjuriesInput = {
@@ -2041,6 +2229,10 @@ export type TeamUncheckedUpdateWithoutInjuriesInput = {
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUncheckedUpdateManyWithoutTeamNestedInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUncheckedUpdateManyWithoutTeamNestedInput
   matchStatistics?: Prisma.MatchTeamStatisticUncheckedUpdateManyWithoutTeamNestedInput
+  leagueStandings?: Prisma.LeagueStandingUncheckedUpdateManyWithoutTeamNestedInput
+  matchEvents?: Prisma.MatchEventUncheckedUpdateManyWithoutTeamNestedInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUncheckedUpdateManyWithoutTeamNestedInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUncheckedUpdateManyWithoutTeamNestedInput
 }
 
 export type TeamCreateWithoutLineupsInput = {
@@ -2074,6 +2266,10 @@ export type TeamCreateWithoutLineupsInput = {
   dataQualitySnapshots?: Prisma.DataQualitySnapshotCreateNestedManyWithoutTeamInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceCreateNestedManyWithoutTeamInput
   matchStatistics?: Prisma.MatchTeamStatisticCreateNestedManyWithoutTeamInput
+  leagueStandings?: Prisma.LeagueStandingCreateNestedManyWithoutTeamInput
+  matchEvents?: Prisma.MatchEventCreateNestedManyWithoutTeamInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticCreateNestedManyWithoutTeamInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryCreateNestedManyWithoutTeamInput
 }
 
 export type TeamUncheckedCreateWithoutLineupsInput = {
@@ -2108,6 +2304,10 @@ export type TeamUncheckedCreateWithoutLineupsInput = {
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUncheckedCreateNestedManyWithoutTeamInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUncheckedCreateNestedManyWithoutTeamInput
   matchStatistics?: Prisma.MatchTeamStatisticUncheckedCreateNestedManyWithoutTeamInput
+  leagueStandings?: Prisma.LeagueStandingUncheckedCreateNestedManyWithoutTeamInput
+  matchEvents?: Prisma.MatchEventUncheckedCreateNestedManyWithoutTeamInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUncheckedCreateNestedManyWithoutTeamInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUncheckedCreateNestedManyWithoutTeamInput
 }
 
 export type TeamCreateOrConnectWithoutLineupsInput = {
@@ -2157,6 +2357,10 @@ export type TeamUpdateWithoutLineupsInput = {
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUpdateManyWithoutTeamNestedInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUpdateManyWithoutTeamNestedInput
   matchStatistics?: Prisma.MatchTeamStatisticUpdateManyWithoutTeamNestedInput
+  leagueStandings?: Prisma.LeagueStandingUpdateManyWithoutTeamNestedInput
+  matchEvents?: Prisma.MatchEventUpdateManyWithoutTeamNestedInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUpdateManyWithoutTeamNestedInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUpdateManyWithoutTeamNestedInput
 }
 
 export type TeamUncheckedUpdateWithoutLineupsInput = {
@@ -2191,6 +2395,10 @@ export type TeamUncheckedUpdateWithoutLineupsInput = {
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUncheckedUpdateManyWithoutTeamNestedInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUncheckedUpdateManyWithoutTeamNestedInput
   matchStatistics?: Prisma.MatchTeamStatisticUncheckedUpdateManyWithoutTeamNestedInput
+  leagueStandings?: Prisma.LeagueStandingUncheckedUpdateManyWithoutTeamNestedInput
+  matchEvents?: Prisma.MatchEventUncheckedUpdateManyWithoutTeamNestedInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUncheckedUpdateManyWithoutTeamNestedInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUncheckedUpdateManyWithoutTeamNestedInput
 }
 
 export type TeamCreateWithoutLineupPlayersInput = {
@@ -2224,6 +2432,10 @@ export type TeamCreateWithoutLineupPlayersInput = {
   dataQualitySnapshots?: Prisma.DataQualitySnapshotCreateNestedManyWithoutTeamInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceCreateNestedManyWithoutTeamInput
   matchStatistics?: Prisma.MatchTeamStatisticCreateNestedManyWithoutTeamInput
+  leagueStandings?: Prisma.LeagueStandingCreateNestedManyWithoutTeamInput
+  matchEvents?: Prisma.MatchEventCreateNestedManyWithoutTeamInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticCreateNestedManyWithoutTeamInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryCreateNestedManyWithoutTeamInput
 }
 
 export type TeamUncheckedCreateWithoutLineupPlayersInput = {
@@ -2258,6 +2470,10 @@ export type TeamUncheckedCreateWithoutLineupPlayersInput = {
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUncheckedCreateNestedManyWithoutTeamInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUncheckedCreateNestedManyWithoutTeamInput
   matchStatistics?: Prisma.MatchTeamStatisticUncheckedCreateNestedManyWithoutTeamInput
+  leagueStandings?: Prisma.LeagueStandingUncheckedCreateNestedManyWithoutTeamInput
+  matchEvents?: Prisma.MatchEventUncheckedCreateNestedManyWithoutTeamInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUncheckedCreateNestedManyWithoutTeamInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUncheckedCreateNestedManyWithoutTeamInput
 }
 
 export type TeamCreateOrConnectWithoutLineupPlayersInput = {
@@ -2307,6 +2523,10 @@ export type TeamUpdateWithoutLineupPlayersInput = {
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUpdateManyWithoutTeamNestedInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUpdateManyWithoutTeamNestedInput
   matchStatistics?: Prisma.MatchTeamStatisticUpdateManyWithoutTeamNestedInput
+  leagueStandings?: Prisma.LeagueStandingUpdateManyWithoutTeamNestedInput
+  matchEvents?: Prisma.MatchEventUpdateManyWithoutTeamNestedInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUpdateManyWithoutTeamNestedInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUpdateManyWithoutTeamNestedInput
 }
 
 export type TeamUncheckedUpdateWithoutLineupPlayersInput = {
@@ -2341,6 +2561,10 @@ export type TeamUncheckedUpdateWithoutLineupPlayersInput = {
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUncheckedUpdateManyWithoutTeamNestedInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUncheckedUpdateManyWithoutTeamNestedInput
   matchStatistics?: Prisma.MatchTeamStatisticUncheckedUpdateManyWithoutTeamNestedInput
+  leagueStandings?: Prisma.LeagueStandingUncheckedUpdateManyWithoutTeamNestedInput
+  matchEvents?: Prisma.MatchEventUncheckedUpdateManyWithoutTeamNestedInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUncheckedUpdateManyWithoutTeamNestedInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUncheckedUpdateManyWithoutTeamNestedInput
 }
 
 export type TeamCreateWithoutPlayerImpactScoresInput = {
@@ -2374,6 +2598,10 @@ export type TeamCreateWithoutPlayerImpactScoresInput = {
   dataQualitySnapshots?: Prisma.DataQualitySnapshotCreateNestedManyWithoutTeamInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceCreateNestedManyWithoutTeamInput
   matchStatistics?: Prisma.MatchTeamStatisticCreateNestedManyWithoutTeamInput
+  leagueStandings?: Prisma.LeagueStandingCreateNestedManyWithoutTeamInput
+  matchEvents?: Prisma.MatchEventCreateNestedManyWithoutTeamInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticCreateNestedManyWithoutTeamInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryCreateNestedManyWithoutTeamInput
 }
 
 export type TeamUncheckedCreateWithoutPlayerImpactScoresInput = {
@@ -2408,6 +2636,10 @@ export type TeamUncheckedCreateWithoutPlayerImpactScoresInput = {
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUncheckedCreateNestedManyWithoutTeamInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUncheckedCreateNestedManyWithoutTeamInput
   matchStatistics?: Prisma.MatchTeamStatisticUncheckedCreateNestedManyWithoutTeamInput
+  leagueStandings?: Prisma.LeagueStandingUncheckedCreateNestedManyWithoutTeamInput
+  matchEvents?: Prisma.MatchEventUncheckedCreateNestedManyWithoutTeamInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUncheckedCreateNestedManyWithoutTeamInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUncheckedCreateNestedManyWithoutTeamInput
 }
 
 export type TeamCreateOrConnectWithoutPlayerImpactScoresInput = {
@@ -2457,6 +2689,10 @@ export type TeamUpdateWithoutPlayerImpactScoresInput = {
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUpdateManyWithoutTeamNestedInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUpdateManyWithoutTeamNestedInput
   matchStatistics?: Prisma.MatchTeamStatisticUpdateManyWithoutTeamNestedInput
+  leagueStandings?: Prisma.LeagueStandingUpdateManyWithoutTeamNestedInput
+  matchEvents?: Prisma.MatchEventUpdateManyWithoutTeamNestedInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUpdateManyWithoutTeamNestedInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUpdateManyWithoutTeamNestedInput
 }
 
 export type TeamUncheckedUpdateWithoutPlayerImpactScoresInput = {
@@ -2491,6 +2727,10 @@ export type TeamUncheckedUpdateWithoutPlayerImpactScoresInput = {
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUncheckedUpdateManyWithoutTeamNestedInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUncheckedUpdateManyWithoutTeamNestedInput
   matchStatistics?: Prisma.MatchTeamStatisticUncheckedUpdateManyWithoutTeamNestedInput
+  leagueStandings?: Prisma.LeagueStandingUncheckedUpdateManyWithoutTeamNestedInput
+  matchEvents?: Prisma.MatchEventUncheckedUpdateManyWithoutTeamNestedInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUncheckedUpdateManyWithoutTeamNestedInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUncheckedUpdateManyWithoutTeamNestedInput
 }
 
 export type TeamCreateWithoutSquadStrengthScoresInput = {
@@ -2524,6 +2764,10 @@ export type TeamCreateWithoutSquadStrengthScoresInput = {
   dataQualitySnapshots?: Prisma.DataQualitySnapshotCreateNestedManyWithoutTeamInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceCreateNestedManyWithoutTeamInput
   matchStatistics?: Prisma.MatchTeamStatisticCreateNestedManyWithoutTeamInput
+  leagueStandings?: Prisma.LeagueStandingCreateNestedManyWithoutTeamInput
+  matchEvents?: Prisma.MatchEventCreateNestedManyWithoutTeamInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticCreateNestedManyWithoutTeamInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryCreateNestedManyWithoutTeamInput
 }
 
 export type TeamUncheckedCreateWithoutSquadStrengthScoresInput = {
@@ -2558,6 +2802,10 @@ export type TeamUncheckedCreateWithoutSquadStrengthScoresInput = {
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUncheckedCreateNestedManyWithoutTeamInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUncheckedCreateNestedManyWithoutTeamInput
   matchStatistics?: Prisma.MatchTeamStatisticUncheckedCreateNestedManyWithoutTeamInput
+  leagueStandings?: Prisma.LeagueStandingUncheckedCreateNestedManyWithoutTeamInput
+  matchEvents?: Prisma.MatchEventUncheckedCreateNestedManyWithoutTeamInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUncheckedCreateNestedManyWithoutTeamInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUncheckedCreateNestedManyWithoutTeamInput
 }
 
 export type TeamCreateOrConnectWithoutSquadStrengthScoresInput = {
@@ -2607,6 +2855,10 @@ export type TeamUpdateWithoutSquadStrengthScoresInput = {
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUpdateManyWithoutTeamNestedInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUpdateManyWithoutTeamNestedInput
   matchStatistics?: Prisma.MatchTeamStatisticUpdateManyWithoutTeamNestedInput
+  leagueStandings?: Prisma.LeagueStandingUpdateManyWithoutTeamNestedInput
+  matchEvents?: Prisma.MatchEventUpdateManyWithoutTeamNestedInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUpdateManyWithoutTeamNestedInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUpdateManyWithoutTeamNestedInput
 }
 
 export type TeamUncheckedUpdateWithoutSquadStrengthScoresInput = {
@@ -2641,6 +2893,10 @@ export type TeamUncheckedUpdateWithoutSquadStrengthScoresInput = {
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUncheckedUpdateManyWithoutTeamNestedInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUncheckedUpdateManyWithoutTeamNestedInput
   matchStatistics?: Prisma.MatchTeamStatisticUncheckedUpdateManyWithoutTeamNestedInput
+  leagueStandings?: Prisma.LeagueStandingUncheckedUpdateManyWithoutTeamNestedInput
+  matchEvents?: Prisma.MatchEventUncheckedUpdateManyWithoutTeamNestedInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUncheckedUpdateManyWithoutTeamNestedInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUncheckedUpdateManyWithoutTeamNestedInput
 }
 
 export type TeamCreateWithoutFeatureValuesInput = {
@@ -2674,6 +2930,10 @@ export type TeamCreateWithoutFeatureValuesInput = {
   dataQualitySnapshots?: Prisma.DataQualitySnapshotCreateNestedManyWithoutTeamInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceCreateNestedManyWithoutTeamInput
   matchStatistics?: Prisma.MatchTeamStatisticCreateNestedManyWithoutTeamInput
+  leagueStandings?: Prisma.LeagueStandingCreateNestedManyWithoutTeamInput
+  matchEvents?: Prisma.MatchEventCreateNestedManyWithoutTeamInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticCreateNestedManyWithoutTeamInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryCreateNestedManyWithoutTeamInput
 }
 
 export type TeamUncheckedCreateWithoutFeatureValuesInput = {
@@ -2708,6 +2968,10 @@ export type TeamUncheckedCreateWithoutFeatureValuesInput = {
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUncheckedCreateNestedManyWithoutTeamInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUncheckedCreateNestedManyWithoutTeamInput
   matchStatistics?: Prisma.MatchTeamStatisticUncheckedCreateNestedManyWithoutTeamInput
+  leagueStandings?: Prisma.LeagueStandingUncheckedCreateNestedManyWithoutTeamInput
+  matchEvents?: Prisma.MatchEventUncheckedCreateNestedManyWithoutTeamInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUncheckedCreateNestedManyWithoutTeamInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUncheckedCreateNestedManyWithoutTeamInput
 }
 
 export type TeamCreateOrConnectWithoutFeatureValuesInput = {
@@ -2757,6 +3021,10 @@ export type TeamUpdateWithoutFeatureValuesInput = {
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUpdateManyWithoutTeamNestedInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUpdateManyWithoutTeamNestedInput
   matchStatistics?: Prisma.MatchTeamStatisticUpdateManyWithoutTeamNestedInput
+  leagueStandings?: Prisma.LeagueStandingUpdateManyWithoutTeamNestedInput
+  matchEvents?: Prisma.MatchEventUpdateManyWithoutTeamNestedInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUpdateManyWithoutTeamNestedInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUpdateManyWithoutTeamNestedInput
 }
 
 export type TeamUncheckedUpdateWithoutFeatureValuesInput = {
@@ -2791,6 +3059,10 @@ export type TeamUncheckedUpdateWithoutFeatureValuesInput = {
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUncheckedUpdateManyWithoutTeamNestedInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUncheckedUpdateManyWithoutTeamNestedInput
   matchStatistics?: Prisma.MatchTeamStatisticUncheckedUpdateManyWithoutTeamNestedInput
+  leagueStandings?: Prisma.LeagueStandingUncheckedUpdateManyWithoutTeamNestedInput
+  matchEvents?: Prisma.MatchEventUncheckedUpdateManyWithoutTeamNestedInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUncheckedUpdateManyWithoutTeamNestedInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUncheckedUpdateManyWithoutTeamNestedInput
 }
 
 export type TeamCreateWithoutTeamSeasonsInput = {
@@ -2824,6 +3096,10 @@ export type TeamCreateWithoutTeamSeasonsInput = {
   dataQualitySnapshots?: Prisma.DataQualitySnapshotCreateNestedManyWithoutTeamInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceCreateNestedManyWithoutTeamInput
   matchStatistics?: Prisma.MatchTeamStatisticCreateNestedManyWithoutTeamInput
+  leagueStandings?: Prisma.LeagueStandingCreateNestedManyWithoutTeamInput
+  matchEvents?: Prisma.MatchEventCreateNestedManyWithoutTeamInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticCreateNestedManyWithoutTeamInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryCreateNestedManyWithoutTeamInput
 }
 
 export type TeamUncheckedCreateWithoutTeamSeasonsInput = {
@@ -2858,6 +3134,10 @@ export type TeamUncheckedCreateWithoutTeamSeasonsInput = {
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUncheckedCreateNestedManyWithoutTeamInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUncheckedCreateNestedManyWithoutTeamInput
   matchStatistics?: Prisma.MatchTeamStatisticUncheckedCreateNestedManyWithoutTeamInput
+  leagueStandings?: Prisma.LeagueStandingUncheckedCreateNestedManyWithoutTeamInput
+  matchEvents?: Prisma.MatchEventUncheckedCreateNestedManyWithoutTeamInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUncheckedCreateNestedManyWithoutTeamInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUncheckedCreateNestedManyWithoutTeamInput
 }
 
 export type TeamCreateOrConnectWithoutTeamSeasonsInput = {
@@ -2907,6 +3187,10 @@ export type TeamUpdateWithoutTeamSeasonsInput = {
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUpdateManyWithoutTeamNestedInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUpdateManyWithoutTeamNestedInput
   matchStatistics?: Prisma.MatchTeamStatisticUpdateManyWithoutTeamNestedInput
+  leagueStandings?: Prisma.LeagueStandingUpdateManyWithoutTeamNestedInput
+  matchEvents?: Prisma.MatchEventUpdateManyWithoutTeamNestedInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUpdateManyWithoutTeamNestedInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUpdateManyWithoutTeamNestedInput
 }
 
 export type TeamUncheckedUpdateWithoutTeamSeasonsInput = {
@@ -2941,6 +3225,10 @@ export type TeamUncheckedUpdateWithoutTeamSeasonsInput = {
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUncheckedUpdateManyWithoutTeamNestedInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUncheckedUpdateManyWithoutTeamNestedInput
   matchStatistics?: Prisma.MatchTeamStatisticUncheckedUpdateManyWithoutTeamNestedInput
+  leagueStandings?: Prisma.LeagueStandingUncheckedUpdateManyWithoutTeamNestedInput
+  matchEvents?: Prisma.MatchEventUncheckedUpdateManyWithoutTeamNestedInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUncheckedUpdateManyWithoutTeamNestedInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUncheckedUpdateManyWithoutTeamNestedInput
 }
 
 export type TeamCreateWithoutDataQualitySnapshotsInput = {
@@ -2974,6 +3262,10 @@ export type TeamCreateWithoutDataQualitySnapshotsInput = {
   teamSeasons?: Prisma.TeamSeasonCreateNestedManyWithoutTeamInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceCreateNestedManyWithoutTeamInput
   matchStatistics?: Prisma.MatchTeamStatisticCreateNestedManyWithoutTeamInput
+  leagueStandings?: Prisma.LeagueStandingCreateNestedManyWithoutTeamInput
+  matchEvents?: Prisma.MatchEventCreateNestedManyWithoutTeamInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticCreateNestedManyWithoutTeamInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryCreateNestedManyWithoutTeamInput
 }
 
 export type TeamUncheckedCreateWithoutDataQualitySnapshotsInput = {
@@ -3008,6 +3300,10 @@ export type TeamUncheckedCreateWithoutDataQualitySnapshotsInput = {
   teamSeasons?: Prisma.TeamSeasonUncheckedCreateNestedManyWithoutTeamInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUncheckedCreateNestedManyWithoutTeamInput
   matchStatistics?: Prisma.MatchTeamStatisticUncheckedCreateNestedManyWithoutTeamInput
+  leagueStandings?: Prisma.LeagueStandingUncheckedCreateNestedManyWithoutTeamInput
+  matchEvents?: Prisma.MatchEventUncheckedCreateNestedManyWithoutTeamInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUncheckedCreateNestedManyWithoutTeamInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUncheckedCreateNestedManyWithoutTeamInput
 }
 
 export type TeamCreateOrConnectWithoutDataQualitySnapshotsInput = {
@@ -3057,6 +3353,10 @@ export type TeamUpdateWithoutDataQualitySnapshotsInput = {
   teamSeasons?: Prisma.TeamSeasonUpdateManyWithoutTeamNestedInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUpdateManyWithoutTeamNestedInput
   matchStatistics?: Prisma.MatchTeamStatisticUpdateManyWithoutTeamNestedInput
+  leagueStandings?: Prisma.LeagueStandingUpdateManyWithoutTeamNestedInput
+  matchEvents?: Prisma.MatchEventUpdateManyWithoutTeamNestedInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUpdateManyWithoutTeamNestedInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUpdateManyWithoutTeamNestedInput
 }
 
 export type TeamUncheckedUpdateWithoutDataQualitySnapshotsInput = {
@@ -3091,6 +3391,10 @@ export type TeamUncheckedUpdateWithoutDataQualitySnapshotsInput = {
   teamSeasons?: Prisma.TeamSeasonUncheckedUpdateManyWithoutTeamNestedInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUncheckedUpdateManyWithoutTeamNestedInput
   matchStatistics?: Prisma.MatchTeamStatisticUncheckedUpdateManyWithoutTeamNestedInput
+  leagueStandings?: Prisma.LeagueStandingUncheckedUpdateManyWithoutTeamNestedInput
+  matchEvents?: Prisma.MatchEventUncheckedUpdateManyWithoutTeamNestedInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUncheckedUpdateManyWithoutTeamNestedInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUncheckedUpdateManyWithoutTeamNestedInput
 }
 
 export type TeamCreateWithoutMatchStatisticsInput = {
@@ -3124,6 +3428,10 @@ export type TeamCreateWithoutMatchStatisticsInput = {
   teamSeasons?: Prisma.TeamSeasonCreateNestedManyWithoutTeamInput
   dataQualitySnapshots?: Prisma.DataQualitySnapshotCreateNestedManyWithoutTeamInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceCreateNestedManyWithoutTeamInput
+  leagueStandings?: Prisma.LeagueStandingCreateNestedManyWithoutTeamInput
+  matchEvents?: Prisma.MatchEventCreateNestedManyWithoutTeamInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticCreateNestedManyWithoutTeamInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryCreateNestedManyWithoutTeamInput
 }
 
 export type TeamUncheckedCreateWithoutMatchStatisticsInput = {
@@ -3158,6 +3466,10 @@ export type TeamUncheckedCreateWithoutMatchStatisticsInput = {
   teamSeasons?: Prisma.TeamSeasonUncheckedCreateNestedManyWithoutTeamInput
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUncheckedCreateNestedManyWithoutTeamInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUncheckedCreateNestedManyWithoutTeamInput
+  leagueStandings?: Prisma.LeagueStandingUncheckedCreateNestedManyWithoutTeamInput
+  matchEvents?: Prisma.MatchEventUncheckedCreateNestedManyWithoutTeamInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUncheckedCreateNestedManyWithoutTeamInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUncheckedCreateNestedManyWithoutTeamInput
 }
 
 export type TeamCreateOrConnectWithoutMatchStatisticsInput = {
@@ -3207,6 +3519,10 @@ export type TeamUpdateWithoutMatchStatisticsInput = {
   teamSeasons?: Prisma.TeamSeasonUpdateManyWithoutTeamNestedInput
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUpdateManyWithoutTeamNestedInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUpdateManyWithoutTeamNestedInput
+  leagueStandings?: Prisma.LeagueStandingUpdateManyWithoutTeamNestedInput
+  matchEvents?: Prisma.MatchEventUpdateManyWithoutTeamNestedInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUpdateManyWithoutTeamNestedInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUpdateManyWithoutTeamNestedInput
 }
 
 export type TeamUncheckedUpdateWithoutMatchStatisticsInput = {
@@ -3241,6 +3557,674 @@ export type TeamUncheckedUpdateWithoutMatchStatisticsInput = {
   teamSeasons?: Prisma.TeamSeasonUncheckedUpdateManyWithoutTeamNestedInput
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUncheckedUpdateManyWithoutTeamNestedInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUncheckedUpdateManyWithoutTeamNestedInput
+  leagueStandings?: Prisma.LeagueStandingUncheckedUpdateManyWithoutTeamNestedInput
+  matchEvents?: Prisma.MatchEventUncheckedUpdateManyWithoutTeamNestedInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUncheckedUpdateManyWithoutTeamNestedInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUncheckedUpdateManyWithoutTeamNestedInput
+}
+
+export type TeamCreateWithoutLeagueStandingsInput = {
+  apiId: number
+  name: string
+  shortName?: string | null
+  code?: string | null
+  logoUrl?: string | null
+  founded?: number | null
+  national?: boolean
+  venueApiId?: number | null
+  venueName?: string | null
+  venueAddress?: string | null
+  venueCity?: string | null
+  venueCapacity?: number | null
+  venueSurface?: string | null
+  venueImageUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  country?: Prisma.CountryCreateNestedOneWithoutTeamsInput
+  homeMatches?: Prisma.MatchCreateNestedManyWithoutHomeTeamInput
+  awayMatches?: Prisma.MatchCreateNestedManyWithoutAwayTeamInput
+  players?: Prisma.PlayerCreateNestedManyWithoutTeamInput
+  playerSeasonStatistics?: Prisma.PlayerSeasonStatisticCreateNestedManyWithoutTeamInput
+  injuries?: Prisma.InjuryCreateNestedManyWithoutTeamInput
+  lineups?: Prisma.LineupCreateNestedManyWithoutTeamInput
+  lineupPlayers?: Prisma.LineupPlayerCreateNestedManyWithoutTeamInput
+  playerImpactScores?: Prisma.PlayerImpactScoreCreateNestedManyWithoutTeamInput
+  squadStrengthScores?: Prisma.SquadStrengthScoreCreateNestedManyWithoutTeamInput
+  featureValues?: Prisma.MatchFeatureValueCreateNestedManyWithoutTeamInput
+  teamSeasons?: Prisma.TeamSeasonCreateNestedManyWithoutTeamInput
+  dataQualitySnapshots?: Prisma.DataQualitySnapshotCreateNestedManyWithoutTeamInput
+  playerMatchPerformances?: Prisma.PlayerMatchPerformanceCreateNestedManyWithoutTeamInput
+  matchStatistics?: Prisma.MatchTeamStatisticCreateNestedManyWithoutTeamInput
+  matchEvents?: Prisma.MatchEventCreateNestedManyWithoutTeamInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticCreateNestedManyWithoutTeamInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryCreateNestedManyWithoutTeamInput
+}
+
+export type TeamUncheckedCreateWithoutLeagueStandingsInput = {
+  id?: number
+  apiId: number
+  name: string
+  shortName?: string | null
+  code?: string | null
+  logoUrl?: string | null
+  countryId?: number | null
+  founded?: number | null
+  national?: boolean
+  venueApiId?: number | null
+  venueName?: string | null
+  venueAddress?: string | null
+  venueCity?: string | null
+  venueCapacity?: number | null
+  venueSurface?: string | null
+  venueImageUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  homeMatches?: Prisma.MatchUncheckedCreateNestedManyWithoutHomeTeamInput
+  awayMatches?: Prisma.MatchUncheckedCreateNestedManyWithoutAwayTeamInput
+  players?: Prisma.PlayerUncheckedCreateNestedManyWithoutTeamInput
+  playerSeasonStatistics?: Prisma.PlayerSeasonStatisticUncheckedCreateNestedManyWithoutTeamInput
+  injuries?: Prisma.InjuryUncheckedCreateNestedManyWithoutTeamInput
+  lineups?: Prisma.LineupUncheckedCreateNestedManyWithoutTeamInput
+  lineupPlayers?: Prisma.LineupPlayerUncheckedCreateNestedManyWithoutTeamInput
+  playerImpactScores?: Prisma.PlayerImpactScoreUncheckedCreateNestedManyWithoutTeamInput
+  squadStrengthScores?: Prisma.SquadStrengthScoreUncheckedCreateNestedManyWithoutTeamInput
+  featureValues?: Prisma.MatchFeatureValueUncheckedCreateNestedManyWithoutTeamInput
+  teamSeasons?: Prisma.TeamSeasonUncheckedCreateNestedManyWithoutTeamInput
+  dataQualitySnapshots?: Prisma.DataQualitySnapshotUncheckedCreateNestedManyWithoutTeamInput
+  playerMatchPerformances?: Prisma.PlayerMatchPerformanceUncheckedCreateNestedManyWithoutTeamInput
+  matchStatistics?: Prisma.MatchTeamStatisticUncheckedCreateNestedManyWithoutTeamInput
+  matchEvents?: Prisma.MatchEventUncheckedCreateNestedManyWithoutTeamInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUncheckedCreateNestedManyWithoutTeamInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUncheckedCreateNestedManyWithoutTeamInput
+}
+
+export type TeamCreateOrConnectWithoutLeagueStandingsInput = {
+  where: Prisma.TeamWhereUniqueInput
+  create: Prisma.XOR<Prisma.TeamCreateWithoutLeagueStandingsInput, Prisma.TeamUncheckedCreateWithoutLeagueStandingsInput>
+}
+
+export type TeamUpsertWithoutLeagueStandingsInput = {
+  update: Prisma.XOR<Prisma.TeamUpdateWithoutLeagueStandingsInput, Prisma.TeamUncheckedUpdateWithoutLeagueStandingsInput>
+  create: Prisma.XOR<Prisma.TeamCreateWithoutLeagueStandingsInput, Prisma.TeamUncheckedCreateWithoutLeagueStandingsInput>
+  where?: Prisma.TeamWhereInput
+}
+
+export type TeamUpdateToOneWithWhereWithoutLeagueStandingsInput = {
+  where?: Prisma.TeamWhereInput
+  data: Prisma.XOR<Prisma.TeamUpdateWithoutLeagueStandingsInput, Prisma.TeamUncheckedUpdateWithoutLeagueStandingsInput>
+}
+
+export type TeamUpdateWithoutLeagueStandingsInput = {
+  apiId?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  shortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  founded?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  national?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  venueApiId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  venueName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  venueAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  venueCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  venueCapacity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  venueSurface?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  venueImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  country?: Prisma.CountryUpdateOneWithoutTeamsNestedInput
+  homeMatches?: Prisma.MatchUpdateManyWithoutHomeTeamNestedInput
+  awayMatches?: Prisma.MatchUpdateManyWithoutAwayTeamNestedInput
+  players?: Prisma.PlayerUpdateManyWithoutTeamNestedInput
+  playerSeasonStatistics?: Prisma.PlayerSeasonStatisticUpdateManyWithoutTeamNestedInput
+  injuries?: Prisma.InjuryUpdateManyWithoutTeamNestedInput
+  lineups?: Prisma.LineupUpdateManyWithoutTeamNestedInput
+  lineupPlayers?: Prisma.LineupPlayerUpdateManyWithoutTeamNestedInput
+  playerImpactScores?: Prisma.PlayerImpactScoreUpdateManyWithoutTeamNestedInput
+  squadStrengthScores?: Prisma.SquadStrengthScoreUpdateManyWithoutTeamNestedInput
+  featureValues?: Prisma.MatchFeatureValueUpdateManyWithoutTeamNestedInput
+  teamSeasons?: Prisma.TeamSeasonUpdateManyWithoutTeamNestedInput
+  dataQualitySnapshots?: Prisma.DataQualitySnapshotUpdateManyWithoutTeamNestedInput
+  playerMatchPerformances?: Prisma.PlayerMatchPerformanceUpdateManyWithoutTeamNestedInput
+  matchStatistics?: Prisma.MatchTeamStatisticUpdateManyWithoutTeamNestedInput
+  matchEvents?: Prisma.MatchEventUpdateManyWithoutTeamNestedInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUpdateManyWithoutTeamNestedInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUpdateManyWithoutTeamNestedInput
+}
+
+export type TeamUncheckedUpdateWithoutLeagueStandingsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  apiId?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  shortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  countryId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  founded?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  national?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  venueApiId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  venueName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  venueAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  venueCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  venueCapacity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  venueSurface?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  venueImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  homeMatches?: Prisma.MatchUncheckedUpdateManyWithoutHomeTeamNestedInput
+  awayMatches?: Prisma.MatchUncheckedUpdateManyWithoutAwayTeamNestedInput
+  players?: Prisma.PlayerUncheckedUpdateManyWithoutTeamNestedInput
+  playerSeasonStatistics?: Prisma.PlayerSeasonStatisticUncheckedUpdateManyWithoutTeamNestedInput
+  injuries?: Prisma.InjuryUncheckedUpdateManyWithoutTeamNestedInput
+  lineups?: Prisma.LineupUncheckedUpdateManyWithoutTeamNestedInput
+  lineupPlayers?: Prisma.LineupPlayerUncheckedUpdateManyWithoutTeamNestedInput
+  playerImpactScores?: Prisma.PlayerImpactScoreUncheckedUpdateManyWithoutTeamNestedInput
+  squadStrengthScores?: Prisma.SquadStrengthScoreUncheckedUpdateManyWithoutTeamNestedInput
+  featureValues?: Prisma.MatchFeatureValueUncheckedUpdateManyWithoutTeamNestedInput
+  teamSeasons?: Prisma.TeamSeasonUncheckedUpdateManyWithoutTeamNestedInput
+  dataQualitySnapshots?: Prisma.DataQualitySnapshotUncheckedUpdateManyWithoutTeamNestedInput
+  playerMatchPerformances?: Prisma.PlayerMatchPerformanceUncheckedUpdateManyWithoutTeamNestedInput
+  matchStatistics?: Prisma.MatchTeamStatisticUncheckedUpdateManyWithoutTeamNestedInput
+  matchEvents?: Prisma.MatchEventUncheckedUpdateManyWithoutTeamNestedInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUncheckedUpdateManyWithoutTeamNestedInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUncheckedUpdateManyWithoutTeamNestedInput
+}
+
+export type TeamCreateWithoutMatchEventsInput = {
+  apiId: number
+  name: string
+  shortName?: string | null
+  code?: string | null
+  logoUrl?: string | null
+  founded?: number | null
+  national?: boolean
+  venueApiId?: number | null
+  venueName?: string | null
+  venueAddress?: string | null
+  venueCity?: string | null
+  venueCapacity?: number | null
+  venueSurface?: string | null
+  venueImageUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  country?: Prisma.CountryCreateNestedOneWithoutTeamsInput
+  homeMatches?: Prisma.MatchCreateNestedManyWithoutHomeTeamInput
+  awayMatches?: Prisma.MatchCreateNestedManyWithoutAwayTeamInput
+  players?: Prisma.PlayerCreateNestedManyWithoutTeamInput
+  playerSeasonStatistics?: Prisma.PlayerSeasonStatisticCreateNestedManyWithoutTeamInput
+  injuries?: Prisma.InjuryCreateNestedManyWithoutTeamInput
+  lineups?: Prisma.LineupCreateNestedManyWithoutTeamInput
+  lineupPlayers?: Prisma.LineupPlayerCreateNestedManyWithoutTeamInput
+  playerImpactScores?: Prisma.PlayerImpactScoreCreateNestedManyWithoutTeamInput
+  squadStrengthScores?: Prisma.SquadStrengthScoreCreateNestedManyWithoutTeamInput
+  featureValues?: Prisma.MatchFeatureValueCreateNestedManyWithoutTeamInput
+  teamSeasons?: Prisma.TeamSeasonCreateNestedManyWithoutTeamInput
+  dataQualitySnapshots?: Prisma.DataQualitySnapshotCreateNestedManyWithoutTeamInput
+  playerMatchPerformances?: Prisma.PlayerMatchPerformanceCreateNestedManyWithoutTeamInput
+  matchStatistics?: Prisma.MatchTeamStatisticCreateNestedManyWithoutTeamInput
+  leagueStandings?: Prisma.LeagueStandingCreateNestedManyWithoutTeamInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticCreateNestedManyWithoutTeamInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryCreateNestedManyWithoutTeamInput
+}
+
+export type TeamUncheckedCreateWithoutMatchEventsInput = {
+  id?: number
+  apiId: number
+  name: string
+  shortName?: string | null
+  code?: string | null
+  logoUrl?: string | null
+  countryId?: number | null
+  founded?: number | null
+  national?: boolean
+  venueApiId?: number | null
+  venueName?: string | null
+  venueAddress?: string | null
+  venueCity?: string | null
+  venueCapacity?: number | null
+  venueSurface?: string | null
+  venueImageUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  homeMatches?: Prisma.MatchUncheckedCreateNestedManyWithoutHomeTeamInput
+  awayMatches?: Prisma.MatchUncheckedCreateNestedManyWithoutAwayTeamInput
+  players?: Prisma.PlayerUncheckedCreateNestedManyWithoutTeamInput
+  playerSeasonStatistics?: Prisma.PlayerSeasonStatisticUncheckedCreateNestedManyWithoutTeamInput
+  injuries?: Prisma.InjuryUncheckedCreateNestedManyWithoutTeamInput
+  lineups?: Prisma.LineupUncheckedCreateNestedManyWithoutTeamInput
+  lineupPlayers?: Prisma.LineupPlayerUncheckedCreateNestedManyWithoutTeamInput
+  playerImpactScores?: Prisma.PlayerImpactScoreUncheckedCreateNestedManyWithoutTeamInput
+  squadStrengthScores?: Prisma.SquadStrengthScoreUncheckedCreateNestedManyWithoutTeamInput
+  featureValues?: Prisma.MatchFeatureValueUncheckedCreateNestedManyWithoutTeamInput
+  teamSeasons?: Prisma.TeamSeasonUncheckedCreateNestedManyWithoutTeamInput
+  dataQualitySnapshots?: Prisma.DataQualitySnapshotUncheckedCreateNestedManyWithoutTeamInput
+  playerMatchPerformances?: Prisma.PlayerMatchPerformanceUncheckedCreateNestedManyWithoutTeamInput
+  matchStatistics?: Prisma.MatchTeamStatisticUncheckedCreateNestedManyWithoutTeamInput
+  leagueStandings?: Prisma.LeagueStandingUncheckedCreateNestedManyWithoutTeamInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUncheckedCreateNestedManyWithoutTeamInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUncheckedCreateNestedManyWithoutTeamInput
+}
+
+export type TeamCreateOrConnectWithoutMatchEventsInput = {
+  where: Prisma.TeamWhereUniqueInput
+  create: Prisma.XOR<Prisma.TeamCreateWithoutMatchEventsInput, Prisma.TeamUncheckedCreateWithoutMatchEventsInput>
+}
+
+export type TeamUpsertWithoutMatchEventsInput = {
+  update: Prisma.XOR<Prisma.TeamUpdateWithoutMatchEventsInput, Prisma.TeamUncheckedUpdateWithoutMatchEventsInput>
+  create: Prisma.XOR<Prisma.TeamCreateWithoutMatchEventsInput, Prisma.TeamUncheckedCreateWithoutMatchEventsInput>
+  where?: Prisma.TeamWhereInput
+}
+
+export type TeamUpdateToOneWithWhereWithoutMatchEventsInput = {
+  where?: Prisma.TeamWhereInput
+  data: Prisma.XOR<Prisma.TeamUpdateWithoutMatchEventsInput, Prisma.TeamUncheckedUpdateWithoutMatchEventsInput>
+}
+
+export type TeamUpdateWithoutMatchEventsInput = {
+  apiId?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  shortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  founded?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  national?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  venueApiId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  venueName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  venueAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  venueCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  venueCapacity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  venueSurface?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  venueImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  country?: Prisma.CountryUpdateOneWithoutTeamsNestedInput
+  homeMatches?: Prisma.MatchUpdateManyWithoutHomeTeamNestedInput
+  awayMatches?: Prisma.MatchUpdateManyWithoutAwayTeamNestedInput
+  players?: Prisma.PlayerUpdateManyWithoutTeamNestedInput
+  playerSeasonStatistics?: Prisma.PlayerSeasonStatisticUpdateManyWithoutTeamNestedInput
+  injuries?: Prisma.InjuryUpdateManyWithoutTeamNestedInput
+  lineups?: Prisma.LineupUpdateManyWithoutTeamNestedInput
+  lineupPlayers?: Prisma.LineupPlayerUpdateManyWithoutTeamNestedInput
+  playerImpactScores?: Prisma.PlayerImpactScoreUpdateManyWithoutTeamNestedInput
+  squadStrengthScores?: Prisma.SquadStrengthScoreUpdateManyWithoutTeamNestedInput
+  featureValues?: Prisma.MatchFeatureValueUpdateManyWithoutTeamNestedInput
+  teamSeasons?: Prisma.TeamSeasonUpdateManyWithoutTeamNestedInput
+  dataQualitySnapshots?: Prisma.DataQualitySnapshotUpdateManyWithoutTeamNestedInput
+  playerMatchPerformances?: Prisma.PlayerMatchPerformanceUpdateManyWithoutTeamNestedInput
+  matchStatistics?: Prisma.MatchTeamStatisticUpdateManyWithoutTeamNestedInput
+  leagueStandings?: Prisma.LeagueStandingUpdateManyWithoutTeamNestedInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUpdateManyWithoutTeamNestedInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUpdateManyWithoutTeamNestedInput
+}
+
+export type TeamUncheckedUpdateWithoutMatchEventsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  apiId?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  shortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  countryId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  founded?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  national?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  venueApiId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  venueName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  venueAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  venueCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  venueCapacity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  venueSurface?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  venueImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  homeMatches?: Prisma.MatchUncheckedUpdateManyWithoutHomeTeamNestedInput
+  awayMatches?: Prisma.MatchUncheckedUpdateManyWithoutAwayTeamNestedInput
+  players?: Prisma.PlayerUncheckedUpdateManyWithoutTeamNestedInput
+  playerSeasonStatistics?: Prisma.PlayerSeasonStatisticUncheckedUpdateManyWithoutTeamNestedInput
+  injuries?: Prisma.InjuryUncheckedUpdateManyWithoutTeamNestedInput
+  lineups?: Prisma.LineupUncheckedUpdateManyWithoutTeamNestedInput
+  lineupPlayers?: Prisma.LineupPlayerUncheckedUpdateManyWithoutTeamNestedInput
+  playerImpactScores?: Prisma.PlayerImpactScoreUncheckedUpdateManyWithoutTeamNestedInput
+  squadStrengthScores?: Prisma.SquadStrengthScoreUncheckedUpdateManyWithoutTeamNestedInput
+  featureValues?: Prisma.MatchFeatureValueUncheckedUpdateManyWithoutTeamNestedInput
+  teamSeasons?: Prisma.TeamSeasonUncheckedUpdateManyWithoutTeamNestedInput
+  dataQualitySnapshots?: Prisma.DataQualitySnapshotUncheckedUpdateManyWithoutTeamNestedInput
+  playerMatchPerformances?: Prisma.PlayerMatchPerformanceUncheckedUpdateManyWithoutTeamNestedInput
+  matchStatistics?: Prisma.MatchTeamStatisticUncheckedUpdateManyWithoutTeamNestedInput
+  leagueStandings?: Prisma.LeagueStandingUncheckedUpdateManyWithoutTeamNestedInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUncheckedUpdateManyWithoutTeamNestedInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUncheckedUpdateManyWithoutTeamNestedInput
+}
+
+export type TeamCreateWithoutTeamSeasonApiStatisticsInput = {
+  apiId: number
+  name: string
+  shortName?: string | null
+  code?: string | null
+  logoUrl?: string | null
+  founded?: number | null
+  national?: boolean
+  venueApiId?: number | null
+  venueName?: string | null
+  venueAddress?: string | null
+  venueCity?: string | null
+  venueCapacity?: number | null
+  venueSurface?: string | null
+  venueImageUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  country?: Prisma.CountryCreateNestedOneWithoutTeamsInput
+  homeMatches?: Prisma.MatchCreateNestedManyWithoutHomeTeamInput
+  awayMatches?: Prisma.MatchCreateNestedManyWithoutAwayTeamInput
+  players?: Prisma.PlayerCreateNestedManyWithoutTeamInput
+  playerSeasonStatistics?: Prisma.PlayerSeasonStatisticCreateNestedManyWithoutTeamInput
+  injuries?: Prisma.InjuryCreateNestedManyWithoutTeamInput
+  lineups?: Prisma.LineupCreateNestedManyWithoutTeamInput
+  lineupPlayers?: Prisma.LineupPlayerCreateNestedManyWithoutTeamInput
+  playerImpactScores?: Prisma.PlayerImpactScoreCreateNestedManyWithoutTeamInput
+  squadStrengthScores?: Prisma.SquadStrengthScoreCreateNestedManyWithoutTeamInput
+  featureValues?: Prisma.MatchFeatureValueCreateNestedManyWithoutTeamInput
+  teamSeasons?: Prisma.TeamSeasonCreateNestedManyWithoutTeamInput
+  dataQualitySnapshots?: Prisma.DataQualitySnapshotCreateNestedManyWithoutTeamInput
+  playerMatchPerformances?: Prisma.PlayerMatchPerformanceCreateNestedManyWithoutTeamInput
+  matchStatistics?: Prisma.MatchTeamStatisticCreateNestedManyWithoutTeamInput
+  leagueStandings?: Prisma.LeagueStandingCreateNestedManyWithoutTeamInput
+  matchEvents?: Prisma.MatchEventCreateNestedManyWithoutTeamInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryCreateNestedManyWithoutTeamInput
+}
+
+export type TeamUncheckedCreateWithoutTeamSeasonApiStatisticsInput = {
+  id?: number
+  apiId: number
+  name: string
+  shortName?: string | null
+  code?: string | null
+  logoUrl?: string | null
+  countryId?: number | null
+  founded?: number | null
+  national?: boolean
+  venueApiId?: number | null
+  venueName?: string | null
+  venueAddress?: string | null
+  venueCity?: string | null
+  venueCapacity?: number | null
+  venueSurface?: string | null
+  venueImageUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  homeMatches?: Prisma.MatchUncheckedCreateNestedManyWithoutHomeTeamInput
+  awayMatches?: Prisma.MatchUncheckedCreateNestedManyWithoutAwayTeamInput
+  players?: Prisma.PlayerUncheckedCreateNestedManyWithoutTeamInput
+  playerSeasonStatistics?: Prisma.PlayerSeasonStatisticUncheckedCreateNestedManyWithoutTeamInput
+  injuries?: Prisma.InjuryUncheckedCreateNestedManyWithoutTeamInput
+  lineups?: Prisma.LineupUncheckedCreateNestedManyWithoutTeamInput
+  lineupPlayers?: Prisma.LineupPlayerUncheckedCreateNestedManyWithoutTeamInput
+  playerImpactScores?: Prisma.PlayerImpactScoreUncheckedCreateNestedManyWithoutTeamInput
+  squadStrengthScores?: Prisma.SquadStrengthScoreUncheckedCreateNestedManyWithoutTeamInput
+  featureValues?: Prisma.MatchFeatureValueUncheckedCreateNestedManyWithoutTeamInput
+  teamSeasons?: Prisma.TeamSeasonUncheckedCreateNestedManyWithoutTeamInput
+  dataQualitySnapshots?: Prisma.DataQualitySnapshotUncheckedCreateNestedManyWithoutTeamInput
+  playerMatchPerformances?: Prisma.PlayerMatchPerformanceUncheckedCreateNestedManyWithoutTeamInput
+  matchStatistics?: Prisma.MatchTeamStatisticUncheckedCreateNestedManyWithoutTeamInput
+  leagueStandings?: Prisma.LeagueStandingUncheckedCreateNestedManyWithoutTeamInput
+  matchEvents?: Prisma.MatchEventUncheckedCreateNestedManyWithoutTeamInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUncheckedCreateNestedManyWithoutTeamInput
+}
+
+export type TeamCreateOrConnectWithoutTeamSeasonApiStatisticsInput = {
+  where: Prisma.TeamWhereUniqueInput
+  create: Prisma.XOR<Prisma.TeamCreateWithoutTeamSeasonApiStatisticsInput, Prisma.TeamUncheckedCreateWithoutTeamSeasonApiStatisticsInput>
+}
+
+export type TeamUpsertWithoutTeamSeasonApiStatisticsInput = {
+  update: Prisma.XOR<Prisma.TeamUpdateWithoutTeamSeasonApiStatisticsInput, Prisma.TeamUncheckedUpdateWithoutTeamSeasonApiStatisticsInput>
+  create: Prisma.XOR<Prisma.TeamCreateWithoutTeamSeasonApiStatisticsInput, Prisma.TeamUncheckedCreateWithoutTeamSeasonApiStatisticsInput>
+  where?: Prisma.TeamWhereInput
+}
+
+export type TeamUpdateToOneWithWhereWithoutTeamSeasonApiStatisticsInput = {
+  where?: Prisma.TeamWhereInput
+  data: Prisma.XOR<Prisma.TeamUpdateWithoutTeamSeasonApiStatisticsInput, Prisma.TeamUncheckedUpdateWithoutTeamSeasonApiStatisticsInput>
+}
+
+export type TeamUpdateWithoutTeamSeasonApiStatisticsInput = {
+  apiId?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  shortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  founded?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  national?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  venueApiId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  venueName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  venueAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  venueCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  venueCapacity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  venueSurface?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  venueImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  country?: Prisma.CountryUpdateOneWithoutTeamsNestedInput
+  homeMatches?: Prisma.MatchUpdateManyWithoutHomeTeamNestedInput
+  awayMatches?: Prisma.MatchUpdateManyWithoutAwayTeamNestedInput
+  players?: Prisma.PlayerUpdateManyWithoutTeamNestedInput
+  playerSeasonStatistics?: Prisma.PlayerSeasonStatisticUpdateManyWithoutTeamNestedInput
+  injuries?: Prisma.InjuryUpdateManyWithoutTeamNestedInput
+  lineups?: Prisma.LineupUpdateManyWithoutTeamNestedInput
+  lineupPlayers?: Prisma.LineupPlayerUpdateManyWithoutTeamNestedInput
+  playerImpactScores?: Prisma.PlayerImpactScoreUpdateManyWithoutTeamNestedInput
+  squadStrengthScores?: Prisma.SquadStrengthScoreUpdateManyWithoutTeamNestedInput
+  featureValues?: Prisma.MatchFeatureValueUpdateManyWithoutTeamNestedInput
+  teamSeasons?: Prisma.TeamSeasonUpdateManyWithoutTeamNestedInput
+  dataQualitySnapshots?: Prisma.DataQualitySnapshotUpdateManyWithoutTeamNestedInput
+  playerMatchPerformances?: Prisma.PlayerMatchPerformanceUpdateManyWithoutTeamNestedInput
+  matchStatistics?: Prisma.MatchTeamStatisticUpdateManyWithoutTeamNestedInput
+  leagueStandings?: Prisma.LeagueStandingUpdateManyWithoutTeamNestedInput
+  matchEvents?: Prisma.MatchEventUpdateManyWithoutTeamNestedInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUpdateManyWithoutTeamNestedInput
+}
+
+export type TeamUncheckedUpdateWithoutTeamSeasonApiStatisticsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  apiId?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  shortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  countryId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  founded?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  national?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  venueApiId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  venueName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  venueAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  venueCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  venueCapacity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  venueSurface?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  venueImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  homeMatches?: Prisma.MatchUncheckedUpdateManyWithoutHomeTeamNestedInput
+  awayMatches?: Prisma.MatchUncheckedUpdateManyWithoutAwayTeamNestedInput
+  players?: Prisma.PlayerUncheckedUpdateManyWithoutTeamNestedInput
+  playerSeasonStatistics?: Prisma.PlayerSeasonStatisticUncheckedUpdateManyWithoutTeamNestedInput
+  injuries?: Prisma.InjuryUncheckedUpdateManyWithoutTeamNestedInput
+  lineups?: Prisma.LineupUncheckedUpdateManyWithoutTeamNestedInput
+  lineupPlayers?: Prisma.LineupPlayerUncheckedUpdateManyWithoutTeamNestedInput
+  playerImpactScores?: Prisma.PlayerImpactScoreUncheckedUpdateManyWithoutTeamNestedInput
+  squadStrengthScores?: Prisma.SquadStrengthScoreUncheckedUpdateManyWithoutTeamNestedInput
+  featureValues?: Prisma.MatchFeatureValueUncheckedUpdateManyWithoutTeamNestedInput
+  teamSeasons?: Prisma.TeamSeasonUncheckedUpdateManyWithoutTeamNestedInput
+  dataQualitySnapshots?: Prisma.DataQualitySnapshotUncheckedUpdateManyWithoutTeamNestedInput
+  playerMatchPerformances?: Prisma.PlayerMatchPerformanceUncheckedUpdateManyWithoutTeamNestedInput
+  matchStatistics?: Prisma.MatchTeamStatisticUncheckedUpdateManyWithoutTeamNestedInput
+  leagueStandings?: Prisma.LeagueStandingUncheckedUpdateManyWithoutTeamNestedInput
+  matchEvents?: Prisma.MatchEventUncheckedUpdateManyWithoutTeamNestedInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUncheckedUpdateManyWithoutTeamNestedInput
+}
+
+export type TeamCreateWithoutPlayerLeaderboardEntriesInput = {
+  apiId: number
+  name: string
+  shortName?: string | null
+  code?: string | null
+  logoUrl?: string | null
+  founded?: number | null
+  national?: boolean
+  venueApiId?: number | null
+  venueName?: string | null
+  venueAddress?: string | null
+  venueCity?: string | null
+  venueCapacity?: number | null
+  venueSurface?: string | null
+  venueImageUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  country?: Prisma.CountryCreateNestedOneWithoutTeamsInput
+  homeMatches?: Prisma.MatchCreateNestedManyWithoutHomeTeamInput
+  awayMatches?: Prisma.MatchCreateNestedManyWithoutAwayTeamInput
+  players?: Prisma.PlayerCreateNestedManyWithoutTeamInput
+  playerSeasonStatistics?: Prisma.PlayerSeasonStatisticCreateNestedManyWithoutTeamInput
+  injuries?: Prisma.InjuryCreateNestedManyWithoutTeamInput
+  lineups?: Prisma.LineupCreateNestedManyWithoutTeamInput
+  lineupPlayers?: Prisma.LineupPlayerCreateNestedManyWithoutTeamInput
+  playerImpactScores?: Prisma.PlayerImpactScoreCreateNestedManyWithoutTeamInput
+  squadStrengthScores?: Prisma.SquadStrengthScoreCreateNestedManyWithoutTeamInput
+  featureValues?: Prisma.MatchFeatureValueCreateNestedManyWithoutTeamInput
+  teamSeasons?: Prisma.TeamSeasonCreateNestedManyWithoutTeamInput
+  dataQualitySnapshots?: Prisma.DataQualitySnapshotCreateNestedManyWithoutTeamInput
+  playerMatchPerformances?: Prisma.PlayerMatchPerformanceCreateNestedManyWithoutTeamInput
+  matchStatistics?: Prisma.MatchTeamStatisticCreateNestedManyWithoutTeamInput
+  leagueStandings?: Prisma.LeagueStandingCreateNestedManyWithoutTeamInput
+  matchEvents?: Prisma.MatchEventCreateNestedManyWithoutTeamInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticCreateNestedManyWithoutTeamInput
+}
+
+export type TeamUncheckedCreateWithoutPlayerLeaderboardEntriesInput = {
+  id?: number
+  apiId: number
+  name: string
+  shortName?: string | null
+  code?: string | null
+  logoUrl?: string | null
+  countryId?: number | null
+  founded?: number | null
+  national?: boolean
+  venueApiId?: number | null
+  venueName?: string | null
+  venueAddress?: string | null
+  venueCity?: string | null
+  venueCapacity?: number | null
+  venueSurface?: string | null
+  venueImageUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  homeMatches?: Prisma.MatchUncheckedCreateNestedManyWithoutHomeTeamInput
+  awayMatches?: Prisma.MatchUncheckedCreateNestedManyWithoutAwayTeamInput
+  players?: Prisma.PlayerUncheckedCreateNestedManyWithoutTeamInput
+  playerSeasonStatistics?: Prisma.PlayerSeasonStatisticUncheckedCreateNestedManyWithoutTeamInput
+  injuries?: Prisma.InjuryUncheckedCreateNestedManyWithoutTeamInput
+  lineups?: Prisma.LineupUncheckedCreateNestedManyWithoutTeamInput
+  lineupPlayers?: Prisma.LineupPlayerUncheckedCreateNestedManyWithoutTeamInput
+  playerImpactScores?: Prisma.PlayerImpactScoreUncheckedCreateNestedManyWithoutTeamInput
+  squadStrengthScores?: Prisma.SquadStrengthScoreUncheckedCreateNestedManyWithoutTeamInput
+  featureValues?: Prisma.MatchFeatureValueUncheckedCreateNestedManyWithoutTeamInput
+  teamSeasons?: Prisma.TeamSeasonUncheckedCreateNestedManyWithoutTeamInput
+  dataQualitySnapshots?: Prisma.DataQualitySnapshotUncheckedCreateNestedManyWithoutTeamInput
+  playerMatchPerformances?: Prisma.PlayerMatchPerformanceUncheckedCreateNestedManyWithoutTeamInput
+  matchStatistics?: Prisma.MatchTeamStatisticUncheckedCreateNestedManyWithoutTeamInput
+  leagueStandings?: Prisma.LeagueStandingUncheckedCreateNestedManyWithoutTeamInput
+  matchEvents?: Prisma.MatchEventUncheckedCreateNestedManyWithoutTeamInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUncheckedCreateNestedManyWithoutTeamInput
+}
+
+export type TeamCreateOrConnectWithoutPlayerLeaderboardEntriesInput = {
+  where: Prisma.TeamWhereUniqueInput
+  create: Prisma.XOR<Prisma.TeamCreateWithoutPlayerLeaderboardEntriesInput, Prisma.TeamUncheckedCreateWithoutPlayerLeaderboardEntriesInput>
+}
+
+export type TeamUpsertWithoutPlayerLeaderboardEntriesInput = {
+  update: Prisma.XOR<Prisma.TeamUpdateWithoutPlayerLeaderboardEntriesInput, Prisma.TeamUncheckedUpdateWithoutPlayerLeaderboardEntriesInput>
+  create: Prisma.XOR<Prisma.TeamCreateWithoutPlayerLeaderboardEntriesInput, Prisma.TeamUncheckedCreateWithoutPlayerLeaderboardEntriesInput>
+  where?: Prisma.TeamWhereInput
+}
+
+export type TeamUpdateToOneWithWhereWithoutPlayerLeaderboardEntriesInput = {
+  where?: Prisma.TeamWhereInput
+  data: Prisma.XOR<Prisma.TeamUpdateWithoutPlayerLeaderboardEntriesInput, Prisma.TeamUncheckedUpdateWithoutPlayerLeaderboardEntriesInput>
+}
+
+export type TeamUpdateWithoutPlayerLeaderboardEntriesInput = {
+  apiId?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  shortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  founded?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  national?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  venueApiId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  venueName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  venueAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  venueCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  venueCapacity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  venueSurface?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  venueImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  country?: Prisma.CountryUpdateOneWithoutTeamsNestedInput
+  homeMatches?: Prisma.MatchUpdateManyWithoutHomeTeamNestedInput
+  awayMatches?: Prisma.MatchUpdateManyWithoutAwayTeamNestedInput
+  players?: Prisma.PlayerUpdateManyWithoutTeamNestedInput
+  playerSeasonStatistics?: Prisma.PlayerSeasonStatisticUpdateManyWithoutTeamNestedInput
+  injuries?: Prisma.InjuryUpdateManyWithoutTeamNestedInput
+  lineups?: Prisma.LineupUpdateManyWithoutTeamNestedInput
+  lineupPlayers?: Prisma.LineupPlayerUpdateManyWithoutTeamNestedInput
+  playerImpactScores?: Prisma.PlayerImpactScoreUpdateManyWithoutTeamNestedInput
+  squadStrengthScores?: Prisma.SquadStrengthScoreUpdateManyWithoutTeamNestedInput
+  featureValues?: Prisma.MatchFeatureValueUpdateManyWithoutTeamNestedInput
+  teamSeasons?: Prisma.TeamSeasonUpdateManyWithoutTeamNestedInput
+  dataQualitySnapshots?: Prisma.DataQualitySnapshotUpdateManyWithoutTeamNestedInput
+  playerMatchPerformances?: Prisma.PlayerMatchPerformanceUpdateManyWithoutTeamNestedInput
+  matchStatistics?: Prisma.MatchTeamStatisticUpdateManyWithoutTeamNestedInput
+  leagueStandings?: Prisma.LeagueStandingUpdateManyWithoutTeamNestedInput
+  matchEvents?: Prisma.MatchEventUpdateManyWithoutTeamNestedInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUpdateManyWithoutTeamNestedInput
+}
+
+export type TeamUncheckedUpdateWithoutPlayerLeaderboardEntriesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  apiId?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  shortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  countryId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  founded?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  national?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  venueApiId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  venueName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  venueAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  venueCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  venueCapacity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  venueSurface?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  venueImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  homeMatches?: Prisma.MatchUncheckedUpdateManyWithoutHomeTeamNestedInput
+  awayMatches?: Prisma.MatchUncheckedUpdateManyWithoutAwayTeamNestedInput
+  players?: Prisma.PlayerUncheckedUpdateManyWithoutTeamNestedInput
+  playerSeasonStatistics?: Prisma.PlayerSeasonStatisticUncheckedUpdateManyWithoutTeamNestedInput
+  injuries?: Prisma.InjuryUncheckedUpdateManyWithoutTeamNestedInput
+  lineups?: Prisma.LineupUncheckedUpdateManyWithoutTeamNestedInput
+  lineupPlayers?: Prisma.LineupPlayerUncheckedUpdateManyWithoutTeamNestedInput
+  playerImpactScores?: Prisma.PlayerImpactScoreUncheckedUpdateManyWithoutTeamNestedInput
+  squadStrengthScores?: Prisma.SquadStrengthScoreUncheckedUpdateManyWithoutTeamNestedInput
+  featureValues?: Prisma.MatchFeatureValueUncheckedUpdateManyWithoutTeamNestedInput
+  teamSeasons?: Prisma.TeamSeasonUncheckedUpdateManyWithoutTeamNestedInput
+  dataQualitySnapshots?: Prisma.DataQualitySnapshotUncheckedUpdateManyWithoutTeamNestedInput
+  playerMatchPerformances?: Prisma.PlayerMatchPerformanceUncheckedUpdateManyWithoutTeamNestedInput
+  matchStatistics?: Prisma.MatchTeamStatisticUncheckedUpdateManyWithoutTeamNestedInput
+  leagueStandings?: Prisma.LeagueStandingUncheckedUpdateManyWithoutTeamNestedInput
+  matchEvents?: Prisma.MatchEventUncheckedUpdateManyWithoutTeamNestedInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUncheckedUpdateManyWithoutTeamNestedInput
 }
 
 export type TeamCreateManyCountryInput = {
@@ -3294,6 +4278,10 @@ export type TeamUpdateWithoutCountryInput = {
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUpdateManyWithoutTeamNestedInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUpdateManyWithoutTeamNestedInput
   matchStatistics?: Prisma.MatchTeamStatisticUpdateManyWithoutTeamNestedInput
+  leagueStandings?: Prisma.LeagueStandingUpdateManyWithoutTeamNestedInput
+  matchEvents?: Prisma.MatchEventUpdateManyWithoutTeamNestedInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUpdateManyWithoutTeamNestedInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUpdateManyWithoutTeamNestedInput
 }
 
 export type TeamUncheckedUpdateWithoutCountryInput = {
@@ -3328,6 +4316,10 @@ export type TeamUncheckedUpdateWithoutCountryInput = {
   dataQualitySnapshots?: Prisma.DataQualitySnapshotUncheckedUpdateManyWithoutTeamNestedInput
   playerMatchPerformances?: Prisma.PlayerMatchPerformanceUncheckedUpdateManyWithoutTeamNestedInput
   matchStatistics?: Prisma.MatchTeamStatisticUncheckedUpdateManyWithoutTeamNestedInput
+  leagueStandings?: Prisma.LeagueStandingUncheckedUpdateManyWithoutTeamNestedInput
+  matchEvents?: Prisma.MatchEventUncheckedUpdateManyWithoutTeamNestedInput
+  teamSeasonApiStatistics?: Prisma.TeamSeasonApiStatisticUncheckedUpdateManyWithoutTeamNestedInput
+  playerLeaderboardEntries?: Prisma.PlayerLeaderboardEntryUncheckedUpdateManyWithoutTeamNestedInput
 }
 
 export type TeamUncheckedUpdateManyWithoutCountryInput = {
@@ -3370,6 +4362,10 @@ export type TeamCountOutputType = {
   dataQualitySnapshots: number
   playerMatchPerformances: number
   matchStatistics: number
+  leagueStandings: number
+  matchEvents: number
+  teamSeasonApiStatistics: number
+  playerLeaderboardEntries: number
 }
 
 export type TeamCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3387,6 +4383,10 @@ export type TeamCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   dataQualitySnapshots?: boolean | TeamCountOutputTypeCountDataQualitySnapshotsArgs
   playerMatchPerformances?: boolean | TeamCountOutputTypeCountPlayerMatchPerformancesArgs
   matchStatistics?: boolean | TeamCountOutputTypeCountMatchStatisticsArgs
+  leagueStandings?: boolean | TeamCountOutputTypeCountLeagueStandingsArgs
+  matchEvents?: boolean | TeamCountOutputTypeCountMatchEventsArgs
+  teamSeasonApiStatistics?: boolean | TeamCountOutputTypeCountTeamSeasonApiStatisticsArgs
+  playerLeaderboardEntries?: boolean | TeamCountOutputTypeCountPlayerLeaderboardEntriesArgs
 }
 
 /**
@@ -3497,6 +4497,34 @@ export type TeamCountOutputTypeCountMatchStatisticsArgs<ExtArgs extends runtime.
   where?: Prisma.MatchTeamStatisticWhereInput
 }
 
+/**
+ * TeamCountOutputType without action
+ */
+export type TeamCountOutputTypeCountLeagueStandingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeagueStandingWhereInput
+}
+
+/**
+ * TeamCountOutputType without action
+ */
+export type TeamCountOutputTypeCountMatchEventsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MatchEventWhereInput
+}
+
+/**
+ * TeamCountOutputType without action
+ */
+export type TeamCountOutputTypeCountTeamSeasonApiStatisticsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TeamSeasonApiStatisticWhereInput
+}
+
+/**
+ * TeamCountOutputType without action
+ */
+export type TeamCountOutputTypeCountPlayerLeaderboardEntriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PlayerLeaderboardEntryWhereInput
+}
+
 
 export type TeamSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -3532,6 +4560,10 @@ export type TeamSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   dataQualitySnapshots?: boolean | Prisma.Team$dataQualitySnapshotsArgs<ExtArgs>
   playerMatchPerformances?: boolean | Prisma.Team$playerMatchPerformancesArgs<ExtArgs>
   matchStatistics?: boolean | Prisma.Team$matchStatisticsArgs<ExtArgs>
+  leagueStandings?: boolean | Prisma.Team$leagueStandingsArgs<ExtArgs>
+  matchEvents?: boolean | Prisma.Team$matchEventsArgs<ExtArgs>
+  teamSeasonApiStatistics?: boolean | Prisma.Team$teamSeasonApiStatisticsArgs<ExtArgs>
+  playerLeaderboardEntries?: boolean | Prisma.Team$playerLeaderboardEntriesArgs<ExtArgs>
   _count?: boolean | Prisma.TeamCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["team"]>
 
@@ -3617,6 +4649,10 @@ export type TeamInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   dataQualitySnapshots?: boolean | Prisma.Team$dataQualitySnapshotsArgs<ExtArgs>
   playerMatchPerformances?: boolean | Prisma.Team$playerMatchPerformancesArgs<ExtArgs>
   matchStatistics?: boolean | Prisma.Team$matchStatisticsArgs<ExtArgs>
+  leagueStandings?: boolean | Prisma.Team$leagueStandingsArgs<ExtArgs>
+  matchEvents?: boolean | Prisma.Team$matchEventsArgs<ExtArgs>
+  teamSeasonApiStatistics?: boolean | Prisma.Team$teamSeasonApiStatisticsArgs<ExtArgs>
+  playerLeaderboardEntries?: boolean | Prisma.Team$playerLeaderboardEntriesArgs<ExtArgs>
   _count?: boolean | Prisma.TeamCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type TeamIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3644,6 +4680,10 @@ export type $TeamPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     dataQualitySnapshots: Prisma.$DataQualitySnapshotPayload<ExtArgs>[]
     playerMatchPerformances: Prisma.$PlayerMatchPerformancePayload<ExtArgs>[]
     matchStatistics: Prisma.$MatchTeamStatisticPayload<ExtArgs>[]
+    leagueStandings: Prisma.$LeagueStandingPayload<ExtArgs>[]
+    matchEvents: Prisma.$MatchEventPayload<ExtArgs>[]
+    teamSeasonApiStatistics: Prisma.$TeamSeasonApiStatisticPayload<ExtArgs>[]
+    playerLeaderboardEntries: Prisma.$PlayerLeaderboardEntryPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -4073,6 +5113,10 @@ export interface Prisma__TeamClient<T, Null = never, ExtArgs extends runtime.Typ
   dataQualitySnapshots<T extends Prisma.Team$dataQualitySnapshotsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Team$dataQualitySnapshotsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DataQualitySnapshotPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   playerMatchPerformances<T extends Prisma.Team$playerMatchPerformancesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Team$playerMatchPerformancesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PlayerMatchPerformancePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   matchStatistics<T extends Prisma.Team$matchStatisticsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Team$matchStatisticsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MatchTeamStatisticPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  leagueStandings<T extends Prisma.Team$leagueStandingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Team$leagueStandingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeagueStandingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  matchEvents<T extends Prisma.Team$matchEventsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Team$matchEventsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MatchEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  teamSeasonApiStatistics<T extends Prisma.Team$teamSeasonApiStatisticsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Team$teamSeasonApiStatisticsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TeamSeasonApiStatisticPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  playerLeaderboardEntries<T extends Prisma.Team$playerLeaderboardEntriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Team$playerLeaderboardEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PlayerLeaderboardEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4873,6 +5917,102 @@ export type Team$matchStatisticsArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   distinct?: Prisma.MatchTeamStatisticScalarFieldEnum | Prisma.MatchTeamStatisticScalarFieldEnum[]
+}
+
+/**
+ * Team.leagueStandings
+ */
+export type Team$leagueStandingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LeagueStanding
+   */
+  select?: Prisma.LeagueStandingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LeagueStanding
+   */
+  omit?: Prisma.LeagueStandingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeagueStandingInclude<ExtArgs> | null
+  where?: Prisma.LeagueStandingWhereInput
+  orderBy?: Prisma.LeagueStandingOrderByWithRelationInput | Prisma.LeagueStandingOrderByWithRelationInput[]
+  cursor?: Prisma.LeagueStandingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LeagueStandingScalarFieldEnum | Prisma.LeagueStandingScalarFieldEnum[]
+}
+
+/**
+ * Team.matchEvents
+ */
+export type Team$matchEventsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MatchEvent
+   */
+  select?: Prisma.MatchEventSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MatchEvent
+   */
+  omit?: Prisma.MatchEventOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MatchEventInclude<ExtArgs> | null
+  where?: Prisma.MatchEventWhereInput
+  orderBy?: Prisma.MatchEventOrderByWithRelationInput | Prisma.MatchEventOrderByWithRelationInput[]
+  cursor?: Prisma.MatchEventWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MatchEventScalarFieldEnum | Prisma.MatchEventScalarFieldEnum[]
+}
+
+/**
+ * Team.teamSeasonApiStatistics
+ */
+export type Team$teamSeasonApiStatisticsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TeamSeasonApiStatistic
+   */
+  select?: Prisma.TeamSeasonApiStatisticSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TeamSeasonApiStatistic
+   */
+  omit?: Prisma.TeamSeasonApiStatisticOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TeamSeasonApiStatisticInclude<ExtArgs> | null
+  where?: Prisma.TeamSeasonApiStatisticWhereInput
+  orderBy?: Prisma.TeamSeasonApiStatisticOrderByWithRelationInput | Prisma.TeamSeasonApiStatisticOrderByWithRelationInput[]
+  cursor?: Prisma.TeamSeasonApiStatisticWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TeamSeasonApiStatisticScalarFieldEnum | Prisma.TeamSeasonApiStatisticScalarFieldEnum[]
+}
+
+/**
+ * Team.playerLeaderboardEntries
+ */
+export type Team$playerLeaderboardEntriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PlayerLeaderboardEntry
+   */
+  select?: Prisma.PlayerLeaderboardEntrySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PlayerLeaderboardEntry
+   */
+  omit?: Prisma.PlayerLeaderboardEntryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PlayerLeaderboardEntryInclude<ExtArgs> | null
+  where?: Prisma.PlayerLeaderboardEntryWhereInput
+  orderBy?: Prisma.PlayerLeaderboardEntryOrderByWithRelationInput | Prisma.PlayerLeaderboardEntryOrderByWithRelationInput[]
+  cursor?: Prisma.PlayerLeaderboardEntryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PlayerLeaderboardEntryScalarFieldEnum | Prisma.PlayerLeaderboardEntryScalarFieldEnum[]
 }
 
 /**

@@ -231,3 +231,23 @@ export type OddsMarket = Prisma.OddsMarketModel
  * 
  */
 export type OddsSelection = Prisma.OddsSelectionModel
+/**
+ * Model LeagueStanding
+ * Cached API-Football /standings row (Neon).
+ */
+export type LeagueStanding = Prisma.LeagueStandingModel
+/**
+ * Model MatchEvent
+ * Cached API-Football /fixtures/events row.
+ */
+export type MatchEvent = Prisma.MatchEventModel
+/**
+ * Model TeamSeasonApiStatistic
+ * Compact cache of API-Football /teams/statistics for a season.
+ */
+export type TeamSeasonApiStatistic = Prisma.TeamSeasonApiStatisticModel
+/**
+ * Model PlayerLeaderboardEntry
+ * Cached API-Football players/top* lists.
+ */
+export type PlayerLeaderboardEntry = Prisma.PlayerLeaderboardEntryModel

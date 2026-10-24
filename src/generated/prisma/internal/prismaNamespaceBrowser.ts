@@ -88,7 +88,11 @@ export const ModelName = {
   SmartCouponLegHistory: 'SmartCouponLegHistory',
   OddsSnapshot: 'OddsSnapshot',
   OddsMarket: 'OddsMarket',
-  OddsSelection: 'OddsSelection'
+  OddsSelection: 'OddsSelection',
+  LeagueStanding: 'LeagueStanding',
+  MatchEvent: 'MatchEvent',
+  TeamSeasonApiStatistic: 'TeamSeasonApiStatistic',
+  PlayerLeaderboardEntry: 'PlayerLeaderboardEntry'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -918,6 +922,87 @@ export const OddsSelectionScalarFieldEnum = {
 } as const
 
 export type OddsSelectionScalarFieldEnum = (typeof OddsSelectionScalarFieldEnum)[keyof typeof OddsSelectionScalarFieldEnum]
+
+
+export const LeagueStandingScalarFieldEnum = {
+  id: 'id',
+  seasonId: 'seasonId',
+  teamId: 'teamId',
+  rank: 'rank',
+  points: 'points',
+  played: 'played',
+  won: 'won',
+  drawn: 'drawn',
+  lost: 'lost',
+  goalsFor: 'goalsFor',
+  goalsAgainst: 'goalsAgainst',
+  goalDiff: 'goalDiff',
+  form: 'form',
+  groupName: 'groupName',
+  description: 'description',
+  sourceUpdatedAt: 'sourceUpdatedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type LeagueStandingScalarFieldEnum = (typeof LeagueStandingScalarFieldEnum)[keyof typeof LeagueStandingScalarFieldEnum]
+
+
+export const MatchEventScalarFieldEnum = {
+  id: 'id',
+  matchId: 'matchId',
+  teamId: 'teamId',
+  elapsed: 'elapsed',
+  extra: 'extra',
+  type: 'type',
+  detail: 'detail',
+  playerName: 'playerName',
+  assistName: 'assistName',
+  source: 'source',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MatchEventScalarFieldEnum = (typeof MatchEventScalarFieldEnum)[keyof typeof MatchEventScalarFieldEnum]
+
+
+export const TeamSeasonApiStatisticScalarFieldEnum = {
+  id: 'id',
+  teamId: 'teamId',
+  seasonId: 'seasonId',
+  form: 'form',
+  played: 'played',
+  wins: 'wins',
+  draws: 'draws',
+  losses: 'losses',
+  goalsFor: 'goalsFor',
+  goalsAgainst: 'goalsAgainst',
+  cleanSheet: 'cleanSheet',
+  failedToScore: 'failedToScore',
+  payloadJson: 'payloadJson',
+  sourceUpdatedAt: 'sourceUpdatedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TeamSeasonApiStatisticScalarFieldEnum = (typeof TeamSeasonApiStatisticScalarFieldEnum)[keyof typeof TeamSeasonApiStatisticScalarFieldEnum]
+
+
+export const PlayerLeaderboardEntryScalarFieldEnum = {
+  id: 'id',
+  seasonId: 'seasonId',
+  leagueId: 'leagueId',
+  kind: 'kind',
+  rank: 'rank',
+  playerId: 'playerId',
+  teamId: 'teamId',
+  value: 'value',
+  sourceUpdatedAt: 'sourceUpdatedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PlayerLeaderboardEntryScalarFieldEnum = (typeof PlayerLeaderboardEntryScalarFieldEnum)[keyof typeof PlayerLeaderboardEntryScalarFieldEnum]
 
 
 export const SortOrder = {

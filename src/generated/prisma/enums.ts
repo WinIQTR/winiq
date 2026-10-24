@@ -221,3 +221,13 @@ export const TeamSeasonStatus = {
 } as const
 
 export type TeamSeasonStatus = (typeof TeamSeasonStatus)[keyof typeof TeamSeasonStatus]
+
+
+export const PlayerLeaderboardKind = {
+  TOP_SCORERS: 'TOP_SCORERS',
+  TOP_ASSISTS: 'TOP_ASSISTS',
+  TOP_YELLOW: 'TOP_YELLOW',
+  TOP_RED: 'TOP_RED'
+} as const
+
+export type PlayerLeaderboardKind = (typeof PlayerLeaderboardKind)[keyof typeof PlayerLeaderboardKind]

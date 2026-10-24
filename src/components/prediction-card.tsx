@@ -1,8 +1,9 @@
 "use client";
 
-import { useLanguage } from "@/components/language-provider";
 import Image from "next/image";
 
+import { useLanguage } from "@/components/language-provider";
+import { buildMatchFormTip } from "@/lib/member-match-insight";
 import type {
   PredictionSettlementStatus,
   UiConfidence,
@@ -341,6 +342,15 @@ export function PredictionCard({
   finalAwayScore,
 }: PredictionCardProps) {
   const { locale, t } = useLanguage();
+  const formTip = buildMatchFormTip(
+    {
+      homeTeam,
+      awayTeam,
+      homeRecentResults,
+      awayRecentResults,
+    },
+    t,
+  );
   const resultPresentation =
     getResultPresentation(
       kickoffAt,
@@ -397,6 +407,7 @@ export function PredictionCard({
         <span>2 <b>%{awayProbability.toFixed(1)}</b></span>
         {hasFinalScore ? <strong>{locale === "tr" ? "Skor" : "Score"}: {finalHomeScore} – {finalAwayScore}</strong> : null}
       </footer>
+      {formTip ? <p className="prediction-form-tip">{formTip}</p> : null}
     </article>
   );
 }

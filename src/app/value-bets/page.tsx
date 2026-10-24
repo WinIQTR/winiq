@@ -1,9 +1,12 @@
 import { PageShell } from "@/components/page-shell";
+import { translateUiText } from "@/i18n/dictionaries";
 import {
   ACTIVE_SEASON_LABEL,
   ACTIVE_SEASON_YEAR,
   isDateInSeason,
 } from "@/config/season";
+import { buildMatchFormTip } from "@/lib/member-match-insight";
+import { loadDashboardPredictionSnapshot } from "@/lib/prediction-dashboard-snapshot";
 import {
   buildValueBetAccuracyReport,
   type ValueBetAccuracyGroup,
@@ -72,7 +75,13 @@ const SIGNAL_LABELS: Record<string, string> = {
   STRONG_ODDS_PREMIUM: "Strong odds premium",
 };
 
-function AiMatchExplanations({ selections }: { selections: PortfolioSelection[] }) {
+function AiMatchExplanations({
+  selections,
+  formTips,
+}: {
+  selections: PortfolioSelection[];
+  formTips: Map<number, string>;
+}) {
   return (
     <div className={styles.explanationBlock}>
       <div className={styles.explanationHeading}>
@@ -82,12 +91,14 @@ function AiMatchExplanations({ selections }: { selections: PortfolioSelection[] 
       <div className={styles.explanationList}>
         {selections.map(({ row, portfolioStakePercentage }) => {
           const explanation = buildValueBetExplanation(row);
+          const formTip = formTips.get(row.matchId);
           return (
             <details className={styles.explanation} key={`explanation-${row.matchId}-${row.marketKey}`}>
               <summary>
                 <span><strong>{row.homeTeam} – {row.awayTeam}</strong><small>{row.market} • {row.selection}</small></span>
                 <span className={styles.verdict}>{VERDICT_LABELS[explanation.verdict]}</span>
               </summary>
+              {formTip ? <p className={styles.formTipLine}>{formTip}</p> : null}
               <div className={styles.explanationGrid}>
                 <div><span>Model / Market</span><strong>{row.modelProbability.toFixed(1)}% / {row.marketProbability.toFixed(1)}%</strong></div>
                 <div><span>Probability Gap</span><strong className={styles.positive}>{formatPercentage(explanation.probabilityGap)}</strong></div>
@@ -432,6 +443,27 @@ export default async function ValueBetsPage() {
   const championChallenger = buildChampionChallengerAudit(data.settled);
   const modelHealth = buildModelHealthReport({ generatedAt: data.generatedAt, upcoming: data.upcoming, settled: data.settled });
 
+  const tipTranslate = (source: string) => translateUiText(source, "en");
+  const predictionByMatch = new Map(
+    (await loadDashboardPredictionSnapshot(5_000)).map((item) => [item.matchId, item]),
+  );
+  const formTips = new Map<number, string>();
+  for (const { row } of portfolio.primarySelections) {
+    const prediction = predictionByMatch.get(row.matchId);
+    const tip = buildMatchFormTip(
+      {
+        homeTeam: row.homeTeam,
+        awayTeam: row.awayTeam,
+        homeRecentResults: prediction?.homeRecentResults,
+        awayRecentResults: prediction?.awayRecentResults,
+        homeVenueResults: prediction?.homeVenueResults,
+        awayVenueResults: prediction?.awayVenueResults,
+      },
+      tipTranslate,
+    );
+    if (tip) formTips.set(row.matchId, tip);
+  }
+
   return (
     <PageShell><div className={styles.page}>
       <header className={styles.header}>
@@ -460,7 +492,7 @@ export default async function ValueBetsPage() {
         <section className={styles.panel}>
           <div className={styles.panelHeader}><div><h2>Main Recommendations</h2><p>Highest-ranked independent match selections. Daily total stake is capped at 6%.</p></div></div>
           <PortfolioTable selections={portfolio.primarySelections} badge="PRIMARY" />
-          <AiMatchExplanations selections={portfolio.primarySelections} />
+          <AiMatchExplanations selections={portfolio.primarySelections} formTips={formTips} />
         </section>
       )}
 

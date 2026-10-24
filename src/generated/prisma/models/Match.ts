@@ -426,6 +426,7 @@ export type MatchWhereInput = {
   smartPickHistory?: Prisma.SmartPickHistoryListRelationFilter
   valueBetHistory?: Prisma.ValueBetHistoryListRelationFilter
   smartCouponLegs?: Prisma.SmartCouponLegHistoryListRelationFilter
+  matchEvents?: Prisma.MatchEventListRelationFilter
   oddsSnapshots?: Prisma.OddsSnapshotListRelationFilter
 }
 
@@ -467,6 +468,7 @@ export type MatchOrderByWithRelationInput = {
   smartPickHistory?: Prisma.SmartPickHistoryOrderByRelationAggregateInput
   valueBetHistory?: Prisma.ValueBetHistoryOrderByRelationAggregateInput
   smartCouponLegs?: Prisma.SmartCouponLegHistoryOrderByRelationAggregateInput
+  matchEvents?: Prisma.MatchEventOrderByRelationAggregateInput
   oddsSnapshots?: Prisma.OddsSnapshotOrderByRelationAggregateInput
 }
 
@@ -511,6 +513,7 @@ export type MatchWhereUniqueInput = Prisma.AtLeast<{
   smartPickHistory?: Prisma.SmartPickHistoryListRelationFilter
   valueBetHistory?: Prisma.ValueBetHistoryListRelationFilter
   smartCouponLegs?: Prisma.SmartCouponLegHistoryListRelationFilter
+  matchEvents?: Prisma.MatchEventListRelationFilter
   oddsSnapshots?: Prisma.OddsSnapshotListRelationFilter
 }, "id" | "apiId">
 
@@ -608,6 +611,7 @@ export type MatchCreateInput = {
   smartPickHistory?: Prisma.SmartPickHistoryCreateNestedManyWithoutMatchInput
   valueBetHistory?: Prisma.ValueBetHistoryCreateNestedManyWithoutMatchInput
   smartCouponLegs?: Prisma.SmartCouponLegHistoryCreateNestedManyWithoutMatchInput
+  matchEvents?: Prisma.MatchEventCreateNestedManyWithoutMatchInput
   oddsSnapshots?: Prisma.OddsSnapshotCreateNestedManyWithoutMatchInput
 }
 
@@ -646,6 +650,7 @@ export type MatchUncheckedCreateInput = {
   smartPickHistory?: Prisma.SmartPickHistoryUncheckedCreateNestedManyWithoutMatchInput
   valueBetHistory?: Prisma.ValueBetHistoryUncheckedCreateNestedManyWithoutMatchInput
   smartCouponLegs?: Prisma.SmartCouponLegHistoryUncheckedCreateNestedManyWithoutMatchInput
+  matchEvents?: Prisma.MatchEventUncheckedCreateNestedManyWithoutMatchInput
   oddsSnapshots?: Prisma.OddsSnapshotUncheckedCreateNestedManyWithoutMatchInput
 }
 
@@ -683,6 +688,7 @@ export type MatchUpdateInput = {
   smartPickHistory?: Prisma.SmartPickHistoryUpdateManyWithoutMatchNestedInput
   valueBetHistory?: Prisma.ValueBetHistoryUpdateManyWithoutMatchNestedInput
   smartCouponLegs?: Prisma.SmartCouponLegHistoryUpdateManyWithoutMatchNestedInput
+  matchEvents?: Prisma.MatchEventUpdateManyWithoutMatchNestedInput
   oddsSnapshots?: Prisma.OddsSnapshotUpdateManyWithoutMatchNestedInput
 }
 
@@ -721,6 +727,7 @@ export type MatchUncheckedUpdateInput = {
   smartPickHistory?: Prisma.SmartPickHistoryUncheckedUpdateManyWithoutMatchNestedInput
   valueBetHistory?: Prisma.ValueBetHistoryUncheckedUpdateManyWithoutMatchNestedInput
   smartCouponLegs?: Prisma.SmartCouponLegHistoryUncheckedUpdateManyWithoutMatchNestedInput
+  matchEvents?: Prisma.MatchEventUncheckedUpdateManyWithoutMatchNestedInput
   oddsSnapshots?: Prisma.OddsSnapshotUncheckedUpdateManyWithoutMatchNestedInput
 }
 
@@ -1232,6 +1239,20 @@ export type MatchUpdateOneRequiredWithoutOddsSnapshotsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.MatchUpdateToOneWithWhereWithoutOddsSnapshotsInput, Prisma.MatchUpdateWithoutOddsSnapshotsInput>, Prisma.MatchUncheckedUpdateWithoutOddsSnapshotsInput>
 }
 
+export type MatchCreateNestedOneWithoutMatchEventsInput = {
+  create?: Prisma.XOR<Prisma.MatchCreateWithoutMatchEventsInput, Prisma.MatchUncheckedCreateWithoutMatchEventsInput>
+  connectOrCreate?: Prisma.MatchCreateOrConnectWithoutMatchEventsInput
+  connect?: Prisma.MatchWhereUniqueInput
+}
+
+export type MatchUpdateOneRequiredWithoutMatchEventsNestedInput = {
+  create?: Prisma.XOR<Prisma.MatchCreateWithoutMatchEventsInput, Prisma.MatchUncheckedCreateWithoutMatchEventsInput>
+  connectOrCreate?: Prisma.MatchCreateOrConnectWithoutMatchEventsInput
+  upsert?: Prisma.MatchUpsertWithoutMatchEventsInput
+  connect?: Prisma.MatchWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MatchUpdateToOneWithWhereWithoutMatchEventsInput, Prisma.MatchUpdateWithoutMatchEventsInput>, Prisma.MatchUncheckedUpdateWithoutMatchEventsInput>
+}
+
 export type MatchCreateWithoutSeasonInput = {
   apiId: number
   round?: string | null
@@ -1265,6 +1286,7 @@ export type MatchCreateWithoutSeasonInput = {
   smartPickHistory?: Prisma.SmartPickHistoryCreateNestedManyWithoutMatchInput
   valueBetHistory?: Prisma.ValueBetHistoryCreateNestedManyWithoutMatchInput
   smartCouponLegs?: Prisma.SmartCouponLegHistoryCreateNestedManyWithoutMatchInput
+  matchEvents?: Prisma.MatchEventCreateNestedManyWithoutMatchInput
   oddsSnapshots?: Prisma.OddsSnapshotCreateNestedManyWithoutMatchInput
 }
 
@@ -1302,6 +1324,7 @@ export type MatchUncheckedCreateWithoutSeasonInput = {
   smartPickHistory?: Prisma.SmartPickHistoryUncheckedCreateNestedManyWithoutMatchInput
   valueBetHistory?: Prisma.ValueBetHistoryUncheckedCreateNestedManyWithoutMatchInput
   smartCouponLegs?: Prisma.SmartCouponLegHistoryUncheckedCreateNestedManyWithoutMatchInput
+  matchEvents?: Prisma.MatchEventUncheckedCreateNestedManyWithoutMatchInput
   oddsSnapshots?: Prisma.OddsSnapshotUncheckedCreateNestedManyWithoutMatchInput
 }
 
@@ -1393,6 +1416,7 @@ export type MatchCreateWithoutPlayerPerformancesInput = {
   smartPickHistory?: Prisma.SmartPickHistoryCreateNestedManyWithoutMatchInput
   valueBetHistory?: Prisma.ValueBetHistoryCreateNestedManyWithoutMatchInput
   smartCouponLegs?: Prisma.SmartCouponLegHistoryCreateNestedManyWithoutMatchInput
+  matchEvents?: Prisma.MatchEventCreateNestedManyWithoutMatchInput
   oddsSnapshots?: Prisma.OddsSnapshotCreateNestedManyWithoutMatchInput
 }
 
@@ -1430,6 +1454,7 @@ export type MatchUncheckedCreateWithoutPlayerPerformancesInput = {
   smartPickHistory?: Prisma.SmartPickHistoryUncheckedCreateNestedManyWithoutMatchInput
   valueBetHistory?: Prisma.ValueBetHistoryUncheckedCreateNestedManyWithoutMatchInput
   smartCouponLegs?: Prisma.SmartCouponLegHistoryUncheckedCreateNestedManyWithoutMatchInput
+  matchEvents?: Prisma.MatchEventUncheckedCreateNestedManyWithoutMatchInput
   oddsSnapshots?: Prisma.OddsSnapshotUncheckedCreateNestedManyWithoutMatchInput
 }
 
@@ -1482,6 +1507,7 @@ export type MatchUpdateWithoutPlayerPerformancesInput = {
   smartPickHistory?: Prisma.SmartPickHistoryUpdateManyWithoutMatchNestedInput
   valueBetHistory?: Prisma.ValueBetHistoryUpdateManyWithoutMatchNestedInput
   smartCouponLegs?: Prisma.SmartCouponLegHistoryUpdateManyWithoutMatchNestedInput
+  matchEvents?: Prisma.MatchEventUpdateManyWithoutMatchNestedInput
   oddsSnapshots?: Prisma.OddsSnapshotUpdateManyWithoutMatchNestedInput
 }
 
@@ -1519,6 +1545,7 @@ export type MatchUncheckedUpdateWithoutPlayerPerformancesInput = {
   smartPickHistory?: Prisma.SmartPickHistoryUncheckedUpdateManyWithoutMatchNestedInput
   valueBetHistory?: Prisma.ValueBetHistoryUncheckedUpdateManyWithoutMatchNestedInput
   smartCouponLegs?: Prisma.SmartCouponLegHistoryUncheckedUpdateManyWithoutMatchNestedInput
+  matchEvents?: Prisma.MatchEventUncheckedUpdateManyWithoutMatchNestedInput
   oddsSnapshots?: Prisma.OddsSnapshotUncheckedUpdateManyWithoutMatchNestedInput
 }
 
@@ -1555,6 +1582,7 @@ export type MatchCreateWithoutHomeTeamInput = {
   smartPickHistory?: Prisma.SmartPickHistoryCreateNestedManyWithoutMatchInput
   valueBetHistory?: Prisma.ValueBetHistoryCreateNestedManyWithoutMatchInput
   smartCouponLegs?: Prisma.SmartCouponLegHistoryCreateNestedManyWithoutMatchInput
+  matchEvents?: Prisma.MatchEventCreateNestedManyWithoutMatchInput
   oddsSnapshots?: Prisma.OddsSnapshotCreateNestedManyWithoutMatchInput
 }
 
@@ -1592,6 +1620,7 @@ export type MatchUncheckedCreateWithoutHomeTeamInput = {
   smartPickHistory?: Prisma.SmartPickHistoryUncheckedCreateNestedManyWithoutMatchInput
   valueBetHistory?: Prisma.ValueBetHistoryUncheckedCreateNestedManyWithoutMatchInput
   smartCouponLegs?: Prisma.SmartCouponLegHistoryUncheckedCreateNestedManyWithoutMatchInput
+  matchEvents?: Prisma.MatchEventUncheckedCreateNestedManyWithoutMatchInput
   oddsSnapshots?: Prisma.OddsSnapshotUncheckedCreateNestedManyWithoutMatchInput
 }
 
@@ -1638,6 +1667,7 @@ export type MatchCreateWithoutAwayTeamInput = {
   smartPickHistory?: Prisma.SmartPickHistoryCreateNestedManyWithoutMatchInput
   valueBetHistory?: Prisma.ValueBetHistoryCreateNestedManyWithoutMatchInput
   smartCouponLegs?: Prisma.SmartCouponLegHistoryCreateNestedManyWithoutMatchInput
+  matchEvents?: Prisma.MatchEventCreateNestedManyWithoutMatchInput
   oddsSnapshots?: Prisma.OddsSnapshotCreateNestedManyWithoutMatchInput
 }
 
@@ -1675,6 +1705,7 @@ export type MatchUncheckedCreateWithoutAwayTeamInput = {
   smartPickHistory?: Prisma.SmartPickHistoryUncheckedCreateNestedManyWithoutMatchInput
   valueBetHistory?: Prisma.ValueBetHistoryUncheckedCreateNestedManyWithoutMatchInput
   smartCouponLegs?: Prisma.SmartCouponLegHistoryUncheckedCreateNestedManyWithoutMatchInput
+  matchEvents?: Prisma.MatchEventUncheckedCreateNestedManyWithoutMatchInput
   oddsSnapshots?: Prisma.OddsSnapshotUncheckedCreateNestedManyWithoutMatchInput
 }
 
@@ -1753,6 +1784,7 @@ export type MatchCreateWithoutInjuriesInput = {
   smartPickHistory?: Prisma.SmartPickHistoryCreateNestedManyWithoutMatchInput
   valueBetHistory?: Prisma.ValueBetHistoryCreateNestedManyWithoutMatchInput
   smartCouponLegs?: Prisma.SmartCouponLegHistoryCreateNestedManyWithoutMatchInput
+  matchEvents?: Prisma.MatchEventCreateNestedManyWithoutMatchInput
   oddsSnapshots?: Prisma.OddsSnapshotCreateNestedManyWithoutMatchInput
 }
 
@@ -1790,6 +1822,7 @@ export type MatchUncheckedCreateWithoutInjuriesInput = {
   smartPickHistory?: Prisma.SmartPickHistoryUncheckedCreateNestedManyWithoutMatchInput
   valueBetHistory?: Prisma.ValueBetHistoryUncheckedCreateNestedManyWithoutMatchInput
   smartCouponLegs?: Prisma.SmartCouponLegHistoryUncheckedCreateNestedManyWithoutMatchInput
+  matchEvents?: Prisma.MatchEventUncheckedCreateNestedManyWithoutMatchInput
   oddsSnapshots?: Prisma.OddsSnapshotUncheckedCreateNestedManyWithoutMatchInput
 }
 
@@ -1842,6 +1875,7 @@ export type MatchUpdateWithoutInjuriesInput = {
   smartPickHistory?: Prisma.SmartPickHistoryUpdateManyWithoutMatchNestedInput
   valueBetHistory?: Prisma.ValueBetHistoryUpdateManyWithoutMatchNestedInput
   smartCouponLegs?: Prisma.SmartCouponLegHistoryUpdateManyWithoutMatchNestedInput
+  matchEvents?: Prisma.MatchEventUpdateManyWithoutMatchNestedInput
   oddsSnapshots?: Prisma.OddsSnapshotUpdateManyWithoutMatchNestedInput
 }
 
@@ -1879,6 +1913,7 @@ export type MatchUncheckedUpdateWithoutInjuriesInput = {
   smartPickHistory?: Prisma.SmartPickHistoryUncheckedUpdateManyWithoutMatchNestedInput
   valueBetHistory?: Prisma.ValueBetHistoryUncheckedUpdateManyWithoutMatchNestedInput
   smartCouponLegs?: Prisma.SmartCouponLegHistoryUncheckedUpdateManyWithoutMatchNestedInput
+  matchEvents?: Prisma.MatchEventUncheckedUpdateManyWithoutMatchNestedInput
   oddsSnapshots?: Prisma.OddsSnapshotUncheckedUpdateManyWithoutMatchNestedInput
 }
 
@@ -1915,6 +1950,7 @@ export type MatchCreateWithoutLineupsInput = {
   smartPickHistory?: Prisma.SmartPickHistoryCreateNestedManyWithoutMatchInput
   valueBetHistory?: Prisma.ValueBetHistoryCreateNestedManyWithoutMatchInput
   smartCouponLegs?: Prisma.SmartCouponLegHistoryCreateNestedManyWithoutMatchInput
+  matchEvents?: Prisma.MatchEventCreateNestedManyWithoutMatchInput
   oddsSnapshots?: Prisma.OddsSnapshotCreateNestedManyWithoutMatchInput
 }
 
@@ -1952,6 +1988,7 @@ export type MatchUncheckedCreateWithoutLineupsInput = {
   smartPickHistory?: Prisma.SmartPickHistoryUncheckedCreateNestedManyWithoutMatchInput
   valueBetHistory?: Prisma.ValueBetHistoryUncheckedCreateNestedManyWithoutMatchInput
   smartCouponLegs?: Prisma.SmartCouponLegHistoryUncheckedCreateNestedManyWithoutMatchInput
+  matchEvents?: Prisma.MatchEventUncheckedCreateNestedManyWithoutMatchInput
   oddsSnapshots?: Prisma.OddsSnapshotUncheckedCreateNestedManyWithoutMatchInput
 }
 
@@ -2004,6 +2041,7 @@ export type MatchUpdateWithoutLineupsInput = {
   smartPickHistory?: Prisma.SmartPickHistoryUpdateManyWithoutMatchNestedInput
   valueBetHistory?: Prisma.ValueBetHistoryUpdateManyWithoutMatchNestedInput
   smartCouponLegs?: Prisma.SmartCouponLegHistoryUpdateManyWithoutMatchNestedInput
+  matchEvents?: Prisma.MatchEventUpdateManyWithoutMatchNestedInput
   oddsSnapshots?: Prisma.OddsSnapshotUpdateManyWithoutMatchNestedInput
 }
 
@@ -2041,6 +2079,7 @@ export type MatchUncheckedUpdateWithoutLineupsInput = {
   smartPickHistory?: Prisma.SmartPickHistoryUncheckedUpdateManyWithoutMatchNestedInput
   valueBetHistory?: Prisma.ValueBetHistoryUncheckedUpdateManyWithoutMatchNestedInput
   smartCouponLegs?: Prisma.SmartCouponLegHistoryUncheckedUpdateManyWithoutMatchNestedInput
+  matchEvents?: Prisma.MatchEventUncheckedUpdateManyWithoutMatchNestedInput
   oddsSnapshots?: Prisma.OddsSnapshotUncheckedUpdateManyWithoutMatchNestedInput
 }
 
@@ -2077,6 +2116,7 @@ export type MatchCreateWithoutPlayerImpactScoresInput = {
   smartPickHistory?: Prisma.SmartPickHistoryCreateNestedManyWithoutMatchInput
   valueBetHistory?: Prisma.ValueBetHistoryCreateNestedManyWithoutMatchInput
   smartCouponLegs?: Prisma.SmartCouponLegHistoryCreateNestedManyWithoutMatchInput
+  matchEvents?: Prisma.MatchEventCreateNestedManyWithoutMatchInput
   oddsSnapshots?: Prisma.OddsSnapshotCreateNestedManyWithoutMatchInput
 }
 
@@ -2114,6 +2154,7 @@ export type MatchUncheckedCreateWithoutPlayerImpactScoresInput = {
   smartPickHistory?: Prisma.SmartPickHistoryUncheckedCreateNestedManyWithoutMatchInput
   valueBetHistory?: Prisma.ValueBetHistoryUncheckedCreateNestedManyWithoutMatchInput
   smartCouponLegs?: Prisma.SmartCouponLegHistoryUncheckedCreateNestedManyWithoutMatchInput
+  matchEvents?: Prisma.MatchEventUncheckedCreateNestedManyWithoutMatchInput
   oddsSnapshots?: Prisma.OddsSnapshotUncheckedCreateNestedManyWithoutMatchInput
 }
 
@@ -2166,6 +2207,7 @@ export type MatchUpdateWithoutPlayerImpactScoresInput = {
   smartPickHistory?: Prisma.SmartPickHistoryUpdateManyWithoutMatchNestedInput
   valueBetHistory?: Prisma.ValueBetHistoryUpdateManyWithoutMatchNestedInput
   smartCouponLegs?: Prisma.SmartCouponLegHistoryUpdateManyWithoutMatchNestedInput
+  matchEvents?: Prisma.MatchEventUpdateManyWithoutMatchNestedInput
   oddsSnapshots?: Prisma.OddsSnapshotUpdateManyWithoutMatchNestedInput
 }
 
@@ -2203,6 +2245,7 @@ export type MatchUncheckedUpdateWithoutPlayerImpactScoresInput = {
   smartPickHistory?: Prisma.SmartPickHistoryUncheckedUpdateManyWithoutMatchNestedInput
   valueBetHistory?: Prisma.ValueBetHistoryUncheckedUpdateManyWithoutMatchNestedInput
   smartCouponLegs?: Prisma.SmartCouponLegHistoryUncheckedUpdateManyWithoutMatchNestedInput
+  matchEvents?: Prisma.MatchEventUncheckedUpdateManyWithoutMatchNestedInput
   oddsSnapshots?: Prisma.OddsSnapshotUncheckedUpdateManyWithoutMatchNestedInput
 }
 
@@ -2239,6 +2282,7 @@ export type MatchCreateWithoutSquadStrengthScoresInput = {
   smartPickHistory?: Prisma.SmartPickHistoryCreateNestedManyWithoutMatchInput
   valueBetHistory?: Prisma.ValueBetHistoryCreateNestedManyWithoutMatchInput
   smartCouponLegs?: Prisma.SmartCouponLegHistoryCreateNestedManyWithoutMatchInput
+  matchEvents?: Prisma.MatchEventCreateNestedManyWithoutMatchInput
   oddsSnapshots?: Prisma.OddsSnapshotCreateNestedManyWithoutMatchInput
 }
 
@@ -2276,6 +2320,7 @@ export type MatchUncheckedCreateWithoutSquadStrengthScoresInput = {
   smartPickHistory?: Prisma.SmartPickHistoryUncheckedCreateNestedManyWithoutMatchInput
   valueBetHistory?: Prisma.ValueBetHistoryUncheckedCreateNestedManyWithoutMatchInput
   smartCouponLegs?: Prisma.SmartCouponLegHistoryUncheckedCreateNestedManyWithoutMatchInput
+  matchEvents?: Prisma.MatchEventUncheckedCreateNestedManyWithoutMatchInput
   oddsSnapshots?: Prisma.OddsSnapshotUncheckedCreateNestedManyWithoutMatchInput
 }
 
@@ -2328,6 +2373,7 @@ export type MatchUpdateWithoutSquadStrengthScoresInput = {
   smartPickHistory?: Prisma.SmartPickHistoryUpdateManyWithoutMatchNestedInput
   valueBetHistory?: Prisma.ValueBetHistoryUpdateManyWithoutMatchNestedInput
   smartCouponLegs?: Prisma.SmartCouponLegHistoryUpdateManyWithoutMatchNestedInput
+  matchEvents?: Prisma.MatchEventUpdateManyWithoutMatchNestedInput
   oddsSnapshots?: Prisma.OddsSnapshotUpdateManyWithoutMatchNestedInput
 }
 
@@ -2365,6 +2411,7 @@ export type MatchUncheckedUpdateWithoutSquadStrengthScoresInput = {
   smartPickHistory?: Prisma.SmartPickHistoryUncheckedUpdateManyWithoutMatchNestedInput
   valueBetHistory?: Prisma.ValueBetHistoryUncheckedUpdateManyWithoutMatchNestedInput
   smartCouponLegs?: Prisma.SmartCouponLegHistoryUncheckedUpdateManyWithoutMatchNestedInput
+  matchEvents?: Prisma.MatchEventUncheckedUpdateManyWithoutMatchNestedInput
   oddsSnapshots?: Prisma.OddsSnapshotUncheckedUpdateManyWithoutMatchNestedInput
 }
 
@@ -2401,6 +2448,7 @@ export type MatchCreateWithoutFeatureValuesInput = {
   smartPickHistory?: Prisma.SmartPickHistoryCreateNestedManyWithoutMatchInput
   valueBetHistory?: Prisma.ValueBetHistoryCreateNestedManyWithoutMatchInput
   smartCouponLegs?: Prisma.SmartCouponLegHistoryCreateNestedManyWithoutMatchInput
+  matchEvents?: Prisma.MatchEventCreateNestedManyWithoutMatchInput
   oddsSnapshots?: Prisma.OddsSnapshotCreateNestedManyWithoutMatchInput
 }
 
@@ -2438,6 +2486,7 @@ export type MatchUncheckedCreateWithoutFeatureValuesInput = {
   smartPickHistory?: Prisma.SmartPickHistoryUncheckedCreateNestedManyWithoutMatchInput
   valueBetHistory?: Prisma.ValueBetHistoryUncheckedCreateNestedManyWithoutMatchInput
   smartCouponLegs?: Prisma.SmartCouponLegHistoryUncheckedCreateNestedManyWithoutMatchInput
+  matchEvents?: Prisma.MatchEventUncheckedCreateNestedManyWithoutMatchInput
   oddsSnapshots?: Prisma.OddsSnapshotUncheckedCreateNestedManyWithoutMatchInput
 }
 
@@ -2490,6 +2539,7 @@ export type MatchUpdateWithoutFeatureValuesInput = {
   smartPickHistory?: Prisma.SmartPickHistoryUpdateManyWithoutMatchNestedInput
   valueBetHistory?: Prisma.ValueBetHistoryUpdateManyWithoutMatchNestedInput
   smartCouponLegs?: Prisma.SmartCouponLegHistoryUpdateManyWithoutMatchNestedInput
+  matchEvents?: Prisma.MatchEventUpdateManyWithoutMatchNestedInput
   oddsSnapshots?: Prisma.OddsSnapshotUpdateManyWithoutMatchNestedInput
 }
 
@@ -2527,6 +2577,7 @@ export type MatchUncheckedUpdateWithoutFeatureValuesInput = {
   smartPickHistory?: Prisma.SmartPickHistoryUncheckedUpdateManyWithoutMatchNestedInput
   valueBetHistory?: Prisma.ValueBetHistoryUncheckedUpdateManyWithoutMatchNestedInput
   smartCouponLegs?: Prisma.SmartCouponLegHistoryUncheckedUpdateManyWithoutMatchNestedInput
+  matchEvents?: Prisma.MatchEventUncheckedUpdateManyWithoutMatchNestedInput
   oddsSnapshots?: Prisma.OddsSnapshotUncheckedUpdateManyWithoutMatchNestedInput
 }
 
@@ -2563,6 +2614,7 @@ export type MatchCreateWithoutDataQualitySnapshotsInput = {
   smartPickHistory?: Prisma.SmartPickHistoryCreateNestedManyWithoutMatchInput
   valueBetHistory?: Prisma.ValueBetHistoryCreateNestedManyWithoutMatchInput
   smartCouponLegs?: Prisma.SmartCouponLegHistoryCreateNestedManyWithoutMatchInput
+  matchEvents?: Prisma.MatchEventCreateNestedManyWithoutMatchInput
   oddsSnapshots?: Prisma.OddsSnapshotCreateNestedManyWithoutMatchInput
 }
 
@@ -2600,6 +2652,7 @@ export type MatchUncheckedCreateWithoutDataQualitySnapshotsInput = {
   smartPickHistory?: Prisma.SmartPickHistoryUncheckedCreateNestedManyWithoutMatchInput
   valueBetHistory?: Prisma.ValueBetHistoryUncheckedCreateNestedManyWithoutMatchInput
   smartCouponLegs?: Prisma.SmartCouponLegHistoryUncheckedCreateNestedManyWithoutMatchInput
+  matchEvents?: Prisma.MatchEventUncheckedCreateNestedManyWithoutMatchInput
   oddsSnapshots?: Prisma.OddsSnapshotUncheckedCreateNestedManyWithoutMatchInput
 }
 
@@ -2652,6 +2705,7 @@ export type MatchUpdateWithoutDataQualitySnapshotsInput = {
   smartPickHistory?: Prisma.SmartPickHistoryUpdateManyWithoutMatchNestedInput
   valueBetHistory?: Prisma.ValueBetHistoryUpdateManyWithoutMatchNestedInput
   smartCouponLegs?: Prisma.SmartCouponLegHistoryUpdateManyWithoutMatchNestedInput
+  matchEvents?: Prisma.MatchEventUpdateManyWithoutMatchNestedInput
   oddsSnapshots?: Prisma.OddsSnapshotUpdateManyWithoutMatchNestedInput
 }
 
@@ -2689,6 +2743,7 @@ export type MatchUncheckedUpdateWithoutDataQualitySnapshotsInput = {
   smartPickHistory?: Prisma.SmartPickHistoryUncheckedUpdateManyWithoutMatchNestedInput
   valueBetHistory?: Prisma.ValueBetHistoryUncheckedUpdateManyWithoutMatchNestedInput
   smartCouponLegs?: Prisma.SmartCouponLegHistoryUncheckedUpdateManyWithoutMatchNestedInput
+  matchEvents?: Prisma.MatchEventUncheckedUpdateManyWithoutMatchNestedInput
   oddsSnapshots?: Prisma.OddsSnapshotUncheckedUpdateManyWithoutMatchNestedInput
 }
 
@@ -2725,6 +2780,7 @@ export type MatchCreateWithoutTeamStatisticsInput = {
   smartPickHistory?: Prisma.SmartPickHistoryCreateNestedManyWithoutMatchInput
   valueBetHistory?: Prisma.ValueBetHistoryCreateNestedManyWithoutMatchInput
   smartCouponLegs?: Prisma.SmartCouponLegHistoryCreateNestedManyWithoutMatchInput
+  matchEvents?: Prisma.MatchEventCreateNestedManyWithoutMatchInput
   oddsSnapshots?: Prisma.OddsSnapshotCreateNestedManyWithoutMatchInput
 }
 
@@ -2762,6 +2818,7 @@ export type MatchUncheckedCreateWithoutTeamStatisticsInput = {
   smartPickHistory?: Prisma.SmartPickHistoryUncheckedCreateNestedManyWithoutMatchInput
   valueBetHistory?: Prisma.ValueBetHistoryUncheckedCreateNestedManyWithoutMatchInput
   smartCouponLegs?: Prisma.SmartCouponLegHistoryUncheckedCreateNestedManyWithoutMatchInput
+  matchEvents?: Prisma.MatchEventUncheckedCreateNestedManyWithoutMatchInput
   oddsSnapshots?: Prisma.OddsSnapshotUncheckedCreateNestedManyWithoutMatchInput
 }
 
@@ -2814,6 +2871,7 @@ export type MatchUpdateWithoutTeamStatisticsInput = {
   smartPickHistory?: Prisma.SmartPickHistoryUpdateManyWithoutMatchNestedInput
   valueBetHistory?: Prisma.ValueBetHistoryUpdateManyWithoutMatchNestedInput
   smartCouponLegs?: Prisma.SmartCouponLegHistoryUpdateManyWithoutMatchNestedInput
+  matchEvents?: Prisma.MatchEventUpdateManyWithoutMatchNestedInput
   oddsSnapshots?: Prisma.OddsSnapshotUpdateManyWithoutMatchNestedInput
 }
 
@@ -2851,6 +2909,7 @@ export type MatchUncheckedUpdateWithoutTeamStatisticsInput = {
   smartPickHistory?: Prisma.SmartPickHistoryUncheckedUpdateManyWithoutMatchNestedInput
   valueBetHistory?: Prisma.ValueBetHistoryUncheckedUpdateManyWithoutMatchNestedInput
   smartCouponLegs?: Prisma.SmartCouponLegHistoryUncheckedUpdateManyWithoutMatchNestedInput
+  matchEvents?: Prisma.MatchEventUncheckedUpdateManyWithoutMatchNestedInput
   oddsSnapshots?: Prisma.OddsSnapshotUncheckedUpdateManyWithoutMatchNestedInput
 }
 
@@ -2887,6 +2946,7 @@ export type MatchCreateWithoutSmartPickHistoryInput = {
   teamStatistics?: Prisma.MatchTeamStatisticCreateNestedManyWithoutMatchInput
   valueBetHistory?: Prisma.ValueBetHistoryCreateNestedManyWithoutMatchInput
   smartCouponLegs?: Prisma.SmartCouponLegHistoryCreateNestedManyWithoutMatchInput
+  matchEvents?: Prisma.MatchEventCreateNestedManyWithoutMatchInput
   oddsSnapshots?: Prisma.OddsSnapshotCreateNestedManyWithoutMatchInput
 }
 
@@ -2924,6 +2984,7 @@ export type MatchUncheckedCreateWithoutSmartPickHistoryInput = {
   teamStatistics?: Prisma.MatchTeamStatisticUncheckedCreateNestedManyWithoutMatchInput
   valueBetHistory?: Prisma.ValueBetHistoryUncheckedCreateNestedManyWithoutMatchInput
   smartCouponLegs?: Prisma.SmartCouponLegHistoryUncheckedCreateNestedManyWithoutMatchInput
+  matchEvents?: Prisma.MatchEventUncheckedCreateNestedManyWithoutMatchInput
   oddsSnapshots?: Prisma.OddsSnapshotUncheckedCreateNestedManyWithoutMatchInput
 }
 
@@ -2976,6 +3037,7 @@ export type MatchUpdateWithoutSmartPickHistoryInput = {
   teamStatistics?: Prisma.MatchTeamStatisticUpdateManyWithoutMatchNestedInput
   valueBetHistory?: Prisma.ValueBetHistoryUpdateManyWithoutMatchNestedInput
   smartCouponLegs?: Prisma.SmartCouponLegHistoryUpdateManyWithoutMatchNestedInput
+  matchEvents?: Prisma.MatchEventUpdateManyWithoutMatchNestedInput
   oddsSnapshots?: Prisma.OddsSnapshotUpdateManyWithoutMatchNestedInput
 }
 
@@ -3013,6 +3075,7 @@ export type MatchUncheckedUpdateWithoutSmartPickHistoryInput = {
   teamStatistics?: Prisma.MatchTeamStatisticUncheckedUpdateManyWithoutMatchNestedInput
   valueBetHistory?: Prisma.ValueBetHistoryUncheckedUpdateManyWithoutMatchNestedInput
   smartCouponLegs?: Prisma.SmartCouponLegHistoryUncheckedUpdateManyWithoutMatchNestedInput
+  matchEvents?: Prisma.MatchEventUncheckedUpdateManyWithoutMatchNestedInput
   oddsSnapshots?: Prisma.OddsSnapshotUncheckedUpdateManyWithoutMatchNestedInput
 }
 
@@ -3049,6 +3112,7 @@ export type MatchCreateWithoutValueBetHistoryInput = {
   teamStatistics?: Prisma.MatchTeamStatisticCreateNestedManyWithoutMatchInput
   smartPickHistory?: Prisma.SmartPickHistoryCreateNestedManyWithoutMatchInput
   smartCouponLegs?: Prisma.SmartCouponLegHistoryCreateNestedManyWithoutMatchInput
+  matchEvents?: Prisma.MatchEventCreateNestedManyWithoutMatchInput
   oddsSnapshots?: Prisma.OddsSnapshotCreateNestedManyWithoutMatchInput
 }
 
@@ -3086,6 +3150,7 @@ export type MatchUncheckedCreateWithoutValueBetHistoryInput = {
   teamStatistics?: Prisma.MatchTeamStatisticUncheckedCreateNestedManyWithoutMatchInput
   smartPickHistory?: Prisma.SmartPickHistoryUncheckedCreateNestedManyWithoutMatchInput
   smartCouponLegs?: Prisma.SmartCouponLegHistoryUncheckedCreateNestedManyWithoutMatchInput
+  matchEvents?: Prisma.MatchEventUncheckedCreateNestedManyWithoutMatchInput
   oddsSnapshots?: Prisma.OddsSnapshotUncheckedCreateNestedManyWithoutMatchInput
 }
 
@@ -3138,6 +3203,7 @@ export type MatchUpdateWithoutValueBetHistoryInput = {
   teamStatistics?: Prisma.MatchTeamStatisticUpdateManyWithoutMatchNestedInput
   smartPickHistory?: Prisma.SmartPickHistoryUpdateManyWithoutMatchNestedInput
   smartCouponLegs?: Prisma.SmartCouponLegHistoryUpdateManyWithoutMatchNestedInput
+  matchEvents?: Prisma.MatchEventUpdateManyWithoutMatchNestedInput
   oddsSnapshots?: Prisma.OddsSnapshotUpdateManyWithoutMatchNestedInput
 }
 
@@ -3175,6 +3241,7 @@ export type MatchUncheckedUpdateWithoutValueBetHistoryInput = {
   teamStatistics?: Prisma.MatchTeamStatisticUncheckedUpdateManyWithoutMatchNestedInput
   smartPickHistory?: Prisma.SmartPickHistoryUncheckedUpdateManyWithoutMatchNestedInput
   smartCouponLegs?: Prisma.SmartCouponLegHistoryUncheckedUpdateManyWithoutMatchNestedInput
+  matchEvents?: Prisma.MatchEventUncheckedUpdateManyWithoutMatchNestedInput
   oddsSnapshots?: Prisma.OddsSnapshotUncheckedUpdateManyWithoutMatchNestedInput
 }
 
@@ -3211,6 +3278,7 @@ export type MatchCreateWithoutSmartCouponLegsInput = {
   teamStatistics?: Prisma.MatchTeamStatisticCreateNestedManyWithoutMatchInput
   smartPickHistory?: Prisma.SmartPickHistoryCreateNestedManyWithoutMatchInput
   valueBetHistory?: Prisma.ValueBetHistoryCreateNestedManyWithoutMatchInput
+  matchEvents?: Prisma.MatchEventCreateNestedManyWithoutMatchInput
   oddsSnapshots?: Prisma.OddsSnapshotCreateNestedManyWithoutMatchInput
 }
 
@@ -3248,6 +3316,7 @@ export type MatchUncheckedCreateWithoutSmartCouponLegsInput = {
   teamStatistics?: Prisma.MatchTeamStatisticUncheckedCreateNestedManyWithoutMatchInput
   smartPickHistory?: Prisma.SmartPickHistoryUncheckedCreateNestedManyWithoutMatchInput
   valueBetHistory?: Prisma.ValueBetHistoryUncheckedCreateNestedManyWithoutMatchInput
+  matchEvents?: Prisma.MatchEventUncheckedCreateNestedManyWithoutMatchInput
   oddsSnapshots?: Prisma.OddsSnapshotUncheckedCreateNestedManyWithoutMatchInput
 }
 
@@ -3300,6 +3369,7 @@ export type MatchUpdateWithoutSmartCouponLegsInput = {
   teamStatistics?: Prisma.MatchTeamStatisticUpdateManyWithoutMatchNestedInput
   smartPickHistory?: Prisma.SmartPickHistoryUpdateManyWithoutMatchNestedInput
   valueBetHistory?: Prisma.ValueBetHistoryUpdateManyWithoutMatchNestedInput
+  matchEvents?: Prisma.MatchEventUpdateManyWithoutMatchNestedInput
   oddsSnapshots?: Prisma.OddsSnapshotUpdateManyWithoutMatchNestedInput
 }
 
@@ -3337,6 +3407,7 @@ export type MatchUncheckedUpdateWithoutSmartCouponLegsInput = {
   teamStatistics?: Prisma.MatchTeamStatisticUncheckedUpdateManyWithoutMatchNestedInput
   smartPickHistory?: Prisma.SmartPickHistoryUncheckedUpdateManyWithoutMatchNestedInput
   valueBetHistory?: Prisma.ValueBetHistoryUncheckedUpdateManyWithoutMatchNestedInput
+  matchEvents?: Prisma.MatchEventUncheckedUpdateManyWithoutMatchNestedInput
   oddsSnapshots?: Prisma.OddsSnapshotUncheckedUpdateManyWithoutMatchNestedInput
 }
 
@@ -3374,6 +3445,7 @@ export type MatchCreateWithoutOddsSnapshotsInput = {
   smartPickHistory?: Prisma.SmartPickHistoryCreateNestedManyWithoutMatchInput
   valueBetHistory?: Prisma.ValueBetHistoryCreateNestedManyWithoutMatchInput
   smartCouponLegs?: Prisma.SmartCouponLegHistoryCreateNestedManyWithoutMatchInput
+  matchEvents?: Prisma.MatchEventCreateNestedManyWithoutMatchInput
 }
 
 export type MatchUncheckedCreateWithoutOddsSnapshotsInput = {
@@ -3411,6 +3483,7 @@ export type MatchUncheckedCreateWithoutOddsSnapshotsInput = {
   smartPickHistory?: Prisma.SmartPickHistoryUncheckedCreateNestedManyWithoutMatchInput
   valueBetHistory?: Prisma.ValueBetHistoryUncheckedCreateNestedManyWithoutMatchInput
   smartCouponLegs?: Prisma.SmartCouponLegHistoryUncheckedCreateNestedManyWithoutMatchInput
+  matchEvents?: Prisma.MatchEventUncheckedCreateNestedManyWithoutMatchInput
 }
 
 export type MatchCreateOrConnectWithoutOddsSnapshotsInput = {
@@ -3463,6 +3536,7 @@ export type MatchUpdateWithoutOddsSnapshotsInput = {
   smartPickHistory?: Prisma.SmartPickHistoryUpdateManyWithoutMatchNestedInput
   valueBetHistory?: Prisma.ValueBetHistoryUpdateManyWithoutMatchNestedInput
   smartCouponLegs?: Prisma.SmartCouponLegHistoryUpdateManyWithoutMatchNestedInput
+  matchEvents?: Prisma.MatchEventUpdateManyWithoutMatchNestedInput
 }
 
 export type MatchUncheckedUpdateWithoutOddsSnapshotsInput = {
@@ -3500,6 +3574,173 @@ export type MatchUncheckedUpdateWithoutOddsSnapshotsInput = {
   smartPickHistory?: Prisma.SmartPickHistoryUncheckedUpdateManyWithoutMatchNestedInput
   valueBetHistory?: Prisma.ValueBetHistoryUncheckedUpdateManyWithoutMatchNestedInput
   smartCouponLegs?: Prisma.SmartCouponLegHistoryUncheckedUpdateManyWithoutMatchNestedInput
+  matchEvents?: Prisma.MatchEventUncheckedUpdateManyWithoutMatchNestedInput
+}
+
+export type MatchCreateWithoutMatchEventsInput = {
+  apiId: number
+  round?: string | null
+  kickoffAt: Date | string
+  status?: $Enums.MatchStatus
+  homeScore?: number | null
+  awayScore?: number | null
+  statusShort?: string | null
+  elapsedMinutes?: number | null
+  referee?: string | null
+  venueName?: string | null
+  venueCity?: string | null
+  halfTimeHomeScore?: number | null
+  halfTimeAwayScore?: number | null
+  extraTimeHomeScore?: number | null
+  extraTimeAwayScore?: number | null
+  penaltyHomeScore?: number | null
+  penaltyAwayScore?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  season: Prisma.SeasonCreateNestedOneWithoutMatchesInput
+  homeTeam: Prisma.TeamCreateNestedOneWithoutHomeMatchesInput
+  awayTeam: Prisma.TeamCreateNestedOneWithoutAwayMatchesInput
+  injuries?: Prisma.InjuryCreateNestedManyWithoutMatchInput
+  lineups?: Prisma.LineupCreateNestedManyWithoutMatchInput
+  playerImpactScores?: Prisma.PlayerImpactScoreCreateNestedManyWithoutMatchInput
+  squadStrengthScores?: Prisma.SquadStrengthScoreCreateNestedManyWithoutMatchInput
+  playerPerformances?: Prisma.PlayerMatchPerformanceCreateNestedManyWithoutMatchInput
+  featureValues?: Prisma.MatchFeatureValueCreateNestedManyWithoutMatchInput
+  dataQualitySnapshots?: Prisma.DataQualitySnapshotCreateNestedManyWithoutMatchInput
+  teamStatistics?: Prisma.MatchTeamStatisticCreateNestedManyWithoutMatchInput
+  smartPickHistory?: Prisma.SmartPickHistoryCreateNestedManyWithoutMatchInput
+  valueBetHistory?: Prisma.ValueBetHistoryCreateNestedManyWithoutMatchInput
+  smartCouponLegs?: Prisma.SmartCouponLegHistoryCreateNestedManyWithoutMatchInput
+  oddsSnapshots?: Prisma.OddsSnapshotCreateNestedManyWithoutMatchInput
+}
+
+export type MatchUncheckedCreateWithoutMatchEventsInput = {
+  id?: number
+  apiId: number
+  seasonId: number
+  homeTeamId: number
+  awayTeamId: number
+  round?: string | null
+  kickoffAt: Date | string
+  status?: $Enums.MatchStatus
+  homeScore?: number | null
+  awayScore?: number | null
+  statusShort?: string | null
+  elapsedMinutes?: number | null
+  referee?: string | null
+  venueName?: string | null
+  venueCity?: string | null
+  halfTimeHomeScore?: number | null
+  halfTimeAwayScore?: number | null
+  extraTimeHomeScore?: number | null
+  extraTimeAwayScore?: number | null
+  penaltyHomeScore?: number | null
+  penaltyAwayScore?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  injuries?: Prisma.InjuryUncheckedCreateNestedManyWithoutMatchInput
+  lineups?: Prisma.LineupUncheckedCreateNestedManyWithoutMatchInput
+  playerImpactScores?: Prisma.PlayerImpactScoreUncheckedCreateNestedManyWithoutMatchInput
+  squadStrengthScores?: Prisma.SquadStrengthScoreUncheckedCreateNestedManyWithoutMatchInput
+  playerPerformances?: Prisma.PlayerMatchPerformanceUncheckedCreateNestedManyWithoutMatchInput
+  featureValues?: Prisma.MatchFeatureValueUncheckedCreateNestedManyWithoutMatchInput
+  dataQualitySnapshots?: Prisma.DataQualitySnapshotUncheckedCreateNestedManyWithoutMatchInput
+  teamStatistics?: Prisma.MatchTeamStatisticUncheckedCreateNestedManyWithoutMatchInput
+  smartPickHistory?: Prisma.SmartPickHistoryUncheckedCreateNestedManyWithoutMatchInput
+  valueBetHistory?: Prisma.ValueBetHistoryUncheckedCreateNestedManyWithoutMatchInput
+  smartCouponLegs?: Prisma.SmartCouponLegHistoryUncheckedCreateNestedManyWithoutMatchInput
+  oddsSnapshots?: Prisma.OddsSnapshotUncheckedCreateNestedManyWithoutMatchInput
+}
+
+export type MatchCreateOrConnectWithoutMatchEventsInput = {
+  where: Prisma.MatchWhereUniqueInput
+  create: Prisma.XOR<Prisma.MatchCreateWithoutMatchEventsInput, Prisma.MatchUncheckedCreateWithoutMatchEventsInput>
+}
+
+export type MatchUpsertWithoutMatchEventsInput = {
+  update: Prisma.XOR<Prisma.MatchUpdateWithoutMatchEventsInput, Prisma.MatchUncheckedUpdateWithoutMatchEventsInput>
+  create: Prisma.XOR<Prisma.MatchCreateWithoutMatchEventsInput, Prisma.MatchUncheckedCreateWithoutMatchEventsInput>
+  where?: Prisma.MatchWhereInput
+}
+
+export type MatchUpdateToOneWithWhereWithoutMatchEventsInput = {
+  where?: Prisma.MatchWhereInput
+  data: Prisma.XOR<Prisma.MatchUpdateWithoutMatchEventsInput, Prisma.MatchUncheckedUpdateWithoutMatchEventsInput>
+}
+
+export type MatchUpdateWithoutMatchEventsInput = {
+  apiId?: Prisma.IntFieldUpdateOperationsInput | number
+  round?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  kickoffAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumMatchStatusFieldUpdateOperationsInput | $Enums.MatchStatus
+  homeScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  awayScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  statusShort?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  elapsedMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  referee?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  venueName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  venueCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  halfTimeHomeScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  halfTimeAwayScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  extraTimeHomeScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  extraTimeAwayScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  penaltyHomeScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  penaltyAwayScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  season?: Prisma.SeasonUpdateOneRequiredWithoutMatchesNestedInput
+  homeTeam?: Prisma.TeamUpdateOneRequiredWithoutHomeMatchesNestedInput
+  awayTeam?: Prisma.TeamUpdateOneRequiredWithoutAwayMatchesNestedInput
+  injuries?: Prisma.InjuryUpdateManyWithoutMatchNestedInput
+  lineups?: Prisma.LineupUpdateManyWithoutMatchNestedInput
+  playerImpactScores?: Prisma.PlayerImpactScoreUpdateManyWithoutMatchNestedInput
+  squadStrengthScores?: Prisma.SquadStrengthScoreUpdateManyWithoutMatchNestedInput
+  playerPerformances?: Prisma.PlayerMatchPerformanceUpdateManyWithoutMatchNestedInput
+  featureValues?: Prisma.MatchFeatureValueUpdateManyWithoutMatchNestedInput
+  dataQualitySnapshots?: Prisma.DataQualitySnapshotUpdateManyWithoutMatchNestedInput
+  teamStatistics?: Prisma.MatchTeamStatisticUpdateManyWithoutMatchNestedInput
+  smartPickHistory?: Prisma.SmartPickHistoryUpdateManyWithoutMatchNestedInput
+  valueBetHistory?: Prisma.ValueBetHistoryUpdateManyWithoutMatchNestedInput
+  smartCouponLegs?: Prisma.SmartCouponLegHistoryUpdateManyWithoutMatchNestedInput
+  oddsSnapshots?: Prisma.OddsSnapshotUpdateManyWithoutMatchNestedInput
+}
+
+export type MatchUncheckedUpdateWithoutMatchEventsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  apiId?: Prisma.IntFieldUpdateOperationsInput | number
+  seasonId?: Prisma.IntFieldUpdateOperationsInput | number
+  homeTeamId?: Prisma.IntFieldUpdateOperationsInput | number
+  awayTeamId?: Prisma.IntFieldUpdateOperationsInput | number
+  round?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  kickoffAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumMatchStatusFieldUpdateOperationsInput | $Enums.MatchStatus
+  homeScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  awayScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  statusShort?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  elapsedMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  referee?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  venueName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  venueCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  halfTimeHomeScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  halfTimeAwayScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  extraTimeHomeScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  extraTimeAwayScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  penaltyHomeScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  penaltyAwayScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  injuries?: Prisma.InjuryUncheckedUpdateManyWithoutMatchNestedInput
+  lineups?: Prisma.LineupUncheckedUpdateManyWithoutMatchNestedInput
+  playerImpactScores?: Prisma.PlayerImpactScoreUncheckedUpdateManyWithoutMatchNestedInput
+  squadStrengthScores?: Prisma.SquadStrengthScoreUncheckedUpdateManyWithoutMatchNestedInput
+  playerPerformances?: Prisma.PlayerMatchPerformanceUncheckedUpdateManyWithoutMatchNestedInput
+  featureValues?: Prisma.MatchFeatureValueUncheckedUpdateManyWithoutMatchNestedInput
+  dataQualitySnapshots?: Prisma.DataQualitySnapshotUncheckedUpdateManyWithoutMatchNestedInput
+  teamStatistics?: Prisma.MatchTeamStatisticUncheckedUpdateManyWithoutMatchNestedInput
+  smartPickHistory?: Prisma.SmartPickHistoryUncheckedUpdateManyWithoutMatchNestedInput
+  valueBetHistory?: Prisma.ValueBetHistoryUncheckedUpdateManyWithoutMatchNestedInput
+  smartCouponLegs?: Prisma.SmartCouponLegHistoryUncheckedUpdateManyWithoutMatchNestedInput
+  oddsSnapshots?: Prisma.OddsSnapshotUncheckedUpdateManyWithoutMatchNestedInput
 }
 
 export type MatchCreateManySeasonInput = {
@@ -3560,6 +3801,7 @@ export type MatchUpdateWithoutSeasonInput = {
   smartPickHistory?: Prisma.SmartPickHistoryUpdateManyWithoutMatchNestedInput
   valueBetHistory?: Prisma.ValueBetHistoryUpdateManyWithoutMatchNestedInput
   smartCouponLegs?: Prisma.SmartCouponLegHistoryUpdateManyWithoutMatchNestedInput
+  matchEvents?: Prisma.MatchEventUpdateManyWithoutMatchNestedInput
   oddsSnapshots?: Prisma.OddsSnapshotUpdateManyWithoutMatchNestedInput
 }
 
@@ -3597,6 +3839,7 @@ export type MatchUncheckedUpdateWithoutSeasonInput = {
   smartPickHistory?: Prisma.SmartPickHistoryUncheckedUpdateManyWithoutMatchNestedInput
   valueBetHistory?: Prisma.ValueBetHistoryUncheckedUpdateManyWithoutMatchNestedInput
   smartCouponLegs?: Prisma.SmartCouponLegHistoryUncheckedUpdateManyWithoutMatchNestedInput
+  matchEvents?: Prisma.MatchEventUncheckedUpdateManyWithoutMatchNestedInput
   oddsSnapshots?: Prisma.OddsSnapshotUncheckedUpdateManyWithoutMatchNestedInput
 }
 
@@ -3708,6 +3951,7 @@ export type MatchUpdateWithoutHomeTeamInput = {
   smartPickHistory?: Prisma.SmartPickHistoryUpdateManyWithoutMatchNestedInput
   valueBetHistory?: Prisma.ValueBetHistoryUpdateManyWithoutMatchNestedInput
   smartCouponLegs?: Prisma.SmartCouponLegHistoryUpdateManyWithoutMatchNestedInput
+  matchEvents?: Prisma.MatchEventUpdateManyWithoutMatchNestedInput
   oddsSnapshots?: Prisma.OddsSnapshotUpdateManyWithoutMatchNestedInput
 }
 
@@ -3745,6 +3989,7 @@ export type MatchUncheckedUpdateWithoutHomeTeamInput = {
   smartPickHistory?: Prisma.SmartPickHistoryUncheckedUpdateManyWithoutMatchNestedInput
   valueBetHistory?: Prisma.ValueBetHistoryUncheckedUpdateManyWithoutMatchNestedInput
   smartCouponLegs?: Prisma.SmartCouponLegHistoryUncheckedUpdateManyWithoutMatchNestedInput
+  matchEvents?: Prisma.MatchEventUncheckedUpdateManyWithoutMatchNestedInput
   oddsSnapshots?: Prisma.OddsSnapshotUncheckedUpdateManyWithoutMatchNestedInput
 }
 
@@ -3806,6 +4051,7 @@ export type MatchUpdateWithoutAwayTeamInput = {
   smartPickHistory?: Prisma.SmartPickHistoryUpdateManyWithoutMatchNestedInput
   valueBetHistory?: Prisma.ValueBetHistoryUpdateManyWithoutMatchNestedInput
   smartCouponLegs?: Prisma.SmartCouponLegHistoryUpdateManyWithoutMatchNestedInput
+  matchEvents?: Prisma.MatchEventUpdateManyWithoutMatchNestedInput
   oddsSnapshots?: Prisma.OddsSnapshotUpdateManyWithoutMatchNestedInput
 }
 
@@ -3843,6 +4089,7 @@ export type MatchUncheckedUpdateWithoutAwayTeamInput = {
   smartPickHistory?: Prisma.SmartPickHistoryUncheckedUpdateManyWithoutMatchNestedInput
   valueBetHistory?: Prisma.ValueBetHistoryUncheckedUpdateManyWithoutMatchNestedInput
   smartCouponLegs?: Prisma.SmartCouponLegHistoryUncheckedUpdateManyWithoutMatchNestedInput
+  matchEvents?: Prisma.MatchEventUncheckedUpdateManyWithoutMatchNestedInput
   oddsSnapshots?: Prisma.OddsSnapshotUncheckedUpdateManyWithoutMatchNestedInput
 }
 
@@ -3888,6 +4135,7 @@ export type MatchCountOutputType = {
   smartPickHistory: number
   valueBetHistory: number
   smartCouponLegs: number
+  matchEvents: number
   oddsSnapshots: number
 }
 
@@ -3903,6 +4151,7 @@ export type MatchCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.
   smartPickHistory?: boolean | MatchCountOutputTypeCountSmartPickHistoryArgs
   valueBetHistory?: boolean | MatchCountOutputTypeCountValueBetHistoryArgs
   smartCouponLegs?: boolean | MatchCountOutputTypeCountSmartCouponLegsArgs
+  matchEvents?: boolean | MatchCountOutputTypeCountMatchEventsArgs
   oddsSnapshots?: boolean | MatchCountOutputTypeCountOddsSnapshotsArgs
 }
 
@@ -3996,6 +4245,13 @@ export type MatchCountOutputTypeCountSmartCouponLegsArgs<ExtArgs extends runtime
 /**
  * MatchCountOutputType without action
  */
+export type MatchCountOutputTypeCountMatchEventsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MatchEventWhereInput
+}
+
+/**
+ * MatchCountOutputType without action
+ */
 export type MatchCountOutputTypeCountOddsSnapshotsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.OddsSnapshotWhereInput
 }
@@ -4039,6 +4295,7 @@ export type MatchSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   smartPickHistory?: boolean | Prisma.Match$smartPickHistoryArgs<ExtArgs>
   valueBetHistory?: boolean | Prisma.Match$valueBetHistoryArgs<ExtArgs>
   smartCouponLegs?: boolean | Prisma.Match$smartCouponLegsArgs<ExtArgs>
+  matchEvents?: boolean | Prisma.Match$matchEventsArgs<ExtArgs>
   oddsSnapshots?: boolean | Prisma.Match$oddsSnapshotsArgs<ExtArgs>
   _count?: boolean | Prisma.MatchCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["match"]>
@@ -4143,6 +4400,7 @@ export type MatchInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   smartPickHistory?: boolean | Prisma.Match$smartPickHistoryArgs<ExtArgs>
   valueBetHistory?: boolean | Prisma.Match$valueBetHistoryArgs<ExtArgs>
   smartCouponLegs?: boolean | Prisma.Match$smartCouponLegsArgs<ExtArgs>
+  matchEvents?: boolean | Prisma.Match$matchEventsArgs<ExtArgs>
   oddsSnapshots?: boolean | Prisma.Match$oddsSnapshotsArgs<ExtArgs>
   _count?: boolean | Prisma.MatchCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -4174,6 +4432,7 @@ export type $MatchPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     smartPickHistory: Prisma.$SmartPickHistoryPayload<ExtArgs>[]
     valueBetHistory: Prisma.$ValueBetHistoryPayload<ExtArgs>[]
     smartCouponLegs: Prisma.$SmartCouponLegHistoryPayload<ExtArgs>[]
+    matchEvents: Prisma.$MatchEventPayload<ExtArgs>[]
     oddsSnapshots: Prisma.$OddsSnapshotPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -4608,6 +4867,7 @@ export interface Prisma__MatchClient<T, Null = never, ExtArgs extends runtime.Ty
   smartPickHistory<T extends Prisma.Match$smartPickHistoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Match$smartPickHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SmartPickHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   valueBetHistory<T extends Prisma.Match$valueBetHistoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Match$valueBetHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ValueBetHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   smartCouponLegs<T extends Prisma.Match$smartCouponLegsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Match$smartCouponLegsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SmartCouponLegHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  matchEvents<T extends Prisma.Match$matchEventsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Match$matchEventsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MatchEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   oddsSnapshots<T extends Prisma.Match$oddsSnapshotsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Match$oddsSnapshotsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OddsSnapshotPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -5323,6 +5583,30 @@ export type Match$smartCouponLegsArgs<ExtArgs extends runtime.Types.Extensions.I
   take?: number
   skip?: number
   distinct?: Prisma.SmartCouponLegHistoryScalarFieldEnum | Prisma.SmartCouponLegHistoryScalarFieldEnum[]
+}
+
+/**
+ * Match.matchEvents
+ */
+export type Match$matchEventsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MatchEvent
+   */
+  select?: Prisma.MatchEventSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MatchEvent
+   */
+  omit?: Prisma.MatchEventOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MatchEventInclude<ExtArgs> | null
+  where?: Prisma.MatchEventWhereInput
+  orderBy?: Prisma.MatchEventOrderByWithRelationInput | Prisma.MatchEventOrderByWithRelationInput[]
+  cursor?: Prisma.MatchEventWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MatchEventScalarFieldEnum | Prisma.MatchEventScalarFieldEnum[]
 }
 
 /**
