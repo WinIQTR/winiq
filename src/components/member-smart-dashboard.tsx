@@ -2,15 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 
 import cards from "@/components/member-match-cards.module.css";
-import home from "@/components/member-home.module.css";
+import shell from "@/components/member-shell.module.css";
 import { LogoutButton } from "@/components/logout-button";
 import { LanguageSwitcher } from "@/components/language-switcher";
-import { MemberDateDayPicker } from "@/components/member-date-day-picker";
-import { BET_MARKET_COUNT } from "@/lib/bet-market-catalog";
+import { MemberPredictionsBoard } from "@/components/member-predictions-board";
+import { ACTIVE_SEASON_YEAR } from "@/config/season";
 import {
   hasMembershipPermission,
   MEMBERSHIP_PLAN_LABELS,
-  MEMBERSHIP_PLAN_MARKET_LIMITS,
   type MembershipPlanName,
 } from "@/lib/membership-access";
 import { LOCK_HINT } from "@/lib/membership-lock-copy";
@@ -27,28 +26,7 @@ const formatKickTime = (date: Date) =>
     hour: "2-digit",
     minute: "2-digit",
   }).format(date);
-const formatLongDate = (date: Date) =>
-  new Intl.DateTimeFormat("tr-TR", {
-    timeZone: TURKEY_TIME_ZONE,
-    weekday: "long",
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  }).format(date);
-const dateKey = (date: Date) =>
-  new Intl.DateTimeFormat("en-CA", {
-    timeZone: TURKEY_TIME_ZONE,
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-  }).format(date);
-const dateLabel = (date: Date) =>
-  new Intl.DateTimeFormat("tr-TR", {
-    timeZone: TURKEY_TIME_ZONE,
-    weekday: "short",
-    day: "2-digit",
-    month: "short",
-  }).format(date);
+
 const fairOdds = (prediction: DashboardPrediction) =>
   prediction.predictedProbability > 0 ? 100 / prediction.predictedProbability : 0;
 const guvenScore = (prediction: DashboardPrediction) => prediction.confidenceScore / 20;
@@ -58,12 +36,6 @@ const pickBadge = (prediction: DashboardPrediction) => {
   if (score >= 2) return { label: "İyi", kind: "good" as const };
   return { label: "Normal", kind: "ok" as const };
 };
-const outcomeShort = (prediction: DashboardPrediction) =>
-  prediction.predictedOutcome === "HOME"
-    ? `${prediction.homeTeam} kazanır`
-    : prediction.predictedOutcome === "AWAY"
-      ? `${prediction.awayTeam} kazanır`
-      : "Beraberlik";
 const initialsOf = (name: string) => {
   const parts = name.trim().split(/\s+/).filter(Boolean);
   if (!parts.length) return "ÜY";
@@ -86,7 +58,87 @@ function TeamLogo({ src, name, size = 28 }: { src: string | null; name: string; 
   if (src) {
     return <Image src={src} alt="" width={size} height={size} />;
   }
-  return <span className={home.logoFall}>{name.slice(0, 2).toUpperCase()}</span>;
+  return (
+    <span
+      style={{
+        display: "grid",
+        width: size,
+        height: size,
+        placeItems: "center",
+        borderRadius: "50%",
+        background: "#122033",
+        color: "#9bb3d4",
+        fontSize: 11,
+        fontWeight: 800,
+      }}
+    >
+      {name.slice(0, 2).toUpperCase()}
+    </span>
+  );
+}
+
+function IconHome() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
+      <path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5Z" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />
+    </svg>
+  );
+}
+function IconChart() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
+      <path d="M5 19V9M12 19V5M19 19v-7" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+    </svg>
+  );
+}
+function IconTrophy() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
+      <path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4Z" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />
+      <path d="M7 6H4.5A2.5 2.5 0 0 0 7 10.5M17 6h2.5A2.5 2.5 0 0 1 17 10.5" stroke="currentColor" strokeWidth="1.8" />
+    </svg>
+  );
+}
+function IconCalendar() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
+      <rect x="3.5" y="5" width="17" height="15" rx="2" stroke="currentColor" strokeWidth="1.8" />
+      <path d="M8 3.5V7M16 3.5V7M3.5 10h17" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+    </svg>
+  );
+}
+function IconUsers() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
+      <circle cx="9" cy="9" r="3" stroke="currentColor" strokeWidth="1.8" />
+      <circle cx="17" cy="10" r="2.5" stroke="currentColor" strokeWidth="1.8" />
+      <path d="M3.5 19c.8-3 3-4.5 5.5-4.5S13.7 16 14.5 19M14 14.6c1.4-.4 2.9 0 4 1.2.7.8 1.1 1.8 1.3 3.2" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+    </svg>
+  );
+}
+function IconGear() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
+      <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="1.8" />
+      <path d="M12 3.5v2.2M12 18.3v2.2M4.8 7.2l1.9 1.1M17.3 15.7l1.9 1.1M4.8 16.8l1.9-1.1M17.3 8.3l1.9-1.1" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+    </svg>
+  );
+}
+function IconSearch() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
+      <circle cx="11" cy="11" r="6.5" stroke="currentColor" strokeWidth="1.8" />
+      <path d="m16 16 4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+    </svg>
+  );
+}
+function IconBell() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
+      <path d="M6 16.5V10a6 6 0 1 1 12 0v6.5l1.5 2H4.5L6 16.5Z" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />
+      <path d="M10 20a2 2 0 0 0 4 0" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+    </svg>
+  );
 }
 
 export type MemberPerformanceBand = {
@@ -119,6 +171,17 @@ export type MemberNavActive =
   | "plans"
   | "alerts";
 
+function railActive(
+  active: MemberNavActive,
+): "home" | "analyses" | "results" | "predictions" | "messages" | "plans" {
+  if (active === "home") return "home";
+  if (active === "predictions" || active === "coupons") return "predictions";
+  if (active === "results") return "results";
+  if (active === "messages") return "messages";
+  if (active === "plans" || active === "alerts") return "plans";
+  return "analyses";
+}
+
 export function MemberPortalHeader({
   plan,
   preview = false,
@@ -141,54 +204,65 @@ export function MemberPortalHeader({
         : "/member/predictions";
   const statsHref = preview ? homeHref : "/member/results";
   const predictionsHref = preview ? homeHref : "/member/predictions";
-
-  const navActive =
-    active === "home"
-      ? "home"
-      : active === "predictions" || active === "coupons"
-        ? "predictions"
-        : active === "value" || active === "special" || active === "fixtures" || active === "players" || active === "scorers" || active === "standings"
-          ? "analyses"
-          : active === "results"
-            ? "stats"
-            : active === "plans" || active === "messages"
-              ? "membership"
-              : "home";
+  const messagesHref = preview ? homeHref : "/member/messages";
+  const current = railActive(active);
 
   return (
-    <header className={styles.topbar}>
-      <Link href={homeHref} className={styles.brand} aria-label="WINIQ" data-no-translate>
-        WIN<span>IQ</span>
-      </Link>
-      <nav>
-        <Link data-active={navActive === "home"} href={homeHref}>
-          Ana Sayfa
+    <div className={shell.chrome}>
+      {preview ? (
+        <div className={shell.preview}>
+          <span>YÖNETİCİ ÖNİZLEMESİ</span>
+          <strong>{MEMBERSHIP_PLAN_LABELS[plan]} üye görünümü</strong>
+          <Link href="/admin/members">Önizlemeden çık</Link>
+        </div>
+      ) : null}
+      <aside className={shell.rail} aria-label="Üye menü">
+        <Link className={shell.railLink} href={homeHref} data-active={current === "home"} title="Ana Sayfa" aria-label="Ana Sayfa">
+          <IconHome />
         </Link>
-        <Link data-active={navActive === "predictions"} href={predictionsHref}>
-          Tahminler
+        <Link className={shell.railLink} href={analysesHref} data-active={current === "analyses"} title="Analizler" aria-label="Analizler">
+          <IconChart />
         </Link>
-        <Link data-active={navActive === "analyses"} href={analysesHref}>
-          Analizler
+        <Link className={shell.railLink} href={statsHref} data-active={current === "results"} title="İstatistikler" aria-label="İstatistikler">
+          <IconTrophy />
         </Link>
-        <Link data-active={navActive === "stats"} href={statsHref}>
-          İstatistikler
+        <Link className={shell.railLink} href={predictionsHref} data-active={current === "predictions"} title="Tahminler" aria-label="Tahminler">
+          <IconCalendar />
         </Link>
-        <Link data-active={navActive === "membership"} href={planLink}>
-          Üyelik
+        <Link className={shell.railLink} href={messagesHref} data-active={current === "messages"} title="Mesajlar" aria-label="Mesajlar">
+          <IconUsers />
         </Link>
-      </nav>
-      <div className={styles.actions}>
-        <LanguageSwitcher />
-        {memberName ? (
-          <span className={styles.avatar} title={memberName} aria-label={memberName}>
-            {initialsOf(memberName)}
-          </span>
-        ) : (
-          <span className={styles.plan}>{MEMBERSHIP_PLAN_LABELS[plan]}</span>
-        )}
-        {!preview ? <LogoutButton /> : null}
-      </div>
-    </header>
+        <span className={shell.railSpacer} />
+        <Link className={shell.railLink} href={planLink} data-active={current === "plans"} title="Üyelik" aria-label="Üyelik">
+          <IconGear />
+        </Link>
+      </aside>
+      <header className={shell.topbar}>
+        <Link href={homeHref} className={shell.brand} aria-label="WINIQ" data-no-translate>
+          WIN<span>IQ</span>
+        </Link>
+        <div className={shell.brandMeta}>
+          <small>AI Football Predictions • {ACTIVE_SEASON_YEAR}</small>
+        </div>
+        <div className={shell.topActions}>
+          <LanguageSwitcher />
+          <Link className={shell.iconBtn} href={predictionsHref} aria-label="Ara / tahminler">
+            <IconSearch />
+          </Link>
+          <Link className={shell.iconBtn} href={preview ? homeHref : "/member/plans#alerts"} aria-label="Bildirimler">
+            <IconBell />
+          </Link>
+          {memberName ? (
+            <span className={shell.avatar} title={memberName} aria-label={memberName}>
+              {initialsOf(memberName)}
+            </span>
+          ) : (
+            <span className={shell.planChip}>{MEMBERSHIP_PLAN_LABELS[plan]}</span>
+          )}
+          {!preview ? <LogoutButton /> : null}
+        </div>
+      </header>
+    </div>
   );
 }
 
@@ -230,9 +304,7 @@ export function MemberPredictionRow({
       <div className={cards.matchMain}>
         <div className={cards.matchMeta}>
           <strong>{prediction.leagueName}</strong>
-          <span>
-            {formatKickTime(prediction.kickoffAt)}
-          </span>
+          <span>{formatKickTime(prediction.kickoffAt)}</span>
         </div>
         <div className={cards.teams}>
           <div>
@@ -301,7 +373,6 @@ export function MemberSmartDashboard({
   plan,
   predictions,
   preview = false,
-  selectedDate,
 }: {
   name: string;
   plan: MembershipPlanName;
@@ -310,368 +381,20 @@ export function MemberSmartDashboard({
   selectedDate?: string;
   performance?: MemberPerformance;
 }) {
-  const todayDate = new Date();
-  todayDate.setHours(12, 0, 0, 0);
-  const dayKeys = Array.from({ length: 14 }, (_, index) => {
-    const day = new Date(todayDate);
-    day.setDate(todayDate.getDate() + index);
-    return dateKey(day);
-  });
-  const activeDate = selectedDate && dayKeys.includes(selectedDate) ? selectedDate : dateKey(todayDate);
-  const activeDay = new Date(`${activeDate}T12:00:00`);
-  const visiblePredictions = predictions.filter((item) => dateKey(item.kickoffAt) === activeDate);
-  const sorted = [...visiblePredictions].sort((a, b) => b.confidenceScore - a.confidenceScore);
-  const strongest = sorted[0];
-  const couponLegs = sorted.filter((item) => guvenScore(item) >= 2).slice(0, 3);
-  const couponOdds =
-    plan !== "BASIC" && couponLegs.length
-      ? couponLegs.reduce((acc, item) => acc * Math.max(fairOdds(item), 1), 1)
-      : null;
-
-  const strongToday = visiblePredictions.filter((item) => guvenScore(item) >= 3);
-  const mediumToday = visiblePredictions.filter((item) => {
-    const score = guvenScore(item);
-    return score >= 2 && score < 3;
-  });
-  const weakToday = visiblePredictions.filter((item) => guvenScore(item) < 2);
-  const totalToday = Math.max(visiblePredictions.length, 1);
-  const avgOdds =
-    plan !== "BASIC" && visiblePredictions.length
-      ? visiblePredictions.reduce((sum, item) => sum + fairOdds(item), 0) / visiblePredictions.length
-      : null;
-  const confidenceEligible = visiblePredictions.filter((item) => fairOdds(item) >= 1.7).length;
-
   const matchHref = (id: number) =>
     preview ? `/admin/members/preview/matches/${id}?plan=${plan}` : `/member/matches/${id}`;
   const plansHref = preview ? `/admin/members/preview?plan=${plan}#paket` : "/member/plans";
-  const homeDateHref = (key: string) =>
-    preview ? `/admin/members/preview?plan=${plan}&date=${key}` : `/member?date=${key}`;
-  const couponsHref = preview ? homeDateHref(activeDate) : "/member/coupons";
-  const dayIndex = dayKeys.indexOf(activeDate);
 
   return (
     <main className={`${styles.shell} member-plan-${plan.toLowerCase()}`}>
-      {preview ? (
-        <div className={styles.preview}>
-          <span>YÖNETİCİ ÖNİZLEMESİ</span>
-          <strong>{MEMBERSHIP_PLAN_LABELS[plan]} üye görünümü</strong>
-          <Link href="/admin/members">Önizlemeden çık</Link>
-        </div>
-      ) : null}
-      <MemberPortalHeader plan={plan} preview={preview} memberName={name} />
+      <MemberPortalHeader plan={plan} preview={preview} memberName={name} active="home" />
       <div className={styles.page}>
-        <div className={home.home}>
-          <section className={home.heroRow}>
-            <div>
-              <p className={home.eyebrow} data-no-translate>
-                WINIQ · FUTBOL TAHMİNLERİ
-              </p>
-              <h1>Bugünün tahminleri</h1>
-              <p>
-                Merhaba {name}. Model destekli analizlerle hazırlanan, günün en iyi maç tahminleri.
-              </p>
-            </div>
-            <div className={home.dateWrap}>
-              <MemberDateDayPicker
-                activeDate={activeDate}
-                options={dayKeys.map((key) => ({
-                  key,
-                  href: homeDateHref(key),
-                  label:
-                    key === dateKey(new Date())
-                      ? `Bugün · ${formatLongDate(new Date(`${key}T12:00:00`))}`
-                      : formatLongDate(new Date(`${key}T12:00:00`)),
-                }))}
-                prevHref={dayIndex > 0 ? homeDateHref(dayKeys[dayIndex - 1]!) : null}
-                nextHref={
-                  dayIndex < dayKeys.length - 1 ? homeDateHref(dayKeys[dayIndex + 1]!) : null
-                }
-              />
-            </div>
-          </section>
-
-          <section className={home.stats}>
-            <article className={home.statCard}>
-              <span className={home.statIcon} aria-hidden>
-                ⚽
-              </span>
-              <div>
-                <small>Bugünkü maç sayısı</small>
-                <strong>{visiblePredictions.length} Maç</strong>
-              </div>
-            </article>
-            <article className={home.statCard}>
-              <span className={home.statIcon} aria-hidden>
-                ◎
-              </span>
-              <div>
-                <small>Güven aralığı</small>
-                <strong>
-                  {confidenceEligible} Tahmin <span style={{ color: "#8b949e", fontSize: 14 }}>(≥1.70)</span>
-                </strong>
-              </div>
-            </article>
-            <article className={home.statCard}>
-              <span className={home.statIcon} aria-hidden>
-                ▦
-              </span>
-              <div>
-                <small>Ortalama oran</small>
-                <strong>{avgOdds === null ? "—" : avgOdds.toFixed(2)}</strong>
-              </div>
-            </article>
-          </section>
-
-          <div className={home.board}>
-            <section className={home.panel}>
-              <div className={home.panelHead}>
-                <h2>Maç tahminleri</h2>
-                <span>{formatLongDate(activeDay)}</span>
-              </div>
-              <div className={home.matchList}>
-                {visiblePredictions.length ? (
-                  sorted.map((item) => {
-                    const badge = pickBadge(item);
-                    return (
-                      <Link
-                        className={home.matchRow}
-                        href={matchHref(item.matchId)}
-                        key={item.matchId}
-                      >
-                        <div className={home.meta}>
-                          <time>{formatKickTime(item.kickoffAt)}</time>
-                          <small>{item.leagueName}</small>
-                        </div>
-                        <div className={home.teams}>
-                          <div className={home.logos}>
-                            <TeamLogo src={item.homeTeamLogo} name={item.homeTeam} />
-                            <TeamLogo src={item.awayTeamLogo} name={item.awayTeam} />
-                          </div>
-                          <div className={home.teamNames}>
-                            <strong>{item.homeTeam}</strong>
-                            <strong>{item.awayTeam}</strong>
-                          </div>
-                        </div>
-                        {plan !== "BASIC" ? (
-                          <div className={home.probs}>
-                            {(
-                              [
-                                ["1", item.homeProbability],
-                                ["X", item.drawProbability],
-                                ["2", item.awayProbability],
-                              ] as const
-                            ).map(([label, value]) => (
-                              <div className={home.prob} key={label}>
-                                <span>
-                                  {label}
-                                  <b>%{value.toFixed(0)}</b>
-                                </span>
-                                <div className={home.bar}>
-                                  <i style={{ width: `${Math.max(4, Math.min(100, value))}%` }} />
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                        ) : (
-                          <div className={home.lockMini}>Analiz paketinde 1/X/2</div>
-                        )}
-                        <div className={home.guven}>
-                          <small>Güven</small>
-                          <strong>{guvenScore(item).toFixed(1)}</strong>
-                        </div>
-                        <div className={home.pick}>
-                          <span
-                            className={`${home.badge} ${
-                              badge.kind === "banko"
-                                ? home.badgeBanko
-                                : badge.kind === "good"
-                                  ? home.badgeGood
-                                  : home.badgeOk
-                            }`}
-                          >
-                            {badge.label}
-                          </span>
-                          <strong>{outcomeShort(item)}</strong>
-                        </div>
-                        {plan !== "BASIC" ? (
-                          <div className={home.odds}>{fairOdds(item).toFixed(2)}</div>
-                        ) : (
-                          <div className={home.lockMini}>—</div>
-                        )}
-                        <span className={home.chev} aria-hidden>
-                          ›
-                        </span>
-                      </Link>
-                    );
-                  })
-                ) : (
-                  <div className={home.empty}>Bu gün için maç bulunamadı.</div>
-                )}
-              </div>
-            </section>
-
-            <aside className={home.side}>
-              <section className={home.sideCard}>
-                <header>
-                  <span aria-hidden>✦</span>
-                  <div>
-                    <h3>Öne çıkan tahmin</h3>
-                    <p>En yüksek güvenli seçim</p>
-                  </div>
-                </header>
-                {strongest ? (
-                  <>
-                    <div className={home.featuredMatch}>
-                      <strong>
-                        {strongest.homeTeam} – {strongest.awayTeam}
-                      </strong>
-                      <small>{strongest.leagueName}</small>
-                    </div>
-                    <div className={home.featuredMeta}>
-                      <span
-                        className={`${home.badge} ${
-                          pickBadge(strongest).kind === "banko"
-                            ? home.badgeBanko
-                            : pickBadge(strongest).kind === "good"
-                              ? home.badgeGood
-                              : home.badgeOk
-                        }`}
-                      >
-                        {pickBadge(strongest).label}
-                      </span>
-                      <em>
-                        Güven <b>{guvenScore(strongest).toFixed(1)}</b>
-                      </em>
-                      <em>
-                        Oran <b>{plan !== "BASIC" ? fairOdds(strongest).toFixed(2) : "—"}</b>
-                      </em>
-                    </div>
-                    <p style={{ margin: "0 0 12px", color: "#8b949e", fontSize: 13 }}>
-                      {outcomeShort(strongest)}
-                    </p>
-                    <Link className={home.cta} href={matchHref(strongest.matchId)}>
-                      Analizi gör
-                    </Link>
-                  </>
-                ) : (
-                  <div className={home.empty}>Veri bekleniyor</div>
-                )}
-              </section>
-
-              <section className={home.sideCard}>
-                <header>
-                  <span aria-hidden>▣</span>
-                  <div>
-                    <h3>Günün kuponu</h3>
-                    <p>Yüksek güvenli bacaklar</p>
-                  </div>
-                </header>
-                {couponLegs.length ? (
-                  <>
-                    <ul className={home.couponList}>
-                      {couponLegs.map((item) => (
-                        <li key={item.matchId}>
-                          <div>
-                            <strong>
-                              {item.homeTeam} – {item.awayTeam}
-                            </strong>
-                            <small>{outcomeShort(item)}</small>
-                          </div>
-                          <b>{plan !== "BASIC" ? fairOdds(item).toFixed(2) : "—"}</b>
-                        </li>
-                      ))}
-                    </ul>
-                    <div className={home.couponTotal}>
-                      <span>Toplam oran</span>
-                      <strong>{couponOdds ? couponOdds.toFixed(2) : "—"}</strong>
-                    </div>
-                    <Link className={home.cta} href={couponsHref}>
-                      Kuponu incele
-                    </Link>
-                  </>
-                ) : (
-                  <div className={home.empty}>Bugün için kupon bacağı yok.</div>
-                )}
-              </section>
-
-              {plan !== "PROFESSIONAL" ? (
-                <section className={home.promo}>
-                  <span aria-hidden>♛</span>
-                  <strong>Profesyonel üyeliğe geçin</strong>
-                  <p>
-                    {BET_MARKET_COUNT} pazar, özel liste ve derin maç analizi Profesyonel pakette.
-                  </p>
-                  <Link className={home.cta} href={plansHref}>
-                    Paketleri gör
-                  </Link>
-                </section>
-              ) : (
-                <section className={home.promo}>
-                  <span aria-hidden>♛</span>
-                  <strong>Profesyonel aktif</strong>
-                  <p>Özel liste, fikstür ve tam pazar kataloğu açık.</p>
-                  <Link className={home.ctaGhost} href={preview ? plansHref : "/member/professional/special"}>
-                    Özel listeye git
-                  </Link>
-                </section>
-              )}
-
-              <section className={home.sideCard}>
-                <div className={home.memberStatus}>
-                  <div>
-                    <strong>{MEMBERSHIP_PLAN_LABELS[plan]} üyelik</strong>
-                    <small>
-                      {MEMBERSHIP_PLAN_MARKET_LIMITS[plan]}/{BET_MARKET_COUNT} pazar
-                    </small>
-                  </div>
-                  <span className={home.activePill}>AKTİF</span>
-                </div>
-                <Link className={home.ctaGhost} href={plansHref}>
-                  Üyeliği yönet
-                </Link>
-              </section>
-            </aside>
-          </div>
-
-          <section className={home.tiers}>
-            <article className={home.tierCard} data-level="strong">
-              <header>
-                <h3>Güçlü tahminler</h3>
-                <small>Güven ≥ 3.0</small>
-              </header>
-              <strong>{strongToday.length} maç</strong>
-              <div className={home.tierBar}>
-                <i style={{ width: `${(strongToday.length / totalToday) * 100}%` }} />
-              </div>
-            </article>
-            <article className={home.tierCard} data-level="medium">
-              <header>
-                <h3>Orta tahminler</h3>
-                <small>Güven 2.0 – 2.9</small>
-              </header>
-              <strong>{mediumToday.length} maç</strong>
-              <div className={home.tierBar}>
-                <i style={{ width: `${(mediumToday.length / totalToday) * 100}%` }} />
-              </div>
-            </article>
-            <article className={home.tierCard} data-level="weak">
-              <header>
-                <h3>Zayıf tahminler</h3>
-                <small>Güven &lt; 2.0</small>
-              </header>
-              <strong>{weakToday.length} maç</strong>
-              <div className={home.tierBar}>
-                <i style={{ width: `${(weakToday.length / totalToday) * 100}%` }} />
-              </div>
-            </article>
-          </section>
-
-          <footer className={home.footer}>
-            <b data-no-translate>WINIQ</b>
-            <span>Veriyi görün, kararınızı kendiniz verin.</span>
-            <small>Tahminler bilgi amaçlıdır; kazanç garantisi sunulmaz.</small>
-          </footer>
-        </div>
+        <MemberPredictionsBoard
+          predictions={predictions}
+          plan={plan}
+          matchHref={matchHref}
+          plansHref={plansHref}
+        />
       </div>
     </main>
   );
