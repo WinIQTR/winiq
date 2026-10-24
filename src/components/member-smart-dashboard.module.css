@@ -7,7 +7,7 @@
 .page {
   display: grid;
   gap: 16px;
-  margin-left: 72px;
+  margin-left: 84px;
   padding: 20px clamp(14px, 2vw, 32px) 32px;
   background: #070f1c;
 }
@@ -15,7 +15,7 @@
 @media (max-width: 860px) {
   .page {
     margin-left: 0;
-    padding-bottom: 88px;
+    padding-bottom: 28px;
   }
 }
 

@@ -5,6 +5,7 @@ import cards from "@/components/member-match-cards.module.css";
 import shell from "@/components/member-shell.module.css";
 import { LogoutButton } from "@/components/logout-button";
 import { LanguageSwitcher } from "@/components/language-switcher";
+import { MemberMobileNav } from "@/components/member-mobile-nav";
 import { MemberPredictionsBoard } from "@/components/member-predictions-board";
 import { ACTIVE_SEASON_YEAR } from "@/config/season";
 import {
@@ -173,8 +174,9 @@ export type MemberNavActive =
 
 function railActive(
   active: MemberNavActive,
-): "home" | "analyses" | "results" | "predictions" | "messages" | "plans" {
+): "home" | "value" | "analyses" | "results" | "predictions" | "messages" | "plans" {
   if (active === "home") return "home";
+  if (active === "value") return "value";
   if (active === "predictions" || active === "coupons") return "predictions";
   if (active === "results") return "results";
   if (active === "messages") return "messages";
@@ -195,17 +197,30 @@ export function MemberPortalHeader({
 }) {
   const homeHref = preview ? `/admin/members/preview?plan=${plan}` : "/member";
   const planLink = preview ? `/admin/members/preview?plan=${plan}#paket` : "/member/plans";
+  const canValue =
+    hasMembershipPermission(plan, "VALUE_BETS") || hasMembershipPermission(plan, "SMART_PICKS");
+  const valueHref = preview ? homeHref : canValue ? "/member/value" : "/member/plans";
   const analysesHref = preview
     ? homeHref
-    : hasMembershipPermission(plan, "VALUE_BETS") || hasMembershipPermission(plan, "SMART_PICKS")
-      ? "/member/value"
-      : plan === "PROFESSIONAL"
-        ? "/member/professional"
+    : plan === "PROFESSIONAL"
+      ? "/member/professional"
+      : canValue
+        ? "/member/value"
         : "/member/predictions";
   const statsHref = preview ? homeHref : "/member/results";
   const predictionsHref = preview ? homeHref : "/member/predictions";
   const messagesHref = preview ? homeHref : "/member/messages";
   const current = railActive(active);
+
+  const navItems = [
+    { href: homeHref, label: "Home page", active: current === "home" },
+    { href: valueHref, label: "Opportunities", active: current === "value" },
+    { href: analysesHref, label: "Analyses", active: current === "analyses" },
+    { href: predictionsHref, label: "Match calendar", active: current === "predictions" },
+    { href: statsHref, label: "Teams", active: current === "results" },
+    { href: messagesHref, label: "Messages", active: current === "messages" },
+    { href: planLink, label: "Settings", active: current === "plans" },
+  ];
 
   return (
     <div className={shell.chrome}>
@@ -216,28 +231,35 @@ export function MemberPortalHeader({
           <Link href="/admin/members">Önizlemeden çık</Link>
         </div>
       ) : null}
-      <aside className={shell.rail} aria-label="Üye menü">
-        <Link className={shell.railLink} href={homeHref} data-active={current === "home"} title="Ana Sayfa" aria-label="Ana Sayfa">
+      <aside className={shell.rail} aria-label="Member menu">
+        <Link className={shell.railLink} href={homeHref} data-active={current === "home"} title="Home page" aria-label="Home page">
           <IconHome />
+          <span>Home page</span>
         </Link>
-        <Link className={shell.railLink} href={analysesHref} data-active={current === "analyses"} title="Analizler" aria-label="Analizler">
+        <Link className={shell.railLink} href={valueHref} data-active={current === "value"} title="Opportunities" aria-label="Opportunities">
           <IconChart />
+          <span>Opportunities</span>
         </Link>
-        <Link className={shell.railLink} href={statsHref} data-active={current === "results"} title="İstatistikler" aria-label="İstatistikler">
+        <Link className={shell.railLink} href={analysesHref} data-active={current === "analyses"} title="Analyses" aria-label="Analyses">
           <IconTrophy />
+          <span>Analyses</span>
         </Link>
-        <Link className={shell.railLink} href={predictionsHref} data-active={current === "predictions"} title="Tahminler" aria-label="Tahminler">
+        <Link className={shell.railLink} href={predictionsHref} data-active={current === "predictions"} title="Match calendar" aria-label="Match calendar">
           <IconCalendar />
+          <span>Match calendar</span>
         </Link>
-        <Link className={shell.railLink} href={messagesHref} data-active={current === "messages"} title="Mesajlar" aria-label="Mesajlar">
+        <Link className={shell.railLink} href={statsHref} data-active={current === "results"} title="Teams" aria-label="Teams">
           <IconUsers />
+          <span>Teams</span>
         </Link>
         <span className={shell.railSpacer} />
-        <Link className={shell.railLink} href={planLink} data-active={current === "plans"} title="Üyelik" aria-label="Üyelik">
+        <Link className={shell.railLink} href={planLink} data-active={current === "plans"} title="Settings" aria-label="Settings">
           <IconGear />
+          <span>Settings</span>
         </Link>
       </aside>
       <header className={shell.topbar}>
+        <MemberMobileNav items={navItems} />
         <Link href={homeHref} className={shell.brand} aria-label="WINIQ" data-no-translate>
           WIN<span>IQ</span>
         </Link>
@@ -246,19 +268,18 @@ export function MemberPortalHeader({
         </div>
         <div className={shell.topActions}>
           <LanguageSwitcher />
-          <Link className={shell.iconBtn} href={predictionsHref} aria-label="Ara / tahminler">
+          <Link className={shell.iconBtn} href={predictionsHref} aria-label="Search">
             <IconSearch />
           </Link>
-          <Link className={shell.iconBtn} href={preview ? homeHref : "/member/plans#alerts"} aria-label="Bildirimler">
+          <Link className={shell.iconBtn} href={preview ? homeHref : "/member/plans#alerts"} aria-label="Notifications">
             <IconBell />
           </Link>
+          <span className={shell.planChip}>{MEMBERSHIP_PLAN_LABELS[plan]}</span>
           {memberName ? (
             <span className={shell.avatar} title={memberName} aria-label={memberName}>
               {initialsOf(memberName)}
             </span>
-          ) : (
-            <span className={shell.planChip}>{MEMBERSHIP_PLAN_LABELS[plan]}</span>
-          )}
+          ) : null}
           {!preview ? <LogoutButton /> : null}
         </div>
       </header>
