@@ -1,8 +1,8 @@
 import { readFile } from "node:fs/promises";
 
-import { MemberSmartDashboard, type MemberPerformance } from "@/components/member-smart-dashboard";
+import { MemberSmartDashboard } from "@/components/member-smart-dashboard";
 import { requireMember } from "@/lib/auth-session";
-import { buildMarketPerformanceArchive } from "@/lib/market-performance-archive";
+import { loadMemberPastPerformance } from "@/lib/member-past-performance";
 import {
   loadDashboardPredictionSnapshot,
   PREDICTION_DASHBOARD_SNAPSHOT_PATH,
@@ -10,28 +10,6 @@ import {
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
-
-function performanceOf(predictions: Awaited<ReturnType<typeof loadDashboardPredictionSnapshot>>): MemberPerformance {
-  const rows = buildMarketPerformanceArchive(predictions, { from: new Date(0), to: new Date() });
-  const band = (tier: "STRONG" | "MEDIUM" | "WEAK") => {
-    const tierRows = rows.filter((item) => item.tier === tier);
-    const wins = tierRows.filter((item) => item.result === "WON").length;
-    const losses = tierRows.filter((item) => item.result === "LOST").length;
-    const voids = tierRows.filter((item) => item.result === "VOID").length;
-    const unavailable = tierRows.filter((item) => item.result === "DATA_MISSING").length;
-    const evaluated = wins + losses;
-    return {
-      rate: evaluated ? (wins / evaluated) * 100 : null,
-      samples: evaluated,
-      wins,
-      losses,
-      voids,
-      unavailable,
-      total: tierRows.length,
-    };
-  };
-  return { strong: band("STRONG"), medium: band("MEDIUM"), weak: band("WEAK") };
-}
 
 async function snapshotGeneratedAtIso() {
   try {
@@ -54,9 +32,10 @@ export default async function MemberPage({
 }) {
   const user = await requireMember();
   const query = searchParams ? await searchParams : {};
-  const [allPredictions, updatedAtIso] = await Promise.all([
+  const [allPredictions, updatedAtIso, past] = await Promise.all([
     loadDashboardPredictionSnapshot(5_000),
     snapshotGeneratedAtIso(),
+    loadMemberPastPerformance({ matchLimit: 1 }),
   ]);
   const predictions = allPredictions
     .slice()
@@ -69,7 +48,7 @@ export default async function MemberPage({
       plan={user.plan}
       predictions={predictions}
       selectedDate={query.date}
-      performance={performanceOf(allPredictions)}
+      performance={past.performance}
       updatedAtIso={updatedAtIso}
     />
   );

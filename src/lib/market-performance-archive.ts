@@ -100,10 +100,17 @@ export function buildMarketPerformanceArchive(
   options: { from: Date; to: Date },
 ): MarketPerformanceArchiveRow[] {
   return predictions.flatMap((prediction) => {
-    if (
-      prediction.kickoffAt < options.from ||
-      prediction.kickoffAt > options.to
-    ) {
+    const settled =
+      prediction.settlementStatus === "WON" ||
+      prediction.settlementStatus === "LOST" ||
+      prediction.settlementStatus === "VOID";
+
+    // Keep settled rows even when kickoff is still "in the future" in the
+    // snapshot clock (common with timezone / early settlement attach).
+    if (prediction.kickoffAt < options.from) {
+      return [];
+    }
+    if (!settled && prediction.kickoffAt > options.to) {
       return [];
     }
 
