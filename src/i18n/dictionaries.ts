@@ -526,7 +526,7 @@ entries.push(
   { en: "Prediction", tr: "Tahmin" },
   { en: "confidence", tr: "güven" },
   { en: "Data quality", tr: "Veri kalitesi" },
-  { en: "Fair odds", tr: "Adil oran" },
+  { en: "Model odds", tr: "Model oranı" },
   { en: "LAST 30 DAYS", tr: "SON 30 GÜN" },
   { en: "Past prediction results", tr: "Geçmiş tahmin sonuçları" },
   { en: "No archived and settled predictions were found in the last 30 days.", tr: "Son 30 gün içinde arşive kaydedilmiş ve sonuçlanmış tahmin bulunmuyor." },
@@ -839,7 +839,8 @@ export function translateUiText(source: string, locale: AppLocale): string {
       .replace(/^(\d+) settled picks$/i, "$1 sonuçlanmış tahmin")
       .replace(/^(\d+) archived picks$/i, "$1 arşivlenmiş tahmin")
       .replace(/^(\d+) won \/ (\d+) lost$/i, "$1 kazandı / $2 kaybetti")
-      .replace(/^Average fair odds (.+)$/i, "Ortalama adil oran $1")
+      .replace(/^Average fair odds (.+)$/i, "Ortalama model oranı $1")
+      .replace(/^Average model odds (.+)$/i, "Ortalama model oranı $1")
       .replace(/^Hello (.+)\. Only today's published selections are shown\.$/i, "Merhaba $1. Yalnız bugünün yayımlanmış seçimleri gösteriliyor.")
       .replace(/^Merhaba (.+)\. Yalnız bugünün yayınlanmış seçimleri gösteriliyor\.$/i, "Merhaba $1. Yalnız bugünün yayımlanmış seçimleri gösteriliyor.")
       .replace(/^(\d+) results?$/i, "$1 sonuç")
@@ -861,7 +862,8 @@ export function translateUiText(source: string, locale: AppLocale): string {
       .replace(/^(\d+) sonuçlanmış tahmin$/i, "$1 settled picks")
       .replace(/^(\d+) arşivlenmiş tahmin$/i, "$1 archived picks")
       .replace(/^(\d+) kazandı \/ (\d+) kaybetti$/i, "$1 won / $2 lost")
-      .replace(/^Ortalama adil oran (.+)$/i, "Average fair odds $1")
+      .replace(/^Ortalama adil oran (.+)$/i, "Average model odds $1")
+      .replace(/^Ortalama model oranı (.+)$/i, "Average model odds $1")
       .replace(/^Merhaba (.+)\. Yalnız bugünün (?:yayınlanmış|yayımlanmış) seçimleri gösteriliyor\.$/i, "Hello $1. Only today's published selections are shown.")
       .replace(/^Merhaba (.+)$/i, "Hello $1")
       .replace(/^(\d+) karşılaşma$/i, "$1 matches")

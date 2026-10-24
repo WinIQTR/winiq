@@ -47,7 +47,7 @@ export default async function MemberMatchDetailPage({
         group: group.title,
         selection: option.selection,
         score: option.score,
-        fairOdds: option.fairOdds,
+        modelOdds: option.fairOdds,
       })),
     )
     .sort((a, b) => b.score - a.score)
@@ -59,7 +59,7 @@ export default async function MemberMatchDetailPage({
       <div className={member.page}>
         <header className={styles.hero}>
           <div>
-            <p data-no-translate>WINIQ · MAÇ ANALİZİ</p>
+            <p data-no-translate>WINIQ · MAÇ</p>
             <h1>
               {prediction.homeTeam} <small>–</small> {prediction.awayTeam}
             </h1>
@@ -83,32 +83,29 @@ export default async function MemberMatchDetailPage({
 
         <section className={styles.overview}>
           <article>
-            <span>Ev sahibi</span>
-            <strong>%{prediction.homeProbability.toFixed(1)}</strong>
-            <small>{prediction.homeTeam}</small>
-          </article>
-          <article>
-            <span>Beraberlik</span>
-            <strong>%{prediction.drawProbability.toFixed(1)}</strong>
-            <small>Model olasılığı</small>
-          </article>
-          <article>
-            <span>Deplasman</span>
-            <strong>%{prediction.awayProbability.toFixed(1)}</strong>
-            <small>{prediction.awayTeam}</small>
+            <span>Öneri</span>
+            <strong>{getPredictionLabel(prediction)}</strong>
+            <small>
+              {prediction.predictedOutcome === "HOME"
+                ? prediction.homeTeam
+                : prediction.predictedOutcome === "AWAY"
+                  ? prediction.awayTeam
+                  : "Beraberlik"}
+            </small>
           </article>
           <article>
             <span>Güven</span>
-            <strong>{prediction.confidenceScore.toFixed(1)}/100</strong>
-            <small>{getPredictionLabel(prediction)}</small>
+            <strong>%{prediction.confidenceScore.toFixed(0)}</strong>
+            <small>Modelin bu seçime güveni</small>
           </article>
-          {user.plan === "PROFESSIONAL" ? (
+          {user.plan !== "BASIC" ? (
             <article>
-              <span>Beklenen gol</span>
+              <span>Ev / X / Dep</span>
               <strong>
-                {prediction.expectedHomeGoals.toFixed(2)} – {prediction.expectedAwayGoals.toFixed(2)}
+                %{prediction.homeProbability.toFixed(0)} · %{prediction.drawProbability.toFixed(0)} · %
+                {prediction.awayProbability.toFixed(0)}
               </strong>
-              <small>Profesyonel gösterge</small>
+              <small>Olasılık özeti</small>
             </article>
           ) : null}
         </section>
@@ -128,30 +125,12 @@ export default async function MemberMatchDetailPage({
               </small>
               <strong>{pick.selection}</strong>
               <span style={{ color: "#9eb0c2", fontSize: 12 }}>
-                Güven {pick.score.toFixed(0)} · model oranı {pick.fairOdds.toFixed(2)}
+                Güven %{pick.score.toFixed(0)}
+                {user.plan !== "BASIC" ? ` · oran ${pick.modelOdds.toFixed(2)}` : ""}
               </span>
             </article>
           ))}
         </div>
-
-        {user.plan === "BASIC" ? (
-          <section className={styles.note}>
-            <strong>Sade görünüm</strong>
-            <span>Temel paket 6 pazarı açar. Diğerleri kilitli görünür.</span>
-          </section>
-        ) : null}
-        {user.plan === "ANALYSIS" ? (
-          <section className={styles.note}>
-            <strong>Analiz görünümü</strong>
-            <span>19 pazarda olasılık ve model oranları açık.</span>
-          </section>
-        ) : null}
-        {user.plan === "PROFESSIONAL" ? (
-          <section className={styles.note}>
-            <strong>Profesyonel görünüm</strong>
-            <span>{BET_MARKET_COUNT} pazarın tamamı açıktır.</span>
-          </section>
-        ) : null}
 
         <BetMarketCatalogPanel groups={groups} locale="tr" accessPlan={user.plan} />
         <section className={styles.notice}>

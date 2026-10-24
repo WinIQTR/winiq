@@ -28,14 +28,14 @@ export const MEMBERSHIP_PLAN_FEATURES: Record<MembershipPlanName, readonly strin
     "19 bahis pazarı ve bütün seçenekler",
     "Oyuncu, kadro, sakatlık ve hakem analizi",
     "xG, risk gerekçesi ve alternatif seçimler",
-    "Geçmiş performans, adil oran ve ayrıntılı karşılaştırma",
+    "Geçmiş performans, model oranı ve ayrıntılı karşılaştırma",
   ],
   PROFESSIONAL: [
     "Analiz paketindeki her şey",
     "30 bahis pazarının tamamı",
     "Toplam gol aralığı, ilk gol ve kesin skor",
     "Korner aralıkları, kart, ofsayt, şut ve oyuncu golü",
-    "Adil oran, veri kalitesi, piyasa farkı ve EV",
+    "Model oranı, veri kalitesi ve değer farkı",
     "Fikstür, oyuncular, gol krallığı ve tam analiz",
   ],
 };

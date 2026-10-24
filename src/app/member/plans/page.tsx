@@ -1,4 +1,5 @@
 import { MembershipPlanSelector } from "@/components/membership-plan-selector";
+import { MemberNotificationSettings } from "@/components/member-notification-settings";
 import { MemberPortalHeader } from "@/components/member-smart-dashboard";
 import member from "@/components/member-smart-dashboard.module.css";
 import { requireMember } from "@/lib/auth-session";
@@ -21,12 +22,31 @@ export const revalidate = 0;
 
 export default async function MembershipPlansPage() {
   const user = await requireMember();
-  const storedPrices = await prisma.membershipPlanPrice.findMany({ where: { isActive: true } });
+  const [storedPrices, notifyRow] = await Promise.all([
+    prisma.membershipPlanPrice.findMany({ where: { isActive: true } }),
+    prisma.appUser
+      .findUnique({
+        where: { id: user.id },
+        select: {
+          notifyEmailEnabled: true,
+          notifyTelegramEnabled: true,
+          telegramHandle: true,
+          email: true,
+        },
+      })
+      .catch(() => null),
+  ]);
   const priceMap = new Map(storedPrices.map((price) => [price.plan, price]));
   const remainingDays = user.membershipEndsAt
     ? daysRemainingUntil(user.membershipEndsAt)
     : null;
   const payment = getMembershipPaymentSettings();
+  const notifySettings = {
+    notifyEmailEnabled: notifyRow?.notifyEmailEnabled ?? false,
+    notifyTelegramEnabled: notifyRow?.notifyTelegramEnabled ?? false,
+    telegramHandle: notifyRow?.telegramHandle ?? "",
+    email: notifyRow?.email ?? user.email,
+  };
 
   return (
     <main className={`${member.shell} member-plans-shell`}>
@@ -87,14 +107,7 @@ export default async function MembershipPlansPage() {
         Talep gönderildiğinde yönetici sizinle iletişime geçer. Ödeme alınmadan paket otomatik etkinleştirilmez.
       </section>
 
-      <section className={member.planChip} id="bildirimler">
-        <small>BİLDİRİMLER</small>
-        <strong>Günün güçlü seçimleri (yakında)</strong>
-        <span style={{ color: "#8ea4b9", fontSize: 12 }}>
-          E-posta / Telegram bildirimleri sonraki sürümde açılacak. Şimdilik Mesajlar üzerinden destek alın.
-        </span>
-        <a href="/member/messages">Mesajlara git →</a>
-      </section>
+      <MemberNotificationSettings initial={notifySettings} />
       </div>
     </main>
   );

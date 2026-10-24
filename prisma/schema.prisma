@@ -78,6 +78,9 @@ model AppUser {
   plan             MembershipPlan @default(BASIC)
   status           UserStatus     @default(ACTIVE)
   membershipEndsAt DateTime?
+  notifyEmailEnabled    Boolean  @default(false)
+  notifyTelegramEnabled Boolean  @default(false)
+  telegramHandle        String?
   createdAt        DateTime       @default(now())
   updatedAt        DateTime       @updatedAt
 

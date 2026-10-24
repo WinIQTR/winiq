@@ -116,6 +116,9 @@ export const AppUserScalarFieldEnum = {
   plan: 'plan',
   status: 'status',
   membershipEndsAt: 'membershipEndsAt',
+  notifyEmailEnabled: 'notifyEmailEnabled',
+  notifyTelegramEnabled: 'notifyTelegramEnabled',
+  telegramHandle: 'telegramHandle',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

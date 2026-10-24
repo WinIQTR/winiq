@@ -1228,7 +1228,7 @@ export function PredictionsWorkspace({
             )
           }
         >
-          En yüksek adil oran
+          En yüksek oran
         </button>
 
         <button
@@ -1645,7 +1645,7 @@ export function PredictionsWorkspace({
                                       Model <b>%{pick.probability.toFixed(1)}</b>
                                     </span>
                                     <span>
-                                      {locale === "tr" ? "Bu seçime ait adil oran" : "Fair odds for this pick"}{" "}
+                                      {locale === "tr" ? "Bu seçime ait oran" : "Model odds for this pick"}{" "}
                                       <b>{pick.fairOdds?.toFixed(2) ?? "—"}</b>
                                     </span>
                                     <span>
@@ -1769,7 +1769,7 @@ export function PredictionsWorkspace({
                                             Model <b>%{option.probability.toFixed(1)}</b>
                                           </span>
                                           <span>
-                                            {locale === "tr" ? "Bu seçime ait adil oran" : "Fair odds for this pick"}{" "}
+                                            {locale === "tr" ? "Bu seçime ait oran" : "Model odds for this pick"}{" "}
                                             <b>{option.fairOdds.toFixed(2)}</b>
                                           </span>
                                         </div>
@@ -1862,7 +1862,7 @@ export function PredictionsWorkspace({
                       <span>
                         {locale === "tr"
                           ? "Tüm pazar sonuçlarını incele"
-                          : "Show 27 betting markets and scores"}
+                          : "Show all betting markets and scores"}
                       </span>
                       <b>{calculatedMarketCount}/30</b>
                     </summary>

@@ -10687,9 +10687,24 @@ body .topbar .subtitle {
 .prediction-card-smart .prediction-team {
   display: flex;
 }
-/* WINIQ ortak okunabilirlik ve responsive ölçek sistemi */
-:root{--w-size-body:15px;--w-size-small:13px;--w-size-label:12px}
-body{font-size:var(--w-size-body)}
+/* WINIQ shared design tokens (UX #28) — admin + member */
+:root{
+  --w-size-body:15px;
+  --w-size-small:13px;
+  --w-size-label:12px;
+  --w-bg:#07131e;
+  --w-surface:#0b1c2c;
+  --w-surface-2:#091f33;
+  --w-border:#2c526c;
+  --w-border-accent:rgba(67,227,161,.35);
+  --w-text:#edf5ff;
+  --w-text-muted:#8eb0c8;
+  --w-accent:#42df97;
+  --w-accent-2:#27c7bd;
+  --w-radius:10px;
+  --w-shadow-soft:0 1px 0 rgba(255,255,255,.04);
+}
+body{font-size:var(--w-size-body);color:var(--w-text)}
 @media (max-width:1024px){body{font-size:14px}.sidebar{width:220px}}
 @media (max-width:768px){body{font-size:14px}.sidebar{width:100%;position:relative}.page-shell{display:block}.sidebar .nav{display:flex;overflow-x:auto}.sidebar .nav-item{white-space:nowrap}}
 @media (max-width:430px){body{font-size:14px}.member-shell{overflow-x:hidden}.member-page h1{font-size:clamp(30px,9vw,42px)}}
@@ -10700,7 +10715,7 @@ body{font-size:var(--w-size-body)}
 .app-shell input[type="text"],
 .app-shell input[type="search"]{
   font:inherit;
-  transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease, filter .2s ease;
+  transition: border-color .15s ease, background .15s ease;
 }
 .app-shell button:not([class]),
 .app-shell button[class*="primary"],
@@ -10708,34 +10723,71 @@ body{font-size:var(--w-size-body)}
 .app-shell button[class*="save"]{
   min-height:42px;
   padding:10px 17px;
-  border:1px solid #39d7a2;
-  border-radius:11px;
-  background:linear-gradient(135deg,#42e3a4,#27c7bd);
-  color:#061722;
-  font-weight:900;
+  border:1px solid var(--w-accent);
+  border-radius:var(--w-radius);
+  background:color-mix(in srgb, var(--w-accent) 22%, #0a1f18);
+  color:#9ef0c8;
+  font-weight:800;
   cursor:pointer;
-  box-shadow:0 8px 22px rgba(50,218,170,.14);
+  box-shadow:none;
 }
 .app-shell button:not([class]):hover,
 .app-shell button[class*="primary"]:hover,
 .app-shell button[class*="run-all"]:hover,
-.app-shell button[class*="save"]:hover{transform:translateY(-1px);filter:brightness(1.07)}
-.app-shell button:disabled{cursor:not-allowed;opacity:.55;transform:none;filter:none}
+.app-shell button[class*="save"]:hover{filter:brightness(1.06)}
+.app-shell button:disabled{cursor:not-allowed;opacity:.55;filter:none}
 .app-shell select{
   min-height:42px;
   appearance:auto;
   padding:10px 42px 10px 14px;
-  border:1px solid #2c526c;
-  border-radius:11px;
+  border:1px solid var(--w-border);
+  border-radius:var(--w-radius);
   outline:none;
-  background:#091f33;
-  color:#edf8ff;
+  background:var(--w-surface-2);
+  color:var(--w-text);
   font-weight:700;
 }
 .app-shell select:focus,
 .app-shell input[type="text"]:focus,
-.app-shell input[type="search"]:focus{border-color:#4fe0ba;box-shadow:0 0 0 3px rgba(79,224,186,.12);outline:none}
+.app-shell input[type="search"]:focus{border-color:var(--w-accent);box-shadow:none;outline:none}
 .app-shell label select{width:100%}
+
+/* UX #33 — quieter badges / pills on main shells */
+.page-shell .mode-badge,
+.member-smart-header .plan-badge,
+.sidebar .status-dot{
+  box-shadow:none;
+  filter:none;
+}
+.page-shell .mode-badge{
+  border-radius:8px;
+  background:color-mix(in srgb, var(--w-surface-2) 80%, transparent);
+}
+.member-smart-header .plan-badge{
+  border-radius:8px;
+}
+.coupon-center-tabs{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  padding:0 24px 12px;
+}
+.coupon-center-tabs a{
+  border:1px solid var(--w-border);
+  border-radius:8px;
+  padding:8px 12px;
+  color:var(--w-text-muted);
+  text-decoration:none;
+  font-size:13px;
+  font-weight:700;
+  background:var(--w-surface);
+}
+.coupon-center-tabs a.active,
+.coupon-center-tabs a[class="active"]{
+  border-color:var(--w-accent);
+  color:var(--w-accent);
+}
+.coupon-center-tabs b{margin-left:6px;color:inherit}
 
 /* Paylaşılan form sonucu rozeti (W/D/L) — tüm sayfalarda (admin: teams/fixtures,
    üye: professional/member dashboard) aynı tasarım için tek kaynak. Önceden

@@ -33,6 +33,9 @@ export type AppUserMinAggregateOutputType = {
   plan: $Enums.MembershipPlan | null
   status: $Enums.UserStatus | null
   membershipEndsAt: Date | null
+  notifyEmailEnabled: boolean | null
+  notifyTelegramEnabled: boolean | null
+  telegramHandle: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -46,6 +49,9 @@ export type AppUserMaxAggregateOutputType = {
   plan: $Enums.MembershipPlan | null
   status: $Enums.UserStatus | null
   membershipEndsAt: Date | null
+  notifyEmailEnabled: boolean | null
+  notifyTelegramEnabled: boolean | null
+  telegramHandle: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -59,6 +65,9 @@ export type AppUserCountAggregateOutputType = {
   plan: number
   status: number
   membershipEndsAt: number
+  notifyEmailEnabled: number
+  notifyTelegramEnabled: number
+  telegramHandle: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -74,6 +83,9 @@ export type AppUserMinAggregateInputType = {
   plan?: true
   status?: true
   membershipEndsAt?: true
+  notifyEmailEnabled?: true
+  notifyTelegramEnabled?: true
+  telegramHandle?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -87,6 +99,9 @@ export type AppUserMaxAggregateInputType = {
   plan?: true
   status?: true
   membershipEndsAt?: true
+  notifyEmailEnabled?: true
+  notifyTelegramEnabled?: true
+  telegramHandle?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -100,6 +115,9 @@ export type AppUserCountAggregateInputType = {
   plan?: true
   status?: true
   membershipEndsAt?: true
+  notifyEmailEnabled?: true
+  notifyTelegramEnabled?: true
+  telegramHandle?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -186,6 +204,9 @@ export type AppUserGroupByOutputType = {
   plan: $Enums.MembershipPlan
   status: $Enums.UserStatus
   membershipEndsAt: Date | null
+  notifyEmailEnabled: boolean
+  notifyTelegramEnabled: boolean
+  telegramHandle: string | null
   createdAt: Date
   updatedAt: Date
   _count: AppUserCountAggregateOutputType | null
@@ -220,6 +241,9 @@ export type AppUserWhereInput = {
   plan?: Prisma.EnumMembershipPlanFilter<"AppUser"> | $Enums.MembershipPlan
   status?: Prisma.EnumUserStatusFilter<"AppUser"> | $Enums.UserStatus
   membershipEndsAt?: Prisma.DateTimeNullableFilter<"AppUser"> | Date | string | null
+  notifyEmailEnabled?: Prisma.BoolFilter<"AppUser"> | boolean
+  notifyTelegramEnabled?: Prisma.BoolFilter<"AppUser"> | boolean
+  telegramHandle?: Prisma.StringNullableFilter<"AppUser"> | string | null
   createdAt?: Prisma.DateTimeFilter<"AppUser"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"AppUser"> | Date | string
   sessions?: Prisma.UserSessionListRelationFilter
@@ -236,6 +260,9 @@ export type AppUserOrderByWithRelationInput = {
   plan?: Prisma.SortOrder
   status?: Prisma.SortOrder
   membershipEndsAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  notifyEmailEnabled?: Prisma.SortOrder
+  notifyTelegramEnabled?: Prisma.SortOrder
+  telegramHandle?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   sessions?: Prisma.UserSessionOrderByRelationAggregateInput
@@ -255,6 +282,9 @@ export type AppUserWhereUniqueInput = Prisma.AtLeast<{
   plan?: Prisma.EnumMembershipPlanFilter<"AppUser"> | $Enums.MembershipPlan
   status?: Prisma.EnumUserStatusFilter<"AppUser"> | $Enums.UserStatus
   membershipEndsAt?: Prisma.DateTimeNullableFilter<"AppUser"> | Date | string | null
+  notifyEmailEnabled?: Prisma.BoolFilter<"AppUser"> | boolean
+  notifyTelegramEnabled?: Prisma.BoolFilter<"AppUser"> | boolean
+  telegramHandle?: Prisma.StringNullableFilter<"AppUser"> | string | null
   createdAt?: Prisma.DateTimeFilter<"AppUser"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"AppUser"> | Date | string
   sessions?: Prisma.UserSessionListRelationFilter
@@ -271,6 +301,9 @@ export type AppUserOrderByWithAggregationInput = {
   plan?: Prisma.SortOrder
   status?: Prisma.SortOrder
   membershipEndsAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  notifyEmailEnabled?: Prisma.SortOrder
+  notifyTelegramEnabled?: Prisma.SortOrder
+  telegramHandle?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.AppUserCountOrderByAggregateInput
@@ -290,6 +323,9 @@ export type AppUserScalarWhereWithAggregatesInput = {
   plan?: Prisma.EnumMembershipPlanWithAggregatesFilter<"AppUser"> | $Enums.MembershipPlan
   status?: Prisma.EnumUserStatusWithAggregatesFilter<"AppUser"> | $Enums.UserStatus
   membershipEndsAt?: Prisma.DateTimeNullableWithAggregatesFilter<"AppUser"> | Date | string | null
+  notifyEmailEnabled?: Prisma.BoolWithAggregatesFilter<"AppUser"> | boolean
+  notifyTelegramEnabled?: Prisma.BoolWithAggregatesFilter<"AppUser"> | boolean
+  telegramHandle?: Prisma.StringNullableWithAggregatesFilter<"AppUser"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"AppUser"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"AppUser"> | Date | string
 }
@@ -303,6 +339,9 @@ export type AppUserCreateInput = {
   plan?: $Enums.MembershipPlan
   status?: $Enums.UserStatus
   membershipEndsAt?: Date | string | null
+  notifyEmailEnabled?: boolean
+  notifyTelegramEnabled?: boolean
+  telegramHandle?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
@@ -319,6 +358,9 @@ export type AppUserUncheckedCreateInput = {
   plan?: $Enums.MembershipPlan
   status?: $Enums.UserStatus
   membershipEndsAt?: Date | string | null
+  notifyEmailEnabled?: boolean
+  notifyTelegramEnabled?: boolean
+  telegramHandle?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
@@ -335,6 +377,9 @@ export type AppUserUpdateInput = {
   plan?: Prisma.EnumMembershipPlanFieldUpdateOperationsInput | $Enums.MembershipPlan
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   membershipEndsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  notifyEmailEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyTelegramEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  telegramHandle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
@@ -351,6 +396,9 @@ export type AppUserUncheckedUpdateInput = {
   plan?: Prisma.EnumMembershipPlanFieldUpdateOperationsInput | $Enums.MembershipPlan
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   membershipEndsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  notifyEmailEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyTelegramEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  telegramHandle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
@@ -367,6 +415,9 @@ export type AppUserCreateManyInput = {
   plan?: $Enums.MembershipPlan
   status?: $Enums.UserStatus
   membershipEndsAt?: Date | string | null
+  notifyEmailEnabled?: boolean
+  notifyTelegramEnabled?: boolean
+  telegramHandle?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -380,6 +431,9 @@ export type AppUserUpdateManyMutationInput = {
   plan?: Prisma.EnumMembershipPlanFieldUpdateOperationsInput | $Enums.MembershipPlan
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   membershipEndsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  notifyEmailEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyTelegramEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  telegramHandle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -393,6 +447,9 @@ export type AppUserUncheckedUpdateManyInput = {
   plan?: Prisma.EnumMembershipPlanFieldUpdateOperationsInput | $Enums.MembershipPlan
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   membershipEndsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  notifyEmailEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyTelegramEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  telegramHandle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -406,6 +463,9 @@ export type AppUserCountOrderByAggregateInput = {
   plan?: Prisma.SortOrder
   status?: Prisma.SortOrder
   membershipEndsAt?: Prisma.SortOrder
+  notifyEmailEnabled?: Prisma.SortOrder
+  notifyTelegramEnabled?: Prisma.SortOrder
+  telegramHandle?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -419,6 +479,9 @@ export type AppUserMaxOrderByAggregateInput = {
   plan?: Prisma.SortOrder
   status?: Prisma.SortOrder
   membershipEndsAt?: Prisma.SortOrder
+  notifyEmailEnabled?: Prisma.SortOrder
+  notifyTelegramEnabled?: Prisma.SortOrder
+  telegramHandle?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -432,6 +495,9 @@ export type AppUserMinOrderByAggregateInput = {
   plan?: Prisma.SortOrder
   status?: Prisma.SortOrder
   membershipEndsAt?: Prisma.SortOrder
+  notifyEmailEnabled?: Prisma.SortOrder
+  notifyTelegramEnabled?: Prisma.SortOrder
+  telegramHandle?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -459,6 +525,14 @@ export type EnumUserStatusFieldUpdateOperationsInput = {
 
 export type NullableDateTimeFieldUpdateOperationsInput = {
   set?: Date | string | null
+}
+
+export type BoolFieldUpdateOperationsInput = {
+  set?: boolean
+}
+
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null
 }
 
 export type DateTimeFieldUpdateOperationsInput = {
@@ -516,6 +590,9 @@ export type AppUserCreateWithoutSupportMessagesInput = {
   plan?: $Enums.MembershipPlan
   status?: $Enums.UserStatus
   membershipEndsAt?: Date | string | null
+  notifyEmailEnabled?: boolean
+  notifyTelegramEnabled?: boolean
+  telegramHandle?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
@@ -531,6 +608,9 @@ export type AppUserUncheckedCreateWithoutSupportMessagesInput = {
   plan?: $Enums.MembershipPlan
   status?: $Enums.UserStatus
   membershipEndsAt?: Date | string | null
+  notifyEmailEnabled?: boolean
+  notifyTelegramEnabled?: boolean
+  telegramHandle?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
@@ -562,6 +642,9 @@ export type AppUserUpdateWithoutSupportMessagesInput = {
   plan?: Prisma.EnumMembershipPlanFieldUpdateOperationsInput | $Enums.MembershipPlan
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   membershipEndsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  notifyEmailEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyTelegramEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  telegramHandle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
@@ -577,6 +660,9 @@ export type AppUserUncheckedUpdateWithoutSupportMessagesInput = {
   plan?: Prisma.EnumMembershipPlanFieldUpdateOperationsInput | $Enums.MembershipPlan
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   membershipEndsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  notifyEmailEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyTelegramEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  telegramHandle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
@@ -592,6 +678,9 @@ export type AppUserCreateWithoutUpgradeRequestsInput = {
   plan?: $Enums.MembershipPlan
   status?: $Enums.UserStatus
   membershipEndsAt?: Date | string | null
+  notifyEmailEnabled?: boolean
+  notifyTelegramEnabled?: boolean
+  telegramHandle?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
@@ -607,6 +696,9 @@ export type AppUserUncheckedCreateWithoutUpgradeRequestsInput = {
   plan?: $Enums.MembershipPlan
   status?: $Enums.UserStatus
   membershipEndsAt?: Date | string | null
+  notifyEmailEnabled?: boolean
+  notifyTelegramEnabled?: boolean
+  telegramHandle?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
@@ -638,6 +730,9 @@ export type AppUserUpdateWithoutUpgradeRequestsInput = {
   plan?: Prisma.EnumMembershipPlanFieldUpdateOperationsInput | $Enums.MembershipPlan
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   membershipEndsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  notifyEmailEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyTelegramEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  telegramHandle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
@@ -653,6 +748,9 @@ export type AppUserUncheckedUpdateWithoutUpgradeRequestsInput = {
   plan?: Prisma.EnumMembershipPlanFieldUpdateOperationsInput | $Enums.MembershipPlan
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   membershipEndsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  notifyEmailEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyTelegramEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  telegramHandle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
@@ -668,6 +766,9 @@ export type AppUserCreateWithoutSessionsInput = {
   plan?: $Enums.MembershipPlan
   status?: $Enums.UserStatus
   membershipEndsAt?: Date | string | null
+  notifyEmailEnabled?: boolean
+  notifyTelegramEnabled?: boolean
+  telegramHandle?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   upgradeRequests?: Prisma.MembershipUpgradeRequestCreateNestedManyWithoutUserInput
@@ -683,6 +784,9 @@ export type AppUserUncheckedCreateWithoutSessionsInput = {
   plan?: $Enums.MembershipPlan
   status?: $Enums.UserStatus
   membershipEndsAt?: Date | string | null
+  notifyEmailEnabled?: boolean
+  notifyTelegramEnabled?: boolean
+  telegramHandle?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   upgradeRequests?: Prisma.MembershipUpgradeRequestUncheckedCreateNestedManyWithoutUserInput
@@ -714,6 +818,9 @@ export type AppUserUpdateWithoutSessionsInput = {
   plan?: Prisma.EnumMembershipPlanFieldUpdateOperationsInput | $Enums.MembershipPlan
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   membershipEndsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  notifyEmailEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyTelegramEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  telegramHandle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   upgradeRequests?: Prisma.MembershipUpgradeRequestUpdateManyWithoutUserNestedInput
@@ -729,6 +836,9 @@ export type AppUserUncheckedUpdateWithoutSessionsInput = {
   plan?: Prisma.EnumMembershipPlanFieldUpdateOperationsInput | $Enums.MembershipPlan
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   membershipEndsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  notifyEmailEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyTelegramEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  telegramHandle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   upgradeRequests?: Prisma.MembershipUpgradeRequestUncheckedUpdateManyWithoutUserNestedInput
@@ -793,6 +903,9 @@ export type AppUserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   plan?: boolean
   status?: boolean
   membershipEndsAt?: boolean
+  notifyEmailEnabled?: boolean
+  notifyTelegramEnabled?: boolean
+  telegramHandle?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   sessions?: boolean | Prisma.AppUser$sessionsArgs<ExtArgs>
@@ -810,6 +923,9 @@ export type AppUserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   plan?: boolean
   status?: boolean
   membershipEndsAt?: boolean
+  notifyEmailEnabled?: boolean
+  notifyTelegramEnabled?: boolean
+  telegramHandle?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["appUser"]>
@@ -823,6 +939,9 @@ export type AppUserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   plan?: boolean
   status?: boolean
   membershipEndsAt?: boolean
+  notifyEmailEnabled?: boolean
+  notifyTelegramEnabled?: boolean
+  telegramHandle?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["appUser"]>
@@ -836,11 +955,14 @@ export type AppUserSelectScalar = {
   plan?: boolean
   status?: boolean
   membershipEndsAt?: boolean
+  notifyEmailEnabled?: boolean
+  notifyTelegramEnabled?: boolean
+  telegramHandle?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type AppUserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "name" | "passwordHash" | "role" | "plan" | "status" | "membershipEndsAt" | "createdAt" | "updatedAt", ExtArgs["result"]["appUser"]>
+export type AppUserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "name" | "passwordHash" | "role" | "plan" | "status" | "membershipEndsAt" | "notifyEmailEnabled" | "notifyTelegramEnabled" | "telegramHandle" | "createdAt" | "updatedAt", ExtArgs["result"]["appUser"]>
 export type AppUserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   sessions?: boolean | Prisma.AppUser$sessionsArgs<ExtArgs>
   upgradeRequests?: boolean | Prisma.AppUser$upgradeRequestsArgs<ExtArgs>
@@ -866,6 +988,9 @@ export type $AppUserPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     plan: $Enums.MembershipPlan
     status: $Enums.UserStatus
     membershipEndsAt: Date | null
+    notifyEmailEnabled: boolean
+    notifyTelegramEnabled: boolean
+    telegramHandle: string | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["appUser"]>
@@ -1302,6 +1427,9 @@ export interface AppUserFieldRefs {
   readonly plan: Prisma.FieldRef<"AppUser", 'MembershipPlan'>
   readonly status: Prisma.FieldRef<"AppUser", 'UserStatus'>
   readonly membershipEndsAt: Prisma.FieldRef<"AppUser", 'DateTime'>
+  readonly notifyEmailEnabled: Prisma.FieldRef<"AppUser", 'Boolean'>
+  readonly notifyTelegramEnabled: Prisma.FieldRef<"AppUser", 'Boolean'>
+  readonly telegramHandle: Prisma.FieldRef<"AppUser", 'String'>
   readonly createdAt: Prisma.FieldRef<"AppUser", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"AppUser", 'DateTime'>
 }

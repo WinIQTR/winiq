@@ -10,6 +10,7 @@ import {
   type GroupPerformance,
   type SampleLevel,
 } from "@/lib/market-performance-analytics";
+import { BET_MARKET_COUNT } from "@/lib/bet-market-catalog";
 import styles from "@/app/match-result-performance/match-result-performance.module.css";
 
 type Settlement = "WON" | "LOST" | "VOID" | "DATA_MISSING";
@@ -201,7 +202,7 @@ export function MarketPerformanceWorkspace({ marketTypes, rows, seasonLabel }: {
     <>
       <section className={styles.marketSelectorPanel}>
         <div>
-          <span>27+ BAHİS TÜRÜ • TEK PERFORMANS MERKEZİ</span>
+          <span>{BET_MARKET_COUNT} BAHİS TÜRÜ • TEK PERFORMANS MERKEZİ</span>
           <strong>Bahis türünü seçin, beklenen ve gerçek sonucu karşılaştırın</strong>
           <small>Lig, seçim tarafı, veri kalitesi ve yüzde aralıkları aynı ekranda incelenir.</small>
         </div>
@@ -251,7 +252,7 @@ export function MarketPerformanceWorkspace({ marketTypes, rows, seasonLabel }: {
         <article className={styles.wonCard}><span>GERÇEK BAŞARI</span><strong>{percentage(summary.actualAccuracy)}</strong><small>{summary.won} kazandı</small></article>
         <article className={styles.lostCard}><span>KALİBRASYON FARKI</span><strong>{signedPercentage(summary.calibrationGap)}</strong><small>Gerçek − beklenen</small></article>
         <article><span>KAYBETTİ / İADE</span><strong>{summary.lost} / {summary.voided}</strong><small>{summary.missing} veri bekliyor</small></article>
-        <article><span>ADİL ORAN ≥1.10</span><strong>{insights.fairOddsPassed}</strong><small>{insights.fairOddsBelow} eşik altında</small></article>
+        <article><span>ORAN ≥1.10</span><strong>{insights.fairOddsPassed}</strong><small>{insights.fairOddsBelow} eşik altında</small></article>
       </section>
 
       <section className={styles.analysisGrid}>

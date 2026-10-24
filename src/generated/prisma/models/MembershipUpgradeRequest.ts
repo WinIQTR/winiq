@@ -473,10 +473,6 @@ export type EnumUpgradeRequestStatusFieldUpdateOperationsInput = {
   set?: $Enums.UpgradeRequestStatus
 }
 
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null
-}
-
 export type MembershipUpgradeRequestCreateWithoutUserInput = {
   id?: string
   currentPlan: $Enums.MembershipPlan

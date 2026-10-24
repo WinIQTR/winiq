@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { useLanguage } from "@/components/language-provider";
+import { BET_MARKET_COUNT } from "@/lib/bet-market-catalog";
 import styles from "./prediction-history-workspace.module.css";
 
 type PredictionSettlement = "WON" | "LOST" | "VOID";
@@ -202,7 +203,7 @@ export function PredictionHistoryWorkspace({
             {groupedMatches.length} {tr ? "maç" : "matches"}
           </span>
           <Link className={styles.resultsLink} href="/prediction-results">
-            {tr ? "27 PAZAR SONUÇLARI" : "27-MARKET RESULTS"}
+            {tr ? `${BET_MARKET_COUNT} PAZAR SONUÇLARI` : `${BET_MARKET_COUNT}-MARKET RESULTS`}
             <span aria-hidden="true">→</span>
           </Link>
         </div>

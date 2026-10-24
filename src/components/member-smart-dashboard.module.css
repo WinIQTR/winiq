@@ -183,61 +183,53 @@
 }
 
 .dateNavigator header > span {
-  border: 1px solid rgba(67, 227, 161, 0.35);
-  border-radius: 999px;
+  border: 1px solid var(--w-border-accent, rgba(67, 227, 161, 0.35));
+  border-radius: 8px;
   padding: 6px 10px;
-  color: #43e3a1;
+  color: var(--w-accent, #43e3a1);
   font-size: 12px;
   font-weight: 800;
 }
 
-.dateNavigator nav {
-  display: grid;
-  grid-template-columns: repeat(7, minmax(0, 1fr));
-  gap: 8px;
-}
-
-.dateNavigator nav a {
+.dateMinimal {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 2px;
-  min-height: 64px;
-  border: 1px solid #294962;
-  border-radius: 10px;
-  padding: 8px 6px;
-  color: #9db8cc;
-  text-align: center;
+  align-items: end;
+  gap: 10px;
+}
+
+.dateMinimal a,
+.dateMinimal > span {
+  display: grid;
+  place-items: center;
+  min-width: 42px;
+  min-height: 42px;
+  border: 1px solid var(--w-border, #294962);
+  border-radius: 8px;
+  color: var(--w-text-muted, #9db8cc);
   text-decoration: none;
-  background: rgba(5, 22, 37, 0.72);
-}
-
-.dateNavigator nav a[data-active="true"] {
-  border-color: #52b6f3;
-  background: linear-gradient(145deg, #24669b, #164772);
-  color: #fff;
-}
-
-.dateNavigator nav a b {
-  font-size: 10px;
-  text-transform: uppercase;
-  color: #7fa8c6;
-}
-
-.dateNavigator nav a[data-active="true"] b {
-  color: #cfe9ff;
-}
-
-.dateNavigator nav a strong {
-  font-size: 12px;
-  color: #edf7ff;
-}
-
-.dateNavigator nav a small {
-  font-size: 10px;
-  color: #43e3a1;
+  background: var(--w-surface-2, #051625);
+  font-size: 16px;
   font-weight: 800;
+}
+
+.dateMinimal label {
+  display: grid;
+  gap: 4px;
+  flex: 1;
+  color: var(--w-text-muted, #8eabc0);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.dateMinimal select {
+  min-height: 42px;
+  width: 100%;
+  border: 1px solid var(--w-border, #2c526c);
+  border-radius: 8px;
+  padding: 8px 12px;
+  background: var(--w-surface-2, #091f33);
+  color: var(--w-text, #edf8ff);
+  font-weight: 700;
 }
 
 .lockCard {
@@ -496,9 +488,8 @@
     align-items: flex-start;
   }
 
-  .dateNavigator nav {
-    grid-template-columns: repeat(7, 88px);
-    overflow-x: auto;
+  .dateMinimal {
+    flex-wrap: wrap;
   }
 
   .performance > div {
@@ -521,7 +512,7 @@
     align-items: flex-start;
   }
 
-  .dateNavigator nav {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .dateMinimal {
+    width: 100%;
   }
 }

@@ -3314,6 +3314,9 @@ export const AppUserScalarFieldEnum = {
   plan: 'plan',
   status: 'status',
   membershipEndsAt: 'membershipEndsAt',
+  notifyEmailEnabled: 'notifyEmailEnabled',
+  notifyTelegramEnabled: 'notifyTelegramEnabled',
+  telegramHandle: 'telegramHandle',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -4233,6 +4236,13 @@ export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaM
 
 
 /**
+ * Reference to a field of type 'Boolean'
+ */
+export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+/**
  * Reference to a field of type 'SupportMessageSender'
  */
 export type EnumSupportMessageSenderFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SupportMessageSender'>
@@ -4243,13 +4253,6 @@ export type EnumSupportMessageSenderFieldRefInput<$PrismaModel> = FieldRefInputT
  * Reference to a field of type 'SupportMessageSender[]'
  */
 export type ListEnumSupportMessageSenderFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SupportMessageSender[]'>
-    
-
-
-/**
- * Reference to a field of type 'Boolean'
- */
-export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 

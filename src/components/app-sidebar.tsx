@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { LanguageSwitcher } from "@/components/language-switcher";
 import { LogoutButton } from "@/components/logout-button";
 
 type NavItem = { href: string; label: string };
@@ -21,7 +20,6 @@ const groups: NavGroup[] = [
       { href: "/prediction-results", label: "Tahmin sonuçları" },
       { href: "/match-result-performance", label: "Pazar performansı" },
       { href: "/coupons", label: "Kupon merkezi" },
-      { href: "/coupon-performance", label: "Kupon performansı" },
       { href: "/evaluation", label: "Model performansı" },
     ],
   },
@@ -79,10 +77,6 @@ export function AppSidebar() {
             </div>
           ))}
         </nav>
-
-        <div className="sidebar-language">
-          <LanguageSwitcher />
-        </div>
       </div>
 
       <div className="sidebar-footer">

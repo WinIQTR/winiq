@@ -66,6 +66,8 @@ export function AdminMembersManager({ members, upgradeRequests, prices, paymentS
   prices: PlanPriceRow[];
   paymentSettings: MembershipPaymentSettings;
 }) {
+  // upgradeRequests kept in props for callers; handled in unified inbox (/admin/messages?tab=upgrades)
+  void upgradeRequests;
   const router = useRouter();
   const [message, setMessage] = useState("");
   const [busy, setBusy] = useState(false);
@@ -123,22 +125,22 @@ export function AdminMembersManager({ members, upgradeRequests, prices, paymentS
     if (result.success) router.refresh();
   }
 
-  async function resolveUpgrade(
-    form: HTMLFormElement,
-    requestId: string,
-    action: "CONTACTED" | "APPROVE" | "REJECT",
-  ) {
-    setBusy(true);
-    const values = Object.fromEntries(new FormData(form));
-    const result = await sendTo("/api/admin/upgrade-requests", { ...values, requestId, action });
-    setMessage(result.message);
-    setBusy(false);
-    if (result.success) router.refresh();
-  }
-
   return (
     <div className={styles.workspace}>
       {message ? <div className={styles.message}>{message}</div> : null}
+
+      <section className={styles.panel}>
+        <div className={styles.heading}>
+          <div>
+            <h2>Gelen kutusu</h2>
+            <p>
+              Mesajlar ve yükseltme talepleri tek yerde:{" "}
+              <a href="/admin/messages">Gelen kutusu</a>
+              {upgradeRequests.length ? ` · ${upgradeRequests.length} yükseltme bekliyor` : ""}
+            </p>
+          </div>
+        </div>
+      </section>
 
       <section className={styles.panel}>
         <h2>Yeni üye oluştur</h2>
@@ -182,40 +184,6 @@ export function AdminMembersManager({ members, upgradeRequests, prices, paymentS
               </form>
             );
           })}
-        </div>
-      </section>
-
-      <section className={styles.panel}>
-        <div className={styles.heading}>
-          <div>
-            <h2>Gelen kutusu · yükseltme talepleri</h2>
-            <p>{upgradeRequests.length} aktif talep · mesajlar için <a href="/admin/messages">üye mesajları</a></p>
-          </div>
-        </div>
-        <div className={styles.requestList}>
-          {upgradeRequests.length === 0 ? <p className={styles.empty}>Bekleyen yükseltme talebi yok.</p> : upgradeRequests.map((request) => (
-            <article className={styles.requestCard} key={request.id}>
-              <div className={styles.identity}>
-                <strong>{request.userName}</strong><span>{request.userEmail}</span>
-                <small>{request.currentPlan} → {request.requestedPlan} · {new Date(request.createdAt).toLocaleDateString("tr-TR")}</small>
-                {request.memberNote ? <p>{request.memberNote}</p> : null}
-              </div>
-              <form className={styles.requestForm} onSubmit={(event) => {
-                event.preventDefault();
-                void resolveUpgrade(event.currentTarget, request.id, "APPROVE");
-              }}>
-                <label>Yeni bitiş tarihi<input name="membershipEndsAt" type="date" required /></label>
-                <label>Yönetici notu<input name="adminNote" maxLength={500} /></label>
-                <button disabled={busy}>Ödemeyi onayla ve yükselt</button>
-                <button type="button" disabled={busy} onClick={(event) => {
-                  if (event.currentTarget.form) void resolveUpgrade(event.currentTarget.form, request.id, "CONTACTED");
-                }}>İletişime geçildi</button>
-                <button type="button" className={styles.rejectButton} disabled={busy} onClick={(event) => {
-                  if (event.currentTarget.form) void resolveUpgrade(event.currentTarget.form, request.id, "REJECT");
-                }}>Reddet</button>
-              </form>
-            </article>
-          ))}
         </div>
       </section>
 

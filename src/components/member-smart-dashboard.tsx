@@ -4,6 +4,7 @@ import Link from "next/link";
 import cards from "@/components/member-match-cards.module.css";
 import { LogoutButton } from "@/components/logout-button";
 import { LanguageSwitcher } from "@/components/language-switcher";
+import { MemberDateDayPicker } from "@/components/member-date-day-picker";
 import { BET_MARKET_COUNT } from "@/lib/bet-market-catalog";
 import {
   hasMembershipPermission,
@@ -11,9 +12,12 @@ import {
   MEMBERSHIP_PLAN_MARKET_LIMITS,
   type MembershipPlanName,
 } from "@/lib/membership-access";
+import { LOCK_HINT } from "@/lib/membership-lock-copy";
 import { getPredictionLabel, type DashboardPrediction } from "@/lib/prediction-dashboard-shared";
 
 import styles from "./member-smart-dashboard.module.css";
+
+export { LOCK_HINT };
 
 const TURKEY_TIME_ZONE = "Europe/Istanbul";
 const formatTime = (date: Date) =>
@@ -178,7 +182,7 @@ export function MemberPortalHeader({
   );
 }
 
-function LockHint({ children, href }: { children: string; href: string }) {
+export function LockHint({ children, href }: { children: string; href: string }) {
   return (
     <div className={styles.lockCard}>
       <span>{children}</span>
@@ -247,7 +251,7 @@ export function MemberPredictionRow({
             </span>
           </div>
         ) : (
-          <LockHint href={plansHref}>1/X/2 olasılıkları Analiz paketinde</LockHint>
+          <LockHint href={plansHref}>{LOCK_HINT.probabilities}</LockHint>
         )}
         {plan === "PROFESSIONAL" ? (
           <div className={cards.xg}>
@@ -270,7 +274,7 @@ export function MemberPredictionRow({
             <strong>{fairOdds(prediction).toFixed(2)}</strong>
           </div>
         ) : (
-          <LockHint href={plansHref}>Model oranı Analiz paketinde</LockHint>
+          <LockHint href={plansHref}>{LOCK_HINT.modelOdds}</LockHint>
         )}
       </div>
       <div className={cards.reasonBar}>
@@ -372,24 +376,18 @@ export function MemberSmartDashboard({
         <section className={styles.dateNavigator}>
           <header>
             <div>
-              <small>14 GÜN</small>
-              <strong>Maç gününü seçin</strong>
+              <small>GÜN SEÇİMİ</small>
+              <strong>{dateLabel(new Date(`${activeDate}T12:00:00`))}</strong>
             </div>
             <span>{visiblePredictions.length} maç</span>
           </header>
-          <nav>
-            {dayKeys.map((key) => (
-              <Link data-active={key === activeDate} href={homeDateHref(key)} key={key}>
-                <b>{dateLabel(new Date(`${key}T12:00:00`)).split(" ")[0]}</b>
-                <strong>{dateLabel(new Date(`${key}T12:00:00`)).replace(/^\S+\s/, "")}</strong>
-                <small>
-                  {key === dateKey(new Date())
-                    ? "BUGÜN"
-                    : `${predictions.filter((item) => dateKey(item.kickoffAt) === key).length}`}
-                </small>
-              </Link>
-            ))}
-          </nav>
+          <MemberDateDayPicker
+            dayKeys={dayKeys}
+            activeDate={activeDate}
+            hrefFor={homeDateHref}
+            labelFor={(key) => dateLabel(new Date(`${key}T12:00:00`))}
+            isToday={(key) => key === dateKey(new Date())}
+          />
         </section>
 
         <div className={cards.layout}>

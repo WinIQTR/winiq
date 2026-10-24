@@ -179,7 +179,7 @@ export default async function EvaluationPage() {
                   <strong>
                     {formatPercentage(summary.averagePredictedProbability)}
                   </strong>
-                  <small>Ortalama adil oran {formatOdds(summary.averageFairOdds)}</small>
+                  <small>Ortalama oran {formatOdds(summary.averageFairOdds)}</small>
                 </div>
               </article>
             </section>

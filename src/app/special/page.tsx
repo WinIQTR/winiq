@@ -117,10 +117,10 @@ export default async function SpecialPage({searchParams}:{searchParams?:Promise<
           <label><input type="checkbox" name="sortOdds" value="1" defaultChecked={sortOdds}/><span>Adil orana göre</span></label>
         </fieldset>
       </form>
-      <p className={styles.helper}>Hiçbir sıralama seçilmezse sonuçlar en yüksek olasılıktan düşüğe sıralanır. Birden fazla sıralama seçilirse sırasıyla tarih → olasılık → adil oran önceliğiyle uygulanır.</p>
+      <p className={styles.helper}>Hiçbir sıralama seçilmezse sonuçlar en yüksek olasılıktan düşüğe sıralanır. Birden fazla sıralama seçilirse sırasıyla tarih → olasılık → oran önceliğiyle uygulanır.</p>
     </section>
     <section className={styles.panel}>
-      <header><div><h2>{selectedTitle}</h2><p>Seçim, olasılık ve adil oran bilgileri</p></div><span>{sortDate||sortProb||sortOdds?[sortDate&&"Tarih",sortProb&&"Olasılık",sortOdds&&"Adil oran"].filter(Boolean).join(" → "):"Olasılık sıralaması"}</span></header>
+      <header><div><h2>{selectedTitle}</h2><p>Seçim, olasılık ve oran bilgileri</p></div><span>{sortDate||sortProb||sortOdds?[sortDate&&"Tarih",sortProb&&"Olasılık",sortOdds&&"Oran"].filter(Boolean).join(" → "):"Olasılık sıralaması"}</span></header>
       <div className={styles.list}>{rows.length?rows:<div className={styles.empty}>Bu bahis türünde seçilen dönem için sonuç bulunamadı.</div>}</div>
     </section>
     <footer>WINIQ · Sadece listeleme ekranı</footer>

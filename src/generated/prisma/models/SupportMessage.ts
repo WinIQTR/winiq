@@ -407,10 +407,6 @@ export type EnumSupportMessageSenderFieldUpdateOperationsInput = {
   set?: $Enums.SupportMessageSender
 }
 
-export type BoolFieldUpdateOperationsInput = {
-  set?: boolean
-}
-
 export type SupportMessageCreateWithoutUserInput = {
   id?: string
   sender: $Enums.SupportMessageSender

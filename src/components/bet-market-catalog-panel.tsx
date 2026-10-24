@@ -7,7 +7,7 @@ import type {
   BetMarketSettlement,
   BetMarketTier,
 } from "@/lib/bet-market-catalog";
-import { settleBetMarketOption } from "@/lib/bet-market-catalog";
+import { BET_MARKET_COUNT, settleBetMarketOption } from "@/lib/bet-market-catalog";
 import {
   canAccessBetMarket,
   MEMBERSHIP_PLAN_LABELS,
@@ -15,6 +15,7 @@ import {
   requiredPlanForBetMarket,
   type MembershipPlanName,
 } from "@/lib/membership-access";
+import { LOCK_HINT } from "@/lib/membership-lock-copy";
 
 import styles from "./predictions-workspace.module.css";
 
@@ -117,7 +118,9 @@ export function BetMarketCatalogPanel({
               ? locale === "tr"
                 ? `${MEMBERSHIP_PLAN_LABELS[accessPlan].toLocaleUpperCase("tr-TR")} • ${MEMBERSHIP_PLAN_MARKET_LIMITS[accessPlan]} PAZAR ERİŞİMİ`
                 : `${MEMBERSHIP_PLAN_LABELS[accessPlan].toUpperCase()} • ${MEMBERSHIP_PLAN_MARKET_LIMITS[accessPlan]} MARKET ACCESS`
-              : locale === "tr" ? "27 PAZARLIK MAÇ ANALİZİ" : "27-MARKET MATCH ANALYSIS"}
+              : locale === "tr"
+                ? `${BET_MARKET_COUNT} PAZARLIK MAÇ ANALİZİ`
+                : `${BET_MARKET_COUNT}-MARKET MATCH ANALYSIS`}
           </span>
           <strong>{locale === "tr" ? "Tüm Bahis Pazarları" : "All Betting Markets"}</strong>
           <small>
@@ -200,7 +203,7 @@ export function BetMarketCatalogPanel({
                     <strong>{option.selection}</strong>
                     <div className={styles.marketOpportunityMeter}><i style={{ width: `${Math.max(0, Math.min(100, option.score))}%` }} /></div>
                   </div>
-                  <b>{isHighestOdds ? "★ " : ""}{option.score.toFixed(1)}<small>/100</small><small className={styles.marketOpportunityOdds}>{locale === "tr" ? "Model oranı" : "Fair odds"} {option.fairOdds.toFixed(2)}</small></b>
+                  <b>{isHighestOdds ? "★ " : ""}{option.score.toFixed(1)}<small>/100</small><small className={styles.marketOpportunityOdds}>{locale === "tr" ? "Oran" : "Odds"} {option.fairOdds.toFixed(2)}</small></b>
                 </article>
               ) : null;
             })}
@@ -253,7 +256,7 @@ export function BetMarketCatalogPanel({
                     <span className={styles.marketIdentity}>
                       <small>{marketGroup.title}</small>
                       <strong>{bestOption.selection}</strong>
-                      {isHighestOddsStrong ? <b className={styles.marketHighestOddsBadge}>★ {locale === "tr" ? "EN YÜKSEK ADİL ORAN" : "HIGHEST FAIR ODDS"} · {bestOption.fairOdds.toFixed(2)}</b> : null}
+                      {isHighestOddsStrong ? <b className={styles.marketHighestOddsBadge}>★ {locale === "tr" ? "EN İYİ ORAN" : "BEST ODDS"} · {bestOption.fairOdds.toFixed(2)}</b> : null}
                     </span>
                     <span className={styles.marketScore}>
                       <span className={styles.marketScoreMeter} aria-hidden="true"><i style={{ width: `${Math.max(0, Math.min(100, bestOption.score))}%` }} /></span>
@@ -279,10 +282,10 @@ export function BetMarketCatalogPanel({
                 {!unlocked ? (
                   <div className={styles.marketUpgradePrompt}>
                     <div>
-                      <strong>{locale === "tr" ? "Bu pazar paketinizde kapalı" : "This market is locked"}</strong>
-                      <span>{locale === "tr" ? "Seçimi, olasılığı ve adil oranı görmek için paketinizi yükseltin." : "Upgrade to see the selection, probability and fair odds."}</span>
+                      <strong>{locale === "tr" ? LOCK_HINT.marketLocked : "This market opens on Analysis or Professional"}</strong>
+                      <span>{locale === "tr" ? LOCK_HINT.marketLockedDetail : "Upgrade your plan to see the selection and probability."}</span>
                     </div>
-                    <a href="/member/plans">{locale === "tr" ? "Paketleri karşılaştır" : "Compare plans"}</a>
+                    <a href="/member/plans">{locale === "tr" ? "Paketi yükselt →" : "Upgrade plan →"}</a>
                   </div>
                 ) : marketGroup.available ? (
                   <div className={styles.marketOptionGrid}>
@@ -312,7 +315,7 @@ export function BetMarketCatalogPanel({
                         <div>
                           <span>{locale === "tr" ? "Puan" : "Score"} <b>{option.score.toFixed(1)}</b></span>
                           <span>Model <b>%{option.probability.toFixed(1)}</b></span>
-                          <span>{locale === "tr" ? "Adil oran" : "Fair odds"} <b>{option.fairOdds.toFixed(2)}</b></span>
+                          <span>{locale === "tr" ? "Oran" : "Odds"} <b>{option.fairOdds.toFixed(2)}</b></span>
                         </div>
                         {option.estimated ? (
                           <small>{locale === "tr" ? "Yaklaşık model hesabı" : "Estimated model calculation"}</small>
