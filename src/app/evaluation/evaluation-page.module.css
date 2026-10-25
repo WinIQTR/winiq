@@ -668,3 +668,82 @@
     align-items: flex-start;
   }
 }
+
+/* Admin light theme: match member surfaces */
+:global(html[data-theme="light"]) .page, :global(html:not([data-theme])) .page { color:#0b1f3a; font-family:var(--font-geist-sans),system-ui,sans-serif; }
+:global(html[data-theme="light"]) .hero,
+:global(html:not([data-theme])) .hero,
+:global(html[data-theme="light"]) .panel,
+:global(html:not([data-theme])) .panel,
+:global(html[data-theme="light"]) .insightCard,
+:global(html:not([data-theme])) .insightCard,
+:global(html[data-theme="light"]) .insightGrid,
+:global(html:not([data-theme])) .insightGrid,
+:global(html[data-theme="light"]) .kpiCard,
+:global(html:not([data-theme])) .kpiCard,
+:global(html[data-theme="light"]) .kpiGrid,
+:global(html:not([data-theme])) .kpiGrid,
+:global(html[data-theme="light"]) .kpiContent,
+:global(html:not([data-theme])) .kpiContent,
+:global(html[data-theme="light"]) .healthCard,
+:global(html:not([data-theme])) .healthCard,
+:global(html[data-theme="light"]) .bucketPanel,
+:global(html:not([data-theme])) .bucketPanel,
+:global(html[data-theme="light"]) .bucketTable,
+:global(html:not([data-theme])) .bucketTable,
+:global(html[data-theme="light"]) .bucketRow,
+:global(html:not([data-theme])) .bucketRow,
+:global(html[data-theme="light"]) .marketPanel,
+:global(html:not([data-theme])) .marketPanel,
+:global(html[data-theme="light"]) .marketResults,
+:global(html:not([data-theme])) .marketResults,
+:global(html[data-theme="light"]) .performanceGrid,
+:global(html:not([data-theme])) .performanceGrid,
+:global(html[data-theme="light"]) .performanceItem,
+:global(html:not([data-theme])) .performanceItem,
+:global(html[data-theme="light"]) .performanceList,
+:global(html:not([data-theme])) .performanceList,
+:global(html[data-theme="light"]) .confidenceList,
+:global(html:not([data-theme])) .confidenceList,
+:global(html[data-theme="light"]) .confidenceItem,
+:global(html:not([data-theme])) .confidenceItem,
+:global(html[data-theme="light"]) .emptyState,
+:global(html:not([data-theme])) .emptyState {
+  background:#ffffff !important; border-color:#e2e8f0 !important; color:#0b1f3a !important; box-shadow:none !important;
+}
+:global(html[data-theme="light"]) .hero,
+:global(html:not([data-theme])) .hero,
+:global(html[data-theme="light"]) .insightCard,
+:global(html:not([data-theme])) .insightCard,
+:global(html[data-theme="light"]) .kpiCard,
+:global(html:not([data-theme])) .kpiCard,
+:global(html[data-theme="light"]) .healthCard,
+:global(html:not([data-theme])) .healthCard,
+:global(html[data-theme="light"]) .bucketRow,
+:global(html:not([data-theme])) .bucketRow,
+:global(html[data-theme="light"]) .performanceItem,
+:global(html:not([data-theme])) .performanceItem,
+:global(html[data-theme="light"]) .confidenceItem,
+:global(html:not([data-theme])) .confidenceItem {
+  background:#e8f1fb !important; border-color:#c5d9ef !important;
+}
+:global(html[data-theme="light"]) .eyebrow,
+:global(html:not([data-theme])) .eyebrow,
+:global(html[data-theme="light"]) .subtitle,
+:global(html:not([data-theme])) .subtitle,
+:global(html[data-theme="light"]) .headerCopy,
+:global(html:not([data-theme])) .headerCopy,
+:global(html[data-theme="light"]) .healthCopy,
+:global(html:not([data-theme])) .healthCopy,
+:global(html[data-theme="light"]) .modeBadge,
+:global(html:not([data-theme])) .modeBadge,
+:global(html[data-theme="light"]) .confidenceMeta,
+:global(html:not([data-theme])) .confidenceMeta,
+:global(html[data-theme="light"]) .performanceMeta,
+:global(html:not([data-theme])) .performanceMeta,
+:global(html[data-theme="light"]) .panelTitle,
+:global(html:not([data-theme])) .panelTitle {
+  color:#334155 !important; font-weight:500;
+}
+:global(html[data-theme="light"]) .title, :global(html:not([data-theme])) .title { color:#0b1f3a !important; font-weight:700; }
+:global(html[data-theme="light"]) .progressTrack, :global(html:not([data-theme])) .progressTrack { background:#dceaf8 !important; }

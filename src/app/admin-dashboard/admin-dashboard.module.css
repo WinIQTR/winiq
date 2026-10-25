@@ -3,3 +3,157 @@
 @media(max-width:1100px){.layout{grid-template-columns:1fr}.side{grid-template-columns:repeat(3,1fr)}.matchMain{grid-template-columns:100px minmax(250px,1fr) minmax(210px,1fr) 75px minmax(160px,.8fr) 70px 80px}.confidence,.odds{grid-row:auto;grid-column:auto}.metrics{grid-template-columns:repeat(5,1fr)}.side>section{min-width:0}}
 @media(max-width:850px){.metrics{grid-template-columns:repeat(2,1fr)}.side{grid-template-columns:1fr}.matchMain{grid-template-columns:1fr 1fr}.matchMeta,.teams,.probabilities{grid-column:1/-1}.xg,.confidence,.odds{text-align:left}.choice{border:0;padding:0}.reasonBar{align-items:flex-start;flex-direction:column;gap:7px}.reasonBar span{white-space:normal}.reasonBar a{margin-left:0}.hero aside{display:none}}
 @media(max-width:520px){.hero{min-height:auto;padding:20px}.hero h1{font-size:38px}.hero div>span{font-size:14px}.metrics{grid-template-columns:1fr}.matchMain{grid-template-columns:1fr}.matchMeta,.teams,.probabilities,.xg,.choice,.confidence,.odds{grid-column:1}.teams{grid-template-columns:1fr}.teams>b{display:none}.featuredStats{grid-template-columns:1fr;gap:8px}.featuredStats span{border-right:0}.modelStatus>div{width:100%}.modelStatus>aside{position:static;width:auto;margin-top:12px}.footer{align-items:flex-start;flex-direction:column}.footer small{margin-left:0}}
+
+/* Light theme: white shell, readable team/league/confidence */
+:global(html[data-theme="light"]) .page,
+:global(html:not([data-theme])) .page {
+  color: #0b1f3a;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+:global(html[data-theme="light"]) .hero,
+:global(html:not([data-theme])) .hero {
+  border-color: #e2e8f0;
+  background: #ffffff;
+  box-shadow: 0 2px 12px rgba(15, 35, 70, 0.05);
+}
+:global(html[data-theme="light"]) .hero:after,
+:global(html:not([data-theme])) .hero:after {
+  background: none;
+}
+:global(html[data-theme="light"]) .hero p,
+:global(html:not([data-theme])) .hero p,
+:global(html[data-theme="light"]) .hero div>span,
+:global(html:not([data-theme])) .hero div>span,
+:global(html[data-theme="light"]) .hero aside,
+:global(html:not([data-theme])) .hero aside {
+  color: #475569;
+}
+:global(html[data-theme="light"]) .hero h1,
+:global(html:not([data-theme])) .hero h1 {
+  color: #0b1f3a;
+  font-weight: 700;
+}
+:global(html[data-theme="light"]) .metrics article,
+:global(html:not([data-theme])) .metrics article,
+:global(html[data-theme="light"]) .featuredTeam,
+:global(html:not([data-theme])) .featuredTeam {
+  background: #e8f1fb !important;
+  border-color: #c5d9ef !important;
+  color: #0b1f3a !important;
+  box-shadow: none !important;
+}
+:global(html[data-theme="light"]) .metrics small,
+:global(html:not([data-theme])) .metrics small,
+:global(html[data-theme="light"]) .footer,
+:global(html:not([data-theme])) .footer,
+:global(html[data-theme="light"]) .featuredTeam div span,
+:global(html:not([data-theme])) .featuredTeam div span,
+:global(html[data-theme="light"]) .featuredStats span,
+:global(html:not([data-theme])) .featuredStats span {
+  color: #334155 !important;
+  font-weight: 500;
+}
+:global(html[data-theme="light"]) .metrics strong,
+:global(html:not([data-theme])) .metrics strong,
+:global(html[data-theme="light"]) .featuredStats b,
+:global(html:not([data-theme])) .featuredStats b,
+:global(html[data-theme="light"]) .footer b,
+:global(html:not([data-theme])) .footer b {
+  color: #0b1f3a !important;
+  font-weight: 700;
+}
+:global(html[data-theme="light"]) .predictionPanel,
+:global(html:not([data-theme])) .predictionPanel,
+:global(html[data-theme="light"]) .side>section,
+:global(html:not([data-theme])) .side>section,
+:global(html[data-theme="light"]) .matchCard,
+:global(html:not([data-theme])) .matchCard,
+:global(html[data-theme="light"]) .modelStatus,
+:global(html:not([data-theme])) .modelStatus,
+:global(html[data-theme="light"]) .featured,
+:global(html:not([data-theme])) .featured {
+  background: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  box-shadow: 0 2px 10px rgba(15, 35, 70, 0.04);
+  color: #0b1f3a;
+}
+:global(html[data-theme="light"]) .predictionPanel h2,
+:global(html:not([data-theme])) .predictionPanel h2,
+:global(html[data-theme="light"]) .side h2,
+:global(html:not([data-theme])) .side h2,
+:global(html[data-theme="light"]) .teams strong,
+:global(html:not([data-theme])) .teams strong,
+:global(html[data-theme="light"]) .xg strong,
+:global(html:not([data-theme])) .xg strong,
+:global(html[data-theme="light"]) .confidence strong,
+:global(html:not([data-theme])) .confidence strong,
+:global(html[data-theme="light"]) .odds strong,
+:global(html:not([data-theme])) .odds strong,
+:global(html[data-theme="light"]) .reasonBar strong,
+:global(html:not([data-theme])) .reasonBar strong {
+  color: #0b1f3a !important;
+  font-weight: 700;
+}
+:global(html[data-theme="light"]) .predictionPanel p,
+:global(html:not([data-theme])) .predictionPanel p,
+:global(html[data-theme="light"]) .side p,
+:global(html:not([data-theme])) .side p,
+:global(html[data-theme="light"]) .xg span,
+:global(html:not([data-theme])) .xg span,
+:global(html[data-theme="light"]) .confidence span,
+:global(html:not([data-theme])) .confidence span,
+:global(html[data-theme="light"]) .odds span,
+:global(html:not([data-theme])) .odds span,
+:global(html[data-theme="light"]) .choice small,
+:global(html:not([data-theme])) .choice small,
+:global(html[data-theme="light"]) .teams>b,
+:global(html:not([data-theme])) .teams>b,
+:global(html[data-theme="light"]) .reasonBar,
+:global(html:not([data-theme])) .reasonBar,
+:global(html[data-theme="light"]) .matchMeta,
+:global(html:not([data-theme])) .matchMeta {
+  color: #475569 !important;
+  font-weight: 400;
+}
+:global(html[data-theme="light"]) .reasonBar,
+:global(html:not([data-theme])) .reasonBar,
+:global(html[data-theme="light"]) .matchMain,
+:global(html:not([data-theme])) .matchMain {
+  border-color: #e2e8f0 !important;
+}
+:global(html[data-theme="light"]) .predictionPanel a,
+:global(html:not([data-theme])) .predictionPanel a,
+:global(html[data-theme="light"]) .side a,
+:global(html:not([data-theme])) .side a,
+:global(html[data-theme="light"]) .reasonBar a,
+:global(html:not([data-theme])) .reasonBar a {
+  color: #1d4ed8 !important;
+  font-weight: 500;
+}
+:global(html[data-theme="light"]) .logoFallback,
+:global(html:not([data-theme])) .logoFallback {
+  background: #f1f5f9;
+  color: #475569;
+  border-color: #e2e8f0;
+}
+:global(html[data-theme="light"]) .empty,
+:global(html:not([data-theme])) .empty {
+  color: #475569;
+}
+
+/* Light: 1/X/2 bars — light-blue track + navy labels */
+:global(html[data-theme="light"]) .probabilities span,
+:global(html:not([data-theme])) .probabilities span {
+  color: #0b1f3a !important;
+  font-weight: 500;
+}
+:global(html[data-theme="light"]) .probabilities b,
+:global(html:not([data-theme])) .probabilities b {
+  color: #0b1f3a !important;
+  font-weight: 700;
+}
+:global(html[data-theme="light"]) .probabilities span:after,
+:global(html:not([data-theme])) .probabilities span:after {
+  background: #dceaf8 !important;
+}
+

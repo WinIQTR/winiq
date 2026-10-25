@@ -977,3 +977,128 @@
     display: grid;
   }
 }
+
+/* Admin light theme: match member surfaces */
+:global(html[data-theme="light"]) .page,
+:global(html:not([data-theme])) .page {
+  color: #0b1f3a;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+:global(html[data-theme="light"]) .header,
+:global(html:not([data-theme])) .header,
+:global(html[data-theme="light"]) .panel,
+:global(html:not([data-theme])) .panel,
+:global(html[data-theme="light"]) .metric,
+:global(html:not([data-theme])) .metric,
+:global(html[data-theme="light"]) .match,
+:global(html:not([data-theme])) .match,
+:global(html[data-theme="light"]) .leagueCard,
+:global(html:not([data-theme])) .leagueCard,
+:global(html[data-theme="light"]) .healthGrid,
+:global(html:not([data-theme])) .healthGrid,
+:global(html[data-theme="light"]) .healthBadge,
+:global(html:not([data-theme])) .healthBadge,
+:global(html[data-theme="light"]) .learningNotice,
+:global(html:not([data-theme])) .learningNotice,
+:global(html[data-theme="light"]) .learningTable,
+:global(html:not([data-theme])) .learningTable,
+:global(html[data-theme="light"]) .accuracyBreakdown,
+:global(html:not([data-theme])) .accuracyBreakdown,
+:global(html[data-theme="light"]) .accuracyTable,
+:global(html:not([data-theme])) .accuracyTable,
+:global(html[data-theme="light"]) .auditMetrics,
+:global(html:not([data-theme])) .auditMetrics,
+:global(html[data-theme="light"]) .gateGrid,
+:global(html:not([data-theme])) .gateGrid,
+:global(html[data-theme="light"]) .explanation,
+:global(html:not([data-theme])) .explanation,
+:global(html[data-theme="light"]) .explanationBlock,
+:global(html:not([data-theme])) .explanationBlock,
+:global(html[data-theme="light"]) .driftTableWrap,
+:global(html:not([data-theme])) .driftTableWrap,
+:global(html[data-theme="light"]) .tableWrap,
+:global(html:not([data-theme])) .tableWrap,
+:global(html[data-theme="light"]) .notice,
+:global(html:not([data-theme])) .notice,
+:global(html[data-theme="light"]) .emptyState,
+:global(html:not([data-theme])) .emptyState,
+:global(html[data-theme="light"]) .primary,
+:global(html:not([data-theme])) .primary,
+:global(html[data-theme="light"]) .alternative,
+:global(html:not([data-theme])) .alternative,
+:global(html[data-theme="light"]) .sampleNotice,
+:global(html:not([data-theme])) .sampleNotice,
+:global(html[data-theme="light"]) .productionLock,
+:global(html:not([data-theme])) .productionLock,
+:global(html[data-theme="light"]) .learningMetrics,
+:global(html:not([data-theme])) .learningMetrics,
+:global(html[data-theme="light"]) .accuracyMetrics,
+:global(html:not([data-theme])) .accuracyMetrics,
+:global(html[data-theme="light"]) .accuracySections,
+:global(html:not([data-theme])) .accuracySections,
+:global(html[data-theme="light"]) .auditSplit,
+:global(html:not([data-theme])) .auditSplit,
+:global(html[data-theme="light"]) .explanationGrid,
+:global(html:not([data-theme])) .explanationGrid,
+:global(html[data-theme="light"]) .explanationList,
+:global(html:not([data-theme])) .explanationList,
+:global(html[data-theme="light"]) .leagueCards,
+:global(html:not([data-theme])) .leagueCards {
+  background: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  color: #0b1f3a !important;
+  box-shadow: none !important;
+}
+:global(html[data-theme="light"]) .header,
+:global(html:not([data-theme])) .header,
+:global(html[data-theme="light"]) .primary,
+:global(html:not([data-theme])) .primary,
+:global(html[data-theme="light"]) .alternative,
+:global(html:not([data-theme])) .alternative,
+:global(html[data-theme="light"]) .leagueCard,
+:global(html:not([data-theme])) .leagueCard,
+:global(html[data-theme="light"]) .healthBadge,
+:global(html:not([data-theme])) .healthBadge,
+:global(html[data-theme="light"]) .sampleNotice,
+:global(html:not([data-theme])) .sampleNotice,
+:global(html[data-theme="light"]) .learningNotice,
+:global(html:not([data-theme])) .learningNotice,
+:global(html[data-theme="light"]) .metric,
+:global(html:not([data-theme])) .metric,
+:global(html[data-theme="light"]) .match,
+:global(html:not([data-theme])) .match {
+  background: #e8f1fb !important;
+  border-color: #c5d9ef !important;
+}
+:global(html[data-theme="light"]) .eyebrow,
+:global(html:not([data-theme])) .eyebrow,
+:global(html[data-theme="light"]) .subtitle,
+:global(html:not([data-theme])) .subtitle,
+:global(html[data-theme="light"]) .muted,
+:global(html:not([data-theme])) .muted,
+:global(html[data-theme="light"]) .meta,
+:global(html:not([data-theme])) .meta,
+:global(html[data-theme="light"]) .formTipLine,
+:global(html:not([data-theme])) .formTipLine,
+:global(html[data-theme="light"]) .badge,
+:global(html:not([data-theme])) .badge,
+:global(html[data-theme="light"]) .modeBadge,
+:global(html:not([data-theme])) .modeBadge,
+:global(html[data-theme="light"]) .sampleBadge,
+:global(html:not([data-theme])) .sampleBadge,
+:global(html[data-theme="light"]) .thresholdRow,
+:global(html:not([data-theme])) .thresholdRow,
+:global(html[data-theme="light"]) .signalRow,
+:global(html:not([data-theme])) .signalRow {
+  color: #334155 !important;
+  font-weight: 500;
+}
+:global(html[data-theme="light"]) .title,
+:global(html:not([data-theme])) .title,
+:global(html[data-theme="light"]) .panelHeader,
+:global(html:not([data-theme])) .panelHeader,
+:global(html[data-theme="light"]) .pick,
+:global(html:not([data-theme])) .pick {
+  color: #0b1f3a !important;
+  font-weight: 700;
+}

@@ -2,3 +2,99 @@
 .calendar{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:12px 14px;border:1px solid #254764;border-radius:14px;background:#0b1c2d}.rangeTabs,.dateNav{display:flex;align-items:center;gap:7px}.rangeTabs button,.dateNav button,.today{border:1px solid #2a4b69;border-radius:9px;background:#0d2135;color:#aac3da;padding:9px 12px;cursor:pointer}.rangeTabs .activeTab,.today{background:#17649b;border-color:#39a9ec;color:#fff}.dateNav{justify-content:center}.dateNav strong{min-width:210px;text-align:center;color:#f0f6ff;text-transform:capitalize}.today{justify-self:end}@media(max-width:700px){.calendar{grid-template-columns:1fr;gap:10px}.rangeTabs{justify-content:center}.dateNav{justify-content:space-between}.dateNav strong{min-width:0;font-size:.82rem}.today{justify-self:stretch}}
 .prob em{color:#7ea2be;font-size:.61rem;font-style:normal;white-space:nowrap}
 .match em{font-size:.62rem;font-style:normal;font-weight:800}.won{color:#52e5ad}.lost{color:#ff7b86}.voided{color:#f2c45d}
+
+/* Admin light theme: match member surfaces */
+:global(html[data-theme="light"]) .page,
+:global(html:not([data-theme])) .page {
+  color: #0b1f3a !important;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+:global(html[data-theme="light"]) .hero,
+:global(html:not([data-theme])) .hero,
+:global(html[data-theme="light"]) .note,
+:global(html:not([data-theme])) .note,
+:global(html[data-theme="light"]) .builder,
+:global(html:not([data-theme])) .builder,
+:global(html[data-theme="light"]) .list,
+:global(html:not([data-theme])) .list,
+:global(html[data-theme="light"]) .heroStat,
+:global(html:not([data-theme])) .heroStat {
+  background: #e8f1fb !important;
+  border-color: #c5d9ef !important;
+  color: #0b1f3a !important;
+  box-shadow: none !important;
+}
+:global(html[data-theme="light"]) .hero h1,
+:global(html:not([data-theme])) .hero h1,
+:global(html[data-theme="light"]) .builder h2,
+:global(html:not([data-theme])) .builder h2,
+:global(html[data-theme="light"]) .list h2,
+:global(html:not([data-theme])) .list h2,
+:global(html[data-theme="light"]) .match strong,
+:global(html:not([data-theme])) .match strong,
+:global(html[data-theme="light"]) .odds b,
+:global(html:not([data-theme])) .odds b {
+  color: #0b1f3a !important;
+  font-weight: 700;
+}
+:global(html[data-theme="light"]) .hero p,
+:global(html:not([data-theme])) .hero p,
+:global(html[data-theme="light"]) .builder p,
+:global(html:not([data-theme])) .builder p,
+:global(html[data-theme="light"]) .list p,
+:global(html:not([data-theme])) .list p {
+  color: #1d4ed8 !important;
+  font-weight: 700;
+}
+:global(html[data-theme="light"]) .hero span,
+:global(html:not([data-theme])) .hero span,
+:global(html[data-theme="light"]) .heroStat small,
+:global(html:not([data-theme])) .heroStat small,
+:global(html[data-theme="light"]) .note span,
+:global(html:not([data-theme])) .note span,
+:global(html[data-theme="light"]) .note small,
+:global(html:not([data-theme])) .note small,
+:global(html[data-theme="light"]) .builderStats,
+:global(html:not([data-theme])) .builderStats,
+:global(html[data-theme="light"]) .match small,
+:global(html:not([data-theme])) .match small,
+:global(html[data-theme="light"]) .match span,
+:global(html:not([data-theme])) .match span,
+:global(html[data-theme="light"]) .prob small,
+:global(html:not([data-theme])) .prob small,
+:global(html[data-theme="light"]) .odds small,
+:global(html:not([data-theme])) .odds small,
+:global(html[data-theme="light"]) .empty,
+:global(html:not([data-theme])) .empty,
+:global(html[data-theme="light"]) .page footer,
+:global(html:not([data-theme])) .page footer {
+  color: #334155 !important;
+  font-weight: 500;
+}
+:global(html[data-theme="light"]) .builder header,
+:global(html:not([data-theme])) .builder header,
+:global(html[data-theme="light"]) .list>header,
+:global(html:not([data-theme])) .list>header,
+:global(html[data-theme="light"]) .list article,
+:global(html:not([data-theme])) .list article {
+  border-color: #c5d9ef !important;
+}
+:global(html[data-theme="light"]) .list article:hover,
+:global(html:not([data-theme])) .list article:hover,
+:global(html[data-theme="light"]) .list article.selected,
+:global(html:not([data-theme])) .list article.selected {
+  background: #dceaf8 !important;
+}
+:global(html[data-theme="light"]) .check,
+:global(html:not([data-theme])) .check,
+:global(html[data-theme="light"]) .builder header button,
+:global(html:not([data-theme])) .builder header button {
+  background: #dceaf8 !important;
+  border-color: #b8d0ea !important;
+  color: #0b1f3a !important;
+}
+:global(html[data-theme="light"]) .selected .check,
+:global(html:not([data-theme])) .selected .check {
+  background: #10b981 !important;
+  color: #06261d !important;
+}

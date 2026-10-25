@@ -416,3 +416,53 @@
   .reconciliationHealthy { align-items: flex-start; flex-direction: column; }
   .reconciliationIssue { grid-template-columns: 1fr; }
 }
+
+/* Admin light theme: match member surfaces */
+:global(html[data-theme="light"]) .header,
+:global(html:not([data-theme])) .header,
+:global(html[data-theme="light"]) .panel,
+:global(html:not([data-theme])) .panel,
+:global(html[data-theme="light"]) .coveragePanel,
+:global(html:not([data-theme])) .coveragePanel,
+:global(html[data-theme="light"]) .lockPanel,
+:global(html:not([data-theme])) .lockPanel,
+:global(html[data-theme="light"]) .metricCard,
+:global(html:not([data-theme])) .metricCard,
+:global(html[data-theme="light"]) .listRow,
+:global(html:not([data-theme])) .listRow,
+:global(html[data-theme="light"]) .reconciliationList,
+:global(html:not([data-theme])) .reconciliationList {
+  background: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  color: #0b1f3a !important;
+  box-shadow: none !important;
+}
+:global(html[data-theme="light"]) .header,
+:global(html:not([data-theme])) .header,
+:global(html[data-theme="light"]) .metricCard,
+:global(html:not([data-theme])) .metricCard,
+:global(html[data-theme="light"]) .lockPanel,
+:global(html:not([data-theme])) .lockPanel {
+  background: #e8f1fb !important;
+  border-color: #c5d9ef !important;
+}
+:global(html[data-theme="light"]) .eyebrow,
+:global(html:not([data-theme])) .eyebrow,
+:global(html[data-theme="light"]) .subtitle,
+:global(html:not([data-theme])) .subtitle,
+:global(html[data-theme="light"]) .rowMeta,
+:global(html:not([data-theme])) .rowMeta,
+:global(html[data-theme="light"]) .footerNote,
+:global(html:not([data-theme])) .footerNote,
+:global(html[data-theme="light"]) .empty,
+:global(html:not([data-theme])) .empty,
+:global(html[data-theme="light"]) .readOnlyBadge,
+:global(html:not([data-theme])) .readOnlyBadge {
+  color: #334155 !important;
+  font-weight: 500;
+}
+:global(html[data-theme="light"]) .homeLink,
+:global(html:not([data-theme])) .homeLink {
+  color: #1d4ed8 !important;
+  font-weight: 500;
+}

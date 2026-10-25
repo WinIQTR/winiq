@@ -47,3 +47,28 @@
     padding: 11px !important;
   }
 }
+
+/* Admin light theme */
+:global(html[data-theme="light"]) .predictionsTopbar h1,
+:global(html:not([data-theme])) .predictionsTopbar h1 {
+  color: #0b1f3a !important;
+  font-weight: 700;
+}
+:global(html[data-theme="light"]) .predictionsTopbar :global(.subtitle),
+:global(html:not([data-theme])) .predictionsTopbar :global(.subtitle),
+:global(html[data-theme="light"]) .matchCenterHeader :global(.dashboard-muted),
+:global(html:not([data-theme])) .matchCenterHeader :global(.dashboard-muted) {
+  color: #334155 !important;
+  font-weight: 500;
+}
+:global(html[data-theme="light"]) .matchCenter,
+:global(html:not([data-theme])) .matchCenter {
+  background: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  color: #0b1f3a !important;
+}
+:global(html[data-theme="light"]) .matchCenterHeader h2,
+:global(html:not([data-theme])) .matchCenterHeader h2 {
+  color: #0b1f3a !important;
+  font-weight: 700;
+}

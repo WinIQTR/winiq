@@ -1,4 +1,4 @@
-﻿.smartNavigation {
+.smartNavigation {
   display: grid;
   gap: 8px;
   margin-bottom: 12px;
@@ -2720,4 +2720,106 @@
 :global(html:not([data-theme])) .marketTier {
   color: #0b1f3a !important;
   font-weight: 500;
+}
+
+/* Admin light: predictions chrome (view switch / week / toolbar / fixtures) */
+:global(html[data-theme="light"]) .viewSwitch,
+:global(html:not([data-theme])) .viewSwitch,
+:global(html[data-theme="light"]) .weekWindow,
+:global(html:not([data-theme])) .weekWindow,
+:global(html[data-theme="light"]) .resultsSummary,
+:global(html:not([data-theme])) .resultsSummary,
+:global(html[data-theme="light"]) .smartToolbar,
+:global(html:not([data-theme])) .smartToolbar,
+:global(html[data-theme="light"]) .fixtureArchive,
+:global(html:not([data-theme])) .fixtureArchive,
+:global(html[data-theme="light"]) .fixtureCard,
+:global(html:not([data-theme])) .fixtureCard,
+:global(html[data-theme="light"]) .recommendationFallbackNotice,
+:global(html:not([data-theme])) .recommendationFallbackNotice {
+  background: #e8f1fb !important;
+  border-color: #c5d9ef !important;
+  color: #0b1f3a !important;
+  box-shadow: none !important;
+}
+:global(html[data-theme="light"]) .viewButton,
+:global(html:not([data-theme])) .viewButton,
+:global(html[data-theme="light"]) .weekWindowButton,
+:global(html:not([data-theme])) .weekWindowButton {
+  color: #334155 !important;
+  font-weight: 500;
+}
+:global(html[data-theme="light"]) .viewButton span,
+:global(html:not([data-theme])) .viewButton span,
+:global(html[data-theme="light"]) .viewButtonActive span,
+:global(html:not([data-theme])) .viewButtonActive span {
+  background: #dceaf8 !important;
+  color: #1d4ed8 !important;
+}
+:global(html[data-theme="light"]) .viewButtonActive,
+:global(html:not([data-theme])) .viewButtonActive,
+:global(html[data-theme="light"]) .weekWindowActive,
+:global(html:not([data-theme])) .weekWindowActive {
+  background: #dceaf8 !important;
+  border-color: #b8d0ea !important;
+  color: #0b1f3a !important;
+  box-shadow: none !important;
+}
+:global(html[data-theme="light"]) .viewButton:hover,
+:global(html:not([data-theme])) .viewButton:hover {
+  background: #dceaf8 !important;
+  color: #0b1f3a !important;
+}
+:global(html[data-theme="light"]) .viewButton strong,
+:global(html:not([data-theme])) .viewButton strong,
+:global(html[data-theme="light"]) .viewButtonActive strong,
+:global(html:not([data-theme])) .viewButtonActive strong,
+:global(html[data-theme="light"]) .weekWindow > div:first-child > strong,
+:global(html:not([data-theme])) .weekWindow > div:first-child > strong,
+:global(html[data-theme="light"]) .resultsSummary > div > strong,
+:global(html:not([data-theme])) .resultsSummary > div > strong,
+:global(html[data-theme="light"]) .toolbarSummary strong,
+:global(html:not([data-theme])) .toolbarSummary strong,
+:global(html[data-theme="light"]) .fixtureArchiveHeader strong,
+:global(html:not([data-theme])) .fixtureArchiveHeader strong {
+  color: #0b1f3a !important;
+  font-weight: 700;
+}
+:global(html[data-theme="light"]) .viewExplanation,
+:global(html:not([data-theme])) .viewExplanation,
+:global(html[data-theme="light"]) .weekWindow > div:first-child > span,
+:global(html:not([data-theme])) .weekWindow > div:first-child > span,
+:global(html[data-theme="light"]) .resultsSummary > div > span,
+:global(html:not([data-theme])) .resultsSummary > div > span,
+:global(html[data-theme="light"]) .resultsSummary small,
+:global(html:not([data-theme])) .resultsSummary small,
+:global(html[data-theme="light"]) .resultsSummary p,
+:global(html:not([data-theme])) .resultsSummary p,
+:global(html[data-theme="light"]) .toolbarSummary small,
+:global(html:not([data-theme])) .toolbarSummary small,
+:global(html[data-theme="light"]) .searchField > span,
+:global(html:not([data-theme])) .searchField > span,
+:global(html[data-theme="light"]) .leagueSelect > span,
+:global(html:not([data-theme])) .leagueSelect > span {
+  color: #334155 !important;
+  font-weight: 500;
+}
+:global(html[data-theme="light"]) .searchField input,
+:global(html:not([data-theme])) .searchField input,
+:global(html[data-theme="light"]) .leagueSelect select,
+:global(html:not([data-theme])) .leagueSelect select {
+  background: #ffffff !important;
+  border-color: #cbd5e1 !important;
+  color: #0b1f3a !important;
+}
+:global(html[data-theme="light"]) .resetButton,
+:global(html:not([data-theme])) .resetButton {
+  background: #dceaf8 !important;
+  border-color: #b8d0ea !important;
+  color: #0b1f3a !important;
+  font-weight: 500;
+}
+:global(html[data-theme="light"]) .fixtureArchiveDivider,
+:global(html:not([data-theme])) .fixtureArchiveDivider {
+  background: #c5d9ef !important;
 }

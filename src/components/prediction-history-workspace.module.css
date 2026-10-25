@@ -380,3 +380,82 @@
     margin-top: -8px;
   }
 }
+
+/* Admin light theme: match member surfaces */
+:global(html[data-theme="light"]) .compactToolbar,
+:global(html:not([data-theme])) .compactToolbar,
+:global(html[data-theme="light"]) .compactSummary article,
+:global(html:not([data-theme])) .compactSummary article,
+:global(html[data-theme="light"]) .tableWrap,
+:global(html:not([data-theme])) .tableWrap,
+:global(html[data-theme="light"]) .matchGroup,
+:global(html:not([data-theme])) .matchGroup,
+:global(html[data-theme="light"]) .detailPanel,
+:global(html:not([data-theme])) .detailPanel {
+  background: #e8f1fb !important;
+  border-color: #c5d9ef !important;
+  color: #0b1f3a !important;
+  box-shadow: none !important;
+}
+:global(html[data-theme="light"]) .marketSelect,
+:global(html:not([data-theme])) .marketSelect,
+:global(html[data-theme="light"]) .bandSelect,
+:global(html:not([data-theme])) .bandSelect {
+  background: #ffffff !important;
+  border-color: #cbd5e1 !important;
+  color: #0b1f3a !important;
+}
+:global(html[data-theme="light"]) .resultsLink,
+:global(html:not([data-theme])) .resultsLink {
+  background: #dceaf8 !important;
+  border-color: #b8d0ea !important;
+  color: #1d4ed8 !important;
+  font-weight: 700;
+}
+:global(html[data-theme="light"]) .compactSummary article > strong,
+:global(html:not([data-theme])) .compactSummary article > strong,
+:global(html[data-theme="light"]) .match,
+:global(html:not([data-theme])) .match,
+:global(html[data-theme="light"]) .summaryScore strong,
+:global(html:not([data-theme])) .summaryScore strong,
+:global(html[data-theme="light"]) .summaryCount strong,
+:global(html:not([data-theme])) .summaryCount strong {
+  color: #0b1f3a !important;
+  font-weight: 700;
+}
+:global(html[data-theme="light"]) .compactSummary article > span,
+:global(html:not([data-theme])) .compactSummary article > span,
+:global(html[data-theme="light"]) .compactSummary article > small,
+:global(html:not([data-theme])) .compactSummary article > small,
+:global(html[data-theme="light"]) .match small,
+:global(html:not([data-theme])) .match small,
+:global(html[data-theme="light"]) .summaryScore span,
+:global(html:not([data-theme])) .summaryScore span,
+:global(html[data-theme="light"]) .summaryCount span,
+:global(html:not([data-theme])) .summaryCount span,
+:global(html[data-theme="light"]) .tableHeader,
+:global(html:not([data-theme])) .tableHeader,
+:global(html[data-theme="light"]) .matchSummary,
+:global(html:not([data-theme])) .matchSummary,
+:global(html[data-theme="light"]) .tableRow,
+:global(html:not([data-theme])) .tableRow {
+  color: #334155 !important;
+  font-weight: 500;
+}
+:global(html[data-theme="light"]) .tableHeader,
+:global(html:not([data-theme])) .tableHeader {
+  background: #dceaf8 !important;
+}
+:global(html[data-theme="light"]) .tableRow,
+:global(html:not([data-theme])) .tableRow,
+:global(html[data-theme="light"]) .detailRow,
+:global(html:not([data-theme])) .detailRow {
+  border-bottom-color: #c5d9ef !important;
+  color: #0b1f3a !important;
+}
+:global(html[data-theme="light"]) .matchSummary:hover,
+:global(html:not([data-theme])) .matchSummary:hover,
+:global(html[data-theme="light"]) .detailRow:not(.detailHeader):hover,
+:global(html:not([data-theme])) .detailRow:not(.detailHeader):hover {
+  background: #dceaf8 !important;
+}

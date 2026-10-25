@@ -27,35 +27,68 @@ html:not([data-theme]) .sidebar > div:first-child::-webkit-scrollbar-thumb {
   background: #cbd5e1;
 }
 
+/* Admin sidebar uses .nav-item / .brand (not .sidebar-link) */
 html[data-theme="light"] .sidebar-link,
-html:not([data-theme]) .sidebar-link {
-  color: #374151;
+html:not([data-theme]) .sidebar-link,
+html[data-theme="light"] .nav-item,
+html:not([data-theme]) .nav-item {
+  color: #334155;
+  font-weight: 500;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
 }
 
 html[data-theme="light"] .sidebar-link:hover,
-html:not([data-theme]) .sidebar-link:hover {
-  background: #f3f4f6;
+html:not([data-theme]) .sidebar-link:hover,
+html[data-theme="light"] .nav-item:hover,
+html:not([data-theme]) .nav-item:hover {
+  background: #e8f1fb;
   color: #0b1f3a;
 }
 
 html[data-theme="light"] .sidebar-link.active,
-html:not([data-theme]) .sidebar-link.active {
-  background: rgba(37, 99, 235, 0.12);
+html:not([data-theme]) .sidebar-link.active,
+html[data-theme="light"] .nav-item-active,
+html:not([data-theme]) .nav-item-active,
+html[data-theme="light"] .nav-item[aria-current="page"],
+html:not([data-theme]) .nav-item[aria-current="page"] {
+  background: #dceaf8;
   color: #1d4ed8;
-  border-color: rgba(37, 99, 235, 0.35);
+  border-color: #b8d0ea;
+  font-weight: 700;
+}
+
+html[data-theme="light"] .brand,
+html:not([data-theme]) .brand,
+html[data-theme="light"] .brand strong,
+html:not([data-theme]) .brand strong {
+  color: #0b1f3a;
+  font-weight: 700;
+}
+
+html[data-theme="light"] .brand span,
+html:not([data-theme]) .brand span {
+  color: #334155 !important;
+  font-weight: 500;
+}
+
+html[data-theme="light"] .nav-group-title,
+html:not([data-theme]) .nav-group-title {
+  color: #1d4ed8 !important;
+  font-weight: 700;
 }
 
 html[data-theme="light"] .sidebar-footer,
 html:not([data-theme]) .sidebar-footer {
   border-top-color: #e5e7eb;
-  color: #6b7280;
+  color: #334155;
 }
 
 html[data-theme="light"] .sidebar-status,
 html:not([data-theme]) .sidebar-status {
-  background: #f9fafb;
-  border-color: #e5e7eb;
-  color: #374151;
+  background: #e8f1fb;
+  border-color: #c5d9ef;
+  color: #0b1f3a;
+  font-weight: 500;
 }
 
 html[data-theme="light"] .page-shell,
@@ -95,10 +128,67 @@ html:not([data-theme]) .smart-match-meta > strong {
 html[data-theme="light"] .dashboard-panel,
 html:not([data-theme]) .dashboard-panel,
 html[data-theme="light"] .dashboard-metrics .metric-card,
-html:not([data-theme]) .dashboard-metrics .metric-card {
+html:not([data-theme]) .dashboard-metrics .metric-card,
+html[data-theme="light"] .metric-card,
+html:not([data-theme]) .metric-card,
+html[data-theme="light"] .admin-card,
+html:not([data-theme]) .admin-card,
+html[data-theme="light"] .insight-panel,
+html:not([data-theme]) .insight-panel,
+html[data-theme="light"] .settings-card,
+html:not([data-theme]) .settings-card {
   background: #ffffff !important;
-  border-color: #e5e7eb !important;
+  border-color: #e2e8f0 !important;
   color: #0b1f3a;
+  box-shadow: 0 2px 12px rgba(15, 35, 70, 0.05) !important;
+}
+
+html[data-theme="light"] .topbar h1,
+html:not([data-theme]) .topbar h1,
+html[data-theme="light"] .admin-header h1,
+html:not([data-theme]) .admin-header h1,
+html[data-theme="light"] .admin-card h2,
+html:not([data-theme]) .admin-card h2 {
+  color: #0b1f3a !important;
+  font-weight: 700;
+}
+
+html[data-theme="light"] .topbar .subtitle,
+html:not([data-theme]) .topbar .subtitle,
+html[data-theme="light"] .admin-description,
+html:not([data-theme]) .admin-description,
+html[data-theme="light"] .subtitle,
+html:not([data-theme]) .subtitle {
+  color: #334155 !important;
+  font-weight: 500;
+}
+
+html[data-theme="light"] .eyebrow,
+html:not([data-theme]) .eyebrow {
+  color: #1d4ed8 !important;
+  font-weight: 700;
+}
+
+html[data-theme="light"] .mode-badge,
+html:not([data-theme]) .mode-badge {
+  background: #dceaf8 !important;
+  border-color: #b8d0ea !important;
+  color: #1d4ed8 !important;
+}
+
+html[data-theme="light"] .field span,
+html:not([data-theme]) .field span {
+  color: #334155 !important;
+  font-weight: 500;
+}
+
+html[data-theme="light"] .field select,
+html:not([data-theme]) .field select,
+html[data-theme="light"] .field input,
+html:not([data-theme]) .field input {
+  background: #ffffff !important;
+  border-color: #cbd5e1 !important;
+  color: #0b1f3a !important;
 }
 
 html[data-theme="light"] .dashboard-rule-grid > div,
@@ -414,5 +504,140 @@ html:not([data-theme]) .smart-match-meta,
 html[data-theme="light"] .prediction-card-smart .muted,
 html:not([data-theme]) .prediction-card-smart .muted {
   color: #334155 !important;
+  font-weight: 500;
+}
+
+/* Admin inbox / messages / coverage tables (globals classes) */
+html[data-theme="light"] .message-thread,
+html:not([data-theme]) .message-thread,
+html[data-theme="light"] .message-compose,
+html:not([data-theme]) .message-compose,
+html[data-theme="light"] .admin-thread-list,
+html:not([data-theme]) .admin-thread-list,
+html[data-theme="light"] .admin-conversation,
+html:not([data-theme]) .admin-conversation,
+html[data-theme="light"] .players-panel,
+html:not([data-theme]) .players-panel,
+html[data-theme="light"] .players-summary-card,
+html:not([data-theme]) .players-summary-card {
+  background: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  color: #0b1f3a !important;
+  box-shadow: 0 2px 12px rgba(15, 35, 70, 0.05) !important;
+}
+
+html[data-theme="light"] .players-position-bar > div,
+html:not([data-theme]) .players-position-bar > div {
+  background: #e8f1fb !important;
+  border-color: #c5d9ef !important;
+  color: #0b1f3a !important;
+}
+
+html[data-theme="light"] .admin-message-compose,
+html:not([data-theme]) .admin-message-compose {
+  background: #e8f1fb !important;
+  border-top-color: #c5d9ef !important;
+}
+
+html[data-theme="light"] .message-compose textarea,
+html:not([data-theme]) .message-compose textarea,
+html[data-theme="light"] .admin-message-compose textarea,
+html:not([data-theme]) .admin-message-compose textarea {
+  background: #ffffff !important;
+  border-color: #cbd5e1 !important;
+  color: #0b1f3a !important;
+}
+
+html[data-theme="light"] .admin-message-filters a,
+html:not([data-theme]) .admin-message-filters a,
+html[data-theme="light"] .coupon-center-tabs a,
+html:not([data-theme]) .coupon-center-tabs a {
+  background: #e8f1fb !important;
+  border-color: #c5d9ef !important;
+  color: #334155 !important;
+  font-weight: 500;
+}
+
+html[data-theme="light"] .admin-message-filters a.active,
+html:not([data-theme]) .admin-message-filters a.active,
+html[data-theme="light"] .coupon-center-tabs a.active,
+html:not([data-theme]) .coupon-center-tabs a.active,
+html[data-theme="light"] .coupon-center-tabs a[class="active"],
+html:not([data-theme]) .coupon-center-tabs a[class="active"] {
+  background: #dceaf8 !important;
+  border-color: #2563eb !important;
+  color: #1d4ed8 !important;
+  font-weight: 700;
+}
+
+html[data-theme="light"] .admin-thread-list > a,
+html:not([data-theme]) .admin-thread-list > a {
+  border-bottom-color: #e2e8f0 !important;
+  color: #0b1f3a !important;
+}
+
+html[data-theme="light"] .admin-thread-list > a:hover,
+html:not([data-theme]) .admin-thread-list > a:hover,
+html[data-theme="light"] .admin-thread-list > a.active,
+html:not([data-theme]) .admin-thread-list > a.active {
+  background: #e8f1fb !important;
+}
+
+html[data-theme="light"] .admin-thread-list > p,
+html:not([data-theme]) .admin-thread-list > p,
+html[data-theme="light"] .admin-thread-list small,
+html:not([data-theme]) .admin-thread-list small,
+html[data-theme="light"] .admin-thread-list p,
+html:not([data-theme]) .admin-thread-list p,
+html[data-theme="light"] .admin-thread-list time,
+html:not([data-theme]) .admin-thread-list time,
+html[data-theme="light"] .admin-conversation > header span,
+html:not([data-theme]) .admin-conversation > header span {
+  color: #334155 !important;
+  font-weight: 500;
+}
+
+html[data-theme="light"] .admin-conversation > header,
+html:not([data-theme]) .admin-conversation > header {
+  border-bottom-color: #e2e8f0 !important;
+}
+
+html[data-theme="light"] .admin-conversation > header strong,
+html:not([data-theme]) .admin-conversation > header strong,
+html[data-theme="light"] .admin-thread-list strong,
+html:not([data-theme]) .admin-thread-list strong,
+html[data-theme="light"] .players-row > strong,
+html:not([data-theme]) .players-row > strong {
+  color: #0b1f3a !important;
+  font-weight: 700;
+}
+
+html[data-theme="light"] .players-row,
+html:not([data-theme]) .players-row {
+  border-color: #e2e8f0 !important;
+  color: #0b1f3a !important;
+}
+
+html[data-theme="light"] .players-header-row,
+html:not([data-theme]) .players-header-row {
+  background: #e8f1fb !important;
+  color: #334155 !important;
+  font-weight: 700;
+}
+
+html[data-theme="light"] .message-admin-count,
+html:not([data-theme]) .message-admin-count {
+  background: #fffbeb !important;
+  border-color: #fcd34d !important;
+}
+
+html[data-theme="light"] .message-admin-count strong,
+html:not([data-theme]) .message-admin-count strong {
+  color: #92400e !important;
+}
+
+html[data-theme="light"] .message-admin-count span,
+html:not([data-theme]) .message-admin-count span {
+  color: #78350f !important;
   font-weight: 500;
 }

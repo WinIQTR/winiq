@@ -62,3 +62,69 @@
 .createForm input,.createForm select,.accessForm input,.accessForm select,.securityActions input,.priceCard input,.requestForm input { border-color:rgba(103,148,211,.25); background:#07162a; transition:border-color .18s,box-shadow .18s; }
 .createForm input:focus,.createForm select:focus,.accessForm input:focus,.accessForm select:focus,.priceCard input:focus,.requestForm input:focus { outline:0; border-color:#4f8cff; box-shadow:0 0 0 3px rgba(79,140,255,.12); }
 .createForm button,.accessForm button,.securityActions button,.priceCard button,.requestForm button { border-radius:10px; background:linear-gradient(135deg,#3475ef,#2455c9); box-shadow:0 8px 20px rgba(24,78,183,.18); }
+
+/* Admin light theme: match member surfaces */
+:global(html[data-theme="light"]) .workspace,
+:global(html:not([data-theme])) .workspace,
+:global(html[data-theme="light"]) .panel,
+:global(html:not([data-theme])) .panel,
+:global(html[data-theme="light"]) .memberCard,
+:global(html:not([data-theme])) .memberCard,
+:global(html[data-theme="light"]) .priceCard,
+:global(html:not([data-theme])) .priceCard,
+:global(html[data-theme="light"]) .requestCard,
+:global(html:not([data-theme])) .requestCard,
+:global(html[data-theme="light"]) .paymentGrid article,
+:global(html:not([data-theme])) .paymentGrid article {
+  background: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  color: #0b1f3a !important;
+  box-shadow: none !important;
+}
+:global(html[data-theme="light"]) .panel,
+:global(html:not([data-theme])) .panel,
+:global(html[data-theme="light"]) .memberCard,
+:global(html:not([data-theme])) .memberCard,
+:global(html[data-theme="light"]) .priceCard,
+:global(html:not([data-theme])) .priceCard,
+:global(html[data-theme="light"]) .requestCard,
+:global(html:not([data-theme])) .requestCard {
+  background: #e8f1fb !important;
+  border-color: #c5d9ef !important;
+}
+:global(html[data-theme="light"]) .panel::before,
+:global(html:not([data-theme])) .panel::before { background: none !important; }
+:global(html[data-theme="light"]) .eyebrow,
+:global(html:not([data-theme])) .eyebrow,
+:global(html[data-theme="light"]) .empty,
+:global(html:not([data-theme])) .empty,
+:global(html[data-theme="light"]) .message,
+:global(html:not([data-theme])) .message,
+:global(html[data-theme="light"]) .identity,
+:global(html:not([data-theme])) .identity {
+  color: #334155 !important;
+  font-weight: 500;
+}
+:global(html[data-theme="light"]) .heading,
+:global(html:not([data-theme])) .heading {
+  color: #0b1f3a !important;
+  font-weight: 700;
+}
+:global(html[data-theme="light"]) .createForm input,
+:global(html:not([data-theme])) .createForm input,
+:global(html[data-theme="light"]) .createForm select,
+:global(html:not([data-theme])) .createForm select,
+:global(html[data-theme="light"]) .accessForm input,
+:global(html:not([data-theme])) .accessForm input,
+:global(html[data-theme="light"]) .accessForm select,
+:global(html:not([data-theme])) .accessForm select,
+:global(html[data-theme="light"]) .securityActions input,
+:global(html:not([data-theme])) .securityActions input,
+:global(html[data-theme="light"]) .priceCard input,
+:global(html:not([data-theme])) .priceCard input,
+:global(html[data-theme="light"]) .requestForm input,
+:global(html:not([data-theme])) .requestForm input {
+  background: #ffffff !important;
+  border-color: #cbd5e1 !important;
+  color: #0b1f3a !important;
+}
