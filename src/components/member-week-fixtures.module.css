@@ -94,7 +94,20 @@
   grid-column: 1 / -1;
   margin: 0;
   padding-top: 2px;
-  color: #6b7c93;
+  color: #334155;
+  font-weight: 500;
+}
+
+:global(html[data-theme="light"]) .formTip,
+:global(html:not([data-theme])) .formTip,
+:global(html[data-theme="light"]) .formTip span,
+:global(html:not([data-theme])) .formTip span,
+:global(html[data-theme="light"]) .leagueHead,
+:global(html:not([data-theme])) .leagueHead,
+:global(html[data-theme="light"]) .metaCopy small,
+:global(html:not([data-theme])) .metaCopy small {
+  color: #1e293b !important;
+  font-weight: 500;
 }
 
 .row:last-child {

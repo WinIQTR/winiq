@@ -505,7 +505,8 @@
 :global(html:not([data-theme])) .hero p,
 :global(html[data-theme="light"]) .muted,
 :global(html:not([data-theme])) .muted {
-  color: #6b7280 !important;
+  color: #334155 !important;
+  font-weight: 500;
 }
 
 :global(html[data-theme="light"]) .controls,
@@ -535,7 +536,8 @@
 :global(html:not([data-theme])) .field span,
 :global(html[data-theme="light"]) .metric span,
 :global(html:not([data-theme])) .metric span {
-  color: #6b7280 !important;
+  color: #334155 !important;
+  font-weight: 500;
 }
 
 :global(html[data-theme="light"]) .heroCopy h1,
@@ -576,7 +578,8 @@
 :global(html:not([data-theme])) .field span,
 :global(html[data-theme="light"]) .meta,
 :global(html:not([data-theme])) .meta {
-  color: #6b7280 !important;
+  color: #334155 !important;
+  font-weight: 500;
 }
 
 :global(html[data-theme="light"]) .stat b,
@@ -584,24 +587,57 @@
 :global(html[data-theme="light"]) .stat strong,
 :global(html:not([data-theme])) .stat strong {
   color: #0b1f3a !important;
+  font-weight: 700;
 }
 
 :global(html[data-theme="light"]) .stat em,
 :global(html:not([data-theme])) .stat em {
-  color: #2563eb !important;
+  color: #1d4ed8 !important;
+  font-weight: 700;
 }
 
 :global(html[data-theme="light"]) .meta strong,
 :global(html:not([data-theme])) .meta strong {
-  color: #2563eb !important;
+  color: #1d4ed8 !important;
+  font-weight: 700;
 }
 
 :global(html[data-theme="light"]) .versus,
 :global(html:not([data-theme])) .versus {
-  color: #9ca3af !important;
+  color: #475569 !important;
+  font-weight: 500;
 }
 
 :global(html[data-theme="light"]) .barTrack,
 :global(html:not([data-theme])) .barTrack {
-  background: #e5e7eb !important;
+  background: #dceaf8 !important;
+}
+
+/* Insight / form tip on value cards — must not wash out on white */
+:global(html[data-theme="light"]) .formTip,
+:global(html:not([data-theme])) .formTip {
+  border-top-color: #e2e8f0;
+  color: #1e293b !important;
+  font-weight: 500;
+}
+
+:global(html[data-theme="light"]) .formTip :global(span),
+:global(html:not([data-theme])) .formTip :global(span),
+:global(html[data-theme="light"]) .formTip span,
+:global(html:not([data-theme])) .formTip span {
+  color: #1e293b !important;
+  font-weight: 500;
+}
+
+:global(html[data-theme="light"]) .formTip :global(svg),
+:global(html:not([data-theme])) .formTip :global(svg),
+:global(html[data-theme="light"]) .formTip svg,
+:global(html:not([data-theme])) .formTip svg {
+  color: #1d4ed8 !important;
+}
+
+:global(html[data-theme="light"]) .empty,
+:global(html:not([data-theme])) .empty {
+  color: #334155 !important;
+  font-weight: 500;
 }

@@ -789,7 +789,7 @@
   --sl-panel-2: #f9fafb;
   --sl-border: #e5e7eb;
   --sl-text: #0b1f3a;
-  --sl-muted: #6b7280;
+  --sl-muted: #334155;
   --sl-teal: #0d9488;
   --sl-teal-deep: #0f766e;
   --sl-green: #059669;
@@ -845,7 +845,8 @@
 
 :global(html[data-theme="light"]) .eyebrow,
 :global(html:not([data-theme])) .eyebrow {
-  color: #6b7280;
+  color: #334155;
+  font-weight: 700;
 }
 
 :global(html[data-theme="light"]) .heroCopy h1,
@@ -855,12 +856,14 @@
 
 :global(html[data-theme="light"]) .lead,
 :global(html:not([data-theme])) .lead {
-  color: #4b5563;
+  color: #1e293b;
+  font-weight: 500;
 }
 
 :global(html[data-theme="light"]) .blurb,
 :global(html:not([data-theme])) .blurb {
-  color: #6b7280;
+  color: #334155;
+  font-weight: 400;
 }
 
 :global(html[data-theme="light"]) .countCard,
@@ -891,7 +894,8 @@
 :global(html:not([data-theme])) .field label,
 :global(html[data-theme="light"]) .chipLabel,
 :global(html:not([data-theme])) .chipLabel {
-  color: #6b7280;
+  color: #334155;
+  font-weight: 500;
 }
 
 :global(html[data-theme="light"]) .selectWrap select,
@@ -905,7 +909,7 @@
 
 :global(html[data-theme="light"]) .selectWrap svg,
 :global(html:not([data-theme])) .selectWrap svg {
-  color: #9ca3af;
+  color: #475569;
 }
 
 :global(html[data-theme="light"]) .found,
@@ -950,12 +954,14 @@
 
 :global(html[data-theme="light"]) .meta small,
 :global(html:not([data-theme])) .meta small {
-  color: #6b7280;
+  color: #334155;
+  font-weight: 500;
 }
 
 :global(html[data-theme="light"]) .meta time,
 :global(html:not([data-theme])) .meta time {
-  color: #4b5563;
+  color: #1e293b;
+  font-weight: 500;
 }
 
 :global(html[data-theme="light"]) .logo,
@@ -964,12 +970,13 @@
 :global(html:not([data-theme])) .logoFallback {
   background: #f9fafb;
   border-color: #e5e7eb;
-  color: #6b7280;
+  color: #334155;
 }
 
 :global(html[data-theme="light"]) .vs,
 :global(html:not([data-theme])) .vs {
-  color: #9ca3af;
+  color: #475569;
+  font-weight: 500;
 }
 
 :global(html[data-theme="light"]) .teamNames,
@@ -983,7 +990,8 @@
 :global(html:not([data-theme])) .pick span,
 :global(html:not([data-theme])) .model span,
 :global(html:not([data-theme])) .odds span {
-  color: #9ca3af;
+  color: #334155;
+  font-weight: 500;
 }
 
 :global(html[data-theme="light"]) .pick b,
@@ -1035,8 +1043,18 @@
 }
 
 :global(html[data-theme="light"]) .tipWrap :global(p),
-:global(html:not([data-theme])) .tipWrap :global(p) {
-  color: #2563eb;
+:global(html:not([data-theme])) .tipWrap :global(p),
+:global(html[data-theme="light"]) .tipWrap :global(.tip),
+:global(html:not([data-theme])) .tipWrap :global(.tip),
+:global(html[data-theme="light"]) .tipWrap :global(.tip span),
+:global(html:not([data-theme])) .tipWrap :global(.tip span) {
+  color: #1e293b !important;
+  font-weight: 500;
+}
+
+:global(html[data-theme="light"]) .tipWrap :global(.tip svg),
+:global(html:not([data-theme])) .tipWrap :global(.tip svg) {
+  color: #1d4ed8 !important;
 }
 
 :global(html[data-theme="light"]) .analyze,
@@ -1057,7 +1075,8 @@
 :global(html:not([data-theme])) .empty,
 :global(html[data-theme="light"]) .sourceNote,
 :global(html:not([data-theme])) .sourceNote {
-  color: #6b7280;
+  color: #334155;
+  font-weight: 500;
 }
 
 :global(html[data-theme="light"]) .chip,

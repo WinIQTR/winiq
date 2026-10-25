@@ -479,7 +479,8 @@
 :global(html:not([data-theme])) .sectionHead small,
 :global(html[data-theme="light"]) .field span,
 :global(html:not([data-theme])) .field span {
-  color: #6b7280 !important;
+  color: #334155 !important;
+  font-weight: 500;
 }
 
 :global(html[data-theme="light"]) .heroCopy h1,
@@ -501,7 +502,8 @@
 
 :global(html[data-theme="light"]) .meta,
 :global(html:not([data-theme])) .meta {
-  color: #6b7280 !important;
+  color: #334155 !important;
+  font-weight: 500;
 }
 
 :global(html[data-theme="light"]) .meta strong,

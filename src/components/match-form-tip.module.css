@@ -23,11 +23,17 @@
 
 :global(html[data-theme="light"]) .tip,
 :global(html:not([data-theme])) .tip {
-  color: #0b1f3a;
+  color: #1e293b !important;
+  font-weight: 500;
+}
+
+:global(html[data-theme="light"]) .tip span,
+:global(html:not([data-theme])) .tip span {
+  color: #1e293b !important;
   font-weight: 500;
 }
 
 :global(html[data-theme="light"]) .tip svg,
 :global(html:not([data-theme])) .tip svg {
-  color: #1d4ed8;
+  color: #1d4ed8 !important;
 }

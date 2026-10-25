@@ -1047,7 +1047,7 @@
   --mh-card-2: #f8fafc;
   --mh-border: #e2e8f0;
   --mh-text: #0b1f3a;
-  --mh-muted: #6b7c93;
+  --mh-muted: #334155;
   --mh-blue: #2563eb;
   --mh-blue-soft: rgba(37, 99, 235, 0.12);
   --mh-green: #43e3a1;
@@ -1130,7 +1130,8 @@
 
 :global(html[data-theme="light"]) .pickChip span,
 :global(html:not([data-theme])) .pickChip span {
-  color: #6b7280 !important;
+  color: #334155 !important;
+  font-weight: 500;
 }
 
 :global(html[data-theme="light"]) .cardBody,
@@ -1217,8 +1218,11 @@
 }
 
 :global(html[data-theme="light"]) .analysis,
-:global(html:not([data-theme])) .analysis {
-  color: #334155 !important;
+:global(html:not([data-theme])) .analysis,
+:global(html[data-theme="light"]) .analysis span,
+:global(html:not([data-theme])) .analysis span {
+  color: #1e293b !important;
+  font-weight: 500;
 }
 
 :global(html[data-theme="light"]) .analysis svg,

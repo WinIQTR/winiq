@@ -402,3 +402,17 @@ html:not([data-theme]) .detail-probabilities strong {
   color: #0b1f3a !important;
   font-weight: 700;
 }
+
+/* Light: secondary/insight text must stay readable (navy/slate) */
+html[data-theme="light"] .prediction-form-tip,
+html:not([data-theme]) .prediction-form-tip {
+  color: #1e293b !important;
+  font-weight: 500;
+}
+html[data-theme="light"] .smart-match-meta,
+html:not([data-theme]) .smart-match-meta,
+html[data-theme="light"] .prediction-card-smart .muted,
+html:not([data-theme]) .prediction-card-smart .muted {
+  color: #334155 !important;
+  font-weight: 500;
+}
