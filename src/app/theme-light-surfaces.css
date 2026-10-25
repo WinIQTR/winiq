@@ -378,3 +378,27 @@ html[data-theme="dark"] .btn-secondary {
   color: #d7e7ff;
   font-weight: 800;
 }
+
+/* Light theme: classic 1/X/2 probability cells + tracks */
+html[data-theme="light"] .prediction-probabilities > div,
+html:not([data-theme]) .prediction-probabilities > div,
+html[data-theme="light"] .detail-probabilities div,
+html:not([data-theme]) .detail-probabilities div {
+  background: #e8f1fb;
+  border-color: #c5d9ef;
+  color: #0b1f3a;
+}
+html[data-theme="light"] .prediction-probabilities span,
+html:not([data-theme]) .prediction-probabilities span,
+html[data-theme="light"] .detail-probabilities span,
+html:not([data-theme]) .detail-probabilities span {
+  color: #334155 !important;
+  font-weight: 500;
+}
+html[data-theme="light"] .prediction-probabilities strong,
+html:not([data-theme]) .prediction-probabilities strong,
+html[data-theme="light"] .detail-probabilities strong,
+html:not([data-theme]) .detail-probabilities strong {
+  color: #0b1f3a !important;
+  font-weight: 700;
+}

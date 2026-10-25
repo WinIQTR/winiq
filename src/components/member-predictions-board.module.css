@@ -1055,11 +1055,51 @@
 }
 :global(html[data-theme="light"]) .hero,
 :global(html:not([data-theme])) .hero {
-  background:
-    linear-gradient(105deg, rgba(255,255,255,0.96) 0%, rgba(244,246,248,0.92) 55%, rgba(232,240,255,0.9) 100%),
-    #ffffff;
-  border-color: #e2e8f0;
-  box-shadow: 0 4px 16px rgba(15, 35, 70, 0.06);
+  background: #e8f1fb;
+  border-color: #c5d9ef;
+  box-shadow: none;
+}
+
+:global(html[data-theme="light"]) .hero::after,
+:global(html:not([data-theme])) .hero::after {
+  background: none;
+}
+
+:global(html[data-theme="light"]) .heroDate,
+:global(html:not([data-theme])) .heroDate {
+  color: #334155 !important;
+  font-weight: 500;
+}
+
+:global(html[data-theme="light"]) .disclaimer,
+:global(html:not([data-theme])) .disclaimer {
+  background: #dceaf8;
+  border-color: #b8d0ea;
+  color: #0b1f3a !important;
+  font-weight: 400;
+}
+
+:global(html[data-theme="light"]) .disclaimer svg,
+:global(html:not([data-theme])) .disclaimer svg {
+  color: #1d4ed8;
+}
+
+:global(html[data-theme="light"]) .heroAside strong,
+:global(html:not([data-theme])) .heroAside strong {
+  color: #0b1f3a !important;
+  font-weight: 700;
+}
+
+:global(html[data-theme="light"]) .heroAside span,
+:global(html:not([data-theme])) .heroAside span {
+  color: #334155 !important;
+  font-weight: 500;
+}
+
+:global(html[data-theme="light"]) .calIcon,
+:global(html:not([data-theme])) .calIcon {
+  background: #dceaf8;
+  color: #1d4ed8;
 }
 :global(html[data-theme="light"]) .titleRow h1,
 :global(html:not([data-theme])) .titleRow h1,
@@ -1219,7 +1259,7 @@
 
 :global(html[data-theme="light"]) .bar,
 :global(html:not([data-theme])) .bar {
-  background: #e2e8f0;
+  background: #dceaf8;
 }
 
 :global(html[data-theme="light"]) .freshCard,

@@ -30,3 +30,46 @@
 :global(html:not([data-theme])) .hero a {
   color: #2563eb !important;
 }
+
+/* Light: form tip + H2H flat light blue */
+:global(html[data-theme="light"]) .formTipWrap,
+:global(html:not([data-theme])) .formTipWrap,
+:global(html[data-theme="light"]) .h2h,
+:global(html:not([data-theme])) .h2h {
+  background: #e8f1fb !important;
+  border-color: #c5d9ef !important;
+  color: #0b1f3a;
+  box-shadow: none;
+}
+:global(html[data-theme="light"]) .h2h h2,
+:global(html:not([data-theme])) .h2h h2 {
+  color: #0b1f3a !important;
+  font-weight: 700;
+}
+:global(html[data-theme="light"]) .h2h li,
+:global(html:not([data-theme])) .h2h li {
+  color: #334155 !important;
+  font-weight: 400;
+}
+:global(html[data-theme="light"]) .h2h strong,
+:global(html:not([data-theme])) .h2h strong {
+  color: #0b1f3a !important;
+  font-weight: 700;
+}
+:global(html[data-theme="light"]) .formTipWrap,
+:global(html:not([data-theme])) .formTipWrap {
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+:global(html[data-theme="light"]) .formTipWrap :global(p),
+:global(html:not([data-theme])) .formTipWrap :global(p),
+:global(html[data-theme="light"]) .formTipWrap,
+:global(html:not([data-theme])) .formTipWrap {
+  color: #0b1f3a !important;
+}
+:global(html[data-theme="light"]) .overview span,
+:global(html:not([data-theme])) .overview span,
+:global(html[data-theme="light"]) .overview small,
+:global(html:not([data-theme])) .overview small {
+  color: #334155 !important;
+  font-weight: 500;
+}

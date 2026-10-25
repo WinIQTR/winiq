@@ -1,6 +1,6 @@
-.workspace { display: grid; gap: 16px; min-width: 0; }
+﻿.workspace { display: grid; gap: 16px; min-width: 0; }
 .hero { display: grid; grid-template-columns: minmax(0, 1fr) 330px; gap: 24px; align-items: center; overflow: hidden; border: 1px solid #29486d; border-radius: 22px; padding: 28px; background: radial-gradient(circle at 88% 8%, rgb(37 99 235 / 24%), transparent 34%), linear-gradient(145deg, #11233e, #081423 72%); box-shadow: 0 24px 60px rgb(2 8 23 / 24%); }
-.hero p { margin: 0 0 7px; color: #60a5fa; font-size: .82rem; font-weight: 900; letter-spacing: .13em; }
+.hero p { margin: 0 0 7px; color: #60a5fa; font-size: .82rem; font-weight: 700; letter-spacing: .13em; }
 .hero h1 { margin: 0; color: #f8fafc; font-size: clamp(2.2rem, 4.6vw, 4.4rem); line-height: .98; letter-spacing: -.05em; }
 .hero > div > span { display: block; max-width: 830px; margin-top: 14px; color: #a9bbd1; font-size: 1rem; line-height: 1.65; }
 .heroStats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; border: 1px solid rgb(52 211 153 / 24%); border-radius: 17px; padding: 14px; background: rgb(4 22 31 / 68%); }
@@ -10,11 +10,11 @@
 .heroStats small { grid-column: 1 / -1; color: #8197b2; font-size: .75rem; }
 .disclaimer { border: 1px solid rgb(251 191 36 / 28%); border-radius: 11px; padding: 13px 15px; background: rgb(120 53 15 / 10%); color: #c6b790; font-size: .84rem; line-height: 1.55; }
 .disclaimer strong { color: #fbbf24; }
-.diagnostics{border:1px solid #2a425f;border-radius:13px;padding:13px 15px;background:#091727}.diagnostics summary{color:#93c5fd;font-size:.82rem;font-weight:850;cursor:pointer}.diagnostics>div{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:7px;margin-top:10px}.diagnostics span{display:flex;justify-content:space-between;gap:8px;border:1px solid #203650;border-radius:8px;padding:10px;color:#91a7c1;font-size:.75rem}.diagnostics strong{color:#dbeafe}.diagnostics p{margin:9px 0 0;color:#8197b0;font-size:.75rem}.legWarnings{display:flex;flex-wrap:wrap;gap:4px}.legWarnings i{border:1px solid rgb(239 68 68/38%);border-radius:999px;padding:4px 6px;background:rgb(127 29 29/25%);color:#fca5a5;font-size:.7rem;font-style:normal}
+.diagnostics{border:1px solid #2a425f;border-radius:13px;padding:13px 15px;background:#091727}.diagnostics summary{color:#93c5fd;font-size:.82rem;font-weight: 700;cursor:pointer}.diagnostics>div{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:7px;margin-top:10px}.diagnostics span{display:flex;justify-content:space-between;gap:8px;border:1px solid #203650;border-radius:8px;padding:10px;color:#91a7c1;font-size:.75rem}.diagnostics strong{color:#dbeafe}.diagnostics p{margin:9px 0 0;color:#8197b0;font-size:.75rem}.legWarnings{display:flex;flex-wrap:wrap;gap:4px}.legWarnings i{border:1px solid rgb(239 68 68/38%);border-radius:999px;padding:4px 6px;background:rgb(127 29 29/25%);color:#fca5a5;font-size:.7rem;font-style:normal}
 .filters { display: grid; grid-template-columns: minmax(240px, .55fr) minmax(520px, 1.45fr); gap: 10px; border: 1px solid #253c5a; border-radius: 15px; padding: 12px; background: #0b182a; }
 .filters > div { display: flex; align-items: center; gap: 7px; }
-.filters span { margin-right: 4px; color: #8299b5; font-size: .75rem; font-weight: 900; letter-spacing: .07em; }
-.filters button { flex: 1; min-height: 44px; border: 1px solid #29425f; border-radius: 9px; padding: 10px 12px; background: #0b1a2d; color: #aec0d5; font: inherit; font-size: .82rem; font-weight: 800; cursor: pointer; white-space: nowrap; }
+.filters span { margin-right: 4px; color: #8299b5; font-size: .75rem; font-weight: 700; letter-spacing: .07em; }
+.filters button { flex: 1; min-height: 44px; border: 1px solid #29425f; border-radius: 9px; padding: 10px 12px; background: #0b1a2d; color: #aec0d5; font: inherit; font-size: .82rem; font-weight: 700; cursor: pointer; white-space: nowrap; }
 .filters .active { border-color: #3b82f6; background: #173b6a; color: #dbeafe; }
 .filters .activeSafe { border-color: #10b981; background: rgb(6 78 59 / 36%); color: #6ee7b7; }
 .filters .activeBalanced { border-color: #f59e0b; background: rgb(120 53 15 / 30%); color: #fcd34d; }
@@ -27,7 +27,7 @@
 .couponSURPRISE { border-color: rgb(239 68 68 / 42%); }
 .couponWEAK { border-color: rgb(239 68 68 / 72%); background: linear-gradient(145deg, rgb(63 19 28 / 50%), #081523); }
 .coupon > header { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 16px 18px; border-bottom: 1px solid #233852; }
-.coupon > header span { color: #82a0c3; font-size: .76rem; font-weight: 900; letter-spacing: .07em; }
+.coupon > header span { color: #82a0c3; font-size: .76rem; font-weight: 700; letter-spacing: .07em; }
 .coupon > header h2 { margin: 5px 0 0; color: #eff6ff; font-size: 1.22rem; }
 .weakBadge { display: inline-block; margin-top: 7px; border: 1px solid rgb(248 113 113 / 52%); border-radius: 999px; padding: 4px 7px; background: rgb(127 29 29 / 35%); color: #fca5a5; font-size: .55rem; letter-spacing: .07em; }
 .fallbackBadge { display: inline-block; margin-top: 7px; border: 1px solid rgb(245 158 11 / 52%); border-radius: 999px; padding: 4px 7px; background: rgb(120 53 15 / 30%); color: #fcd34d; font-size: .58rem; letter-spacing: .07em; }
@@ -49,7 +49,7 @@
 .legs .legBasic { grid-template-columns: 34px minmax(210px, 1.4fr) minmax(190px, 1fr) 62px; }
 .legs .legAnalysis { grid-template-columns: 34px minmax(210px, 1.3fr) minmax(190px, 1fr) 76px 62px; }
 .legs .legProfessional { grid-template-columns: 34px minmax(210px, 1.25fr) minmax(190px, 1fr) 76px minmax(150px, .8fr) 62px; }
-.legNumber { color: #6c8caf; font-size: .8rem; font-weight: 900; }
+.legNumber { color: #6c8caf; font-size: .8rem; font-weight: 700; }
 .match,.pick,.model,.pro,.odds { display: grid; min-width: 0; gap: 3px; }
 .match small,.pick small,.model small,.pro small,.odds small { color: #8297b2; font-size: .74rem; }
 .match strong,.pick strong,.model strong,.pro strong,.odds strong { overflow: hidden; color: #e5eef9; font-size: .88rem; line-height: 1.4; text-overflow: ellipsis; white-space: nowrap; }
@@ -58,10 +58,10 @@
 .odds { text-align: right; }
 .odds strong { color: #6ee7b7; font-size: .9rem; }
 .locked,.empty { display: grid; justify-items: start; gap: 7px; border: 1px solid #2a415f; border-radius: 17px; padding: 24px; background: linear-gradient(145deg, #101d31, #091524); }
-.locked > span,.empty > span { color: #60a5fa; font-size: .62rem; font-weight: 900; letter-spacing: .1em; }
+.locked > span,.empty > span { color: #60a5fa; font-size: .62rem; font-weight: 700; letter-spacing: .1em; }
 .locked h2,.empty h2 { margin: 0; color: #eef5ff; font-size: 1.15rem; }
 .locked p,.empty p { margin: 0; color: #8ea2ba; font-size: .76rem; }
-.locked a { margin-top: 5px; border-radius: 9px; padding: 9px 12px; background: #1d4ed8; color: white; font-size: .7rem; font-weight: 800; text-decoration: none; }
+.locked a { margin-top: 5px; border-radius: 9px; padding: 9px 12px; background: #1d4ed8; color: white; font-size: .7rem; font-weight: 700; text-decoration: none; }
 .empty small { color: #fbbf24; font-size: .64rem; }
 @media (max-width: 1120px) { .hero { grid-template-columns: 1fr; } .filters { grid-template-columns: 1fr; } .summaryGrid { grid-template-columns: repeat(3, 1fr); } .diagnostics>div{grid-template-columns:repeat(3,1fr)} .legs { overflow-x: auto; } .legs .legBasic { min-width: 720px; } .legs .legAnalysis { min-width: 830px; } .legs .legProfessional { min-width: 950px; } }
 @media (max-width: 680px) {
@@ -83,4 +83,184 @@
   .legNumber { grid-column: 1; grid-row: 1 / span 5; padding-top: 2px; }
   .match,.pick,.model,.pro,.odds { grid-column: 2; text-align: left; }
   .match strong,.pick strong,.model strong,.pro strong,.odds strong { white-space: normal; }
+}
+
+/* Light theme: flat light-blue coupon center */
+:global(html[data-theme="light"]) .workspace,
+:global(html:not([data-theme])) .workspace {
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  color: #0b1f3a;
+}
+:global(html[data-theme="light"]) .hero,
+:global(html:not([data-theme])) .hero,
+:global(html[data-theme="light"]) .filters,
+:global(html:not([data-theme])) .filters,
+:global(html[data-theme="light"]) .diagnostics,
+:global(html:not([data-theme])) .diagnostics,
+:global(html[data-theme="light"]) .coupon,
+:global(html:not([data-theme])) .coupon,
+:global(html[data-theme="light"]) .locked,
+:global(html:not([data-theme])) .locked,
+:global(html[data-theme="light"]) .empty,
+:global(html:not([data-theme])) .empty {
+  background: #e8f1fb !important;
+  border-color: #c5d9ef !important;
+  box-shadow: none !important;
+  color: #0b1f3a;
+}
+:global(html[data-theme="light"]) .hero p,
+:global(html:not([data-theme])) .hero p {
+  color: #1d4ed8 !important;
+  font-weight: 700;
+}
+:global(html[data-theme="light"]) .hero h1,
+:global(html:not([data-theme])) .hero h1,
+:global(html[data-theme="light"]) .coupon > header h2,
+:global(html:not([data-theme])) .coupon > header h2,
+:global(html[data-theme="light"]) .locked h2,
+:global(html:not([data-theme])) .locked h2,
+:global(html[data-theme="light"]) .empty h2,
+:global(html:not([data-theme])) .empty h2 {
+  color: #0b1f3a !important;
+  font-weight: 700;
+}
+:global(html[data-theme="light"]) .hero > div > span,
+:global(html:not([data-theme])) .hero > div > span,
+:global(html[data-theme="light"]) .filters span,
+:global(html:not([data-theme])) .filters span,
+:global(html[data-theme="light"]) .heroStats span,
+:global(html:not([data-theme])) .heroStats span,
+:global(html[data-theme="light"]) .heroStats small,
+:global(html:not([data-theme])) .heroStats small,
+:global(html[data-theme="light"]) .summaryGrid span,
+:global(html:not([data-theme])) .summaryGrid span,
+:global(html[data-theme="light"]) .coupon > header span,
+:global(html:not([data-theme])) .coupon > header span,
+:global(html[data-theme="light"]) .match small,
+:global(html:not([data-theme])) .match small,
+:global(html[data-theme="light"]) .pick small,
+:global(html:not([data-theme])) .pick small,
+:global(html[data-theme="light"]) .model small,
+:global(html:not([data-theme])) .model small,
+:global(html[data-theme="light"]) .pro small,
+:global(html:not([data-theme])) .pro small,
+:global(html[data-theme="light"]) .odds small,
+:global(html:not([data-theme])) .odds small,
+:global(html[data-theme="light"]) .diagnostics p,
+:global(html:not([data-theme])) .diagnostics p,
+:global(html[data-theme="light"]) .locked p,
+:global(html:not([data-theme])) .locked p,
+:global(html[data-theme="light"]) .empty p,
+:global(html:not([data-theme])) .empty p {
+  color: #334155 !important;
+  font-weight: 400;
+}
+:global(html[data-theme="light"]) .heroStats,
+:global(html:not([data-theme])) .heroStats,
+:global(html[data-theme="light"]) .heroStats article,
+:global(html:not([data-theme])) .heroStats article,
+:global(html[data-theme="light"]) .summaryGrid > div,
+:global(html:not([data-theme])) .summaryGrid > div,
+:global(html[data-theme="light"]) .totalOdds,
+:global(html:not([data-theme])) .totalOdds,
+:global(html[data-theme="light"]) .legs article,
+:global(html:not([data-theme])) .legs article,
+:global(html[data-theme="light"]) .diagnostics span,
+:global(html:not([data-theme])) .diagnostics span,
+:global(html[data-theme="light"]) .filters button,
+:global(html:not([data-theme])) .filters button {
+  background: #dceaf8 !important;
+  border-color: #b8d0ea !important;
+  color: #0b1f3a !important;
+}
+:global(html[data-theme="light"]) .heroStats strong,
+:global(html:not([data-theme])) .heroStats strong {
+  color: #047857 !important;
+  font-weight: 700;
+}
+:global(html[data-theme="light"]) .filters .active,
+:global(html:not([data-theme])) .filters .active {
+  background: #2563eb !important;
+  border-color: #2563eb !important;
+  color: #ffffff !important;
+}
+:global(html[data-theme="light"]) .filters .activeSafe,
+:global(html:not([data-theme])) .filters .activeSafe {
+  background: #d1fae5 !important;
+  border-color: #34d399 !important;
+  color: #065f46 !important;
+}
+:global(html[data-theme="light"]) .filters .activeBalanced,
+:global(html:not([data-theme])) .filters .activeBalanced {
+  background: #fef3c7 !important;
+  border-color: #f59e0b !important;
+  color: #92400e !important;
+}
+:global(html[data-theme="light"]) .filters .activeSurprise,
+:global(html:not([data-theme])) .filters .activeSurprise,
+:global(html[data-theme="light"]) .filters .activeWeak,
+:global(html:not([data-theme])) .filters .activeWeak {
+  background: #fee2e2 !important;
+  border-color: #f87171 !important;
+  color: #991b1b !important;
+}
+:global(html[data-theme="light"]) .coupon > header,
+:global(html:not([data-theme])) .coupon > header,
+:global(html[data-theme="light"]) .legs,
+:global(html:not([data-theme])) .legs {
+  border-color: #c5d9ef !important;
+  background: transparent;
+}
+:global(html[data-theme="light"]) .summaryGrid strong,
+:global(html:not([data-theme])) .summaryGrid strong,
+:global(html[data-theme="light"]) .totalOdds strong,
+:global(html:not([data-theme])) .totalOdds strong,
+:global(html[data-theme="light"]) .match strong,
+:global(html:not([data-theme])) .match strong,
+:global(html[data-theme="light"]) .model strong,
+:global(html:not([data-theme])) .model strong,
+:global(html[data-theme="light"]) .pro strong,
+:global(html:not([data-theme])) .pro strong,
+:global(html[data-theme="light"]) .diagnostics strong,
+:global(html:not([data-theme])) .diagnostics strong {
+  color: #0b1f3a !important;
+  font-weight: 700;
+}
+:global(html[data-theme="light"]) .pick strong,
+:global(html:not([data-theme])) .pick strong {
+  color: #1d4ed8 !important;
+}
+:global(html[data-theme="light"]) .odds strong,
+:global(html:not([data-theme])) .odds strong {
+  color: #047857 !important;
+}
+:global(html[data-theme="light"]) .explanation,
+:global(html:not([data-theme])) .explanation {
+  background: #dceaf8;
+  border-left-color: #2563eb;
+}
+:global(html[data-theme="light"]) .explanation strong,
+:global(html:not([data-theme])) .explanation strong {
+  color: #1d4ed8 !important;
+  font-weight: 700;
+}
+:global(html[data-theme="light"]) .explanation p,
+:global(html:not([data-theme])) .explanation p {
+  color: #0b1f3a !important;
+}
+:global(html[data-theme="light"]) .disclaimer,
+:global(html:not([data-theme])) .disclaimer {
+  background: #fef3c7;
+  border-color: #f59e0b;
+  color: #78350f !important;
+}
+:global(html[data-theme="light"]) .disclaimer strong,
+:global(html:not([data-theme])) .disclaimer strong {
+  color: #92400e !important;
+  font-weight: 700;
+}
+:global(html[data-theme="light"]) .diagnostics summary,
+:global(html:not([data-theme])) .diagnostics summary {
+  color: #1d4ed8 !important;
+  font-weight: 700;
 }

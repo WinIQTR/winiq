@@ -1,4 +1,4 @@
-.smartNavigation {
+﻿.smartNavigation {
   display: grid;
   gap: 8px;
   margin-bottom: 12px;
@@ -81,7 +81,7 @@
   background: rgb(60 91 138 / 20%);
   color: #7896c2;
   font-size: 9px;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .viewButtonActive {
@@ -132,7 +132,7 @@
 .resultsSummary > div > span {
   color: #6f8caf;
   font-size: 7px;
-  font-weight: 900;
+  font-weight: 700;
   letter-spacing: 0.08em;
 }
 
@@ -174,7 +174,7 @@
   background: transparent;
   color: #7e96b7;
   font-size: 8px;
-  font-weight: 850;
+  font-weight: 700;
   cursor: pointer;
 }
 
@@ -207,7 +207,7 @@
 .leagueSelect > span {
   color: #6f8caf;
   font-size: 8px;
-  font-weight: 900;
+  font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -244,7 +244,7 @@
   background: rgb(20 37 61 / 72%);
   color: #a7bad4;
   font-size: 10px;
-  font-weight: 800;
+  font-weight: 700;
   white-space: nowrap;
   cursor: pointer;
 }
@@ -285,7 +285,7 @@
   border-radius: 999px;
   padding: 5px 7px;
   font-size: 8px;
-  font-weight: 900;
+  font-weight: 700;
   letter-spacing: 0.06em;
 }
 
@@ -382,7 +382,7 @@
 .fixtureMeta span {
   color: #7696c1;
   font-size: 10px;
-  font-weight: 800;
+  font-weight: 700;
   text-transform: uppercase;
 }
 
@@ -433,7 +433,7 @@
 .fixtureTeams > span {
   color: #5e769b;
   font-size: 10px;
-  font-weight: 900;
+  font-weight: 700;
   text-transform: uppercase;
 }
 
@@ -479,7 +479,7 @@
   border-radius: 999px;
   padding: 5px 8px;
   font-size: 8px;
-  font-weight: 900;
+  font-weight: 700;
   letter-spacing: 0.06em;
   white-space: nowrap;
 }
@@ -741,7 +741,7 @@
   padding: 8px 9px;
   color: #a9bce0;
   font-size: 10px;
-  font-weight: 800;
+  font-weight: 700;
   cursor: pointer;
   user-select: none;
 }
@@ -778,7 +778,7 @@
   background: rgb(6 32 31 / 48%);
 }
 
-/* V9.3.1: Eski sağ-sütun panelleri yerine tek tam-genişlik panel kullanılır. */
+/* V9.3.1: Eski saÄŸ-sÃ¼tun panelleri yerine tek tam-geniÅŸlik panel kullanÄ±lÄ±r. */
 .publishedBetDetails,
 .advisoryBetDetails,
 .marketCatalogOnlyDetails {
@@ -794,7 +794,7 @@
   padding: 9px 11px;
   color: #78efba;
   font-size: 10px;
-  font-weight: 850;
+  font-weight: 700;
   cursor: pointer;
   list-style: none;
 }
@@ -806,7 +806,7 @@
 .publishedBetDetails > summary::after {
   color: #34d399;
   font-size: 14px;
-  content: "⌄";
+  content: "âŒ„";
   transition: transform 0.18s ease;
 }
 
@@ -888,14 +888,14 @@
 .publishedBetCard > div:first-child span {
   color: #3d8668;
   font-size: 8px;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .publishedBetCard small {
   overflow: hidden;
   color: #86d7b3;
   font-size: 8px;
-  font-weight: 800;
+  font-weight: 700;
   text-overflow: ellipsis;
   text-transform: uppercase;
   white-space: nowrap;
@@ -916,7 +916,7 @@
   border: 1px solid rgb(52 211 153 / 48%);
   background: rgb(5 55 43 / 82%);
   color: #b9f8da;
-  font-weight: 800;
+  font-weight: 700;
 }
 .publishedBetNumbers span:nth-child(2) b { font-size: 11px; }
 
@@ -948,7 +948,7 @@
   padding: 9px 11px;
   color: #ffd479;
   font-size: 10px;
-  font-weight: 850;
+  font-weight: 700;
   cursor: pointer;
   list-style: none;
 }
@@ -960,7 +960,7 @@
 .advisoryBetDetails > summary::after {
   color: #fbbf24;
   font-size: 14px;
-  content: "⌄";
+  content: "âŒ„";
   transition: transform 0.18s ease;
 }
 
@@ -1036,14 +1036,14 @@
 .advisoryBetCard > div:first-child span {
   color: #775a27;
   font-size: 8px;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .advisoryBetCard small {
   overflow: hidden;
   color: #c9a85f;
   font-size: 8px;
-  font-weight: 800;
+  font-weight: 700;
   text-overflow: ellipsis;
   text-transform: uppercase;
   white-space: nowrap;
@@ -1064,7 +1064,7 @@
   border: 1px solid rgb(245 158 11 / 50%);
   background: rgb(71 48 9 / 70%);
   color: #ffe0a0;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .advisoryBetNumbers span {
@@ -1128,7 +1128,7 @@
 .marketCatalogHeader > div:first-child > span {
   color: #60a5fa;
   font-size: 12px;
-  font-weight: 900;
+  font-weight: 700;
   letter-spacing: 0.12em;
 }
 
@@ -1243,7 +1243,7 @@
   grid-row: 1;
   justify-self: end;
   color: currentcolor;
-  content: "⌄";
+  content: "âŒ„";
   font-size: 13px;
 }
 
@@ -1260,7 +1260,7 @@
   background: rgb(30 64 175 / 12%);
   color: #526b8e;
   font-size: 12px;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .marketTitle {
@@ -1274,14 +1274,14 @@
 .marketScore small {
   color: #526b8e;
   font-size: 11px;
-  font-weight: 900;
+  font-weight: 700;
   letter-spacing: 0.07em;
 }
 
 .marketTitle b {
   color: #c8d7ea;
   font-size: 14px;
-  font-weight: 850;
+  font-weight: 700;
   line-height: 1.3;
 }
 
@@ -1303,7 +1303,7 @@
   border-radius: 999px;
   padding: 6px 9px;
   font-size: 12px;
-  font-weight: 900;
+  font-weight: 700;
   white-space: nowrap;
 }
 
@@ -1389,7 +1389,7 @@
   background: rgb(30 64 175 / 12%);
   color: #8db8f2;
   font-size: 11px;
-  font-weight: 900;
+  font-weight: 700;
   letter-spacing: .04em;
 }
 
@@ -1417,7 +1417,7 @@
   background: #2563eb;
   color: white;
   font-size: 13px;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .marketUnavailableLabel {
@@ -1570,7 +1570,7 @@
   padding: 8px 10px;
   color: #9fb2ce;
   font-size: 9px;
-  font-weight: 850;
+  font-weight: 700;
   cursor: pointer;
   list-style: none;
 }
@@ -1597,7 +1597,7 @@
   padding: 7px 10px;
   color: #93c5fd;
   font-size: 9px;
-  font-weight: 850;
+  font-weight: 700;
   cursor: pointer;
   list-style: none;
 }
@@ -1608,7 +1608,7 @@
 
 .fullWidthMarketDetails > summary::after {
   color: #60a5fa;
-  content: "⌄";
+  content: "âŒ„";
   font-size: 12px;
   transition: transform 160ms ease;
 }
@@ -1813,7 +1813,7 @@
   }
 }
 
-/* Approved smart fixture system — Predictions, All Matches and Results. */
+/* Approved smart fixture system â€” Predictions, All Matches and Results. */
 .smartNavigation {
   margin-bottom: 0;
   border: 1px solid rgb(55 91 140 / 58%);
@@ -1942,14 +1942,14 @@
 .filteredReason::before {
   color: #50e6ad;
   font-size: 9px;
-  font-weight: 900;
+  font-weight: 700;
   letter-spacing: .08em;
-  content: "★  EN İYİ ÖNERİ";
+  content: "â˜…  EN Ä°YÄ° Ã–NERÄ°";
 }
 
 .fixtureCardAdvisory .filteredReason::before {
   color: #ffd15b;
-  content: "★  MODEL DEĞERLENDİRMESİ";
+  content: "â˜…  MODEL DEÄžERLENDÄ°RMESÄ°";
 }
 
 .publishedReason > strong {
@@ -2067,7 +2067,7 @@
 .dateStatus {
   color: #7f98ff;
   font-size: 8px;
-  font-weight: 900;
+  font-weight: 700;
   letter-spacing: 0.12em;
 }
 
@@ -2076,7 +2076,7 @@
   overflow: hidden;
   color: #f8fafc;
   font-size: 14px;
-  font-weight: 850;
+  font-weight: 700;
   line-height: 1.2;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -2085,7 +2085,7 @@
 .timeZone {
   color: #94a3b8;
   font-size: 9px;
-  font-weight: 650;
+  font-weight: 500;
 }
 
 .calendarIcon {
@@ -2125,7 +2125,7 @@
   background: linear-gradient(135deg, #182747, #111c35);
   color: #9db0ff;
   font-size: 12px;
-  font-weight: 850;
+  font-weight: 700;
   white-space: nowrap;
   cursor: pointer;
   transition: background 160ms ease, border-color 160ms ease;
@@ -2170,7 +2170,7 @@
   }
 }
 
-/* V9.6.7 — calmer, decision-first betting market catalogue */
+/* V9.6.7 â€” calmer, decision-first betting market catalogue */
 .marketCatalog {
   gap: 16px;
   padding: 22px;
@@ -2340,7 +2340,7 @@
   background: rgb(50 101 172 / 18%);
   color: #9fc6ff;
   font-size: 11px;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .marketBestOpportunities article > div {
@@ -2373,7 +2373,7 @@
   margin-top: 3px;
   color: #8aa4c2 !important;
   font-size: 9px !important;
-  font-weight: 650;
+  font-weight: 500;
 }
 
 .marketOpportunityMeter,
@@ -2424,7 +2424,7 @@
   background: rgb(250 204 21 / 11%);
   color: #fde68a;
   font-size: 9px;
-  font-weight: 850;
+  font-weight: 700;
   letter-spacing: .035em;
   line-height: 1;
 }
@@ -2456,7 +2456,7 @@
   overflow: hidden;
   color: #7898bd;
   font-size: 12px;
-  font-weight: 650;
+  font-weight: 500;
   line-height: 1.2;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -2467,7 +2467,7 @@
   word-break: normal;
   color: #f0f6ff;
   font-size: 14px;
-  font-weight: 760;
+  font-weight: 700;
   line-height: 1.25;
 }
 
@@ -2593,4 +2593,131 @@
   .marketOptionGrid {
     grid-template-columns: 1fr;
   }
+}
+
+/* Light theme: TÃ¼m Bahis PazarlarÄ± â€” flat light blue shell */
+:global(html[data-theme="light"]) .marketCatalog,
+:global(html:not([data-theme])) .marketCatalog {
+  background: #e8f1fb !important;
+  border-color: #c5d9ef !important;
+  box-shadow: none !important;
+  color: #0b1f3a;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+:global(html[data-theme="light"]) .marketCatalogHeader > div:first-child > span,
+:global(html:not([data-theme])) .marketCatalogHeader > div:first-child > span {
+  color: #1d4ed8 !important;
+  font-weight: 700;
+}
+:global(html[data-theme="light"]) .marketCatalogHeader > div:first-child > strong,
+:global(html:not([data-theme])) .marketCatalogHeader > div:first-child > strong {
+  color: #0b1f3a !important;
+  font-weight: 700;
+}
+:global(html[data-theme="light"]) .marketCatalogHeader small,
+:global(html:not([data-theme])) .marketCatalogHeader small {
+  color: #334155 !important;
+  font-weight: 400;
+}
+:global(html[data-theme="light"]) .marketCatalogStats,
+:global(html:not([data-theme])) .marketCatalogStats,
+:global(html[data-theme="light"]) .marketBestOpportunities,
+:global(html:not([data-theme])) .marketBestOpportunities,
+:global(html[data-theme="light"]) .marketBestOpportunities article,
+:global(html:not([data-theme])) .marketBestOpportunities article,
+:global(html[data-theme="light"]) .marketGroup,
+:global(html:not([data-theme])) .marketGroup,
+:global(html[data-theme="light"]) .marketGroup:hover,
+:global(html:not([data-theme])) .marketGroup:hover,
+:global(html[data-theme="light"]) .marketGroup[open],
+:global(html:not([data-theme])) .marketGroup[open],
+:global(html[data-theme="light"]) .marketTierFilter,
+:global(html:not([data-theme])) .marketTierFilter {
+  background: #dceaf8 !important;
+  border-color: #b8d0ea !important;
+  color: #0b1f3a !important;
+  box-shadow: none !important;
+}
+:global(html[data-theme="light"]) .marketCatalogStats span,
+:global(html:not([data-theme])) .marketCatalogStats span {
+  border-left-color: #b8d0ea !important;
+  color: #334155 !important;
+}
+:global(html[data-theme="light"]) .marketCatalogStats b,
+:global(html:not([data-theme])) .marketCatalogStats b,
+:global(html[data-theme="light"]) .marketBestOpportunities header strong,
+:global(html:not([data-theme])) .marketBestOpportunities header strong,
+:global(html[data-theme="light"]) .marketBestOpportunities article strong,
+:global(html:not([data-theme])) .marketBestOpportunities article strong,
+:global(html[data-theme="light"]) .marketIdentity strong,
+:global(html:not([data-theme])) .marketIdentity strong {
+  color: #0b1f3a !important;
+  font-weight: 700;
+}
+:global(html[data-theme="light"]) .marketStatStrong b,
+:global(html:not([data-theme])) .marketStatStrong b { color: #047857 !important; }
+:global(html[data-theme="light"]) .marketStatMedium b,
+:global(html:not([data-theme])) .marketStatMedium b { color: #b45309 !important; }
+:global(html[data-theme="light"]) .marketStatWeak b,
+:global(html:not([data-theme])) .marketStatWeak b { color: #b91c1c !important; }
+:global(html[data-theme="light"]) .marketTierFilterActive,
+:global(html:not([data-theme])) .marketTierFilterActive {
+  background: #2563eb !important;
+  border-color: #2563eb !important;
+  color: #ffffff !important;
+  box-shadow: none !important;
+}
+:global(html[data-theme="light"]) .marketBestOpportunities header small,
+:global(html:not([data-theme])) .marketBestOpportunities header small,
+:global(html[data-theme="light"]) .marketIdentity small,
+:global(html:not([data-theme])) .marketIdentity small,
+:global(html[data-theme="light"]) .marketOpportunityOdds,
+:global(html:not([data-theme])) .marketOpportunityOdds,
+:global(html[data-theme="light"]) .marketBestOpportunities article > b small,
+:global(html:not([data-theme])) .marketBestOpportunities article > b small {
+  color: #334155 !important;
+  font-weight: 400;
+}
+:global(html[data-theme="light"]) .marketBestOpportunities article > b,
+:global(html:not([data-theme])) .marketBestOpportunities article > b,
+:global(html[data-theme="light"]) .marketScore,
+:global(html:not([data-theme])) .marketScore {
+  color: #0b1f3a !important;
+  font-weight: 700;
+}
+:global(html[data-theme="light"]) .marketNumber,
+:global(html:not([data-theme])) .marketNumber,
+:global(html[data-theme="light"]) .marketBestOpportunities article > span,
+:global(html:not([data-theme])) .marketBestOpportunities article > span {
+  background: #c5d9ef !important;
+  color: #0b1f3a !important;
+  font-weight: 700;
+}
+:global(html[data-theme="light"]) .marketOpportunityMeter,
+:global(html:not([data-theme])) .marketOpportunityMeter,
+:global(html[data-theme="light"]) .marketScoreMeter,
+:global(html:not([data-theme])) .marketScoreMeter {
+  background: #c5d9ef !important;
+}
+:global(html[data-theme="light"]) .marketGroupStrong,
+:global(html:not([data-theme])) .marketGroupStrong,
+:global(html[data-theme="light"]) .marketGroupMedium,
+:global(html:not([data-theme])) .marketGroupMedium,
+:global(html[data-theme="light"]) .marketGroupWeak,
+:global(html:not([data-theme])) .marketGroupWeak,
+:global(html[data-theme="light"]) .marketGroupUnavailable,
+:global(html:not([data-theme])) .marketGroupUnavailable {
+  background: #dceaf8 !important;
+  border-color: #b8d0ea !important;
+}
+:global(html[data-theme="light"]) .marketHighestOddsCard,
+:global(html:not([data-theme])) .marketHighestOddsCard {
+  background: #fef9c3 !important;
+  border-color: #facc15 !important;
+  box-shadow: none !important;
+}
+:global(html[data-theme="light"]) .marketTier,
+:global(html:not([data-theme])) .marketTier {
+  color: #0b1f3a !important;
+  font-weight: 500;
 }

@@ -111,3 +111,19 @@
 :global(html:not([data-theme])) .empty {
   color: #475569;
 }
+
+/* Light: 1/X/2 bars — light-blue track + navy labels */
+:global(html[data-theme="light"]) .probabilities span,
+:global(html:not([data-theme])) .probabilities span {
+  color: #0b1f3a !important;
+  font-weight: 500;
+}
+:global(html[data-theme="light"]) .probabilities b,
+:global(html:not([data-theme])) .probabilities b {
+  color: #0b1f3a !important;
+  font-weight: 700;
+}
+:global(html[data-theme="light"]) .probabilities span:after,
+:global(html:not([data-theme])) .probabilities span:after {
+  background: #dceaf8 !important;
+}

@@ -7,6 +7,8 @@
   color: #c5d4e8;
   font-size: 12.5px;
   line-height: 1.45;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  font-weight: 400;
 }
 
 .tip svg {
@@ -17,4 +19,15 @@
 
 .tip span {
   min-width: 0;
+}
+
+:global(html[data-theme="light"]) .tip,
+:global(html:not([data-theme])) .tip {
+  color: #0b1f3a;
+  font-weight: 500;
+}
+
+:global(html[data-theme="light"]) .tip svg,
+:global(html:not([data-theme])) .tip svg {
+  color: #1d4ed8;
 }
