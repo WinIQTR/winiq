@@ -1049,26 +1049,21 @@
   color: #0b1f3a !important;
   box-shadow: none !important;
 }
+/* Soft blue wash only for header/metric shells — NOT match cells or league cards */
 :global(html[data-theme="light"]) .header,
 :global(html:not([data-theme])) .header,
-:global(html[data-theme="light"]) .primary,
-:global(html:not([data-theme])) .primary,
-:global(html[data-theme="light"]) .alternative,
-:global(html:not([data-theme])) .alternative,
-:global(html[data-theme="light"]) .leagueCard,
-:global(html:not([data-theme])) .leagueCard,
-:global(html[data-theme="light"]) .healthBadge,
-:global(html:not([data-theme])) .healthBadge,
 :global(html[data-theme="light"]) .sampleNotice,
 :global(html:not([data-theme])) .sampleNotice,
 :global(html[data-theme="light"]) .learningNotice,
-:global(html:not([data-theme])) .learningNotice,
-:global(html[data-theme="light"]) .metric,
-:global(html:not([data-theme])) .metric,
-:global(html[data-theme="light"]) .match,
-:global(html:not([data-theme])) .match {
+:global(html:not([data-theme])) .learningNotice {
   background: #e8f1fb !important;
   border-color: #c5d9ef !important;
+}
+:global(html[data-theme="light"]) .match,
+:global(html:not([data-theme])) .match {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
 }
 :global(html[data-theme="light"]) .eyebrow,
 :global(html:not([data-theme])) .eyebrow,
@@ -1315,7 +1310,6 @@
   min-width: 88px;
 }
 .probCell strong {
-  color: #0b1f3a;
   font-size: 0.9rem;
 }
 .probBar {
@@ -1323,7 +1317,7 @@
   height: 6px;
   overflow: hidden;
   border-radius: 999px;
-  background: #dceaf8;
+  background: #1e293b;
 }
 .probBar i {
   display: block;
@@ -1340,10 +1334,23 @@
   width: fit-content;
   padding: 2px 8px;
   border-radius: 999px;
-  background: #d1fae5;
-  color: #047857;
+  background: #0d2b1d;
+  color: #4ade80;
   font-size: 0.62rem;
   font-weight: 700;
+}
+:global(html[data-theme="light"]) .probCell strong,
+:global(html:not([data-theme])) .probCell strong {
+  color: #0b1f3a !important;
+}
+:global(html[data-theme="light"]) .probBar,
+:global(html:not([data-theme])) .probBar {
+  background: #dceaf8 !important;
+}
+:global(html[data-theme="light"]) .edgePill,
+:global(html:not([data-theme])) .edgePill {
+  background: #d1fae5 !important;
+  color: #047857 !important;
 }
 :global(html[data-theme="light"]) .portfolioTable td,
 :global(html:not([data-theme])) .portfolioTable td {
@@ -1379,4 +1386,465 @@
     border-radius: 14px;
     background: #ffffff;
   }
+}
+ 
+/* ===== FULL PAGE LIGHT HARMONY (value-bets UI fix) ===== */
+:global(html[data-theme="light"]) .page,
+:global(html:not([data-theme])) .page {
+  gap: 18px !important;
+  color: #0b1f3a !important;
+  background: transparent !important;
+}
+
+:global(html[data-theme="light"]) .modeBadge,
+:global(html:not([data-theme])) .modeBadge {
+  background: #dbeafe !important;
+  border: 1px solid #93c5fd !important;
+  color: #1d4ed8 !important;
+  border-radius: 999px !important;
+  padding: 10px 14px !important;
+}
+
+:global(html[data-theme="light"]) .metric,
+:global(html:not([data-theme])) .metric,
+:global(html[data-theme="light"]) .panel,
+:global(html:not([data-theme])) .panel,
+:global(html[data-theme="light"]) .emptyState,
+:global(html:not([data-theme])) .emptyState,
+:global(html[data-theme="light"]) .notice,
+:global(html:not([data-theme])) .notice {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 16px !important;
+  box-shadow: 0 3px 14px rgba(15, 35, 70, 0.045) !important;
+  color: #0b1f3a !important;
+}
+
+:global(html[data-theme="light"]) .metric strong,
+:global(html:not([data-theme])) .metric strong {
+  color: #0b1f3a !important;
+}
+:global(html[data-theme="light"]) .metric .positive,
+:global(html:not([data-theme])) .metric .positive,
+:global(html[data-theme="light"]) .positive,
+:global(html:not([data-theme])) .positive {
+  color: #047857 !important;
+}
+:global(html[data-theme="light"]) .negative,
+:global(html:not([data-theme])) .negative {
+  color: #b91c1c !important;
+}
+
+/* Badges */
+:global(html[data-theme="light"]) .badge,
+:global(html:not([data-theme])) .badge,
+:global(html[data-theme="light"]) .primary,
+:global(html:not([data-theme])) .primary {
+  background: #dbeafe !important;
+  border: 1px solid #93c5fd !important;
+  color: #1d4ed8 !important;
+  border-radius: 999px !important;
+}
+:global(html[data-theme="light"]) .watch,
+:global(html:not([data-theme])) .watch {
+  background: #eef2ff !important;
+  border: 1px solid #c7d2fe !important;
+  color: #4338ca !important;
+}
+:global(html[data-theme="light"]) .alternative,
+:global(html:not([data-theme])) .alternative {
+  background: #e0f2fe !important;
+  border: 1px solid #7dd3fc !important;
+  color: #0369a1 !important;
+}
+:global(html[data-theme="light"]) .stake,
+:global(html:not([data-theme])) .stake {
+  color: #0b1f3a !important;
+}
+
+/* AI explanations */
+:global(html[data-theme="light"]) .explanationHeading h3,
+:global(html:not([data-theme])) .explanationHeading h3,
+:global(html[data-theme="light"]) .accuracyBreakdown h3,
+:global(html:not([data-theme])) .accuracyBreakdown h3 {
+  color: #0b1f3a !important;
+  font-weight: 700 !important;
+  font-size: 1.05rem !important;
+}
+:global(html[data-theme="light"]) .explanationHeading p,
+:global(html:not([data-theme])) .explanationHeading p,
+:global(html[data-theme="light"]) .panelHeader p,
+:global(html:not([data-theme])) .panelHeader p {
+  color: #475569 !important;
+}
+:global(html[data-theme="light"]) .explanationBlock,
+:global(html:not([data-theme])) .explanationBlock {
+  border-top-color: #e2e8f0 !important;
+  background: transparent !important;
+}
+:global(html[data-theme="light"]) .explanation,
+:global(html:not([data-theme])) .explanation {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 14px !important;
+  box-shadow: 0 2px 10px rgba(15, 35, 70, 0.04) !important;
+}
+:global(html[data-theme="light"]) .explanation summary,
+:global(html:not([data-theme])) .explanation summary {
+  color: #0b1f3a !important;
+  background: transparent !important;
+}
+:global(html[data-theme="light"]) .explanation summary strong,
+:global(html:not([data-theme])) .explanation summary strong {
+  color: #0b1f3a !important;
+}
+:global(html[data-theme="light"]) .explanation summary small,
+:global(html:not([data-theme])) .explanation summary small {
+  color: #64748b !important;
+}
+:global(html[data-theme="light"]) .verdict,
+:global(html:not([data-theme])) .verdict {
+  background: #d1fae5 !important;
+  border: 1px solid #6ee7b7 !important;
+  color: #047857 !important;
+  border-radius: 999px !important;
+}
+:global(html[data-theme="light"]) .explanationGrid,
+:global(html:not([data-theme])) .explanationGrid {
+  border-top-color: #eef2f7 !important;
+}
+:global(html[data-theme="light"]) .explanationGrid div,
+:global(html:not([data-theme])) .explanationGrid div {
+  background: #f8fafc !important;
+  border: 1px solid #eef2f7 !important;
+}
+:global(html[data-theme="light"]) .explanationGrid span,
+:global(html:not([data-theme])) .explanationGrid span {
+  color: #64748b !important;
+}
+:global(html[data-theme="light"]) .explanationGrid strong,
+:global(html:not([data-theme])) .explanationGrid strong {
+  color: #0b1f3a !important;
+}
+:global(html[data-theme="light"]) .signalRow span,
+:global(html:not([data-theme])) .signalRow span {
+  background: #eef2ff !important;
+  border-color: #c7d2fe !important;
+  color: #3730a3 !important;
+}
+
+/* Accuracy KPIs + tables */
+:global(html[data-theme="light"]) .accuracyMetrics,
+:global(html:not([data-theme])) .accuracyMetrics {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 12px !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+:global(html[data-theme="light"]) .accuracyMetrics article,
+:global(html:not([data-theme])) .accuracyMetrics article,
+:global(html[data-theme="light"]) .learningMetrics article,
+:global(html:not([data-theme])) .learningMetrics article,
+:global(html[data-theme="light"]) .healthGrid article,
+:global(html:not([data-theme])) .healthGrid article,
+:global(html[data-theme="light"]) .auditSplit article,
+:global(html:not([data-theme])) .auditSplit article,
+:global(html[data-theme="light"]) .auditMetrics div,
+:global(html:not([data-theme])) .auditMetrics div {
+  background: #f0f7ff !important;
+  border: 1px solid #d7e4f4 !important;
+  border-radius: 14px !important;
+  color: #0b1f3a !important;
+  box-shadow: none !important;
+}
+:global(html[data-theme="light"]) .accuracyMetrics span,
+:global(html:not([data-theme])) .accuracyMetrics span,
+:global(html[data-theme="light"]) .healthGrid span,
+:global(html:not([data-theme])) .healthGrid span,
+:global(html[data-theme="light"]) .auditSplit span,
+:global(html:not([data-theme])) .auditSplit span,
+:global(html[data-theme="light"]) .auditMetrics span,
+:global(html:not([data-theme])) .auditMetrics span {
+  color: #1d4ed8 !important;
+  font-weight: 700 !important;
+}
+:global(html[data-theme="light"]) .accuracyMetrics strong,
+:global(html:not([data-theme])) .accuracyMetrics strong,
+:global(html[data-theme="light"]) .healthGrid strong,
+:global(html:not([data-theme])) .healthGrid strong,
+:global(html[data-theme="light"]) .auditSplit strong,
+:global(html:not([data-theme])) .auditSplit strong,
+:global(html[data-theme="light"]) .auditMetrics strong,
+:global(html:not([data-theme])) .auditMetrics strong {
+  color: #0b1f3a !important;
+}
+:global(html[data-theme="light"]) .accuracyMetrics small,
+:global(html:not([data-theme])) .accuracyMetrics small,
+:global(html[data-theme="light"]) .healthGrid small,
+:global(html:not([data-theme])) .healthGrid small,
+:global(html[data-theme="light"]) .auditSplit small,
+:global(html:not([data-theme])) .auditSplit small,
+:global(html[data-theme="light"]) .auditMetrics small,
+:global(html:not([data-theme])) .auditMetrics small {
+  color: #64748b !important;
+}
+:global(html[data-theme="light"]) .accuracyMetrics .positive,
+:global(html:not([data-theme])) .accuracyMetrics .positive,
+:global(html[data-theme="light"]) .accuracyTable .positive,
+:global(html:not([data-theme])) .accuracyTable .positive,
+:global(html[data-theme="light"]) .table .positive,
+:global(html:not([data-theme])) .table .positive {
+  color: #047857 !important;
+}
+:global(html[data-theme="light"]) .accuracyMetrics .negative,
+:global(html:not([data-theme])) .accuracyMetrics .negative,
+:global(html[data-theme="light"]) .accuracyTable .negative,
+:global(html:not([data-theme])) .accuracyTable .negative,
+:global(html[data-theme="light"]) .table .negative,
+:global(html:not([data-theme])) .table .negative {
+  color: #b91c1c !important;
+}
+:global(html[data-theme="light"]) .sampleBadge,
+:global(html:not([data-theme])) .sampleBadge,
+:global(html[data-theme="light"]) .auditBadge,
+:global(html:not([data-theme])) .auditBadge {
+  background: #e8f1fb !important;
+  border: 1px solid #bfdbfe !important;
+  color: #1d4ed8 !important;
+}
+:global(html[data-theme="light"]) .sampleMature,
+:global(html:not([data-theme])) .sampleMature,
+:global(html[data-theme="light"]) .auditPassed,
+:global(html:not([data-theme])) .auditPassed {
+  background: #d1fae5 !important;
+  border-color: #6ee7b7 !important;
+  color: #047857 !important;
+}
+:global(html[data-theme="light"]) .auditRejected,
+:global(html:not([data-theme])) .auditRejected,
+:global(html[data-theme="light"]) .healthCritical,
+:global(html:not([data-theme])) .healthCritical {
+  background: #fee2e2 !important;
+  border: 1px solid #fca5a5 !important;
+  color: #b91c1c !important;
+}
+:global(html[data-theme="light"]) .healthHealthy,
+:global(html:not([data-theme])) .healthHealthy {
+  background: #d1fae5 !important;
+  border-color: #6ee7b7 !important;
+  color: #047857 !important;
+}
+:global(html[data-theme="light"]) .healthWarning,
+:global(html:not([data-theme])) .healthWarning {
+  background: #fef3c7 !important;
+  border-color: #fcd34d !important;
+  color: #b45309 !important;
+}
+
+/* League cards */
+:global(html[data-theme="light"]) .leagueCard,
+:global(html:not([data-theme])) .leagueCard {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 2px 10px rgba(15, 35, 70, 0.04) !important;
+}
+:global(html[data-theme="light"]) .leagueCard header strong,
+:global(html:not([data-theme])) .leagueCard header strong {
+  color: #0b1f3a !important;
+  font-weight: 700 !important;
+}
+:global(html[data-theme="light"]) .leagueCard header small,
+:global(html:not([data-theme])) .leagueCard header small {
+  color: #64748b !important;
+}
+:global(html[data-theme="light"]) .leagueCard header > span,
+:global(html:not([data-theme])) .leagueCard header > span {
+  background: #e8f1fb !important;
+  border: 1px solid #bfdbfe !important;
+  color: #1d4ed8 !important;
+}
+:global(html[data-theme="light"]) .leagueMetricGrid div,
+:global(html:not([data-theme])) .leagueMetricGrid div {
+  background: #f0f7ff !important;
+  border: 1px solid #d7e4f4 !important;
+}
+:global(html[data-theme="light"]) .leagueMetricGrid span,
+:global(html:not([data-theme])) .leagueMetricGrid span {
+  color: #1d4ed8 !important;
+}
+:global(html[data-theme="light"]) .leagueMetricGrid strong,
+:global(html:not([data-theme])) .leagueMetricGrid strong {
+  color: #0b1f3a !important;
+}
+:global(html[data-theme="light"]) .leagueMetricGrid .positive,
+:global(html:not([data-theme])) .leagueMetricGrid .positive {
+  color: #047857 !important;
+}
+:global(html[data-theme="light"]) .leagueMetricGrid .negative,
+:global(html:not([data-theme])) .leagueMetricGrid .negative {
+  color: #b91c1c !important;
+}
+:global(html[data-theme="light"]) .gatePending,
+:global(html:not([data-theme])) .gatePending,
+:global(html[data-theme="light"]) .leagueGates .gatePending,
+:global(html:not([data-theme])) .leagueGates .gatePending {
+  background: #eef2ff !important;
+  border: 1px solid #c7d2fe !important;
+  color: #4338ca !important;
+}
+:global(html[data-theme="light"]) .leagueGates span,
+:global(html:not([data-theme])) .leagueGates span {
+  background: #e8f1fb !important;
+  border: 1px solid #bfdbfe !important;
+  color: #1d4ed8 !important;
+}
+
+/* Progress / audit bars */
+:global(html[data-theme="light"]) .progressTrack,
+:global(html:not([data-theme])) .progressTrack,
+:global(html[data-theme="light"]) .auditProgress,
+:global(html:not([data-theme])) .auditProgress,
+:global(html[data-theme="light"]) .sampleProgress,
+:global(html:not([data-theme])) .sampleProgress {
+  background: #f0f7ff !important;
+  border: 1px solid #d7e4f4 !important;
+  color: #0b1f3a !important;
+}
+:global(html[data-theme="light"]) .productionLock,
+:global(html:not([data-theme])) .productionLock,
+:global(html[data-theme="light"]) .learningNotice,
+:global(html:not([data-theme])) .learningNotice,
+:global(html[data-theme="light"]) .sampleNotice,
+:global(html:not([data-theme])) .sampleNotice {
+  background: #eff6ff !important;
+  border: 1px solid #bfdbfe !important;
+  color: #1e3a8a !important;
+}
+:global(html[data-theme="light"]) .productionLock strong,
+:global(html:not([data-theme])) .productionLock strong,
+:global(html[data-theme="light"]) .learningNotice strong,
+:global(html:not([data-theme])) .learningNotice strong {
+  color: #1e3a8a !important;
+}
+
+:global(html[data-theme="light"]) .table thead th,
+:global(html:not([data-theme])) .table thead th {
+  color: #475569 !important;
+  font-weight: 700 !important;
+  background: #f8fafc !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+}
+:global(html[data-theme="light"]) .table td,
+:global(html:not([data-theme])) .table td {
+  color: #0b1f3a !important;
+  background: transparent !important;
+}
+:global(html[data-theme="light"]) .formTipLine,
+:global(html:not([data-theme])) .formTipLine {
+  color: #475569 !important;
+}
+
+@media (max-width: 900px) {
+  :global(html[data-theme="light"]) .accuracyMetrics,
+  :global(html:not([data-theme])) .accuracyMetrics,
+  :global(html[data-theme="light"]) .healthGrid,
+  :global(html:not([data-theme])) .healthGrid,
+  :global(html[data-theme="light"]) .auditSplit,
+  :global(html:not([data-theme])) .auditSplit,
+  :global(html[data-theme="light"]) .auditMetrics,
+  :global(html:not([data-theme])) .auditMetrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+  :global(html[data-theme="light"]) .leagueCards,
+  :global(html:not([data-theme])) .leagueCards {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+:global(html[data-theme="light"]) .learningProgress,
+:global(html:not([data-theme])) .learningProgress {
+  background: #f0f7ff !important;
+  border: 1px solid #d7e4f4 !important;
+  border-radius: 14px !important;
+  color: #0b1f3a !important;
+  padding: 14px 16px !important;
+}
+:global(html[data-theme="light"]) .learningProgress strong,
+:global(html:not([data-theme])) .learningProgress strong {
+  color: #0b1f3a !important;
+}
+:global(html[data-theme="light"]) .learningProgress span,
+:global(html:not([data-theme])) .learningProgress span,
+:global(html[data-theme="light"]) .learningProgress > div > span,
+:global(html:not([data-theme])) .learningProgress > div > span {
+  color: #64748b !important;
+}
+:global(html[data-theme="light"]) .progressTrack,
+:global(html:not([data-theme])) .progressTrack {
+  background: #dceaf8 !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  overflow: hidden !important;
+}
+:global(html[data-theme="light"]) .progressTrack > span,
+:global(html:not([data-theme])) .progressTrack > span {
+  background: linear-gradient(90deg, #2563eb, #10b981) !important;
+}
+:global(html[data-theme="light"]) .gatePass,
+:global(html:not([data-theme])) .gatePass {
+  background: #d1fae5 !important;
+  border: 1px solid #6ee7b7 !important;
+  color: #047857 !important;
+}
+:global(html[data-theme="light"]) .gateFail,
+:global(html:not([data-theme])) .gateFail {
+  background: #fee2e2 !important;
+  border: 1px solid #fca5a5 !important;
+  color: #b91c1c !important;
+}
+:global(html[data-theme="light"]) .thresholdRow,
+:global(html:not([data-theme])) .thresholdRow,
+:global(html[data-theme="light"]) .thresholdRow span,
+:global(html:not([data-theme])) .thresholdRow span {
+  color: #64748b !important;
+}
+:global(html[data-theme="light"]) .healthGrid,
+:global(html:not([data-theme])) .healthGrid,
+:global(html[data-theme="light"]) .auditSplit,
+:global(html:not([data-theme])) .auditSplit,
+:global(html[data-theme="light"]) .auditMetrics,
+:global(html:not([data-theme])) .auditMetrics,
+:global(html[data-theme="light"]) .learningMetrics,
+:global(html:not([data-theme])) .learningMetrics {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+:global(html[data-theme="light"]) .accuracyBreakdown,
+:global(html:not([data-theme])) .accuracyBreakdown {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 14px !important;
+  padding: 14px !important;
+}
+
+/* Dark theme: keep original navy surfaces (no light-harmony leak) */
+:global(html[data-theme="dark"]) .leagueCard {
+  background: #0d1729 !important;
+  border-color: #24344f !important;
+  color: #e2e8f0 !important;
+}
+:global(html[data-theme="dark"]) .leagueCard header strong,
+:global(html[data-theme="dark"]) .match strong,
+:global(html[data-theme="dark"]) .panelHeader h2,
+:global(html[data-theme="dark"]) .metric strong {
+  color: #f8fafc !important;
+}
+:global(html[data-theme="dark"]) .probCell strong {
+  color: #f8fafc !important;
+}
+:global(html[data-theme="dark"]) .pick {
+  color: #cbd5e1 !important;
 }
