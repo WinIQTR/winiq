@@ -1193,7 +1193,7 @@ export function PredictionsWorkspace({
             )
           }
         >
-          All
+          {locale === "tr" ? "Tümü" : "All"}
         </button>
 
         <button
@@ -1210,7 +1210,7 @@ export function PredictionsWorkspace({
             )
           }
         >
-          Top 5
+          {locale === "tr" ? "En İyi 5" : "Top 5"}
         </button>
 
         <button
@@ -1227,7 +1227,7 @@ export function PredictionsWorkspace({
             )
           }
         >
-          En yüksek oran
+          {locale === "tr" ? "En yüksek oran" : "Highest odds"}
         </button>
 
         <button
@@ -1244,7 +1244,7 @@ export function PredictionsWorkspace({
             )
           }
         >
-          High Confidence
+          {locale === "tr" ? "Yüksek Güven" : "High Confidence"}
         </button>
 
         <button
@@ -1261,7 +1261,7 @@ export function PredictionsWorkspace({
             )
           }
         >
-          Home
+          {locale === "tr" ? "Ev sahibi" : "Home"}
         </button>
 
         <button
@@ -1278,7 +1278,7 @@ export function PredictionsWorkspace({
             )
           }
         >
-          Away
+          {locale === "tr" ? "Deplasman" : "Away"}
         </button>
 
       </div>
@@ -1583,21 +1583,19 @@ export function PredictionsWorkspace({
                     <strong>{getFixtureStatusLabel(fixture)}</strong>
                     {publishedPrediction ? (
                       <div className={styles.publishedReason}>
-                        <span className={`${styles.publishedBadge} ${
-                          publishedPrediction.settlementStatus === "LOST"
-                            ? styles.settlementLost
-                            : publishedPrediction.settlementStatus === "VOID"
-                              ? styles.settlementVoid
-                              : publishedPrediction.settlementStatus === "PENDING"
-                                ? styles.settlementPending
-                                : styles.settlementWon
-                        }`}>
-                          {workspaceMode === "FINISHED_RESULTS"
-                            ? getSettlementLabel(publishedPrediction.settlementStatus, locale)
-                            : locale === "tr"
-                              ? "EN İYİ ÖNERİ"
-                              : "BEST PICK"}
-                        </span>
+                        {workspaceMode === "FINISHED_RESULTS" ? (
+                          <span className={`${styles.publishedBadge} ${
+                            publishedPrediction.settlementStatus === "LOST"
+                              ? styles.settlementLost
+                              : publishedPrediction.settlementStatus === "VOID"
+                                ? styles.settlementVoid
+                                : publishedPrediction.settlementStatus === "PENDING"
+                                  ? styles.settlementPending
+                                  : styles.settlementWon
+                          }`}>
+                            {getSettlementLabel(publishedPrediction.settlementStatus, locale)}
+                          </span>
+                        ) : null}
                         <strong>
                           {publishedPrediction.topPicks[0]?.market ?? "1X2"}
                           {" • "}

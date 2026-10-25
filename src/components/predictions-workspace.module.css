@@ -3034,3 +3034,215 @@
     padding: 12px !important;
   }
 }
+
+/* ===== Color harmony (mockup 808753c3) — light only, wins last ===== */
+:global(html[data-theme="light"]) .viewSwitch,
+:global(html:not([data-theme])) .viewSwitch {
+  width: min(100%, 720px) !important;
+  gap: 6px !important;
+  padding: 5px !important;
+  border: 1px solid #d7e4f4 !important;
+  border-radius: 14px !important;
+  background: #ffffff !important;
+  box-shadow: 0 2px 10px rgba(15, 35, 70, 0.04) !important;
+}
+:global(html[data-theme="light"]) .viewButton,
+:global(html:not([data-theme])) .viewButton {
+  border: 1px solid transparent !important;
+  border-radius: 10px !important;
+  background: #ffffff !important;
+  color: #0b1f3a !important;
+  font-weight: 600 !important;
+  box-shadow: none !important;
+}
+:global(html[data-theme="light"]) .viewButton strong,
+:global(html:not([data-theme])) .viewButton strong {
+  color: #0b1f3a !important;
+}
+:global(html[data-theme="light"]) .viewButton span,
+:global(html:not([data-theme])) .viewButton span {
+  background: #e8f1fb !important;
+  color: #2563eb !important;
+  border-radius: 999px !important;
+  font-weight: 700 !important;
+}
+:global(html[data-theme="light"]) .viewButtonActive,
+:global(html:not([data-theme])) .viewButtonActive {
+  background: #2563eb !important;
+  border-color: #2563eb !important;
+  color: #ffffff !important;
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.28) !important;
+}
+:global(html[data-theme="light"]) .viewButtonActive strong,
+:global(html:not([data-theme])) .viewButtonActive strong {
+  color: #ffffff !important;
+}
+:global(html[data-theme="light"]) .viewButtonActive span,
+:global(html:not([data-theme])) .viewButtonActive span {
+  background: rgba(255, 255, 255, 0.22) !important;
+  color: #ffffff !important;
+}
+:global(html[data-theme="light"]) .smartToolbar,
+:global(html:not([data-theme])) .smartToolbar {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 14px !important;
+  box-shadow: none !important;
+}
+:global(html[data-theme="light"]) .liveBadge,
+:global(html:not([data-theme])) .liveBadge {
+  background: #d1fae5 !important;
+  border-color: #6ee7b7 !important;
+  color: #047857 !important;
+  font-weight: 800 !important;
+}
+:global(html[data-theme="light"]) .toolbarSummary,
+:global(html:not([data-theme])) .toolbarSummary {
+  color: #334155 !important;
+}
+:global(html[data-theme="light"]) .toolbarSummary strong,
+:global(html:not([data-theme])) .toolbarSummary strong {
+  color: #0b1f3a !important;
+}
+:global(html[data-theme="light"]) .calendarArea,
+:global(html:not([data-theme])) .calendarArea,
+:global(html[data-theme="light"]) .calendarNavigation,
+:global(html:not([data-theme])) .calendarNavigation {
+  background: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  color: #0b1f3a !important;
+}
+:global(html[data-theme="light"]) .calendarNavigation strong,
+:global(html:not([data-theme])) .calendarNavigation strong,
+:global(html[data-theme="light"]) .calendarArea strong,
+:global(html:not([data-theme])) .calendarArea strong {
+  color: #0b1f3a !important;
+  font-weight: 700 !important;
+}
+:global(html[data-theme="light"]) .calendarNavigation span,
+:global(html:not([data-theme])) .calendarNavigation span,
+:global(html[data-theme="light"]) .calendarArea span,
+:global(html:not([data-theme])) .calendarArea span {
+  color: #64748b !important;
+}
+:global(html[data-theme="light"]) .arrowButton,
+:global(html:not([data-theme])) .arrowButton {
+  background: #f8fafc !important;
+  border: 1px solid #d7e4f4 !important;
+  color: #1d4ed8 !important;
+}
+:global(html[data-theme="light"]) .fixtureCard,
+:global(html:not([data-theme])) .fixtureCard {
+  background: #ffffff !important;
+  border: 1px solid #e5eef8 !important;
+  border-radius: 16px !important;
+  box-shadow: 0 3px 14px rgba(15, 35, 70, 0.045) !important;
+}
+:global(html[data-theme="light"]) .fixtureMeta span,
+:global(html:not([data-theme])) .fixtureMeta span {
+  color: #2563eb !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.04em;
+}
+:global(html[data-theme="light"]) .fixtureMeta strong,
+:global(html:not([data-theme])) .fixtureMeta strong,
+:global(html[data-theme="light"]) .fixtureTeams strong,
+:global(html:not([data-theme])) .fixtureTeams strong {
+  color: #0b1f3a !important;
+  font-weight: 700 !important;
+}
+:global(html[data-theme="light"]) .fixtureTeams > span,
+:global(html:not([data-theme])) .fixtureTeams > span {
+  color: #64748b !important;
+  font-weight: 600 !important;
+}
+:global(html[data-theme="light"]) .fixtureDecision,
+:global(html:not([data-theme])) .fixtureDecision {
+  background: #ecfdf5 !important;
+  border: 1px solid #a7f3d0 !important;
+  border-left: 1px solid #a7f3d0 !important;
+  border-radius: 14px !important;
+  box-shadow: none !important;
+  color: #0b1f3a !important;
+}
+:global(html[data-theme="light"]) .fixtureDecision > strong,
+:global(html:not([data-theme])) .fixtureDecision > strong {
+  color: #64748b !important;
+}
+:global(html[data-theme="light"]) .publishedReason,
+:global(html:not([data-theme])) .publishedReason {
+  background: transparent !important;
+  border: 0 !important;
+  color: #0b1f3a !important;
+  grid-template-columns: minmax(0, 1fr) auto !important;
+}
+:global(html[data-theme="light"]) .publishedReason::before,
+:global(html:not([data-theme])) .publishedReason::before {
+  color: #059669 !important;
+  font-size: 0.68rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.06em !important;
+}
+:global(html[data-theme="light"]) .publishedReason > strong,
+:global(html:not([data-theme])) .publishedReason > strong {
+  color: #0b1f3a !important;
+  font-size: 0.92rem !important;
+  font-weight: 700 !important;
+  white-space: normal !important;
+}
+:global(html[data-theme="light"]) .bestPickXg,
+:global(html:not([data-theme])) .bestPickXg {
+  color: #64748b !important;
+}
+:global(html[data-theme="light"]) .confidenceBox,
+:global(html:not([data-theme])) .confidenceBox {
+  background: #059669 !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.22) !important;
+}
+:global(html[data-theme="light"]) .confidenceBox b,
+:global(html:not([data-theme])) .confidenceBox b,
+:global(html[data-theme="light"]) .confidenceBox small,
+:global(html:not([data-theme])) .confidenceBox small {
+  color: #ffffff !important;
+}
+:global(html[data-theme="light"]) .publishedBetDetails > summary,
+:global(html:not([data-theme])) .publishedBetDetails > summary,
+:global(html[data-theme="light"]) .fullWidthMarketDetails > summary,
+:global(html:not([data-theme])) .fullWidthMarketDetails > summary {
+  background: #f1f5f9 !important;
+  border-color: #e2e8f0 !important;
+  color: #334155 !important;
+}
+:global(html[data-theme="light"]) .publishedBetCard,
+:global(html:not([data-theme])) .publishedBetCard {
+  background: #f0fdf4 !important;
+  border-color: #bbf7d0 !important;
+  color: #0b1f3a !important;
+}
+:global(html[data-theme="dark"]) .confidenceBox {
+  background: #10b981;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.28);
+}
+@media (max-width: 800px) {
+  :global(html[data-theme="light"]) .fixtureCard,
+  :global(html:not([data-theme])) .fixtureCard,
+  :global(html[data-theme="light"]) .finishedWorkspace .fixtureCard,
+  :global(html:not([data-theme])) .finishedWorkspace .fixtureCard {
+    grid-template-columns: 1fr !important;
+    grid-template-areas:
+      "meta"
+      "teams"
+      "decision"
+      "markets" !important;
+  }
+  :global(html[data-theme="light"]) .fixtureDecision,
+  :global(html:not([data-theme])) .fixtureDecision {
+    margin: 0 10px 10px !important;
+    width: auto !important;
+  }
+  :global(html[data-theme="light"]) .bestPickMeta,
+  :global(html:not([data-theme])) .bestPickMeta {
+    align-items: flex-end;
+  }
+}

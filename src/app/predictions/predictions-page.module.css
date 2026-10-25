@@ -225,3 +225,31 @@
   box-shadow: 0 4px 18px rgba(15, 35, 70, 0.05) !important;
   padding: 16px !important;
 }
+
+/* Color harmony: page body only */
+:global(html[data-theme="light"]) .predictionsTopbar :global(.eyebrow),
+:global(html:not([data-theme])) .predictionsTopbar :global(.eyebrow) {
+  color: #2563eb !important;
+}
+:global(html[data-theme="light"]) .predictionsTopbar h1,
+:global(html:not([data-theme])) .predictionsTopbar h1 {
+  color: #0b1f3a !important;
+}
+:global(html[data-theme="light"]) .predictionsTopbar :global(.subtitle),
+:global(html:not([data-theme])) .predictionsTopbar :global(.subtitle) {
+  color: #475569 !important;
+}
+:global(html[data-theme="light"]) .predictionsTopbar :global(.mode-badge),
+:global(html:not([data-theme])) .predictionsTopbar :global(.mode-badge) {
+  background: #dbeafe !important;
+  border: 1px solid #93c5fd !important;
+  color: #1d4ed8 !important;
+}
+:global(html[data-theme="light"]) .matchCenterHeader :global(.eyebrow),
+:global(html:not([data-theme])) .matchCenterHeader :global(.eyebrow) {
+  color: #2563eb !important;
+}
+:global(html[data-theme="light"]) .matchCenterHeader :global(.dashboard-muted),
+:global(html:not([data-theme])) .matchCenterHeader :global(.dashboard-muted) {
+  color: #64748b !important;
+}
