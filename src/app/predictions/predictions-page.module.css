@@ -215,3 +215,13 @@
 :global(html[data-theme="dark"]) .matchCenterHeader {
   margin-bottom: 8px !important;
 }
+
+/* Match center card shell */
+:global(html[data-theme="light"]) .matchCenter,
+:global(html:not([data-theme])) .matchCenter {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 18px !important;
+  box-shadow: 0 4px 18px rgba(15, 35, 70, 0.05) !important;
+  padding: 16px !important;
+}

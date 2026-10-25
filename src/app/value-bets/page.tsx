@@ -58,7 +58,7 @@ function formatDate(value: Date): string {
 }
 
 function formatBookmakerCount(value: number): string {
-  return `${value} bookmaker prices`;
+  return `${value} oran kontrolü`;
 }
 
 const VERDICT_LABELS: Record<ValueBetVerdict, string> = {
@@ -403,23 +403,93 @@ function PortfolioTable({ selections, badge }: {
 }) {
   return (
     <div className={styles.tableWrap}>
-      <table className={styles.table}>
-        <thead><tr>
-          <th>MATCH</th><th>PICK</th><th>MODEL PROBABILITY</th><th>MARKET PROBABILITY</th>
-          <th>EDGE</th><th>FAIR / BEST</th><th>EV</th><th>BOOKMAKER</th><th>PORTFOLIO STAKE</th>
-        </tr></thead>
-        <tbody>{selections.map(({ row, portfolioStakePercentage }) => (
-          <tr key={`${row.matchId}-${row.marketKey}-${row.id ?? "live"}`}>
-            <td><div className={styles.match}><strong>{row.homeTeam} – {row.awayTeam}</strong><span className={styles.meta}>{row.leagueName} • {formatDate(row.kickoffAt)}</span></div></td>
-            <td><span className={`${styles.badge} ${badge === "PRIMARY" ? styles.primary : styles.watch}`}>{badge}</span><span className={styles.pick}>{row.market}<br /><strong>{row.selection}</strong></span></td>
-            <td>{row.modelProbability.toFixed(1)}%</td><td>{row.marketProbability.toFixed(1)}%</td>
-            <td className={styles.positive}>{formatPercentage(row.marketEdge)}</td>
-            <td>{formatOdds(row.fairOdds)} / <strong>{formatOdds(row.bestOdds)}</strong></td>
-            <td className={styles.positive}>{formatPercentage(row.expectedValue)}</td>
-            <td>{row.bookmakerName}<br /><span className={styles.meta}>{formatBookmakerCount(row.bookmakerCount)}</span></td>
-            <td className={portfolioStakePercentage > 0 ? styles.stake : undefined}>{portfolioStakePercentage.toFixed(2)}%</td>
+      <table className={`${styles.table} ${styles.portfolioTable}`}>
+        <thead>
+          <tr>
+            <th>MAÇ</th>
+            <th>SEÇİM</th>
+            <th>MODEL OLASILIĞI</th>
+            <th>PİYASA OLASILIĞI</th>
+            <th>EDGE</th>
+            <th>ADİL / EN İYİ</th>
+            <th>EV</th>
+            <th>BOOKMAKER</th>
+            <th>PORTFÖY</th>
           </tr>
-        ))}</tbody>
+        </thead>
+        <tbody>
+          {selections.map(({ row, portfolioStakePercentage }) => (
+            <tr key={`${row.matchId}-${row.marketKey}-${row.id ?? "live"}`}>
+              <td>
+                <div className={styles.match}>
+                  <strong>
+                    {row.homeTeam} – {row.awayTeam}
+                  </strong>
+                  <span className={styles.meta}>
+                    {row.leagueName} • {formatDate(row.kickoffAt)}
+                  </span>
+                </div>
+              </td>
+              <td>
+                <span
+                  className={`${styles.badge} ${badge === "PRIMARY" ? styles.primary : styles.watch}`}
+                >
+                  {badge === "PRIMARY" ? "PRIMARY" : "WATCH"}
+                </span>
+                <span className={styles.pick}>
+                  {row.market}
+                  <br />
+                  <strong>{row.selection}</strong>
+                </span>
+              </td>
+              <td>
+                <div className={styles.probCell}>
+                  <strong>{row.modelProbability.toFixed(1)}%</strong>
+                  <span className={styles.probBar}>
+                    <i style={{ width: `${Math.min(100, row.modelProbability)}%` }} />
+                  </span>
+                </div>
+              </td>
+              <td>
+                <div className={styles.probCell}>
+                  <strong>{row.marketProbability.toFixed(1)}%</strong>
+                  <span className={styles.probBar}>
+                    <i style={{ width: `${Math.min(100, row.marketProbability)}%` }} />
+                  </span>
+                </div>
+              </td>
+              <td className={styles.edgeCell}>
+                <strong className={styles.positive}>
+                  {formatPercentage(row.marketEdge)}
+                </strong>
+                {row.marketEdge > 0 ? (
+                  <span className={styles.edgePill}>Değer var</span>
+                ) : null}
+              </td>
+              <td>
+                {formatOdds(row.fairOdds)} /{" "}
+                <strong>{formatOdds(row.bestOdds)}</strong>
+              </td>
+              <td className={styles.positive}>
+                {formatPercentage(row.expectedValue)}
+              </td>
+              <td>
+                {row.bookmakerName}
+                <br />
+                <span className={styles.meta}>
+                  {formatBookmakerCount(row.bookmakerCount)}
+                </span>
+              </td>
+              <td
+                className={
+                  portfolioStakePercentage > 0 ? styles.stake : undefined
+                }
+              >
+                {portfolioStakePercentage.toFixed(2)}%
+              </td>
+            </tr>
+          ))}
+        </tbody>
       </table>
     </div>
   );
@@ -469,28 +539,49 @@ export default async function ValueBetsPage() {
       <header className={styles.header}>
         <div>
           <p className={styles.eyebrow}>
-            REAL BOOKMAKER ODDS • {ACTIVE_SEASON_LABEL} • MODEL HEALTH V2.7
+            REAL BOOKMAKER ODDS • {ACTIVE_SEASON_LABEL} • MODEL SAĞLIĞI V2.7
           </p>
-          <h1 className={styles.title}>Value Bets</h1>
-          <p className={styles.subtitle}>One primary selection per match. Low-confidence candidates remain on watch, while same-match alternatives are shown without adding portfolio exposure.</p>
+          <h1 className={styles.title}>Değerli Bahisler</h1>
+          <p className={styles.subtitle}>
+            Her maç için bir ana seçim. Düşük güvenli adaylar izleme listesinde kalır;
+            aynı maçtaki alternatifler portföy riskini artırmadan gösterilir.
+          </p>
         </div>
         <span className={styles.modeBadge}>
-          {ACTIVE_SEASON_LABEL} PRE-KICKOFF
+          {ACTIVE_SEASON_LABEL} MAÇ ÖNCESİ
         </span>
       </header>
 
       <section className={styles.metricGrid}>
-        <article className={styles.metric}><span>MAIN RECOMMENDATIONS</span><strong>{portfolio.primarySelections.length}</strong><small>One strongest selection per match</small></article>
-        <article className={styles.metric}><span>WATCH LIST</span><strong>{portfolio.watchSelections.length}</strong><small>Below portfolio confidence threshold</small></article>
-        <article className={styles.metric}><span>ALTERNATIVES</span><strong>{portfolio.alternatives.length}</strong><small>Shown for context, not extra wagers</small></article>
-        <article className={styles.metric}><span>MAXIMUM DAILY RISK</span><strong className={styles.positive}>{portfolio.maximumDailyAllocatedRiskPercentage.toFixed(2)}%</strong><small>Daily portfolio exposure, capped at 6%</small></article>
+        <article className={styles.metric}>
+          <span>ANA ÖNERİLER</span>
+          <strong>{portfolio.primarySelections.length}</strong>
+          <small>Maç başına en güçlü tek seçim</small>
+        </article>
+        <article className={styles.metric}>
+          <span>İZLEME LİSTESİ</span>
+          <strong>{portfolio.watchSelections.length}</strong>
+          <small>Portföy güven eşiğinin altında</small>
+        </article>
+        <article className={styles.metric}>
+          <span>ALTERNATİFLER</span>
+          <strong>{portfolio.alternatives.length}</strong>
+          <small>Ek bahis değil, bağlam için gösterilir</small>
+        </article>
+        <article className={styles.metric}>
+          <span>MAKSİMUM GÜNLÜK RİSK</span>
+          <strong className={styles.positive}>
+            {portfolio.maximumDailyAllocatedRiskPercentage.toFixed(2)}%
+          </strong>
+          <small>%6 ile sınırlı günlük portföy riski</small>
+        </article>
       </section>
 
       {portfolio.primarySelections.length === 0 ? (
         <section className={styles.emptyState}><h2>No primary recommendation right now</h2><p>Candidates may be unavailable or below the portfolio confidence threshold.</p></section>
       ) : (
         <section className={styles.panel}>
-          <div className={styles.panelHeader}><div><h2>Main Recommendations</h2><p>Highest-ranked independent match selections. Daily total stake is capped at 6%.</p></div></div>
+          <div className={styles.panelHeader}><div><h2>Ana Öneriler</h2><p>En yüksek sıralı bağımsız maç seçimleri. Günlük toplam bahis miktarı %6 ile sınırlıdır.</p></div></div>
           <PortfolioTable selections={portfolio.primarySelections} badge="PRIMARY" />
           <AiMatchExplanations selections={portfolio.primarySelections} formTips={formTips} />
         </section>
@@ -498,7 +589,7 @@ export default async function ValueBetsPage() {
 
       {portfolio.watchSelections.length > 0 && (
         <section className={styles.panel}>
-          <div className={styles.panelHeader}><div><h2>Watch List</h2><p>Expected value below 5% or market edge below 3%. No stake is assigned.</p></div></div>
+          <div className={styles.panelHeader}><div><h2>İzleme Listesi</h2><p>Beklenen değer %5 veya piyasa edge %3 altında. Bahis miktarı atanmaz.</p></div></div>
           <PortfolioTable selections={portfolio.watchSelections} badge="WATCH" />
         </section>
       )}

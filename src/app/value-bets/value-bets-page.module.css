@@ -1247,3 +1247,136 @@
 :global(html:not([data-theme])) .match small {
   color: #334155 !important;
 }
+
+/* ===== Mockup body: Değerli Bahisler (light) ===== */
+:global(html[data-theme="light"]) .metricGrid,
+:global(html:not([data-theme])) .metricGrid {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 12px !important;
+}
+:global(html[data-theme="light"]) .metric,
+:global(html:not([data-theme])) .metric {
+  min-height: 110px !important;
+  padding: 16px 18px !important;
+  border-radius: 16px !important;
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 4px 14px rgba(15, 35, 70, 0.05) !important;
+}
+:global(html[data-theme="light"]) .metric span,
+:global(html:not([data-theme])) .metric span {
+  color: #1d4ed8 !important;
+  font-size: 0.68rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.06em;
+}
+:global(html[data-theme="light"]) .metric strong,
+:global(html:not([data-theme])) .metric strong {
+  color: #0b1f3a !important;
+  font-size: 1.85rem !important;
+  font-weight: 700 !important;
+}
+:global(html[data-theme="light"]) .metric small,
+:global(html:not([data-theme])) .metric small {
+  color: #334155 !important;
+  font-weight: 500 !important;
+}
+:global(html[data-theme="light"]) .panel,
+:global(html:not([data-theme])) .panel,
+:global(html[data-theme="light"]) .tableWrap,
+:global(html:not([data-theme])) .tableWrap {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 16px !important;
+  box-shadow: 0 4px 14px rgba(15, 35, 70, 0.04) !important;
+}
+:global(html[data-theme="light"]) .panelHeader h2,
+:global(html:not([data-theme])) .panelHeader h2 {
+  color: #0b1f3a !important;
+  font-size: 1.2rem !important;
+  font-weight: 700 !important;
+}
+:global(html[data-theme="light"]) .badge.primary,
+:global(html:not([data-theme])) .badge.primary,
+:global(html[data-theme="light"]) .primary,
+:global(html:not([data-theme])) .primary {
+  display: inline-flex !important;
+  border-radius: 999px !important;
+  background: #dbeafe !important;
+  border-color: #93c5fd !important;
+  color: #1d4ed8 !important;
+  font-weight: 700 !important;
+  font-size: 0.65rem !important;
+}
+.probCell {
+  display: grid;
+  gap: 6px;
+  min-width: 88px;
+}
+.probCell strong {
+  color: #0b1f3a;
+  font-size: 0.9rem;
+}
+.probBar {
+  display: block;
+  height: 6px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #dceaf8;
+}
+.probBar i {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #3b82f6, #2563eb);
+}
+.edgeCell {
+  display: grid;
+  gap: 4px;
+}
+.edgePill {
+  display: inline-flex;
+  width: fit-content;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #d1fae5;
+  color: #047857;
+  font-size: 0.62rem;
+  font-weight: 700;
+}
+:global(html[data-theme="light"]) .portfolioTable td,
+:global(html:not([data-theme])) .portfolioTable td {
+  padding: 14px 12px !important;
+  vertical-align: middle;
+  border-bottom: 1px solid #eef2f7 !important;
+}
+@media (max-width: 900px) {
+  :global(html[data-theme="light"]) .metricGrid,
+  :global(html:not([data-theme])) .metricGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+  :global(html[data-theme="light"]) .portfolioTable thead,
+  :global(html:not([data-theme])) .portfolioTable thead {
+    display: none;
+  }
+  :global(html[data-theme="light"]) .portfolioTable,
+  :global(html:not([data-theme])) .portfolioTable,
+  :global(html[data-theme="light"]) .portfolioTable tbody,
+  :global(html:not([data-theme])) .portfolioTable tbody,
+  :global(html[data-theme="light"]) .portfolioTable tr,
+  :global(html:not([data-theme])) .portfolioTable tr,
+  :global(html[data-theme="light"]) .portfolioTable td,
+  :global(html:not([data-theme])) .portfolioTable td {
+    display: block;
+    width: 100%;
+  }
+  :global(html[data-theme="light"]) .portfolioTable tr,
+  :global(html:not([data-theme])) .portfolioTable tr {
+    margin-bottom: 12px;
+    padding: 14px;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    background: #ffffff;
+  }
+}

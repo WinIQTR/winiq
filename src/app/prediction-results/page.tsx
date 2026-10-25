@@ -70,19 +70,47 @@ export default async function PredictionResultsPage() {
     isDateInSeason(prediction.kickoffAt, ACTIVE_SEASON_YEAR),
   );
 
+  const settledCount = fixtures.length;
+  const publishedCount = predictions.length;
+
   return (
     <PageShell>
       <header className={styles.header}>
         <div>
           <p className={styles.eyebrow}>SONUÇ ARŞİVİ · {ACTIVE_SEASON_YEAR}</p>
-          <h1>Tahmin Sonuçları</h1>
+          <h1>Tahmin sonuçları</h1>
           <p>
             Sonuçlanmış maçlar, yayımlanan tahminler ve bütün pazar puanları
             ayrı bir arşivde incelenir.
           </p>
         </div>
-        <span>GÜNCEL ARŞİV</span>
+        <span className={styles.archiveButton}>GÜNCEL ARŞİV</span>
       </header>
+
+      <section className={styles.statsRow} aria-label="Arşiv özeti">
+        <article className={styles.statCard}>
+          <span className={styles.statIcon} aria-hidden="true">
+            ●
+          </span>
+          <div>
+            <span>Sonuçlanan</span>
+            <strong>{settledCount} maç</strong>
+          </div>
+        </article>
+        <article className={styles.statCard}>
+          <span className={styles.statIcon} aria-hidden="true">
+            ■
+          </span>
+          <div>
+            <span>Yayımlanan</span>
+            <strong>{publishedCount} öneri</strong>
+          </div>
+        </article>
+        <p className={styles.infoBanner}>
+          Yayımlanmış öneriler önce, ardından diğer sonuçlar; en yeni maçlar
+          üstte.
+        </p>
+      </section>
 
       <section className={styles.resultsPanel}>
         <PredictionsWorkspace

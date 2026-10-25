@@ -213,3 +213,79 @@
 :global(html:not([data-theme])) .summaryLost {
   color: #b91c1c !important;
 }
+
+/* ===== Mockup body: Tahmin sonuçları ===== */
+.archiveButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border: 1px solid #93c5fd;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #1d4ed8;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+.statsRow {
+  display: grid;
+  grid-template-columns: minmax(160px, 0.7fr) minmax(160px, 0.7fr) minmax(0, 1.6fr);
+  gap: 12px;
+  margin: 0 0 14px;
+  align-items: stretch;
+}
+.statCard {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  background: #ffffff;
+  box-shadow: 0 2px 10px rgba(15, 35, 70, 0.04);
+  color: #0b1f3a;
+}
+.statCard span:not(.statIcon) {
+  display: block;
+  color: #334155;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+.statCard strong {
+  display: block;
+  margin-top: 2px;
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+.statIcon {
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  border-radius: 10px;
+  background: #dbeafe;
+  color: #2563eb;
+  font-size: 12px;
+}
+.infoBanner {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  padding: 14px 16px;
+  border: 1px solid #bfdbfe;
+  border-radius: 14px;
+  background: #eff6ff;
+  color: #1e3a8a;
+  font-size: 0.84rem;
+  font-weight: 500;
+  line-height: 1.45;
+}
+@media (max-width: 900px) {
+  .statsRow {
+    grid-template-columns: 1fr 1fr;
+  }
+  .infoBanner {
+    grid-column: 1 / -1;
+  }
+}

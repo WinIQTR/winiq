@@ -588,3 +588,224 @@
   color: #334155 !important;
   font-weight: 500;
 }
+
+/* ===== Mockup body: Akıllı Tahmin Performansı (light) ===== */
+:global(html[data-theme="light"]) .hero,
+:global(html:not([data-theme])) .hero {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.4fr) minmax(220px, 0.8fr) !important;
+  gap: 16px !important;
+  align-items: center !important;
+  padding: 18px 20px !important;
+  border-radius: 18px !important;
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 4px 16px rgba(15, 35, 70, 0.05) !important;
+}
+:global(html[data-theme="light"]) .heroTags span,
+:global(html:not([data-theme])) .heroTags span {
+  display: inline-flex !important;
+  padding: 6px 10px !important;
+  border-radius: 999px !important;
+  background: #e8f1fb !important;
+  border: 1px solid #c5d9ef !important;
+  color: #0b1f3a !important;
+  font-size: 0.65rem !important;
+  font-weight: 700 !important;
+}
+:global(html[data-theme="light"]) .heroResult,
+:global(html:not([data-theme])) .heroResult {
+  display: flex !important;
+  align-items: center !important;
+  gap: 14px !important;
+  padding: 12px !important;
+  border-radius: 16px !important;
+  background: #0b1f3a !important;
+  color: #ffffff !important;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06);
+  background-image:
+    radial-gradient(circle at 65% 40%, rgba(255,255,255,0.16) 0 1px, transparent 1.6px);
+  background-size: 14px 14px;
+}
+:global(html[data-theme="light"]) .heroResult span,
+:global(html:not([data-theme])) .heroResult span,
+:global(html[data-theme="light"]) .heroResult small,
+:global(html:not([data-theme])) .heroResult small {
+  color: #cbd5e1 !important;
+  font-weight: 500 !important;
+}
+:global(html[data-theme="light"]) .heroResult strong,
+:global(html:not([data-theme])) .heroResult strong,
+:global(html[data-theme="light"]) .healthStrong,
+:global(html:not([data-theme])) .healthStrong {
+  color: #34d399 !important;
+  font-weight: 700 !important;
+}
+:global(html[data-theme="light"]) .accuracyRing,
+:global(html:not([data-theme])) .accuracyRing {
+  width: 92px !important;
+  height: 92px !important;
+  border-radius: 50% !important;
+  display: grid !important;
+  place-items: center !important;
+  background:
+    conic-gradient(#34d399 var(--accuracy, 180deg), #1e3a5f 0) !important;
+}
+:global(html[data-theme="light"]) .accuracyRing > div,
+:global(html:not([data-theme])) .accuracyRing > div {
+  width: 68px !important;
+  height: 68px !important;
+  border-radius: 50% !important;
+  display: grid !important;
+  place-items: center !important;
+  background: #07101f !important;
+  color: #ffffff !important;
+  text-align: center;
+}
+:global(html[data-theme="light"]) .accuracyRing strong,
+:global(html:not([data-theme])) .accuracyRing strong {
+  color: #ffffff !important;
+  font-size: 0.95rem !important;
+}
+:global(html[data-theme="light"]) .kpiGridSix,
+:global(html:not([data-theme])) .kpiGridSix {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 12px !important;
+}
+:global(html[data-theme="light"]) .kpiGridSix > article:nth-child(n + 5),
+:global(html:not([data-theme])) .kpiGridSix > article:nth-child(n + 5) {
+  display: none !important;
+}
+:global(html[data-theme="light"]) .kpiGridSix > article,
+:global(html:not([data-theme])) .kpiGridSix > article,
+:global(html[data-theme="light"]) .insightCard,
+:global(html:not([data-theme])) .insightCard,
+:global(html[data-theme="light"]) .panel,
+:global(html:not([data-theme])) .panel {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 16px !important;
+  box-shadow: 0 4px 14px rgba(15, 35, 70, 0.04) !important;
+  color: #0b1f3a !important;
+}
+:global(html[data-theme="light"]) .kpiGridSix > article span,
+:global(html:not([data-theme])) .kpiGridSix > article span,
+:global(html[data-theme="light"]) .panelHeading span,
+:global(html:not([data-theme])) .panelHeading span {
+  color: #1d4ed8 !important;
+  font-weight: 700 !important;
+}
+:global(html[data-theme="light"]) .kpiGridSix > article strong,
+:global(html:not([data-theme])) .kpiGridSix > article strong,
+:global(html[data-theme="light"]) .panelHeading h2,
+:global(html:not([data-theme])) .panelHeading h2 {
+  color: #0b1f3a !important;
+  font-weight: 700 !important;
+}
+:global(html[data-theme="light"]) .outcomeGrid > article,
+:global(html:not([data-theme])) .outcomeGrid > article {
+  background: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 12px !important;
+  color: #0b1f3a !important;
+}
+:global(html[data-theme="light"]) .outcomeGrid > article > div,
+:global(html:not([data-theme])) .outcomeGrid > article > div {
+  height: 6px !important;
+  border-radius: 999px !important;
+  background: #dceaf8 !important;
+  overflow: hidden;
+}
+:global(html[data-theme="light"]) .outcomeGrid > article > div > span,
+:global(html:not([data-theme])) .outcomeGrid > article > div > span {
+  display: block !important;
+  height: 100% !important;
+  background: #2563eb !important;
+}
+:global(html[data-theme="light"]) .marketSelectorPanel,
+:global(html:not([data-theme])) .marketSelectorPanel {
+  background: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  color: #0b1f3a !important;
+}
+.highlightGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0 0 14px;
+}
+.highlightCard {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 14px 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 4px 14px rgba(15, 35, 70, 0.04);
+  color: #0b1f3a;
+}
+.highlightIndex {
+  display: inline-grid;
+  place-items: center;
+  min-width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: #dbeafe;
+  color: #1d4ed8;
+  font-size: 0.68rem;
+  font-weight: 800;
+}
+.highlightCard small {
+  display: block;
+  color: #1d4ed8;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.highlightCard strong {
+  display: block;
+  margin-top: 4px;
+  color: #0b1f3a;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+.highlightCard p {
+  margin: 6px 0 0;
+  color: #475569;
+  font-size: 0.78rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+:global(html[data-theme="light"]) .highlightCard,
+:global(html:not([data-theme])) .highlightCard {
+  background: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  color: #0b1f3a !important;
+}
+:global(html[data-theme="dark"]) .highlightCard {
+  background: rgb(12 29 52 / 92%);
+  border-color: rgb(45 70 107 / 56%);
+  color: #e2e8f0;
+}
+:global(html[data-theme="dark"]) .highlightCard strong {
+  color: #f8fafc;
+}
+:global(html[data-theme="dark"]) .highlightCard p {
+  color: #94a3b8;
+}
+@media (max-width: 900px) {
+  :global(html[data-theme="light"]) .hero,
+  :global(html:not([data-theme])) .hero {
+    grid-template-columns: 1fr !important;
+  }
+  :global(html[data-theme="light"]) .kpiGridSix,
+  :global(html:not([data-theme])) .kpiGridSix {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+  .highlightGrid {
+    grid-template-columns: 1fr;
+  }
+}

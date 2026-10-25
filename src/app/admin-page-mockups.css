@@ -1,0 +1,25 @@
+/*
+ * Admin page-body mockup polish (light theme).
+ * Does NOT touch .sidebar / .brand / top nav chrome.
+ * Dark theme left intentional; light follows white/#E8F1FB mockups.
+ */
+
+/* Decorative star-dot texture — dark accent panels only (sparingly) */
+html[data-theme="dark"] .page-shell .heroResult,
+html[data-theme="dark"] .page-shell .accuracyRing > div,
+html[data-theme="dark"] .page-shell .smart-best-pick,
+html[data-theme="light"] .page-shell .heroResult,
+html:not([data-theme]) .page-shell .heroResult {
+  background-image:
+    radial-gradient(circle at 70% 40%, rgba(255, 255, 255, 0.14) 0 1px, transparent 1.5px),
+    radial-gradient(circle at 30% 70%, rgba(255, 255, 255, 0.08) 0 1px, transparent 1.5px);
+  background-size: 12px 12px, 18px 18px;
+  background-blend-mode: soft-light;
+}
+
+/* Page shell content padding tighten under admin chrome */
+.page-shell > main,
+.page-shell > .page,
+.page-shell > div:not(.sidebar) {
+  min-width: 0;
+}

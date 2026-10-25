@@ -198,9 +198,9 @@ function getSettlementLabel(
   status: DashboardPrediction["settlementStatus"],
   locale: "en" | "tr",
 ): string {
-  if (status === "WON") return locale === "tr" ? "KAZANDI" : "WON";
-  if (status === "LOST") return locale === "tr" ? "KAYBETTİ" : "LOST";
-  if (status === "VOID") return locale === "tr" ? "İADE" : "VOID";
+  if (status === "WON") return locale === "tr" ? "Kazandı" : "Won";
+  if (status === "LOST") return locale === "tr" ? "Kaybetti" : "Lost";
+  if (status === "VOID") return locale === "tr" ? "İade" : "Void";
   return locale === "tr" ? "SONUÇ BEKLİYOR" : "PENDING";
 }
 
@@ -1595,14 +1595,53 @@ export function PredictionsWorkspace({
                           {workspaceMode === "FINISHED_RESULTS"
                             ? getSettlementLabel(publishedPrediction.settlementStatus, locale)
                             : locale === "tr"
-                              ? "YAYIMLANMIŞ ÖNERİ"
-                              : "PUBLISHED RECOMMENDATION"}
+                              ? "EN İYİ ÖNERİ"
+                              : "BEST PICK"}
                         </span>
                         <strong>
                           {publishedPrediction.topPicks[0]?.market ?? "1X2"}
                           {" • "}
                           {publishedPrediction.topPicks[0]?.selection ?? publishedPrediction.predictedOutcome}
                         </strong>
+                        {(() => {
+                          const topPick = publishedPrediction.topPicks[0];
+                          const confidencePct = Math.round(
+                            topPick?.probability ??
+                              publishedPrediction.confidenceScore ??
+                              0,
+                          );
+                          const confidenceLabel =
+                            confidencePct >= 75
+                              ? locale === "tr"
+                                ? "ÇOK YÜKSEK"
+                                : "VERY HIGH"
+                              : confidencePct >= 60
+                                ? locale === "tr"
+                                  ? "YÜKSEK"
+                                  : "HIGH"
+                                : locale === "tr"
+                                  ? "ORTA"
+                                  : "MEDIUM";
+                          const xgHome =
+                            publishedPrediction.expectedHomeGoals?.toFixed(2) ??
+                            null;
+                          const xgAway =
+                            publishedPrediction.expectedAwayGoals?.toFixed(2) ??
+                            null;
+                          return (
+                            <div className={styles.bestPickMeta}>
+                              {xgHome && xgAway ? (
+                                <span className={styles.bestPickXg}>
+                                  xG {xgHome} – {xgAway}
+                                </span>
+                              ) : null}
+                              <div className={styles.confidenceBox}>
+                                <b>%{confidencePct}</b>
+                                <small>{confidenceLabel}</small>
+                              </div>
+                            </div>
+                          );
+                        })()}
 
                         <details className={styles.publishedBetDetails}>
                           <summary>

@@ -5,7 +5,6 @@ import { useMemo, useState } from "react";
 import type { MarketPerformanceType } from "@/lib/market-performance-archive";
 import {
   buildPerformanceInsights,
-  probabilityBand,
   summarizePerformance,
   type GroupPerformance,
   type SampleLevel,
@@ -170,13 +169,6 @@ export function MarketPerformanceWorkspace({ marketTypes, rows, seasonLabel }: {
     tier, ...summarizePerformance(marketRows.filter((row) => row.tier === tier)),
   }));
 
-  const probabilityBands = Array.from({ length: 10 }, (_, index) => {
-    const key = String(index * 10);
-    return insights.probability.find((row) => row.key === key) ?? {
-      key, label: probabilityBand(index * 10).label, ...summarizePerformance([]),
-    };
-  });
-
   const filteredRows = useMemo(() => {
     const normalized = query.trim().toLocaleLowerCase("tr-TR");
     return marketRows.filter((row) => {
@@ -221,23 +213,39 @@ export function MarketPerformanceWorkspace({ marketTypes, rows, seasonLabel }: {
 
       <header className={styles.hero}>
         <div>
-          <p className={styles.eyebrow}>15 AĞUSTOS 2026 → BUGÜN • {seasonLabel}</p>
-          <h1>{activeType.title} Performansı</h1>
+          <p className={styles.eyebrow}>ÜRETİM ARŞİVİ • {seasonLabel}</p>
+          <h1>Akıllı Tahmin Performansı</h1>
           <p className={styles.subtitle}>
-            Maç öncesi model olasılığı ile gerçek sonuç yan yana gösterilir.
-            İade ve veri bekleyen kayıtlar başarı hesabına katılmaz; düşük örneklem açıkça uyarılır.
+            {activeType.title} pazarı için maç öncesi model olasılığı ile gerçek sonuç yan yana.
+            İade ve veri bekleyen kayıtlar başarı hesabına katılmaz.
           </p>
           <div className={styles.heroTags}>
+            <span>%20 ML / %80 POISSON</span>
+            <span>{summary.settled} SONUÇLANMIŞ MAÇ</span>
+            <span>DEĞİŞMEZ ARŞİV</span>
             <span>PAZAR {String(activeType.number).padStart(2, "0")} / 30</span>
-            <span>MODEL AĞIRLIKLARI KİLİTLİ</span><span>ADİL ORAN EŞİĞİ 1.10</span>
           </div>
         </div>
         <div className={styles.heroResult}>
           <div className={styles.accuracyRing} style={{ "--accuracy": `${accuracy * 3.6}deg` } as CSSProperties}>
-            <div><strong>{percentage(summary.actualAccuracy)}</strong><span>GERÇEK</span></div>
+            <div>
+              <strong>{percentage(summary.actualAccuracy)}</strong>
+              <span>BAŞARI</span>
+            </div>
           </div>
-          <div><span>KALİBRASYON ÖZETİ</span><strong>Beklenen {percentage(summary.expectedAccuracy)}</strong>
-            <small>Fark: {signedPercentage(summary.calibrationGap)}</small></div>
+          <div>
+            <span>MODEL SAĞLIĞI</span>
+            <strong className={styles.healthStrong}>
+              {(summary.actualAccuracy ?? 0) >= 70
+                ? "Güçlü"
+                : (summary.actualAccuracy ?? 0) >= 55
+                  ? "Orta"
+                  : "Zayıf"}
+            </strong>
+            <small>
+              {summary.won} kazandı • {summary.lost} kaybetti
+            </small>
+          </div>
         </div>
       </header>
 
@@ -247,37 +255,137 @@ export function MarketPerformanceWorkspace({ marketTypes, rows, seasonLabel }: {
       </section>
 
       <section className={styles.kpiGridSix}>
-        <article><span>SONUÇLANAN</span><strong>{summary.settled}</strong><small>{summary.total} toplam kayıt</small></article>
-        <article><span>BEKLENEN BAŞARI</span><strong>{percentage(summary.expectedAccuracy)}</strong><small>Ortalama model olasılığı</small></article>
-        <article className={styles.wonCard}><span>GERÇEK BAŞARI</span><strong>{percentage(summary.actualAccuracy)}</strong><small>{summary.won} kazandı</small></article>
-        <article className={styles.lostCard}><span>KALİBRASYON FARKI</span><strong>{signedPercentage(summary.calibrationGap)}</strong><small>Gerçek − beklenen</small></article>
-        <article><span>KAYBETTİ / İADE</span><strong>{summary.lost} / {summary.voided}</strong><small>{summary.missing} veri bekliyor</small></article>
-        <article><span>ORAN ≥1.10</span><strong>{insights.fairOddsPassed}</strong><small>{insights.fairOddsBelow} eşik altında</small></article>
+        <article>
+          <span>ARŞİVLENEN TAHMİN</span>
+          <strong>{summary.total}</strong>
+          <small>{summary.settled} farklı maçta kayıtlı</small>
+        </article>
+        <article className={styles.wonCard}>
+          <span>GENEL BAŞARI</span>
+          <strong>{percentage(summary.actualAccuracy)}</strong>
+          <small>
+            {summary.won} kazandı / {summary.lost} kaybetti
+          </small>
+        </article>
+        <article>
+          <span>YÜKSEK GÜVEN BAŞARISI</span>
+          <strong>
+            {percentage(
+              tierCards.find((card) => card.tier === "STRONG")?.actualAccuracy ??
+                null,
+            )}
+          </strong>
+          <small>
+            {tierCards.find((card) => card.tier === "STRONG")?.settled ?? 0}{" "}
+            sonuçlanmış seçim
+          </small>
+        </article>
+        <article>
+          <span>ORTALAMA OLASILIK</span>
+          <strong>{percentage(summary.expectedAccuracy)}</strong>
+          <small>
+            Kalibrasyon {signedPercentage(summary.calibrationGap)}
+          </small>
+        </article>
+      </section>
+
+      <section className={styles.highlightGrid}>
+        <article className={styles.highlightCard}>
+          <span className={styles.highlightIndex}>01</span>
+          <div>
+            <small>En Başarılı Bahis Türü</small>
+            <strong>
+              {insights.selections[0]?.label ?? activeType.title}
+            </strong>
+            <p>
+              {percentage(insights.selections[0]?.actualAccuracy ?? null)} başarı
+              {" • "}
+              {insights.selections[0]?.settled ?? 0} seçim
+            </p>
+          </div>
+        </article>
+        <article className={styles.highlightCard}>
+          <span className={styles.highlightIndex}>02</span>
+          <div>
+            <small>Kalibrasyon Farkı</small>
+            <strong>{signedPercentage(summary.calibrationGap)}</strong>
+            <p>Model olasılığı ile gerçekleşen başarı arasındaki fark.</p>
+          </div>
+        </article>
+        <article className={styles.highlightCard}>
+          <span className={styles.highlightIndex}>03</span>
+          <div>
+            <small>Yüksek Güven Etkisi</small>
+            <strong>
+              {(() => {
+                const strong =
+                  tierCards.find((card) => card.tier === "STRONG")
+                    ?.actualAccuracy ?? null;
+                if (strong === null || summary.actualAccuracy === null) {
+                  return "—";
+                }
+                return signedPercentage(strong - summary.actualAccuracy);
+              })()}
+            </strong>
+            <p>Yüksek güven seçimlerinin genel başarıya göre farkı.</p>
+          </div>
+        </article>
       </section>
 
       <section className={styles.analysisGrid}>
         <article className={styles.panel}>
-          <header className={styles.panelHeading}><div><span>PUAN SEVİYESİNE GÖRE</span><h2>Güçlü / Orta / Zayıf</h2></div><small>Gerçek başarı</small></header>
+          <header className={styles.panelHeading}>
+            <div>
+              <span>BAHİS TÜRÜNE GÖRE</span>
+              <h2>Performans Listesi</h2>
+            </div>
+            <small>{BET_MARKET_COUNT} PAZAR</small>
+          </header>
           <div className={styles.outcomeGrid}>
-            {tierCards.map((card) => <article key={card.tier}>
-              <span>{tierLabel(card.tier)} · {card.settled} sonuç</span><strong>{percentage(card.actualAccuracy)}</strong>
-              <small>Beklenen {percentage(card.expectedAccuracy)} · Fark {signedPercentage(card.calibrationGap)}</small>
-              <div><span style={{ width: `${card.actualAccuracy ?? 0}%` }} /></div>
-            </article>)}
+            {insights.selections.slice(0, 12).map((card, index) => (
+              <article key={card.key}>
+                <span>
+                  {String(index + 1).padStart(2, "0")} {card.label}
+                </span>
+                <strong>{percentage(card.actualAccuracy)}</strong>
+                <small>
+                  <span className={styles.wonText}>{card.won} kazandı</span>
+                  {" · "}
+                  <span className={styles.lostText}>{card.lost} kaybetti</span>
+                  {card.voided > 0 ? ` · ${card.voided} iade` : ""}
+                </small>
+                <div>
+                  <span style={{ width: `${card.actualAccuracy ?? 0}%` }} />
+                </div>
+              </article>
+            ))}
           </div>
         </article>
 
         <article className={styles.panel}>
-          <header className={styles.panelHeading}><div><span>MODEL YÜZDESİNE GÖRE</span><h2>Hangi Olasılıklar Kazandı?</h2></div><small>Beklenen ↔ Gerçek</small></header>
-          <div className={styles.bucketList}>
-            <div className={`${styles.calibrationBucketRow} ${styles.bucketHead}`}>
-              <span>Yüzde</span><span>Örnek</span><span>Kazandı</span><span>Kaybetti</span><span>Beklenen</span><span>Gerçek</span><span>Fark</span>
+          <header className={styles.panelHeading}>
+            <div>
+              <span>GÜVEN SEVİYESİNE GÖRE</span>
+              <h2>Yüksek / Orta / Düşük</h2>
             </div>
-            {probabilityBands.map((bucket) => <div className={styles.calibrationBucketRow} key={bucket.key}>
-              <strong>{bucket.label}</strong><span>{bucket.settled}</span><span className={styles.wonText}>{bucket.won}</span>
-              <span className={styles.lostText}>{bucket.lost}</span><span>{percentage(bucket.expectedAccuracy)}</span>
-              <strong>{percentage(bucket.actualAccuracy)}</strong><span>{signedPercentage(bucket.calibrationGap)}</span>
-            </div>)}
+            <small>Gerçek başarı</small>
+          </header>
+          <div className={styles.outcomeGrid}>
+            {tierCards.map((card) => (
+              <article key={card.tier}>
+                <span>
+                  {tierLabel(card.tier)} · {card.settled} seçim
+                </span>
+                <strong>{percentage(card.actualAccuracy)}</strong>
+                <small>
+                  Beklenen {percentage(card.expectedAccuracy)} · Fark{" "}
+                  {signedPercentage(card.calibrationGap)}
+                </small>
+                <div>
+                  <span style={{ width: `${card.actualAccuracy ?? 0}%` }} />
+                </div>
+              </article>
+            ))}
           </div>
         </article>
       </section>

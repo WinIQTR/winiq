@@ -212,24 +212,20 @@ export default async function PredictionsPage() {
       <header className={`topbar ${styles.predictionsTopbar}`}>
         <div>
           <p className="eyebrow">
-            AI FOOTBALL PREDICTIONS
+            YAPAY ZEKÂ FUTBOL TAHMİNLERİ
             {" • "}
             {ACTIVE_SEASON_YEAR}
           </p>
 
-          <h1>
-            Production Predictions
-          </h1>
+          <h1>Canlı Tahminler</h1>
 
           <p className="subtitle">
-            Official picks, the complete fixture archive and final results from
-            the locked 20% ML / 80% Poisson model in one workspace.
+            Kilitli %20 ML / %80 Poisson modelinden yayımlanan seçimler, tüm fikstür
+            arşivi ve sonuçlar tek çalışma alanında.
           </p>
         </div>
 
-        <span className="mode-badge">
-          PUBLISHED DATA
-        </span>
+        <span className="mode-badge">YAYIMLANMIŞ VERİ</span>
       </header>
 
       {predictions.length === 0 &&
@@ -253,18 +249,11 @@ export default async function PredictionsPage() {
         <section className={`dashboard-section ${styles.matchCenter}`}>
           <div className={`dashboard-section-header ${styles.matchCenterHeader}`}>
             <div>
-              <p className="eyebrow">
-                SMART MATCH CENTER
-              </p>
-
-              <h2>
-                Explore Matches
-              </h2>
-
+              <p className="eyebrow">AKILLI MAÇ MERKEZİ</p>
+              <h2>Maçları İncele</h2>
               <p className="dashboard-muted">
-                Published picks are green; advisory-only matches are amber.
-                Search by team, choose a league, or switch directly between
-                recommendations, the full schedule and completed matches.
+                Yayımlanan seçimler yeşil; yalnızca danışmanlık maçları amber.
+                Takım ara, lig seç veya önerilen / tüm / biten görünümleri arasında geç.
               </p>
             </div>
           </div>
