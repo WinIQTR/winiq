@@ -507,6 +507,38 @@ html:not([data-theme]) .prediction-card-smart .muted {
   font-weight: 500;
 }
 
+/* Prediction cards: team names / odds were near-white on white */
+html[data-theme="light"] .smart-team-matchup .prediction-team strong,
+html:not([data-theme]) .smart-team-matchup .prediction-team strong,
+html[data-theme="light"] .prediction-team strong,
+html:not([data-theme]) .prediction-team strong,
+html[data-theme="light"] .prediction-teams strong,
+html:not([data-theme]) .prediction-teams strong {
+  color: #0b1f3a !important;
+  font-weight: 700;
+}
+
+html[data-theme="light"] .smart-match-meta > strong,
+html:not([data-theme]) .smart-match-meta > strong,
+html[data-theme="light"] .versus,
+html:not([data-theme]) .versus,
+html[data-theme="light"] .prediction-team span,
+html:not([data-theme]) .prediction-team span,
+html[data-theme="light"] .smart-outcome-strip,
+html:not([data-theme]) .smart-outcome-strip,
+html[data-theme="light"] .smart-outcome-strip span,
+html:not([data-theme]) .smart-outcome-strip span {
+  color: #334155 !important;
+  font-weight: 500;
+}
+
+html[data-theme="light"] .smart-pick-copy,
+html:not([data-theme]) .smart-pick-copy,
+html[data-theme="light"] .smart-pick-copy strong,
+html:not([data-theme]) .smart-pick-copy strong {
+  color: #0b1f3a !important;
+}
+
 /* Admin inbox / messages / coverage tables (globals classes) */
 html[data-theme="light"] .message-thread,
 html:not([data-theme]) .message-thread,

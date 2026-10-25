@@ -1,0 +1,106 @@
+/*
+ * Admin chrome: compact page headers + light-theme readable text.
+ * Scoped to .page-shell (admin layout). Member shell is untouched.
+ * Dark theme: only header scale; intentional dark colors stay.
+ */
+
+/* —— Minimal headers (both themes) —— */
+.page-shell .topbar,
+.page-shell .dashboard-topbar,
+.page-shell .admin-header {
+  margin-bottom: 14px !important;
+  gap: 12px !important;
+  align-items: flex-start;
+}
+
+.page-shell .topbar h1,
+.page-shell .dashboard-topbar h1,
+.page-shell .admin-header h1 {
+  margin: 0 0 4px !important;
+  font-size: 1.65rem !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.02em !important;
+  line-height: 1.2 !important;
+}
+
+.page-shell .topbar .subtitle,
+.page-shell .dashboard-topbar .subtitle,
+.page-shell .admin-header .subtitle,
+.page-shell .topbar > div > .subtitle {
+  margin-top: 4px !important;
+  max-width: 52rem;
+  font-size: 0.875rem !important;
+  line-height: 1.45 !important;
+}
+
+.page-shell .eyebrow {
+  margin-bottom: 4px !important;
+  font-size: 0.68rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.1em !important;
+}
+
+.page-shell .mode-badge {
+  padding: 7px 10px !important;
+  font-size: 0.65rem !important;
+}
+
+/* Coupon centre / messages tabs sit closer to content */
+.page-shell .coupon-center-tabs {
+  padding: 0 24px 8px !important;
+}
+
+/* —— Light theme: readable tokens inside admin shell —— */
+html[data-theme="light"] .page-shell,
+html:not([data-theme]) .page-shell {
+  --secondary: #334155;
+  --muted: #475569;
+  --text: #0b1f3a;
+  color: #0b1f3a;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+
+html[data-theme="light"] .page-shell .topbar h1,
+html:not([data-theme]) .page-shell .topbar h1,
+html[data-theme="light"] .page-shell .dashboard-topbar h1,
+html:not([data-theme]) .page-shell .dashboard-topbar h1,
+html[data-theme="light"] .page-shell .admin-header h1,
+html:not([data-theme]) .page-shell .admin-header h1 {
+  color: #0b1f3a !important;
+}
+
+html[data-theme="light"] .page-shell .subtitle,
+html:not([data-theme]) .page-shell .subtitle {
+  color: #334155 !important;
+  font-weight: 500;
+}
+
+html[data-theme="light"] .page-shell .eyebrow,
+html:not([data-theme]) .page-shell .eyebrow {
+  color: #1d4ed8 !important;
+}
+
+/* Tables / coverage rows often inherit pale hardcoded colours */
+html[data-theme="light"] .page-shell .players-row,
+html:not([data-theme]) .page-shell .players-row,
+html[data-theme="light"] .page-shell .players-row > span,
+html:not([data-theme]) .page-shell .players-row > span,
+html[data-theme="light"] .page-shell .players-row > strong,
+html:not([data-theme]) .page-shell .players-row > strong {
+  color: #0b1f3a !important;
+  font-weight: 500;
+}
+
+html[data-theme="light"] .page-shell .players-header-row,
+html:not([data-theme]) .page-shell .players-header-row,
+html[data-theme="light"] .page-shell .players-header-row > span,
+html:not([data-theme]) .page-shell .players-header-row > span {
+  color: #334155 !important;
+  font-weight: 700;
+}
+
+/* Keep neon CTA accents */
+html[data-theme="light"] .page-shell .primary-button,
+html:not([data-theme]) .page-shell .primary-button {
+  color: #ffffff !important;
+}

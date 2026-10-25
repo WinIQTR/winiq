@@ -806,7 +806,7 @@
 .publishedBetDetails > summary::after {
   color: #34d399;
   font-size: 14px;
-  content: "âŒ„";
+  content: "▾";
   transition: transform 0.18s ease;
 }
 
@@ -960,7 +960,7 @@
 .advisoryBetDetails > summary::after {
   color: #fbbf24;
   font-size: 14px;
-  content: "âŒ„";
+  content: "▾";
   transition: transform 0.18s ease;
 }
 
@@ -1243,7 +1243,7 @@
   grid-row: 1;
   justify-self: end;
   color: currentcolor;
-  content: "âŒ„";
+  content: "▾";
   font-size: 13px;
 }
 
@@ -1608,7 +1608,7 @@
 
 .fullWidthMarketDetails > summary::after {
   color: #60a5fa;
-  content: "âŒ„";
+  content: "▾";
   font-size: 12px;
   transition: transform 160ms ease;
 }
@@ -1944,12 +1944,12 @@
   font-size: 9px;
   font-weight: 700;
   letter-spacing: .08em;
-  content: "â˜…  EN Ä°YÄ° Ã–NERÄ°";
+  content: "★  EN İYİ ÖNERİ";
 }
 
 .fixtureCardAdvisory .filteredReason::before {
   color: #ffd15b;
-  content: "â˜…  MODEL DEÄžERLENDÄ°RMESÄ°";
+  content: "★  MODEL DEĞERLENDİRMESİ";
 }
 
 .publishedReason > strong {
@@ -2822,4 +2822,41 @@
 :global(html[data-theme="light"]) .fixtureArchiveDivider,
 :global(html:not([data-theme])) .fixtureArchiveDivider {
   background: #c5d9ef !important;
+}
+
+/* Fixture / finished-card contrast + compact second hero */
+:global(html[data-theme="light"]) .fixtureTeams strong,
+:global(html:not([data-theme])) .fixtureTeams strong,
+:global(html[data-theme="light"]) .finishedWorkspace .fixtureTeams strong,
+:global(html:not([data-theme])) .finishedWorkspace .fixtureTeams strong {
+  color: #0b1f3a !important;
+  font-weight: 700;
+}
+:global(html[data-theme="light"]) .fixtureTeams > span,
+:global(html:not([data-theme])) .fixtureTeams > span,
+:global(html[data-theme="light"]) .fixtureMeta,
+:global(html:not([data-theme])) .fixtureMeta,
+:global(html[data-theme="light"]) .fixtureMeta span,
+:global(html:not([data-theme])) .fixtureMeta span {
+  color: #334155 !important;
+  font-weight: 500;
+}
+/* Keep published/advisory reason copy green on dark decision panels */
+:global(html[data-theme="light"]) .publishedReason,
+:global(html:not([data-theme])) .publishedReason,
+:global(html[data-theme="light"]) .publishedReason > strong,
+:global(html:not([data-theme])) .publishedReason > strong {
+  color: #059669 !important;
+  font-weight: 600;
+}
+:global(html[data-theme="light"]) .filteredReason,
+:global(html:not([data-theme])) .filteredReason,
+:global(html[data-theme="light"]) .filteredReason > strong,
+:global(html:not([data-theme])) .filteredReason > strong {
+  color: #b45309 !important;
+  font-weight: 600;
+}
+:global(html[data-theme="light"]) .publishedReason::before,
+:global(html:not([data-theme])) .publishedReason::before {
+  color: #059669 !important;
 }

@@ -5,6 +5,7 @@ import "./theme-tokens.css";
 import "./analytics-design-system.css";
 import "./v6-8-ui.css";
 import "./theme-light-surfaces.css";
+import "./admin-chrome.css";
 import { LanguageProvider } from "@/components/language-provider";
 import { ThemeProvider } from "@/components/theme-provider";
 
