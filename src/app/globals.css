@@ -249,11 +249,8 @@ body {
     ),
     var(--background);
   color: var(--text);
-  font-family:
-    Inter,
-    Arial,
-    Helvetica,
-    sans-serif;
+  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  font-weight: 400;
 }
 
 img,

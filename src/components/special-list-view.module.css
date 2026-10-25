@@ -1,4 +1,4 @@
-.root {
+﻿.root {
   --sl-bg: #070d16;
   --sl-panel: #0b1624;
   --sl-panel-2: #0e1c2e;
@@ -10,6 +10,7 @@
   --sl-green: #34d399;
   --sl-blue: #7eb6ff;
   color: var(--sl-text);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
 }
 
 .root[data-surface="member"] {
@@ -25,7 +26,7 @@
   background: var(--sl-bg);
 }
 
-/* ── Hero ── */
+/* â”€â”€ Hero â”€â”€ */
 .hero {
   position: relative;
   overflow: hidden;
@@ -88,38 +89,13 @@
     );
 }
 
+/* Decorative 3D sphere removed â€” flat pitch panel only */
 .heroBall {
-  position: absolute;
-  right: 7%;
-  top: 10%;
-  width: clamp(64px, 9vw, 104px);
-  height: clamp(64px, 9vw, 104px);
-  border-radius: 50%;
-  background:
-    radial-gradient(circle at 35% 30%, #f8fafc, #cbd5e1 45%, #64748b 100%);
-  box-shadow:
-    0 0 0 2px rgba(148, 163, 184, 0.35),
-    0 18px 40px rgba(0, 0, 0, 0.45),
-    0 0 50px rgba(46, 230, 194, 0.2);
+  display: none !important;
 }
 
 .heroBall::after {
-  content: "";
-  position: absolute;
-  inset: 18%;
-  background:
-    conic-gradient(
-      from 20deg,
-      transparent 0 40deg,
-      rgba(15, 23, 42, 0.55) 40deg 70deg,
-      transparent 70deg 140deg,
-      rgba(15, 23, 42, 0.55) 140deg 175deg,
-      transparent 175deg 250deg,
-      rgba(15, 23, 42, 0.55) 250deg 290deg,
-      transparent 290deg 360deg
-    );
-  clip-path: polygon(50% 0%, 90% 25%, 80% 70%, 50% 100%, 20% 70%, 10% 25%);
-  opacity: 0.85;
+  content: none;
 }
 
 .heroCopy,
@@ -148,7 +124,7 @@
   margin: 10px 0 0;
   color: #c5d4e4;
   font-size: 1.02rem;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .blurb {
@@ -174,7 +150,7 @@
   border-radius: 14px;
   background: rgba(8, 24, 36, 0.82);
   box-shadow: 0 0 24px rgba(46, 230, 194, 0.12);
-  font-weight: 800;
+  font-weight: 700;
   font-size: 1.15rem;
 }
 
@@ -206,7 +182,7 @@
   color: var(--sl-green);
 }
 
-/* ── Filters ── */
+/* â”€â”€ Filters â”€â”€ */
 .filters {
   display: grid;
   grid-template-columns: 1.1fr 1.1fr auto auto;
@@ -227,7 +203,7 @@
 .field label {
   color: #8ea6bb;
   font-size: 0.7rem;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
@@ -275,7 +251,7 @@
   background: linear-gradient(135deg, #2ee6c2, #14b8a6);
   color: #042018;
   font: inherit;
-  font-weight: 900;
+  font-weight: 700;
   cursor: pointer;
   box-shadow: 0 0 22px rgba(46, 230, 194, 0.28);
   white-space: nowrap;
@@ -296,7 +272,7 @@
   background: rgba(6, 40, 28, 0.65);
   color: #6ee7b7;
   font-size: 0.86rem;
-  font-weight: 800;
+  font-weight: 700;
   white-space: nowrap;
 }
 
@@ -316,7 +292,7 @@
   gap: 6px;
   color: #9db3c7;
   font-size: 0.82rem;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .adminExtras input[type="number"] {
@@ -330,7 +306,7 @@
   font: inherit;
 }
 
-/* ── List section ── */
+/* â”€â”€ List section â”€â”€ */
 .section {
   border: 1px solid var(--sl-border);
   border-radius: 16px;
@@ -400,7 +376,7 @@
   background: #14283c;
   border: 1px solid #274560;
   color: #c5d8ea;
-  font-weight: 900;
+  font-weight: 700;
   font-size: 0.9rem;
 }
 
@@ -422,7 +398,7 @@
 .meta time {
   color: #b7c9da;
   font-size: 0.82rem;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .teams {
@@ -453,20 +429,20 @@
   place-items: center;
   color: #9eb6cc;
   font-size: 0.65rem;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .vs {
   color: #6f8aa3;
   font-size: 0.72rem;
-  font-weight: 900;
+  font-weight: 700;
   letter-spacing: 0.04em;
 }
 
 .teamNames {
   color: #e4eef8;
   font-size: 0.84rem;
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1.25;
   white-space: nowrap;
   overflow: hidden;
@@ -484,7 +460,7 @@
 .odds span {
   color: #7f97ad;
   font-size: 0.62rem;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
@@ -501,7 +477,7 @@
 .pick strong {
   color: var(--sl-teal);
   font-size: 0.95rem;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .model {
@@ -513,7 +489,7 @@
 .model strong {
   color: var(--sl-green);
   font-size: 1.15rem;
-  font-weight: 900;
+  font-weight: 700;
   letter-spacing: -0.02em;
 }
 
@@ -525,7 +501,7 @@
   padding: 5px 9px;
   border-radius: 999px;
   font-size: 0.68rem;
-  font-weight: 800;
+  font-weight: 700;
   border: 1px solid transparent;
 }
 
@@ -562,7 +538,7 @@
 .odds strong {
   color: #e8f1fa;
   font-size: 1.15rem;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .tipWrap {
@@ -585,7 +561,7 @@
   background: #0c1c2e;
   color: #9ec8ff;
   font-size: 0.8rem;
-  font-weight: 800;
+  font-weight: 700;
   text-decoration: none;
   white-space: nowrap;
 }
@@ -609,7 +585,7 @@
   font-size: 0.72rem;
 }
 
-/* ── Chip filters ── */
+/* â”€â”€ Chip filters â”€â”€ */
 .chipPanel {
   display: grid;
   gap: 12px;
@@ -629,7 +605,7 @@
 .chipLabel {
   color: #8ea6bb;
   font-size: 0.7rem;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
@@ -651,7 +627,7 @@
   background: #0a1a2b;
   color: #c5d7e8;
   font-size: 0.8rem;
-  font-weight: 800;
+  font-weight: 700;
   text-decoration: none;
   white-space: nowrap;
   transition:
@@ -673,7 +649,7 @@
   box-shadow: 0 0 16px rgba(46, 230, 194, 0.28);
 }
 
-/* ── Mobile ── */
+/* â”€â”€ Mobile â”€â”€ */
 @media (max-width: 1100px) {
   .row {
     grid-template-columns: 36px 1fr 1fr;
@@ -717,7 +693,7 @@
     width: 100%;
   }
 
-  /* move conf out of model cell on mobile — model only shows % */
+  /* move conf out of model cell on mobile â€” model only shows % */
   .model .conf {
     display: none;
   }
@@ -805,7 +781,7 @@
   }
 }
 
-/* ── Light theme (white mockup) — dark rules above stay default for data-theme=dark ── */
+/* â”€â”€ Light theme (white mockup) â€” dark rules above stay default for data-theme=dark â”€â”€ */
 :global(html[data-theme="light"]) .root,
 :global(html:not([data-theme])) .root {
   --sl-bg: #f8f9fb;
@@ -829,58 +805,42 @@
 :global(html[data-theme="light"]) .hero,
 :global(html:not([data-theme])) .hero {
   border-color: #e5e7eb;
-  background:
-    linear-gradient(105deg, #ffffff 0%, #ffffff 52%, #f0fdf8 78%, #ecfdf5 100%);
+  background: #ffffff;
   box-shadow: 0 4px 16px rgba(15, 35, 70, 0.05);
 }
 
 :global(html[data-theme="light"]) .heroVisual::before,
 :global(html:not([data-theme])) .heroVisual::before {
-  background:
-    radial-gradient(circle at 82% 28%, rgba(20, 184, 166, 0.12), transparent 28%),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0.7) 55%, rgba(248, 250, 252, 0.2) 100%);
+  background: linear-gradient(90deg, #ffffff 0%, #ffffff 48%, #f0fdf4 100%);
 }
 
 :global(html[data-theme="light"]) .heroPitch,
 :global(html:not([data-theme])) .heroPitch {
-  /* Mown-grass vertical stripes (light mint) */
-  background:
-    radial-gradient(ellipse at 70% 120%, rgba(167, 243, 208, 0.35), transparent 55%),
-    repeating-linear-gradient(
-      90deg,
-      #ecfdf5 0 22px,
-      #d1fae5 22px 44px
-    );
-  box-shadow: inset 0 0 0 1px rgba(16, 185, 129, 0.22);
+  /* Flat mint panel + simple stripe (no 3D orb) */
+  background: repeating-linear-gradient(
+    90deg,
+    #ecfdf5 0 28px,
+    #d1fae5 28px 56px
+  );
+  box-shadow: inset 0 0 0 1px #a7f3d0;
 }
 
 :global(html[data-theme="light"]) .heroPitch::before,
 :global(html:not([data-theme])) .heroPitch::before {
-  inset: 14% 10% 12%;
-  border: 1.5px solid rgba(13, 148, 136, 0.38);
-  border-radius: 10px;
-  background:
-    /* center spot + circle */
-    radial-gradient(circle at 50% 50%, rgba(13, 148, 136, 0.55) 0 2px, transparent 2.5px),
-    radial-gradient(circle at 50% 50%, transparent 0 16%, rgba(13, 148, 136, 0.35) 16% 17.2%, transparent 17.5%),
-    /* halfway line */
-    linear-gradient(90deg, transparent 49.2%, rgba(13, 148, 136, 0.4) 49.2%, rgba(13, 148, 136, 0.4) 50.8%, transparent 50.8%),
-    transparent;
+  inset: 18% 14% 16%;
+  border: 1px solid #6ee7b7;
+  border-radius: 6px;
+  background: transparent;
 }
 
 :global(html[data-theme="light"]) .heroPitch::after,
 :global(html:not([data-theme])) .heroPitch::after {
-  content: "";
-  position: absolute;
-  right: 14%;
-  top: 18%;
-  width: 28%;
-  height: 34%;
-  border: 1.5px solid rgba(13, 148, 136, 0.32);
-  border-left: 0;
-  border-bottom: 0;
-  border-radius: 0 8px 0 0;
-  pointer-events: none;
+  content: none;
+}
+
+:global(html[data-theme="light"]) .heroBall,
+:global(html:not([data-theme])) .heroBall {
+  display: none !important;
 }
 
 :global(html[data-theme="light"]) .eyebrow,

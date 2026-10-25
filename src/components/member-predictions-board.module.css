@@ -1,4 +1,4 @@
-/* Member home v3 — content only. Top nav / WINIQ brand live in member-shell. */
+﻿/* Member home v3 â€” content only. Top nav / WINIQ brand live in member-shell. */
 
 .board {
   --mh-card: #0f1a2c;
@@ -71,7 +71,7 @@
   margin: 0;
   color: var(--mh-text);
   font-size: clamp(26px, 3.2vw, 38px);
-  font-weight: 850;
+  font-weight: 700;
   letter-spacing: -0.03em;
   line-height: 1.1;
 }
@@ -90,7 +90,7 @@
   margin: 0;
   color: #b7c9e4;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .disclaimer {
@@ -125,7 +125,7 @@
 .heroAside strong {
   color: #dbeafe;
   font-size: clamp(15px, 1.8vw, 20px);
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1.25;
 }
@@ -177,7 +177,7 @@
   margin-top: 3px;
   color: var(--mh-text);
   font-size: 18px;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .freshCard {
@@ -248,7 +248,7 @@
 .field span {
   color: #7f96b8;
   font-size: 10px;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
@@ -275,7 +275,7 @@
   border-radius: 10px;
   padding: 0 14px;
   font-size: 12px;
-  font-weight: 800;
+  font-weight: 700;
   cursor: pointer;
 }
 
@@ -342,7 +342,7 @@
   background: linear-gradient(180deg, #1d4ed8, #0f766e);
   color: #f8fbff;
   font-size: 8px;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.02em;
 }
 
@@ -352,7 +352,7 @@
   gap: 6px;
   color: #dbe7f8;
   font-size: 12px;
-  font-weight: 650;
+  font-weight: 500;
   white-space: nowrap;
 }
 
@@ -392,7 +392,7 @@
   max-width: 100%;
   color: #f4f8ff;
   font-size: 12px;
-  font-weight: 750;
+  font-weight: 500;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -412,14 +412,14 @@
   place-items: center;
   color: #9bb3d4;
   font-size: 11px;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .versus {
   margin-top: 12px;
   color: #7eb6ff;
   font-size: 12px;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.08em;
 }
 
@@ -436,7 +436,7 @@
 .pickChip span {
   color: #7eb6ff;
   font-size: 10px;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
@@ -444,7 +444,7 @@
 .pickChip strong {
   color: #f8fbff;
   font-size: 14px;
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1.25;
 }
 
@@ -463,7 +463,7 @@
   gap: 10px;
   color: var(--mh-muted);
   font-size: 11px;
-  font-weight: 750;
+  font-weight: 500;
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
@@ -471,7 +471,7 @@
 .marketsStripHead strong {
   color: #9ec9ff;
   font-size: 12px;
-  font-weight: 850;
+  font-weight: 700;
   letter-spacing: 0.02em;
   text-transform: none;
 }
@@ -521,7 +521,7 @@
 .metric > span:first-child {
   color: #7eb6ff;
   font-size: 10px;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
@@ -530,7 +530,7 @@
 .oddsValue {
   color: #f8fbff !important;
   font-size: 18px;
-  font-weight: 800;
+  font-weight: 700;
   font-variant-numeric: tabular-nums;
   line-height: 1.1;
 }
@@ -556,7 +556,7 @@
   border-radius: 999px;
   padding: 4px 10px;
   font-size: 11px;
-  font-weight: 850;
+  font-weight: 700;
   letter-spacing: 0.02em;
 }
 
@@ -629,7 +629,7 @@
   padding: 0 12px;
   color: #9ec9ff;
   font-size: 12.5px;
-  font-weight: 750;
+  font-weight: 500;
   text-decoration: none;
   white-space: nowrap;
 }
@@ -732,7 +732,7 @@
     conic-gradient(#22c55e calc(var(--pct) * 1%), rgba(56, 90, 140, 0.35) 0);
   color: var(--mh-text);
   font-size: 14px;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .summaryStats {
@@ -772,7 +772,7 @@
   margin: 0;
   color: var(--mh-text);
   font-size: 13px;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .sideMatch {
@@ -885,7 +885,7 @@
   background: linear-gradient(145deg, #3b82f6, #2563eb);
   color: #f8fbff;
   font-size: 13px;
-  font-weight: 750;
+  font-weight: 500;
   text-decoration: none;
 }
 
@@ -1098,4 +1098,248 @@
 :global(html[data-theme="light"]) .matchTitle,
 :global(html:not([data-theme])) .matchTitle {
   color: #0b1f3a;
+}
+
+/* Light: readable labels, light sidebar cards, flat chips */
+:global(html[data-theme="light"]) .board,
+:global(html:not([data-theme])) .board {
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  color: #0b1f3a;
+}
+
+:global(html[data-theme="light"]) .league,
+:global(html:not([data-theme])) .league,
+:global(html[data-theme="light"]) .team strong,
+:global(html:not([data-theme])) .team strong,
+:global(html[data-theme="light"]) .kick,
+:global(html:not([data-theme])) .kick {
+  color: #1e293b !important;
+  font-weight: 500;
+}
+
+:global(html[data-theme="light"]) .kick svg,
+:global(html:not([data-theme])) .kick svg {
+  color: #2563eb;
+}
+
+:global(html[data-theme="light"]) .versus,
+:global(html:not([data-theme])) .versus {
+  color: #475569 !important;
+  font-weight: 500;
+}
+
+:global(html[data-theme="light"]) .clearBtn,
+:global(html:not([data-theme])) .clearBtn {
+  color: #1d4ed8 !important;
+  font-weight: 700;
+}
+
+:global(html[data-theme="light"]) .field span,
+:global(html:not([data-theme])) .field span,
+:global(html[data-theme="light"]) .metric > span:first-child,
+:global(html:not([data-theme])) .metric > span:first-child,
+:global(html[data-theme="light"]) .marketsStripHead,
+:global(html:not([data-theme])) .marketsStripHead {
+  color: #475569 !important;
+  font-weight: 500;
+}
+
+:global(html[data-theme="light"]) .marketsStripHead strong,
+:global(html:not([data-theme])) .marketsStripHead strong {
+  color: #0b1f3a !important;
+  font-weight: 700;
+}
+
+:global(html[data-theme="light"]) .field select,
+:global(html:not([data-theme])) .field select {
+  background: #ffffff;
+  border-color: #d1d5db;
+  color: #0b1f3a;
+}
+
+:global(html[data-theme="light"]) .marketChip,
+:global(html:not([data-theme])) .marketChip,
+:global(html[data-theme="light"]) .marketMore,
+:global(html:not([data-theme])) .marketMore {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+  color: #0f172a;
+  font-weight: 500;
+}
+
+:global(html[data-theme="light"]) .marketChip:hover,
+:global(html:not([data-theme])) .marketChip:hover,
+:global(html[data-theme="light"]) .marketMore:hover,
+:global(html:not([data-theme])) .marketMore:hover {
+  background: #e0e7ff;
+  border-color: #93c5fd;
+  color: #1e3a8a;
+}
+
+:global(html[data-theme="light"]) .analysis,
+:global(html:not([data-theme])) .analysis {
+  color: #334155 !important;
+}
+
+:global(html[data-theme="light"]) .analysis svg,
+:global(html:not([data-theme])) .analysis svg {
+  color: #2563eb;
+}
+
+:global(html[data-theme="light"]) .analysisLink,
+:global(html:not([data-theme])) .analysisLink {
+  border-color: #2563eb;
+  color: #1d4ed8 !important;
+  font-weight: 500;
+  background: #ffffff;
+}
+
+:global(html[data-theme="light"]) .analysisLink:hover,
+:global(html:not([data-theme])) .analysisLink:hover {
+  border-color: #1d4ed8;
+  color: #1e3a8a !important;
+  background: #eff6ff;
+}
+
+:global(html[data-theme="light"]) .cardFoot,
+:global(html:not([data-theme])) .cardFoot,
+:global(html[data-theme="light"]) .marketsStrip,
+:global(html:not([data-theme])) .marketsStrip {
+  border-top-color: #e2e8f0;
+}
+
+:global(html[data-theme="light"]) .logo,
+:global(html:not([data-theme])) .logo,
+:global(html[data-theme="light"]) .logoFall,
+:global(html:not([data-theme])) .logoFall {
+  background: #f1f5f9;
+  border-color: #e2e8f0;
+  color: #475569;
+}
+
+:global(html[data-theme="light"]) .bar,
+:global(html:not([data-theme])) .bar {
+  background: #e2e8f0;
+}
+
+:global(html[data-theme="light"]) .freshCard,
+:global(html:not([data-theme])) .freshCard {
+  background: #ecfdf5;
+  border-color: #a7f3d0;
+}
+
+:global(html[data-theme="light"]) .freshCard p,
+:global(html:not([data-theme])) .freshCard p {
+  color: #065f46 !important;
+}
+
+:global(html[data-theme="light"]) .freshCard span,
+:global(html:not([data-theme])) .freshCard span {
+  color: #047857 !important;
+}
+
+:global(html[data-theme="light"]) .sideCard,
+:global(html:not([data-theme])) .sideCard,
+:global(html[data-theme="light"]) .sideStrong,
+:global(html:not([data-theme])) .sideStrong,
+:global(html[data-theme="light"]) .sideCoupon,
+:global(html:not([data-theme])) .sideCoupon,
+:global(html[data-theme="light"]) .summary,
+:global(html:not([data-theme])) .summary {
+  background: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  box-shadow: 0 2px 12px rgba(15, 35, 70, 0.06);
+  color: #0b1f3a;
+}
+
+:global(html[data-theme="light"]) .sideStrong,
+:global(html:not([data-theme])) .sideStrong {
+  border-color: #86efac !important;
+}
+
+:global(html[data-theme="light"]) .sideCoupon,
+:global(html:not([data-theme])) .sideCoupon {
+  border-color: #93c5fd !important;
+}
+
+:global(html[data-theme="light"]) .sideCard h2,
+:global(html:not([data-theme])) .sideCard h2,
+:global(html[data-theme="light"]) .sideMatch,
+:global(html:not([data-theme])) .sideMatch,
+:global(html[data-theme="light"]) .sidePick strong,
+:global(html:not([data-theme])) .sidePick strong,
+:global(html[data-theme="light"]) .couponLeg strong,
+:global(html:not([data-theme])) .couponLeg strong,
+:global(html[data-theme="light"]) .couponTotal strong,
+:global(html:not([data-theme])) .couponTotal strong,
+:global(html[data-theme="light"]) .summary h3,
+:global(html:not([data-theme])) .summary h3,
+:global(html[data-theme="light"]) .summaryStats strong,
+:global(html:not([data-theme])) .summaryStats strong {
+  color: #0b1f3a !important;
+  font-weight: 700;
+}
+
+:global(html[data-theme="light"]) .sidePick span,
+:global(html:not([data-theme])) .sidePick span,
+:global(html[data-theme="light"]) .sideNote,
+:global(html:not([data-theme])) .sideNote,
+:global(html[data-theme="light"]) .couponLeg small,
+:global(html:not([data-theme])) .couponLeg small,
+:global(html[data-theme="light"]) .couponTotal,
+:global(html:not([data-theme])) .couponTotal,
+:global(html[data-theme="light"]) .summary p,
+:global(html:not([data-theme])) .summary p,
+:global(html[data-theme="light"]) .summaryStats,
+:global(html:not([data-theme])) .summaryStats {
+  color: #475569 !important;
+}
+
+:global(html[data-theme="light"]) .sideChip,
+:global(html:not([data-theme])) .sideChip {
+  background: #eff6ff;
+  color: #1d4ed8;
+  font-weight: 500;
+}
+
+:global(html[data-theme="light"]) .couponLeg,
+:global(html:not([data-theme])) .couponLeg {
+  background: #f8fafc;
+  border-color: #e2e8f0;
+}
+
+:global(html[data-theme="light"]) .couponLeg b,
+:global(html:not([data-theme])) .couponLeg b {
+  color: #1d4ed8 !important;
+  font-weight: 700;
+}
+
+:global(html[data-theme="light"]) .ring,
+:global(html:not([data-theme])) .ring {
+  background:
+    radial-gradient(closest-side, #ffffff 72%, transparent 73%),
+    conic-gradient(#22c55e calc(var(--pct) * 1%), #e2e8f0 0);
+  color: #0b1f3a;
+}
+
+:global(html[data-theme="light"]) .pageBtn,
+:global(html:not([data-theme])) .pageBtn {
+  background: #ffffff;
+  border-color: #cbd5e1;
+  color: #0f172a;
+}
+
+:global(html[data-theme="light"]) .pageActive,
+:global(html:not([data-theme])) .pageActive {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: #ffffff;
+}
+
+:global(html[data-theme="light"]) .applyBtn,
+:global(html:not([data-theme])) .applyBtn,
+:global(html[data-theme="light"]) .sideLink,
+:global(html:not([data-theme])) .sideLink {
+  background: #2563eb;
+  font-weight: 700;
 }

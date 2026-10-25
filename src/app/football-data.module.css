@@ -1,8 +1,8 @@
-.page { display:grid; gap:18px; }
+﻿.page { display:grid; gap:18px; }
 .hero { border:1px solid #1c4164; border-radius:22px; padding:24px; background:linear-gradient(135deg,#0d2037,#081729 65%); display:flex; justify-content:space-between; gap:20px; align-items:flex-start; }
 .hero h1 { margin:5px 0 8px; font-size:clamp(30px,4vw,52px); line-height:1; }
 .hero p { margin:0; color:#91a7c1; max-width:780px; }
-.eyebrow { color:#57a2ff!important; font-weight:800; letter-spacing:.14em; text-transform:uppercase; font-size:12px; }
+.eyebrow { color:#57a2ff!important; font-weight: 700; letter-spacing:.14em; text-transform:uppercase; font-size:12px; }
 .fresh { display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end; }
 .fresh span,.badge { border:1px solid #285071; background:#0b1a2d; color:#a9bdd4; border-radius:999px; padding:8px 11px; font-size:12px; white-space:nowrap; }
 .fresh strong { color:#48e6b2; }
@@ -43,7 +43,7 @@
 .score { font-size:18px; }
 .favorite { color:#ffd15c; font-size:14px; text-shadow:0 0 12px rgb(250 204 21 / 45%); }
 .favoriteNote { color:#7792ae; font-size:10px; padding-left:34px; }
-.status { border-radius:999px; padding:7px 10px; text-align:center; background:#102640; color:#92a9c4; font-size:12px; font-weight:800; }
+.status { border-radius:999px; padding:7px 10px; text-align:center; background:#102640; color:#92a9c4; font-size:12px; font-weight: 700; }
 .live { color:#49e7b2; border:1px solid #15664f; }
 .done { color:#72aefe; }
 .detail { grid-column:1/-1; border-top:1px dashed #1d3b58; padding-top:10px; }
@@ -62,9 +62,9 @@
 .identity strong,.identity small { display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
 .identity small { color:#718ba7; font-size:11px; margin-top:3px; }
 
-.valueBest { color:#51e6aa!important; font-weight:900; text-shadow:0 0 16px rgb(52 211 153 / 25%); }
-.valueWorst { color:#ff8994!important; font-weight:850; }
-.rankUp,.rankDown,.rankSame { width:fit-content; border-radius:999px; padding:4px 7px; font-size:10px; font-weight:900; }
+.valueBest { color:#51e6aa!important; font-weight: 700; text-shadow:0 0 16px rgb(52 211 153 / 25%); }
+.valueWorst { color:#ff8994!important; font-weight: 700; }
+.rankUp,.rankDown,.rankSame { width:fit-content; border-radius:999px; padding:4px 7px; font-size:10px; font-weight: 700; }
 .rankUp { background:rgb(16 185 129 / 14%); color:#6ee7b7; }
 .rankDown { background:rgb(239 68 68 / 14%); color:#fca5a5; }
 .rankSame { color:#657e9d; }
@@ -82,3 +82,154 @@
 @media(max-width:900px){.hero{display:grid}.fresh{justify-content:flex-start}.stats{grid-template-columns:repeat(2,1fr)}.match{grid-template-columns:1fr}.detail{grid-column:auto}.detailGrid{grid-template-columns:repeat(2,1fr)}.teamCards{grid-template-columns:1fr}}
 @media(max-width:700px){.stageTabs{grid-template-columns:repeat(2,minmax(0,1fr))}.stageInfo,.stageWarning{align-items:flex-start;flex-direction:column;gap:4px}}
 @media(max-width:520px){.stats{grid-template-columns:1fr}.hero{padding:18px}.teamCardBody{grid-template-columns:repeat(2,1fr)}.team{grid-template-columns:25px minmax(0,1fr) auto}.team .form{grid-column:2/3;flex-wrap:wrap}.score{grid-column:3;grid-row:1}.favoriteNote{padding-left:34px}}
+
+/* Light theme: Teams / football data white surfaces */
+:global(html[data-theme="light"]) .page,
+:global(html:not([data-theme])) .page {
+  color: #0b1f3a;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+:global(html[data-theme="light"]) .hero,
+:global(html:not([data-theme])) .hero,
+:global(html[data-theme="light"]) .toolbar,
+:global(html:not([data-theme])) .toolbar,
+:global(html[data-theme="light"]) .stat,
+:global(html:not([data-theme])) .stat,
+:global(html[data-theme="light"]) .panel,
+:global(html:not([data-theme])) .panel,
+:global(html[data-theme="light"]) .teamCard,
+:global(html:not([data-theme])) .teamCard {
+  background: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  box-shadow: 0 2px 10px rgba(15, 35, 70, 0.04);
+  color: #0b1f3a;
+}
+:global(html[data-theme="light"]) .hero h1,
+:global(html:not([data-theme])) .hero h1,
+:global(html[data-theme="light"]) .panelHead h2,
+:global(html:not([data-theme])) .panelHead h2,
+:global(html[data-theme="light"]) .stat strong,
+:global(html:not([data-theme])) .stat strong,
+:global(html[data-theme="light"]) .team strong,
+:global(html:not([data-theme])) .team strong,
+:global(html[data-theme="light"]) .identity strong,
+:global(html:not([data-theme])) .identity strong,
+:global(html[data-theme="light"]) .teamCardBody strong,
+:global(html:not([data-theme])) .teamCardBody strong,
+:global(html[data-theme="light"]) .detailGrid strong,
+:global(html:not([data-theme])) .detailGrid strong {
+  color: #0b1f3a !important;
+  font-weight: 700;
+}
+:global(html[data-theme="light"]) .hero p,
+:global(html:not([data-theme])) .hero p,
+:global(html[data-theme="light"]) .meta,
+:global(html:not([data-theme])) .meta,
+:global(html[data-theme="light"]) .stat span,
+:global(html:not([data-theme])) .stat span,
+:global(html[data-theme="light"]) .identity small,
+:global(html:not([data-theme])) .identity small,
+:global(html[data-theme="light"]) .favoriteNote,
+:global(html:not([data-theme])) .favoriteNote,
+:global(html[data-theme="light"]) .teamCardBody span,
+:global(html:not([data-theme])) .teamCardBody span,
+:global(html[data-theme="light"]) .detailGrid span,
+:global(html:not([data-theme])) .detailGrid span,
+:global(html[data-theme="light"]) .empty,
+:global(html:not([data-theme])) .empty,
+:global(html[data-theme="light"]) .tableHead,
+:global(html:not([data-theme])) .tableHead {
+  color: #475569 !important;
+}
+:global(html[data-theme="light"]) .eyebrow,
+:global(html:not([data-theme])) .eyebrow {
+  color: #2563eb !important;
+  font-weight: 700;
+}
+:global(html[data-theme="light"]) .fresh span,
+:global(html:not([data-theme])) .fresh span,
+:global(html[data-theme="light"]) .badge,
+:global(html:not([data-theme])) .badge {
+  background: #f8fafc;
+  border-color: #e2e8f0;
+  color: #334155;
+}
+:global(html[data-theme="light"]) .league,
+:global(html:not([data-theme])) .league {
+  background: #ffffff;
+  border-color: #e2e8f0;
+  color: #475569;
+}
+:global(html[data-theme="light"]) .leagueActive,
+:global(html:not([data-theme])) .leagueActive {
+  background: #eff6ff;
+  border-color: #93c5fd;
+  color: #0b1f3a;
+}
+:global(html[data-theme="light"]) .stageTabs a,
+:global(html:not([data-theme])) .stageTabs a {
+  background: #ffffff;
+  border-color: #e2e8f0;
+  color: #475569;
+}
+:global(html[data-theme="light"]) .stageTabs a[data-active="true"],
+:global(html:not([data-theme])) .stageTabs a[data-active="true"] {
+  background: #eff6ff;
+  border-color: #2563eb;
+  color: #0b1f3a;
+}
+:global(html[data-theme="light"]) .stageTabs span,
+:global(html:not([data-theme])) .stageTabs span {
+  color: #64748b;
+}
+:global(html[data-theme="light"]) .toolbar a,
+:global(html:not([data-theme])) .toolbar a {
+  color: #334155;
+  border-color: #e2e8f0;
+  background: #ffffff;
+}
+:global(html[data-theme="light"]) .toolbar a[data-active="true"],
+:global(html:not([data-theme])) .toolbar a[data-active="true"] {
+  color: #ffffff;
+  background: #2563eb;
+  border-color: #2563eb;
+}
+:global(html[data-theme="light"]) .search,
+:global(html:not([data-theme])) .search {
+  background: #ffffff;
+  border-color: #d1d5db;
+  color: #0b1f3a;
+}
+:global(html[data-theme="light"]) .panelHead,
+:global(html:not([data-theme])) .panelHead,
+:global(html[data-theme="light"]) .match,
+:global(html:not([data-theme])) .match,
+:global(html[data-theme="light"]) .tableRow,
+:global(html:not([data-theme])) .tableRow {
+  border-color: #e2e8f0 !important;
+}
+:global(html[data-theme="light"]) .status,
+:global(html:not([data-theme])) .status {
+  background: #f1f5f9;
+  color: #334155;
+  font-weight: 700;
+}
+:global(html[data-theme="light"]) .detailGrid div,
+:global(html:not([data-theme])) .detailGrid div,
+:global(html[data-theme="light"]) .teamCardBody div,
+:global(html:not([data-theme])) .teamCardBody div {
+  background: #f8fafc;
+}
+:global(html[data-theme="light"]) .tableHead,
+:global(html:not([data-theme])) .tableHead {
+  background: #f8fafc !important;
+}
+:global(html[data-theme="light"]) .detail summary,
+:global(html:not([data-theme])) .detail summary {
+  color: #1d4ed8;
+}
+:global(html[data-theme="light"]) .coverage,
+:global(html:not([data-theme])) .coverage {
+  background: #ecfdf5;
+  color: #065f46;
+}
