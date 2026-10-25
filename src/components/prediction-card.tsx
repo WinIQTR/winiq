@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 
+import { FormResultBadge } from "@/components/form-result-badge";
 import { useLanguage } from "@/components/language-provider";
 import { buildMatchFormTip } from "@/lib/member-match-insight";
 import type {
@@ -297,14 +298,7 @@ function FormIcons({
 
   return (
     <span className="prediction-team-form">
-      {results.map((result, index) => (
-        <span
-          key={index}
-          className={`prediction-form-dot prediction-form-dot-${result}`}
-        >
-          {result}
-        </span>
-      ))}
+      <FormResultBadge results={results} locale="en" max={5} />
     </span>
   );
 }

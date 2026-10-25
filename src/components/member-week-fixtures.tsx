@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { FormResultBadge } from "@/components/form-result-badge";
 import { useLanguage } from "@/components/language-provider";
 import { MatchFormTip } from "@/components/match-form-tip";
 import { LeagueMark } from "@/lib/league-marks";
@@ -78,29 +79,7 @@ function FormDots({
 }) {
   return (
     <span className={styles.form} aria-label="Form">
-      {Array.from({ length: 5 }, (_, index) => {
-        const result = results[index] ?? null;
-        if (!result) {
-          return (
-            <i className={styles.formEmpty} key={index}>
-              —
-            </i>
-          );
-        }
-        const mark =
-          locale === "en"
-            ? result
-            : result === "W"
-              ? "G"
-              : result === "D"
-                ? "B"
-                : "M";
-        return (
-          <i className={styles.formDot} data-result={result} key={index}>
-            {mark}
-          </i>
-        );
-      })}
+      <FormResultBadge results={results} locale={locale} max={5} fillMissing />
     </span>
   );
 }

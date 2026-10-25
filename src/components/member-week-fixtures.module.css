@@ -277,39 +277,10 @@
 .form {
   display: inline-flex;
   gap: 4px;
+  align-items: center;
 }
 
-.formDot,
-.formEmpty {
-  display: grid;
-  place-items: center;
-  width: 18px;
-  height: 18px;
-  border-radius: 999px;
-  font-size: 9px;
-  font-style: normal;
-  font-weight: 800;
-}
-
-.formDot[data-result="W"] {
-  background: #1f8f57;
-  color: #e9fff4;
-}
-
-.formDot[data-result="D"] {
-  background: #b87a28;
-  color: #fff6e8;
-}
-
-.formDot[data-result="L"] {
-  background: #b0434f;
-  color: #ffe8eb;
-}
-
-.formEmpty {
-  background: #e8eef5;
-  color: #8aa0b8;
-}
+/* Form squares use shared globals `.form-result-dot` via FormResultBadge */
 
 .metaCols {
   display: grid;

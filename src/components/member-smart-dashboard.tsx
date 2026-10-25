@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 
+import { FormResultBadge } from "@/components/form-result-badge";
 import cards from "@/components/member-match-cards.module.css";
 import shell from "@/components/member-shell.module.css";
 import { LogoutButton } from "@/components/logout-button";
@@ -365,13 +366,7 @@ export function MemberPredictionRow({
   const { t, locale } = useLanguage();
   const reasons = prediction.topPicks[0]?.reasons.slice(0, 2) ?? [];
   const formIcons = (results?: ("W" | "D" | "L")[]) => (
-    <span className="form-result-badge">
-      {(results ?? []).slice(0, 5).map((result, index) => (
-        <i className="form-result-dot" data-result={result} key={index}>
-          {result === "W" ? "G" : result === "D" ? "B" : "M"}
-        </i>
-      ))}
-    </span>
+    <FormResultBadge results={results} locale={locale === "en" ? "en" : "tr"} max={5} />
   );
 
   return (

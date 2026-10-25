@@ -2567,27 +2567,36 @@ h2 {
   margin-top: 2px;
 }
 
+/* Aliased to shared square form indicators (see .form-result-dot) */
 .prediction-form-dot {
-  width: 18px;
-  height: 18px;
+  width: 19px;
+  height: 19px;
   display: grid;
   place-items: center;
   border-radius: 5px;
-  font-size: 9px;
-  font-weight: 800;
-  color: #0b1220;
+  font-size: 10px;
+  font-weight: 700;
+  font-style: normal;
+  border: 1px solid transparent;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
 }
 
 .prediction-form-dot-W {
-  background: #22c55e;
+  background: #d1fae5;
+  border-color: #a7f3d0;
+  color: #059669;
 }
 
 .prediction-form-dot-D {
-  background: #eab308;
+  background: #fef3c7;
+  border-color: #fde68a;
+  color: #d97706;
 }
 
 .prediction-form-dot-L {
-  background: #ef4444;
+  background: #fee2e2;
+  border-color: #fecaca;
+  color: #dc2626;
 }
 
 .team-logo {
@@ -9452,30 +9461,36 @@ body .topbar .subtitle {
   font-size: 12px;
 }
 
+/* Aliased to shared square form indicators (see .form-result-dot) */
 .team-form-dot {
-  width: 20px;
-  height: 20px;
-
+  width: 19px;
+  height: 19px;
   display: grid;
   place-items: center;
-
-  border-radius: 6px;
-
+  border-radius: 5px;
   font-size: 10px;
-  font-weight: 800;
-  color: #0b1220;
+  font-weight: 700;
+  font-style: normal;
+  border: 1px solid transparent;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
 }
 
 .team-form-dot-W {
-  background: #22c55e;
+  background: #d1fae5;
+  border-color: #a7f3d0;
+  color: #059669;
 }
 
 .team-form-dot-D {
-  background: #eab308;
+  background: #fef3c7;
+  border-color: #fde68a;
+  color: #d97706;
 }
 
 .team-form-dot-L {
-  background: #ef4444;
+  background: #fee2e2;
+  border-color: #fecaca;
+  color: #dc2626;
 }
 
 .teams-panel {
@@ -10807,16 +10822,67 @@ body{font-size:var(--w-size-body);color:var(--w-text)}
 }
 .coupon-center-tabs b{margin-left:6px;color:inherit}
 
-/* Paylaşılan form sonucu rozeti (W/D/L) — tüm sayfalarda (admin: teams/fixtures,
-   üye: professional/member dashboard) aynı tasarım için tek kaynak. Önceden
-   4 farklı dosyada birbirinden farklı boyut/çerçeve ile tanımlanmıştı. */
-.form-result-badge{display:flex;gap:4px;align-items:center}
-.form-result-dot{width:19px;height:19px;display:grid;place-items:center;border-radius:5px;font-style:normal;font-size:10px;font-weight:900;color:#9db6ca;background:#1c3550;border:1px solid transparent}
-.form-result-dot[data-result="W"]{border-color:rgb(52 211 153 / 30%);background:rgb(16 185 129 / 20%);color:#6ee7b7}
-.form-result-dot[data-result="D"]{border-color:rgb(245 158 11 / 30%);background:rgb(245 158 11 / 17%);color:#fcd34d}
-.form-result-dot[data-result="L"]{border-color:rgb(248 113 113 / 30%);background:rgb(239 68 68 / 18%);color:#fca5a5}
-.form-result-missing{width:19px;height:19px;display:grid;place-items:center;border-radius:5px;font-style:normal;font-size:10px;font-weight:900;color:#4c6178;background:rgb(28 53 80 / 40%);border:1px dashed rgb(148 163 184 / 20%)}
-@media(max-width:760px){.form-result-dot,.form-result-missing{width:17px;height:17px;font-size:9px}}
+/* Shared form result squares (G/B/M · W/D/L) — sitewide standard.
+   Rounded squares, pastel fill + darker letter. Not circles. */
+.form-result-badge{
+  display:inline-flex;
+  gap:4px;
+  align-items:center;
+}
+.form-result-dot,
+.form-result-missing{
+  width:19px;
+  height:19px;
+  display:grid;
+  place-items:center;
+  border-radius:5px;
+  font-style:normal;
+  font-size:10px;
+  font-weight:700;
+  font-family:var(--font-geist-sans),system-ui,sans-serif;
+  border:1px solid transparent;
+  line-height:1;
+  box-sizing:border-box;
+}
+.form-result-dot{
+  color:#334155;
+  background:#e2e8f0;
+}
+.form-result-dot[data-result="W"]{
+  background:#d1fae5;
+  border-color:#a7f3d0;
+  color:#059669;
+}
+.form-result-dot[data-result="D"]{
+  background:#fef3c7;
+  border-color:#fde68a;
+  color:#d97706;
+}
+.form-result-dot[data-result="L"]{
+  background:#fee2e2;
+  border-color:#fecaca;
+  color:#dc2626;
+}
+.form-result-missing{
+  color:#64748b;
+  background:#f1f5f9;
+  border:1px dashed #cbd5e1;
+}
+html[data-theme="dark"] .form-result-missing{
+  color:#94a3b8;
+  background:rgba(30,41,59,.55);
+  border-color:rgba(148,163,184,.28);
+}
+@media(max-width:760px){
+  .form-result-dot,
+  .form-result-missing,
+  .prediction-form-dot,
+  .team-form-dot{
+    width:17px;
+    height:17px;
+    font-size:9px;
+  }
+}
 
 /* Admin grouped sidebar (UX audit) */
 .admin-nav-groups { gap: 18px; margin-top: 28px; }
