@@ -289,8 +289,10 @@ function TeamLogo({
 
 function FormIcons({
   results,
+  locale,
 }: {
   results?: ("W" | "D" | "L")[];
+  locale: "en" | "tr";
 }) {
   if (!results || results.length === 0) {
     return null;
@@ -298,7 +300,7 @@ function FormIcons({
 
   return (
     <span className="prediction-team-form">
-      <FormResultBadge results={results} locale="en" max={5} />
+      <FormResultBadge results={results} locale={locale} max={5} />
     </span>
   );
 }
@@ -371,12 +373,12 @@ export function PredictionCard({
         <div className="smart-team-matchup">
           <div className="prediction-team">
             <TeamLogo logo={homeTeamLogo} team={homeTeam} />
-            <div><strong>{homeTeam}</strong><FormIcons results={homeRecentResults} /></div>
+            <div><strong>{homeTeam}</strong><FormIcons results={homeRecentResults} locale={locale} /></div>
           </div>
           <span className="versus">VS</span>
           <div className="prediction-team">
             <TeamLogo logo={awayTeamLogo} team={awayTeam} />
-            <div><strong>{awayTeam}</strong><FormIcons results={awayRecentResults} /></div>
+            <div><strong>{awayTeam}</strong><FormIcons results={awayRecentResults} locale={locale} /></div>
           </div>
         </div>
 

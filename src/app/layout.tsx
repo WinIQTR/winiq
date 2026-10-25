@@ -7,6 +7,7 @@ import "./v6-8-ui.css";
 import "./theme-light-surfaces.css";
 import "./admin-chrome.css";
 import "./admin-page-mockups.css";
+import "./predictions-harmony.css";
 import { LanguageProvider } from "@/components/language-provider";
 import { ThemeProvider } from "@/components/theme-provider";
 

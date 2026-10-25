@@ -5,11 +5,11 @@
  */
 
 /* Decorative star-dot texture — dark accent panels only (sparingly) */
-html[data-theme="dark"] .page-shell .heroResult,
-html[data-theme="dark"] .page-shell .accuracyRing > div,
-html[data-theme="dark"] .page-shell .smart-best-pick,
-html[data-theme="light"] .page-shell .heroResult,
-html:not([data-theme]) .page-shell .heroResult {
+html[data-theme="dark"] .app-shell .heroResult,
+html[data-theme="dark"] .app-shell .accuracyRing > div,
+html[data-theme="dark"] .app-shell .smart-best-pick,
+html[data-theme="light"] .app-shell .heroResult,
+html:not([data-theme]) .app-shell .heroResult {
   background-image:
     radial-gradient(circle at 70% 40%, rgba(255, 255, 255, 0.14) 0 1px, transparent 1.5px),
     radial-gradient(circle at 30% 70%, rgba(255, 255, 255, 0.08) 0 1px, transparent 1.5px);
@@ -17,86 +17,7 @@ html:not([data-theme]) .page-shell .heroResult {
   background-blend-mode: soft-light;
 }
 
-/* Page shell content padding tighten under admin chrome */
-.page-shell > main,
-.page-shell > .page,
-.page-shell > div:not(.sidebar) {
+/* Content min-width under admin chrome */
+.app-shell .main-content {
   min-width: 0;
-}
-
-/*
- * /predictions color harmony (primary mockup 808753c3).
- * Fixes dark global .quick-filter / .prediction-control-bar on light theme.
- * Logo + sidebar / top nav untouched.
- */
-html[data-theme="light"] .page-shell .quick-filter-bar,
-html:not([data-theme]) .page-shell .quick-filter-bar {
-  gap: 8px;
-  margin: 0 0 12px;
-}
-
-html[data-theme="light"] .page-shell .quick-filter,
-html:not([data-theme]) .page-shell .quick-filter {
-  min-height: 34px;
-  height: auto;
-  padding: 0 14px;
-  border: 1px solid #d7e4f4;
-  border-radius: 999px;
-  background: #ffffff;
-  color: #334155;
-  font-size: 0.72rem;
-  font-weight: 700;
-  box-shadow: none;
-}
-
-html[data-theme="light"] .page-shell .quick-filter:hover,
-html:not([data-theme]) .page-shell .quick-filter:hover {
-  border-color: #93c5fd;
-  background: #eff6ff;
-  color: #1d4ed8;
-}
-
-html[data-theme="light"] .page-shell .quick-filter-active,
-html:not([data-theme]) .page-shell .quick-filter-active,
-html[data-theme="light"] .page-shell .quick-filter.active,
-html:not([data-theme]) .page-shell .quick-filter.active {
-  border-color: #2563eb;
-  background: #2563eb;
-  color: #ffffff;
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.22);
-}
-
-html[data-theme="light"] .page-shell .prediction-control-bar,
-html:not([data-theme]) .page-shell .prediction-control-bar {
-  margin-bottom: 12px;
-  padding: 10px 12px;
-  border: 1px solid #e2e8f0;
-  border-radius: 14px;
-  background: #ffffff;
-  box-shadow: 0 2px 10px rgba(15, 35, 70, 0.04);
-  color: #0b1f3a;
-}
-
-html[data-theme="light"] .page-shell .mode-badge,
-html:not([data-theme]) .page-shell .mode-badge {
-  background: #dbeafe;
-  border: 1px solid #93c5fd;
-  color: #1d4ed8;
-  font-weight: 700;
-}
-
-html[data-theme="light"] .page-shell .topbar h1,
-html:not([data-theme]) .page-shell .topbar h1 {
-  color: #0b1f3a;
-}
-
-html[data-theme="light"] .page-shell .topbar .subtitle,
-html:not([data-theme]) .page-shell .topbar .subtitle {
-  color: #475569;
-}
-
-html[data-theme="light"] .page-shell .topbar .eyebrow,
-html:not([data-theme]) .page-shell .topbar .eyebrow {
-  color: #2563eb;
-  font-weight: 700;
 }

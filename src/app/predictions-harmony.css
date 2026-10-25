@@ -1,0 +1,335 @@
+/*
+ * /predictions light-theme visual rebuild (mockup 808753c3).
+ * Targets .app-shell / .main-content (NOT .page-shell — that class does not exist).
+ * Sidebar / brand / logo untouched. Dark theme left alone.
+ */
+
+html[data-theme="light"] .app-shell .main-content,
+html:not([data-theme]) .app-shell .main-content {
+  background: #eef4fb !important;
+}
+
+/* Header */
+html[data-theme="light"] .app-shell .main-content .topbar .eyebrow,
+html:not([data-theme]) .app-shell .main-content .topbar .eyebrow {
+  color: #2563eb !important;
+  font-weight: 700 !important;
+}
+html[data-theme="light"] .app-shell .main-content .topbar h1,
+html:not([data-theme]) .app-shell .main-content .topbar h1 {
+  color: #0b1f3a !important;
+}
+html[data-theme="light"] .app-shell .main-content .topbar .subtitle,
+html:not([data-theme]) .app-shell .main-content .topbar .subtitle {
+  color: #475569 !important;
+}
+html[data-theme="light"] .app-shell .main-content .mode-badge,
+html:not([data-theme]) .app-shell .main-content .mode-badge {
+  background: #dbeafe !important;
+  border: 1px solid #93c5fd !important;
+  color: #1d4ed8 !important;
+  border-radius: 999px !important;
+  box-shadow: none !important;
+}
+
+/* Kill dark global chips / date bar on light admin content */
+html[data-theme="light"] .app-shell .main-content .quick-filter,
+html:not([data-theme]) .app-shell .main-content .quick-filter,
+html[data-theme="light"] .app-shell .main-content .quick-filter-active,
+html:not([data-theme]) .app-shell .main-content .quick-filter-active,
+html[data-theme="light"] .app-shell .main-content .quick-filter.active,
+html:not([data-theme]) .app-shell .main-content .quick-filter.active {
+  min-height: 34px !important;
+  height: auto !important;
+  padding: 0 14px !important;
+  border: 1px solid #d7e4f4 !important;
+  border-radius: 999px !important;
+  background: #ffffff !important;
+  color: #334155 !important;
+  font-size: 0.72rem !important;
+  font-weight: 700 !important;
+  box-shadow: none !important;
+  background-image: none !important;
+}
+
+html[data-theme="light"] .app-shell .main-content .quick-filter:hover,
+html:not([data-theme]) .app-shell .main-content .quick-filter:hover {
+  border-color: #93c5fd !important;
+  background: #eff6ff !important;
+  color: #1d4ed8 !important;
+}
+
+html[data-theme="light"] .app-shell .main-content .quick-filter-active,
+html:not([data-theme]) .app-shell .main-content .quick-filter-active,
+html[data-theme="light"] .app-shell .main-content .quick-filter.quick-filter-active,
+html:not([data-theme]) .app-shell .main-content .quick-filter.quick-filter-active {
+  border-color: #2563eb !important;
+  background: #2563eb !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.24) !important;
+}
+
+html[data-theme="light"] .app-shell .main-content .prediction-control-bar,
+html:not([data-theme]) .app-shell .main-content .prediction-control-bar {
+  margin-bottom: 12px !important;
+  padding: 10px 14px !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 14px !important;
+  background: #ffffff !important;
+  background-image: none !important;
+  color: #0b1f3a !important;
+  box-shadow: 0 2px 10px rgba(15, 35, 70, 0.04) !important;
+}
+
+html[data-theme="light"] .app-shell .main-content .quick-filter-bar,
+html:not([data-theme]) .app-shell .main-content .quick-filter-bar {
+  gap: 8px !important;
+  margin: 0 0 12px !important;
+}
+
+/* Soft footer disclaimer — don't force full dark navy strip look into body */
+html[data-theme="light"] .app-shell .main-content .dashboard-disclaimer,
+html:not([data-theme]) .app-shell .main-content .dashboard-disclaimer {
+  background: #e8f1fb !important;
+  border: 1px solid #c5d9ef !important;
+  color: #475569 !important;
+  border-radius: 12px !important;
+}
+
+/* CSS-module hashed classes — attribute selectors, light only */
+html[data-theme="light"] .app-shell .main-content [class*="viewSwitch"],
+html:not([data-theme]) .app-shell .main-content [class*="viewSwitch"] {
+  background: #ffffff !important;
+  border: 1px solid #d7e4f4 !important;
+  border-radius: 14px !important;
+  box-shadow: 0 2px 10px rgba(15, 35, 70, 0.04) !important;
+}
+
+html[data-theme="light"] .app-shell .main-content [class*="viewButton"]:not([class*="viewButtonActive"]),
+html:not([data-theme]) .app-shell .main-content [class*="viewButton"]:not([class*="viewButtonActive"]) {
+  background: #ffffff !important;
+  border: 1px solid #bfdbfe !important;
+  color: #0b1f3a !important;
+  box-shadow: none !important;
+}
+
+html[data-theme="light"] .app-shell .main-content [class*="viewButtonActive"],
+html:not([data-theme]) .app-shell .main-content [class*="viewButtonActive"] {
+  background: #2563eb !important;
+  border-color: #2563eb !important;
+  color: #ffffff !important;
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.28) !important;
+}
+
+html[data-theme="light"] .app-shell .main-content [class*="smartToolbar"],
+html:not([data-theme]) .app-shell .main-content [class*="smartToolbar"],
+html[data-theme="light"] .app-shell .main-content [class*="calendarNavigation"],
+html:not([data-theme]) .app-shell .main-content [class*="calendarNavigation"],
+html[data-theme="light"] .app-shell .main-content [class*="calendarArea"],
+html:not([data-theme]) .app-shell .main-content [class*="calendarArea"] {
+  background: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  color: #0b1f3a !important;
+  background-image: none !important;
+}
+
+html[data-theme="light"] .app-shell .main-content [class*="fixtureCard"],
+html:not([data-theme]) .app-shell .main-content [class*="fixtureCard"] {
+  background: #ffffff !important;
+  border: 1px solid #e5eef8 !important;
+  border-radius: 16px !important;
+  box-shadow: 0 3px 14px rgba(15, 35, 70, 0.05) !important;
+}
+
+html[data-theme="light"] .app-shell .main-content [class*="fixtureDecision"],
+html:not([data-theme]) .app-shell .main-content [class*="fixtureDecision"],
+html[data-theme="light"] .app-shell .main-content [class*="publishedReason"],
+html:not([data-theme]) .app-shell .main-content [class*="publishedReason"] {
+  background: #ecfdf5 !important;
+  background-image: none !important;
+  border: 1px solid #a7f3d0 !important;
+  border-radius: 14px !important;
+  color: #0b1f3a !important;
+  box-shadow: none !important;
+}
+
+html[data-theme="light"] .app-shell .main-content [class*="publishedReason"]::before,
+html:not([data-theme]) .app-shell .main-content [class*="publishedReason"]::before {
+  color: #059669 !important;
+}
+
+html[data-theme="light"] .app-shell .main-content [class*="publishedReason"] > strong,
+html:not([data-theme]) .app-shell .main-content [class*="publishedReason"] > strong,
+html[data-theme="light"] .app-shell .main-content [class*="fixtureTeams"] strong,
+html:not([data-theme]) .app-shell .main-content [class*="fixtureTeams"] strong {
+  color: #0b1f3a !important;
+}
+
+html[data-theme="light"] .app-shell .main-content [class*="fixtureMeta"] span,
+html:not([data-theme]) .app-shell .main-content [class*="fixtureMeta"] span {
+  color: #2563eb !important;
+}
+
+html[data-theme="light"] .app-shell .main-content [class*="confidenceBox"],
+html:not([data-theme]) .app-shell .main-content [class*="confidenceBox"] {
+  background: #059669 !important;
+  background-image: none !important;
+  color: #ffffff !important;
+  border-radius: 12px !important;
+}
+
+html[data-theme="light"] .app-shell .main-content [class*="confidenceBox"] b,
+html[data-theme="light"] .app-shell .main-content [class*="confidenceBox"] small,
+html:not([data-theme]) .app-shell .main-content [class*="confidenceBox"] b,
+html:not([data-theme]) .app-shell .main-content [class*="confidenceBox"] small {
+  color: #ffffff !important;
+}
+
+html[data-theme="light"] .app-shell .main-content [class*="liveBadge"],
+html:not([data-theme]) .app-shell .main-content [class*="liveBadge"] {
+  background: #d1fae5 !important;
+  border-color: #6ee7b7 !important;
+  color: #047857 !important;
+}
+
+html[data-theme="light"] .app-shell .main-content [class*="resetButton"],
+html:not([data-theme]) .app-shell .main-content [class*="resetButton"] {
+  background: #ffffff !important;
+  border: 1px solid #93c5fd !important;
+  color: #1d4ed8 !important;
+}
+
+@media (max-width: 800px) {
+  html[data-theme="light"] .app-shell .main-content [class*="fixtureCard"],
+  html:not([data-theme]) .app-shell .main-content [class*="fixtureCard"] {
+    grid-template-columns: 1fr !important;
+  }
+  html[data-theme="light"] .app-shell .main-content [class*="fixtureDecision"],
+  html:not([data-theme]) .app-shell .main-content [class*="fixtureDecision"] {
+    margin: 0 10px 10px !important;
+    border-left: 1px solid #a7f3d0 !important;
+    border-top: 1px solid #a7f3d0 !important;
+  }
+}
+
+/*
+ * REAL recommended cards use .prediction-card-smart + .smart-best-pick
+ * (not CSS-module fixtureCard). This was the dark-teal mismatch.
+ */
+html[data-theme="light"] .app-shell .main-content .prediction-card-smart,
+html:not([data-theme]) .app-shell .main-content .prediction-card-smart,
+html[data-theme="light"] .app-shell .main-content .prediction-card-pro,
+html:not([data-theme]) .app-shell .main-content .prediction-card-pro {
+  border: 1px solid #e5eef8 !important;
+  border-radius: 16px !important;
+  background: #ffffff !important;
+  background-image: none !important;
+  box-shadow: 0 3px 14px rgba(15, 35, 70, 0.05) !important;
+  color: #0b1f3a !important;
+}
+
+html[data-theme="light"] .app-shell .main-content .smart-match-meta,
+html:not([data-theme]) .app-shell .main-content .smart-match-meta {
+  border-bottom: 1px solid #eef2f7 !important;
+  color: #64748b !important;
+  background: transparent !important;
+}
+
+html[data-theme="light"] .app-shell .main-content .smart-match-meta > span:first-child,
+html:not([data-theme]) .app-shell .main-content .smart-match-meta > span:first-child {
+  color: #2563eb !important;
+  font-weight: 800 !important;
+}
+
+html[data-theme="light"] .app-shell .main-content .smart-match-meta > strong,
+html:not([data-theme]) .app-shell .main-content .smart-match-meta > strong,
+html[data-theme="light"] .app-shell .main-content .smart-team-matchup .prediction-team strong,
+html:not([data-theme]) .app-shell .main-content .smart-team-matchup .prediction-team strong {
+  color: #0b1f3a !important;
+}
+
+html[data-theme="light"] .app-shell .main-content .smart-best-pick,
+html:not([data-theme]) .app-shell .main-content .smart-best-pick {
+  border: 1px solid #a7f3d0 !important;
+  border-radius: 14px !important;
+  background: #ecfdf5 !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  color: #0b1f3a !important;
+}
+
+html[data-theme="light"] .app-shell .main-content .smart-pick-copy > span,
+html:not([data-theme]) .app-shell .main-content .smart-pick-copy > span {
+  color: #059669 !important;
+  font-weight: 800 !important;
+}
+
+html[data-theme="light"] .app-shell .main-content .smart-pick-copy > strong,
+html:not([data-theme]) .app-shell .main-content .smart-pick-copy > strong {
+  color: #0b1f3a !important;
+  font-weight: 700 !important;
+}
+
+html[data-theme="light"] .app-shell .main-content .smart-pick-copy > small,
+html:not([data-theme]) .app-shell .main-content .smart-pick-copy > small {
+  color: #64748b !important;
+}
+
+html[data-theme="light"] .app-shell .main-content .smart-pick-score,
+html:not([data-theme]) .app-shell .main-content .smart-pick-score {
+  border-left: 0 !important;
+  padding: 8px 10px !important;
+  border-radius: 12px !important;
+  background: #059669 !important;
+  min-width: 64px !important;
+}
+
+html[data-theme="light"] .app-shell .main-content .smart-pick-score > strong,
+html:not([data-theme]) .app-shell .main-content .smart-pick-score > strong {
+  color: #ffffff !important;
+  font-size: 1.15rem !important;
+}
+
+html[data-theme="light"] .app-shell .main-content .smart-pick-score .prediction-confidence-badge,
+html:not([data-theme]) .app-shell .main-content .smart-pick-score .prediction-confidence-badge,
+html[data-theme="light"] .app-shell .main-content .smart-pick-score > span,
+html:not([data-theme]) .app-shell .main-content .smart-pick-score > span {
+  background: transparent !important;
+  border: 0 !important;
+  color: rgba(255, 255, 255, 0.92) !important;
+  font-size: 0.58rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.04em;
+}
+
+html[data-theme="light"] .app-shell .main-content .smart-outcome-strip > span,
+html:not([data-theme]) .app-shell .main-content .smart-outcome-strip > span {
+  border: 1px solid #d7e4f4 !important;
+  background: #ffffff !important;
+  color: #475569 !important;
+}
+
+html[data-theme="light"] .app-shell .main-content .smart-outcome-strip b,
+html:not([data-theme]) .app-shell .main-content .smart-outcome-strip b {
+  color: #0b1f3a !important;
+}
+
+html[data-theme="light"] .app-shell .main-content .prediction-form-tip,
+html:not([data-theme]) .app-shell .main-content .prediction-form-tip {
+  color: #475569 !important;
+  padding: 0 14px 12px !important;
+}
+
+html[data-theme="light"] .app-shell .main-content .prediction-entry .match-analysis-toggle,
+html:not([data-theme]) .app-shell .main-content .prediction-entry .match-analysis-toggle {
+  background: #f1f5f9 !important;
+  border-color: #e2e8f0 !important;
+  color: #334155 !important;
+}
+
+@media (max-width: 680px) {
+  html[data-theme="light"] .app-shell .main-content .smart-match-main,
+  html:not([data-theme]) .app-shell .main-content .smart-match-main {
+    grid-template-columns: 1fr !important;
+  }
+}
