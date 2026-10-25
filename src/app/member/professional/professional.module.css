@@ -70,3 +70,34 @@
   background: #43e3a1 !important;
   color: #03150e !important;
 }
+
+/* theme-contrast: filters buttons */
+.filters button{
+  display:inline-flex;align-items:center;justify-content:center;
+  height:42px;border:1px solid transparent;border-radius:9px;padding:0 16px;
+  background:linear-gradient(135deg,#2ee6c2,#14b8a6);color:#042018;
+  font:inherit;font-weight:900;cursor:pointer;box-shadow:0 0 14px rgba(46,230,194,.22);
+}
+.filters button:hover{filter:brightness(1.05)}
+.filters>a{
+  display:inline-flex;align-items:center;justify-content:center;
+  height:42px;border:1px solid #d5deea;border-radius:9px;padding:0 14px;
+  background:#f8fafc;color:#374151;font-weight:800;text-decoration:none;
+}
+.filters>a:hover{border-color:#93c5fd;color:#1d4ed8;background:#eff6ff}
+.historyList summary b{color:#0b1f3a}
+.footer b{color:#0b1f3a}
+.playerTools button,.scorerTools button{
+  border:1px solid transparent!important;
+  background:linear-gradient(135deg,#2ee6c2,#14b8a6)!important;
+  color:#042018!important;font-weight:900;cursor:pointer;
+}
+
+:global(html[data-theme="dark"]) .filters button{
+  background:linear-gradient(135deg,#2ee6c2,#14b8a6);color:#042018;border-color:transparent;
+}
+:global(html[data-theme="dark"]) .filters>a{
+  border-color:#2a4660;background:#0a1a2b;color:#c5d7e8;
+}
+:global(html[data-theme="dark"]) .historyList summary b{color:#eaf4fc}
+:global(html[data-theme="dark"]) .footer b{color:#f7fbff}

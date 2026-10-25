@@ -559,3 +559,49 @@
   background: #f9fafb !important;
   border-color: #e5e7eb !important;
 }
+
+/* theme-contrast: value text */
+:global(html[data-theme="light"]) .team strong,
+:global(html:not([data-theme])) .team strong,
+:global(html[data-theme="light"]) .cardTop,
+:global(html:not([data-theme])) .cardTop,
+:global(html[data-theme="light"]) .rank,
+:global(html:not([data-theme])) .rank {
+  color: #0b1f3a !important;
+}
+
+:global(html[data-theme="light"]) .stat span,
+:global(html:not([data-theme])) .stat span,
+:global(html[data-theme="light"]) .field span,
+:global(html:not([data-theme])) .field span,
+:global(html[data-theme="light"]) .meta,
+:global(html:not([data-theme])) .meta {
+  color: #6b7280 !important;
+}
+
+:global(html[data-theme="light"]) .stat b,
+:global(html:not([data-theme])) .stat b,
+:global(html[data-theme="light"]) .stat strong,
+:global(html:not([data-theme])) .stat strong {
+  color: #0b1f3a !important;
+}
+
+:global(html[data-theme="light"]) .stat em,
+:global(html:not([data-theme])) .stat em {
+  color: #2563eb !important;
+}
+
+:global(html[data-theme="light"]) .meta strong,
+:global(html:not([data-theme])) .meta strong {
+  color: #2563eb !important;
+}
+
+:global(html[data-theme="light"]) .versus,
+:global(html:not([data-theme])) .versus {
+  color: #9ca3af !important;
+}
+
+:global(html[data-theme="light"]) .barTrack,
+:global(html:not([data-theme])) .barTrack {
+  background: #e5e7eb !important;
+}

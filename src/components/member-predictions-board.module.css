@@ -1081,3 +1081,21 @@
   border-color: #e2e8f0;
   box-shadow: 0 4px 16px rgba(15, 35, 70, 0.06);
 }
+
+:global(html[data-theme="light"]) .pickChip,
+:global(html:not([data-theme])) .pickChip {
+  border-color: #e5e7eb;
+  background: #f9fafb;
+}
+
+:global(html[data-theme="light"]) .pickChip span,
+:global(html:not([data-theme])) .pickChip span {
+  color: #6b7280 !important;
+}
+
+:global(html[data-theme="light"]) .cardBody,
+:global(html:not([data-theme])) .cardBody,
+:global(html[data-theme="light"]) .matchTitle,
+:global(html:not([data-theme])) .matchTitle {
+  color: #0b1f3a;
+}

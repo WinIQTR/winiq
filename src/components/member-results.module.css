@@ -493,3 +493,31 @@
 :global(html:not([data-theme])) .barTrack {
   background: #e5e7eb !important;
 }
+
+:global(html[data-theme="light"]) .teamLine strong,
+:global(html:not([data-theme])) .teamLine strong {
+  color: #0b1f3a !important;
+}
+
+:global(html[data-theme="light"]) .meta,
+:global(html:not([data-theme])) .meta {
+  color: #6b7280 !important;
+}
+
+:global(html[data-theme="light"]) .meta strong,
+:global(html:not([data-theme])) .meta strong {
+  color: #2563eb !important;
+}
+
+:global(html[data-theme="light"]) .logoFall,
+:global(html:not([data-theme])) .logoFall {
+  background: #f3f4f6 !important;
+  color: #4b5563 !important;
+}
+
+:global(html[data-theme="light"]) .detail,
+:global(html:not([data-theme])) .detail {
+  background: #ffffff;
+  color: #059669;
+  border-color: rgba(16, 185, 129, 0.55);
+}

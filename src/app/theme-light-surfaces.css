@@ -312,3 +312,69 @@ html:not([data-theme]) .loading-card > * {
   position: relative;
   z-index: 1;
 }
+
+/* Prediction / smart cards — force dark text on white light cards */
+html[data-theme="light"] .prediction-card-smart,
+html:not([data-theme]) .prediction-card-smart,
+html[data-theme="light"] .prediction-card-pro,
+html:not([data-theme]) .prediction-card-pro,
+html[data-theme="light"] .prediction-card-simple,
+html:not([data-theme]) .prediction-card-simple,
+html[data-theme="light"] .prediction-card,
+html:not([data-theme]) .prediction-card {
+  color: #0b1f3a;
+}
+
+html[data-theme="light"] .prediction-card-simple .teams strong,
+html:not([data-theme]) .prediction-card-simple .teams strong,
+html[data-theme="light"] .prediction-card-pro .teams strong,
+html:not([data-theme]) .prediction-card-pro .teams strong,
+html[data-theme="light"] .smart-match-meta > strong,
+html:not([data-theme]) .smart-match-meta > strong {
+  color: #0b1f3a !important;
+}
+
+html[data-theme="light"] .prediction-card-simple .teams span,
+html:not([data-theme]) .prediction-card-simple .teams span,
+html[data-theme="light"] .prediction-card-simple .kickoff,
+html:not([data-theme]) .prediction-card-simple .kickoff {
+  color: #6b7280 !important;
+}
+
+/* Shared CTA / secondary buttons (admin + member) */
+html[data-theme="light"] .btn-primary,
+html:not([data-theme]) .btn-primary,
+html[data-theme="light"] button[type="submit"].primary,
+html:not([data-theme]) button[type="submit"].primary {
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #2ee6c2, #14b8a6);
+  color: #042018;
+  font-weight: 900;
+}
+
+html[data-theme="dark"] .btn-primary,
+html[data-theme="dark"] button[type="submit"].primary {
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #2ee6c2, #14b8a6);
+  color: #042018;
+  font-weight: 900;
+}
+
+html[data-theme="light"] .btn-secondary,
+html:not([data-theme]) .btn-secondary {
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  background: #f9fafb;
+  color: #374151;
+  font-weight: 800;
+}
+
+html[data-theme="dark"] .btn-secondary {
+  border: 1px solid rgba(70, 110, 170, 0.45);
+  border-radius: 10px;
+  background: #0a1526;
+  color: #d7e7ff;
+  font-weight: 800;
+}
