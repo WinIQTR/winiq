@@ -2,7 +2,15 @@
 
 import { FormEvent, useState } from "react";
 
-export function LoginForm() {
+export function LoginForm({
+  className = "login-form",
+  submitClassName,
+  errorClassName = "login-error",
+}: {
+  className?: string;
+  submitClassName?: string;
+  errorClassName?: string;
+}) {
   const [message, setMessage] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
@@ -31,23 +39,39 @@ export function LoginForm() {
       return;
     }
 
-    setMessage(result.message ?? "Giriş yapılamadı.");
+    setMessage(result.message ?? "Sign-in failed.");
     setSubmitting(false);
   }
 
   return (
-    <form className="login-form" onSubmit={submit}>
+    <form className={className} onSubmit={submit}>
       <label>
-        E-posta
-        <input name="email" type="email" autoComplete="email" required />
+        Email
+        <input
+          name="email"
+          type="email"
+          autoComplete="email"
+          required
+          placeholder="Enter your email"
+        />
       </label>
       <label>
-        Şifre
-        <input name="password" type="password" autoComplete="current-password" required />
+        Password
+        <input
+          name="password"
+          type="password"
+          autoComplete="current-password"
+          required
+          placeholder="Enter your password"
+        />
       </label>
-      {message ? <p className="login-error" role="alert">{message}</p> : null}
-      <button type="submit" disabled={submitting}>
-        {submitting ? "Kontrol ediliyor…" : "Giriş yap"}
+      {message ? (
+        <p className={errorClassName} role="alert">
+          {message}
+        </p>
+      ) : null}
+      <button className={submitClassName} type="submit" disabled={submitting}>
+        {submitting ? "Signing in…" : "Sign in"}
       </button>
     </form>
   );

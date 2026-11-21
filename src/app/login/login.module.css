@@ -1,0 +1,232 @@
+.shell {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  overflow: hidden;
+  padding: clamp(20px, 4vw, 40px);
+  color: #f5f8fc;
+  background: #05070d;
+}
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 55% 40% at 18% 12%, rgba(255, 255, 255, 0.22), transparent 55%),
+    radial-gradient(ellipse 50% 38% at 84% 10%, rgba(255, 255, 255, 0.18), transparent 52%),
+    radial-gradient(ellipse 45% 35% at 50% 88%, rgba(34, 197, 94, 0.18), transparent 60%),
+    #05070d;
+}
+
+.backdropImage {
+  position: absolute;
+  inset: 0;
+  object-fit: cover;
+  object-position: center 35%;
+  width: 100%;
+  height: 100%;
+  opacity: 0.72;
+  filter: saturate(1.05) contrast(1.05);
+}
+
+.backdropScrim {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(180deg, rgba(5, 8, 14, 0.55) 0%, rgba(5, 8, 14, 0.42) 45%, rgba(5, 8, 14, 0.78) 100%),
+    radial-gradient(ellipse 70% 55% at 50% 45%, transparent 20%, rgba(5, 8, 14, 0.55) 100%);
+}
+
+.card {
+  position: relative;
+  width: min(420px, 100%);
+  border: 1px solid rgba(96, 165, 250, 0.45);
+  border-radius: 22px;
+  padding: 28px 28px 24px;
+  background: linear-gradient(165deg, rgba(10, 16, 28, 0.94), rgba(7, 12, 22, 0.92));
+  box-shadow:
+    0 0 0 1px rgba(59, 130, 246, 0.12),
+    0 28px 80px rgba(0, 0, 0, 0.55),
+    0 0 48px rgba(37, 99, 235, 0.12);
+  backdrop-filter: blur(18px);
+}
+
+.language {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 18px;
+}
+
+.language :global(.language-switcher) {
+  width: auto;
+  margin: 0;
+  gap: 8px;
+  align-items: center;
+}
+
+.language :global(.language-switcher > span) {
+  color: #8fa3bb;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.language :global(.language-switcher-options) {
+  display: inline-flex;
+  min-width: 0;
+  padding: 3px;
+  border: 1px solid rgba(100, 130, 170, 0.35);
+  border-radius: 999px;
+  background: rgba(8, 14, 26, 0.9);
+}
+
+.language :global(.language-option) {
+  min-width: 42px;
+  min-height: 34px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: #9db0c8;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.language :global(.language-option-active) {
+  background: #2563eb;
+  color: #fff;
+}
+
+.brand {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 22px;
+  justify-items: start;
+}
+
+.mark {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border-radius: 10px;
+  background: #22c55e;
+  color: #04120a;
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  box-shadow: 0 0 24px rgba(34, 197, 94, 0.35);
+}
+
+.brandName {
+  margin: 0;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+}
+
+.brandRule {
+  width: 42px;
+  height: 3px;
+  border-radius: 999px;
+  background: #22c55e;
+}
+
+.title {
+  margin: 0 0 8px;
+  color: #fff;
+  font-size: clamp(28px, 4vw, 34px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+
+.lede {
+  margin: 0 0 22px;
+  color: #9aa8bc;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.form {
+  display: grid;
+  gap: 16px;
+  margin: 0 0 18px;
+}
+
+.form label {
+  display: grid;
+  gap: 8px;
+  color: #e8eef8;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.form input {
+  min-height: 48px;
+  padding: 0 14px;
+  border: 1px solid rgba(100, 130, 170, 0.35);
+  border-radius: 12px;
+  outline: none;
+  background: rgba(8, 14, 26, 0.92);
+  color: #f5f8fc;
+  font-size: 14px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.form input::placeholder {
+  color: #7f93ad;
+}
+
+.form input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.22);
+}
+
+.error {
+  margin: 0;
+  color: #ff9b9b;
+  font-size: 13px;
+}
+
+.submit {
+  min-height: 48px;
+  border: 0;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #3b82f6 0%, #2563eb 100%);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 10px 28px rgba(37, 99, 235, 0.35);
+}
+
+.submit:hover:not(:disabled),
+.submit:focus-visible {
+  background: linear-gradient(180deg, #4b8fff 0%, #2f6fed 100%);
+  outline: none;
+}
+
+.submit:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+.footnote {
+  display: block;
+  color: #8799ae;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 22px 18px 20px;
+  }
+}

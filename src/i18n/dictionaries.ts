@@ -513,8 +513,12 @@ entries.push(
   { en: "Securely access your daily football predictions.", tr: "Günlük futbol tahminlerinize güvenli biçimde ulaşın." },
   { en: "Accounts are created with administrator approval. Public registration is disabled.", tr: "Hesaplar yönetici onayıyla oluşturulur. Açık üyelik kapalıdır." },
   { en: "Password", tr: "Şifre" },
+  { en: "Enter your email", tr: "E-postanızı girin" },
+  { en: "Enter your password", tr: "Şifrenizi girin" },
+  { en: "Sign-in failed.", tr: "Giriş yapılamadı." },
   { en: "Signing in…", tr: "Kontrol ediliyor…" },
   { en: "Sign in", tr: "Giriş yap" },
+  { en: "LANGUAGE", tr: "DİL" },
   { en: "Member Login", tr: "Üye Girişi" },
   { en: "AI FOOTBALL PREDICTIONS", tr: "YAPAY ZEKÂ FUTBOL TAHMİNLERİ" },
   {
