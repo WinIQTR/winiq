@@ -1,3 +1,4 @@
+import { AdminPerformanceTabs } from "@/components/admin-performance-tabs";
 import { MarketPerformanceWorkspace } from "@/components/market-performance-workspace";
 import { PageShell } from "@/components/page-shell";
 import { ACTIVE_SEASON_LABEL } from "@/config/season";
@@ -25,6 +26,7 @@ export default async function MatchResultPerformancePage() {
   return (
     <PageShell>
       <main className={styles.page}>
+        <AdminPerformanceTabs active="markets" />
         <MarketPerformanceWorkspace
           marketTypes={MARKET_PERFORMANCE_TYPES}
           rows={rows.map((row) => ({

@@ -1,3 +1,4 @@
+import { AdminPerformanceTabs } from "@/components/admin-performance-tabs";
 import { PageShell } from "@/components/page-shell";
 import { PredictionsWorkspace } from "@/components/predictions-workspace";
 import { ACTIVE_SEASON_YEAR, isDateInSeason } from "@/config/season";
@@ -75,6 +76,7 @@ export default async function PredictionResultsPage() {
 
   return (
     <PageShell>
+      <AdminPerformanceTabs active="results" />
       <header className={styles.header}>
         <div>
           <p className={styles.eyebrow}>SONUÇ ARŞİVİ · {ACTIVE_SEASON_YEAR}</p>

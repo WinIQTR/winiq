@@ -1,66 +1,43 @@
+import Link from "next/link";
+
 import { PageShell } from "@/components/page-shell";
+import { ACTIVE_SEASON_LABEL, ACTIVE_SEASON_YEAR } from "@/config/season";
+import { requireAdmin } from "@/lib/auth-session";
 
-import {
-  ACTIVE_SEASON_LABEL,
-  ACTIVE_SEASON_YEAR,
-} from "@/config/season";
+export default async function SettingsPage() {
+  await requireAdmin();
 
-export default function SettingsPage() {
   return (
     <PageShell>
       <header className="topbar">
         <div>
-          <p className="eyebrow">SETTINGS</p>
+          <p className="eyebrow">AYARLAR</p>
           <h1>Ayarlar</h1>
-          <p className="subtitle">
-            Lig, sezon ve tahmin çalışma ayarları.
-          </p>
+          <p className="subtitle">Canlı sezon ve operasyon kısayolları (salt okunur).</p>
         </div>
       </header>
 
       <section className="admin-card settings-card">
-        <label className="field">
-          <span>Lig</span>
-
-          <select defaultValue="39">
-            <option value="39">
-              Premier League
-            </option>
-          </select>
-        </label>
-
-        <label className="field">
-          <span>Sezon</span>
-
-          <select defaultValue={String(ACTIVE_SEASON_YEAR)}>
-            <option value={String(ACTIVE_SEASON_YEAR)}>
-              {ACTIVE_SEASON_LABEL} Canlı
-            </option>
-          </select>
-        </label>
-
-        <label className="field">
-          <span>Minimum tahmin olasılığı</span>
-
-          <select defaultValue="57">
-            <option value="55">%55</option>
-            <option value="57">%57</option>
-            <option value="60">%60</option>
-            <option value="65">%65</option>
-          </select>
-        </label>
-
-        <button
-          className="primary-button settings-save"
-          type="button"
-        >
-          Ayarları kaydet
-        </button>
-
+        <p className="eyebrow">CANLI SEZON</p>
+        <h2>
+          {ACTIVE_SEASON_LABEL} ({ACTIVE_SEASON_YEAR})
+        </h2>
         <p className="subtitle">
-          Canlı sayfalar yalnızca {ACTIVE_SEASON_LABEL} sezonunu kullanır.
-          Tarihsel model testleri üretim verisine karıştırılmaz.
+          Canlı sayfalar yalnızca bu sezonu kullanır. Sezon değişimi ortam / config ile yapılır;
+          bu ekranda kayıtlı form yoktur.
         </p>
+
+        <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 16 }}>
+          <Link className="member-plan-link" href="/operations">
+            Operasyon paneli →
+          </Link>
+          <Link className="member-plan-link" href="/admin/data-coverage">
+            Veri kapsamı →
+          </Link>
+          <Link className="member-plan-link" href="/admin/members/preview?plan=PROFESSIONAL">
+            Üye önizleme →
+          </Link>
+        </div>
       </section>
     </PageShell>
   );

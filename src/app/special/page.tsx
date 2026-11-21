@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { PageShell } from "@/components/page-shell";
 import {
   SpecialListView,
@@ -88,6 +90,22 @@ export default async function SpecialPage({
 
   return (
     <PageShell>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-end",
+          gap: 12,
+          padding: "12px 24px 0",
+          flexWrap: "wrap",
+        }}
+      >
+        <Link className="member-plan-link" href="/special">
+          Special List
+        </Link>
+        <Link className="member-plan-link" href="/value-bets">
+          Değerli bahisler →
+        </Link>
+      </div>
       <SpecialListView
         surface="admin"
         action="/special"

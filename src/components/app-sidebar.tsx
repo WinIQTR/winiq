@@ -6,34 +6,25 @@ import { ThemeToggle } from "@/components/theme-toggle";
 type NavItem = { href: string; label: string };
 type NavGroup = { title: string; items: NavItem[] };
 
+/** Slim admin nav — clutter cut list. Deep links still work if bookmarked. */
 const groups: NavGroup[] = [
   {
     title: "Live",
     items: [
-      { href: "/admin-dashboard", label: "Dashboard" },
       { href: "/predictions", label: "Predictions" },
-      { href: "/special", label: "Special list" },
-      { href: "/value-bets", label: "Value bets" },
+      { href: "/special", label: "Shortlists" },
+      { href: "/coupons", label: "Coupon centre" },
     ],
   },
   {
     title: "Performance",
-    items: [
-      { href: "/prediction-results", label: "Prediction results" },
-      { href: "/match-result-performance", label: "Market performance" },
-      { href: "/coupons", label: "Coupon centre" },
-      { href: "/evaluation", label: "Model Performance" },
-    ],
+    items: [{ href: "/evaluation", label: "Performance" }],
   },
   {
-    title: "Data",
+    title: "Ops",
     items: [
-      { href: "/fixtures", label: "Fixtures" },
-      { href: "/teams", label: "Teams" },
-      { href: "/players", label: "Players" },
-      { href: "/top-scorers", label: "Top scorers" },
-      { href: "/admin/data-coverage", label: "Data coverage" },
       { href: "/operations", label: "Operations" },
+      { href: "/admin/data", label: "Data centre" },
     ],
   },
   {
@@ -45,11 +36,7 @@ const groups: NavGroup[] = [
   },
   {
     title: "System",
-    items: [
-      { href: "/admin", label: "System health" },
-      { href: "/admin-dashboard/mobile", label: "Mobile preview" },
-      { href: "/settings", label: "Settings" },
-    ],
+    items: [{ href: "/settings", label: "Settings" }],
   },
 ];
 
@@ -82,13 +69,12 @@ export function AppSidebar() {
       </div>
 
       <div className="sidebar-footer">
-        <div className="sidebar-utilities" style={{ display: "flex", gap: 8, alignItems: "center", marginBottom: 10 }}>
+        <div
+          className="sidebar-utilities"
+          style={{ display: "flex", gap: 8, alignItems: "center", marginBottom: 10 }}
+        >
           <ThemeToggle />
           <LanguageSwitcher hideLabel />
-        </div>
-        <div className="sidebar-status">
-          <span className="status-dot" />
-          System online
         </div>
         <LogoutButton />
       </div>

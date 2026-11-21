@@ -7,7 +7,7 @@ import { LanguageSwitcher } from "@/components/language-switcher";
 
 export default async function HomePage() {
   const user = await getCurrentUser();
-  if (user) redirect(user.role === "ADMIN" ? "/admin-dashboard" : "/member");
+  if (user) redirect(user.role === "ADMIN" ? "/predictions" : "/member");
 
   return (
     <main className="landing-shell">

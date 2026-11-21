@@ -1,3 +1,4 @@
+import { AdminPerformanceTabs } from "@/components/admin-performance-tabs";
 import { PageShell } from "@/components/page-shell";
 import type { CSSProperties } from "react";
 import { PredictionHistoryWorkspace } from "@/components/prediction-history-workspace";
@@ -85,12 +86,13 @@ export default async function EvaluationPage() {
   return (
     <PageShell>
       <main className={styles.page}>
+        <AdminPerformanceTabs active="model" />
         <header className={styles.hero}>
           <div className={styles.headerCopy}>
             <p className={styles.eyebrow}>
               ÜRETİM ARŞİVİ • {ACTIVE_SEASON_LABEL}
             </p>
-            <h1 className={styles.title}>Akıllı Tahmin Performansı</h1>
+            <h1 className={styles.title}>Model performansı</h1>
             <p className={styles.subtitle}>
               Yayımlanmış tahminlerin gerçek maç sonuçlarına göre doğrulanmış,
               sade ve karşılaştırılabilir performans merkezi. Yalnızca maçtan

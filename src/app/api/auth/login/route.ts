@@ -62,6 +62,6 @@ export async function POST(request: NextRequest) {
 
   return NextResponse.json({
     success: true,
-    destination: user.role === "ADMIN" ? "/admin-dashboard" : "/member",
+    destination: user.role === "ADMIN" ? "/predictions" : "/member",
   });
 }

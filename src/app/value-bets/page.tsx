@@ -612,31 +612,95 @@ export default async function ValueBetsPage() {
         </section>
       )}
 
-      <ValueBetAccuracyDashboard report={accuracy} />
-      <HistoricalLearningPanel report={learning} />
-      <LeagueProfilePanel report={leagueProfiles} />
-      <ChampionChallengerPanel audit={championChallenger} />
-      <ModelHealthPanel report={modelHealth} />
+      <details className={styles.panel} style={{ padding: 16 }}>
+        <summary style={{ cursor: "pointer", fontWeight: 800, color: "#0b1f3a" }}>
+          Araştırma ve model sağlığı (opsiyonel)
+        </summary>
+        <div style={{ display: "grid", gap: 16, marginTop: 16 }}>
+          <ValueBetAccuracyDashboard report={accuracy} />
+          <HistoricalLearningPanel report={learning} />
+          <LeagueProfilePanel report={leagueProfiles} />
+          <ChampionChallengerPanel audit={championChallenger} />
+          <ModelHealthPanel report={modelHealth} />
 
-      <section className={styles.panel}>
-        <div className={styles.panelHeader}><div><h2>Value Bet History</h2><p>Immutable prices and model probabilities captured before kickoff.</p></div></div>
-        {data.settled.length === 0 ? (
-          <div className={styles.emptyState}><h2>No settled Value Bets yet</h2><p>Results will appear automatically after final scores are imported.</p></div>
-        ) : (
-          <div className={styles.tableWrap}><table className={styles.table}>
-            <thead><tr><th>MATCH</th><th>PICK</th><th>ODDS</th><th>EV</th><th>SCORE</th><th>RESULT</th><th>PROFIT</th></tr></thead>
-            <tbody>{data.settled.map((row) => (
-              <tr key={row.id ?? `${row.matchId}-${row.marketKey}`}>
-                <td><div className={styles.match}><strong>{row.homeTeam} – {row.awayTeam}</strong><span className={styles.meta}>{row.leagueName} • {formatDate(row.kickoffAt)}</span></div></td>
-                <td>{row.market}<br /><strong>{row.selection}</strong></td><td>{formatOdds(row.bestOdds)}</td>
-                <td className={styles.positive}>{formatPercentage(row.expectedValue)}</td><td>{row.actualHomeScore ?? "—"} – {row.actualAwayScore ?? "—"}</td>
-                <td><span className={`${styles.badge} ${row.result === "WON" ? styles.won : row.result === "LOST" ? styles.lost : styles.void}`}>{row.result}</span></td>
-                <td className={(row.profitUnits ?? 0) >= 0 ? styles.positive : styles.negative}>{row.profitUnits?.toFixed(2) ?? "—"}</td>
-              </tr>
-            ))}</tbody>
-          </table></div>
-        )}
-      </section>
+          <section className={styles.panel}>
+            <div className={styles.panelHeader}>
+              <div>
+                <h2>Value Bet History</h2>
+                <p>Immutable prices and model probabilities captured before kickoff.</p>
+              </div>
+            </div>
+            {data.settled.length === 0 ? (
+              <div className={styles.emptyState}>
+                <h2>No settled Value Bets yet</h2>
+                <p>Results will appear automatically after final scores are imported.</p>
+              </div>
+            ) : (
+              <div className={styles.tableWrap}>
+                <table className={styles.table}>
+                  <thead>
+                    <tr>
+                      <th>MATCH</th>
+                      <th>PICK</th>
+                      <th>ODDS</th>
+                      <th>EV</th>
+                      <th>SCORE</th>
+                      <th>RESULT</th>
+                      <th>PROFIT</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {data.settled.map((row) => (
+                      <tr key={row.id ?? `${row.matchId}-${row.marketKey}`}>
+                        <td>
+                          <div className={styles.match}>
+                            <strong>
+                              {row.homeTeam} – {row.awayTeam}
+                            </strong>
+                            <span className={styles.meta}>
+                              {row.leagueName} • {formatDate(row.kickoffAt)}
+                            </span>
+                          </div>
+                        </td>
+                        <td>
+                          {row.market}
+                          <br />
+                          <strong>{row.selection}</strong>
+                        </td>
+                        <td>{formatOdds(row.bestOdds)}</td>
+                        <td className={styles.positive}>{formatPercentage(row.expectedValue)}</td>
+                        <td>
+                          {row.actualHomeScore ?? "—"} – {row.actualAwayScore ?? "—"}
+                        </td>
+                        <td>
+                          <span
+                            className={`${styles.badge} ${
+                              row.result === "WON"
+                                ? styles.won
+                                : row.result === "LOST"
+                                  ? styles.lost
+                                  : styles.void
+                            }`}
+                          >
+                            {row.result}
+                          </span>
+                        </td>
+                        <td
+                          className={
+                            (row.profitUnits ?? 0) >= 0 ? styles.positive : styles.negative
+                          }
+                        >
+                          {row.profitUnits?.toFixed(2) ?? "—"}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </section>
+        </div>
+      </details>
 
       <div className={styles.notice}>Value Bet is a statistical comparison, not a guarantee of profit. Portfolio stakes are capped at 6% per day and should remain within a separate betting bankroll.</div>
     </div></PageShell>

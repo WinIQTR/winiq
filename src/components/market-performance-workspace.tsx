@@ -214,7 +214,7 @@ export function MarketPerformanceWorkspace({ marketTypes, rows, seasonLabel }: {
       <header className={styles.hero}>
         <div>
           <p className={styles.eyebrow}>ÜRETİM ARŞİVİ • {seasonLabel}</p>
-          <h1>Akıllı Tahmin Performansı</h1>
+          <h1>Pazar performansı</h1>
           <p className={styles.subtitle}>
             {activeType.title} pazarı için maç öncesi model olasılığı ile gerçek sonuç yan yana.
             İade ve veri bekleyen kayıtlar başarı hesabına katılmaz.
