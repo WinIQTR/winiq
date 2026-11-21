@@ -233,6 +233,13 @@ export async function saveDashboardPredictionSnapshot(
       )
     : [];
 
+  if (!mergeExisting && archivedPredictions.length > 0) {
+    const { assertRefreshShrink } = await import(
+      "@/modules/prediction-audit/refresh-guard"
+    );
+    assertRefreshShrink(archivedPredictions.length, predictions.length);
+  }
+
   const mergedPredictions =
     mergeDashboardPredictionHistory(
       archivedPredictions,

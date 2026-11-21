@@ -179,6 +179,15 @@ export async function publishUpcomingPredictions(
   let published = 0;
   let duplicatesSkipped = 0;
   let kickoffSkipped = 0;
+  const ledgerCandidates: Array<{
+    fixtureId: string;
+    kickoffAt: Date;
+    leagueKey: string;
+    homeTeam: string;
+    awayTeam: string;
+    pick: "1" | "X" | "2";
+    pickWrittenAt: Date;
+  }> = [];
 
   for (const prediction of predictions) {
     if (
@@ -197,6 +206,19 @@ export async function publishUpcomingPredictions(
     const rows = prediction.topPicks.map(
       (pick) => {
         picksConsidered += 1;
+
+        const oneXTwoPick = inferOneXTwoPick(pick.selection, pick.market, pick.key);
+        if (oneXTwoPick && pick.rank === 1) {
+          ledgerCandidates.push({
+            fixtureId: String(prediction.matchId),
+            kickoffAt: prediction.kickoffAt,
+            leagueKey: String(prediction.leagueApiId),
+            homeTeam: prediction.homeTeam,
+            awayTeam: prediction.awayTeam,
+            pick: oneXTwoPick,
+            pickWrittenAt: now,
+          });
+        }
 
         return {
           matchId: prediction.matchId,
@@ -254,6 +276,13 @@ export async function publishUpcomingPredictions(
       rows.length - result.count;
   }
 
+  if (ledgerCandidates.length > 0) {
+    const { appendUpcomingPicksToLedger } = await import(
+      "@/modules/prediction-audit/pick-ledger-store"
+    );
+    await appendUpcomingPicksToLedger(ledgerCandidates, { now });
+  }
+
   return {
     matchesEvaluated: predictions.length,
     picksConsidered,
@@ -261,6 +290,21 @@ export async function publishUpcomingPredictions(
     duplicatesSkipped,
     kickoffSkipped,
   };
+}
+
+function inferOneXTwoPick(
+  selection: string,
+  market: string,
+  marketKey: string,
+): "1" | "X" | "2" | null {
+  const haystack = `${marketKey} ${market} ${selection}`.toLowerCase();
+  if (!/match.?result|1x2|full.?time|maç sonucu/.test(haystack)) {
+    return null;
+  }
+  if (/draw|beraber|x\b/.test(haystack)) return "X";
+  if (/away|deplasman|away win/.test(haystack)) return "2";
+  if (/home|ev sahibi|home win/.test(haystack)) return "1";
+  return null;
 }
 
 export async function settleArchivedPredictions(

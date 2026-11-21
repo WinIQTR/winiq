@@ -25,6 +25,7 @@
     "test:decision-engine-v1": "tsx scripts/test-decision-engine-v1.ts",
     "test:match-context-v1": "tsx scripts/test-match-context-engine-v1.ts",
     "test:bankroll-backtest-v1": "tsx scripts/test-bankroll-backtest-v1.ts",
+    "test:prediction-audit-v1": "tsx scripts/test-prediction-audit-v1.ts",
     "test:archive": "tsx scripts/test-prediction-archive.ts",
     "verify:v1": "tsx scripts/verify-production-v1.ts",
     "verify:v2": "tsx scripts/verify-production-v2.ts",

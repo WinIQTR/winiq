@@ -7,6 +7,10 @@ import {
   ACTIVE_SEASON_LABEL,
   ACTIVE_SEASON_YEAR,
 } from "@/config/season";
+import {
+  buildPredictionAuditReport,
+  softPredictionsToOneXTwo,
+} from "@/modules/prediction-audit";
 import styles from "./evaluation-page.module.css";
 
 function formatPercentage(value: number): string {
@@ -82,6 +86,31 @@ export default async function EvaluationPage() {
       : summary.accuracy >= 52
         ? styles.healthStable
         : styles.healthReview;
+  const auditRows = softPredictionsToOneXTwo(
+    predictions.map((prediction) => ({
+      matchId: prediction.matchId,
+      leagueName: prediction.leagueName,
+      kickoffAt: prediction.kickoffAt,
+      homeTeam: prediction.homeTeam,
+      awayTeam: prediction.awayTeam,
+      predictedOutcome: prediction.predictedOutcome,
+      predictedProbability: prediction.predictedProbability,
+      actualHomeScore: prediction.actualHomeScore,
+      actualAwayScore: prediction.actualAwayScore,
+      actualOutcome: prediction.actualOutcome,
+      isCorrect: prediction.isCorrect,
+      modelVersion: prediction.modelVersion,
+      publishedAt: prediction.publishedAt,
+      firstSeenAt: prediction.publishedAt,
+      marketKey: prediction.marketKey,
+      selection: prediction.selection,
+    })),
+  );
+  const audit = buildPredictionAuditReport(auditRows);
+  const formatRate = (value: number | null) =>
+    value === null ? "—" : `${(value * 100).toFixed(1)}%`;
+  const formatBrier = (value: number | null) =>
+    value === null ? "—" : value.toFixed(4);
 
   return (
     <PageShell>
@@ -221,6 +250,134 @@ export default async function EvaluationPage() {
                   <p>Yüksek güvenli seçimlerin genel başarıya göre performansı.</p>
                 </div>
               </article>
+            </section>
+
+            <section className={styles.panel}>
+              <div className={styles.compactPanelHeader}>
+                <div>
+                  <div className={styles.panelTitle}>OPEN-DATA AUDIT · BASELINES</div>
+                  <small>
+                    Home-pick ve uniform ⅓ Brier referansları · pick kalibrasyon · lig rollup · favori dilimleri
+                  </small>
+                </div>
+                <span>{audit.baselines.matches} 1X2</span>
+              </div>
+              <div className={styles.kpiGrid} style={{ marginTop: 12 }}>
+                <article className={`${styles.kpiCard} ${styles.kpiBlue}`}>
+                  <div className={styles.kpiContent}>
+                    <span>PICK HIT</span>
+                    <strong>{formatRate(audit.baselines.modelPickHitRate)}</strong>
+                    <small>
+                      vs home {formatRate(audit.baselines.homePickHitRate)}
+                      {audit.baselines.hitRateVsHomePp !== null
+                        ? ` (${audit.baselines.hitRateVsHomePp >= 0 ? "+" : ""}${audit.baselines.hitRateVsHomePp.toFixed(1)} pp)`
+                        : ""}
+                    </small>
+                  </div>
+                </article>
+                <article className={`${styles.kpiCard} ${styles.kpiGreen}`}>
+                  <div className={styles.kpiContent}>
+                    <span>BRIER</span>
+                    <strong>{formatBrier(audit.baselines.modelBrier)}</strong>
+                    <small>
+                      uniform {audit.baselines.uniformBrier.toFixed(4)}
+                      {audit.baselines.brierImprovementVsUniform !== null
+                        ? ` · Δ ${audit.baselines.brierImprovementVsUniform >= 0 ? "+" : ""}${audit.baselines.brierImprovementVsUniform.toFixed(4)}`
+                        : ""}
+                    </small>
+                  </div>
+                </article>
+                <article className={`${styles.kpiCard} ${styles.kpiPurple}`}>
+                  <div className={styles.kpiContent}>
+                    <span>PROB SUM REJECTS</span>
+                    <strong>{audit.rejectedProbabilityRows}</strong>
+                    <small>±0.01 ingest check</small>
+                  </div>
+                </article>
+                <article className={`${styles.kpiCard} ${styles.kpiYellow}`}>
+                  <div className={styles.kpiContent}>
+                    <span>EXPORT SCHEMA</span>
+                    <strong>{audit.settledExportCsvPreviewLines} lines</strong>
+                    <small>flat CSV ready (p/λ/pick/version)</small>
+                  </div>
+                </article>
+              </div>
+
+              <div className={styles.compactPanelHeader} style={{ marginTop: 16 }}>
+                <div>
+                  <div className={styles.panelTitle}>PICK-PROBABILITY CALIBRATION</div>
+                  <small>Pick olasılığı bin’lerinde predicted vs observed</small>
+                </div>
+              </div>
+              <div className={styles.performanceList}>
+                {audit.pickCalibration
+                  .filter((bin) => bin.matches > 0)
+                  .map((bin) => (
+                    <div className={styles.performanceItem} key={bin.label}>
+                      <div className={styles.performanceMeta}>
+                        <strong>{bin.label}</strong>
+                        <small>{bin.matches} matches</small>
+                      </div>
+                      <div className={styles.marketAccuracy}>
+                        <b>
+                          {(bin.meanPredicted! * 100).toFixed(1)}% →{" "}
+                          {(bin.observedHitRate! * 100).toFixed(1)}%
+                        </b>
+                        <small className={getCalibrationClass(bin.gapPp ?? 0)}>
+                          {bin.gapPp === null
+                            ? "—"
+                            : `${bin.gapPp >= 0 ? "+" : ""}${bin.gapPp.toFixed(1)} pp`}
+                        </small>
+                      </div>
+                    </div>
+                  ))}
+              </div>
+
+              <div className={styles.compactPanelHeader} style={{ marginTop: 16 }}>
+                <div>
+                  <div className={styles.panelTitle}>LEAGUE ROLLUP</div>
+                  <small>pick hit · home win · Brier</small>
+                </div>
+              </div>
+              <div className={styles.performanceList}>
+                {audit.leagueRollup.leagues.slice(0, 8).map((league) => (
+                  <div className={styles.performanceItem} key={league.leagueKey}>
+                    <div className={styles.performanceMeta}>
+                      <strong>{league.leagueName}</strong>
+                      <small>{league.matches} matches</small>
+                    </div>
+                    <div className={styles.marketAccuracy}>
+                      <b>{formatRate(league.pickHitRate)}</b>
+                      <small>
+                        home {formatRate(league.homeWinRate)} · Brier {formatBrier(league.brier)}
+                      </small>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className={styles.compactPanelHeader} style={{ marginTop: 16 }}>
+                <div>
+                  <div className={styles.panelTitle}>FAVOURITE-STRENGTH BRIER</div>
+                  <small>max(p) dilimlerine göre kalite</small>
+                </div>
+              </div>
+              <div className={styles.performanceList}>
+                {audit.favouriteBrier
+                  .filter((slice) => slice.matches > 0)
+                  .map((slice) => (
+                    <div className={styles.performanceItem} key={slice.label}>
+                      <div className={styles.performanceMeta}>
+                        <strong>{slice.label}</strong>
+                        <small>{slice.matches} matches</small>
+                      </div>
+                      <div className={styles.marketAccuracy}>
+                        <b>{formatBrier(slice.brier)}</b>
+                        <small>hit {formatRate(slice.pickHitRate)}</small>
+                      </div>
+                    </div>
+                  ))}
+              </div>
             </section>
 
             <section className={styles.performanceGrid}>
