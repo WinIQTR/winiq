@@ -12,10 +12,10 @@ export default function LoginPage() {
         <p className="member-eyebrow" data-no-translate>
           WINIQ
         </p>
-        <h1>Üye girişi</h1>
-        <p>Günlük futbol tahminlerinize güvenli biçimde ulaşın.</p>
+        <h1>Member login</h1>
+        <p>Securely access your daily football predictions.</p>
         <LoginForm />
-        <small>Kayıtlar yönetici onayıyla oluşturulur. Açık üyelik kapalıdır.</small>
+        <small>Accounts are created with administrator approval. Public registration is disabled.</small>
       </section>
     </main>
   );

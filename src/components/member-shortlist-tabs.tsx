@@ -8,20 +8,20 @@ export function MemberShortlistTabs({
   active: "special" | "value";
 }) {
   return (
-    <nav className={styles.tabs} aria-label="Kısa listeler">
+    <nav className={styles.tabs} aria-label="Shortlists">
       <Link
         className={styles.tab}
         data-active={active === "special" ? "true" : undefined}
         href="/member/professional/special"
       >
-        Özel liste
+        Special List
       </Link>
       <Link
         className={styles.tab}
         data-active={active === "value" ? "true" : undefined}
         href="/member/value"
       >
-        Değer fırsatları
+        Value opportunities
       </Link>
     </nav>
   );

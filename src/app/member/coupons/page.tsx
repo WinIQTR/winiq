@@ -55,16 +55,16 @@ export default async function MemberCouponsPage({
   const serialized = serializeCouponCenter(center);
 
   const tabs = (
-    <nav className="coupon-center-tabs" aria-label="Kupon merkezi sekmeleri">
+    <nav className="coupon-center-tabs" aria-label="Coupon centre">
       <Link className={view === "center" ? "active" : ""} href="/member/coupons">
-        Günlük kuponlar
+        Daily coupons
       </Link>
       {canPerformance ? (
         <Link
           className={view === "performance" ? "active" : ""}
           href="/member/coupons?view=performance"
         >
-          Performans
+          Performance
         </Link>
       ) : null}
       {canGuaranteed ? (
@@ -72,11 +72,11 @@ export default async function MemberCouponsPage({
           className={view === "guaranteed" ? "active" : ""}
           href="/member/coupons?view=guaranteed"
         >
-          Garanti / güvenli
+          Safe / guaranteed
         </Link>
       ) : null}
       {user.plan === "PROFESSIONAL" ? (
-        <Link href="/member/professional/special">Özel liste →</Link>
+        <Link href="/member/professional/special">Special List →</Link>
       ) : null}
     </nav>
   );
@@ -95,9 +95,9 @@ export default async function MemberCouponsPage({
         <div className={member.page}>
           <section className={member.welcome}>
             <div>
-              <p data-no-translate>WINIQ · KUPONLAR</p>
-              <h1>Kupon performansı</h1>
-              <span>Yayımlanan kuponların sonuç özeti.</span>
+              <p data-no-translate>WINIQ · COUPONS</p>
+              <h1>Coupon performance</h1>
+              <span>Published coupon results in one place.</span>
             </div>
           </section>
           {tabs}
@@ -159,9 +159,9 @@ export default async function MemberCouponsPage({
         <div className={member.page}>
           <section className={member.welcome}>
             <div>
-              <p data-no-translate>WINIQ · KUPONLAR</p>
-              <h1>Garanti / güvenli kuponlar</h1>
-              <span>Daha muhafazakâr kupon setleri.</span>
+              <p data-no-translate>WINIQ · COUPONS</p>
+              <h1>Safe / guaranteed coupons</h1>
+              <span>More conservative coupon sets.</span>
             </div>
           </section>
           {tabs}
@@ -181,9 +181,9 @@ export default async function MemberCouponsPage({
       <div className={member.page}>
         <section className={member.welcome}>
           <div>
-            <p data-no-translate>WINIQ · KUPONLAR</p>
-            <h1>Kupon merkezi</h1>
-            <span>Paketinize açık günlük ve haftalık kupon önerileri.</span>
+            <p data-no-translate>WINIQ · COUPONS</p>
+            <h1>Coupon centre</h1>
+            <span>Daily and weekly coupon suggestions available on your plan.</span>
           </div>
         </section>
         {tabs}

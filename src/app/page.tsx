@@ -85,38 +85,38 @@ export default async function HomePage() {
         <div className={styles.topActions}>
           <LanguageSwitcher hideLabel />
           <Link className={styles.memberLogin} href="/login">
-            Üye Girişi
+            Member Login
           </Link>
         </div>
       </header>
 
       <section className={styles.hero} aria-labelledby="landing-hero-title">
         <div className={styles.heroCopy}>
-          <p className={styles.eyebrow}>AI FUTBOL TAHMİNLERİ</p>
+          <p className={styles.eyebrow}>AI FOOTBALL PREDICTIONS</p>
           <h1 id="landing-hero-title">
-            Futbol verisini, <em>daha net yorumlayın.</em>
+            Interpret football data, <em>more clearly.</em>
           </h1>
           <p className={styles.lede}>
-            Günlük maçların olasılıklarını, detaylı analizlerini ve sonuç takibini tek platformda
-            inceleyin.
+            Examine daily match probabilities, detailed analysis, and result tracking on one
+            platform.
           </p>
           <div className={styles.ctaRow}>
             <Link className={styles.ctaPrimary} href="/login">
-              Giriş yap →
+              Sign in →
             </Link>
             <a className={styles.ctaSecondary} href="#paketler">
-              Paketleri gör
+              See plans
             </a>
           </div>
         </div>
 
-        <aside className={styles.preview} aria-label="Örnek maç tahmini">
+        <aside className={styles.preview} aria-label="Sample match prediction">
           <div className={styles.previewGlow} aria-hidden />
           <div className={styles.previewCard}>
             <div className={styles.previewHead}>
               <div className={styles.previewTitle}>
                 <IconBars />
-                Maç Tahmini
+                Match Prediction
               </div>
               <span className={styles.leagueBadge}>Premier League</span>
             </div>
@@ -146,26 +146,26 @@ export default async function HomePage() {
             </div>
 
             <div className={styles.probs}>
-              <div className={styles.probsLabel}>Maç Olasılıkları</div>
+              <div className={styles.probsLabel}>Match Probabilities</div>
               <div className={styles.probGrid}>
                 <div className={styles.prob} data-active="true">
                   <strong>%68</strong>
-                  <span>Ev Sahibi Kazanır</span>
+                  <span>Home Win</span>
                 </div>
                 <div className={styles.prob}>
                   <strong>%20</strong>
-                  <span>Beraberlik</span>
+                  <span>Draw</span>
                 </div>
                 <div className={styles.prob}>
                   <strong>%12</strong>
-                  <span>Deplasman Kazanır</span>
+                  <span>Away Win</span>
                 </div>
               </div>
             </div>
 
             <div className={styles.trend}>
               <div className={styles.trendHead}>
-                <span>Olasılık Trendi</span>
+                <span>Probability Trend</span>
                 <b>+12%</b>
               </div>
               <div className={styles.chart} aria-hidden>
@@ -194,30 +194,30 @@ export default async function HomePage() {
         </aside>
       </section>
 
-      <section className={styles.plans} id="paketler" aria-label="Üyelik paketleri">
+      <section className={styles.plans} id="paketler" aria-label="Membership plans">
         <article className={styles.plan}>
           <span className={styles.planIcon}>
             <IconLayers />
           </span>
-          <small>TEMEL</small>
-          <h2>6 pazar</h2>
-          <p>Günün tahminleri ve günlük kupon özeti.</p>
+          <small>BASIC</small>
+          <h2>6 markets</h2>
+          <p>Daily predictions and daily coupon summary.</p>
         </article>
         <article className={styles.plan} data-tone="analysis">
           <span className={styles.planIcon}>
             <IconBars />
           </span>
-          <small>ANALİZ</small>
-          <h2>19 pazar</h2>
-          <p>Olasılıklar, model oranı ve daha geniş kuponlar.</p>
+          <small>ANALYSIS</small>
+          <h2>19 markets</h2>
+          <p>Probabilities, model odds, and wider coupons.</p>
         </article>
         <article className={styles.plan} data-tone="pro">
           <span className={styles.planIcon}>
             <IconTrend />
           </span>
-          <small>PROFESYONEL</small>
-          <h2>{BET_MARKET_COUNT} pazar</h2>
-          <p>Tam katalog, değer seçimleri, fikstür ve özel liste.</p>
+          <small>PROFESSIONAL</small>
+          <h2>{BET_MARKET_COUNT} markets</h2>
+          <p>Full catalog, value picks, fixtures, and special list.</p>
         </article>
       </section>
 
@@ -227,11 +227,11 @@ export default async function HomePage() {
         </b>
         <span className={styles.footerNote}>
           <IconInfo />
-          Bilgi amaçlıdır; kazanç garantisi sunulmaz.
+          For information only; no profit guarantee.
         </span>
         <span className={styles.footerGuard}>
           <IconShield />
-          Kayıtlar yönetici onayıyla açılır.
+          Registrations open with administrator approval.
         </span>
       </footer>
     </main>
