@@ -18,27 +18,34 @@ export default function LoginPage() {
           sizes="100vw"
         />
         <div className={styles.backdropScrim} />
+        <div className={styles.pitchGlow} />
       </div>
 
       <section className={styles.card}>
-        <div className={styles.language}>
-          <LanguageSwitcher />
-        </div>
-
-        <div className={styles.brand}>
-          <div className={styles.mark} data-no-translate>
-            W
+        <header className={styles.cardTop}>
+          <div className={styles.brand} data-no-translate>
+            <span className={styles.mark}>W</span>
+            <strong className={styles.brandName}>WINIQ</strong>
           </div>
-          <p className={styles.brandName} data-no-translate>
-            WINIQ
-          </p>
-          <span className={styles.brandRule} aria-hidden />
-        </div>
+          <div className={styles.language}>
+            <LanguageSwitcher />
+          </div>
+        </header>
+
+        <p className={styles.welcome}>
+          <i aria-hidden />
+          <span>WELCOME BACK</span>
+          <i aria-hidden />
+        </p>
 
         <h1 className={styles.title}>Member login</h1>
         <p className={styles.lede}>Securely access your daily football predictions.</p>
 
-        <LoginForm className={styles.form} submitClassName={styles.submit} errorClassName={styles.error} />
+        <LoginForm
+          className={styles.form}
+          submitClassName={styles.submit}
+          errorClassName={styles.error}
+        />
 
         <small className={styles.footnote}>
           Accounts are created with administrator approval. Public registration is disabled.

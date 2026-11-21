@@ -1,4 +1,9 @@
 .shell {
+  --login-green: #22c55e;
+  --login-blue: #2563eb;
+  --login-blue-bright: #3b82f6;
+  --login-card: rgba(8, 14, 26, 0.78);
+
   position: relative;
   isolation: isolate;
   display: grid;
@@ -7,7 +12,7 @@
   overflow: hidden;
   padding: clamp(20px, 4vw, 40px);
   color: #f5f8fc;
-  background: #05070d;
+  background: #03060c;
 }
 
 .backdrop {
@@ -15,51 +20,98 @@
   inset: 0;
   z-index: -2;
   overflow: hidden;
-  background:
-    radial-gradient(ellipse 55% 40% at 18% 12%, rgba(255, 255, 255, 0.22), transparent 55%),
-    radial-gradient(ellipse 50% 38% at 84% 10%, rgba(255, 255, 255, 0.18), transparent 52%),
-    radial-gradient(ellipse 45% 35% at 50% 88%, rgba(34, 197, 94, 0.18), transparent 60%),
-    #05070d;
+  background: #03060c;
 }
 
 .backdropImage {
   position: absolute;
   inset: 0;
-  object-fit: cover;
-  object-position: center 35%;
   width: 100%;
   height: 100%;
-  opacity: 0.72;
-  filter: saturate(1.05) contrast(1.05);
+  object-fit: cover;
+  object-position: center 42%;
+  opacity: 0.88;
+  filter: saturate(1.08) contrast(1.08) brightness(0.92);
 }
 
 .backdropScrim {
   position: absolute;
   inset: 0;
-  z-index: -1;
   background:
-    linear-gradient(180deg, rgba(5, 8, 14, 0.55) 0%, rgba(5, 8, 14, 0.42) 45%, rgba(5, 8, 14, 0.78) 100%),
-    radial-gradient(ellipse 70% 55% at 50% 45%, transparent 20%, rgba(5, 8, 14, 0.55) 100%);
+    radial-gradient(ellipse 42% 34% at 12% 8%, rgba(255, 255, 255, 0.28), transparent 58%),
+    radial-gradient(ellipse 40% 32% at 88% 8%, rgba(147, 197, 253, 0.22), transparent 55%),
+    linear-gradient(180deg, rgba(3, 6, 12, 0.35) 0%, rgba(3, 6, 12, 0.28) 48%, rgba(3, 6, 12, 0.72) 100%);
+}
+
+.pitchGlow {
+  position: absolute;
+  left: 50%;
+  bottom: -8%;
+  width: min(920px, 120vw);
+  height: 42vh;
+  transform: translateX(-50%);
+  background:
+    radial-gradient(ellipse 55% 42% at 50% 55%, rgba(34, 197, 94, 0.38), transparent 68%),
+    radial-gradient(ellipse 28% 18% at 50% 62%, rgba(74, 222, 128, 0.55), transparent 70%);
+  filter: blur(2px);
+  pointer-events: none;
 }
 
 .card {
   position: relative;
-  width: min(420px, 100%);
-  border: 1px solid rgba(96, 165, 250, 0.45);
-  border-radius: 22px;
-  padding: 28px 28px 24px;
-  background: linear-gradient(165deg, rgba(10, 16, 28, 0.94), rgba(7, 12, 22, 0.92));
+  width: min(440px, 100%);
+  border: 1px solid rgba(96, 165, 250, 0.55);
+  border-radius: 24px;
+  padding: 26px 28px 22px;
+  background: linear-gradient(165deg, rgba(10, 18, 32, 0.82), rgba(6, 12, 22, 0.86));
   box-shadow:
-    0 0 0 1px rgba(59, 130, 246, 0.12),
-    0 28px 80px rgba(0, 0, 0, 0.55),
-    0 0 48px rgba(37, 99, 235, 0.12);
-  backdrop-filter: blur(18px);
+    0 0 0 1px rgba(56, 189, 248, 0.08),
+    0 30px 90px rgba(0, 0, 0, 0.55),
+    0 0 60px rgba(37, 99, 235, 0.16);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+}
+
+.cardTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 26px;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.mark {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  place-items: center;
+  border-radius: 8px;
+  background: var(--login-green);
+  color: #04120a;
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  box-shadow: 0 0 18px rgba(34, 197, 94, 0.4);
+}
+
+.brandName {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
 }
 
 .language {
   display: flex;
-  justify-content: flex-end;
-  margin-bottom: 18px;
+  flex: 0 0 auto;
 }
 
 .language :global(.language-switcher) {
@@ -70,10 +122,10 @@
 }
 
 .language :global(.language-switcher > span) {
-  color: #8fa3bb;
+  color: #c5d0df;
   font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 0.12em;
+  font-weight: 700;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
@@ -81,14 +133,14 @@
   display: inline-flex;
   min-width: 0;
   padding: 3px;
-  border: 1px solid rgba(100, 130, 170, 0.35);
+  border: 1px solid rgba(120, 150, 190, 0.35);
   border-radius: 999px;
-  background: rgba(8, 14, 26, 0.9);
+  background: rgba(6, 12, 22, 0.9);
 }
 
 .language :global(.language-option) {
-  min-width: 42px;
-  min-height: 34px;
+  min-width: 40px;
+  min-height: 32px;
   border: 0;
   border-radius: 999px;
   background: transparent;
@@ -98,60 +150,48 @@
 }
 
 .language :global(.language-option-active) {
-  background: #2563eb;
+  background: var(--login-blue);
   color: #fff;
 }
 
-.brand {
-  display: grid;
-  gap: 10px;
-  margin-bottom: 22px;
-  justify-items: start;
+.welcome {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 0 0 14px;
+  color: #f4f7fb;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
 }
 
-.mark {
-  display: grid;
-  width: 42px;
-  height: 42px;
-  place-items: center;
-  border-radius: 10px;
-  background: #22c55e;
-  color: #04120a;
-  font-size: 22px;
-  font-weight: 900;
-  letter-spacing: -0.04em;
-  box-shadow: 0 0 24px rgba(34, 197, 94, 0.35);
-}
-
-.brandName {
-  margin: 0;
-  color: #fff;
-  font-size: 15px;
-  font-weight: 800;
-  letter-spacing: 0.18em;
-}
-
-.brandRule {
-  width: 42px;
-  height: 3px;
+.welcome i {
+  display: block;
+  width: 28px;
+  height: 2px;
   border-radius: 999px;
-  background: #22c55e;
+  background: var(--login-green);
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.65);
 }
 
 .title {
   margin: 0 0 8px;
   color: #fff;
-  font-size: clamp(28px, 4vw, 34px);
+  font-size: clamp(30px, 4.2vw, 36px);
   font-weight: 800;
-  letter-spacing: -0.03em;
-  line-height: 1.15;
+  letter-spacing: -0.035em;
+  line-height: 1.1;
+  text-align: center;
 }
 
 .lede {
-  margin: 0 0 22px;
-  color: #9aa8bc;
+  margin: 0 0 24px;
+  color: #a7b4c7;
   font-size: 14px;
   line-height: 1.5;
+  text-align: center;
 }
 
 .form {
@@ -163,18 +203,18 @@
 .form label {
   display: grid;
   gap: 8px;
-  color: #e8eef8;
+  color: #f0f4fa;
   font-size: 13px;
   font-weight: 700;
 }
 
 .form input {
-  min-height: 48px;
+  min-height: 50px;
   padding: 0 14px;
-  border: 1px solid rgba(100, 130, 170, 0.35);
+  border: 1px solid rgba(96, 165, 250, 0.42);
   border-radius: 12px;
   outline: none;
-  background: rgba(8, 14, 26, 0.92);
+  background: rgba(6, 12, 22, 0.72);
   color: #f5f8fc;
   font-size: 14px;
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
@@ -185,7 +225,7 @@
 }
 
 .form input:focus {
-  border-color: #3b82f6;
+  border-color: var(--login-blue-bright);
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.22);
 }
 
@@ -196,7 +236,9 @@
 }
 
 .submit {
-  min-height: 48px;
+  position: relative;
+  overflow: hidden;
+  min-height: 50px;
   border: 0;
   border-radius: 12px;
   background: linear-gradient(180deg, #3b82f6 0%, #2563eb 100%);
@@ -204,7 +246,18 @@
   font-size: 15px;
   font-weight: 800;
   cursor: pointer;
-  box-shadow: 0 10px 28px rgba(37, 99, 235, 0.35);
+  box-shadow: 0 12px 30px rgba(37, 99, 235, 0.38);
+}
+
+.submit::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 18px;
+  height: 18px;
+  background: linear-gradient(225deg, transparent 49%, var(--login-green) 50%);
+  pointer-events: none;
 }
 
 .submit:hover:not(:disabled),
@@ -220,13 +273,31 @@
 
 .footnote {
   display: block;
-  color: #8799ae;
+  color: #8b9bb0;
   font-size: 12px;
   line-height: 1.45;
+  text-align: center;
 }
 
 @media (max-width: 480px) {
   .card {
-    padding: 22px 18px 20px;
+    padding: 22px 18px 18px;
+  }
+
+  .cardTop {
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+
+  .language {
+    margin-left: auto;
+  }
+
+  .welcome {
+    letter-spacing: 0.18em;
+  }
+
+  .welcome i {
+    width: 18px;
   }
 }

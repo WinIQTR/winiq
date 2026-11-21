@@ -510,6 +510,7 @@ entries.push(
   { en: "Reset password", tr: "Şifreyi yenile" },
   { en: "Revoke sessions", tr: "Oturumları kapat" },
   { en: "Member login", tr: "Üye girişi" },
+  { en: "WELCOME BACK", tr: "TEKRAR HOŞ GELDİNİZ" },
   { en: "Securely access your daily football predictions.", tr: "Günlük futbol tahminlerinize güvenli biçimde ulaşın." },
   { en: "Accounts are created with administrator approval. Public registration is disabled.", tr: "Hesaplar yönetici onayıyla oluşturulur. Açık üyelik kapalıdır." },
   { en: "Password", tr: "Şifre" },
