@@ -126,15 +126,20 @@ export async function loadMemberPastPerformance(options?: {
 
   const recent = await prisma.smartPickHistory.findMany({
     where: { result: { in: ["WON", "LOST", "VOID"] } },
-    orderBy: [{ kickoffAt: "desc" }, { settledAt: "desc" }],
+    orderBy: [{ kickoffAt: "desc" }, { settledAt: "desc" }, { rank: "asc" }],
     take: 400,
     select: {
+      id: true,
       matchId: true,
       homeTeam: true,
       awayTeam: true,
       leagueName: true,
       kickoffAt: true,
       result: true,
+      market: true,
+      selection: true,
+      category: true,
+      tier: true,
       match: {
         select: {
           homeTeam: { select: { logoUrl: true } },
@@ -144,11 +149,8 @@ export async function loadMemberPastPerformance(options?: {
     },
   });
 
-  const seen = new Set<number>();
   const matches: MemberResultsMatch[] = [];
   for (const row of recent) {
-    if (seen.has(row.matchId)) continue;
-    seen.add(row.matchId);
     const status =
       row.result === "WON" || row.result === "LOST" || row.result === "VOID"
         ? row.result
@@ -165,15 +167,19 @@ export async function loadMemberPastPerformance(options?: {
       month: "2-digit",
       day: "2-digit",
     }).format(row.kickoffAt);
+    const pickLabel = [row.market || row.category, row.selection].filter(Boolean).join(" · ");
     matches.push({
       matchId: row.matchId,
+      rowKey: `${row.matchId}-${row.id}`,
       homeTeam: row.homeTeam,
       awayTeam: row.awayTeam,
       homeTeamLogo: row.match?.homeTeam?.logoUrl ?? null,
       awayTeamLogo: row.match?.awayTeam?.logoUrl ?? null,
       leagueName: row.leagueName,
       dateKey,
-      dateLabel: `${day} · ${status.toLowerCase()}`,
+      dateLabel: day,
+      pickLabel: pickLabel || "—",
+      tierLabel: mapSmartPickTierToBand(row.tier),
       status,
       statusLabel:
         status === "WON"

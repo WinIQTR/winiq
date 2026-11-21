@@ -338,6 +338,12 @@
   font-weight: 700;
 }
 
+.pickLabel {
+  color: #c5d7ef;
+  font-size: 12px;
+  font-weight: 600;
+}
+
 .pill {
   display: inline-flex;
   align-items: center;

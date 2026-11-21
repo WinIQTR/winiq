@@ -829,9 +829,9 @@ export function MemberPredictionsBoard({
           <IconHome />
           {t("Today's Predictions")}
         </Link>
-        <Link className={styles.bottomLink} href="/member/value">
+        <Link className={styles.bottomLink} href={couponsHref}>
           <IconChart />
-          {t("Opportunities")}
+          {t("Coupons")}
         </Link>
         <Link className={styles.bottomLink} href="/member/results">
           <IconTrophy />

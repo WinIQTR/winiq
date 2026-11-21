@@ -6,6 +6,7 @@ import {
 } from "@/components/special-list-view";
 import { MemberPortalHeader } from "@/components/member-smart-dashboard";
 import member from "@/components/member-smart-dashboard.module.css";
+import { MemberShortlistTabs } from "@/components/member-shortlist-tabs";
 import { translateUiText } from "@/i18n/dictionaries";
 import { readAppLocale } from "@/lib/app-locale-server";
 import { requireMember } from "@/lib/auth-session";
@@ -85,6 +86,7 @@ export default async function ProfessionalSpecialPage({
     <main className={member.shell}>
       <MemberPortalHeader plan={user.plan} active="special" />
       <div className={member.page}>
+        <MemberShortlistTabs active="special" />
         <SpecialListView
           surface="member"
           action="/member/professional/special"

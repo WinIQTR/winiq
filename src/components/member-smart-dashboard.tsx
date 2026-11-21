@@ -81,13 +81,6 @@ function IconHome() {
     </svg>
   );
 }
-function IconChart() {
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
-      <path d="M5 19V9M12 19V5M19 19v-7" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-    </svg>
-  );
-}
 function IconStar() {
   return (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
@@ -115,6 +108,19 @@ function IconUsers() {
       <circle cx="9" cy="9" r="3" stroke="currentColor" strokeWidth="1.8" />
       <circle cx="17" cy="10" r="2.5" stroke="currentColor" strokeWidth="1.8" />
       <path d="M3.5 19c.8-3 3-4.5 5.5-4.5S13.7 16 14.5 19M14 14.6c1.4-.4 2.9 0 4 1.2.7.8 1.1 1.8 1.3 3.2" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+    </svg>
+  );
+}
+function IconTicket() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
+      <path
+        d="M4 9V6.8A1.8 1.8 0 0 1 5.8 5h12.4A1.8 1.8 0 0 1 20 6.8V9a2 2 0 0 0 0 4v2.2a1.8 1.8 0 0 1-1.8 1.8H5.8A1.8 1.8 0 0 1 4 15.2V13a2 2 0 0 0 0-4Z"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinejoin="round"
+      />
+      <path d="M12 8v8" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeDasharray="2 3" />
     </svg>
   );
 }
@@ -159,11 +165,17 @@ export type MemberNavActive =
 
 function navActive(
   active: MemberNavActive,
-): "home" | "value" | "analyses" | "special" | "results" | "predictions" | "messages" | "plans" {
+):
+  | "home"
+  | "shortlists"
+  | "analyses"
+  | "coupons"
+  | "results"
+  | "messages"
+  | "plans" {
   if (active === "home") return "home";
-  if (active === "value") return "value";
-  if (active === "special") return "special";
-  if (active === "predictions" || active === "coupons") return "predictions";
+  if (active === "value" || active === "special") return "shortlists";
+  if (active === "coupons" || active === "predictions") return "coupons";
   if (active === "results") return "results";
   if (active === "messages") return "messages";
   if (active === "plans" || active === "alerts") return "plans";
@@ -184,12 +196,11 @@ export function MemberPortalHeader({
   const { t } = useLanguage();
   const homeHref = preview ? `/admin/members/preview?plan=${plan}` : "/member";
   const planLink = preview ? `/admin/members/preview?plan=${plan}#paket` : "/member/plans";
-  const canValue =
-    hasMembershipPermission(plan, "VALUE_BETS") || hasMembershipPermission(plan, "SMART_PICKS");
-  const valueHref = preview ? homeHref : canValue ? "/member/value" : "/member/plans";
+  const canCoupons = hasMembershipPermission(plan, "DAILY_COUPONS");
   const isPro = plan === "PROFESSIONAL";
   const analysesHref = preview ? homeHref : "/member/professional";
-  const specialHref = preview ? homeHref : "/member/professional/special";
+  const shortlistsHref = preview ? homeHref : "/member/professional/special";
+  const couponsHref = preview ? homeHref : canCoupons ? "/member/coupons" : "/member/plans";
   const resultsHref = preview ? homeHref : "/member/results";
   const messagesHref = preview ? homeHref : "/member/messages";
   const current = navActive(active);
@@ -202,29 +213,29 @@ export function MemberPortalHeader({
     locked?: boolean;
   }> = [
     { href: homeHref, label: "Home page", active: current === "home", icon: <IconHome /> },
-    {
-      href: valueHref,
-      label: "Opportunities",
-      active: current === "value",
-      icon: <IconChart />,
-      locked: !canValue && !preview,
-    },
     ...(isPro || preview
       ? [
+          {
+            href: shortlistsHref,
+            label: "Shortlists",
+            active: current === "shortlists",
+            icon: <IconStar />,
+          },
           {
             href: analysesHref,
             label: "Analyses",
             active: current === "analyses",
             icon: <IconTrophy />,
           },
-          {
-            href: specialHref,
-            label: "Special List",
-            active: current === "special",
-            icon: <IconStar />,
-          },
         ]
       : []),
+    {
+      href: couponsHref,
+      label: "Coupons",
+      active: current === "coupons",
+      icon: <IconTicket />,
+      locked: !canCoupons && !preview,
+    },
     { href: resultsHref, label: "Results", active: current === "results", icon: <IconUsers /> },
   ];
 

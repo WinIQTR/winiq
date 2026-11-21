@@ -32,9 +32,14 @@ export type MemberValueOpportunity = {
   awayRecentResults?: FormResult[];
   homeVenueResults?: FormResult[];
   awayVenueResults?: FormResult[];
+  bestOdds?: number | null;
+  fairOdds?: number | null;
+  expectedValue?: number | null;
+  marketEdge?: number | null;
+  bookmakerName?: string | null;
 };
 
-type SortKey = "confidence" | "odds" | "kickoff";
+type SortKey = "confidence" | "odds" | "kickoff" | "ev";
 type ConfidenceFloor = "all" | "75" | "85" | "95";
 
 function TeamLogo({ src, name }: { src: string | null; name: string }) {
@@ -52,11 +57,14 @@ function toneFor(score: number): "high" | "mid" | "low" {
 
 export function MemberValueOpportunities({
   opportunities,
+  mode = "confidence",
 }: {
   opportunities: MemberValueOpportunity[];
+  mode?: "confidence" | "value";
 }) {
   const { t } = useLanguage();
-  const [sort, setSort] = useState<SortKey>("confidence");
+  const isValue = mode === "value";
+  const [sort, setSort] = useState<SortKey>(isValue ? "ev" : "confidence");
   const [league, setLeague] = useState("ALL");
   const [market, setMarket] = useState("ALL");
   const [confidenceFloor, setConfidenceFloor] = useState<ConfidenceFloor>("all");
@@ -83,10 +91,13 @@ export function MemberValueOpportunities({
 
     rows.sort((a, b) => {
       if (sort === "odds") {
-        return (a.modelOdds ?? 99) - (b.modelOdds ?? 99);
+        return (a.bestOdds ?? a.modelOdds ?? 99) - (b.bestOdds ?? b.modelOdds ?? 99);
       }
       if (sort === "kickoff") {
         return new Date(a.kickoffIso).getTime() - new Date(b.kickoffIso).getTime();
+      }
+      if (sort === "ev") {
+        return (b.expectedValue ?? -99) - (a.expectedValue ?? -99);
       }
       return b.confidenceScore - a.confidenceScore;
     });
@@ -99,13 +110,19 @@ export function MemberValueOpportunities({
       <section className={styles.hero} aria-labelledby="value-opportunities-title">
         <div className={styles.heroCopy}>
           <p className={styles.eyebrow} data-no-translate>
-            WINIQ · {t("VALUE PICKS")}
+            WINIQ · {isValue ? "VALUE BETS" : t("VALUE PICKS")}
           </p>
-          <h1 id="value-opportunities-title">{t("High-confidence opportunities")}</h1>
+          <h1 id="value-opportunities-title">
+            {isValue ? t("Market value opportunities") : t("High-confidence opportunities")}
+          </h1>
           <p>
-            {t(
-              "A simple list ordered by model odds and confidence score. No market jargon — just clear picks.",
-            )}
+            {isValue
+              ? t(
+                  "Bookmaker odds vs model fair odds. Positive edge only — open a match for full analysis.",
+                )
+              : t(
+                  "A simple list ordered by model odds and confidence score. No market jargon — just clear picks.",
+                )}
           </p>
         </div>
         <div className={styles.heroMetrics} aria-hidden>
@@ -147,8 +164,11 @@ export function MemberValueOpportunities({
               aria-label={t("Sort")}
               onChange={(event) => setSort(event.target.value as SortKey)}
             >
-              <option value="confidence">{t("Confidence score")}</option>
-              <option value="odds">{t("Model odds")}</option>
+              {isValue ? <option value="ev">{t("Expected value")}</option> : null}
+              <option value="confidence">
+                {isValue ? t("Value score") : t("Confidence score")}
+              </option>
+              <option value="odds">{isValue ? t("Best odds") : t("Model odds")}</option>
               <option value="kickoff">{t("Kickoff")}</option>
             </select>
           </label>
@@ -198,13 +218,23 @@ export function MemberValueOpportunities({
         </div>
 
         <div className={styles.chipRow} role="toolbar" aria-label={t("Opportunity filters")}>
+          {isValue ? (
+            <button
+              type="button"
+              className={styles.chip}
+              aria-pressed={sort === "ev"}
+              onClick={() => setSort("ev")}
+            >
+              {t("Expected value")}
+            </button>
+          ) : null}
           <button
             type="button"
             className={styles.chip}
             aria-pressed={sort === "confidence"}
             onClick={() => setSort("confidence")}
           >
-            {t("Confidence score")}
+            {isValue ? t("Value score") : t("Confidence score")}
           </button>
           <button
             type="button"
@@ -212,7 +242,7 @@ export function MemberValueOpportunities({
             aria-pressed={sort === "odds"}
             onClick={() => setSort("odds")}
           >
-            {t("Model odds")}
+            {isValue ? t("Best odds") : t("Model odds")}
           </button>
           <button
             type="button"
@@ -250,8 +280,9 @@ export function MemberValueOpportunities({
                 <div className={styles.cardTop}>
                   <span className={styles.rank}>#{index + 1}</span>
                   <span className={styles.badge} data-tone={tone}>
-                    %{item.confidenceScore.toFixed(0)} {t("confidence")} · {t("model odds")}{" "}
-                    {item.modelOdds != null ? item.modelOdds.toFixed(2) : "—"}
+                    {isValue
+                      ? `EV ${(item.expectedValue ?? 0) >= 0 ? "+" : ""}${(item.expectedValue ?? 0).toFixed(1)}% · ${t("Best odds")} ${item.bestOdds != null ? item.bestOdds.toFixed(2) : "—"}`
+                      : `%${item.confidenceScore.toFixed(0)} ${t("confidence")} · ${t("model odds")} ${item.modelOdds != null ? item.modelOdds.toFixed(2) : "—"}`}
                   </span>
                 </div>
 
@@ -277,25 +308,55 @@ export function MemberValueOpportunities({
                     <span>{t("Market / Selection")}</span>
                     <strong title={item.marketLabel}>{item.marketLabel}</strong>
                   </div>
-                  <div className={styles.stat}>
-                    <span>{t("Model odds")}</span>
-                    <em>{item.modelOdds != null ? item.modelOdds.toFixed(2) : "—"}</em>
-                  </div>
-                  <div className={styles.stat}>
-                    <MarketLineMoveBlock move={item.lineMove} />
-                  </div>
-                  <div className={styles.stat}>
-                    <span>{t("Confidence score")}</span>
-                    <div className={styles.barWrap}>
-                      <div className={styles.barTrack} aria-hidden>
-                        <i
-                          className={styles.barFill}
-                          style={{ width: `${Math.max(4, Math.min(100, item.confidenceScore))}%` }}
-                        />
+                  {isValue ? (
+                    <>
+                      <div className={styles.stat}>
+                        <span>{t("Best odds")}</span>
+                        <em>{item.bestOdds != null ? item.bestOdds.toFixed(2) : "—"}</em>
                       </div>
-                      <div className={styles.barLabel}>%{item.confidenceScore.toFixed(0)}</div>
-                    </div>
-                  </div>
+                      <div className={styles.stat}>
+                        <span>{t("Fair odds")}</span>
+                        <em>{item.fairOdds != null ? item.fairOdds.toFixed(2) : "—"}</em>
+                      </div>
+                      <div className={styles.stat}>
+                        <span>{t("Edge / EV")}</span>
+                        <em>
+                          {(item.marketEdge ?? 0) >= 0 ? "+" : ""}
+                          {(item.marketEdge ?? 0).toFixed(1)}% /{" "}
+                          {(item.expectedValue ?? 0) >= 0 ? "+" : ""}
+                          {(item.expectedValue ?? 0).toFixed(1)}%
+                        </em>
+                      </div>
+                      <div className={styles.stat}>
+                        <span>{t("Bookmaker")}</span>
+                        <strong>{item.bookmakerName || "—"}</strong>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className={styles.stat}>
+                        <span>{t("Model odds")}</span>
+                        <em>{item.modelOdds != null ? item.modelOdds.toFixed(2) : "—"}</em>
+                      </div>
+                      <div className={styles.stat}>
+                        <MarketLineMoveBlock move={item.lineMove} />
+                      </div>
+                      <div className={styles.stat}>
+                        <span>{t("Confidence score")}</span>
+                        <div className={styles.barWrap}>
+                          <div className={styles.barTrack} aria-hidden>
+                            <i
+                              className={styles.barFill}
+                              style={{
+                                width: `${Math.max(4, Math.min(100, item.confidenceScore))}%`,
+                              }}
+                            />
+                          </div>
+                          <div className={styles.barLabel}>%{item.confidenceScore.toFixed(0)}</div>
+                        </div>
+                      </div>
+                    </>
+                  )}
                 </div>
 
                 <MatchFormTip

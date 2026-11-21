@@ -17,6 +17,7 @@ export type MemberResultsBand = {
 
 export type MemberResultsMatch = {
   matchId: number;
+  rowKey?: string;
   homeTeam: string;
   awayTeam: string;
   homeTeamLogo: string | null;
@@ -24,6 +25,8 @@ export type MemberResultsMatch = {
   leagueName: string;
   dateLabel: string;
   dateKey: string;
+  pickLabel?: string;
+  tierLabel?: "strong" | "medium" | "weak";
   status: "WON" | "LOST" | "VOID" | "PENDING" | "OTHER";
   statusLabel: string;
   href: string;
@@ -152,7 +155,7 @@ export function MemberResultsBoard({
 
       <section aria-labelledby="results-list-title">
         <div className={styles.sectionHead}>
-          <small>{t("RECENT MATCHES")}</small>
+          <small>{t("Published picks")}</small>
           <h2 id="results-list-title">{t("Recent results")}</h2>
           <p>
             {matches.length
@@ -220,7 +223,7 @@ export function MemberResultsBoard({
         <div className={styles.list}>
           {filtered.length ? (
             filtered.map((item) => (
-              <article className={styles.row} key={item.matchId}>
+              <article className={styles.row} key={item.rowKey ?? `${item.matchId}-${item.dateKey}`}>
                 <div className={styles.teams}>
                   <div className={styles.teamLine}>
                     <TeamLogo src={item.homeTeamLogo} name={item.homeTeam} />
@@ -234,6 +237,11 @@ export function MemberResultsBoard({
                 <div className={styles.meta}>
                   <strong>{item.leagueName}</strong>
                   <span>{item.dateLabel}</span>
+                  {item.pickLabel ? (
+                    <span className={styles.pickLabel}>
+                      {t("Pick")}: {item.pickLabel}
+                    </span>
+                  ) : null}
                 </div>
                 <span className={`${styles.pill} ${pillClass(item.status)}`}>{t(item.statusLabel)}</span>
                 <Link className={styles.detail} href={item.href}>
