@@ -1,4 +1,10 @@
 import {
+  NoCommission,
+  settleWithCommission,
+  type CommissionModel,
+} from "@/modules/bankroll-backtest/commission";
+import { StrategyLedger } from "@/modules/bankroll-backtest/rejection-log";
+import {
   adjustSimultaneousStakes,
   applyRiskLimits,
   createBetHistory,
@@ -31,16 +37,33 @@ export type SimulationResult = {
   settled: SettledBacktestBet[];
   path: BankrollPathPoint[];
   finalBankroll: number;
+  ledger: StrategyLedger;
 };
 
-function settleProfit(
-  stake: number,
-  odds: number,
-  result: "WON" | "LOST" | "VOID",
-): number {
-  if (stake <= 0 || result === "VOID") return 0;
-  if (result === "WON") return stake * (odds - 1);
-  return -stake;
+function mapSkipReason(
+  reason: string | null,
+):
+  | "below_min_ev"
+  | "risk_limit"
+  | "insufficient_bankroll"
+  | "invalid_odds"
+  | "invalid_probability"
+  | "simultaneous_cap"
+  | "custom" {
+  if (!reason) return "custom";
+  if (reason.includes("EV")) return "below_min_ev";
+  if (reason.includes("ODDS")) return "invalid_odds";
+  if (reason.includes("PROBABILITY")) return "invalid_probability";
+  if (
+    reason.includes("STOP") ||
+    reason.includes("PAUSE") ||
+    reason.includes("DAILY") ||
+    reason.includes("STAKE")
+  ) {
+    return "risk_limit";
+  }
+  if (reason.includes("SIMULTANEOUS")) return "simultaneous_cap";
+  return "custom";
 }
 
 /**
@@ -52,6 +75,8 @@ export function runBankrollSimulation(
     initialBankroll?: number;
     strategy?: Partial<StrategyConfig>;
     oddsHaircut?: number;
+    commission?: CommissionModel;
+    ledger?: StrategyLedger;
   },
 ): SimulationResult {
   const initialBankroll = options?.initialBankroll ?? 1000;
@@ -64,6 +89,8 @@ export function runBankrollSimulation(
     },
   };
   const haircut = Math.min(0.99, Math.max(0, options?.oddsHaircut ?? 0));
+  const commission = options?.commission ?? NoCommission;
+  const ledger = options?.ledger ?? new StrategyLedger();
   const history = createBetHistory(initialBankroll);
 
   const prepared = [...bets]
@@ -86,6 +113,7 @@ export function runBankrollSimulation(
   }
 
   let bankroll = initialBankroll;
+  let cumulativeTurnover = 0;
   const settled: SettledBacktestBet[] = [];
   const path: BankrollPathPoint[] = [
     {
@@ -95,6 +123,7 @@ export function runBankrollSimulation(
       drawdownPct: 0,
       stake: 0,
       profit: 0,
+      cumulativeTurnover: 0,
     },
   ];
   let peak = bankroll;
@@ -113,6 +142,7 @@ export function runBankrollSimulation(
     for (const bet of group) {
       const selection = selectBet(bet, config);
       if (!selection.accept) {
+        ledger.reject(bet.id, mapSkipReason(selection.reason), selection.reason);
         decisions.push({
           bet,
           stake: 0,
@@ -124,6 +154,9 @@ export function runBankrollSimulation(
       }
       const rawStake = sizeStake(bet, opening, config, selection.ev);
       const limited = applyRiskLimits(rawStake, opening, dayKey, history, config);
+      if (limited.stake <= 0) {
+        ledger.reject(bet.id, mapSkipReason(limited.reason), limited.reason);
+      }
       decisions.push({
         bet,
         stake: limited.stake,
@@ -143,12 +176,42 @@ export function runBankrollSimulation(
       const decision = decisions[i]!;
       const stake = adjusted[i] ?? 0;
       const bankrollBefore = bankroll;
-      const profit = decision.skipped
+      const skipped = decision.skipped || stake <= 0;
+      if (
+        !decision.skipped &&
+        stake > 0 &&
+        adjusted[i]! + 1e-9 < decision.stake &&
+        decision.stake > 0
+      ) {
+        ledger.reject(
+          decision.bet.id,
+          "simultaneous_cap",
+          "simultaneous stake reduced",
+        );
+      }
+      const profit = skipped
         ? 0
-        : settleProfit(stake, decision.bet.odds, decision.bet.result);
-      if (!decision.skipped && stake > 0) {
+        : settleWithCommission(
+            stake,
+            decision.bet.odds,
+            decision.bet.result,
+            commission,
+          );
+      if (!skipped && stake > 0) {
         bankroll += profit;
+        cumulativeTurnover += stake;
         recordSettlement(history, dayKey, stake, decision.bet.result);
+        ledger.commit({
+          betId: decision.bet.id,
+          stake,
+          odds: decision.bet.odds,
+          expectedProfit:
+            stake *
+            expectedValue(
+              Math.min(1, Math.max(0, decision.bet.modelProbability)),
+              decision.bet.odds,
+            ),
+        });
       }
       peak = Math.max(peak, bankroll);
       const drawdownPct = peak > 0 ? ((peak - bankroll) / peak) * 100 : 0;
@@ -167,7 +230,7 @@ export function runBankrollSimulation(
         profit,
         bankrollBefore,
         bankrollAfter: bankroll,
-        skipped: decision.skipped || stake <= 0,
+        skipped,
         skipReason: decision.reason,
         expectedProfit,
       });
@@ -178,6 +241,7 @@ export function runBankrollSimulation(
         drawdownPct,
         stake,
         profit,
+        cumulativeTurnover,
       });
     }
   }
@@ -187,5 +251,6 @@ export function runBankrollSimulation(
     settled,
     path,
     finalBankroll: bankroll,
+    ledger,
   };
 }

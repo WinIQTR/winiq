@@ -4,6 +4,8 @@ export type EquityChartSeries = {
   labels: string[];
   bankroll: number[];
   drawdownPct: number[];
+  /** Cumulative stake turnover (R1ch1k equity + turnover overlay). */
+  cumulativeTurnover: number[];
   peak: number;
   valley: number;
 };
@@ -15,7 +17,14 @@ export function buildEquityChartSeries(
   path: readonly BankrollPathPoint[],
 ): EquityChartSeries {
   if (path.length === 0) {
-    return { labels: [], bankroll: [], drawdownPct: [], peak: 0, valley: 0 };
+    return {
+      labels: [],
+      bankroll: [],
+      drawdownPct: [],
+      cumulativeTurnover: [],
+      peak: 0,
+      valley: 0,
+    };
   }
   const labels = path.map((point, index) =>
     index === 0
@@ -32,10 +41,14 @@ export function buildEquityChartSeries(
   const drawdownPct = path.map(
     (point) => Math.round(point.drawdownPct * 100) / 100,
   );
+  const cumulativeTurnover = path.map(
+    (point) => Math.round((point.cumulativeTurnover ?? 0) * 100) / 100,
+  );
   return {
     labels,
     bankroll,
     drawdownPct,
+    cumulativeTurnover,
     peak: Math.max(...bankroll),
     valley: Math.min(...bankroll),
   };

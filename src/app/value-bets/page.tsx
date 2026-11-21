@@ -428,7 +428,109 @@ function BankrollBacktestPanel({ report }: { report: BankrollBacktestReport }) {
               <polyline fill="none" stroke="#f97316" strokeWidth="1.5" points={report.drawdownSparkline} />
             </svg>
           </div>
+          {report.turnoverSparkline ? (
+            <div>
+              <small>Cumulative turnover</small>
+              <svg viewBox="0 0 100 28" width="100%" height="48" role="img" aria-label="Cumulative turnover">
+                <polyline fill="none" stroke="#38bdf8" strokeWidth="1.5" points={report.turnoverSparkline} />
+              </svg>
+            </div>
+          ) : null}
         </div>
+      ) : null}
+
+      <div className={styles.healthGrid} style={{ marginTop: 12 }}>
+        <article>
+          <span>YIELD CI</span>
+          <strong>
+            {report.yieldCI
+              ? `${(report.yieldCI.lower * 100).toFixed(1)}…${(report.yieldCI.upper * 100).toFixed(1)}%`
+              : "—"}
+          </strong>
+          <small>
+            {report.yieldCI
+              ? `${Math.round(report.yieldCI.confidence * 100)}% · ${report.yieldCI.nMatchGroups} match groups`
+              : "Need settled bets"}
+          </small>
+        </article>
+        <article>
+          <span>LEDGER</span>
+          <strong>
+            {report.ledgerSummary.committed}/{report.ledgerSummary.committed + report.ledgerSummary.rejected}
+          </strong>
+          <small>
+            Rejected {report.ledgerSummary.rejected}
+            {report.ledgerSummary.byReason.below_min_ev
+              ? ` · EV ${report.ledgerSummary.byReason.below_min_ev}`
+              : ""}
+          </small>
+        </article>
+        <article>
+          <span>INVARIANTS</span>
+          <strong className={report.invariantViolations === 0 ? styles.positive : styles.negative}>
+            {report.invariantViolations === 0 ? "OK" : report.invariantViolations}
+          </strong>
+          <small>Bankroll accounting checks</small>
+        </article>
+        <article>
+          <span>REGIME FLIP</span>
+          <strong>
+            {report.regimeReversal
+              ? report.regimeReversal.worsened
+                ? "Worsened ✓"
+                : "Did not worsen"
+              : "—"}
+          </strong>
+          <small>
+            {report.regimeReversal?.yieldDelta !== null &&
+            report.regimeReversal?.yieldDelta !== undefined
+              ? `Δ yield ${(report.regimeReversal.yieldDelta * 100).toFixed(1)} pp`
+              : "Lookahead smoke"}
+          </small>
+        </article>
+      </div>
+
+      {report.walkForward && report.walkForward.folds.length > 0 ? (
+        <>
+          <div className={styles.panelHeader} style={{ marginTop: 12 }}>
+            <div>
+              <h3 style={{ margin: 0 }}>Walk-forward (chained bankroll)</h3>
+              <p style={{ margin: "4px 0 0" }}>
+                Expanding train → test folds. Boundary-excluded bets:{" "}
+                {report.walkForward.boundaryExcludedTotal}. Final BR{" "}
+                {report.walkForward.finalBankroll.toFixed(0)}.
+              </p>
+            </div>
+          </div>
+          <div className={styles.tableWrap}>
+            <table className={`${styles.table} ${styles.driftTable}`}>
+              <thead>
+                <tr>
+                  <th>FOLD</th>
+                  <th>TRAIN</th>
+                  <th>TEST</th>
+                  <th>YIELD</th>
+                  <th>ROI</th>
+                  <th>EXCL</th>
+                </tr>
+              </thead>
+              <tbody>
+                {report.walkForward.folds.map((fold) => (
+                  <tr key={fold.foldIndex}>
+                    <td>#{fold.foldIndex + 1}</td>
+                    <td>{fold.trainCount}</td>
+                    <td>{fold.testCount}</td>
+                    <td>{formatNullable(fold.metrics.yieldPct, 1, "%")}</td>
+                    <td className={fold.metrics.roiPct >= 0 ? styles.positive : styles.negative}>
+                      {formatNullable(fold.metrics.roiPct, 1, "%")}
+                    </td>
+                    <td>{fold.boundaryExcluded}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </>
       ) : null}
 
       <div className={styles.panelHeader} style={{ marginTop: 12 }}>

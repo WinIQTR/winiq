@@ -52,3 +52,53 @@ export {
   buildBankrollBacktestReport,
   type BankrollBacktestReport,
 } from "@/modules/bankroll-backtest/report";
+
+export {
+  computeYieldBootstrapCI,
+  type YieldCI,
+} from "@/modules/bankroll-backtest/yield-ci";
+export {
+  NoCommission,
+  NetWinningsCommission,
+  settleWithCommission,
+  type CommissionModel,
+} from "@/modules/bankroll-backtest/commission";
+export {
+  runWalkForward,
+  type WalkForwardFold,
+  type WalkForwardResult,
+} from "@/modules/bankroll-backtest/walk-forward";
+export {
+  StrategyLedger,
+  type RejectionReason,
+  type StrategyCommitment,
+  type StrategyRejection,
+} from "@/modules/bankroll-backtest/rejection-log";
+export {
+  kellyBackFraction,
+  kellyBackStake,
+  kellyLayFraction,
+  kellyLayStake,
+} from "@/modules/bankroll-backtest/lay-kelly";
+export {
+  detectOneXTwoArbitrage,
+  type ArbitrageOpportunity,
+  type OneXTwoOdds,
+} from "@/modules/bankroll-backtest/arbitrage";
+export {
+  generateSyntheticBets,
+  type SyntheticConfig,
+} from "@/modules/bankroll-backtest/synthetic";
+export {
+  runRegimeReversalTest,
+  type RegimeReversalResult,
+} from "@/modules/bankroll-backtest/regime-reversal";
+export {
+  checkBankrollInvariants,
+  type InvariantViolation,
+} from "@/modules/bankroll-backtest/invariants";
+export {
+  createFixedEvStrategy,
+  type OddsDecision,
+  type StrategyProtocol,
+} from "@/modules/bankroll-backtest/strategy-protocol";

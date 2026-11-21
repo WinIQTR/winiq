@@ -4,12 +4,22 @@ import {
   adjustSimultaneousStakes,
   buildBankrollBacktestReport,
   calculateBacktestMetrics,
+  checkBankrollInvariants,
   chronologicalHoldoutSplit,
+  computeYieldBootstrapCI,
+  createFixedEvStrategy,
+  detectOneXTwoArbitrage,
   evaluateStrategy,
   expectedValue,
+  generateSyntheticBets,
+  kellyBackFraction,
   kellyFraction,
+  kellyLayFraction,
+  NetWinningsCommission,
   runBankrollSimulation,
   runOddsStressTest,
+  runRegimeReversalTest,
+  runWalkForward,
   selectBet,
   DEFAULT_STRATEGY_CONFIG,
   type BacktestBetInput,
@@ -82,5 +92,63 @@ const report = buildBankrollBacktestReport(sample, {
 assert.ok(report.equity.bankroll.length > 0);
 assert.ok(report.stress.length === 4);
 assert.ok(report.bankrollSparkline.length > 0);
+assert.ok(report.equity.cumulativeTurnover.length === report.equity.bankroll.length);
+assert.ok(report.ledgerSummary.committed + report.ledgerSummary.rejected >= sample.length);
+assert.equal(report.invariantViolations, 0);
+
+const ci = computeYieldBootstrapCI(sim.settled, { nResamples: 200, seed: 1 });
+assert.ok(ci !== null);
+assert.ok(ci!.lower <= ci!.upper);
+
+const withCommission = runBankrollSimulation(sample, {
+  initialBankroll: 1000,
+  commission: new NetWinningsCommission(0.05),
+});
+const plainProfit = sim.settled
+  .filter((row) => !row.skipped && row.result === "WON")
+  .reduce((total, row) => total + row.profit, 0);
+const taxedProfit = withCommission.settled
+  .filter((row) => !row.skipped && row.result === "WON")
+  .reduce((total, row) => total + row.profit, 0);
+assert.ok(taxedProfit <= plainProfit + 1e-9);
+
+const synthetic = generateSyntheticBets({ n: 60, seed: 9, modelBias: 0.05 });
+assert.equal(synthetic.length, 60);
+const wf = runWalkForward(synthetic, {
+  initialBankroll: 1000,
+  minTrain: 20,
+  testSize: 10,
+  step: 10,
+  boundarySize: 1,
+});
+assert.ok(wf.folds.length >= 1);
+assert.ok(wf.boundaryExcludedTotal >= 0);
+
+const invariants = checkBankrollInvariants(
+  withCommission.settled,
+  withCommission.path,
+  withCommission.initialBankroll,
+);
+assert.equal(invariants.length, 0);
+
+assert.ok(kellyBackFraction(0.55, 2) > 0);
+assert.ok(kellyLayFraction(0.4, 2) > 0);
+
+const arb = detectOneXTwoArbitrage({ home: 2.2, draw: 3.6, away: 4.0 });
+assert.equal(arb.present, true);
+assert.ok((arb.guaranteedProfitPct ?? 0) > 0);
+
+const noArb = detectOneXTwoArbitrage({ home: 2.0, draw: 3.2, away: 3.5 });
+assert.equal(noArb.present, false);
+
+const protocol = createFixedEvStrategy({ minEv: 0.01 });
+protocol.fit(synthetic.slice(0, 30));
+const decision = protocol.onOdds(synthetic[30]!, 1000);
+assert.ok(decision.action === "bet" || decision.action === "skip");
+
+const regime = runRegimeReversalTest(synthetic, { initialBankroll: 1000 });
+assert.ok(typeof regime.worsened === "boolean");
+
+assert.ok(report.turnoverSparkline.length >= 0);
 
 console.log("test-bankroll-backtest-v1: ok");

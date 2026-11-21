@@ -34,6 +34,8 @@ export type BankrollPathPoint = {
   drawdownPct: number;
   stake: number;
   profit: number;
+  /** Cumulative stake turnover along the path. */
+  cumulativeTurnover?: number;
 };
 
 export type BacktestMetrics = {

@@ -94,10 +94,19 @@ export default async function SmartCouponsPage({
         <main className={perfStyles.page}>
           <section className={perfStyles.summary} aria-label="Bankroll backtest">
             <article><span>Yield</span><strong>{m.yieldPct == null ? "—" : `${m.yieldPct.toFixed(1)}%`}</strong></article>
+            <article>
+              <span>Yield CI</span>
+              <strong>
+                {bankroll.yieldCI
+                  ? `${(bankroll.yieldCI.lower * 100).toFixed(1)}…${(bankroll.yieldCI.upper * 100).toFixed(1)}%`
+                  : "—"}
+              </strong>
+            </article>
             <article><span>ROI</span><strong>{m.roiPct.toFixed(1)}%</strong></article>
             <article><span>Max DD</span><strong>{m.maxDrawdownPct.toFixed(1)}%</strong></article>
             <article><span>Sharpe</span><strong>{m.sharpe == null ? "—" : m.sharpe.toFixed(2)}</strong></article>
             <article><span>CAGR</span><strong>{m.cagrPct == null ? "—" : `${m.cagrPct.toFixed(1)}%`}</strong></article>
+            <article><span>Ledger</span><strong>{bankroll.ledgerSummary.committed}/{bankroll.ledgerSummary.rejected} ok/skip</strong></article>
             {bankroll.bankrollSparkline ? (
               <article>
                 <span>Equity</span>
