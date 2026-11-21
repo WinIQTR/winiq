@@ -109,36 +109,12 @@ function IconTrophy() {
     </svg>
   );
 }
-function IconCalendar() {
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
-      <rect x="3.5" y="5" width="17" height="15" rx="2" stroke="currentColor" strokeWidth="1.8" />
-      <path d="M8 3.5V7M16 3.5V7M3.5 10h17" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-    </svg>
-  );
-}
 function IconUsers() {
   return (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
       <circle cx="9" cy="9" r="3" stroke="currentColor" strokeWidth="1.8" />
       <circle cx="17" cy="10" r="2.5" stroke="currentColor" strokeWidth="1.8" />
       <path d="M3.5 19c.8-3 3-4.5 5.5-4.5S13.7 16 14.5 19M14 14.6c1.4-.4 2.9 0 4 1.2.7.8 1.1 1.8 1.3 3.2" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-    </svg>
-  );
-}
-function IconGear() {
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
-      <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="1.8" />
-      <path d="M12 3.5v2.2M12 18.3v2.2M4.8 7.2l1.9 1.1M17.3 15.7l1.9 1.1M4.8 16.8l1.9-1.1M17.3 8.3l1.9-1.1" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-    </svg>
-  );
-}
-function IconSearch() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
-      <circle cx="11" cy="11" r="6.5" stroke="currentColor" strokeWidth="1.8" />
-      <path d="m16 16 4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
     </svg>
   );
 }
@@ -211,24 +187,10 @@ export function MemberPortalHeader({
   const canValue =
     hasMembershipPermission(plan, "VALUE_BETS") || hasMembershipPermission(plan, "SMART_PICKS");
   const valueHref = preview ? homeHref : canValue ? "/member/value" : "/member/plans";
-  // Local review: Analizler always opens the week-fixtures redesign.
-  // Production keeps plan-gated destinations.
-  const localReviewBypass = process.env.NODE_ENV !== "production";
-  const analysesHref = preview
-    ? homeHref
-    : plan === "PROFESSIONAL" || localReviewBypass
-      ? "/member/professional"
-      : canValue
-        ? "/member/value"
-        : "/member/predictions";
-  const canSpecial = plan === "PROFESSIONAL" || localReviewBypass;
-  const specialHref = preview
-    ? homeHref
-    : canSpecial
-      ? "/member/professional/special"
-      : "/member/plans";
-  const teamsHref = preview ? homeHref : "/member/results";
-  const predictionsHref = preview ? homeHref : "/member/predictions";
+  const isPro = plan === "PROFESSIONAL";
+  const analysesHref = preview ? homeHref : "/member/professional";
+  const specialHref = preview ? homeHref : "/member/professional/special";
+  const resultsHref = preview ? homeHref : "/member/results";
   const messagesHref = preview ? homeHref : "/member/messages";
   const current = navActive(active);
 
@@ -240,22 +202,30 @@ export function MemberPortalHeader({
     locked?: boolean;
   }> = [
     { href: homeHref, label: "Home page", active: current === "home", icon: <IconHome /> },
-    { href: valueHref, label: "Opportunities", active: current === "value", icon: <IconChart /> },
-    { href: analysesHref, label: "Analyses", active: current === "analyses", icon: <IconTrophy /> },
     {
-      href: specialHref,
-      label: "Special List",
-      active: current === "special",
-      icon: <IconStar />,
-      locked: !canSpecial && !preview,
+      href: valueHref,
+      label: "Opportunities",
+      active: current === "value",
+      icon: <IconChart />,
+      locked: !canValue && !preview,
     },
-    {
-      href: predictionsHref,
-      label: "Match calendar",
-      active: current === "predictions",
-      icon: <IconCalendar />,
-    },
-    { href: teamsHref, label: "Teams", active: current === "results", icon: <IconUsers /> },
+    ...(isPro || preview
+      ? [
+          {
+            href: analysesHref,
+            label: "Analyses",
+            active: current === "analyses",
+            icon: <IconTrophy />,
+          },
+          {
+            href: specialHref,
+            label: "Special List",
+            active: current === "special",
+            icon: <IconStar />,
+          },
+        ]
+      : []),
+    { href: resultsHref, label: "Results", active: current === "results", icon: <IconUsers /> },
   ];
 
   const drawerItems = [
@@ -299,7 +269,7 @@ export function MemberPortalHeader({
               aria-current={item.active ? "page" : undefined}
               title={
                 "locked" in item && item.locked
-                  ? "Special List is available on the Professional plan"
+                  ? t("Upgrade plan →")
                   : undefined
               }
             >
@@ -312,9 +282,6 @@ export function MemberPortalHeader({
         <div className={shell.topActions}>
           <ThemeToggle />
           <LanguageSwitcher hideLabel />
-          <Link className={shell.iconBtn} href={predictionsHref} aria-label="Search">
-            <IconSearch />
-          </Link>
           <Link
             className={shell.iconBtn}
             href={preview ? homeHref : "/member/plans#alerts"}

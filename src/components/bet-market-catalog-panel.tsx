@@ -52,12 +52,15 @@ export function BetMarketCatalogPanel({
   finalHomeScore = null,
   finalAwayScore = null,
   accessPlan,
+  showBestOpportunities = true,
 }: {
   groups: BetMarketGroup[];
   locale: "en" | "tr";
   finalHomeScore?: number | null;
   finalAwayScore?: number | null;
   accessPlan?: MembershipPlanName;
+  /** When false, hide the Top-3 "best opportunities" strip (use match-detail rec card instead). */
+  showBestOpportunities?: boolean;
 }) {
   type MarketFilter = "ALL" | BetMarketTier | "STRONG_150";
   const [activeTier, setActiveTier] = useState<MarketFilter>("ALL");
@@ -184,7 +187,7 @@ export function BetMarketCatalogPanel({
         </div>
       )}
 
-      {!hasFinalScore && bestOpportunities.length > 0 ? (
+      {showBestOpportunities && !hasFinalScore && bestOpportunities.length > 0 ? (
         <section className={styles.marketBestOpportunities}>
           <header>
             <span aria-hidden="true">✦</span>

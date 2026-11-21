@@ -7,10 +7,10 @@ import { MemberPortalHeader } from "@/components/member-smart-dashboard";
 import member from "@/components/member-smart-dashboard.module.css";
 import { translateUiText } from "@/i18n/dictionaries";
 import { ACTIVE_SEASON_YEAR } from "@/config/season";
-import { BET_MARKET_COUNT, buildBetMarketCatalog } from "@/lib/bet-market-catalog";
+import { buildBetMarketCatalog } from "@/lib/bet-market-catalog";
 import { requireMember } from "@/lib/auth-session";
 import { buildMatchFormTip } from "@/lib/member-match-insight";
-import { MEMBERSHIP_PLAN_LABELS, MEMBERSHIP_PLAN_MARKET_LIMITS } from "@/lib/membership-access";
+import { MEMBERSHIP_PLAN_LABELS } from "@/lib/membership-access";
 import { loadDashboardPredictionSnapshot } from "@/lib/prediction-dashboard-snapshot";
 import { getPredictionLabel } from "@/lib/prediction-dashboard-shared";
 import { prisma } from "@/lib/prisma";
@@ -230,7 +230,7 @@ export default async function MemberMatchDetailPage({
 
   return (
     <main className={`${member.shell} member-plan-${user.plan.toLowerCase()}`}>
-      <MemberPortalHeader plan={user.plan} active="predictions" memberName={user.name} />
+      <MemberPortalHeader plan={user.plan} active="home" memberName={user.name} />
       <div className={`${member.page} ${styles.page}`}>
         <header className={styles.matchHead}>
           <div className={styles.headTop}>
@@ -239,9 +239,6 @@ export default async function MemberMatchDetailPage({
             </p>
             <div className={styles.headAside}>
               <span className={styles.planPill}>{MEMBERSHIP_PLAN_LABELS[user.plan]}</span>
-              <span className={styles.planMeta}>
-                {MEMBERSHIP_PLAN_MARKET_LIMITS[user.plan]}/{BET_MARKET_COUNT} {tr("markets count")}
-              </span>
               <Link className={styles.back} href="/member">
                 ← {tr("All predictions")}
               </Link>
@@ -460,9 +457,15 @@ export default async function MemberMatchDetailPage({
           </ol>
         </article>
 
-        <div className={styles.catalogWrap}>
-          <BetMarketCatalogPanel groups={groups} locale="tr" accessPlan={user.plan} />
-        </div>
+        <details className={styles.catalogWrap}>
+          <summary className={styles.catalogToggle}>{tr("Show all markets")}</summary>
+          <BetMarketCatalogPanel
+            groups={groups}
+            locale="tr"
+            accessPlan={user.plan}
+            showBestOpportunities={false}
+          />
+        </details>
 
         <section className={styles.notice}>
           {tr("WINIQ provides analysis only. There is no guarantee of profit.")}

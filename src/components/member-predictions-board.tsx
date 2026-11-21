@@ -6,7 +6,6 @@ import { useMemo, useState } from "react";
 
 import { useLanguage } from "@/components/language-provider";
 import { MarketLineMoveBlock } from "@/components/market-line-move";
-import { BET_MARKET_COUNT } from "@/lib/bet-market-catalog";
 import {
   marketLineMoveKey,
   type MarketLineMove,
@@ -203,7 +202,6 @@ function pickChip(
   return { market: t("Match result"), tip: "X" };
 }
 
-const MARKETS_STRIP_LIMIT = 8;
 
 function leagueFlagCode(leagueName: string) {
   const name = leagueName.toLowerCase();
@@ -256,22 +254,6 @@ function IconCal() {
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
       <rect x="3.5" y="5" width="17" height="15" rx="2" stroke="currentColor" strokeWidth="1.8" />
       <path d="M8 3.5V7M16 3.5V7M3.5 10h17" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-    </svg>
-  );
-}
-function IconInfo() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
-      <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.8" />
-      <path d="M12 10.5V17M12 7.5h.01" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-    </svg>
-  );
-}
-function IconDoc() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
-      <path d="M7 3.5h7l4 4V20a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4.5a1 1 0 0 1 1-1Z" stroke="currentColor" strokeWidth="1.8" />
-      <path d="M14 3.5V8h4M9 12h6M9 16h6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
     </svg>
   );
 }
@@ -464,16 +446,6 @@ export function MemberPredictionsBoard({
   const safePage = Math.min(page, totalPages);
   const pageItems = filtered.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE);
 
-  const strongest = useMemo(() => {
-    const pool = (todayMatches.length ? todayMatches : upcoming).slice();
-    pool.sort(
-      (a, b) =>
-        b.confidenceScore - a.confidenceScore ||
-        asDate(a.kickoffAt).getTime() - asDate(b.kickoffAt).getTime(),
-    );
-    return pool[0] ?? null;
-  }, [todayMatches, upcoming]);
-
   const couponLegs = useMemo(() => {
     const pool = (todayMatches.length ? todayMatches : upcoming)
       .filter((item) => item.confidenceScore >= 55)
@@ -529,10 +501,6 @@ export function MemberPredictionsBoard({
   const evaluatedWins =
     (performance?.strong.wins ?? 0) + (performance?.medium.wins ?? 0) + (performance?.weak.wins ?? 0);
   const hitRate = evaluatedSamples ? (evaluatedWins / evaluatedSamples) * 100 : null;
-  const avgOdds =
-    filtered.length > 0
-      ? filtered.reduce((sum, item) => sum + fairOdds(item, applied.market), 0) / filtered.length
-      : null;
 
   return (
     <div className={styles.board}>
@@ -545,23 +513,7 @@ export function MemberPredictionsBoard({
             <h1 id="member-home-title">{t("Today's Predictions")}</h1>
           </div>
           <p className={styles.heroDate}>{formatLongDate(today)}</p>
-          <p className={styles.disclaimer}>
-            <IconInfo />
-            <span>
-              {t(
-                "Match predictions prepared with our advanced statistical models. Predictions are for analysis; results are not guaranteed.",
-              )}
-            </span>
-          </p>
         </div>
-        <aside className={styles.heroAside}>
-          <strong>
-            {t("More Analysis")}
-            <br />
-            {t("Better Decisions")}
-          </strong>
-          <span>{t("Model-backed daily shortlist")}</span>
-        </aside>
       </section>
 
       <section className={styles.statsRow} aria-label={t("Quick stats")}>
@@ -572,18 +524,7 @@ export function MemberPredictionsBoard({
           <div>
             <small>{t("Today")}</small>
             <strong>
-              {todayMatches.length} {t("matches")}
-            </strong>
-          </div>
-        </article>
-        <article className={styles.statCard}>
-          <span className={styles.statIcon}>
-            <IconDoc />
-          </span>
-          <div>
-            <small>{t("Published predictions")}</small>
-            <strong>
-              {publishedToday.length} {t("matches")}
+              {publishedToday.length || todayMatches.length} {t("matches")}
             </strong>
           </div>
         </article>
@@ -595,13 +536,6 @@ export function MemberPredictionsBoard({
             <small>{t("Last update")}</small>
             <strong>{formatUpdate(updatedAtIso)}</strong>
           </div>
-        </article>
-        <article className={styles.freshCard}>
-          <p>
-            <i className={styles.freshDot} aria-hidden />
-            {t("All predictions are current")}
-          </p>
-          <span>{t("Data refreshes regularly.")}</span>
         </article>
       </section>
 
@@ -703,11 +637,6 @@ export function MemberPredictionsBoard({
                 const probability = pickProbability(item, applied.market);
                 const chip = pickChip(item, locale, t, applied.market);
                 const insight = buildMatchCardInsight(item, t, locale);
-                const matchMarkets = collectMatchMarkets(item);
-                const primaryMarket = primaryPick?.market ?? matchMarkets[0] ?? "";
-                const otherMarkets = matchMarkets.filter((market) => market !== primaryMarket);
-                const visibleMarkets = otherMarkets.slice(0, MARKETS_STRIP_LIMIT);
-                const hiddenMarketCount = Math.max(0, otherMarkets.length - visibleMarkets.length);
                 const lineMove =
                   showOdds && primaryPick?.key
                     ? lineMoves[marketLineMoveKey(item.matchId, primaryPick.key)]
@@ -743,94 +672,51 @@ export function MemberPredictionsBoard({
                         <strong>{chip.tip}</strong>
                       </div>
 
-                      <div className={styles.metric}>
-                        <span>{t("Model probability")}</span>
-                        {showOdds ? (
-                          <>
+                      <div className={styles.metricRowCompact}>
+                        <div className={styles.metric}>
+                          <span>{t("Model probability")}</span>
+                          {showOdds ? (
                             <strong className={styles.probValue}>%{probability.toFixed(0)}</strong>
-                            <span className={styles.bar} aria-hidden>
-                              <i style={{ width: `${Math.min(100, Math.max(0, probability))}%` }} />
+                          ) : (
+                            <span className={styles.lock}>—</span>
+                          )}
+                        </div>
+                        <div className={styles.metric}>
+                          <span>{t("Odds (decimal)")}</span>
+                          {showOdds ? (
+                            <strong className={styles.oddsValue}>{odds > 0 ? odds.toFixed(2) : "—"}</strong>
+                          ) : (
+                            <span className={styles.lock}>
+                              <Link href={plansHref}>{t(LOCK_HINT.modelOdds)}</Link>
                             </span>
-                          </>
-                        ) : (
-                          <span className={styles.lock}>—</span>
-                        )}
-                      </div>
-
-                      <div className={styles.metric}>
-                        <span>{t("Odds (decimal)")}</span>
-                        {showOdds ? (
-                          <strong className={styles.oddsValue}>{odds > 0 ? odds.toFixed(2) : "—"}</strong>
-                        ) : (
-                          <span className={styles.lock}>
-                            <Link href={plansHref}>{t(LOCK_HINT.modelOdds)}</Link>
+                          )}
+                        </div>
+                        <div className={styles.metric}>
+                          <span>{t("Confidence")}</span>
+                          <span
+                            className={`${styles.confPill} ${
+                              conf.kind === "high"
+                                ? styles.confHigh
+                                : conf.kind === "med"
+                                  ? styles.confMed
+                                  : styles.confLow
+                            }`}
+                          >
+                            {t(conf.label)}
                           </span>
-                        )}
+                        </div>
                       </div>
 
                       <MarketLineMoveBlock locked={!showOdds} move={lineMove} />
-
-                      <div className={styles.metric}>
-                        <span>{t("Confidence Score")}</span>
-                        <span
-                          className={`${styles.confPill} ${
-                            conf.kind === "high"
-                              ? styles.confHigh
-                              : conf.kind === "med"
-                                ? styles.confMed
-                                : styles.confLow
-                          }`}
-                        >
-                          {t(conf.label)}
-                        </span>
-                        <span className={styles.confMeter} aria-hidden>
-                          {[1, 2, 3, 4, 5].map((step) => (
-                            <i key={step} data-on={step <= conf.filled} />
-                          ))}
-                        </span>
-                      </div>
                     </div>
 
-                    {matchMarkets.length > 1 ? (
-                      <div className={styles.marketsStrip} aria-label={t("Other markets")}>
-                        <div className={styles.marketsStripHead}>
-                          <span>{t("Other markets")}</span>
-                          <strong>
-                            {matchMarkets.length}/{BET_MARKET_COUNT}
-                          </strong>
-                        </div>
-                        <ul className={styles.marketsChips}>
-                          {visibleMarkets.map((market) => (
-                            <li key={market}>
-                              <button
-                                type="button"
-                                className={styles.marketChip}
-                                onClick={() => {
-                                  setDraft((prev) => ({ ...prev, market }));
-                                  setApplied((prev) => ({ ...prev, market }));
-                                  setPage(1);
-                                }}
-                              >
-                                {localizePickText(market, locale, t)}
-                              </button>
-                            </li>
-                          ))}
-                          {hiddenMarketCount > 0 ? (
-                            <li>
-                              <Link className={styles.marketMore} href={matchHref(item.matchId)}>
-                                +{hiddenMarketCount}
-                              </Link>
-                            </li>
-                          ) : null}
-                        </ul>
-                      </div>
-                    ) : null}
-
                     <div className={styles.cardFoot}>
-                      <p className={styles.analysis}>
-                        <IconChart />
-                        <span>{insight}</span>
-                      </p>
+                      {insight ? (
+                        <p className={styles.analysis}>
+                          <IconChart />
+                          <span>{insight}</span>
+                        </p>
+                      ) : null}
                       <Link className={styles.analysisLink} href={matchHref(item.matchId)}>
                         {t("View match analysis")} →
                       </Link>
@@ -895,60 +781,16 @@ export function MemberPredictionsBoard({
           </footer>
 
           {performance ? (
-            <section className={styles.summary} aria-label={t("Performance summary")}>
-              <div>
-                <h3>{t("Performance summary")}</h3>
-                <p>{t("Evaluated published picks across confidence bands.")}</p>
-              </div>
-              <div
-                className={styles.ring}
-                style={{ ["--pct" as string]: hitRate != null ? Math.round(hitRate) : 0 }}
-              >
-                {hitRate != null ? `%${hitRate.toFixed(0)}` : "—"}
-              </div>
-              <div className={styles.summaryStats}>
-                <span>
-                  {t("Evaluated")}: <strong>{evaluatedSamples}</strong>
-                </span>
-                <span>
-                  {t("Average odds")}: <strong>{avgOdds != null ? avgOdds.toFixed(2) : "—"}</strong>
-                </span>
-              </div>
-            </section>
+            <p className={styles.resultsLinkRow}>
+              <Link href="/member/results">
+                {t("View results")}
+                {hitRate != null ? ` · %${hitRate.toFixed(0)}` : ""} →
+              </Link>
+            </p>
           ) : null}
         </div>
 
         <aside className={styles.sideCol}>
-          {strongest ? (
-            <section className={`${styles.sideCard} ${styles.sideStrong}`}>
-              <h2>{t("Today's strongest pick")}</h2>
-              <div className={styles.sideMatch}>
-                <TeamLogo src={strongest.homeTeamLogo} name={strongest.homeTeam} size={28} />
-                <span>
-                  {strongest.homeTeam} vs {strongest.awayTeam}
-                </span>
-                <TeamLogo src={strongest.awayTeamLogo} name={strongest.awayTeam} size={28} />
-              </div>
-              <div className={styles.sidePick}>
-                <span>{t("Prediction")}</span>
-                <strong>{localizePickText(getPredictionLabel(strongest), locale, t)}</strong>
-              </div>
-              <div className={styles.sideMeta}>
-                {showOdds ? (
-                  <>
-                    <span className={styles.sideChip}>%{pickProbability(strongest).toFixed(0)}</span>
-                    <span className={styles.sideChip}>{fairOdds(strongest).toFixed(2)}</span>
-                  </>
-                ) : null}
-                <span className={styles.sideChip}>{t(confidenceMeta(strongest.confidenceScore).label)}</span>
-              </div>
-              <p className={styles.sideNote}>{buildMatchCardInsight(strongest, t, locale)}</p>
-              <Link className={styles.sideLink} href={matchHref(strongest.matchId)}>
-                {t("View match analysis")} →
-              </Link>
-            </section>
-          ) : null}
-
           <section className={`${styles.sideCard} ${styles.sideCoupon}`}>
             <h2>{t("Today's coupon suggestion")}</h2>
             {couponLegs.length ? (
@@ -987,13 +829,13 @@ export function MemberPredictionsBoard({
           <IconHome />
           {t("Today's Predictions")}
         </Link>
-        <Link className={styles.bottomLink} href="/member/predictions">
-          <IconCal />
-          {t("Match calendar")}
+        <Link className={styles.bottomLink} href="/member/value">
+          <IconChart />
+          {t("Opportunities")}
         </Link>
         <Link className={styles.bottomLink} href="/member/results">
           <IconTrophy />
-          {t("Performance")}
+          {t("Results")}
         </Link>
       </nav>
     </div>

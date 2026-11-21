@@ -20,11 +20,11 @@
 .hero {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(160px, 0.65fr);
+  grid-template-columns: 1fr;
   gap: 18px;
   align-items: end;
   overflow: hidden;
-  min-height: 168px;
+  min-height: 120px;
   border: 1px solid var(--mh-border);
   border-radius: 20px;
   padding: 22px clamp(16px, 2.4vw, 28px);
@@ -512,11 +512,32 @@
   background: rgba(59, 130, 246, 0.16);
 }
 
+.metricRowCompact {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
 .metric {
   display: grid;
   gap: 6px;
   min-width: 0;
   align-content: start;
+}
+
+.resultsLinkRow {
+  margin: 4px 0 0;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.resultsLinkRow a {
+  color: #3b82f6;
+  text-decoration: none;
+}
+
+.resultsLinkRow a:hover {
+  text-decoration: underline;
 }
 
 .metric > span:first-child {

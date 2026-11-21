@@ -648,6 +648,34 @@
 
 .catalogWrap {
   margin-top: 4px;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.catalogToggle {
+  cursor: pointer;
+  list-style: none;
+  padding: 14px 18px;
+  color: #1d4ed8;
+  font-size: 14px;
+  font-weight: 800;
+  user-select: none;
+}
+
+.catalogToggle::-webkit-details-marker {
+  display: none;
+}
+
+.catalogWrap[open] .catalogToggle {
+  border-bottom: 1px solid #eef2f7;
+}
+
+.catalogWrap :global(.marketCatalog) {
+  border: 0;
+  box-shadow: none;
+  border-radius: 0;
 }
 
 .notice {
