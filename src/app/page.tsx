@@ -70,13 +70,59 @@ function IconInfo() {
   );
 }
 
+function TacticsOverlay() {
+  return (
+    <svg className={styles.tactics} viewBox="0 0 1200 700" fill="none" aria-hidden>
+      <path
+        d="M180 520 C320 430, 420 360, 560 300 S820 210, 980 160"
+        stroke="rgba(34,197,94,0.55)"
+        strokeWidth="3"
+        strokeDasharray="10 10"
+      />
+      <path
+        d="M220 560 C360 470, 470 390, 620 340 S860 260, 1020 220"
+        stroke="rgba(34,197,94,0.35)"
+        strokeWidth="2"
+        strokeDasharray="6 10"
+      />
+      <circle cx="560" cy="300" r="8" fill="#22c55e" />
+      <circle cx="720" cy="250" r="7" fill="#22c55e" />
+      <circle cx="880" cy="190" r="7" fill="#22c55e" />
+      <path d="M548 288 l24 24M572 288 l-24 24" stroke="#22c55e" strokeWidth="3" />
+      <path d="M708 238 l24 24M732 238 l-24 24" stroke="#22c55e" strokeWidth="3" />
+      <text x="500" y="275" fill="#4ade80" fontSize="22" fontWeight="700">
+        68%
+      </text>
+      <text x="690" y="225" fill="#86efac" fontSize="18" fontWeight="700">
+        20%
+      </text>
+      <text x="860" y="165" fill="#bbf7d0" fontSize="16" fontWeight="700">
+        12%
+      </text>
+      <circle cx="980" cy="160" r="14" fill="rgba(34,197,94,0.2)" stroke="#22c55e" strokeWidth="2" />
+      <circle cx="980" cy="160" r="5" fill="#22c55e" />
+    </svg>
+  );
+}
+
 export default async function HomePage() {
   const user = await getCurrentUser();
   if (user) redirect(user.role === "ADMIN" ? "/predictions" : "/member");
 
   return (
     <main className={styles.shell}>
-      <div className={styles.atmosphere} aria-hidden />
+      <div className={styles.backdrop} aria-hidden>
+        <Image
+          className={styles.backdropImage}
+          src="/brand/landing-pitch.jpg"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+        />
+        <div className={styles.backdropScrim} />
+        <TacticsOverlay />
+      </div>
 
       <header className={styles.top}>
         <Link className={styles.brand} href="/" aria-label="WINIQ" data-no-translate>
@@ -223,7 +269,7 @@ export default async function HomePage() {
 
       <footer className={styles.footer}>
         <b className={styles.footerBrand} data-no-translate>
-          WINIQ
+          WIN<span>IQ</span>
         </b>
         <span className={styles.footerNote}>
           <IconInfo />
