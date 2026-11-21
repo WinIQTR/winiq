@@ -1,0 +1,14 @@
+{
+  "aliases": {
+    "Manchester United": ["Man United", "Man Utd", "Manchester Utd"],
+    "Manchester City": ["Man City", "Manchester City FC"],
+    "Tottenham Hotspur": ["Tottenham", "Spurs"],
+    "Inter Milan": ["Inter", "FC Internazionale", "Internazionale"],
+    "AC Milan": ["Milan", "A.C. Milan"],
+    "Bayern Munich": ["Bayern München", "Bayern Munchen", "FC Bayern"],
+    "Paris Saint-Germain": ["PSG", "Paris SG", "Paris Saint Germain"],
+    "Atletico Madrid": ["Atlético Madrid", "Atletico de Madrid", "Atleti"],
+    "Sporting CP": ["Sporting Lisbon", "Sporting Lisboa"],
+    "Olympique Marseille": ["Marseille", "OM"]
+  }
+}

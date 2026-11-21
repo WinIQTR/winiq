@@ -9,11 +9,13 @@ import { translateUiText } from "@/i18n/dictionaries";
 import { ACTIVE_SEASON_YEAR } from "@/config/season";
 import { buildBetMarketCatalog } from "@/lib/bet-market-catalog";
 import { requireMember } from "@/lib/auth-session";
+import { buildMatchContextSummary } from "@/lib/match-context-summary";
 import { buildMatchFormTip } from "@/lib/member-match-insight";
 import { MEMBERSHIP_PLAN_LABELS } from "@/lib/membership-access";
 import { loadDashboardPredictionSnapshot } from "@/lib/prediction-dashboard-snapshot";
 import { getPredictionLabel } from "@/lib/prediction-dashboard-shared";
 import { prisma } from "@/lib/prisma";
+import { labelGoalLineMarket } from "@/modules/match-context-engine";
 import styles from "./member-match.module.css";
 
 export const dynamic = "force-dynamic";
@@ -189,6 +191,8 @@ export default async function MemberMatchDetailPage({
     tr,
   );
 
+  const matchContext = await buildMatchContextSummary(matchId).catch(() => null);
+
   const h2h =
     prediction.homeTeamId && prediction.awayTeamId
       ? await prisma.match.findMany({
@@ -283,6 +287,44 @@ export default async function MemberMatchDetailPage({
               <span>{kickoffLabel}</span>
             </div>
           </div>
+          {matchContext ? (
+            <div className={styles.metaRow} style={{ marginTop: 10, flexWrap: "wrap", gap: 8 }}>
+              <span className={styles.planPill}>
+                {matchContext.predictionMode === "lineup_known_prediction"
+                  ? tr("Lineup-known mode")
+                  : tr("Early prediction mode")}
+              </span>
+              {matchContext.venue.isNeutral ? (
+                <span className={styles.planPill}>{tr("Neutral venue")}</span>
+              ) : null}
+              {matchContext.venue.hostCountry ? (
+                <span className={styles.planPill}>
+                  {tr("Host")}: {matchContext.venue.hostCountry}
+                </span>
+              ) : null}
+              {matchContext.homeElo != null && matchContext.awayElo != null ? (
+                <span className={styles.planPill}>
+                  Elo {Math.round(matchContext.homeElo)}–{Math.round(matchContext.awayElo)}
+                </span>
+              ) : null}
+              {matchContext.goalLines
+                ?.filter((line) => line.highlighted)
+                .map((line) => (
+                  <span className={styles.planPill} key={line.line}>
+                    {labelGoalLineMarket(line.line, "over")}{" "}
+                    {(line.overProb * 100).toFixed(0)}%
+                  </span>
+                ))}
+              {matchContext.monteCarloCheck ? (
+                <span className={styles.planPill}>
+                  MC{" "}
+                  {matchContext.monteCarloCheck.withinTolerance
+                    ? tr("aligned")
+                    : tr("check")}
+                </span>
+              ) : null}
+            </div>
+          ) : null}
         </header>
 
         <section className={styles.metricGrid}>

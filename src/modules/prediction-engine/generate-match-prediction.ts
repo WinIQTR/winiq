@@ -14,14 +14,13 @@ import {
   type OutcomeProbabilities,
 } from "@/modules/probability-engine";
 import { calculateMatchRating } from "@/modules/rating-engine";
+import { resolveProductionBlendWeights } from "@/modules/match-context-engine";
 import { applyDrawDecisionLayer } from "./draw-decision-layer";
 import { generateLearnedMatchPrediction } from "./generate-learned-match-prediction";
 import { calculatePoissonConfidence } from "./poisson-confidence";
 import { applyRatingProbabilityAdjustment } from "./rating-probability-adjustment";
 import type { MatchPredictionResult } from "./types";
 
-const ML_WEIGHT = 0.2;
-const POISSON_WEIGHT = 0.8;
 const PRODUCTION_MODEL_VERSION = "v1.0-20-80";
 
 function round(value: number, decimals = 2): number {
@@ -42,13 +41,22 @@ function normalize(probabilities: OutcomeProbabilities): OutcomeProbabilities {
 }
 
 function blendProbabilities(
-  ml: OutcomeProbabilities,
+  ml: OutcomeProbabilities | null,
   poisson: OutcomeProbabilities,
+  options?: { marketAvailable?: boolean; eloAvailable?: boolean },
 ): OutcomeProbabilities {
+  const weights = resolveProductionBlendWeights({
+    mlAvailable: ml !== null,
+    marketAvailable: options?.marketAvailable ?? false,
+    eloAvailable: options?.eloAvailable ?? false,
+  });
+  if (!ml || weights.ml <= 0) {
+    return normalize(poisson);
+  }
   return normalize({
-    home: ml.home * ML_WEIGHT + poisson.home * POISSON_WEIGHT,
-    draw: ml.draw * ML_WEIGHT + poisson.draw * POISSON_WEIGHT,
-    away: ml.away * ML_WEIGHT + poisson.away * POISSON_WEIGHT,
+    home: ml.home * weights.ml + poisson.home * weights.poisson,
+    draw: ml.draw * weights.ml + poisson.draw * weights.poisson,
+    away: ml.away * weights.ml + poisson.away * weights.poisson,
   });
 }
 
@@ -173,10 +181,12 @@ export async function generateMatchPrediction(options: {
       })
     : null;
 
-  // ML baÅŸarÄ±sÄ±z olursa maÃ§ dÃ¼ÅŸmez; doÄŸrulanmÄ±ÅŸ gÃ¼venli fallback saf Poisson'dur.
-  const finalProbabilities = mlProbabilities
-    ? blendProbabilities(mlProbabilities, poissonProbabilities)
-    : poissonProbabilities;
+  // ML yoksa market/elo kapalıysa ağırlıklar yeniden dağıtılır (saf Poisson).
+  const finalProbabilities = blendProbabilities(
+    mlProbabilities,
+    poissonProbabilities,
+    { marketAvailable: false, eloAvailable: false },
+  );
   const finalPrediction = getTopPrediction(finalProbabilities);
 
   // DRAW katmanÄ± yalnÄ±z audit sinyalidir; production sonucunu deÄŸiÅŸtirmez.
@@ -204,12 +214,17 @@ export async function generateMatchPrediction(options: {
 
   if (learnedAttempt.result) {
     warnings.push(...learnedAttempt.result.warnings);
+    const blend = resolveProductionBlendWeights({
+      mlAvailable: true,
+      marketAvailable: false,
+      eloAvailable: false,
+    });
     warnings.push(
-      "Production 1X2: %20 doÄŸrulanmÄ±ÅŸ ML + %80 Poisson kullanÄ±ldÄ±.",
+      `Production 1X2: %${Math.round(blend.ml * 100)} ML + %${Math.round(blend.poisson * 100)} Poisson (ensemble redistribute).`,
     );
   } else {
     warnings.push(
-      `ML Ã¼retilemedi; gÃ¼venli Poisson fallback kullanÄ±ldÄ±: ${learnedAttempt.error}`,
+      `ML üretilemedi; ensemble weight redistribute → saf Poisson: ${learnedAttempt.error}`,
     );
   }
   warnings.push(

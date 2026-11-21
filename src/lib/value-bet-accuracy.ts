@@ -21,6 +21,8 @@ export type ValueBetAccuracyReport = ValueBetAccuracyGroup & {
   probabilityBuckets: ValueBetAccuracyGroup[];
   markets: ValueBetAccuracyGroup[];
   leagues: ValueBetAccuracyGroup[];
+  /** Year × league breakdown for evaluation transparency. */
+  yearLeagues: ValueBetAccuracyGroup[];
 };
 
 const round = (value: number, digits = 1): number => {
@@ -89,6 +91,13 @@ function probabilityBucket(row: ValueBetDashboardRow): { key: string; label: str
   return { key: "80_PLUS", label: "80%+" };
 }
 
+function yearKey(kickoffAt: Date): string {
+  return new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Europe/Istanbul",
+    year: "numeric",
+  }).format(kickoffAt);
+}
+
 export function buildValueBetAccuracyReport(
   rows: readonly ValueBetDashboardRow[],
 ): ValueBetAccuracyReport {
@@ -108,6 +117,11 @@ export function buildValueBetAccuracyReport(
       settledRows,
       (row) => String(row.leagueApiId),
       (row) => row.leagueName,
+    ),
+    yearLeagues: groupBy(
+      settledRows,
+      (row) => `${yearKey(row.kickoffAt)}|${row.leagueApiId}`,
+      (row) => `${yearKey(row.kickoffAt)} · ${row.leagueName}`,
     ),
   };
 }

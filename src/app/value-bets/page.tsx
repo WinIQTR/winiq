@@ -196,6 +196,7 @@ function ValueBetAccuracyDashboard({ report }: { report: ValueBetAccuracyReport 
         <AccuracyBreakdown title="Performance by Probability Range" rows={report.probabilityBuckets} />
         <AccuracyBreakdown title="Performance by Market" rows={report.markets} />
         <AccuracyBreakdown title="Performance by League" rows={report.leagues} />
+        <AccuracyBreakdown title="Performance by Year × League" rows={report.yearLeagues} />
       </div>
     </section>
   );

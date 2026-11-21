@@ -350,13 +350,23 @@ export function buildBetMarketCatalog(input: BetMarketCatalogInput): BetMarketGr
     }
   }
 
+  // Highlight O/U 1.5 and 3.5 (plus 2.5) first — Cesar-style surface emphasis.
   const totalGoals: RawOption[] = [];
-  for (const line of [0.5, 1.5, 2.5, 3.5, 4.5, 5.5]) {
+  for (const line of [1.5, 2.5, 3.5, 0.5, 4.5, 5.5]) {
     if (!full.length) break;
     const under = sum(full, (cell) => cell.home + cell.away < line) * 100;
+    const highlight = line === 1.5 || line === 2.5 || line === 3.5;
     totalGoals.push(
-      { key: `tg-${line}-alt`, selection: `${line} ALT`, probability: under },
-      { key: `tg-${line}-ust`, selection: `${line} ÜST`, probability: 100 - under },
+      {
+        key: `tg-${line}-alt`,
+        selection: highlight ? `${line} ALT ★` : `${line} ALT`,
+        probability: under,
+      },
+      {
+        key: `tg-${line}-ust`,
+        selection: highlight ? `${line} ÜST ★` : `${line} ÜST`,
+        probability: 100 - under,
+      },
     );
   }
 
