@@ -24,7 +24,7 @@ const groups: NavGroup[] = [
     title: "Ops",
     items: [
       { href: "/operations", label: "Operations" },
-      { href: "/admin/data", label: "Data centre" },
+      { href: "/admin/data-centre", label: "Data centre" },
     ],
   },
   {
