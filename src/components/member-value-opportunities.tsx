@@ -37,10 +37,15 @@ export type MemberValueOpportunity = {
   expectedValue?: number | null;
   marketEdge?: number | null;
   bookmakerName?: string | null;
+  /** Decision-engine mode tags (same model, different thresholds). */
+  betModes?: Array<"smart" | "high_return">;
+  uncertaintyBuffer?: number | null;
+  conservativeEv?: number | null;
 };
 
 type SortKey = "confidence" | "odds" | "kickoff" | "ev";
 type ConfidenceFloor = "all" | "75" | "85" | "95";
+type BetModeFilter = "all" | "smart" | "high_return";
 
 function TeamLogo({ src, name }: { src: string | null; name: string }) {
   if (src) {
@@ -68,6 +73,7 @@ export function MemberValueOpportunities({
   const [league, setLeague] = useState("ALL");
   const [market, setMarket] = useState("ALL");
   const [confidenceFloor, setConfidenceFloor] = useState<ConfidenceFloor>("all");
+  const [betMode, setBetMode] = useState<BetModeFilter>("all");
 
   const leagues = useMemo(() => {
     const names = [...new Set(opportunities.map((item) => item.leagueName))];
@@ -86,6 +92,12 @@ export function MemberValueOpportunities({
       if (league !== "ALL" && item.leagueName !== league) return false;
       if (market !== "ALL" && item.market !== market) return false;
       if (item.confidenceScore < floor) return false;
+      if (
+        betMode !== "all" &&
+        !(item.betModes ?? []).includes(betMode)
+      ) {
+        return false;
+      }
       return true;
     });
 
@@ -103,7 +115,7 @@ export function MemberValueOpportunities({
     });
 
     return rows;
-  }, [opportunities, sort, league, market, confidenceFloor]);
+  }, [opportunities, sort, league, market, confidenceFloor, betMode]);
 
   return (
     <div className={styles.page}>
@@ -172,6 +184,20 @@ export function MemberValueOpportunities({
               <option value="kickoff">{t("Kickoff")}</option>
             </select>
           </label>
+          {isValue ? (
+            <label className={styles.field}>
+              <span>{t("Bet mode")}</span>
+              <select
+                value={betMode}
+                aria-label={t("Bet mode")}
+                onChange={(event) => setBetMode(event.target.value as BetModeFilter)}
+              >
+                <option value="all">{t("All modes")}</option>
+                <option value="smart">{t("Smart Bet")}</option>
+                <option value="high_return">{t("High Return")}</option>
+              </select>
+            </label>
+          ) : null}
           <label className={styles.field}>
             <span>{t("Confidence score")}</span>
             <select

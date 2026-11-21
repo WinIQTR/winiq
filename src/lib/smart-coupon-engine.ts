@@ -1,4 +1,8 @@
 import type { ValueBetDashboardRow } from "@/lib/value-bet-dashboard-snapshot";
+import {
+  DEFAULT_DECISION_ENGINE_CONFIG,
+  isMarketEnabled,
+} from "@/modules/decision-engine";
 import { evaluateOddsFreshness } from "@/modules/value-bet-engine/odds-freshness";
 
 export type CouponWindow = "DAILY" | "WEEKLY";
@@ -58,6 +62,9 @@ export type SmartCouponCenter = {
     invalidOdds: number;
     insufficientBookmakers: number;
     staleOdds: number;
+    staleFixture: number;
+    missingOddsTimestamp: number;
+    marketDisabled: number;
     invalidProbability: number;
   };
   coupons: SmartCoupon[];
@@ -417,13 +424,30 @@ export function buildSmartCouponCenter(
     invalidOdds: 0,
     insufficientBookmakers: 0,
     staleOdds: 0,
+    staleFixture: 0,
+    missingOddsTimestamp: 0,
+    marketDisabled: 0,
     invalidProbability: 0,
   };
+  const maxFixtureAgeHours =
+    DEFAULT_DECISION_ENGINE_CONFIG.maxFixtureStalenessHours;
   const strictEligible: ValueBetDashboardRow[] = [];
   const advisoryEligible: ValueBetDashboardRow[] = [];
   for (const row of rows) {
     const freshness = freshnessOf(row, now);
-    const common = row.result === "PENDING" &&
+    const marketEnabled = isMarketEnabled(row.marketKey);
+    const oddsTimestampPresent =
+      Number.isFinite(row.sourceUpdatedAt.getTime()) &&
+      row.sourceUpdatedAt.getTime() > 0;
+    const fixtureAgeHours = Math.max(
+      0,
+      (now.getTime() - row.publishedAt.getTime()) / (1000 * 60 * 60),
+    );
+    const fixtureFresh = fixtureAgeHours <= maxFixtureAgeHours;
+    const common = marketEnabled &&
+      oddsTimestampPresent &&
+      fixtureFresh &&
+      row.result === "PENDING" &&
       row.kickoffAt >= now &&
       row.kickoffAt <= weeklyEnd &&
       row.bestOdds >= MINIMUM_BOOKMAKER_ODDS &&
@@ -447,6 +471,9 @@ export function buildSmartCouponCenter(
     if (!Number.isFinite(row.bestOdds) || row.bestOdds < MINIMUM_BOOKMAKER_ODDS) rejectionBreakdown.invalidOdds += 1;
     if (row.bookmakerCount < MINIMUM_BOOKMAKER_COUNT) rejectionBreakdown.insufficientBookmakers += 1;
     if (!freshness.sourceIsFresh || !freshness.captureIsFresh) rejectionBreakdown.staleOdds += 1;
+    if (!fixtureFresh) rejectionBreakdown.staleFixture += 1;
+    if (!oddsTimestampPresent) rejectionBreakdown.missingOddsTimestamp += 1;
+    if (!marketEnabled) rejectionBreakdown.marketDisabled += 1;
     if (!Number.isFinite(row.modelProbability) || row.modelProbability < 30) rejectionBreakdown.invalidProbability += 1;
   }
   const weakPool = [...strictEligible, ...advisoryEligible];

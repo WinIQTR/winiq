@@ -1,9 +1,19 @@
+import {
+  DEFAULT_DECISION_ENGINE_CONFIG,
+  devig,
+  toProbabilityPercents,
+  type DevigMethod,
+} from "@/modules/decision-engine";
+
 import type {
   ApiOddsBet,
   NormalizedOddsMarket,
   NormalizedOddsSelection,
   SupportedOddsMarketFamily,
 } from "./types";
+
+const DEFAULT_DEVIG_METHOD: DevigMethod =
+  DEFAULT_DECISION_ENGINE_CONFIG.devigMethod;
 
 function round(
   value: number,
@@ -403,44 +413,36 @@ function normalizeSelectionName(
 }
 
 function applyNormalizedProbabilities(
-  selections:
-    NormalizedOddsSelection[],
+  selections: NormalizedOddsSelection[],
+  method: DevigMethod = DEFAULT_DEVIG_METHOD,
 ): NormalizedOddsSelection[] {
-  const totalImpliedProbability =
-    selections.reduce(
-      (
-        total,
-        selection,
-      ) =>
-        total +
-        selection.impliedProbability,
+  if (selections.length === 0) return selections;
+
+  try {
+    const fair = toProbabilityPercents(
+      devig(
+        selections.map((selection) => selection.decimalOdds),
+        method,
+      ),
+    );
+    return selections.map((selection, index) => ({
+      ...selection,
+      normalizedProbability: round(fair[index] ?? 0, 4),
+    }));
+  } catch {
+    const totalImpliedProbability = selections.reduce(
+      (total, selection) => total + selection.impliedProbability,
       0,
     );
-
-  if (
-    totalImpliedProbability <=
-    0
-  ) {
-    return selections;
-  }
-
-  return selections.map(
-    (
-      selection,
-    ) => ({
+    if (totalImpliedProbability <= 0) return selections;
+    return selections.map((selection) => ({
       ...selection,
-
-      normalizedProbability:
-        round(
-          (
-            selection.impliedProbability /
-            totalImpliedProbability
-          ) *
-            100,
-          4,
-        ),
-    }),
-  );
+      normalizedProbability: round(
+        (selection.impliedProbability / totalImpliedProbability) * 100,
+        4,
+      ),
+    }));
+  }
 }
 
 export function normalizeApiMarket(

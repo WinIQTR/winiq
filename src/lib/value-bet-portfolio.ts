@@ -1,4 +1,9 @@
 import type { ValueBetDashboardRow } from "@/lib/value-bet-dashboard-snapshot";
+import {
+  applyExposureCaps,
+  DEFAULT_DECISION_ENGINE_CONFIG,
+  isMarketEnabled,
+} from "@/modules/decision-engine";
 
 const ISTANBUL_TIME_ZONE = "Europe/Istanbul";
 
@@ -87,9 +92,10 @@ export function buildValueBetPortfolio(
   const minimumMarketEdge =
     options?.minimumMarketEdge ?? DEFAULT_MINIMUM_PORTFOLIO_EDGE;
 
+  const enabledRows = rows.filter((row) => isMarketEnabled(row.marketKey));
   const matchGroups = new Map<number, ValueBetDashboardRow[]>();
 
-  for (const row of rows) {
+  for (const row of enabledRows) {
     const group = matchGroups.get(row.matchId) ?? [];
     group.push(row);
     matchGroups.set(row.matchId, group);
@@ -149,7 +155,37 @@ export function buildValueBetPortfolio(
     const primary = dailySelections.filter(
       (selection) => selection.status === "PRIMARY",
     );
-    const requestedRisk = primary.reduce(
+
+    const exposure = applyExposureCaps(
+      primary.map((selection) => ({
+        id: `${selection.row.matchId}:${selection.row.marketKey}`,
+        matchId: selection.row.matchId,
+        leagueKey: String(selection.row.leagueApiId),
+        kickoffAt: selection.row.kickoffAt,
+        stakeFraction: Math.min(
+          DEFAULT_DECISION_ENGINE_CONFIG.exposure
+            .maximumHypotheticalFractionPerSelection,
+          Math.max(0, selection.row.recommendedStakePercentage) / 100,
+        ),
+        score: selection.row.valueScore,
+        correlationGroup: String(selection.row.leagueApiId),
+      })),
+    );
+    const acceptedPrimaryIds = new Set(
+      exposure.filter((item) => item.accepted).map((item) => item.id),
+    );
+
+    const gatedDaily = dailySelections.map((selection) => {
+      if (selection.status !== "PRIMARY") return selection;
+      const id = `${selection.row.matchId}:${selection.row.marketKey}`;
+      if (acceptedPrimaryIds.has(id)) return selection;
+      return { ...selection, status: "WATCH" as const };
+    });
+
+    const gatedPrimary = gatedDaily.filter(
+      (selection) => selection.status === "PRIMARY",
+    );
+    const requestedRisk = gatedPrimary.reduce(
       (total, selection) =>
         total + Math.max(0, selection.row.recommendedStakePercentage),
       0,
@@ -160,7 +196,7 @@ export function buildValueBetPortfolio(
         : 1;
 
     let remainingRisk = maximumDailyRiskPercentage;
-    const allocated = dailySelections.map((selection) => {
+    const allocated = gatedDaily.map((selection) => {
       const requestedAllocation = selection.status === "PRIMARY"
         ? round(
             Math.max(0, selection.row.recommendedStakePercentage) * scale,
@@ -187,8 +223,8 @@ export function buildValueBetPortfolio(
     selections.push(...allocated);
     dailySummaries.push({
       dateKey,
-      primaryCount: primary.length,
-      watchCount: dailySelections.length - primary.length,
+      primaryCount: gatedPrimary.length,
+      watchCount: gatedDaily.length - gatedPrimary.length,
       allocatedRiskPercentage,
     });
   }

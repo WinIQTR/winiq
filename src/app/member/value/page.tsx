@@ -17,7 +17,11 @@ import {
 import { hasMembershipPermission } from "@/lib/membership-access";
 import { loadDashboardPredictionSnapshot } from "@/lib/prediction-dashboard-snapshot";
 import { getPredictionLabel } from "@/lib/prediction-dashboard-shared";
+import {
+  annotateValueBetDecisions,
+} from "@/lib/value-bet-decision";
 import { loadValueBetDashboardSnapshot } from "@/lib/value-bet-dashboard-snapshot";
+import { isMarketEnabled } from "@/modules/decision-engine";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -70,16 +74,22 @@ export default async function MemberValuePage() {
   if (canValue) {
     mode = "value";
     const snapshot = await loadValueBetDashboardSnapshot();
-    const rows = snapshot.upcoming
-      .filter(
-        (item) =>
-          item.kickoffAt >= now &&
-          item.result === "PENDING" &&
-          item.expectedValue > 0 &&
-          item.marketEdge > 0,
+    const pending = snapshot.upcoming.filter(
+      (item) =>
+        item.kickoffAt >= now &&
+        item.result === "PENDING" &&
+        isMarketEnabled(item.marketKey) &&
+        item.expectedValue > 0 &&
+        item.marketEdge > 0,
+    );
+    const annotated = annotateValueBetDecisions(pending, snapshot.settled, now)
+      .sort(
+        (a, b) =>
+          b.row.expectedValue - a.row.expectedValue ||
+          b.row.valueScore - a.row.valueScore,
       )
-      .sort((a, b) => b.expectedValue - a.expectedValue || b.valueScore - a.valueScore)
       .slice(0, 40);
+    const rows = annotated.map((item) => item.row);
 
     const lineMoves = marketLineMovesToRecord(
       await loadMarketLineMoves(
@@ -90,29 +100,38 @@ export default async function MemberValuePage() {
       ),
     );
 
-    opportunities = rows.map((item) => ({
-      matchId: item.matchId,
-      homeTeam: item.homeTeam,
-      awayTeam: item.awayTeam,
-      homeTeamLogo: null,
-      awayTeamLogo: null,
-      leagueName: item.leagueName,
-      kickoffIso: item.kickoffAt.toISOString(),
-      kickoffLabel: formatKickoffLabel(item.kickoffAt, locale),
-      market: item.market,
-      selection: item.selection,
-      marketLabel: `${item.market} · ${item.selection}`,
-      modelOdds: item.fairOdds,
-      bestOdds: item.bestOdds,
-      fairOdds: item.fairOdds,
-      expectedValue: item.expectedValue,
-      marketEdge: item.marketEdge,
-      bookmakerName: item.bookmakerName,
-      confidenceScore: Math.max(0, Math.min(100, item.valueScore)),
-      href: `/member/matches/${item.matchId}`,
-      lineMove:
-        lineMoves[marketLineMoveKey(item.matchId, `${item.marketKey}:${item.selection}`)] ?? null,
-    }));
+    opportunities = annotated.map(({ row: item, smart, highReturn, decision }) => {
+      const betModes: Array<"smart" | "high_return"> = [];
+      if (smart.qualified) betModes.push("smart");
+      if (highReturn.qualified) betModes.push("high_return");
+      return {
+        matchId: item.matchId,
+        homeTeam: item.homeTeam,
+        awayTeam: item.awayTeam,
+        homeTeamLogo: null,
+        awayTeamLogo: null,
+        leagueName: item.leagueName,
+        kickoffIso: item.kickoffAt.toISOString(),
+        kickoffLabel: formatKickoffLabel(item.kickoffAt, locale),
+        market: item.market,
+        selection: item.selection,
+        marketLabel: `${item.market} · ${item.selection}`,
+        modelOdds: item.fairOdds,
+        bestOdds: item.bestOdds,
+        fairOdds: item.fairOdds,
+        expectedValue: item.expectedValue,
+        marketEdge: item.marketEdge,
+        bookmakerName: item.bookmakerName,
+        confidenceScore: Math.max(0, Math.min(100, item.valueScore)),
+        href: `/member/matches/${item.matchId}`,
+        lineMove:
+          lineMoves[marketLineMoveKey(item.matchId, `${item.marketKey}:${item.selection}`)] ??
+          null,
+        betModes,
+        uncertaintyBuffer: decision.uncertaintyBuffer,
+        conservativeEv: decision.conservativeEv,
+      };
+    });
   } else {
     const rows = (await loadDashboardPredictionSnapshot(5_000))
       .filter(

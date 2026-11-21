@@ -33,6 +33,15 @@ import {
   type HealthLevel,
   type ModelHealthReport,
 } from "@/lib/value-bet-model-health";
+import {
+  annotateValueBetDecisions,
+  buildMarketComparisonReport,
+  buildValueBetReliabilityDiagram,
+  decisionGateSummary,
+} from "@/lib/value-bet-decision";
+import type { PairedBootstrapReport } from "@/modules/decision-engine";
+import type { ReliabilityDiagram } from "@/modules/decision-engine";
+import { DEFAULT_DECISION_ENGINE_CONFIG } from "@/modules/decision-engine";
 
 import styles from "./value-bets-page.module.css";
 
@@ -359,6 +368,172 @@ function ChampionChallengerPanel({ audit }: { audit: ChampionChallengerAudit }) 
 
 const HEALTH_LABELS: Record<HealthLevel, string> = { HEALTHY: "HEALTHY", WARNING: "WARNING", CRITICAL: "CRITICAL" };
 
+function DecisionEnginePanel({
+  summary,
+}: {
+  summary: ReturnType<typeof decisionGateSummary>;
+}) {
+  const disabledMarkets = Object.entries(DEFAULT_DECISION_ENGINE_CONFIG.markets)
+    .filter(([, profile]) => !profile.enabled)
+    .map(([key]) => key);
+
+  return (
+    <section className={styles.panel}>
+      <div className={styles.panelHeader}>
+        <div>
+          <h2>Decision Engine Gates</h2>
+          <p>
+            No-bet is a successful output. Uncertainty buffer, market activation,
+            disagreement and freshness gates filter publish candidates before
+            portfolio risk is assigned.
+          </p>
+        </div>
+        <span className={styles.learningBadge}>ADVISORY · DEVIG {DEFAULT_DECISION_ENGINE_CONFIG.devigMethod.toUpperCase()}</span>
+      </div>
+      <div className={styles.healthGrid}>
+        <article><span>QUALIFIED</span><strong>{summary.qualified}</strong><small>Passed all decision gates</small></article>
+        <article><span>NO-BET</span><strong>{summary.noBet}</strong><small>Rejected or below conservative EV</small></article>
+        <article><span>SMART MODE</span><strong>{summary.smart}</strong><small>Conservative odds band</small></article>
+        <article><span>HIGH RETURN</span><strong>{summary.highReturn}</strong><small>Higher odds, stricter EV</small></article>
+      </div>
+      {disabledMarkets.length > 0 ? (
+        <div className={styles.sampleNotice}>
+          <strong>Disabled markets:</strong>
+          <span>{disabledMarkets.join(", ")} (correct score stays off until sample quality is proven).</span>
+        </div>
+      ) : null}
+      {summary.topRejections.length > 0 ? (
+        <div className={styles.gateGrid}>
+          {summary.topRejections.map((item) => (
+            <span className={styles.gateFail} key={item.code}>
+              {item.code}: {item.count}
+            </span>
+          ))}
+        </div>
+      ) : null}
+    </section>
+  );
+}
+
+function MarketBootstrapPanel({ report }: { report: PairedBootstrapReport }) {
+  return (
+    <section className={styles.panel}>
+      <div className={styles.panelHeader}>
+        <div>
+          <h2>Model vs Market · Paired Bootstrap</h2>
+          <p>
+            Honest out-of-time comparison against de-vigged market probabilities.
+            If the 95% CI includes zero, the model does not beat the bookmaker line.
+          </p>
+        </div>
+        <span className={styles.learningBadge}>{report.observations} OBS · {report.blocks} BLOCKS</span>
+      </div>
+      <div className={styles.sampleNotice}>
+        <strong>{report.summary}</strong>
+        <span>{report.iterations} paired block-bootstrap iterations.</span>
+      </div>
+      {report.observations === 0 ? (
+        <p className={styles.muted}>No settled Value Bets yet for market comparison.</p>
+      ) : (
+        <div className={styles.tableWrap}>
+          <table className={`${styles.table} ${styles.driftTable}`}>
+            <thead>
+              <tr>
+                <th>METRIC</th>
+                <th>MODEL</th>
+                <th>MARKET</th>
+                <th>Δ</th>
+                <th>95% CI</th>
+                <th>p</th>
+                <th>VERDICT</th>
+              </tr>
+            </thead>
+            <tbody>
+              {report.metrics.map((row) => (
+                <tr key={row.metric}>
+                  <td><strong>{row.metric}</strong></td>
+                  <td>{row.model.toFixed(4)}</td>
+                  <td>{row.market.toFixed(4)}</td>
+                  <td>{row.delta > 0 ? "+" : ""}{row.delta.toFixed(5)}</td>
+                  <td>{row.ciLow.toFixed(4)} … {row.ciHigh.toFixed(4)}</td>
+                  <td>{row.pValue.toFixed(2)}</td>
+                  <td>
+                    {row.indistinguishable
+                      ? "Matches market"
+                      : row.beatsMarket
+                        ? "Beats market"
+                        : "Does not beat market"}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </section>
+  );
+}
+
+function ReliabilityDiagramPanel({ diagram }: { diagram: ReliabilityDiagram }) {
+  const maxCount = Math.max(1, ...diagram.bins.map((bin) => bin.count));
+  return (
+    <section className={styles.panel}>
+      <div className={styles.panelHeader}>
+        <div>
+          <h2>Reliability Diagram · ECE</h2>
+          <p>
+            Predicted probability bins versus observed hit rate. Gap area is the
+            expected calibration error (ECE).
+          </p>
+        </div>
+        <span className={styles.learningBadge}>ECE {diagram.ece.toFixed(4)}</span>
+      </div>
+      {diagram.samples === 0 ? (
+        <p className={styles.muted}>No settled outcomes for the reliability diagram.</p>
+      ) : (
+        <>
+          <div className={styles.healthGrid}>
+            <article><span>SAMPLES</span><strong>{diagram.samples}</strong><small>Won/Lost only</small></article>
+            <article><span>ECE</span><strong>{diagram.ece.toFixed(4)}</strong><small>Lower is better</small></article>
+            <article><span>ACTIVE BINS</span><strong>{diagram.chartPoints.length}</strong><small>Non-empty probability bands</small></article>
+            <article><span>IDEAL</span><strong>y = x</strong><small>Predicted = observed</small></article>
+          </div>
+          <div className={styles.tableWrap}>
+            <table className={`${styles.table} ${styles.driftTable}`}>
+              <thead>
+                <tr>
+                  <th>BIN</th>
+                  <th>COUNT</th>
+                  <th>PREDICTED</th>
+                  <th>OBSERVED</th>
+                  <th>GAP</th>
+                  <th>BAR</th>
+                </tr>
+              </thead>
+              <tbody>
+                {diagram.bins.map((bin) => (
+                  <tr key={bin.index}>
+                    <td>{(bin.lower * 100).toFixed(0)}–{(bin.upper * 100).toFixed(0)}%</td>
+                    <td>{bin.count}</td>
+                    <td>{(bin.averagePredicted * 100).toFixed(1)}%</td>
+                    <td>{bin.count === 0 ? "—" : `${(bin.averageObserved * 100).toFixed(1)}%`}</td>
+                    <td>{bin.count === 0 ? "—" : (bin.gap * 100).toFixed(1)}</td>
+                    <td>
+                      <span className={styles.probBar}>
+                        <i style={{ width: `${(bin.count / maxCount) * 100}%` }} />
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </>
+      )}
+    </section>
+  );
+}
+
 function ModelHealthPanel({ report }: { report: ModelHealthReport }) {
   return (
     <section className={styles.panel}>
@@ -512,6 +687,10 @@ export default async function ValueBetsPage() {
   const leagueProfiles = buildValueBetLeagueProfileReport(data.settled);
   const championChallenger = buildChampionChallengerAudit(data.settled);
   const modelHealth = buildModelHealthReport({ generatedAt: data.generatedAt, upcoming: data.upcoming, settled: data.settled });
+  const decisionAnnotated = annotateValueBetDecisions(data.upcoming, data.settled);
+  const decisionSummary = decisionGateSummary(decisionAnnotated);
+  const marketBootstrap = buildMarketComparisonReport(data.settled);
+  const reliabilityDiagram = buildValueBetReliabilityDiagram(data.settled);
 
   const tipTranslate = (source: string) => translateUiText(source, "en");
   const predictionByMatch = new Map(
@@ -617,6 +796,9 @@ export default async function ValueBetsPage() {
           Araştırma ve model sağlığı (opsiyonel)
         </summary>
         <div style={{ display: "grid", gap: 16, marginTop: 16 }}>
+          <DecisionEnginePanel summary={decisionSummary} />
+          <MarketBootstrapPanel report={marketBootstrap} />
+          <ReliabilityDiagramPanel diagram={reliabilityDiagram} />
           <ValueBetAccuracyDashboard report={accuracy} />
           <HistoricalLearningPanel report={learning} />
           <LeagueProfilePanel report={leagueProfiles} />

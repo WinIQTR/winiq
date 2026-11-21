@@ -119,6 +119,9 @@ export function SmartCouponWorkspace({
     invalidOdds: number;
     insufficientBookmakers: number;
     staleOdds: number;
+    staleFixture: number;
+    missingOddsTimestamp: number;
+    marketDisabled: number;
     invalidProbability: number;
   };
   access: AccessMode;
@@ -165,6 +168,9 @@ export function SmartCouponWorkspace({
         <summary>Neden seçimler elendi?</summary>
         <div>
           <span>Eski oran <strong>{rejectionBreakdown.staleOdds}</strong></span>
+          <span>Eski fikstür <strong>{rejectionBreakdown.staleFixture}</strong></span>
+          <span>Oran zaman damgası yok <strong>{rejectionBreakdown.missingOddsTimestamp}</strong></span>
+          <span>Pazar kapalı <strong>{rejectionBreakdown.marketDisabled}</strong></span>
           <span>Bookmaker yetersiz <strong>{rejectionBreakdown.insufficientBookmakers}</strong></span>
           <span>Başlamış / bitmiş <strong>{rejectionBreakdown.startedOrFinished}</strong></span>
           <span>7 gün dışında <strong>{rejectionBreakdown.outsideSevenDays}</strong></span>
