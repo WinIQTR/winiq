@@ -20,7 +20,7 @@ import {
   type MembershipPlanName,
 } from "@/lib/membership-access";
 import { LOCK_HINT } from "@/lib/membership-lock-copy";
-import type { MarketLineMove } from "@/lib/market-line-move";
+import type { MarketLineMove } from "@/lib/market-line-move-shared";
 import { localizePickText } from "@/lib/member-match-insight";
 import { getPredictionLabel, type DashboardPrediction } from "@/lib/prediction-dashboard-shared";
 

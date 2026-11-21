@@ -4,10 +4,8 @@ import { MemberSmartDashboard } from "@/components/member-smart-dashboard";
 import { requireAdmin } from "@/lib/auth-session";
 import { BET_MARKET_COUNT } from "@/lib/bet-market-catalog";
 import { collectMarketLineMoveQueries } from "@/lib/market-line-move-queries";
-import {
-  loadMarketLineMoves,
-  marketLineMovesToRecord,
-} from "@/lib/market-line-move";
+import { loadMarketLineMoves } from "@/lib/market-line-move";
+import { marketLineMovesToRecord } from "@/lib/market-line-move-shared";
 import {
   MEMBERSHIP_PLAN_LABELS,
   MEMBERSHIP_PLAN_MARKET_LIMITS,

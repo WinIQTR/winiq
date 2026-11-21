@@ -2,7 +2,7 @@ import {
   buildMarketLineMove,
   classifyMarketLineMove,
   marketLineMoveKey,
-} from "@/lib/market-line-move";
+} from "@/lib/market-line-move-shared";
 
 function assert(condition: unknown, message: string): asserts condition {
   if (!condition) throw new Error(message);

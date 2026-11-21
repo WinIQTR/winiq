@@ -1,7 +1,7 @@
 "use client";
 
 import { useLanguage } from "@/components/language-provider";
-import type { MarketLineMove } from "@/lib/market-line-move";
+import type { MarketLineMove } from "@/lib/market-line-move-shared";
 
 import styles from "./market-line-move.module.css";
 

@@ -1,5 +1,5 @@
 import type { DashboardPrediction } from "@/lib/prediction-dashboard-shared";
-import type { MarketLineMoveQuery } from "@/lib/market-line-move";
+import type { MarketLineMoveQuery } from "@/lib/market-line-move-shared";
 
 /** Collect selection keys to resolve book line moves for member boards. */
 export function collectMarketLineMoveQueries(

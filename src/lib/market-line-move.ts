@@ -1,59 +1,27 @@
 import { prisma } from "@/lib/prisma";
+import {
+  buildMarketLineMove,
+  marketLineMoveKey,
+  type MarketLineMove,
+  type MarketLineMoveQuery,
+} from "@/lib/market-line-move-shared";
 
-export type MarketLineDirection = "up" | "down" | "flat";
-
-export type MarketLineMove = {
-  openingOdds: number;
-  currentOdds: number;
-  direction: MarketLineDirection;
-  delta: number;
-};
-
-export type MarketLineMoveQuery = {
-  matchId: number;
-  selectionKey: string;
-};
-
-const FLAT_EPSILON = 0.005;
-
-export function marketLineMoveKey(matchId: number, selectionKey: string): string {
-  return `${matchId}:${selectionKey}`;
-}
-
-export function classifyMarketLineMove(
-  openingOdds: number,
-  currentOdds: number,
-  epsilon = FLAT_EPSILON,
-): MarketLineDirection {
-  const delta = currentOdds - openingOdds;
-  if (!Number.isFinite(delta) || Math.abs(delta) < epsilon) return "flat";
-  return delta > 0 ? "up" : "down";
-}
-
-export function buildMarketLineMove(
-  openingOdds: number,
-  currentOdds: number,
-): MarketLineMove | null {
-  if (
-    !Number.isFinite(openingOdds) ||
-    !Number.isFinite(currentOdds) ||
-    openingOdds <= 1 ||
-    currentOdds <= 1
-  ) {
-    return null;
-  }
-  const direction = classifyMarketLineMove(openingOdds, currentOdds);
-  return {
-    openingOdds,
-    currentOdds,
-    direction,
-    delta: Number((currentOdds - openingOdds).toFixed(4)),
-  };
-}
+export type {
+  MarketLineDirection,
+  MarketLineMove,
+  MarketLineMoveQuery,
+} from "@/lib/market-line-move-shared";
+export {
+  buildMarketLineMove,
+  classifyMarketLineMove,
+  marketLineMoveKey,
+  marketLineMovesToRecord,
+} from "@/lib/market-line-move-shared";
 
 /**
  * Loads opening (earliest snapshot) vs current (latest snapshot) book odds
  * for pick selection keys (e.g. match_result_home, btts_yes).
+ * Server-only — do not import this module from client components.
  */
 export async function loadMarketLineMoves(
   queries: MarketLineMoveQuery[],
@@ -135,10 +103,4 @@ export async function loadMarketLineMoves(
   }
 
   return result;
-}
-
-export function marketLineMovesToRecord(
-  moves: Map<string, MarketLineMove>,
-): Record<string, MarketLineMove> {
-  return Object.fromEntries(moves.entries());
 }

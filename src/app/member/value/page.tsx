@@ -8,11 +8,11 @@ import {
 } from "@/components/member-value-opportunities";
 import { readAppLocale } from "@/lib/app-locale-server";
 import { requireMember } from "@/lib/auth-session";
+import { loadMarketLineMoves } from "@/lib/market-line-move";
 import {
-  loadMarketLineMoves,
   marketLineMoveKey,
   marketLineMovesToRecord,
-} from "@/lib/market-line-move";
+} from "@/lib/market-line-move-shared";
 import { hasMembershipPermission } from "@/lib/membership-access";
 import { loadDashboardPredictionSnapshot } from "@/lib/prediction-dashboard-snapshot";
 import { getPredictionLabel } from "@/lib/prediction-dashboard-shared";

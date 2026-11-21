@@ -3,10 +3,8 @@ import { readFile } from "node:fs/promises";
 import { MemberSmartDashboard } from "@/components/member-smart-dashboard";
 import { requireMember } from "@/lib/auth-session";
 import { collectMarketLineMoveQueries } from "@/lib/market-line-move-queries";
-import {
-  loadMarketLineMoves,
-  marketLineMovesToRecord,
-} from "@/lib/market-line-move";
+import { loadMarketLineMoves } from "@/lib/market-line-move";
+import { marketLineMovesToRecord } from "@/lib/market-line-move-shared";
 import { loadMemberPastPerformance } from "@/lib/member-past-performance";
 import {
   loadDashboardPredictionSnapshot,

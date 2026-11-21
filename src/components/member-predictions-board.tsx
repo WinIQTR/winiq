@@ -10,7 +10,7 @@ import { BET_MARKET_COUNT } from "@/lib/bet-market-catalog";
 import {
   marketLineMoveKey,
   type MarketLineMove,
-} from "@/lib/market-line-move";
+} from "@/lib/market-line-move-shared";
 import {
   getPredictionLabel,
   getUiConfidence,

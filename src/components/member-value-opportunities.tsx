@@ -7,7 +7,7 @@ import { useMemo, useState } from "react";
 import { useLanguage } from "@/components/language-provider";
 import { MarketLineMoveBlock } from "@/components/market-line-move";
 import { MatchFormTip } from "@/components/match-form-tip";
-import type { MarketLineMove } from "@/lib/market-line-move";
+import type { MarketLineMove } from "@/lib/market-line-move-shared";
 import { buildMatchFormTip, type FormResult } from "@/lib/member-match-insight";
 
 import styles from "./member-value-opportunities.module.css";
