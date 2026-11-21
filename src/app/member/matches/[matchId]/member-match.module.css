@@ -1,75 +1,499 @@
-.hero{display:flex;justify-content:space-between;gap:24px;padding:26px;border:1px solid #1d3b53;border-radius:18px;background:linear-gradient(130deg,#0b2137,#071727);margin-bottom:18px}.hero p{margin:0 0 8px;color:#58a7ff;font-weight:900;letter-spacing:.16em;font-size:12px}.hero h1{margin:0;color:#f7fbff;font-size:clamp(28px,4vw,52px)}.hero h1 small{color:#57758d}.hero>div:last-child{display:grid;align-content:center;justify-items:end;gap:7px}.hero>div:last-child b{color:#43e3a1}.hero span{color:#8dacbf}.hero a{color:#70b6ff;font-weight:800}.overview{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-bottom:16px}.overview article{display:grid;gap:5px;padding:18px;border:1px solid #1b3950;border-radius:14px;background:#081b2d}.overview span,.overview small{color:#7899b3}.overview strong{font-size:22px;color:#f3f9ff}.note{display:flex;gap:12px;align-items:center;padding:14px 18px;margin-bottom:16px;border:1px solid #176a55;border-radius:12px;background:#073229;color:#b9d9cf}.note strong{color:#45e1a3}.formTipWrap{margin:0 0 14px;padding:12px 14px;border:1px solid #1b3950;border-radius:12px;background:#081b2d}.h2h{margin:0 0 16px;padding:16px 18px;border:1px solid #1b3950;border-radius:14px;background:#081b2d}.h2h h2{margin:0 0 10px;color:#dce8f5;font-size:15px}.h2h ul{margin:0;padding:0;list-style:none;display:grid;gap:8px}.h2h li{display:flex;justify-content:space-between;gap:12px;color:#9eb6ce;font-size:13px}.h2h strong{color:#eef5ff;font-weight:700}.notice{margin-top:16px;padding:16px 18px;border:1px solid #29445a;border-radius:12px;color:#91acbf;background:#071827}@media(max-width:900px){.hero{flex-direction:column}.hero>div:last-child{justify-items:start}.overview{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:520px){.overview{grid-template-columns:1fr}.note{align-items:flex-start;flex-direction:column}}
+.page {
+  display: grid;
+  gap: 16px;
+  padding-bottom: 32px;
+}
 
-/* theme-contrast: match light */
-:global(html[data-theme="light"]) .hero,
-:global(html:not([data-theme])) .hero,
-:global(html[data-theme="light"]) .overview article,
-:global(html:not([data-theme])) .overview article,
-:global(html[data-theme="light"]) .note,
-:global(html:not([data-theme])) .note {
-  border-color: #e5e7eb !important;
-  background: #ffffff !important;
-  color: #0b1f3a !important;
+.topBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.topBar p {
+  margin: 0;
+  color: #0b1f3a;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.planBadge {
+  color: #059669;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.matchHead {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 16px;
+  align-items: center;
+  padding: 16px 18px;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  background: #ffffff;
   box-shadow: 0 2px 12px rgba(15, 35, 70, 0.05);
 }
-:global(html[data-theme="light"]) .hero h1,
-:global(html:not([data-theme])) .hero h1,
-:global(html[data-theme="light"]) .overview strong,
-:global(html:not([data-theme])) .overview strong {
-  color: #0b1f3a !important;
-}
-:global(html[data-theme="light"]) .hero span,
-:global(html:not([data-theme])) .hero span,
-:global(html[data-theme="light"]) .overview span,
-:global(html:not([data-theme])) .overview span,
-:global(html[data-theme="light"]) .overview small,
-:global(html:not([data-theme])) .overview small {
-  color: #6b7280 !important;
-}
-:global(html[data-theme="light"]) .hero a,
-:global(html:not([data-theme])) .hero a {
-  color: #2563eb !important;
+
+.back {
+  color: #2563eb;
+  font-weight: 700;
+  font-size: 13px;
+  text-decoration: none;
+  white-space: nowrap;
 }
 
-/* Light: form tip + H2H flat light blue */
-:global(html[data-theme="light"]) .formTipWrap,
-:global(html:not([data-theme])) .formTipWrap,
-:global(html[data-theme="light"]) .h2h,
-:global(html:not([data-theme])) .h2h {
-  background: #e8f1fb !important;
-  border-color: #c5d9ef !important;
+.back:hover {
+  text-decoration: underline;
+}
+
+.leagueRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.matchup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.team {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.team strong {
   color: #0b1f3a;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.logo,
+.logoFall {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: contain;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+}
+
+.logoFall {
+  display: grid;
+  place-items: center;
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.vs {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #f1f5f9;
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.kick {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #475569;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1.35fr 0.95fr 0.95fr;
+  gap: 14px;
+  align-items: stretch;
+}
+
+.gridLower {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 14px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 2px 12px rgba(15, 35, 70, 0.05);
+  overflow: hidden;
+}
+
+.cardHead {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 14px;
+  background: #0b1f3a;
+  color: #f8fafc;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.cardHead svg {
+  flex-shrink: 0;
+}
+
+.cardBody {
+  display: grid;
+  gap: 12px;
+  padding: 14px;
+}
+
+.pickTitle {
+  margin: 0;
+  color: #0b1f3a;
+  font-size: clamp(18px, 2.4vw, 24px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+.metricRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.metric {
+  display: grid;
+  gap: 4px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+}
+
+.metric span {
+  color: #047857;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.metric strong {
+  color: #065f46;
+  font-size: 22px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.why {
+  display: grid;
+  gap: 6px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+.whyHead {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #0b1f3a;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.why p {
+  margin: 0;
+  color: #475569;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.probList {
+  display: grid;
+  gap: 10px;
+}
+
+.probRow {
+  display: grid;
+  gap: 6px;
+}
+
+.probMeta {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  color: #0b1f3a;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.probMeta b {
+  color: #1d4ed8;
+  font-variant-numeric: tabular-nums;
+}
+
+.bar {
+  height: 8px;
+  border-radius: 999px;
+  background: #e2e8f0;
+  overflow: hidden;
+}
+
+.bar i {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #1f6fff, #22e38a);
+}
+
+.formBox {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 12px;
+  border-radius: 12px;
+  background: #e8f1fb;
+  border: 1px solid #c5d9ef;
+  color: #0b1f3a;
+  font-size: 14px;
+  line-height: 1.45;
+  font-weight: 600;
+}
+
+.formBox svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: #1d4ed8;
+}
+
+.h2hTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.h2hTable th {
+  text-align: left;
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0 0 8px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.h2hTable td {
+  padding: 10px 0;
+  border-bottom: 1px solid #f1f5f9;
+  color: #334155;
+  vertical-align: middle;
+}
+
+.h2hTable tr:last-child td {
+  border-bottom: 0;
+}
+
+.score {
+  display: inline-flex;
+  min-width: 52px;
+  justify-content: center;
+  padding: 4px 8px;
+  border-radius: 8px;
+  background: #e8f1fb;
+  color: #0b1f3a;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.topList {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.topItem {
+  display: grid;
+  grid-template-columns: 28px 1fr auto;
+  gap: 10px;
+  align-items: start;
+}
+
+.num {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #1f6fff;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.topItem small {
+  display: block;
+  color: #1d4ed8;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.topItem strong {
+  display: block;
+  color: #0b1f3a;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.topMeta {
+  display: grid;
+  justify-items: end;
+  gap: 4px;
+}
+
+.conf {
+  display: inline-flex;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba(34, 197, 94, 0.14);
+  color: #059669;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.odds {
+  color: #0b1f3a;
+  font-size: 14px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.empty {
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.catalogWrap {
+  margin-top: 4px;
+}
+
+.notice {
+  padding: 14px 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #f8fafc;
+  color: #64748b;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.lockHint {
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* Dark theme fallbacks keep brand readable */
+:global(html[data-theme="dark"]) .matchHead,
+:global(html[data-theme="dark"]) .card {
+  background: #0f1a2c;
+  border-color: rgba(70, 110, 170, 0.35);
   box-shadow: none;
 }
-:global(html[data-theme="light"]) .h2h h2,
-:global(html:not([data-theme])) .h2h h2 {
-  color: #0b1f3a !important;
-  font-weight: 700;
+
+:global(html[data-theme="dark"]) .topBar p,
+:global(html[data-theme="dark"]) .team strong,
+:global(html[data-theme="dark"]) .pickTitle,
+:global(html[data-theme="dark"]) .probMeta,
+:global(html[data-theme="dark"]) .topItem strong,
+:global(html[data-theme="dark"]) .odds {
+  color: #eef4ff;
 }
-:global(html[data-theme="light"]) .h2h li,
-:global(html:not([data-theme])) .h2h li {
-  color: #334155 !important;
-  font-weight: 400;
+
+:global(html[data-theme="dark"]) .cardBody {
+  background: transparent;
 }
-:global(html[data-theme="light"]) .h2h strong,
-:global(html:not([data-theme])) .h2h strong {
-  color: #0b1f3a !important;
-  font-weight: 700;
+
+:global(html[data-theme="dark"]) .why,
+:global(html[data-theme="dark"]) .formBox,
+:global(html[data-theme="dark"]) .notice {
+  background: #121f34;
+  border-color: rgba(70, 110, 170, 0.35);
+  color: #c5d5ea;
 }
-:global(html[data-theme="light"]) .formTipWrap,
-:global(html:not([data-theme])) .formTipWrap {
-  font-family: var(--font-geist-sans), system-ui, sans-serif;
+
+:global(html[data-theme="dark"]) .whyHead,
+:global(html[data-theme="dark"]) .formBox {
+  color: #eef4ff;
 }
-:global(html[data-theme="light"]) .formTipWrap :global(p),
-:global(html:not([data-theme])) .formTipWrap :global(p),
-:global(html[data-theme="light"]) .formTipWrap,
-:global(html:not([data-theme])) .formTipWrap {
-  color: #0b1f3a !important;
+
+:global(html[data-theme="dark"]) .h2hTable th {
+  color: #8aa3c4;
+  border-bottom-color: rgba(70, 110, 170, 0.35);
 }
-:global(html[data-theme="light"]) .overview span,
-:global(html:not([data-theme])) .overview span,
-:global(html[data-theme="light"]) .overview small,
-:global(html:not([data-theme])) .overview small {
-  color: #334155 !important;
-  font-weight: 500;
+
+:global(html[data-theme="dark"]) .h2hTable td {
+  color: #c5d5ea;
+  border-bottom-color: rgba(70, 110, 170, 0.2);
+}
+
+:global(html[data-theme="dark"]) .score {
+  background: rgba(31, 111, 255, 0.16);
+  color: #eef4ff;
+}
+
+@media (max-width: 1100px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .grid > :first-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 820px) {
+  .matchHead {
+    grid-template-columns: 1fr;
+    justify-items: start;
+  }
+
+  .grid,
+  .gridLower {
+    grid-template-columns: 1fr;
+  }
+
+  .kick {
+    white-space: normal;
+  }
 }
