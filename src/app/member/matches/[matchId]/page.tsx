@@ -24,11 +24,24 @@ export const revalidate = 0;
 
 const TZ = "Europe/Istanbul";
 
-function TeamLogo({ src, name }: { src: string | null; name: string }) {
+function TeamLogo({
+  src,
+  name,
+  size = 40,
+}: {
+  src: string | null;
+  name: string;
+  size?: number;
+}) {
+  const className = size <= 28 ? styles.logoSm : styles.logo;
   if (src) {
-    return <Image className={styles.logo} src={src} alt="" width={40} height={40} />;
+    return <Image className={className} src={src} alt="" width={size} height={size} />;
   }
-  return <span className={styles.logoFall}>{name.slice(0, 2).toUpperCase()}</span>;
+  return (
+    <span className={`${className} ${styles.logoFall}`} style={{ width: size, height: size }}>
+      {name.slice(0, 2).toUpperCase()}
+    </span>
+  );
 }
 
 function IconTarget() {
@@ -46,32 +59,6 @@ function IconBars() {
     </svg>
   );
 }
-function IconTrend() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
-      <path d="M4 16l5-5 4 4 7-8" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-function IconSwap() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
-      <path d="M7 7h11M15 3l4 4-4 4M17 17H6M9 13l-4 4 4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-function IconStar() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
-      <path
-        d="M12 3.6l2.2 4.6 5 .7-3.6 3.5.9 5-4.5-2.4L7.5 17.4l.9-5L4.8 8.9l5-.7L12 3.6z"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
 function IconInfo() {
   return (
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden>
@@ -85,6 +72,33 @@ function IconCal() {
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
       <rect x="3.5" y="5" width="17" height="15" rx="2" stroke="currentColor" strokeWidth="1.8" />
       <path d="M8 3.5V7M16 3.5V7M3.5 10h17" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+    </svg>
+  );
+}
+function IconBall() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
+      <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.7" />
+      <path
+        d="M12 3v3.2M12 17.8V21M3 12h3.2M17.8 12H21M7.2 7.2l2.2 2.2M14.6 14.6l2.2 2.2M16.8 7.2l-2.2 2.2M9.4 14.6l-2.2 2.2"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
+      <circle cx="12" cy="12" r="2.4" stroke="currentColor" strokeWidth="1.5" />
+    </svg>
+  );
+}
+function IconBallSm() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden>
+      <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.7" />
+      <path
+        d="M12 3v3.2M12 17.8V21M3 12h3.2M17.8 12H21"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
     </svg>
   );
 }
@@ -175,8 +189,8 @@ export default async function MemberMatchDetailPage({
             kickoffAt: true,
             homeScore: true,
             awayScore: true,
-            homeTeam: { select: { name: true } },
-            awayTeam: { select: { name: true } },
+            homeTeam: { select: { name: true, logoUrl: true } },
+            awayTeam: { select: { name: true, logoUrl: true } },
           },
         })
       : [];
@@ -189,6 +203,13 @@ export default async function MemberMatchDetailPage({
     hour: "2-digit",
     minute: "2-digit",
   }).format(new Date(prediction.kickoffAt));
+
+  const h2hDateFmt = new Intl.DateTimeFormat("tr-TR", {
+    timeZone: TZ,
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  });
 
   return (
     <main className={`${member.shell} member-plan-${user.plan.toLowerCase()}`}>
@@ -291,124 +312,124 @@ export default async function MemberMatchDetailPage({
               )}
             </div>
           </article>
-
-          <article className={styles.card}>
-            <div className={styles.cardHead}>
-              <IconTrend />
-              {tr("Recent form")}
-            </div>
-            <div className={styles.cardBody}>
-              {formTip ? (
-                <div className={styles.formBox}>
-                  <IconCal />
-                  <span>{formTip}</span>
-                </div>
-              ) : (
-                <p className={styles.empty}>{tr("No recent form summary yet.")}</p>
-              )}
-            </div>
-          </article>
         </section>
 
-        <section className={styles.gridLower}>
-          <article className={styles.card}>
-            <div className={styles.cardHead}>
-              <IconSwap />
-              {tr("Head-to-head (H2H)")}
-            </div>
-            <div className={styles.cardBody}>
-              {h2h.length ? (
-                <table className={styles.h2hTable}>
-                  <thead>
-                    <tr>
-                      <th>{tr("Date")}</th>
-                      <th>{tr("Fixture")}</th>
-                      <th>{tr("Score")}</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {h2h.map((match, index) => (
-                      <tr key={`${match.kickoffAt.toISOString()}-${index}`}>
-                        <td>
-                          {new Intl.DateTimeFormat("tr-TR", {
-                            timeZone: TZ,
-                            day: "2-digit",
-                            month: "short",
-                            year: "numeric",
-                          }).format(match.kickoffAt)}
-                        </td>
-                        <td>
-                          {match.homeTeam.name} – {match.awayTeam.name}
-                        </td>
-                        <td>
-                          <span className={styles.score}>
-                            {match.homeScore} - {match.awayScore}
-                          </span>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              ) : (
-                <p className={styles.empty}>{tr("No head-to-head results yet.")}</p>
-              )}
-            </div>
-          </article>
+        {formTip ? (
+          <aside className={styles.formStrip} aria-label={tr("Recent form")}>
+            <span className={styles.formIcon}>
+              <IconBars />
+            </span>
+            <span className={styles.formDivider} aria-hidden />
+            <p className={styles.formText}>{formTip}</p>
+          </aside>
+        ) : null}
 
-          <article className={styles.card}>
-            <div className={styles.cardHead}>
-              <IconStar />
-              {tr("Top 3 predictions")}
+        <article className={styles.h2hCard}>
+          <div className={styles.h2hHead}>
+            <span className={styles.h2hIcon}>
+              <IconBall />
+            </span>
+            <div>
+              <h2 className={styles.h2hTitle}>{tr("Recent meetings (H2H)")}</h2>
+              <span className={styles.h2hUnderline} aria-hidden />
             </div>
-            <div className={styles.cardBody}>
-              <ol className={styles.topList}>
-                {topPicks.map((pick, index) => {
-                  const conf = getUiConfidence(
-                    "pickScore" in pick && typeof pick.pickScore === "number"
-                      ? pick.pickScore
-                      : "probability" in pick && typeof pick.probability === "number"
-                        ? pick.probability
-                        : prediction.confidenceScore,
-                  );
-                  const odds =
-                    "fairOdds" in pick && typeof pick.fairOdds === "number" && pick.fairOdds > 0
-                      ? pick.fairOdds
-                      : null;
-                  const market =
-                    "market" in pick && typeof pick.market === "string" ? pick.market : "";
-                  const selection =
-                    "selection" in pick && typeof pick.selection === "string"
-                      ? pick.selection
-                      : "";
-                  const pct =
-                    "probability" in pick && typeof pick.probability === "number"
-                      ? pick.probability
-                      : "pickScore" in pick && typeof pick.pickScore === "number"
-                        ? pick.pickScore
-                        : null;
-                  return (
-                    <li className={styles.topItem} key={`${market}-${selection}-${index}`}>
-                      <span className={styles.num}>{index + 1}</span>
-                      <div>
-                        <small>{tr(market)}</small>
-                        <strong>{tr(selection)}</strong>
-                      </div>
-                      <div className={styles.topMeta}>
-                        <span className={styles.conf}>
-                          {tr(conf)}
-                          {pct != null ? ` (%${pct.toFixed(0)})` : ""}
+          </div>
+          {h2h.length ? (
+            <ul className={styles.h2hList}>
+              {h2h.map((match, index) => (
+                <li className={styles.h2hRow} key={`${match.kickoffAt.toISOString()}-${index}`}>
+                  <div className={styles.h2hDate}>
+                    <IconCal />
+                    <span>{h2hDateFmt.format(match.kickoffAt)}</span>
+                  </div>
+                  <div className={styles.h2hFixture}>
+                    <div className={styles.h2hTeamHome}>
+                      <TeamLogo src={match.homeTeam.logoUrl} name={match.homeTeam.name} size={28} />
+                      <strong>{match.homeTeam.name}</strong>
+                    </div>
+                    <span className={styles.score}>
+                      {match.homeScore}–{match.awayScore}
+                    </span>
+                    <div className={styles.h2hTeamAway}>
+                      <strong>{match.awayTeam.name}</strong>
+                      <TeamLogo src={match.awayTeam.logoUrl} name={match.awayTeam.name} size={28} />
+                    </div>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className={styles.emptyPad}>{tr("No head-to-head results yet.")}</p>
+          )}
+        </article>
+
+        <article className={styles.recCard}>
+          <div className={styles.recHead}>
+            <span className={styles.recHeadIcon}>
+              <IconBall />
+            </span>
+            <span className={styles.recHeadDivider} aria-hidden />
+            <div>
+              <span className={styles.recBadge}>{tr("RECOMMENDED PICKS")}</span>
+              <h2 className={styles.recTitle}>{tr("Top 3 for this match")}</h2>
+              <p className={styles.recSub}>
+                {tr("Full catalog is below; start with the clear picks.")}
+              </p>
+            </div>
+          </div>
+          <ol className={styles.recList}>
+            {topPicks.map((pick, index) => {
+              const odds =
+                "fairOdds" in pick && typeof pick.fairOdds === "number" && pick.fairOdds > 0
+                  ? pick.fairOdds
+                  : null;
+              const market =
+                "market" in pick && typeof pick.market === "string" ? pick.market : "";
+              const selection =
+                "selection" in pick && typeof pick.selection === "string" ? pick.selection : "";
+              const pctRaw =
+                "probability" in pick && typeof pick.probability === "number"
+                  ? pick.probability
+                  : "pickScore" in pick && typeof pick.pickScore === "number"
+                    ? pick.pickScore
+                    : prediction.confidenceScore;
+              const pct = Math.max(0, Math.min(100, pctRaw));
+              return (
+                <li className={styles.recItem} key={`${market}-${selection}-${index}`}>
+                  <span className={styles.recRank}>#{index + 1}</span>
+                  <div className={styles.recPick}>
+                    <span className={styles.recMarket}>
+                      <IconBallSm />
+                      {tr(market)}
+                    </span>
+                    <strong>{tr(selection)}</strong>
+                  </div>
+                  {showOdds ? (
+                    <>
+                      <div className={styles.recConf}>
+                        <span>
+                          {tr("Confidence")} <b>%{pct.toFixed(0)}</b>
                         </span>
-                        {showOdds && odds != null ? (
-                          <span className={styles.odds}>{odds.toFixed(2)}</span>
-                        ) : null}
+                        <span className={styles.recConfBar} aria-hidden>
+                          <i style={{ width: `${Math.max(4, pct)}%` }} />
+                        </span>
                       </div>
-                    </li>
-                  );
-                })}
-              </ol>
-            </div>
-          </article>
-        </section>
+                      {odds != null ? (
+                        <span className={styles.recOdds}>
+                          {tr("odds")} <b>{odds.toFixed(2)}</b>
+                        </span>
+                      ) : (
+                        <span className={styles.recOddsMuted}>—</span>
+                      )}
+                    </>
+                  ) : (
+                    <p className={styles.lockHint}>{tr("Upgrade plan to see probabilities and confidence.")}</p>
+                  )}
+                </li>
+              );
+            })}
+          </ol>
+        </article>
 
         <div className={styles.catalogWrap}>
           <BetMarketCatalogPanel groups={groups} locale="tr" accessPlan={user.plan} />
