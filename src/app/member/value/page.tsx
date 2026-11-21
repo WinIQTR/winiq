@@ -8,6 +8,11 @@ import {
 } from "@/components/member-value-opportunities";
 import { readAppLocale } from "@/lib/app-locale-server";
 import { requireMember } from "@/lib/auth-session";
+import {
+  loadMarketLineMoves,
+  marketLineMoveKey,
+  marketLineMovesToRecord,
+} from "@/lib/market-line-move";
 import { hasMembershipPermission } from "@/lib/membership-access";
 import { loadDashboardPredictionSnapshot } from "@/lib/prediction-dashboard-snapshot";
 import { getPredictionLabel } from "@/lib/prediction-dashboard-shared";
@@ -68,6 +73,17 @@ export default async function MemberValuePage() {
     .sort((a, b) => b.confidenceScore - a.confidenceScore)
     .slice(0, 30);
 
+  const lineMoves = marketLineMovesToRecord(
+    await loadMarketLineMoves(
+      rows
+        .map((item) => {
+          const key = item.topPicks[0]?.key;
+          return key ? { matchId: item.matchId, selectionKey: key } : null;
+        })
+        .filter((item): item is { matchId: number; selectionKey: string } => Boolean(item)),
+    ),
+  );
+
   const opportunities: MemberValueOpportunity[] = rows.map((item) => {
     const top = item.topPicks[0];
     const modelOdds =
@@ -76,6 +92,9 @@ export default async function MemberValuePage() {
         : item.predictedProbability > 0
           ? 100 / item.predictedProbability
           : null;
+    const lineMove = top?.key
+      ? lineMoves[marketLineMoveKey(item.matchId, top.key)] ?? null
+      : null;
 
     return {
       matchId: item.matchId,
@@ -92,6 +111,7 @@ export default async function MemberValuePage() {
       modelOdds,
       confidenceScore: item.confidenceScore,
       href: `/member/matches/${item.matchId}`,
+      lineMove,
       homeRecentResults: item.homeRecentResults,
       awayRecentResults: item.awayRecentResults,
       homeVenueResults: item.homeVenueResults,

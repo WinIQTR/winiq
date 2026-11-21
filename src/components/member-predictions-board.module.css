@@ -367,6 +367,7 @@
     minmax(120px, 0.95fr)
     minmax(90px, 0.7fr)
     minmax(70px, 0.55fr)
+    minmax(120px, 0.95fr)
     minmax(100px, 0.75fr);
   gap: 14px;
   align-items: center;

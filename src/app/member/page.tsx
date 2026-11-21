@@ -2,6 +2,11 @@ import { readFile } from "node:fs/promises";
 
 import { MemberSmartDashboard } from "@/components/member-smart-dashboard";
 import { requireMember } from "@/lib/auth-session";
+import { collectMarketLineMoveQueries } from "@/lib/market-line-move-queries";
+import {
+  loadMarketLineMoves,
+  marketLineMovesToRecord,
+} from "@/lib/market-line-move";
 import { loadMemberPastPerformance } from "@/lib/member-past-performance";
 import {
   loadDashboardPredictionSnapshot,
@@ -41,6 +46,9 @@ export default async function MemberPage({
     .slice()
     .sort((a, b) => a.kickoffAt.getTime() - b.kickoffAt.getTime())
     .slice(0, 2_000);
+  const lineMoves = marketLineMovesToRecord(
+    await loadMarketLineMoves(collectMarketLineMoveQueries(predictions)),
+  );
 
   return (
     <MemberSmartDashboard
@@ -50,6 +58,7 @@ export default async function MemberPage({
       selectedDate={query.date}
       performance={past.performance}
       updatedAtIso={updatedAtIso}
+      lineMoves={lineMoves}
     />
   );
 }

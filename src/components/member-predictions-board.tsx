@@ -5,7 +5,12 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 
 import { useLanguage } from "@/components/language-provider";
+import { MarketLineMoveBlock } from "@/components/market-line-move";
 import { BET_MARKET_COUNT } from "@/lib/bet-market-catalog";
+import {
+  marketLineMoveKey,
+  type MarketLineMove,
+} from "@/lib/market-line-move";
 import {
   getPredictionLabel,
   getUiConfidence,
@@ -60,6 +65,7 @@ function todayKey(now = new Date()) {
 }
 
 type BoardPick = {
+  key: string;
   market: string;
   selection: string;
   probability: number;
@@ -90,6 +96,7 @@ function resolvePrimaryPick(
     const fromTop = (prediction.topPicks ?? []).find((pick) => pick.market === preferred);
     if (fromTop) {
       return {
+        key: fromTop.key,
         market: fromTop.market,
         selection: fromTop.selection,
         probability: fromTop.probability,
@@ -105,6 +112,7 @@ function resolvePrimaryPick(
     );
     if (fromPopular?.market && fromPopular.selection && fromPopular.probability != null) {
       return {
+        key: "",
         market: fromPopular.market,
         selection: fromPopular.selection,
         probability: fromPopular.probability,
@@ -116,6 +124,7 @@ function resolvePrimaryPick(
   const top = prediction.topPicks[0];
   if (top) {
     return {
+      key: top.key,
       market: top.market,
       selection: top.selection,
       probability: top.probability,
@@ -322,6 +331,7 @@ export function MemberPredictionsBoard({
   selectedDate,
   updatedAtIso,
   performance,
+  lineMoves = {},
 }: {
   predictions: DashboardPrediction[];
   plan: MembershipPlanName;
@@ -332,6 +342,7 @@ export function MemberPredictionsBoard({
   selectedDate?: string;
   updatedAtIso?: string;
   performance?: MemberHomePerformance;
+  lineMoves?: Record<string, MarketLineMove>;
 }) {
   const { t, locale } = useLanguage();
   const matchHref = (matchId: number) => `${matchPathPrefix}/${matchId}${matchQuery}`;
@@ -687,16 +698,20 @@ export function MemberPredictionsBoard({
             {pageItems.length ? (
               pageItems.map((item) => {
                 const conf = confidenceMeta(item.confidenceScore);
+                const primaryPick = resolvePrimaryPick(item, applied.market);
                 const odds = fairOdds(item, applied.market);
                 const probability = pickProbability(item, applied.market);
                 const chip = pickChip(item, locale, t, applied.market);
                 const insight = buildMatchCardInsight(item, t, locale);
                 const matchMarkets = collectMatchMarkets(item);
-                const primaryMarket =
-                  resolvePrimaryPick(item, applied.market)?.market ?? matchMarkets[0] ?? "";
+                const primaryMarket = primaryPick?.market ?? matchMarkets[0] ?? "";
                 const otherMarkets = matchMarkets.filter((market) => market !== primaryMarket);
                 const visibleMarkets = otherMarkets.slice(0, MARKETS_STRIP_LIMIT);
                 const hiddenMarketCount = Math.max(0, otherMarkets.length - visibleMarkets.length);
+                const lineMove =
+                  showOdds && primaryPick?.key
+                    ? lineMoves[marketLineMoveKey(item.matchId, primaryPick.key)]
+                    : null;
                 return (
                   <article className={styles.card} key={item.matchId}>
                     <div className={styles.cardHead}>
@@ -752,6 +767,8 @@ export function MemberPredictionsBoard({
                           </span>
                         )}
                       </div>
+
+                      <MarketLineMoveBlock locked={!showOdds} move={lineMove} />
 
                       <div className={styles.metric}>
                         <span>{t("Confidence Score")}</span>

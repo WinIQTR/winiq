@@ -20,6 +20,7 @@ import {
   type MembershipPlanName,
 } from "@/lib/membership-access";
 import { LOCK_HINT } from "@/lib/membership-lock-copy";
+import type { MarketLineMove } from "@/lib/market-line-move";
 import { localizePickText } from "@/lib/member-match-insight";
 import { getPredictionLabel, type DashboardPrediction } from "@/lib/prediction-dashboard-shared";
 
@@ -446,6 +447,7 @@ export function MemberSmartDashboard({
   selectedDate,
   performance,
   updatedAtIso,
+  lineMoves = {},
 }: {
   name: string;
   plan: MembershipPlanName;
@@ -454,6 +456,7 @@ export function MemberSmartDashboard({
   selectedDate?: string;
   performance?: MemberPerformance;
   updatedAtIso?: string;
+  lineMoves?: Record<string, MarketLineMove>;
 }) {
   const matchPathPrefix = preview
     ? "/admin/members/preview/matches"
@@ -476,6 +479,7 @@ export function MemberSmartDashboard({
           selectedDate={selectedDate}
           updatedAtIso={updatedAtIso}
           performance={performance}
+          lineMoves={lineMoves}
         />
       </div>
     </main>

@@ -5,7 +5,9 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 
 import { useLanguage } from "@/components/language-provider";
+import { MarketLineMoveBlock } from "@/components/market-line-move";
 import { MatchFormTip } from "@/components/match-form-tip";
+import type { MarketLineMove } from "@/lib/market-line-move";
 import { buildMatchFormTip, type FormResult } from "@/lib/member-match-insight";
 
 import styles from "./member-value-opportunities.module.css";
@@ -25,6 +27,7 @@ export type MemberValueOpportunity = {
   modelOdds: number | null;
   confidenceScore: number;
   href: string;
+  lineMove?: MarketLineMove | null;
   homeRecentResults?: FormResult[];
   awayRecentResults?: FormResult[];
   homeVenueResults?: FormResult[];
@@ -277,6 +280,9 @@ export function MemberValueOpportunities({
                   <div className={styles.stat}>
                     <span>{t("Model odds")}</span>
                     <em>{item.modelOdds != null ? item.modelOdds.toFixed(2) : "—"}</em>
+                  </div>
+                  <div className={styles.stat}>
+                    <MarketLineMoveBlock move={item.lineMove} />
                   </div>
                   <div className={styles.stat}>
                     <span>{t("Confidence score")}</span>

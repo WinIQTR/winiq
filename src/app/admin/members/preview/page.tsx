@@ -3,6 +3,11 @@ import Link from "next/link";
 import { MemberSmartDashboard } from "@/components/member-smart-dashboard";
 import { requireAdmin } from "@/lib/auth-session";
 import { BET_MARKET_COUNT } from "@/lib/bet-market-catalog";
+import { collectMarketLineMoveQueries } from "@/lib/market-line-move-queries";
+import {
+  loadMarketLineMoves,
+  marketLineMovesToRecord,
+} from "@/lib/market-line-move";
 import {
   MEMBERSHIP_PLAN_LABELS,
   MEMBERSHIP_PLAN_MARKET_LIMITS,
@@ -29,6 +34,9 @@ export default async function MembershipPreviewPage({
     .filter((item) => item.settlementStatus === undefined || item.settlementStatus === "PENDING")
     .sort((a, b) => a.kickoffAt.getTime() - b.kickoffAt.getTime())
     .slice(0, 200);
+  const lineMoves = marketLineMovesToRecord(
+    await loadMarketLineMoves(collectMarketLineMoveQueries(predictions)),
+  );
 
   return (
     <>
@@ -52,6 +60,7 @@ export default async function MembershipPreviewPage({
         predictions={predictions}
         preview
         selectedDate={selectedDate}
+        lineMoves={lineMoves}
       />
     </>
   );
