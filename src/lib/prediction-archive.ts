@@ -468,6 +468,46 @@ export async function runPredictionArchiveAutomation(): Promise<
       },
     );
 
+  try {
+    const { writeImmutableTrackSnapshot } = await import(
+      "@/modules/track-record/snapshot-manifest"
+    );
+    const { archiveRowToTrackRecord } = await import(
+      "@/modules/track-record/from-archive"
+    );
+    const trackPredictions = settledDashboardHistory.flatMap((prediction) => {
+      const top = prediction.topPicks?.[0];
+      if (!top) return [];
+      const row = archiveRowToTrackRecord({
+        id: `${prediction.matchId}-${top.key}`,
+        matchId: prediction.matchId,
+        leagueName: prediction.leagueName,
+        homeTeam: prediction.homeTeam,
+        awayTeam: prediction.awayTeam,
+        kickoffAt: prediction.kickoffAt,
+        publishedAt: prediction.kickoffAt,
+        selection: top.selection,
+        marketKey: top.key,
+        probability: top.probability,
+        fairOdds: top.fairOdds,
+        result: prediction.settlementStatus,
+        actualHomeScore: prediction.finalHomeScore,
+        actualAwayScore: prediction.finalAwayScore,
+      });
+      return row ? [row] : [];
+    });
+    await writeImmutableTrackSnapshot({
+      predictions: trackPredictions,
+      source: "winiq-prediction-archive",
+      note: "Immutable daily track snapshot (TipsAudit-style); SHA-256 in reports/track/manifest.csv",
+    });
+  } catch (error) {
+    console.error(
+      "Immutable track snapshot skipped:",
+      error instanceof Error ? error.message : error,
+    );
+  }
+
   return {
     publication,
     settlement,

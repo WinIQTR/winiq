@@ -1,50 +1,39 @@
 import type { SettledBacktestBet } from "@/modules/bankroll-backtest/types";
+import {
+  computeLabeledClv,
+  summarizeLabeledClv,
+} from "@/modules/track-record/clv-labeled";
 
 export type ClvMetrics = {
+  /** Raw CLV %: mean(taken/close - 1)*100 (margin included). */
   clvPct: number | null;
+  /** De-vig / fair-p CLV % (labeled separately from raw). */
   clvNoVigPct: number | null;
   beatClosingPct: number | null;
   samples: number;
 };
 
 /**
- * Closing Line Value: mean(takenOdds / closingOdds - 1).
- * clvNoVig uses modelProbability as fair p: expected return vs closing.
+ * Closing Line Value with explicit raw vs de-vig labels (TipsAudit-style).
+ * Raw: takenOdds / closingOdds - 1. De-vig: fair-p EV delta vs close.
  */
 export function computeClvMetrics(
   placed: readonly SettledBacktestBet[],
 ): ClvMetrics {
-  const withClose = placed.filter(
-    (row) =>
-      row.closingOdds != null &&
-      Number.isFinite(row.closingOdds) &&
-      (row.closingOdds as number) > 1,
-  );
-  if (withClose.length === 0) {
-    return {
-      clvPct: null,
-      clvNoVigPct: null,
-      beatClosingPct: null,
-      samples: 0,
-    };
-  }
-
-  let clvSum = 0;
-  let noVigSum = 0;
-  let beat = 0;
-  for (const row of withClose) {
-    const closing = row.closingOdds as number;
-    clvSum += row.odds / closing - 1;
-    // Expected return if closing is the true price: p * closing - 1, vs taken EV
-    const p = Math.min(1, Math.max(0, row.modelProbability));
-    noVigSum += p * row.odds - 1 - (p * closing - 1);
-    if (row.odds > closing) beat += 1;
-  }
-
+  const labeled = placed
+    .filter((row) => !row.skipped && row.stake > 0)
+    .map((row) =>
+      computeLabeledClv({
+        oddsTaken: row.odds,
+        closingOdds: row.closingOdds,
+        fairProbability: row.modelProbability,
+      }),
+    );
+  const summary = summarizeLabeledClv(labeled);
   return {
-    clvPct: (clvSum / withClose.length) * 100,
-    clvNoVigPct: (noVigSum / withClose.length) * 100,
-    beatClosingPct: (beat / withClose.length) * 100,
-    samples: withClose.length,
+    clvPct: summary.meanRawClvPct,
+    clvNoVigPct: summary.meanDeVigClvPct,
+    beatClosingPct: summary.beatClosingPct,
+    samples: summary.samples,
   };
 }

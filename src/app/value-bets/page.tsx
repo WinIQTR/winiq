@@ -404,7 +404,14 @@ function BankrollBacktestPanel({ report }: { report: BankrollBacktestReport }) {
         <article><span>SHARPE</span><strong>{formatNullable(m.sharpe, 2)}</strong><small>Risk-adjusted</small></article>
         <article><span>SORTINO</span><strong>{formatNullable(m.sortino, 2)}</strong><small>Downside only</small></article>
         <article><span>CALMAR</span><strong>{formatNullable(m.calmar, 2)}</strong><small>CAGR / max DD</small></article>
-        <article><span>CLV</span><strong>{formatNullable(m.clvPct, 2, "%")}</strong><small>Beat close {formatNullable(m.beatClosingPct, 0, "%")}</small></article>
+        <article>
+          <span>CLV RAW</span>
+          <strong>{formatNullable(m.clvPct, 2, "%")}</strong>
+          <small>
+            de-vig {formatNullable(m.clvNoVigPct, 2, "%")} · beat{" "}
+            {formatNullable(m.beatClosingPct, 0, "%")}
+          </small>
+        </article>
       </div>
 
       <div className={styles.healthGrid}>

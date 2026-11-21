@@ -11,6 +11,10 @@ import {
   buildPredictionAuditReport,
   softPredictionsToOneXTwo,
 } from "@/modules/prediction-audit";
+import {
+  archiveRowToTrackRecord,
+  buildTrackRecordReport,
+} from "@/modules/track-record";
 import styles from "./evaluation-page.module.css";
 
 function formatPercentage(value: number): string {
@@ -107,6 +111,29 @@ export default async function EvaluationPage() {
     })),
   );
   const audit = buildPredictionAuditReport(auditRows);
+  const trackRows = predictions
+    .map((prediction) =>
+      archiveRowToTrackRecord({
+        id: prediction.id,
+        matchId: prediction.matchId,
+        leagueName: prediction.leagueName,
+        homeTeam: prediction.homeTeam,
+        awayTeam: prediction.awayTeam,
+        kickoffAt: prediction.kickoffAt,
+        publishedAt: prediction.publishedAt,
+        selection: prediction.selection,
+        marketKey: prediction.marketKey,
+        probability: prediction.predictedProbability,
+        fairOdds: prediction.fairOdds,
+        marketOdds: prediction.marketOdds,
+        result: prediction.result,
+        actualOutcome: prediction.actualOutcome,
+        actualHomeScore: prediction.actualHomeScore,
+        actualAwayScore: prediction.actualAwayScore,
+      }),
+    )
+    .filter((row): row is NonNullable<typeof row> => row !== null);
+  const track = buildTrackRecordReport(trackRows);
   const formatRate = (value: number | null) =>
     value === null ? "—" : `${(value * 100).toFixed(1)}%`;
   const formatBrier = (value: number | null) =>
@@ -377,6 +404,61 @@ export default async function EvaluationPage() {
                       </div>
                     </div>
                   ))}
+              </div>
+            </section>
+
+            <section className={styles.panel}>
+              <div className={styles.compactPanelHeader}>
+                <div>
+                  <div className={styles.panelTitle}>TRACK RECORD · TIPSAUDIT-STYLE</div>
+                  <small>
+                    logged_before_kickoff · void hariç hit · raw vs de-vig CLV · value origin
+                  </small>
+                </div>
+                <span>{track.rows} rows</span>
+              </div>
+              <div className={styles.kpiGrid} style={{ marginTop: 12 }}>
+                <article className={`${styles.kpiCard} ${styles.kpiBlue}`}>
+                  <div className={styles.kpiContent}>
+                    <span>BEFORE KICKOFF</span>
+                    <strong>{formatRate(track.loggedBeforeKickoffRate)}</strong>
+                    <small>logged_before_kickoff</small>
+                  </div>
+                </article>
+                <article className={`${styles.kpiCard} ${styles.kpiGreen}`}>
+                  <div className={styles.kpiContent}>
+                    <span>HIT (SCOREABLE)</span>
+                    <strong>{formatRate(track.hitRate)}</strong>
+                    <small>
+                      {track.scoreable} graded · {track.voided} void
+                    </small>
+                  </div>
+                </article>
+                <article className={`${styles.kpiCard} ${styles.kpiPurple}`}>
+                  <div className={styles.kpiContent}>
+                    <span>CLV RAW</span>
+                    <strong>
+                      {track.clv.meanRawClvPct === null
+                        ? "—"
+                        : `${track.clv.meanRawClvPct.toFixed(2)}%`}
+                    </strong>
+                    <small>
+                      de-vig{" "}
+                      {track.clv.meanDeVigClvPct === null
+                        ? "—"
+                        : `${track.clv.meanDeVigClvPct.toFixed(2)}%`}
+                    </small>
+                  </div>
+                </article>
+                <article className={`${styles.kpiCard} ${styles.kpiYellow}`}>
+                  <div className={styles.kpiContent}>
+                    <span>VALUE FLAGS</span>
+                    <strong>
+                      {track.liveValueFlags}/{track.replayValueFlags}
+                    </strong>
+                    <small>live / replay · reversed {track.teamsReversed}</small>
+                  </div>
+                </article>
               </div>
             </section>
 
