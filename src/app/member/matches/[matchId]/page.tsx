@@ -12,10 +12,7 @@ import { requireMember } from "@/lib/auth-session";
 import { buildMatchFormTip } from "@/lib/member-match-insight";
 import { MEMBERSHIP_PLAN_LABELS, MEMBERSHIP_PLAN_MARKET_LIMITS } from "@/lib/membership-access";
 import { loadDashboardPredictionSnapshot } from "@/lib/prediction-dashboard-snapshot";
-import {
-  getPredictionLabel,
-  getUiConfidence,
-} from "@/lib/prediction-dashboard-shared";
+import { getPredictionLabel } from "@/lib/prediction-dashboard-shared";
 import { prisma } from "@/lib/prisma";
 import styles from "./member-match.module.css";
 
@@ -33,7 +30,7 @@ function TeamLogo({
   name: string;
   size?: number;
 }) {
-  const className = size <= 28 ? styles.logoSm : styles.logo;
+  const className = size <= 28 ? styles.logoSm : size >= 44 ? styles.logoLg : styles.logo;
   if (src) {
     return <Image className={className} src={src} alt="" width={size} height={size} />;
   }
@@ -59,11 +56,24 @@ function IconBars() {
     </svg>
   );
 }
-function IconInfo() {
+function IconShield() {
   return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden>
-      <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.8" />
-      <path d="M12 10v6M12 7.5h.01" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
+      <path
+        d="M12 3l7 3v5c0 5-3.2 8.4-7 10-3.8-1.6-7-5-7-10V6l7-3z"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinejoin="round"
+      />
+      <path d="M9.2 12.2l1.8 1.8 3.8-3.8" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+function IconFlag() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
+      <path d="M6 21V4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+      <path d="M6 4h10l-2.2 3.5L16 11H6" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />
     </svg>
   );
 }
@@ -134,16 +144,23 @@ export default async function MemberMatchDetailPage({
   });
 
   const primary = prediction.topPicks[0] ?? null;
-  const pickLabel = primary
+  const pickTitle = primary
     ? `${tr(primary.market)} · ${tr(primary.selection)}`
     : getPredictionLabel(prediction);
+  const pickSubtitle = prediction.homeTeam;
   const pickProbability = primary?.probability ?? prediction.predictedProbability;
-  const pickConfidence = getUiConfidence(primary?.pickScore ?? prediction.confidenceScore);
-  const whyText =
-    primary?.reasons
-      ?.slice(0, 2)
-      .map((reason) => tr(reason))
-      .join(" ") || tr("Model output based on recent form and historical calibration.");
+  const confScore = Math.max(
+    0,
+    Math.min(
+      100,
+      primary?.pickScore ?? primary?.probability ?? prediction.confidenceScore ?? pickProbability,
+    ),
+  );
+
+  const league = await prisma.league.findFirst({
+    where: { name: prediction.leagueName },
+    select: { logoUrl: true },
+  });
 
   const topPicks = (prediction.topPicks.length
     ? prediction.topPicks
@@ -197,8 +214,8 @@ export default async function MemberMatchDetailPage({
 
   const kickoffLabel = new Intl.DateTimeFormat("tr-TR", {
     timeZone: TZ,
-    day: "2-digit",
-    month: "short",
+    day: "numeric",
+    month: "long",
     year: "numeric",
     hour: "2-digit",
     minute: "2-digit",
@@ -215,111 +232,123 @@ export default async function MemberMatchDetailPage({
     <main className={`${member.shell} member-plan-${user.plan.toLowerCase()}`}>
       <MemberPortalHeader plan={user.plan} active="predictions" memberName={user.name} />
       <div className={`${member.page} ${styles.page}`}>
-        <div className={styles.topBar}>
-          <p data-no-translate>WINIQ · MAÇ DETAYI</p>
-          <span className={styles.planBadge}>
-            {MEMBERSHIP_PLAN_LABELS[user.plan]} {MEMBERSHIP_PLAN_MARKET_LIMITS[user.plan]}/
-            {BET_MARKET_COUNT} pazar
-          </span>
-        </div>
-
         <header className={styles.matchHead}>
-          <Link className={styles.back} href="/member">
-            ← {tr("Back to predictions")}
-          </Link>
-          <div>
-            <div className={styles.leagueRow}>
-              <span>{prediction.leagueName}</span>
-              <span>·</span>
-              <span>{ACTIVE_SEASON_YEAR}</span>
-            </div>
-            <div className={styles.matchup}>
-              <div className={styles.team}>
-                <TeamLogo src={prediction.homeTeamLogo} name={prediction.homeTeam} />
-                <strong>{prediction.homeTeam}</strong>
-              </div>
-              <span className={styles.vs}>VS</span>
-              <div className={styles.team}>
-                <TeamLogo src={prediction.awayTeamLogo} name={prediction.awayTeam} />
-                <strong>{prediction.awayTeam}</strong>
-              </div>
+          <div className={styles.headTop}>
+            <p className={styles.brandMark} data-no-translate>
+              WINIQ · MAÇ
+            </p>
+            <div className={styles.headAside}>
+              <span className={styles.planPill}>{MEMBERSHIP_PLAN_LABELS[user.plan]}</span>
+              <span className={styles.planMeta}>
+                {MEMBERSHIP_PLAN_MARKET_LIMITS[user.plan]}/{BET_MARKET_COUNT} {tr("markets count")}
+              </span>
+              <Link className={styles.back} href="/member">
+                ← {tr("All predictions")}
+              </Link>
             </div>
           </div>
-          <div className={styles.kick}>
-            <IconCal />
-            <span>{kickoffLabel}</span>
+
+          <div className={styles.matchup}>
+            <div className={`${styles.team} ${styles.teamHome}`}>
+              <TeamLogo src={prediction.homeTeamLogo} name={prediction.homeTeam} size={48} />
+              <strong>{prediction.homeTeam}</strong>
+            </div>
+            <span className={styles.vsLine} aria-hidden />
+            <span className={styles.vs}>vs</span>
+            <span className={styles.vsLine} aria-hidden />
+            <div className={`${styles.team} ${styles.teamAway}`}>
+              <strong>{prediction.awayTeam}</strong>
+              <TeamLogo src={prediction.awayTeamLogo} name={prediction.awayTeam} size={48} />
+            </div>
+          </div>
+
+          <div className={styles.metaRow}>
+            <div className={styles.leagueRow}>
+              {league?.logoUrl ? (
+                <Image
+                  className={styles.leagueLogo}
+                  src={league.logoUrl}
+                  alt=""
+                  width={20}
+                  height={20}
+                />
+              ) : null}
+              <span>
+                {prediction.leagueName}
+                {ACTIVE_SEASON_YEAR ? ` · ${ACTIVE_SEASON_YEAR}` : ""}
+              </span>
+            </div>
+            <span className={styles.metaSep} aria-hidden>
+              |
+            </span>
+            <div className={styles.kick}>
+              <IconCal />
+              <span>{kickoffLabel}</span>
+            </div>
           </div>
         </header>
 
-        <section className={styles.grid}>
-          <article className={styles.card}>
-            <div className={styles.cardHead}>
+        <section className={styles.metricGrid}>
+          <article className={styles.metricCard}>
+            <div className={styles.metricHead}>
               <IconTarget />
               {tr("Main prediction")}
             </div>
-            <div className={styles.cardBody}>
-              <h1 className={styles.pickTitle}>{pickLabel}</h1>
-              {showOdds ? (
-                <div className={styles.metricRow}>
-                  <div className={styles.metric}>
-                    <span>{tr("Probability")}</span>
-                    <strong>%{pickProbability.toFixed(0)}</strong>
-                  </div>
-                  <div className={styles.metric}>
-                    <span>{tr("Confidence")}</span>
-                    <strong>{tr(pickConfidence)}</strong>
-                  </div>
-                </div>
-              ) : (
-                <p className={styles.lockHint}>{tr("Upgrade plan to see probabilities and confidence.")}</p>
-              )}
-              <div className={styles.why}>
-                <div className={styles.whyHead}>
-                  <IconInfo />
-                  {tr("Why this pick?")}
-                </div>
-                <p>{whyText}</p>
-              </div>
+            <div className={styles.pickBox}>
+              <h1 className={styles.pickTitle}>{pickTitle}</h1>
+              <p className={styles.pickSub}>{pickSubtitle}</p>
             </div>
           </article>
 
-          <article className={styles.card}>
-            <div className={styles.cardHead}>
+          <article className={styles.metricCard}>
+            <div className={`${styles.metricHead} ${styles.metricHeadGreen}`}>
+              <IconShield />
+              {tr("Confidence")}
+            </div>
+            {showOdds ? (
+              <>
+                <div className={styles.confBadge}>%{confScore.toFixed(0)}</div>
+                <p className={styles.metricFoot}>{tr("Model confidence for this pick")}</p>
+              </>
+            ) : (
+              <p className={styles.lockHint}>{tr("Upgrade plan to see probabilities and confidence.")}</p>
+            )}
+          </article>
+
+          <article className={styles.metricCard}>
+            <div className={styles.metricHead}>
               <IconBars />
               {tr("Match probabilities")}
             </div>
-            <div className={styles.cardBody}>
-              {showOdds ? (
-                <div className={styles.probList}>
-                  {[
-                    { label: prediction.homeTeam, value: prediction.homeProbability },
-                    { label: tr("Draw"), value: prediction.drawProbability },
-                    { label: prediction.awayTeam, value: prediction.awayProbability },
-                  ].map((row) => (
-                    <div className={styles.probRow} key={row.label}>
-                      <div className={styles.probMeta}>
-                        <span>{row.label}</span>
-                        <b>%{row.value.toFixed(0)}</b>
-                      </div>
-                      <span className={styles.bar} aria-hidden>
-                        <i style={{ width: `${Math.max(2, Math.min(100, row.value))}%` }} />
-                      </span>
-                    </div>
-                  ))}
+            {showOdds ? (
+              <>
+                <div className={styles.probSplit}>
+                  <div className={`${styles.probCell} ${styles.probHome}`}>
+                    <span>{tr("Home short")}</span>
+                    <strong>%{prediction.homeProbability.toFixed(0)}</strong>
+                  </div>
+                  <div className={styles.probCell}>
+                    <span>{tr("Draw")}</span>
+                    <strong>%{prediction.drawProbability.toFixed(0)}</strong>
+                  </div>
+                  <div className={styles.probCell}>
+                    <span>{tr("Away")}</span>
+                    <strong>%{prediction.awayProbability.toFixed(0)}</strong>
+                  </div>
                 </div>
-              ) : (
-                <p className={styles.lockHint}>{tr("Upgrade plan to see match probabilities.")}</p>
-              )}
-            </div>
+                <p className={styles.metricFoot}>{tr("Probability summary")}</p>
+              </>
+            ) : (
+              <p className={styles.lockHint}>{tr("Upgrade plan to see match probabilities.")}</p>
+            )}
           </article>
         </section>
 
         {formTip ? (
           <aside className={styles.formStrip} aria-label={tr("Recent form")}>
             <span className={styles.formIcon}>
-              <IconBars />
+              <IconFlag />
             </span>
-            <span className={styles.formDivider} aria-hidden />
             <p className={styles.formText}>{formTip}</p>
           </aside>
         ) : null}

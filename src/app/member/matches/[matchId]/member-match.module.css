@@ -4,39 +4,53 @@
   padding-bottom: 32px;
 }
 
-.topBar {
+.matchHead {
+  display: grid;
+  gap: 18px;
+  padding: 18px 20px 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 2px 12px rgba(15, 35, 70, 0.05);
+}
+
+.headTop {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  gap: 12px;
+  align-items: flex-start;
+  gap: 16px;
   flex-wrap: wrap;
 }
 
-.topBar p {
+.brandMark {
   margin: 0;
-  color: #0b1f3a;
+  color: #1d4ed8;
   font-size: 12px;
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
-.planBadge {
-  color: #059669;
-  font-size: 13px;
+.headAside {
+  display: grid;
+  justify-items: end;
+  gap: 6px;
+}
+
+.planPill {
+  display: inline-flex;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: #dcfce7;
+  color: #15803d;
+  font-size: 12px;
   font-weight: 800;
 }
 
-.matchHead {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  gap: 16px;
-  align-items: center;
-  padding: 16px 18px;
-  border: 1px solid #e5e7eb;
-  border-radius: 16px;
-  background: #ffffff;
-  box-shadow: 0 2px 12px rgba(15, 35, 70, 0.05);
+.planMeta {
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 600;
 }
 
 .back {
@@ -51,39 +65,38 @@
   text-decoration: underline;
 }
 
-.leagueRow {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  color: #64748b;
-  font-size: 13px;
-  font-weight: 600;
-  margin-bottom: 10px;
-}
-
 .matchup {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 14px;
+  gap: 12px;
   flex-wrap: wrap;
 }
 
 .team {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   min-width: 0;
 }
 
 .team strong {
   color: #0b1f3a;
-  font-size: 16px;
+  font-size: clamp(18px, 2.4vw, 26px);
   font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.teamHome {
+  justify-content: flex-end;
+}
+
+.teamAway {
+  justify-content: flex-start;
 }
 
 .logo,
+.logoLg,
 .logoSm,
 .logoFall {
   border-radius: 50%;
@@ -96,6 +109,11 @@
 .logo {
   width: 40px;
   height: 40px;
+}
+
+.logoLg {
+  width: 48px;
+  height: 48px;
 }
 
 .logoSm {
@@ -114,13 +132,49 @@
 .vs {
   display: grid;
   place-items: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: #f1f5f9;
+  min-width: 36px;
+  height: 28px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: #e8f1fb;
   color: #64748b;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
+  text-transform: lowercase;
+}
+
+.vsLine {
+  flex: 1 1 40px;
+  max-width: 72px;
+  height: 0;
+  border-top: 1px dashed #cbd5e1;
+}
+
+.metaRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.leagueRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.leagueLogo {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.metaSep {
+  color: #cbd5e1;
 }
 
 .kick {
@@ -128,179 +182,149 @@
   align-items: center;
   gap: 8px;
   color: #475569;
-  font-size: 13px;
-  font-weight: 600;
   white-space: nowrap;
 }
 
-.grid {
+.kick svg {
+  color: #94a3b8;
+  flex-shrink: 0;
+}
+
+/* —— Top metric trio —— */
+.metricGrid {
   display: grid;
-  grid-template-columns: 1.4fr 1fr;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 14px;
   align-items: stretch;
 }
 
-.card {
+.metricCard {
   display: flex;
   flex-direction: column;
+  gap: 12px;
   min-width: 0;
+  padding: 14px;
   border: 1px solid #e5e7eb;
   border-radius: 16px;
   background: #ffffff;
   box-shadow: 0 2px 12px rgba(15, 35, 70, 0.05);
-  overflow: hidden;
 }
 
-.cardHead {
+.metricHead {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 12px 14px;
-  background: #0b1f3a;
-  color: #f8fafc;
+  color: #1d4ed8;
   font-size: 13px;
   font-weight: 800;
 }
 
-.cardHead svg {
-  flex-shrink: 0;
+.metricHeadGreen {
+  color: #16a34a;
 }
 
-.cardBody {
+.pickBox {
   display: grid;
-  gap: 12px;
-  padding: 14px;
+  gap: 6px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: #eef5ff;
+  border-left: 4px solid #2563eb;
 }
 
 .pickTitle {
   margin: 0;
   color: #0b1f3a;
-  font-size: clamp(18px, 2.4vw, 24px);
+  font-size: clamp(15px, 1.8vw, 18px);
   font-weight: 800;
-  letter-spacing: -0.02em;
-  line-height: 1.25;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
 }
 
-.metricRow {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
+.pickSub {
+  margin: 0;
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 600;
 }
 
-.metric {
+.confBadge {
+  display: inline-flex;
+  align-self: flex-start;
+  padding: 10px 22px;
+  border-radius: 999px;
+  background: #dcfce7;
+  color: #15803d;
+  font-size: clamp(22px, 2.6vw, 28px);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.metricFoot {
+  margin: auto 0 0;
+  color: #94a3b8;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.probSplit {
   display: grid;
-  gap: 4px;
-  padding: 10px 12px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border: 1px solid #e2e8f0;
   border-radius: 12px;
-  background: #ecfdf5;
-  border: 1px solid #a7f3d0;
+  overflow: hidden;
 }
 
-.metric span {
-  color: #047857;
+.probCell {
+  display: grid;
+  gap: 6px;
+  justify-items: center;
+  padding: 12px 8px;
+  text-align: center;
+  border-right: 1px solid #e2e8f0;
+}
+
+.probCell:last-child {
+  border-right: 0;
+}
+
+.probCell span {
+  color: #64748b;
   font-size: 11px;
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
 }
 
-.metric strong {
-  color: #065f46;
+.probCell strong {
+  color: #0b1f3a;
   font-size: 22px;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
 }
 
-.why {
-  display: grid;
-  gap: 6px;
-  padding: 10px 12px;
-  border-radius: 12px;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
+.probHome {
+  background: #eef5ff;
 }
 
-.whyHead {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  color: #0b1f3a;
-  font-size: 13px;
-  font-weight: 800;
-}
-
-.why p {
-  margin: 0;
-  color: #475569;
-  font-size: 13px;
-  line-height: 1.45;
-}
-
-.probList {
-  display: grid;
-  gap: 10px;
-}
-
-.probRow {
-  display: grid;
-  gap: 6px;
-}
-
-.probMeta {
-  display: flex;
-  justify-content: space-between;
-  gap: 8px;
-  color: #0b1f3a;
-  font-size: 13px;
-  font-weight: 700;
-}
-
-.probMeta b {
+.probHome strong {
   color: #1d4ed8;
-  font-variant-numeric: tabular-nums;
-}
-
-.bar {
-  height: 8px;
-  border-radius: 999px;
-  background: #e2e8f0;
-  overflow: hidden;
-}
-
-.bar i {
-  display: block;
-  height: 100%;
-  border-radius: inherit;
-  background: linear-gradient(90deg, #1f6fff, #22e38a);
 }
 
 /* —— Form insight strip —— */
 .formStrip {
   display: flex;
   align-items: center;
-  gap: 14px;
-  padding: 14px 16px;
-  border: 1px solid #e5e7eb;
+  gap: 12px;
+  padding: 12px 16px;
+  border: 1px solid #dbeafe;
   border-radius: 14px;
-  background: #ffffff;
-  box-shadow: 0 2px 10px rgba(15, 35, 70, 0.04);
+  background: #eff6ff;
 }
 
 .formIcon {
   display: grid;
   place-items: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  background: #e8f1fb;
   color: #2563eb;
-  flex-shrink: 0;
-}
-
-.formDivider {
-  width: 1px;
-  align-self: stretch;
-  background: #e2e8f0;
   flex-shrink: 0;
 }
 
@@ -640,12 +664,11 @@
   color: #64748b;
   font-size: 13px;
   font-weight: 600;
-  grid-column: 3 / -1;
 }
 
 /* Dark theme fallbacks keep brand readable */
 :global(html[data-theme="dark"]) .matchHead,
-:global(html[data-theme="dark"]) .card,
+:global(html[data-theme="dark"]) .metricCard,
 :global(html[data-theme="dark"]) .formStrip,
 :global(html[data-theme="dark"]) .h2hCard,
 :global(html[data-theme="dark"]) .recCard,
@@ -659,10 +682,8 @@
   background: linear-gradient(180deg, #0f1a2c 0%, #121f34 100%);
 }
 
-:global(html[data-theme="dark"]) .topBar p,
 :global(html[data-theme="dark"]) .team strong,
 :global(html[data-theme="dark"]) .pickTitle,
-:global(html[data-theme="dark"]) .probMeta,
 :global(html[data-theme="dark"]) .formText,
 :global(html[data-theme="dark"]) .h2hTitle,
 :global(html[data-theme="dark"]) .h2hTeamHome strong,
@@ -670,37 +691,30 @@
 :global(html[data-theme="dark"]) .recTitle,
 :global(html[data-theme="dark"]) .recPick strong,
 :global(html[data-theme="dark"]) .recConf span,
-:global(html[data-theme="dark"]) .recOdds b {
+:global(html[data-theme="dark"]) .recOdds b,
+:global(html[data-theme="dark"]) .probCell strong {
   color: #eef4ff;
 }
 
-:global(html[data-theme="dark"]) .cardBody {
-  background: transparent;
-}
-
-:global(html[data-theme="dark"]) .why,
 :global(html[data-theme="dark"]) .notice,
-:global(html[data-theme="dark"]) .formIcon,
+:global(html[data-theme="dark"]) .pickBox,
 :global(html[data-theme="dark"]) .recHeadIcon,
 :global(html[data-theme="dark"]) .recRank,
 :global(html[data-theme="dark"]) .recOdds,
-:global(html[data-theme="dark"]) .score {
+:global(html[data-theme="dark"]) .score,
+:global(html[data-theme="dark"]) .probHome {
   background: #121f34;
   border-color: rgba(70, 110, 170, 0.35);
   color: #c5d5ea;
-}
-
-:global(html[data-theme="dark"]) .whyHead {
-  color: #eef4ff;
 }
 
 :global(html[data-theme="dark"]) .h2hRow {
   border-top-color: rgba(70, 110, 170, 0.25);
 }
 
-:global(html[data-theme="dark"]) .formDivider,
-:global(html[data-theme="dark"]) .recHeadDivider {
-  background: rgba(70, 110, 170, 0.35);
+:global(html[data-theme="dark"]) .recHeadDivider,
+:global(html[data-theme="dark"]) .probCell {
+  border-color: rgba(70, 110, 170, 0.35);
 }
 
 :global(html[data-theme="dark"]) .score {
@@ -709,6 +723,10 @@
 }
 
 @media (max-width: 980px) {
+  .metricGrid {
+    grid-template-columns: 1fr;
+  }
+
   .recItem {
     grid-template-columns: 40px 1fr auto;
     grid-template-areas:
@@ -735,13 +753,16 @@
 }
 
 @media (max-width: 820px) {
-  .matchHead {
-    grid-template-columns: 1fr;
+  .headAside {
     justify-items: start;
   }
 
-  .grid {
-    grid-template-columns: 1fr;
+  .matchup {
+    flex-direction: column;
+  }
+
+  .vsLine {
+    display: none;
   }
 
   .kick {
