@@ -42,6 +42,11 @@ import {
 import type { PairedBootstrapReport } from "@/modules/decision-engine";
 import type { ReliabilityDiagram } from "@/modules/decision-engine";
 import { DEFAULT_DECISION_ENGINE_CONFIG } from "@/modules/decision-engine";
+import {
+  buildBankrollBacktestReport,
+  valueBetsToBacktestInputs,
+  type BankrollBacktestReport,
+} from "@/modules/bankroll-backtest";
 
 import styles from "./value-bets-page.module.css";
 
@@ -369,6 +374,110 @@ function ChampionChallengerPanel({ audit }: { audit: ChampionChallengerAudit }) 
 
 const HEALTH_LABELS: Record<HealthLevel, string> = { HEALTHY: "HEALTHY", WARNING: "WARNING", CRITICAL: "CRITICAL" };
 
+function formatNullable(value: number | null, digits = 2, suffix = ""): string {
+  return value === null || Number.isNaN(value) ? "—" : `${value.toFixed(digits)}${suffix}`;
+}
+
+function BankrollBacktestPanel({ report }: { report: BankrollBacktestReport }) {
+  const m = report.metrics;
+  return (
+    <section className={styles.panel}>
+      <div className={styles.panelHeader}>
+        <div>
+          <h2>Bankroll Backtest · Risk Metrics</h2>
+          <p>
+            Sequential stake→settle simulation on settled Value Bets (BacktestBuddy-style).
+            Yield is profit/staked; ROI is bankroll growth. CLV uses fair/median odds as the
+            closing reference when available.
+          </p>
+        </div>
+        <span className={styles.learningBadge}>
+          {m.bets} BETS · BR {report.initialBankroll.toFixed(0)}→{report.finalBankroll.toFixed(0)}
+        </span>
+      </div>
+
+      <div className={styles.healthGrid}>
+        <article><span>YIELD</span><strong>{formatNullable(m.yieldPct, 1, "%")}</strong><small>Profit / staked</small></article>
+        <article><span>ROI</span><strong className={m.roiPct >= 0 ? styles.positive : styles.negative}>{formatNullable(m.roiPct, 1, "%")}</strong><small>Bankroll growth</small></article>
+        <article><span>CAGR</span><strong>{formatNullable(m.cagrPct, 1, "%")}</strong><small>Compound annual</small></article>
+        <article><span>MAX DD</span><strong>{formatNullable(m.maxDrawdownPct, 1, "%")}</strong><small>{m.maxDrawdownDurationBets} bets underwater</small></article>
+        <article><span>SHARPE</span><strong>{formatNullable(m.sharpe, 2)}</strong><small>Risk-adjusted</small></article>
+        <article><span>SORTINO</span><strong>{formatNullable(m.sortino, 2)}</strong><small>Downside only</small></article>
+        <article><span>CALMAR</span><strong>{formatNullable(m.calmar, 2)}</strong><small>CAGR / max DD</small></article>
+        <article><span>CLV</span><strong>{formatNullable(m.clvPct, 2, "%")}</strong><small>Beat close {formatNullable(m.beatClosingPct, 0, "%")}</small></article>
+      </div>
+
+      <div className={styles.healthGrid}>
+        <article><span>EXPECTED YIELD</span><strong>{formatNullable(m.expectedYieldPct, 1, "%")}</strong><small>Model-implied</small></article>
+        <article><span>REALIZED − EXPECTED</span><strong className={m.realizedVsExpected >= 0 ? styles.positive : styles.negative}>{m.realizedVsExpected >= 0 ? "+" : ""}{m.realizedVsExpected.toFixed(2)}</strong><small>Luck vs calibration</small></article>
+        <article><span>WIN RATE</span><strong>{formatNullable(m.winRatePct, 1, "%")}</strong><small>Avg odds {formatNullable(m.averageOdds, 2)}</small></article>
+        <article><span>BET FREQUENCY</span><strong>{formatNullable(m.betFrequencyPct, 0, "%")}</strong><small>{m.bets}/{m.opportunities} placed</small></article>
+      </div>
+
+      {report.bankrollSparkline ? (
+        <div style={{ display: "grid", gap: 8, marginTop: 8 }}>
+          <div>
+            <small>Equity curve</small>
+            <svg viewBox="0 0 100 28" width="100%" height="48" role="img" aria-label="Bankroll equity">
+              <polyline fill="none" stroke="#22c55e" strokeWidth="1.5" points={report.bankrollSparkline} />
+            </svg>
+          </div>
+          <div>
+            <small>Drawdown</small>
+            <svg viewBox="0 0 100 28" width="100%" height="48" role="img" aria-label="Drawdown">
+              <polyline fill="none" stroke="#f97316" strokeWidth="1.5" points={report.drawdownSparkline} />
+            </svg>
+          </div>
+        </div>
+      ) : null}
+
+      <div className={styles.panelHeader} style={{ marginTop: 12 }}>
+        <div>
+          <h3 style={{ margin: 0 }}>Odds stress test</h3>
+          <p style={{ margin: "4px 0 0" }}>Re-run with 0–3% worse odds (strategy decisions use haircut prices).</p>
+        </div>
+      </div>
+      <div className={styles.tableWrap}>
+        <table className={`${styles.table} ${styles.driftTable}`}>
+          <thead>
+            <tr>
+              <th>HAIRCUT</th>
+              <th>YIELD</th>
+              <th>ROI</th>
+              <th>MAX DD</th>
+              <th>BETS</th>
+            </tr>
+          </thead>
+          <tbody>
+            {report.stress.map((row) => (
+              <tr key={row.haircut}>
+                <td>{(row.haircut * 100).toFixed(0)}%</td>
+                <td>{formatNullable(row.metrics.yieldPct, 1, "%")}</td>
+                <td className={row.metrics.roiPct >= 0 ? styles.positive : styles.negative}>
+                  {formatNullable(row.metrics.roiPct, 1, "%")}
+                </td>
+                <td>{formatNullable(row.metrics.maxDrawdownPct, 1, "%")}</td>
+                <td>{row.metrics.bets}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {report.tuning ? (
+        <div className={styles.sampleNotice} style={{ marginTop: 12 }}>
+          <strong>Holdout minEV tune:</strong>
+          <span>
+            best minEV={report.tuning.bestMinEv.toFixed(2)} · train yield{" "}
+            {formatNullable(report.tuning.trainYield, 1, "%")} · holdout yield{" "}
+            {formatNullable(report.tuning.holdoutYield, 1, "%")}
+          </span>
+        </div>
+      ) : null}
+    </section>
+  );
+}
+
 function DecisionEnginePanel({
   summary,
 }: {
@@ -692,6 +801,10 @@ export default async function ValueBetsPage() {
   const decisionSummary = decisionGateSummary(decisionAnnotated);
   const marketBootstrap = buildMarketComparisonReport(data.settled);
   const reliabilityDiagram = buildValueBetReliabilityDiagram(data.settled);
+  const bankrollBacktest = buildBankrollBacktestReport(
+    valueBetsToBacktestInputs(data.settled),
+    { initialBankroll: 1000, includeTuning: true },
+  );
 
   const tipTranslate = (source: string) => translateUiText(source, "en");
   const predictionByMatch = new Map(
@@ -797,6 +910,7 @@ export default async function ValueBetsPage() {
           Araştırma ve model sağlığı (opsiyonel)
         </summary>
         <div style={{ display: "grid", gap: 16, marginTop: 16 }}>
+          <BankrollBacktestPanel report={bankrollBacktest} />
           <DecisionEnginePanel summary={decisionSummary} />
           <MarketBootstrapPanel report={marketBootstrap} />
           <ReliabilityDiagramPanel diagram={reliabilityDiagram} />

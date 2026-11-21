@@ -10,6 +10,10 @@ import { buildSmartCouponCenter } from "@/lib/smart-coupon-engine";
 import { loadSmartCouponPerformance } from "@/lib/smart-coupon-performance-data";
 import { serializeCouponCenter } from "@/lib/smart-coupon-view";
 import { loadValueBetDashboardSnapshot } from "@/lib/value-bet-dashboard-snapshot";
+import {
+  buildBankrollBacktestReport,
+  couponsToBacktestInputs,
+} from "@/modules/bankroll-backtest";
 import styles from "./smart-coupons-page.module.css";
 import perfStyles from "../coupon-performance/coupon-performance-page.module.css";
 
@@ -61,6 +65,22 @@ export default async function SmartCouponsPage({
       settledAt: row.settledAt?.toISOString() ?? null,
       legs: row.legs.map((leg) => ({ ...leg, kickoffAt: leg.kickoffAt.toISOString() })),
     }));
+    const bankroll = buildBankrollBacktestReport(
+      couponsToBacktestInputs(performance.rows),
+      {
+        initialBankroll: 1000,
+        includeTuning: false,
+        strategy: {
+          minEv: -1,
+          minProbability: 0,
+          minOdds: 1.01,
+          maxOdds: 1000,
+          sizer: "fixed_fraction",
+          sizeParam: 0.02,
+        },
+      },
+    );
+    const m = bankroll.metrics;
     return (
       <PageShell>
         <header className="topbar dashboard-topbar">
@@ -72,6 +92,21 @@ export default async function SmartCouponsPage({
         </header>
         {tabs}
         <main className={perfStyles.page}>
+          <section className={perfStyles.summary} aria-label="Bankroll backtest">
+            <article><span>Yield</span><strong>{m.yieldPct == null ? "—" : `${m.yieldPct.toFixed(1)}%`}</strong></article>
+            <article><span>ROI</span><strong>{m.roiPct.toFixed(1)}%</strong></article>
+            <article><span>Max DD</span><strong>{m.maxDrawdownPct.toFixed(1)}%</strong></article>
+            <article><span>Sharpe</span><strong>{m.sharpe == null ? "—" : m.sharpe.toFixed(2)}</strong></article>
+            <article><span>CAGR</span><strong>{m.cagrPct == null ? "—" : `${m.cagrPct.toFixed(1)}%`}</strong></article>
+            {bankroll.bankrollSparkline ? (
+              <article>
+                <span>Equity</span>
+                <svg viewBox="0 0 100 28" width="120" height="36" aria-hidden>
+                  <polyline fill="none" stroke="currentColor" strokeWidth="1.5" points={bankroll.bankrollSparkline} />
+                </svg>
+              </article>
+            ) : null}
+          </section>
           <CouponPerformanceWorkspace rows={rows} report={performance.report} />
         </main>
       </PageShell>
