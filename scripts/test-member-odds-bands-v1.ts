@@ -5,15 +5,14 @@ import {
   resolvePublishedSelectionOdds,
 } from "../src/lib/member-odds-bands";
 
-assert.equal(mapPublishedOddsToBandKey(1.1), "o110_150");
-assert.equal(mapPublishedOddsToBandKey(1.5), "o110_150");
-assert.equal(mapPublishedOddsToBandKey(1.51), "o151_175");
-assert.equal(mapPublishedOddsToBandKey(1.75), "o151_175");
-assert.equal(mapPublishedOddsToBandKey(1.76), "o176_200");
-assert.equal(mapPublishedOddsToBandKey(2.0), "o176_200");
-assert.equal(mapPublishedOddsToBandKey(2.01), "o200_300");
-assert.equal(mapPublishedOddsToBandKey(3.0), "o200_300");
-assert.equal(mapPublishedOddsToBandKey(3.01), "o300_plus");
+assert.equal(mapPublishedOddsToBandKey(1.1), "o110_145");
+assert.equal(mapPublishedOddsToBandKey(1.45), "o110_145");
+assert.equal(mapPublishedOddsToBandKey(1.46), "o146_185");
+assert.equal(mapPublishedOddsToBandKey(1.85), "o146_185");
+assert.equal(mapPublishedOddsToBandKey(1.86), "o186_215");
+assert.equal(mapPublishedOddsToBandKey(2.15), "o186_215");
+assert.equal(mapPublishedOddsToBandKey(2.16), "o216_plus");
+assert.equal(mapPublishedOddsToBandKey(3.5), "o216_plus");
 assert.equal(mapPublishedOddsToBandKey(1.09), null);
 assert.equal(
   resolvePublishedSelectionOdds({ fairOdds: 1.8, marketOdds: 2.2 }),

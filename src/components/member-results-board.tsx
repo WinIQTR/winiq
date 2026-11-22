@@ -18,7 +18,7 @@ export type MemberResultsBand = {
 export type MemberResultsOddsBand = MemberResultsBand & {
   key: string;
   label: string;
-  tone: "band1" | "band2" | "band3" | "band4" | "band5";
+  tone: "band1" | "band2" | "band3" | "band4";
 };
 
 export type MemberResultsMatch = {
