@@ -1,6 +1,10 @@
 import type { MarketLineMove } from "@/lib/market-line-move-shared";
 import { marketLineMoveKey } from "@/lib/market-line-move-shared";
 import {
+  MEMBER_ODDS_BAND_DEFS,
+  mapPublishedOddsToBandKey,
+} from "@/lib/member-odds-bands";
+import {
   getPredictionLabel,
   type DashboardPrediction,
 } from "@/lib/prediction-dashboard-shared";
@@ -64,10 +68,9 @@ function fairOddsOf(prediction: DashboardPrediction): number | null {
 
 export function mapOddsToBandLabel(odds: number | null): string {
   if (odds == null || !(odds >= 1.1)) return "—";
-  if (odds <= 1.45) return "1.10 – 1.45";
-  if (odds <= 1.85) return "1.46 – 1.85";
-  if (odds <= 2.15) return "1.86 – 2.15";
-  return "2.16+";
+  const key = mapPublishedOddsToBandKey(odds);
+  if (!key) return "—";
+  return MEMBER_ODDS_BAND_DEFS.find((band) => band.key === key)?.label ?? "—";
 }
 
 function primaryReason(prediction: DashboardPrediction): string {

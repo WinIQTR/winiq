@@ -1,39 +1,45 @@
 /**
  * Published decimal-odds bands for member results ÖZET row.
  *
- * Scheme (all edges inclusive; typical book odds are 2-decimal so adjacent
- * labels abut with no gap — e.g. 1.45 ends band 1, 1.46 starts band 2):
- *   [1.10, 1.45] · [1.46, 1.85] · [1.86, 2.15] · [2.16, ∞)
+ * Scheme A (5 bands; all edges inclusive; 2-decimal book odds abut):
+ *   [1.10, 1.49] · [1.50, 1.79] · [1.80, 2.19] · [2.20, 2.99] · [3.00, ∞)
  * Odds below 1.10 are excluded from all bands (“Oranı yok”).
  */
 
 export const MEMBER_ODDS_BAND_DEFS = [
   {
-    key: "o110_145",
-    label: "1.10 – 1.45",
+    key: "o110_149",
+    label: "1.10 – 1.49",
     tone: "band1" as const,
     minInclusive: 1.1,
-    maxInclusive: 1.45 as number | null,
+    maxInclusive: 1.49 as number | null,
   },
   {
-    key: "o146_185",
-    label: "1.46 – 1.85",
+    key: "o150_179",
+    label: "1.50 – 1.79",
     tone: "band2" as const,
-    minInclusive: 1.46,
-    maxInclusive: 1.85 as number | null,
+    minInclusive: 1.5,
+    maxInclusive: 1.79 as number | null,
   },
   {
-    key: "o186_215",
-    label: "1.86 – 2.15",
+    key: "o180_219",
+    label: "1.80 – 2.19",
     tone: "band3" as const,
-    minInclusive: 1.86,
-    maxInclusive: 2.15 as number | null,
+    minInclusive: 1.8,
+    maxInclusive: 2.19 as number | null,
   },
   {
-    key: "o216_plus",
-    label: "2.16+",
+    key: "o220_299",
+    label: "2.20 – 2.99",
     tone: "band4" as const,
-    minInclusive: 2.16,
+    minInclusive: 2.2,
+    maxInclusive: 2.99 as number | null,
+  },
+  {
+    key: "o300_plus",
+    label: "3.00+",
+    tone: "band5" as const,
+    minInclusive: 3.0,
     maxInclusive: null as number | null,
   },
 ] as const;
