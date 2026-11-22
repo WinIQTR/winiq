@@ -1,0 +1,53 @@
+.wrap {
+  display: grid;
+  gap: 10px;
+  margin: 0 0 14px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid color-mix(in srgb, currentColor 14%, transparent);
+}
+
+.budget {
+  display: grid;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.budget input {
+  width: 100%;
+}
+
+.oddsRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.oddsRow article {
+  display: grid;
+  gap: 2px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: color-mix(in srgb, currentColor 6%, transparent);
+}
+
+.oddsRow span {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.7;
+}
+
+.warn {
+  margin: 0;
+  color: #b45309;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.ok {
+  margin: 0;
+  opacity: 0.75;
+  font-size: 13px;
+}

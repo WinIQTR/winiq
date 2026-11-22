@@ -108,6 +108,68 @@
   gap: 12px;
 }
 
+.summaryCard[data-active="true"] {
+  outline: 2px solid #2563eb;
+  outline-offset: 1px;
+}
+
+.v2Panel {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin: 8px 0 4px;
+  padding: 12px 14px;
+  border: 1px solid color-mix(in srgb, currentColor 14%, transparent);
+  border-radius: 14px;
+}
+
+.v2Panel article {
+  display: grid;
+  gap: 4px;
+}
+
+.v2Panel span {
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.72;
+}
+
+.v2Panel strong {
+  font-size: 1.05rem;
+}
+
+.voidNote {
+  grid-column: 1 / -1;
+  margin: 0;
+  font-size: 13px;
+  opacity: 0.8;
+}
+
+.chipRow {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip,
+.clearBand {
+  border: 1px solid color-mix(in srgb, currentColor 20%, transparent);
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  padding: 6px 10px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.chip[data-active="true"] {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: white;
+}
+
 .summaryCard {
   display: grid;
   gap: 12px;

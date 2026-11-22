@@ -9,6 +9,7 @@ import { MarketLineMoveBlock } from "@/components/market-line-move";
 import { MatchFormTip } from "@/components/match-form-tip";
 import type { MarketLineMove } from "@/lib/market-line-move-shared";
 import { buildMatchFormTip, type FormResult } from "@/lib/member-match-insight";
+import { suggestUnitSize } from "@/lib/member-v2-desk";
 
 import styles from "./member-value-opportunities.module.css";
 
@@ -366,6 +367,27 @@ export function MemberValueOpportunities({
                           </em>
                         </div>
                       ) : null}
+                      {(() => {
+                        const tip = suggestUnitSize({
+                          conservativeEv: item.conservativeEv ?? null,
+                          uncertaintyBuffer: item.uncertaintyBuffer ?? null,
+                          expectedValuePct: item.expectedValue ?? null,
+                        });
+                        return (
+                          <div className={styles.stat}>
+                            <span>{t("Unit / action")}</span>
+                            <strong>
+                              {tip.units > 0 ? `${tip.units}u` : "0u"} ·{" "}
+                              {tip.action === "play"
+                                ? t("Play now")
+                                : tip.action === "watch"
+                                  ? t("Watch price")
+                                  : t("Skip")}
+                            </strong>
+                            <em>{t(tip.note)}</em>
+                          </div>
+                        );
+                      })()}
                       <div className={styles.stat}>
                         <span>{t("Bookmaker")}</span>
                         <strong>{item.bookmakerName || "—"}</strong>

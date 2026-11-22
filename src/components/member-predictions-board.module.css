@@ -142,6 +142,30 @@
   align-items: stretch;
 }
 
+.windowRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 4px 0 10px;
+}
+
+.windowChip {
+  border: 1px solid var(--mh-border);
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  padding: 7px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.windowChip[data-active="true"] {
+  border-color: #2563eb;
+  background: #2563eb;
+  color: #fff;
+}
+
 .statCard {
   display: flex;
   align-items: center;

@@ -345,6 +345,7 @@ export function MemberPredictionsBoard({
   const [applied, setApplied] = useState<DraftFilters>(emptyDraft);
   const [page, setPage] = useState(1);
   const [filtersOpen, setFiltersOpen] = useState(false);
+  const [kickWindow, setKickWindow] = useState<"all" | "2h" | "30m">("all");
 
   const formatLongDate = (key: string) =>
     new Intl.DateTimeFormat(lang, {
@@ -438,9 +439,14 @@ export function MemberPredictionsBoard({
         return false;
       }
       if (applied.confidence === "LOW" && item.confidenceScore >= 40) return false;
+      if (kickWindow !== "all") {
+        const ms = asDate(item.kickoffAt).getTime() - now.getTime();
+        const limit = kickWindow === "2h" ? 2 * 60 * 60 * 1000 : 30 * 60 * 1000;
+        if (ms < 0 || ms > limit) return false;
+      }
       return true;
     });
-  }, [upcoming, applied]);
+  }, [upcoming, applied, kickWindow, now]);
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const safePage = Math.min(page, totalPages);
@@ -538,6 +544,29 @@ export function MemberPredictionsBoard({
           </div>
         </article>
       </section>
+
+      <div className={styles.windowRow} role="toolbar" aria-label={t("Kickoff window")}>
+        {(
+          [
+            ["all", t("All kickoffs")],
+            ["2h", t("Next 2 hours")],
+            ["30m", t("Within 30 minutes")],
+          ] as const
+        ).map(([key, label]) => (
+          <button
+            key={key}
+            type="button"
+            className={styles.windowChip}
+            data-active={kickWindow === key}
+            onClick={() => {
+              setKickWindow(key);
+              setPage(1);
+            }}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
 
       <div className={styles.layout}>
         <div className={styles.mainCol}>

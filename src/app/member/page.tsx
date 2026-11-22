@@ -6,6 +6,7 @@ import { collectMarketLineMoveQueries } from "@/lib/market-line-move-queries";
 import { loadMarketLineMoves } from "@/lib/market-line-move";
 import { marketLineMovesToRecord } from "@/lib/market-line-move-shared";
 import { loadMemberPastPerformance } from "@/lib/member-past-performance";
+import { buildMemberV2Desk } from "@/lib/member-v2-desk";
 import {
   loadDashboardPredictionSnapshot,
   PREDICTION_DASHBOARD_SNAPSHOT_PATH,
@@ -38,7 +39,7 @@ export default async function MemberPage({
   const [allPredictions, updatedAtIso, past] = await Promise.all([
     loadDashboardPredictionSnapshot(5_000),
     snapshotGeneratedAtIso(),
-    loadMemberPastPerformance({ matchLimit: 1 }),
+    loadMemberPastPerformance({ matchLimit: 40 }),
   ]);
   const predictions = allPredictions
     .slice()
@@ -47,6 +48,14 @@ export default async function MemberPage({
   const lineMoves = marketLineMovesToRecord(
     await loadMarketLineMoves(collectMarketLineMoveQueries(predictions)),
   );
+  const v2Desk = buildMemberV2Desk({
+    predictions,
+    lineMoves,
+    matchPathPrefix: "/member/matches",
+    recentResults: past.v2.recentResults,
+    loggedBeforeKickoffPct: past.v2.loggedBeforeKickoffPct,
+    homeBaselineHitRate: past.v2.homeBaselineHitRate,
+  });
 
   return (
     <MemberSmartDashboard
@@ -57,6 +66,7 @@ export default async function MemberPage({
       performance={past.performance}
       updatedAtIso={updatedAtIso}
       lineMoves={lineMoves}
+      v2Desk={v2Desk}
     />
   );
 }

@@ -13,6 +13,7 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { useLanguage } from "@/components/language-provider";
 import { MemberMobileNav } from "@/components/member-mobile-nav";
 import { MemberPredictionsBoard } from "@/components/member-predictions-board";
+import { MemberV2Desk } from "@/components/member-v2-desk";
 import { ACTIVE_SEASON_YEAR } from "@/config/season";
 import {
   hasMembershipPermission,
@@ -259,12 +260,13 @@ export function MemberPortalHeader({
       <header className={shell.topbar}>
         <div className={shell.brandBlock}>
           <MemberMobileNav items={drawerItems} />
-          <Link href={homeHref} className={shell.brand} aria-label="WINIQ" data-no-translate>
+          <Link href={homeHref} className={shell.brand} aria-label="WINIQ V2" data-no-translate>
             WIN<span>IQ</span>
+            <em className={shell.brandVersion}>V2</em>
           </Link>
           <div className={shell.brandMeta}>
             <small>
-              {t("AI Football Predictions")} • {ACTIVE_SEASON_YEAR}
+              {t("AI Football Predictions")} • {ACTIVE_SEASON_YEAR} • V2
             </small>
           </div>
         </div>
@@ -426,6 +428,7 @@ export function MemberSmartDashboard({
   performance,
   updatedAtIso,
   lineMoves = {},
+  v2Desk = null,
 }: {
   name: string;
   plan: MembershipPlanName;
@@ -435,6 +438,7 @@ export function MemberSmartDashboard({
   performance?: MemberPerformance;
   updatedAtIso?: string;
   lineMoves?: Record<string, MarketLineMove>;
+  v2Desk?: import("@/lib/member-v2-desk").MemberV2DeskBundle | null;
 }) {
   const matchPathPrefix = preview
     ? "/admin/members/preview/matches"
@@ -447,6 +451,7 @@ export function MemberSmartDashboard({
     <main className={`${styles.shell} member-plan-${plan.toLowerCase()}`}>
       <MemberPortalHeader plan={plan} preview={preview} memberName={name} active="home" />
       <div className={styles.page}>
+        {v2Desk ? <MemberV2Desk desk={v2Desk} /> : null}
         <MemberPredictionsBoard
           predictions={predictions}
           plan={plan}

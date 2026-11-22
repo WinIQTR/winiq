@@ -3,6 +3,10 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { BetMarketCatalogPanel } from "@/components/bet-market-catalog-panel";
+import {
+  MemberMarketFamilyTabs,
+  classifyMarketFamily,
+} from "@/components/member-market-family-tabs";
 import { MemberPortalHeader } from "@/components/member-smart-dashboard";
 import member from "@/components/member-smart-dashboard.module.css";
 import { translateUiText } from "@/i18n/dictionaries";
@@ -174,10 +178,26 @@ export default async function MemberMatchDetailPage({
             probability: option.score,
             fairOdds: option.fairOdds,
             pickScore: option.score,
+            reasons: [] as string[],
           })),
         )
         .sort((a, b) => b.pickScore - a.pickScore)
   ).slice(0, 3);
+
+  const familyPicks = groups.flatMap((group) =>
+    group.options.slice(0, 4).map((option, index) => ({
+      key: `${group.number}-${option.selection}-${index}`,
+      family: classifyMarketFamily(group.title, option.selection),
+      market: group.title,
+      selection: option.selection,
+      probability: option.score,
+      fairOdds: option.fairOdds ?? null,
+    })),
+  );
+
+  const pickReasons = (primary?.reasons ?? [])
+    .filter((line): line is string => typeof line === "string" && line.trim().length > 6)
+    .slice(0, 3);
 
   const formTip = buildMatchFormTip(
     {
@@ -305,6 +325,29 @@ export default async function MemberMatchDetailPage({
               {matchContext.homeElo != null && matchContext.awayElo != null ? (
                 <span className={styles.planPill}>
                   Elo {Math.round(matchContext.homeElo)}–{Math.round(matchContext.awayElo)}
+                  {" · "}
+                  {Math.abs(matchContext.homeElo - matchContext.awayElo) < 40
+                    ? tr("Even matchup")
+                    : matchContext.homeElo > matchContext.awayElo
+                      ? tr("Home favourite")
+                      : tr("Away favourite")}
+                </span>
+              ) : null}
+              {matchContext.goalLines?.find((line) => line.line === 2.5) ? (
+                <span className={styles.planPill}>
+                  {tr("Goals 2.5")} ·{" "}
+                  {(
+                    (matchContext.goalLines.find((line) => line.line === 2.5)?.overProb ??
+                      0) * 100
+                  ).toFixed(0)}
+                  % {tr("Over")}
+                  {(matchContext.goalLines.find((line) => line.line === 2.5)?.overProb ??
+                    0) < 0.48
+                    ? ` → ${tr("Lean under 2.5")}`
+                    : (matchContext.goalLines.find((line) => line.line === 2.5)
+                          ?.overProb ?? 0) > 0.55
+                      ? ` → ${tr("Lean over 2.5")}`
+                      : ""}
                 </span>
               ) : null}
               {matchContext.goalLines
@@ -336,6 +379,13 @@ export default async function MemberMatchDetailPage({
             <div className={styles.pickBox}>
               <h1 className={styles.pickTitle}>{pickTitle}</h1>
               <p className={styles.pickSub}>{pickSubtitle}</p>
+              {pickReasons.length ? (
+                <ul className={styles.reasonList}>
+                  {pickReasons.map((line) => (
+                    <li key={line}>{tr(line)}</li>
+                  ))}
+                </ul>
+              ) : null}
             </div>
           </article>
 
@@ -498,6 +548,8 @@ export default async function MemberMatchDetailPage({
             })}
           </ol>
         </article>
+
+        {familyPicks.length ? <MemberMarketFamilyTabs picks={familyPicks} /> : null}
 
         <details className={styles.catalogWrap}>
           <summary className={styles.catalogToggle}>{tr("Show all markets")}</summary>

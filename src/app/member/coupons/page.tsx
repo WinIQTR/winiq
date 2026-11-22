@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 
 import { CouponPerformanceWorkspace } from "@/components/coupon-performance-workspace";
 import { GuaranteedCouponWorkspace } from "@/components/guaranteed-coupon-workspace";
+import { MemberCouponV2Controls } from "@/components/member-coupon-v2-controls";
 import { MemberPortalHeader } from "@/components/member-smart-dashboard";
 import member from "@/components/member-smart-dashboard.module.css";
 import { SmartCouponWorkspace } from "@/components/smart-coupon-workspace";
@@ -19,6 +20,27 @@ import {
   buildBankrollBacktestReport,
   couponsToBacktestInputs,
 } from "@/modules/bankroll-backtest";
+
+function couponV2Meta(
+  coupons: Array<{
+    totalOdds: number;
+    legs: Array<{ matchId: number; modelProbability: number }>;
+  }>,
+) {
+  const featured = coupons[0] ?? null;
+  if (!featured) {
+    return { legMatchIds: [] as number[], bookTotalOdds: null as number | null, modelTotalOdds: null as number | null };
+  }
+  const modelTotalOdds = featured.legs.reduce((total, leg) => {
+    if (!(leg.modelProbability > 0)) return total;
+    return total * (100 / leg.modelProbability);
+  }, 1);
+  return {
+    legMatchIds: featured.legs.map((leg) => leg.matchId),
+    bookTotalOdds: featured.totalOdds > 1 ? featured.totalOdds : null,
+    modelTotalOdds: modelTotalOdds > 1 ? modelTotalOdds : null,
+  };
+}
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -255,6 +277,19 @@ export default async function MemberCouponsPage({
         </section>
         {tabs}
         <div className={couponStyles.page}>
+          {(() => {
+            const meta = couponV2Meta([
+              ...serialized.coupons,
+              ...serialized.fallbackCoupons,
+            ]);
+            return (
+              <MemberCouponV2Controls
+                legMatchIds={meta.legMatchIds}
+                bookTotalOdds={meta.bookTotalOdds}
+                modelTotalOdds={meta.modelTotalOdds}
+              />
+            );
+          })()}
           <SmartCouponWorkspace
             {...serialized}
             missing={center.missing}

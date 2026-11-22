@@ -29,6 +29,9 @@
 
 /* Keep existing WINIQ logo typography exactly */
 .brand {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
   color: #f0f6fc;
   font-size: 28px;
   font-style: italic;
@@ -39,6 +42,20 @@
 
 .brand span {
   color: var(--mh-logo-green, #3fb950);
+}
+
+.brandVersion {
+  margin: 0;
+  padding: 2px 7px 1px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--mh-logo-green, #3fb950) 55%, transparent);
+  background: color-mix(in srgb, var(--mh-logo-green, #3fb950) 16%, transparent);
+  color: var(--mh-logo-green, #3fb950);
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
 }
 
 .brandMeta {
@@ -311,6 +328,13 @@
 :global(html[data-theme="light"]) .brand,
 :global(html:not([data-theme])) .brand {
   color: var(--mh-navy);
+}
+
+:global(html[data-theme="light"]) .brandVersion,
+:global(html:not([data-theme])) .brandVersion {
+  border-color: color-mix(in srgb, var(--mh-blue, #2563eb) 40%, transparent);
+  background: color-mix(in srgb, var(--mh-blue, #2563eb) 10%, white);
+  color: var(--mh-blue, #2563eb);
 }
 
 :global(html[data-theme="light"]) .brandMeta small,

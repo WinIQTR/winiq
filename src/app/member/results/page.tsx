@@ -16,6 +16,7 @@ export default async function MemberResultsPage() {
     oddsBandEvaluated,
     oddsMissing,
     matches,
+    v2,
   } = await loadMemberPastPerformance({
     matchLimit: 40,
   });
@@ -48,6 +49,13 @@ export default async function MemberResultsPage() {
           oddsBandEvaluated={oddsBandEvaluated}
           oddsMissing={oddsMissing}
           matches={matches}
+          v2={{
+            equitySparkline: v2.equitySparkline,
+            clvPct: v2.clvPct,
+            loggedBeforeKickoffPct: v2.loggedBeforeKickoffPct,
+            streakLabel: v2.streakLabel,
+            leagueChips: v2.leagueChips,
+          }}
           todayHref="/member"
         />
       </div>

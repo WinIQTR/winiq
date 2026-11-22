@@ -33,9 +33,18 @@ export type MemberResultsMatch = {
   dateKey: string;
   pickLabel?: string;
   tierLabel?: "strong" | "medium" | "weak";
+  oddsBandKey?: string | null;
   status: "WON" | "LOST" | "VOID" | "PENDING" | "OTHER";
   statusLabel: string;
   href: string;
+};
+
+export type MemberResultsV2Panel = {
+  equitySparkline: string | null;
+  clvPct: number | null;
+  loggedBeforeKickoffPct: number | null;
+  streakLabel: string;
+  leagueChips: Array<{ label: string; rate: number; samples: number }>;
 };
 
 function TeamLogo({ src, name }: { src: string | null; name: string }) {
@@ -61,6 +70,7 @@ export function MemberResultsBoard({
   oddsBandEvaluated = 0,
   oddsMissing = 0,
   matches,
+  v2 = null,
   todayHref = "/member",
 }: {
   strong: MemberResultsBand;
@@ -71,6 +81,7 @@ export function MemberResultsBoard({
   oddsBandEvaluated?: number;
   oddsMissing?: number;
   matches: MemberResultsMatch[];
+  v2?: MemberResultsV2Panel | null;
   todayHref?: string;
 }) {
   const { t } = useLanguage();
@@ -78,6 +89,7 @@ export function MemberResultsBoard({
   const [league, setLeague] = useState("ALL");
   const [date, setDate] = useState("ALL");
   const [result, setResult] = useState("ALL");
+  const [oddsBand, setOddsBand] = useState("ALL");
 
   const leagues = useMemo(() => {
     return [...new Set(matches.map((item) => item.leagueName))].sort((a, b) =>
@@ -95,6 +107,7 @@ export function MemberResultsBoard({
       if (league !== "ALL" && item.leagueName !== league) return false;
       if (date !== "ALL" && item.dateKey !== date) return false;
       if (result !== "ALL" && item.status !== result) return false;
+      if (oddsBand !== "ALL" && item.oddsBandKey !== oddsBand) return false;
       if (!q) return true;
       return (
         item.homeTeam.toLowerCase().includes(q) ||
@@ -102,7 +115,7 @@ export function MemberResultsBoard({
         item.leagueName.toLowerCase().includes(q)
       );
     });
-  }, [matches, search, league, date, result]);
+  }, [matches, search, league, date, result, oddsBand]);
 
   const bands = [
     { key: "strong", label: t("Strong"), tone: "strong" as const, icon: "🛡", band: strong },
@@ -167,6 +180,68 @@ export function MemberResultsBoard({
         </div>
       </section>
 
+      {v2 ? (
+        <section className={styles.v2Panel} aria-label={t("Trust and bankroll")}>
+          <article>
+            <span>{t("1u equity")}</span>
+            {v2.equitySparkline ? (
+              <svg viewBox="0 0 100 28" width="140" height="36" aria-hidden>
+                <polyline
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  points={v2.equitySparkline}
+                />
+              </svg>
+            ) : (
+              <strong>—</strong>
+            )}
+          </article>
+          <article>
+            <span>{t("CLV vs fair")}</span>
+            <strong>
+              {v2.clvPct == null
+                ? "—"
+                : `${v2.clvPct >= 0 ? "+" : ""}${v2.clvPct.toFixed(1)}%`}
+            </strong>
+          </article>
+          <article>
+            <span>{t("Pre-kickoff log")}</span>
+            <strong>
+              {v2.loggedBeforeKickoffPct == null
+                ? "—"
+                : `%${v2.loggedBeforeKickoffPct.toFixed(0)}`}
+            </strong>
+          </article>
+          <article>
+            <span>{t("Recent form")}</span>
+            <strong>{t(v2.streakLabel)}</strong>
+          </article>
+          <p className={styles.voidNote}>
+            {t("Voids are counted separately — not as losses.")}
+          </p>
+          {v2.leagueChips.length > 0 ? (
+            <div className={styles.chipRow}>
+              {v2.leagueChips.map((chip) => (
+                <button
+                  type="button"
+                  key={chip.label}
+                  className={styles.chip}
+                  data-active={league === chip.label}
+                  onClick={() =>
+                    setLeague((current) =>
+                      current === chip.label ? "ALL" : chip.label,
+                    )
+                  }
+                >
+                  {chip.label} · %{chip.rate.toFixed(0)} ({chip.samples})
+                </button>
+              ))}
+            </div>
+          ) : null}
+        </section>
+      ) : null}
+
       {oddsBands.length > 0 ? (
         <section aria-labelledby="results-odds-summary-title">
           <div className={styles.sectionHead}>
@@ -190,6 +265,18 @@ export function MemberResultsBoard({
                   {t("No odds")}
                 </>
               ) : null}
+              {oddsBand !== "ALL" ? (
+                <>
+                  {" · "}
+                  <button
+                    type="button"
+                    className={styles.clearBand}
+                    onClick={() => setOddsBand("ALL")}
+                  >
+                    {t("Clear band filter")}
+                  </button>
+                </>
+              ) : null}
             </p>
           </div>
           <div className={styles.oddsSummaryGrid}>
@@ -199,7 +286,23 @@ export function MemberResultsBoard({
                 <article
                   className={styles.summaryCard}
                   data-tone={item.tone}
+                  data-active={oddsBand === item.key}
                   key={item.key}
+                  role="button"
+                  tabIndex={0}
+                  onClick={() =>
+                    setOddsBand((current) =>
+                      current === item.key ? "ALL" : item.key,
+                    )
+                  }
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter" || event.key === " ") {
+                      event.preventDefault();
+                      setOddsBand((current) =>
+                        current === item.key ? "ALL" : item.key,
+                      );
+                    }
+                  }}
                 >
                   <div className={styles.summaryTop}>
                     <span className={styles.summaryIcon} aria-hidden>

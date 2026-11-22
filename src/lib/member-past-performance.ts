@@ -22,6 +22,17 @@ export {
 
 const TZ = "Europe/Istanbul";
 
+export type MemberV2Insights = {
+  equitySparkline: string | null;
+  clvPct: number | null;
+  loggedBeforeKickoffPct: number | null;
+  recentResults: Array<"WON" | "LOST" | "VOID">;
+  streakLabel: string;
+  leagueChips: Array<{ label: string; rate: number; samples: number }>;
+  voidsExcludedNote: true;
+  homeBaselineHitRate: number;
+};
+
 export type MemberPastPerformanceBundle = {
   performance: MemberPerformance;
   oddsBands: MemberResultsOddsBand[];
@@ -32,6 +43,7 @@ export type MemberPastPerformanceBundle = {
   /** Settled rows with no usable market/fair odds (or odds &lt; 1.10). */
   oddsMissing: number;
   matches: MemberResultsMatch[];
+  v2: MemberV2Insights;
 };
 
 function emptyBand(): MemberPerformance["strong"] {
@@ -96,14 +108,19 @@ export async function loadMemberPastPerformance(options?: {
 
   const settledRows = await prisma.smartPickHistory.findMany({
     where: { result: { in: ["WON", "LOST", "VOID"] } },
+    orderBy: [{ kickoffAt: "asc" }, { id: "asc" }],
     select: {
       id: true,
       matchId: true,
       marketKey: true,
+      market: true,
       tier: true,
       result: true,
       fairOdds: true,
       marketOdds: true,
+      leagueName: true,
+      kickoffAt: true,
+      publishedAt: true,
     },
   });
 
@@ -132,6 +149,13 @@ export async function loadMemberPastPerformance(options?: {
     oddsBucketMap.set(def.key, { wins: 0, losses: 0, voids: 0, total: 0 });
   }
   let oddsMissing = 0;
+  let bankroll = 1000;
+  const equityPoints: number[] = [bankroll];
+  const clvSamples: number[] = [];
+  let loggedBefore = 0;
+  let loggedTotal = 0;
+  const leagueMap = new Map<string, { wins: number; losses: number }>();
+  const oddsByRowId = new Map<number, { odds: number; bandKey: string | null }>();
 
   for (const row of settledRows) {
     const band = mapSmartPickTierToBand(row.tier);
@@ -139,6 +163,9 @@ export async function loadMemberPastPerformance(options?: {
     if (row.result === "WON") buckets[band].wins += 1;
     else if (row.result === "LOST") buckets[band].losses += 1;
     else if (row.result === "VOID") buckets[band].voids += 1;
+
+    loggedTotal += 1;
+    if (row.publishedAt.getTime() < row.kickoffAt.getTime()) loggedBefore += 1;
 
     const lookedUp =
       marketOddsLookup.get(marketOddsPickKey(row.matchId, row.marketKey)) ??
@@ -152,11 +179,30 @@ export async function loadMemberPastPerformance(options?: {
           ? row.marketOdds
           : lookedUp,
     });
+    const oddsKey =
+      odds != null && odds >= 1.1 ? mapPublishedOddsToBandKey(odds) : null;
+    oddsByRowId.set(row.id, { odds: odds ?? 0, bandKey: oddsKey });
+
+    if (row.result === "WON" || row.result === "LOST") {
+      const league = leagueMap.get(row.leagueName) ?? { wins: 0, losses: 0 };
+      if (row.result === "WON") league.wins += 1;
+      else league.losses += 1;
+      leagueMap.set(row.leagueName, league);
+
+      if (odds != null && odds > 1) {
+        const stake = 1;
+        bankroll += row.result === "WON" ? stake * (odds - 1) : -stake;
+        equityPoints.push(bankroll);
+        if (row.fairOdds != null && row.fairOdds > 1) {
+          clvSamples.push(odds / row.fairOdds - 1);
+        }
+      }
+    }
+
     if (odds === null || odds < 1.1) {
       if (row.result === "WON" || row.result === "LOST") oddsMissing += 1;
       continue;
     }
-    const oddsKey = mapPublishedOddsToBandKey(odds);
     if (!oddsKey) {
       if (row.result === "WON" || row.result === "LOST") oddsMissing += 1;
       continue;
@@ -279,6 +325,7 @@ export async function loadMemberPastPerformance(options?: {
       day: "2-digit",
     }).format(row.kickoffAt);
     const pickLabel = [row.market || row.category, row.selection].filter(Boolean).join(" · ");
+    const oddsMeta = oddsByRowId.get(row.id);
     matches.push({
       matchId: row.matchId,
       rowKey: `${row.matchId}-${row.id}`,
@@ -291,6 +338,7 @@ export async function loadMemberPastPerformance(options?: {
       dateLabel: day,
       pickLabel: pickLabel || "—",
       tierLabel: mapSmartPickTierToBand(row.tier),
+      oddsBandKey: oddsMeta?.bandKey ?? null,
       status,
       statusLabel:
         status === "WON"
@@ -298,12 +346,68 @@ export async function loadMemberPastPerformance(options?: {
           : status === "LOST"
             ? "Lost"
             : status === "VOID"
-              ? "Void"
+              ? "Void (not a loss)"
               : "Not settled yet",
       href: `/member/matches/${row.matchId}`,
     });
     if (matches.length >= matchLimit) break;
   }
+
+  const recentResults = recent
+    .map((row) => row.result)
+    .filter(
+      (result): result is "WON" | "LOST" | "VOID" =>
+        result === "WON" || result === "LOST" || result === "VOID",
+    )
+    .slice(0, 40);
+
+  let streak = 0;
+  let streakKind: "WON" | "LOST" | null = null;
+  for (const item of recentResults) {
+    if (item === "VOID") continue;
+    if (!streakKind) {
+      streakKind = item;
+      streak = 1;
+      continue;
+    }
+    if (item === streakKind) streak += 1;
+    else break;
+  }
+
+  const equitySparkline =
+    equityPoints.length > 1
+      ? (() => {
+          const min = Math.min(...equityPoints);
+          const max = Math.max(...equityPoints);
+          const span = Math.max(1e-6, max - min);
+          return equityPoints
+            .map((value, index) => {
+              const x = (index / (equityPoints.length - 1)) * 100;
+              const y = 26 - ((value - min) / span) * 24;
+              return `${x.toFixed(1)},${y.toFixed(1)}`;
+            })
+            .join(" ");
+        })()
+      : null;
+
+  const leagueChips = [...leagueMap.entries()]
+    .map(([label, counts]) => {
+      const samples = counts.wins + counts.losses;
+      return {
+        label,
+        samples,
+        rate: samples ? (counts.wins / samples) * 100 : 0,
+      };
+    })
+    .filter((item) => item.samples >= 20)
+    .sort((a, b) => b.rate - a.rate)
+    .slice(0, 6);
+
+  const clvPct =
+    clvSamples.length > 0
+      ? (clvSamples.reduce((sum, value) => sum + value, 0) / clvSamples.length) *
+        100
+      : null;
 
   return {
     performance,
@@ -312,5 +416,20 @@ export async function loadMemberPastPerformance(options?: {
     oddsBandEvaluated,
     oddsMissing,
     matches,
+    v2: {
+      equitySparkline,
+      clvPct,
+      loggedBeforeKickoffPct: loggedTotal
+        ? (loggedBefore / loggedTotal) * 100
+        : null,
+      recentResults,
+      streakLabel:
+        streakKind && streak > 0
+          ? `${streak} ${streakKind === "WON" ? "win" : "loss"} streak`
+          : "No streak yet",
+      leagueChips,
+      voidsExcludedNote: true,
+      homeBaselineHitRate: 45,
+    },
   };
 }
