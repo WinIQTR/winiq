@@ -57,6 +57,9 @@ export function MemberResultsBoard({
   medium,
   weak,
   oddsBands = [],
+  strengthEvaluated = 0,
+  oddsBandEvaluated = 0,
+  oddsMissing = 0,
   matches,
   todayHref = "/member",
 }: {
@@ -64,6 +67,9 @@ export function MemberResultsBoard({
   medium: MemberResultsBand;
   weak: MemberResultsBand;
   oddsBands?: MemberResultsOddsBand[];
+  strengthEvaluated?: number;
+  oddsBandEvaluated?: number;
+  oddsMissing?: number;
   matches: MemberResultsMatch[];
   todayHref?: string;
 }) {
@@ -166,6 +172,25 @@ export function MemberResultsBoard({
           <div className={styles.sectionHead}>
             <small>{t("SUMMARY")}</small>
             <h2 id="results-odds-summary-title">{t("Odds bands")}</h2>
+            <p data-no-translate={false}>
+              <strong data-no-translate>
+                {oddsBandEvaluated.toLocaleString("tr-TR")}
+              </strong>
+              {" / "}
+              <strong data-no-translate>
+                {strengthEvaluated.toLocaleString("tr-TR")}
+              </strong>{" "}
+              {t("evaluated in odds bands")}
+              {oddsMissing > 0 ? (
+                <>
+                  {" · "}
+                  <strong data-no-translate>
+                    {oddsMissing.toLocaleString("tr-TR")}
+                  </strong>{" "}
+                  {t("No odds")}
+                </>
+              ) : null}
+            </p>
           </div>
           <div className={styles.oddsSummaryGrid}>
             {oddsBands.map((item) => {

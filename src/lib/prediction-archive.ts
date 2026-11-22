@@ -16,6 +16,10 @@ import {
   settleMarketSelection,
   type SettlementResult,
 } from "@/lib/market-settlement";
+import {
+  loadMarketLineMoves,
+  marketLineMoveKey,
+} from "@/lib/market-line-move";
 
 import { prisma } from "@/lib/prisma";
 
@@ -175,6 +179,15 @@ export async function publishUpcomingPredictions(
       MAXIMUM_PUBLISHABLE_MATCHES,
     );
 
+  const marketMoves = await loadMarketLineMoves(
+    predictions.flatMap((prediction) =>
+      prediction.topPicks.map((pick) => ({
+        matchId: prediction.matchId,
+        selectionKey: pick.key,
+      })),
+    ),
+  );
+
   let picksConsidered = 0;
   let published = 0;
   let duplicatesSkipped = 0;
@@ -220,6 +233,10 @@ export async function publishUpcomingPredictions(
           });
         }
 
+        const bookOdds =
+          marketMoves.get(marketLineMoveKey(prediction.matchId, pick.key))
+            ?.currentOdds ?? null;
+
         return {
           matchId: prediction.matchId,
           leagueApiId: prediction.leagueApiId,
@@ -233,7 +250,7 @@ export async function publishUpcomingPredictions(
           selection: pick.selection,
           probability: pick.probability,
           fairOdds: pick.fairOdds,
-          marketOdds: null,
+          marketOdds: bookOdds,
           reliabilityScore: pick.reliabilityScore,
           pickScore: pick.pickScore,
           dataQualityScore: prediction.dataQualityScore,

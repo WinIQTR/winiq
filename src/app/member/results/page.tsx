@@ -9,7 +9,14 @@ export const revalidate = 0;
 
 export default async function MemberResultsPage() {
   const user = await requireMember();
-  const { performance, oddsBands, matches } = await loadMemberPastPerformance({
+  const {
+    performance,
+    oddsBands,
+    strengthEvaluated,
+    oddsBandEvaluated,
+    oddsMissing,
+    matches,
+  } = await loadMemberPastPerformance({
     matchLimit: 40,
   });
 
@@ -37,6 +44,9 @@ export default async function MemberResultsPage() {
             samples: performance.weak.samples,
           }}
           oddsBands={oddsBands}
+          strengthEvaluated={strengthEvaluated}
+          oddsBandEvaluated={oddsBandEvaluated}
+          oddsMissing={oddsMissing}
           matches={matches}
           todayHref="/member"
         />

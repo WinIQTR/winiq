@@ -699,6 +699,8 @@ entries.push(
   { en: "SUMMARY", tr: "ÖZET" },
   { en: "Strong / medium / weak", tr: "Güçlü / orta / zayıf" },
   { en: "Odds bands", tr: "Oran aralıkları" },
+  { en: "evaluated in odds bands", tr: "oran aralığında değerlendirildi" },
+  { en: "No odds", tr: "Oranı yok" },
   { en: "Strong", tr: "Güçlü" },
   { en: "Weak", tr: "Zayıf" },
   { en: "Evaluated", tr: "Değerlendirildi" },

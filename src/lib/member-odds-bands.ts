@@ -63,20 +63,23 @@ export function mapPublishedOddsToBandKey(
   return null;
 }
 
-/** Prefer fair (published model) odds; fall back to market odds. */
+/**
+ * Prefer market/book decimal odds shown for the published pick;
+ * fall back to fair (model) odds only when market is missing.
+ */
 export function resolvePublishedSelectionOdds(row: {
   fairOdds: number | null;
   marketOdds: number | null;
 }): number | null {
-  if (row.fairOdds != null && Number.isFinite(row.fairOdds) && row.fairOdds > 1) {
-    return row.fairOdds;
-  }
   if (
     row.marketOdds != null &&
     Number.isFinite(row.marketOdds) &&
     row.marketOdds > 1
   ) {
     return row.marketOdds;
+  }
+  if (row.fairOdds != null && Number.isFinite(row.fairOdds) && row.fairOdds > 1) {
+    return row.fairOdds;
   }
   return null;
 }

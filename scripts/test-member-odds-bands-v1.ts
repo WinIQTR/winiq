@@ -16,12 +16,16 @@ assert.equal(mapPublishedOddsToBandKey(3.0), "o200_300");
 assert.equal(mapPublishedOddsToBandKey(3.01), "o300_plus");
 assert.equal(mapPublishedOddsToBandKey(1.09), null);
 assert.equal(
-  resolvePublishedSelectionOdds({ fairOdds: 1.8, marketOdds: 2.0 }),
+  resolvePublishedSelectionOdds({ fairOdds: 1.8, marketOdds: 2.2 }),
+  2.2,
+);
+assert.equal(
+  resolvePublishedSelectionOdds({ fairOdds: 1.8, marketOdds: null }),
   1.8,
 );
 assert.equal(
-  resolvePublishedSelectionOdds({ fairOdds: null, marketOdds: 2.2 }),
-  2.2,
+  resolvePublishedSelectionOdds({ fairOdds: null, marketOdds: 2.5 }),
+  2.5,
 );
 
 console.log("test-member-odds-bands-v1: ok");
