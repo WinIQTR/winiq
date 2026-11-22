@@ -353,10 +353,35 @@ export function MemberValueOpportunities({
                           {(item.expectedValue ?? 0).toFixed(1)}%
                         </em>
                       </div>
+                      {item.conservativeEv != null || item.uncertaintyBuffer != null ? (
+                        <div className={styles.stat}>
+                          <span>{t("Conservative EV")}</span>
+                          <em>
+                            {item.conservativeEv != null
+                              ? `${item.conservativeEv >= 0 ? "+" : ""}${(item.conservativeEv * 100).toFixed(1)}%`
+                              : "—"}
+                            {item.uncertaintyBuffer != null
+                              ? ` · ${t("Buffer")} ${(item.uncertaintyBuffer * 100).toFixed(1)}%`
+                              : ""}
+                          </em>
+                        </div>
+                      ) : null}
                       <div className={styles.stat}>
                         <span>{t("Bookmaker")}</span>
                         <strong>{item.bookmakerName || "—"}</strong>
                       </div>
+                      {(item.betModes?.length ?? 0) > 0 ? (
+                        <div className={styles.stat}>
+                          <span>{t("Bet mode")}</span>
+                          <strong>
+                            {(item.betModes ?? [])
+                              .map((mode) =>
+                                mode === "smart" ? t("Smart Bet") : t("High Return"),
+                              )
+                              .join(" · ")}
+                          </strong>
+                        </div>
+                      ) : null}
                     </>
                   ) : (
                     <>

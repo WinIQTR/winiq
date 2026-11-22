@@ -648,6 +648,8 @@ entries.push(
   { en: "Bookmaker", tr: "Bahis şirketi" },
   { en: "Value score", tr: "Değer skoru" },
   { en: "Bet mode", tr: "Bahis modu" },
+  { en: "Conservative EV", tr: "Temkinli EV" },
+  { en: "Buffer", tr: "Tampon" },
   { en: "All modes", tr: "Tüm modlar" },
   { en: "Smart Bet", tr: "Akıllı Bahis" },
   { en: "High Return", tr: "Yüksek Getiri" },
