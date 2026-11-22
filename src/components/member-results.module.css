@@ -102,6 +102,12 @@
   gap: 12px;
 }
 
+.oddsSummaryGrid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+}
+
 .summaryCard {
   display: grid;
   gap: 12px;
@@ -125,6 +131,22 @@
 .summaryCard[data-tone="weak"] {
   border-color: rgba(245, 158, 11, 0.45);
   box-shadow: inset 0 0 0 1px rgba(245, 158, 11, 0.08);
+}
+
+.summaryCard[data-tone="band1"] {
+  border-color: rgba(46, 160, 67, 0.4);
+}
+.summaryCard[data-tone="band2"] {
+  border-color: rgba(34, 197, 94, 0.35);
+}
+.summaryCard[data-tone="band3"] {
+  border-color: rgba(59, 130, 246, 0.4);
+}
+.summaryCard[data-tone="band4"] {
+  border-color: rgba(168, 85, 247, 0.4);
+}
+.summaryCard[data-tone="band5"] {
+  border-color: rgba(245, 158, 11, 0.4);
 }
 
 .summaryTop {
@@ -153,6 +175,27 @@
 }
 
 .summaryCard[data-tone="weak"] .summaryIcon {
+  background: rgba(245, 158, 11, 0.16);
+  color: #fbbf24;
+}
+
+.summaryCard[data-tone="band1"] .summaryIcon {
+  background: rgba(46, 160, 67, 0.16);
+  color: #3fb950;
+}
+.summaryCard[data-tone="band2"] .summaryIcon {
+  background: rgba(16, 185, 129, 0.16);
+  color: #34d399;
+}
+.summaryCard[data-tone="band3"] .summaryIcon {
+  background: rgba(59, 130, 246, 0.16);
+  color: #60a5fa;
+}
+.summaryCard[data-tone="band4"] .summaryIcon {
+  background: rgba(168, 85, 247, 0.16);
+  color: #c084fc;
+}
+.summaryCard[data-tone="band5"] .summaryIcon {
   background: rgba(245, 158, 11, 0.16);
   color: #fbbf24;
 }
@@ -199,6 +242,22 @@
 }
 
 .summaryCard[data-tone="weak"] .barFill {
+  background: linear-gradient(90deg, #d97706, #fbbf24);
+}
+
+.summaryCard[data-tone="band1"] .barFill {
+  background: linear-gradient(90deg, #2ea043, #3fb950);
+}
+.summaryCard[data-tone="band2"] .barFill {
+  background: linear-gradient(90deg, #059669, #34d399);
+}
+.summaryCard[data-tone="band3"] .barFill {
+  background: linear-gradient(90deg, #2563eb, #60a5fa);
+}
+.summaryCard[data-tone="band4"] .barFill {
+  background: linear-gradient(90deg, #7c3aed, #c084fc);
+}
+.summaryCard[data-tone="band5"] .barFill {
   background: linear-gradient(90deg, #d97706, #fbbf24);
 }
 
@@ -405,8 +464,18 @@
   text-align: center;
 }
 
+@media (max-width: 1100px) {
+  .oddsSummaryGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 980px) {
   .summaryGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .oddsSummaryGrid {
     grid-template-columns: 1fr;
   }
 

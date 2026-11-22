@@ -698,6 +698,7 @@ entries.push(
   { en: "Back to today's predictions", tr: "Bugünün tahminlerine dön" },
   { en: "SUMMARY", tr: "ÖZET" },
   { en: "Strong / medium / weak", tr: "Güçlü / orta / zayıf" },
+  { en: "Odds bands", tr: "Oran aralıkları" },
   { en: "Strong", tr: "Güçlü" },
   { en: "Weak", tr: "Zayıf" },
   { en: "Evaluated", tr: "Değerlendirildi" },

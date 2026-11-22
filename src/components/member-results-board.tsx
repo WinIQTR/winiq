@@ -15,6 +15,12 @@ export type MemberResultsBand = {
   samples: number;
 };
 
+export type MemberResultsOddsBand = MemberResultsBand & {
+  key: string;
+  label: string;
+  tone: "band1" | "band2" | "band3" | "band4" | "band5";
+};
+
 export type MemberResultsMatch = {
   matchId: number;
   rowKey?: string;
@@ -50,12 +56,14 @@ export function MemberResultsBoard({
   strong,
   medium,
   weak,
+  oddsBands = [],
   matches,
   todayHref = "/member",
 }: {
   strong: MemberResultsBand;
   medium: MemberResultsBand;
   weak: MemberResultsBand;
+  oddsBands?: MemberResultsOddsBand[];
   matches: MemberResultsMatch[];
   todayHref?: string;
 }) {
@@ -152,6 +160,59 @@ export function MemberResultsBoard({
           })}
         </div>
       </section>
+
+      {oddsBands.length > 0 ? (
+        <section aria-labelledby="results-odds-summary-title">
+          <div className={styles.sectionHead}>
+            <small>{t("SUMMARY")}</small>
+            <h2 id="results-odds-summary-title">{t("Odds bands")}</h2>
+          </div>
+          <div className={styles.oddsSummaryGrid}>
+            {oddsBands.map((item) => {
+              const rate = item.rate;
+              return (
+                <article
+                  className={styles.summaryCard}
+                  data-tone={item.tone}
+                  key={item.key}
+                >
+                  <div className={styles.summaryTop}>
+                    <span className={styles.summaryIcon} aria-hidden>
+                      #
+                    </span>
+                    <strong data-no-translate>{item.label}</strong>
+                  </div>
+                  <div className={styles.rateRow}>
+                    <div className={styles.barTrack} aria-hidden>
+                      <i
+                        className={styles.barFill}
+                        style={{
+                          width: `${Math.max(0, Math.min(100, rate ?? 0))}%`,
+                        }}
+                      />
+                    </div>
+                    <em>{rate === null ? "—" : `%${rate.toFixed(0)}`}</em>
+                  </div>
+                  <div className={styles.statRow}>
+                    <span>
+                      <b>{item.wins}</b>
+                      {t("Won")}
+                    </span>
+                    <span>
+                      <b>{item.losses}</b>
+                      {t("Lost")}
+                    </span>
+                    <span>
+                      <b>{item.samples}</b>
+                      {t("Evaluated")}
+                    </span>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </section>
+      ) : null}
 
       <section aria-labelledby="results-list-title">
         <div className={styles.sectionHead}>

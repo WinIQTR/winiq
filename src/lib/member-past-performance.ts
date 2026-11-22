@@ -1,11 +1,26 @@
 import type { MemberPerformance } from "@/components/member-smart-dashboard";
-import type { MemberResultsMatch } from "@/components/member-results-board";
+import type {
+  MemberResultsMatch,
+  MemberResultsOddsBand,
+} from "@/components/member-results-board";
+import {
+  MEMBER_ODDS_BAND_DEFS,
+  mapPublishedOddsToBandKey,
+  resolvePublishedSelectionOdds,
+} from "@/lib/member-odds-bands";
 import { prisma } from "@/lib/prisma";
+
+export {
+  MEMBER_ODDS_BAND_DEFS,
+  mapPublishedOddsToBandKey,
+  resolvePublishedSelectionOdds,
+} from "@/lib/member-odds-bands";
 
 const TZ = "Europe/Istanbul";
 
 export type MemberPastPerformanceBundle = {
   performance: MemberPerformance;
+  oddsBands: MemberResultsOddsBand[];
   matches: MemberResultsMatch[];
 };
 
@@ -69,11 +84,14 @@ export async function loadMemberPastPerformance(options?: {
 }): Promise<MemberPastPerformanceBundle> {
   const matchLimit = options?.matchLimit ?? 40;
 
-  const grouped = await prisma.smartPickHistory.groupBy({
-    by: ["tier", "result"],
-    _count: { _all: true },
-    where: {
-      result: { in: ["WON", "LOST", "VOID"] },
+  const settledRows = await prisma.smartPickHistory.findMany({
+    where: { result: { in: ["WON", "LOST", "VOID"] } },
+    select: {
+      id: true,
+      tier: true,
+      result: true,
+      fairOdds: true,
+      marketOdds: true,
     },
   });
 
@@ -82,14 +100,31 @@ export async function loadMemberPastPerformance(options?: {
     medium: { wins: 0, losses: 0, voids: 0, total: 0 },
     weak: { wins: 0, losses: 0, voids: 0, total: 0 },
   };
+  const oddsBucketMap = new Map<
+    string,
+    { wins: number; losses: number; voids: number; total: number }
+  >();
+  for (const def of MEMBER_ODDS_BAND_DEFS) {
+    oddsBucketMap.set(def.key, { wins: 0, losses: 0, voids: 0, total: 0 });
+  }
 
-  for (const row of grouped) {
+  for (const row of settledRows) {
     const band = mapSmartPickTierToBand(row.tier);
-    const count = row._count._all;
-    buckets[band].total += count;
-    if (row.result === "WON") buckets[band].wins += count;
-    else if (row.result === "LOST") buckets[band].losses += count;
-    else if (row.result === "VOID") buckets[band].voids += count;
+    buckets[band].total += 1;
+    if (row.result === "WON") buckets[band].wins += 1;
+    else if (row.result === "LOST") buckets[band].losses += 1;
+    else if (row.result === "VOID") buckets[band].voids += 1;
+
+    const odds = resolvePublishedSelectionOdds(row);
+    if (odds === null) continue;
+    const oddsKey = mapPublishedOddsToBandKey(odds);
+    if (!oddsKey) continue;
+    const oddsBucket = oddsBucketMap.get(oddsKey);
+    if (!oddsBucket) continue;
+    oddsBucket.total += 1;
+    if (row.result === "WON") oddsBucket.wins += 1;
+    else if (row.result === "LOST") oddsBucket.losses += 1;
+    else if (row.result === "VOID") oddsBucket.voids += 1;
   }
 
   const performance: MemberPerformance = {
@@ -123,6 +158,32 @@ export async function loadMemberPastPerformance(options?: {
     performance.medium = emptyBand();
     performance.weak = emptyBand();
   }
+
+  const oddsBands: MemberResultsOddsBand[] = MEMBER_ODDS_BAND_DEFS.map(
+    (def) => {
+      const bucket = oddsBucketMap.get(def.key) ?? {
+        wins: 0,
+        losses: 0,
+        voids: 0,
+        total: 0,
+      };
+      const counted = bandFromCounts(
+        bucket.wins,
+        bucket.losses,
+        bucket.voids,
+        bucket.total,
+      );
+      return {
+        key: def.key,
+        label: def.label,
+        tone: def.tone,
+        rate: counted.rate,
+        wins: counted.wins,
+        losses: counted.losses,
+        samples: counted.samples,
+      };
+    },
+  );
 
   const recent = await prisma.smartPickHistory.findMany({
     where: { result: { in: ["WON", "LOST", "VOID"] } },
@@ -194,5 +255,5 @@ export async function loadMemberPastPerformance(options?: {
     if (matches.length >= matchLimit) break;
   }
 
-  return { performance, matches };
+  return { performance, oddsBands, matches };
 }
