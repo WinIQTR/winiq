@@ -77,12 +77,6 @@ export function MembershipPlanSelector({
           <small>Önce talebi gönderin, ardından ödemenizi yapın.</small>
         </div>
         <div className="member-payment-methods">
-          {payment.ininalUrl ? (
-            <a href={payment.ininalUrl} target="_blank" rel="noreferrer">
-              <b>İninal</b>
-              <span>Türkiye · {priceTry}</span>
-            </a>
-          ) : null}
           {payment.wiseUrl ? (
             <a href={payment.wiseUrl} target="_blank" rel="noreferrer">
               <b>Wise</b>
@@ -112,7 +106,7 @@ export function MembershipPlanSelector({
             </span>
           </div>
         ) : null}
-        {!payment.ininalUrl && !payment.wiseUrl && !payment.bankIban ? (
+        {!payment.wiseUrl && !payment.bankIban ? (
           <small className="member-payment-pending">
             Ödeme bağlantıları yönetici tarafından hazırlanıyor.
           </small>

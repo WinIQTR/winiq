@@ -158,10 +158,9 @@ export function AdminMembersManager({ members, upgradeRequests, prices, paymentS
       <section className={`${styles.panel} ${styles.paymentPanel}`}>
         <div className={styles.heading}>
           <div><span className={styles.eyebrow}>ÖDEME MERKEZİ</span><h2>Ödeme bağlantıları</h2><p>Üyelerin paket ekranında görünen Türkiye ve yurt dışı ödeme kanalları.</p></div>
-          <span className={styles.paymentCount}>{[paymentSettings.ininalUrl, paymentSettings.wiseUrl, paymentSettings.bankIban].filter(Boolean).length}/3 aktif</span>
+          <span className={styles.paymentCount}>{[paymentSettings.wiseUrl, paymentSettings.bankIban].filter(Boolean).length}/2 aktif</span>
         </div>
         <div className={styles.paymentGrid}>
-          <article className={paymentSettings.ininalUrl ? styles.paymentActive : styles.paymentWaiting}><div><b>İninal</b><span>Türkiye · Sanal POS / ödeme bağlantısı</span></div><strong>{paymentSettings.ininalUrl ? "AKTİF" : "KURULUM BEKLİYOR"}</strong><small>ININAL_PAYMENT_URL</small></article>
           <article className={paymentSettings.bankIban ? styles.paymentActive : styles.paymentWaiting}><div><b>Banka havalesi</b><span>Türkiye · TL hesabı</span></div><strong>{paymentSettings.bankIban ? "AKTİF" : "KURULUM BEKLİYOR"}</strong><small>BANK_TRANSFER_IBAN + PAYMENT_ACCOUNT_NAME</small></article>
           <article className={paymentSettings.wiseUrl ? styles.paymentActive : styles.paymentWaiting}><div><b>Wise</b><span>Yurt dışı · EUR ödeme bağlantısı</span></div><strong>{paymentSettings.wiseUrl ? "AKTİF" : "KURULUM BEKLİYOR"}</strong><small>WISE_PAYMENT_URL</small></article>
         </div>
