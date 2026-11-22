@@ -8,6 +8,8 @@ import {
   formatPrice,
   getDurationPrice,
   MEMBERSHIP_DURATION_PRICES,
+  MEMBERSHIP_LAUNCH_ACTIVE,
+  MEMBERSHIP_LIST_PRICE,
   SINGLE_MEMBERSHIP_FEATURES,
   SINGLE_MEMBERSHIP_PRICE,
   type MembershipDuration,
@@ -99,21 +101,43 @@ export default async function MembershipPlansPage() {
 
         <section className="member-plan-grid member-plan-grid-single">
           <article className="member-plan-card member-plan-card-professional member-plan-current">
-            <b className="member-popular-label">TEK ÜYELİK</b>
+            <b className="member-popular-label">
+              {MEMBERSHIP_LAUNCH_ACTIVE ? "LANSMAN" : "TEK ÜYELİK"}
+            </b>
             <div>
               <p className="member-eyebrow">30 MARKET · FULL ACCESS</p>
               <h2>{MEMBERSHIP_PLAN_LABELS[SINGLE_MEMBERSHIP_PLAN]}</h2>
             </div>
             <div className="member-plan-prices">
               <strong>
-                {formatPrice(listPrice.priceTryCents || SINGLE_MEMBERSHIP_PRICE.priceTryCents, "TRY")}{" "}
+                {formatPrice(
+                  MEMBERSHIP_LAUNCH_ACTIVE
+                    ? SINGLE_MEMBERSHIP_PRICE.priceTryCents
+                    : listPrice.priceTryCents || SINGLE_MEMBERSHIP_PRICE.priceTryCents,
+                  "TRY",
+                )}{" "}
                 <small>/ ay</small>
               </strong>
+              {MEMBERSHIP_LAUNCH_ACTIVE ? (
+                <span style={{ textDecoration: "line-through", opacity: 0.55 }}>
+                  {formatPrice(MEMBERSHIP_LIST_PRICE.priceTryCents, "TRY")} / ay
+                </span>
+              ) : null}
               <span>
-                {formatPrice(listPrice.priceEurCents || SINGLE_MEMBERSHIP_PRICE.priceEurCents, "EUR")}{" "}
+                {formatPrice(
+                  MEMBERSHIP_LAUNCH_ACTIVE
+                    ? SINGLE_MEMBERSHIP_PRICE.priceEurCents
+                    : listPrice.priceEurCents || SINGLE_MEMBERSHIP_PRICE.priceEurCents,
+                  "EUR",
+                )}{" "}
                 / ay
               </span>
             </div>
+            {MEMBERSHIP_LAUNCH_ACTIVE ? (
+              <p style={{ margin: "8px 0 0", fontSize: 13, opacity: 0.8 }}>
+                Lansman fiyatı — sonra {formatPrice(MEMBERSHIP_LIST_PRICE.priceTryCents, "TRY")} / ay.
+              </p>
+            ) : null}
             <ul>
               {SINGLE_MEMBERSHIP_FEATURES.map((feature) => (
                 <li key={feature}>{feature}</li>

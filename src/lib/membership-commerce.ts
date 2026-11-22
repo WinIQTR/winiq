@@ -5,38 +5,72 @@ import {
 
 export type MembershipDuration = "MONTHLY" | "QUARTERLY" | "YEARLY";
 
-/** List price — single fixed membership (TRY 899 / EUR 14.99). */
-export const SINGLE_MEMBERSHIP_PRICE = {
+/** Regular list price (after launch window). */
+export const MEMBERSHIP_LIST_PRICE = {
   priceTryCents: 89_900,
   priceEurCents: 1_499,
 } as const;
 
+/**
+ * Active sell price — launch window (749 TRY / 12.99 EUR).
+ * After launch, flip SINGLE_MEMBERSHIP_PRICE back to MEMBERSHIP_LIST_PRICE.
+ */
+export const MEMBERSHIP_LAUNCH_ACTIVE = true;
+
+export const SINGLE_MEMBERSHIP_PRICE = MEMBERSHIP_LAUNCH_ACTIVE
+  ? ({ priceTryCents: 74_900, priceEurCents: 1_299 } as const)
+  : MEMBERSHIP_LIST_PRICE;
+
 export const MEMBERSHIP_DURATION_PRICES: Record<
   MembershipDuration,
   { priceTryCents: number; priceEurCents: number; months: number; labelTr: string; labelEn: string }
-> = {
-  MONTHLY: {
-    priceTryCents: 89_900,
-    priceEurCents: 1_499,
-    months: 1,
-    labelTr: "1 aylık",
-    labelEn: "1 month",
-  },
-  QUARTERLY: {
-    priceTryCents: 229_900,
-    priceEurCents: 3_799,
-    months: 3,
-    labelTr: "3 aylık",
-    labelEn: "3 months",
-  },
-  YEARLY: {
-    priceTryCents: 599_900,
-    priceEurCents: 9_900,
-    months: 12,
-    labelTr: "12 aylık",
-    labelEn: "12 months",
-  },
-};
+> = MEMBERSHIP_LAUNCH_ACTIVE
+  ? {
+      MONTHLY: {
+        priceTryCents: 74_900,
+        priceEurCents: 1_299,
+        months: 1,
+        labelTr: "1 aylık · lansman",
+        labelEn: "1 month · launch",
+      },
+      QUARTERLY: {
+        priceTryCents: 199_900,
+        priceEurCents: 3_299,
+        months: 3,
+        labelTr: "3 aylık · lansman",
+        labelEn: "3 months · launch",
+      },
+      YEARLY: {
+        priceTryCents: 499_900,
+        priceEurCents: 8_299,
+        months: 12,
+        labelTr: "12 aylık · lansman",
+        labelEn: "12 months · launch",
+      },
+    }
+  : {
+      MONTHLY: {
+        priceTryCents: 89_900,
+        priceEurCents: 1_499,
+        months: 1,
+        labelTr: "1 aylık",
+        labelEn: "1 month",
+      },
+      QUARTERLY: {
+        priceTryCents: 229_900,
+        priceEurCents: 3_799,
+        months: 3,
+        labelTr: "3 aylık",
+        labelEn: "3 months",
+      },
+      YEARLY: {
+        priceTryCents: 599_900,
+        priceEurCents: 9_900,
+        months: 12,
+        labelTr: "12 aylık",
+        labelEn: "12 months",
+      },
+    };
 
 export const SINGLE_MEMBERSHIP_FEATURES = [
   "30 bahis pazarının tamamı",
