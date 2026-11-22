@@ -65,8 +65,7 @@ export default async function MemberCouponsPage({
 
   const requested = viewOf((await searchParams)?.view);
   const canPerformance = hasMembershipPermission(user.plan, "COUPON_ANALYTICS");
-  const canGuaranteed =
-    hasMembershipPermission(user.plan, "SURPRISE_COUPONS") || user.plan === "PROFESSIONAL";
+  const canGuaranteed = hasMembershipPermission(user.plan, "SURPRISE_COUPONS");
   const view: View =
     requested === "performance" && !canPerformance
       ? "center"
@@ -101,9 +100,7 @@ export default async function MemberCouponsPage({
           Safe / guaranteed
         </Link>
       ) : null}
-      {user.plan === "PROFESSIONAL" ? (
-        <Link href="/member/professional/special">Special List →</Link>
-      ) : null}
+      <Link href="/member/professional/special">Special List →</Link>
     </nav>
   );
 

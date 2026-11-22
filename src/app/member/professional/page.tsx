@@ -32,10 +32,6 @@ const positionName = (value:string) => ({GOALKEEPER:"Kaleci",DEFENDER:"Defans",M
 export default async function ProfessionalDataPage({ searchParams }: { searchParams: Promise<{ view?: string; league?: string; team?: string; position?: string; q?: string; week?: string; stage?: string; table?: string }> }) {
   const user = await requireMember();
   const locale = await readAppLocale();
-  // Local review: allow any logged-in member to open the redesigned Analizler list.
-  // Production still requires PROFESSIONAL.
-  const localReviewBypass = process.env.NODE_ENV !== "production";
-  if (user.plan !== "PROFESSIONAL" && !localReviewBypass) redirect("/member/plans");
   const params = await searchParams;
   const requested = params.view as View | undefined;
   const view: View = requested && validViews.has(requested) ? requested : "fixtures";
@@ -258,11 +254,6 @@ export default async function ProfessionalDataPage({ searchParams }: { searchPar
   const description = view === "fixtures" ? "Matches from the previous, current and upcoming week." : view === "players" ? "Season performance for active squad players." : view === "scorers" ? "Attack leaders by goals, assists and minutes." : "Standings for the selected league from verified results.";
   return <main className={member.shell}>
     <MemberPortalHeader plan={user.plan} active={view}/>
-    {localReviewBypass && user.plan !== "PROFESSIONAL" ? (
-      <div className={styles.localReviewBanner} role="status">
-        Local review: this page is open to all member plans in development. Production requires Professional.
-      </div>
-    ) : null}
     <nav className={styles.standingModeLinks} aria-label="Puan durumu görünümü"><span>Tablo görünümü</span><Link data-active={standingMode === "overall"} href={`/member/professional?view=standings&league=${leagueFilter}`}>Genel</Link><Link data-active={standingMode === "home"} href={`/member/professional?view=standings&league=${leagueFilter}&table=home`}>İç saha</Link><Link data-active={standingMode === "away"} href={`/member/professional?view=standings&league=${leagueFilter}&table=away`}>Deplasman</Link></nav>
     <div className={member.page}>
       <section className={member.welcome}><div><p><i/> WINIQ · PROFESSIONAL DATA CENTRE</p><h1>{title}</h1><span>{description}</span></div></section>

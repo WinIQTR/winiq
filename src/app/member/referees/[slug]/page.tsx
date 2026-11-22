@@ -45,8 +45,6 @@ export default async function MemberRefereePage({
 }) {
   const user = await requireMember();
   const locale = await readAppLocale();
-  const localReviewBypass = process.env.NODE_ENV !== "production";
-  if (user.plan !== "PROFESSIONAL" && !localReviewBypass) redirect("/member/plans");
 
   const { slug: rawSlug } = await params;
   const slug = decodeURIComponent(rawSlug);

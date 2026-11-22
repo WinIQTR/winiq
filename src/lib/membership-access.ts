@@ -1,4 +1,15 @@
+/**
+ * Single fixed membership (WinIQ V2).
+ *
+ * DB enum still has BASIC | ANALYSIS | PROFESSIONAL for compatibility.
+ * Product surface is one plan: every active member sees the full member desk.
+ * Canonical stored plan = PROFESSIONAL.
+ */
+
 export type MembershipPlanName = "BASIC" | "ANALYSIS" | "PROFESSIONAL";
+
+/** Only plan sold / assigned going forward. */
+export const SINGLE_MEMBERSHIP_PLAN: MembershipPlanName = "PROFESSIONAL";
 
 export type MembershipPermission =
   | "DAILY_PICKS"
@@ -15,43 +26,37 @@ export type MembershipPermission =
   | "COUPON_ANALYTICS"
   | "COUPON_HISTORY";
 
+export const ALL_MEMBERSHIP_PERMISSIONS: readonly MembershipPermission[] = [
+  "DAILY_PICKS",
+  "ADVISORY_PICKS",
+  "PICK_DETAILS",
+  "RESULT_HISTORY",
+  "VALUE_BETS",
+  "SMART_PICKS",
+  "FULL_ANALYTICS",
+  "DAILY_COUPONS",
+  "WEEKLY_COUPONS",
+  "BALANCED_COUPONS",
+  "SURPRISE_COUPONS",
+  "COUPON_ANALYTICS",
+  "COUPON_HISTORY",
+] as const;
+
+/** @deprecated Tier matrix removed — kept as full access for every enum value. */
 export const MEMBERSHIP_PERMISSIONS: Record<
   MembershipPlanName,
   readonly MembershipPermission[]
 > = {
-  BASIC: ["DAILY_PICKS", "DAILY_COUPONS", "COUPON_HISTORY"],
-  ANALYSIS: [
-    "DAILY_PICKS",
-    "ADVISORY_PICKS",
-    "PICK_DETAILS",
-    "RESULT_HISTORY",
-    "DAILY_COUPONS",
-    "WEEKLY_COUPONS",
-    "BALANCED_COUPONS",
-    "COUPON_HISTORY",
-  ],
-  PROFESSIONAL: [
-    "DAILY_PICKS",
-    "ADVISORY_PICKS",
-    "PICK_DETAILS",
-    "RESULT_HISTORY",
-    "VALUE_BETS",
-    "SMART_PICKS",
-    "FULL_ANALYTICS",
-    "DAILY_COUPONS",
-    "WEEKLY_COUPONS",
-    "BALANCED_COUPONS",
-    "SURPRISE_COUPONS",
-    "COUPON_ANALYTICS",
-    "COUPON_HISTORY",
-  ],
+  BASIC: ALL_MEMBERSHIP_PERMISSIONS,
+  ANALYSIS: ALL_MEMBERSHIP_PERMISSIONS,
+  PROFESSIONAL: ALL_MEMBERSHIP_PERMISSIONS,
 };
 
 export function hasMembershipPermission(
-  plan: MembershipPlanName,
-  permission: MembershipPermission,
+  _plan: MembershipPlanName,
+  _permission: MembershipPermission,
 ): boolean {
-  return MEMBERSHIP_PERMISSIONS[plan].includes(permission);
+  return true;
 }
 
 export function isMembershipActive(
@@ -59,39 +64,42 @@ export function isMembershipActive(
   membershipEndsAt: Date | null,
   now = new Date(),
 ): boolean {
-  return status === "ACTIVE" &&
-    (membershipEndsAt === null || membershipEndsAt.getTime() > now.getTime());
+  return (
+    status === "ACTIVE" &&
+    (membershipEndsAt === null || membershipEndsAt.getTime() > now.getTime())
+  );
 }
 
 export const MEMBERSHIP_PLAN_LABELS: Record<MembershipPlanName, string> = {
-  BASIC: "Temel",
-  ANALYSIS: "Analiz",
-  PROFESSIONAL: "Profesyonel",
+  BASIC: "Üyelik",
+  ANALYSIS: "Üyelik",
+  PROFESSIONAL: "Üyelik",
 };
 
 export const MEMBERSHIP_PLAN_MARKET_LIMITS: Record<MembershipPlanName, number> = {
-  BASIC: 6,
-  ANALYSIS: 19,
+  BASIC: 30,
+  ANALYSIS: 30,
   PROFESSIONAL: 30,
 };
 
-const BASIC_MARKET_NUMBERS = new Set([1, 2, 5, 7, 8, 14]);
-const ANALYSIS_MARKET_NUMBERS = new Set([
-  ...BASIC_MARKET_NUMBERS,
-  3, 4, 6, 9, 10, 11, 12, 13, 15, 16, 17, 18, 19,
-]);
+export const BET_MARKET_ACCESS_MAX = 30;
 
 export function canAccessBetMarket(
-  plan: MembershipPlanName,
+  _plan: MembershipPlanName,
   marketNumber: number,
 ): boolean {
-  if (plan === "PROFESSIONAL") return marketNumber >= 1 && marketNumber <= 30;
-  if (plan === "ANALYSIS") return ANALYSIS_MARKET_NUMBERS.has(marketNumber);
-  return BASIC_MARKET_NUMBERS.has(marketNumber);
+  return marketNumber >= 1 && marketNumber <= BET_MARKET_ACCESS_MAX;
 }
 
-export function requiredPlanForBetMarket(marketNumber: number): MembershipPlanName {
-  if (BASIC_MARKET_NUMBERS.has(marketNumber)) return "BASIC";
-  if (ANALYSIS_MARKET_NUMBERS.has(marketNumber)) return "ANALYSIS";
-  return "PROFESSIONAL";
+export function requiredPlanForBetMarket(_marketNumber: number): MembershipPlanName {
+  return SINGLE_MEMBERSHIP_PLAN;
+}
+
+export function normalizeMembershipPlan(
+  plan: MembershipPlanName | string | null | undefined,
+): MembershipPlanName {
+  if (plan === "BASIC" || plan === "ANALYSIS" || plan === "PROFESSIONAL") {
+    return SINGLE_MEMBERSHIP_PLAN;
+  }
+  return SINGLE_MEMBERSHIP_PLAN;
 }

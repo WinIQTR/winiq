@@ -148,7 +148,7 @@ export function AdminMembersManager({ members, upgradeRequests, prices, paymentS
         <form className={styles.createForm} onSubmit={createMember}>
           <label>Ad<input name="name" required /></label>
           <label>E-posta<input name="email" type="email" required /></label>
-          <label>Paket<select name="plan" defaultValue="BASIC"><option value="BASIC">Temel</option><option value="ANALYSIS">Analiz</option><option value="PROFESSIONAL">Profesyonel</option></select></label>
+          <label>Paket<select name="plan" defaultValue="PROFESSIONAL"><option value="PROFESSIONAL">Üyelik</option></select></label>
           <label>Bitiş tarihi<input name="membershipEndsAt" type="date" /></label>
           <label className={styles.wide}>Geçici şifre<input name="password" type="password" minLength={12} required /></label>
           <button disabled={busy}>Üye oluştur</button>
@@ -169,10 +169,10 @@ export function AdminMembersManager({ members, upgradeRequests, prices, paymentS
       </section>
 
       <section className={styles.panel}>
-        <h2>Paket fiyatları</h2>
-        <p>Sıfır değer, fiyatın henüz kullanıcıya yayınlanmadığını belirtir.</p>
+        <h2>Üyelik fiyatı (tek plan)</h2>
+        <p>Liste fiyatı aylık. 3 / 12 aylık tutarlar üye ekranında sabit gösterilir; onayda süreyi siz uzatırsınız.</p>
         <div className={styles.priceGrid}>
-          {(["BASIC", "ANALYSIS", "PROFESSIONAL"] as const).map((plan) => {
+          {(["PROFESSIONAL"] as const).map((plan) => {
             const price = prices.find((item) => item.plan === plan);
             return (
               <form key={plan} className={styles.priceCard} onSubmit={(event) => updatePrice(event, plan)}>
@@ -194,9 +194,9 @@ export function AdminMembersManager({ members, upgradeRequests, prices, paymentS
           <label>Paket
             <select value={planFilter} onChange={(event) => setPlanFilter(event.target.value as typeof planFilter)}>
               <option value="ALL">Tümü</option>
-              <option value="BASIC">Temel</option>
-              <option value="ANALYSIS">Analiz</option>
-              <option value="PROFESSIONAL">Profesyonel</option>
+              <option value="PROFESSIONAL">Üyelik</option>
+              <option value="BASIC">Eski · Temel</option>
+              <option value="ANALYSIS">Eski · Analiz</option>
             </select>
           </label>
           <label>Durum
@@ -222,7 +222,7 @@ export function AdminMembersManager({ members, upgradeRequests, prices, paymentS
                 </small>
               </div>
               <form className={styles.accessForm} onSubmit={(event) => updateAccess(event, member.id)}>
-                <label>Paket<select name="plan" defaultValue={member.plan}><option value="BASIC">Temel</option><option value="ANALYSIS">Analiz</option><option value="PROFESSIONAL">Profesyonel</option></select></label>
+                <label>Paket<select name="plan" defaultValue="PROFESSIONAL"><option value="PROFESSIONAL">Üyelik</option></select></label>
                 <label>Durum<select name="status" defaultValue={member.status}><option>ACTIVE</option><option>SUSPENDED</option></select></label>
                 <label>Bitiş<input name="membershipEndsAt" type="date" defaultValue={member.membershipEndsAt?.slice(0, 10) ?? ""} /></label>
                 <button disabled={busy}>Kaydet</button>

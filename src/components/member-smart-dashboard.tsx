@@ -198,7 +198,7 @@ export function MemberPortalHeader({
   const homeHref = preview ? `/admin/members/preview?plan=${plan}` : "/member";
   const planLink = preview ? `/admin/members/preview?plan=${plan}#paket` : "/member/plans";
   const canCoupons = hasMembershipPermission(plan, "DAILY_COUPONS");
-  const isPro = plan === "PROFESSIONAL";
+  const isPro = true;
   const analysesHref = preview ? homeHref : "/member/professional";
   const shortlistsHref = preview ? homeHref : "/member/professional/special";
   const couponsHref = preview ? homeHref : canCoupons ? "/member/coupons" : "/member/plans";
@@ -370,24 +370,20 @@ export function MemberPredictionRow({
             {formIcons(prediction.awayRecentResults)}
           </div>
         </div>
-        {plan !== "BASIC" ? (
-          <div className={cards.probabilities}>
-            <span>
-              1 <b>%{prediction.homeProbability.toFixed(0)}</b>
-              <i style={{ width: `${prediction.homeProbability}%` }} />
-            </span>
-            <span>
-              X <b>%{prediction.drawProbability.toFixed(0)}</b>
-              <i style={{ width: `${prediction.drawProbability}%` }} />
-            </span>
-            <span>
-              2 <b>%{prediction.awayProbability.toFixed(0)}</b>
-              <i style={{ width: `${prediction.awayProbability}%` }} />
-            </span>
-          </div>
-        ) : (
-          <LockHint href={plansHref}>{t(LOCK_HINT.probabilities)}</LockHint>
-        )}
+        <div className={cards.probabilities}>
+          <span>
+            1 <b>%{prediction.homeProbability.toFixed(0)}</b>
+            <i style={{ width: `${prediction.homeProbability}%` }} />
+          </span>
+          <span>
+            X <b>%{prediction.drawProbability.toFixed(0)}</b>
+            <i style={{ width: `${prediction.drawProbability}%` }} />
+          </span>
+          <span>
+            2 <b>%{prediction.awayProbability.toFixed(0)}</b>
+            <i style={{ width: `${prediction.awayProbability}%` }} />
+          </span>
+        </div>
         <div className={cards.choice}>
           <span className={cards.strongBadge}>{pickBadge(prediction).label}</span>
           <small>En iyi seçim</small>
@@ -397,21 +393,17 @@ export function MemberPredictionRow({
           <span>Güven</span>
           <strong>{guvenScore(prediction).toFixed(1)}</strong>
         </div>
-        {plan !== "BASIC" ? (
-          <div className={cards.odds}>
-            <span>Oran</span>
-            <strong>{fairOdds(prediction).toFixed(2)}</strong>
-          </div>
-        ) : (
-          <LockHint href={plansHref}>{t(LOCK_HINT.modelOdds)}</LockHint>
-        )}
+        <div className={cards.odds}>
+          <span>Oran</span>
+          <strong>{fairOdds(prediction).toFixed(2)}</strong>
+        </div>
       </div>
       <div className={cards.reasonBar}>
         <strong>Neden bu tahmin?</strong>
-        {plan === "PROFESSIONAL" && reasons.length ? (
+        {reasons.length ? (
           reasons.map((reason) => <span key={reason}>{reason}</span>)
         ) : (
-          <span>Ayrıntılı gerekçeler Profesyonel üyelikte açılır.</span>
+          <span>Bu maç için kısa gerekçe henüz yok.</span>
         )}
         <Link href={href}>Analizi gör →</Link>
       </div>

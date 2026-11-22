@@ -37,8 +37,6 @@ export default async function ProfessionalSpecialPage({
 }) {
   const user = await requireMember();
   const locale = await readAppLocale();
-  const localReviewBypass = process.env.NODE_ENV !== "production";
-  if (user.plan !== "PROFESSIONAL" && !localReviewBypass) redirect("/member/plans");
 
   const q = await searchParams;
   const range = q?.range === "week" ? "week" : "day";

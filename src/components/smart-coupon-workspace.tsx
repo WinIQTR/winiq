@@ -83,16 +83,8 @@ function mayOpen(access: AccessMode, window: CouponWindow, band: CouponBand): bo
   return true;
 }
 
-function accessMessage(access: AccessMode, window: CouponWindow, band: CouponBand): string {
-  if (access === "BASIC") {
-    return window === "WEEKLY"
-      ? "Haftalık kuponlar Analiz paketinden itibaren açılır."
-      : "5–10 ve Sürpriz kuponları daha yüksek üyelik paketlerinde açılır.";
-  }
-  if (access === "ANALYSIS" && band === "SURPRISE") {
-    return "Sürpriz kuponlar ve profesyonel risk verileri Profesyonel pakette açılır.";
-  }
-  return "Bu kupon üyelik kapsamınızda bulunmuyor.";
+function accessMessage(_access: AccessMode, _window: CouponWindow, _band: CouponBand): string {
+  return "Bu kupon şu an listede değil veya veri yetersiz.";
 }
 
 export function SmartCouponWorkspace({
@@ -220,10 +212,8 @@ export function SmartCouponWorkspace({
                 <div><span>Maç</span><strong>{coupon.legs.length}</strong></div>
                 <div><span>Birleşik model</span><strong>%{coupon.combinedModelProbability.toFixed(1)}</strong></div>
                 <div><span>Ort. olasılık</span><strong>%{coupon.averageModelProbability.toFixed(1)}</strong></div>
-                {access === "ADMIN" || access === "PROFESSIONAL" ? <>
-                  <div><span>Ort. piyasa farkı</span><strong>+{coupon.averageMarketEdge.toFixed(1)}</strong></div>
-                  <div><span>Ort. EV</span><strong>%{coupon.averageExpectedValue.toFixed(1)}</strong></div>
-                </> : null}
+                <div><span>Ort. piyasa farkı</span><strong>+{coupon.averageMarketEdge.toFixed(1)}</strong></div>
+                <div><span>Ort. EV</span><strong>%{coupon.averageExpectedValue.toFixed(1)}</strong></div>
               </div>
 
               <div className={styles.explanation}><strong>Neden bu kupon?</strong><p>{coupon.explanation}</p><small>{coupon.riskNote}</small></div>
@@ -231,20 +221,14 @@ export function SmartCouponWorkspace({
               <div className={styles.legs}>
                 {coupon.legs.map((leg, legIndex) => (
                   <article
-                    className={
-                      access === "BASIC"
-                        ? styles.legBasic
-                        : access === "ANALYSIS"
-                          ? styles.legAnalysis
-                          : styles.legProfessional
-                    }
+                    className={styles.legProfessional}
                     key={`${coupon.id}-${leg.matchId}`}
                   >
                     <span className={styles.legNumber}>{String(legIndex + 1).padStart(2, "0")}</span>
                     <div className={styles.match}><small>{leg.leagueName} · {formatKickoff(leg.kickoffAt)}</small><strong>{leg.homeTeam} – {leg.awayTeam}</strong></div>
                     <div className={styles.pick}><small>{leg.market}</small><strong>{leg.selection}</strong>{coupon.band === "WEAK" && leg.warnings.length > 0 ? <span className={styles.legWarnings}>{leg.warnings.map((warning) => <i key={warning}>{warning}</i>)}</span> : null}</div>
-                    {access !== "BASIC" ? <div className={styles.model}><small>Model / Geçmiş</small><strong>%{leg.modelProbability.toFixed(1)} · {leg.historicalHitRate === null ? "—" : `%${leg.historicalHitRate.toFixed(1)}`}</strong><span>{leg.historicalSamples} geçmiş sonuç</span></div> : null}
-                    {access === "ADMIN" || access === "PROFESSIONAL" ? <div className={styles.pro}><small>EV / Değer</small><strong>%{leg.expectedValue.toFixed(1)} · {leg.valueScore.toFixed(0)}/100</strong><span>{leg.bookmakerName} · {leg.bookmakerCount} kaynak</span></div> : null}
+                    <div className={styles.model}><small>Model / Geçmiş</small><strong>%{leg.modelProbability.toFixed(1)} · {leg.historicalHitRate === null ? "—" : `%${leg.historicalHitRate.toFixed(1)}`}</strong><span>{leg.historicalSamples} geçmiş sonuç</span></div>
+                    <div className={styles.pro}><small>EV / Değer</small><strong>%{leg.expectedValue.toFixed(1)} · {leg.valueScore.toFixed(0)}/100</strong><span>{leg.bookmakerName} · {leg.bookmakerCount} kaynak</span></div>
                     <div className={styles.odds}><small>Oran</small><strong>{leg.odds.toFixed(2)}</strong></div>
                   </article>
                 ))}

@@ -329,7 +329,7 @@ export function MemberPredictionsBoard({
   const { t, locale } = useLanguage();
   const matchHref = (matchId: number) => `${matchPathPrefix}/${matchId}${matchQuery}`;
   const now = useMemo(() => new Date(), []);
-  const showOdds = plan !== "BASIC";
+  const showOdds = true;
   const today = todayKey(now);
   const lang = locale === "tr" ? "tr-TR" : "en-GB";
 

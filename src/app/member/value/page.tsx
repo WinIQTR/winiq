@@ -194,7 +194,7 @@ export default async function MemberValuePage() {
     <main className={member.shell}>
       <MemberPortalHeader plan={user.plan} active="value" memberName={user.name} />
       <div className={member.page}>
-        {user.plan === "PROFESSIONAL" ? <MemberShortlistTabs active="value" /> : null}
+        <MemberShortlistTabs active="value" />
         <MemberValueOpportunities opportunities={opportunities} mode={mode} />
       </div>
     </main>

@@ -133,7 +133,7 @@ export default async function MemberMatchDetailPage({
   if (!prediction) notFound();
 
   const tr = (source: string) => translateUiText(source, "tr");
-  const showOdds = user.plan !== "BASIC";
+  const showOdds = true;
 
   const groups = buildBetMarketCatalog({
     matchId: prediction.matchId,

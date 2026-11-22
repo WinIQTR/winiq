@@ -8,21 +8,6 @@ import { BET_MARKET_COUNT } from "@/lib/bet-market-catalog";
 
 import styles from "./landing.module.css";
 
-function IconLayers() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
-      <path
-        d="M12 3.5 3.5 8 12 12.5 20.5 8 12 3.5Z"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinejoin="round"
-      />
-      <path d="M3.5 12.5 12 17l8.5-4.5" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />
-      <path d="M3.5 16.5 12 21l8.5-4.5" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
 function IconBars() {
   return (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
@@ -240,30 +225,16 @@ export default async function HomePage() {
         </aside>
       </section>
 
-      <section className={styles.plans} id="paketler" aria-label="Membership plans">
-        <article className={styles.plan}>
-          <span className={styles.planIcon}>
-            <IconLayers />
-          </span>
-          <small>BASIC</small>
-          <h2>6 markets</h2>
-          <p>Daily predictions and daily coupon summary.</p>
-        </article>
-        <article className={styles.plan} data-tone="analysis">
-          <span className={styles.planIcon}>
-            <IconBars />
-          </span>
-          <small>ANALYSIS</small>
-          <h2>19 markets</h2>
-          <p>Probabilities, model odds, and wider coupons.</p>
-        </article>
+      <section className={styles.plans} id="paketler" aria-label="Membership">
         <article className={styles.plan} data-tone="pro">
           <span className={styles.planIcon}>
             <IconTrend />
           </span>
-          <small>PROFESSIONAL</small>
-          <h2>{BET_MARKET_COUNT} markets</h2>
-          <p>Full catalog, value picks, fixtures, and special list.</p>
+          <small>TEK ÜYELİK</small>
+          <h2>{BET_MARKET_COUNT} markets · full desk</h2>
+          <p>
+            Predictions, value, coupons, results, and match analysis — one fixed membership.
+          </p>
         </article>
       </section>
 

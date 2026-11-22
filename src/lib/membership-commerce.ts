@@ -1,47 +1,90 @@
-import type { MembershipPlanName } from "@/lib/membership-access";
+import {
+  SINGLE_MEMBERSHIP_PLAN,
+  type MembershipPlanName,
+} from "@/lib/membership-access";
 
-export const MEMBERSHIP_PLAN_ORDER: Record<MembershipPlanName, number> = {
-  BASIC: 1,
-  ANALYSIS: 2,
-  PROFESSIONAL: 3,
+export type MembershipDuration = "MONTHLY" | "QUARTERLY" | "YEARLY";
+
+/** List price — single fixed membership (TRY 899 / EUR 14.99). */
+export const SINGLE_MEMBERSHIP_PRICE = {
+  priceTryCents: 89_900,
+  priceEurCents: 1_499,
+} as const;
+
+export const MEMBERSHIP_DURATION_PRICES: Record<
+  MembershipDuration,
+  { priceTryCents: number; priceEurCents: number; months: number; labelTr: string; labelEn: string }
+> = {
+  MONTHLY: {
+    priceTryCents: 89_900,
+    priceEurCents: 1_499,
+    months: 1,
+    labelTr: "1 aylık",
+    labelEn: "1 month",
+  },
+  QUARTERLY: {
+    priceTryCents: 229_900,
+    priceEurCents: 3_799,
+    months: 3,
+    labelTr: "3 aylık",
+    labelEn: "3 months",
+  },
+  YEARLY: {
+    priceTryCents: 599_900,
+    priceEurCents: 9_900,
+    months: 12,
+    labelTr: "12 aylık",
+    labelEn: "12 months",
+  },
 };
 
+export const SINGLE_MEMBERSHIP_FEATURES = [
+  "30 bahis pazarının tamamı",
+  "Günün net tahminleri, value ve kupon merkezi",
+  "Sonuç ÖZET · oran bantları · track-record",
+  "Maç analizi, Elo, gol çizgileri ve market ailesi",
+  "Özel liste / profesyonel veri merkezi",
+  "TR / EN arayüz",
+] as const;
+
+/**
+ * DB still stores one row per enum value. Only PROFESSIONAL is sold;
+ * legacy BASIC/ANALYSIS rows are normalized to the same list price.
+ */
 export const DEFAULT_MEMBERSHIP_PRICES: Record<
   MembershipPlanName,
   { priceTryCents: number; priceEurCents: number }
 > = {
-  BASIC: { priceTryCents: 19_900, priceEurCents: 399 },
-  ANALYSIS: { priceTryCents: 49_900, priceEurCents: 799 },
-  PROFESSIONAL: { priceTryCents: 99_900, priceEurCents: 1_599 },
+  BASIC: { ...SINGLE_MEMBERSHIP_PRICE },
+  ANALYSIS: { ...SINGLE_MEMBERSHIP_PRICE },
+  PROFESSIONAL: { ...SINGLE_MEMBERSHIP_PRICE },
 };
 
 export const MEMBERSHIP_PLAN_FEATURES: Record<MembershipPlanName, readonly string[]> = {
-  BASIC: [
-    "6 temel bahis pazarı",
-    "Günün yayımlanmış tahminleri",
-    "1X2, gol ve karşılıklı gol olasılıkları",
-    "Takım formu ve temel karşılaştırma",
-    "Tahmin seviyesi ve sonuç başarı özeti",
-  ],
-  ANALYSIS: [
-    "Temel paketteki her şey",
-    "19 bahis pazarı ve bütün seçenekler",
-    "Oyuncu, kadro, sakatlık ve hakem analizi",
-    "xG, risk gerekçesi ve alternatif seçimler",
-    "Geçmiş performans, model oranı ve ayrıntılı karşılaştırma",
-  ],
-  PROFESSIONAL: [
-    "Analiz paketindeki her şey",
-    "30 bahis pazarının tamamı",
-    "Toplam gol aralığı, ilk gol ve kesin skor",
-    "Korner aralıkları, kart, ofsayt, şut ve oyuncu golü",
-    "Model oranı, veri kalitesi ve değer farkı",
-    "Fikstür, oyuncular, gol krallığı ve tam analiz",
-  ],
+  BASIC: SINGLE_MEMBERSHIP_FEATURES,
+  ANALYSIS: SINGLE_MEMBERSHIP_FEATURES,
+  PROFESSIONAL: SINGLE_MEMBERSHIP_FEATURES,
 };
 
-export function isHigherPlan(current: MembershipPlanName, requested: MembershipPlanName): boolean {
-  return MEMBERSHIP_PLAN_ORDER[requested] > MEMBERSHIP_PLAN_ORDER[current];
+export const MEMBERSHIP_PLAN_ORDER: Record<MembershipPlanName, number> = {
+  BASIC: 1,
+  ANALYSIS: 1,
+  PROFESSIONAL: 1,
+};
+
+/** Tier upgrades removed — renewals always target the single plan. */
+export function isHigherPlan(
+  _current: MembershipPlanName,
+  _requested: MembershipPlanName,
+): boolean {
+  return false;
+}
+
+export function isRenewalRequestAllowed(
+  _current: MembershipPlanName,
+  requested: MembershipPlanName,
+): boolean {
+  return requested === SINGLE_MEMBERSHIP_PLAN;
 }
 
 export function formatPrice(cents: number, currency: "TRY" | "EUR"): string {
@@ -50,4 +93,8 @@ export function formatPrice(cents: number, currency: "TRY" | "EUR"): string {
     style: "currency",
     currency,
   }).format(cents / 100);
+}
+
+export function getDurationPrice(duration: MembershipDuration) {
+  return MEMBERSHIP_DURATION_PRICES[duration];
 }
