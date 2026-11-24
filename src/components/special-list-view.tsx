@@ -422,7 +422,10 @@ export function SpecialListView({
           {rows.length ? (
             rows.map((item, index) => {
               const key = rowKey(item);
-              const level = confidenceLabel(item.prediction.confidenceScore);
+              // Badge sits under Model Tahmini % — must reflect that selection
+              // probability, not match-level poisson confidenceScore (which can
+              // be ≥80 even when a correct-score pick is only ~10%).
+              const level = confidenceLabel(item.probability);
               const tip = tipsByKey[key] ?? null;
               const kick = formatKickoff(item.prediction.kickoffAt, locale === "en" ? "en" : "tr");
               return (

@@ -71,13 +71,19 @@ export function confidenceTier(score: number): "Güçlü" | "Orta" | "Zayıf" {
   return "Zayıf";
 }
 
-/** Mockup-facing confidence labels for Special List rows. */
+/**
+ * Special List row badge under “Model Tahmini %”.
+ * Thresholds apply to the **selection probability** (0–100), not match-level
+ * `prediction.confidenceScore` (poisson/data-quality 0–100). Using the match
+ * score next to a 9–20% correct-score / HT-FT pick falsely showed “çok yüksek
+ * güven”.
+ */
 export function confidenceLabel(
-  score: number,
+  selectionProbability: number,
 ): "very-high" | "high" | "medium" | "low" {
-  if (score >= 80) return "very-high";
-  if (score >= 70) return "high";
-  if (score >= 55) return "medium";
+  if (selectionProbability >= 80) return "very-high";
+  if (selectionProbability >= 70) return "high";
+  if (selectionProbability >= 55) return "medium";
   return "low";
 }
 
