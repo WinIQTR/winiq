@@ -8,10 +8,11 @@
   display: grid;
   gap: 18px;
   padding: 18px 20px 16px;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--mh-border, #e5e7eb);
   border-radius: 16px;
-  background: #ffffff;
-  box-shadow: 0 2px 12px rgba(15, 35, 70, 0.05);
+  background: var(--mh-card, #ffffff);
+  box-shadow: var(--mh-shadow, 0 2px 12px rgba(15, 35, 70, 0.05));
+  color: var(--mh-text, #0b1f3a);
 }
 
 .headTop {
@@ -604,9 +605,26 @@
 }
 
 .recConf b {
-  color: #16a34a;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
+}
+
+.recConf[data-tone="high"] b,
+.recConf[data-tone="high"] .recConfBar i {
+  color: #16a34a;
+  background: #16a34a;
+}
+
+.recConf[data-tone="medium"] b,
+.recConf[data-tone="medium"] .recConfBar i {
+  color: #ca8a04;
+  background: #ca8a04;
+}
+
+.recConf[data-tone="low"] b,
+.recConf[data-tone="low"] .recConfBar i {
+  color: #dc2626;
+  background: #dc2626;
 }
 
 .recConfBar {

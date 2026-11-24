@@ -1,0 +1,346 @@
+.wrap {
+  display: grid;
+  gap: 16px;
+  padding: 18px 18px 20px;
+  border: 1px solid var(--mh-border, #e5e7eb);
+  border-radius: 16px;
+  background: var(--mh-card, #ffffff);
+  box-shadow: var(--mh-shadow, 0 2px 12px rgba(15, 35, 70, 0.05));
+  color: var(--mh-text, #0b1f3a);
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.title {
+  margin: 0 0 4px;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.lead {
+  margin: 0;
+  color: var(--mh-muted, #6b7280);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.legend {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.legend span::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.legend span[data-tone="high"] {
+  background: rgba(34, 197, 94, 0.12);
+  color: #15803d;
+}
+
+.legend span[data-tone="medium"] {
+  background: rgba(234, 179, 8, 0.14);
+  color: #a16207;
+}
+
+.legend span[data-tone="low"] {
+  background: rgba(239, 68, 68, 0.12);
+  color: #b91c1c;
+}
+
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tabs button {
+  min-height: 34px;
+  border: 1px solid var(--mh-border, #e5e7eb);
+  border-radius: 999px;
+  padding: 0 14px;
+  background: var(--mh-card-soft, #f9fafb);
+  color: var(--mh-muted, #6b7280);
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.tabs button[data-active="true"] {
+  border-color: #16a34a;
+  background: #16a34a;
+  color: #ffffff;
+}
+
+.groups {
+  display: grid;
+  gap: 14px;
+}
+
+.group {
+  display: grid;
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid var(--mh-border, #e5e7eb);
+  border-radius: 14px;
+  background: var(--mh-card-soft, #f8fafc);
+}
+
+.groupHead {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.groupIcon {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: rgba(37, 99, 235, 0.1);
+  color: #2563eb;
+}
+
+.groupHead h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.table {
+  display: grid;
+  gap: 6px;
+}
+
+.cols,
+.rows li {
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1.2fr) minmax(140px, 1.4fr) 72px;
+  gap: 10px;
+  align-items: center;
+}
+
+.cols {
+  padding: 0 10px 4px;
+  color: var(--mh-muted, #6b7280);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.rows {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 6px;
+}
+
+.rows li {
+  padding: 10px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  background: var(--mh-card, #ffffff);
+}
+
+.code {
+  color: var(--mh-muted, #64748b);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.pick {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.prob {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+}
+
+.bar {
+  display: block;
+  height: 8px;
+  border-radius: 999px;
+  background: color-mix(in srgb, currentColor 10%, transparent);
+  overflow: hidden;
+}
+
+.bar i {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: currentColor;
+}
+
+.prob b {
+  min-width: 42px;
+  text-align: right;
+  font-size: 13px;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+}
+
+.odds {
+  justify-self: end;
+  min-width: 56px;
+  padding: 6px 8px;
+  border: 1px solid var(--mh-border, #e5e7eb);
+  border-radius: 10px;
+  background: var(--mh-card, #ffffff);
+  color: var(--mh-text, #0b1f3a);
+  font-size: 13px;
+  font-weight: 800;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Tone colors — same in light & dark */
+.rows li[data-tone="high"],
+.rows li[data-tone="high"] .prob {
+  color: #16a34a;
+}
+
+.rows li[data-tone="medium"],
+.rows li[data-tone="medium"] .prob {
+  color: #ca8a04;
+}
+
+.rows li[data-tone="low"],
+.rows li[data-tone="low"] .prob {
+  color: #dc2626;
+}
+
+.rows li[data-tone="high"] .pick,
+.rows li[data-tone="medium"] .pick,
+.rows li[data-tone="low"] .pick,
+.rows li[data-tone="high"] .code,
+.rows li[data-tone="medium"] .code,
+.rows li[data-tone="low"] .code {
+  color: var(--mh-text, #0b1f3a);
+}
+
+@media (max-width: 760px) {
+  .cols {
+    display: none;
+  }
+
+  .rows li {
+    grid-template-columns: 64px minmax(0, 1fr) auto;
+    grid-template-areas:
+      "code pick odds"
+      "prob prob prob";
+  }
+
+  .code {
+    grid-area: code;
+  }
+
+  .pick {
+    grid-area: pick;
+  }
+
+  .prob {
+    grid-area: prob;
+  }
+
+  .odds {
+    grid-area: odds;
+  }
+}
+
+:global(html[data-theme="dark"]) .wrap {
+  background: #0f1a2c;
+  border-color: rgba(70, 110, 170, 0.35);
+  box-shadow: none;
+}
+
+:global(html[data-theme="dark"]) .group,
+:global(html[data-theme="dark"]) .rows li,
+:global(html[data-theme="dark"]) .odds,
+:global(html[data-theme="dark"]) .tabs button {
+  background: #121f34;
+  border-color: rgba(70, 110, 170, 0.35);
+  color: #c5d5ea;
+}
+
+:global(html[data-theme="dark"]) .tabs button[data-active="true"] {
+  background: #16a34a;
+  border-color: #16a34a;
+  color: #ffffff;
+}
+
+:global(html[data-theme="dark"]) .title,
+:global(html[data-theme="dark"]) .groupHead h3,
+:global(html[data-theme="dark"]) .pick,
+:global(html[data-theme="dark"]) .odds {
+  color: #eef4ff;
+}
+
+:global(html[data-theme="dark"]) .lead,
+:global(html[data-theme="dark"]) .cols,
+:global(html[data-theme="dark"]) .code {
+  color: #8aa3c4;
+}
+
+:global(html[data-theme="dark"]) .groupIcon {
+  background: rgba(59, 130, 246, 0.16);
+  color: #93c5fd;
+}
+
+:global(html[data-theme="dark"]) .legend span[data-tone="high"] {
+  background: rgba(34, 197, 94, 0.18);
+  color: #4ade80;
+}
+
+:global(html[data-theme="dark"]) .legend span[data-tone="medium"] {
+  background: rgba(234, 179, 8, 0.18);
+  color: #facc15;
+}
+
+:global(html[data-theme="dark"]) .legend span[data-tone="low"] {
+  background: rgba(239, 68, 68, 0.18);
+  color: #f87171;
+}
+
+:global(html[data-theme="dark"]) .rows li[data-tone="high"] .pick,
+:global(html[data-theme="dark"]) .rows li[data-tone="medium"] .pick,
+:global(html[data-theme="dark"]) .rows li[data-tone="low"] .pick,
+:global(html[data-theme="dark"]) .rows li[data-tone="high"] .code,
+:global(html[data-theme="dark"]) .rows li[data-tone="medium"] .code,
+:global(html[data-theme="dark"]) .rows li[data-tone="low"] .code {
+  color: #eef4ff;
+}

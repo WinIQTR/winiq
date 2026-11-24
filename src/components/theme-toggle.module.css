@@ -30,6 +30,33 @@
   box-shadow: 0 1px 2px rgba(15, 35, 70, 0.12);
 }
 
+.labeled {
+  gap: 4px;
+  padding: 4px;
+  border-radius: 999px;
+}
+
+.labeled .option {
+  display: inline-flex;
+  width: auto;
+  min-width: 0;
+  height: 34px;
+  padding: 0 12px;
+  gap: 6px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.labeled .option span {
+  line-height: 1;
+}
+
+.labeled .option[data-active="true"] {
+  background: #16a34a;
+  color: #ffffff;
+}
+
 /* Light theme (white topbar / admin chrome) */
 :global(html[data-theme="light"]) .toggle,
 :global(html:not([data-theme])) .toggle {

@@ -293,7 +293,7 @@ export function MemberPortalHeader({
         </nav>
 
         <div className={shell.topActions}>
-          <ThemeToggle />
+          <ThemeToggle labeled />
           <LanguageSwitcher hideLabel />
           <Link
             className={shell.iconBtn}

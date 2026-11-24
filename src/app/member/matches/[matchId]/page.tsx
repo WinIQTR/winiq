@@ -3,15 +3,15 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { BetMarketCatalogPanel } from "@/components/bet-market-catalog-panel";
-import { MemberMarketFamilyTabs } from "@/components/member-market-family-tabs";
+import { MemberMatchMarkets } from "@/components/member-match-markets";
 import { MemberPortalHeader } from "@/components/member-smart-dashboard";
 import member from "@/components/member-smart-dashboard.module.css";
 import { translateUiText } from "@/i18n/dictionaries";
 import { ACTIVE_SEASON_YEAR } from "@/config/season";
 import { buildBetMarketCatalog } from "@/lib/bet-market-catalog";
 import { requireMember } from "@/lib/auth-session";
-import { classifyMarketFamily } from "@/lib/member-market-family";
 import { buildMatchContextSummary } from "@/lib/match-context-summary";
+import { probabilityTone } from "@/lib/probability-tone";
 import { buildMatchFormTip } from "@/lib/member-match-insight";
 import { MEMBERSHIP_PLAN_LABELS } from "@/lib/membership-access";
 import { loadDashboardPredictionSnapshot } from "@/lib/prediction-dashboard-snapshot";
@@ -181,17 +181,6 @@ export default async function MemberMatchDetailPage({
         )
         .sort((a, b) => b.pickScore - a.pickScore)
   ).slice(0, 3);
-
-  const familyPicks = groups.flatMap((group) =>
-    group.options.slice(0, 4).map((option, index) => ({
-      key: `${group.number}-${option.selection}-${index}`,
-      family: classifyMarketFamily(group.title, option.selection),
-      market: group.title,
-      selection: option.selection,
-      probability: option.score,
-      fairOdds: option.fairOdds ?? null,
-    })),
-  );
 
   const pickReasons = (primary?.reasons ?? [])
     .filter((line): line is string => typeof line === "string" && line.trim().length > 6)
@@ -522,9 +511,9 @@ export default async function MemberMatchDetailPage({
                   </div>
                   {showOdds ? (
                     <>
-                      <div className={styles.recConf}>
+                      <div className={styles.recConf} data-tone={probabilityTone(pct)}>
                         <span>
-                          {tr("Confidence")} <b>%{pct.toFixed(0)}</b>
+                          {tr("Model probability")} <b>%{pct.toFixed(0)}</b>
                         </span>
                         <span className={styles.recConfBar} aria-hidden>
                           <i style={{ width: `${Math.max(4, pct)}%` }} />
@@ -547,7 +536,7 @@ export default async function MemberMatchDetailPage({
           </ol>
         </article>
 
-        {familyPicks.length ? <MemberMarketFamilyTabs picks={familyPicks} /> : null}
+        {showOdds ? <MemberMatchMarkets groups={groups} /> : null}
 
         <details className={styles.catalogWrap}>
           <summary className={styles.catalogToggle}>{tr("Show all markets")}</summary>

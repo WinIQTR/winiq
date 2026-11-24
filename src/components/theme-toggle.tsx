@@ -32,13 +32,13 @@ function IconMoon() {
   );
 }
 
-export function ThemeToggle() {
+export function ThemeToggle({ labeled = false }: { labeled?: boolean } = {}) {
   const { theme, setTheme } = useTheme();
   const { t } = useLanguage();
 
   return (
     <div
-      className={styles.toggle}
+      className={labeled ? `${styles.toggle} ${styles.labeled}` : styles.toggle}
       role="group"
       aria-label={t("Appearance")}
       data-no-translate
@@ -48,20 +48,22 @@ export function ThemeToggle() {
         className={styles.option}
         data-active={theme === "light" ? "true" : undefined}
         aria-pressed={theme === "light"}
-        title={t("Light")}
+        title={t("Day")}
         onClick={() => setTheme("light")}
       >
         <IconSun />
+        {labeled ? <span>{t("Day")}</span> : null}
       </button>
       <button
         type="button"
         className={styles.option}
         data-active={theme === "dark" ? "true" : undefined}
         aria-pressed={theme === "dark"}
-        title={t("Dark")}
+        title={t("Night")}
         onClick={() => setTheme("dark")}
       >
         <IconMoon />
+        {labeled ? <span>{t("Night")}</span> : null}
       </button>
     </div>
   );
