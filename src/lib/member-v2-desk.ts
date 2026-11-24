@@ -24,6 +24,8 @@ export type MemberV2TopPick = {
   matchId: number;
   homeTeam: string;
   awayTeam: string;
+  homeTeamLogo: string | null;
+  awayTeamLogo: string | null;
   leagueName: string;
   kickoffIso: string;
   market: string;
@@ -128,6 +130,8 @@ export function buildMemberV2Desk(options: {
       matchId: prediction.matchId,
       homeTeam: prediction.homeTeam,
       awayTeam: prediction.awayTeam,
+      homeTeamLogo: prediction.homeTeamLogo ?? null,
+      awayTeamLogo: prediction.awayTeamLogo ?? null,
       leagueName: prediction.leagueName,
       kickoffIso:
         prediction.kickoffAt instanceof Date
@@ -188,7 +192,9 @@ export function buildMemberV2Desk(options: {
       loggedBeforeKickoffPct: options.loggedBeforeKickoffPct ?? null,
       recentStreakLabel:
         streakKind && streak > 0
-          ? `${streak} ${streakKind === "WON" ? "win" : "loss"} streak`
+          ? streakKind === "WON"
+            ? `${streak} win streak`
+            : `${streak} loss streak`
           : "No streak yet",
       recentHitRate,
       baselineBeat,
