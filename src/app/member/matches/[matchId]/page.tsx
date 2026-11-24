@@ -357,6 +357,8 @@ export default async function MemberMatchDetailPage({
           ) : null}
         </header>
 
+        {showOdds ? <MemberMatchMarkets groups={groups} /> : null}
+
         <section className={styles.metricGrid}>
           <article className={styles.metricCard}>
             <div className={styles.metricHead}>
@@ -535,8 +537,6 @@ export default async function MemberMatchDetailPage({
             })}
           </ol>
         </article>
-
-        {showOdds ? <MemberMatchMarkets groups={groups} /> : null}
 
         <details className={styles.catalogWrap}>
           <summary className={styles.catalogToggle}>{tr("Show all markets")}</summary>

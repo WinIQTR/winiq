@@ -1,25 +1,17 @@
 .wrap {
   display: grid;
-  gap: 16px;
-  padding: 18px 18px 20px;
-  border: 1px solid var(--mh-border, #e5e7eb);
-  border-radius: 16px;
-  background: var(--mh-card, #ffffff);
-  box-shadow: var(--mh-shadow, 0 2px 12px rgba(15, 35, 70, 0.05));
+  gap: 14px;
   color: var(--mh-text, #0b1f3a);
 }
 
 .head {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 14px;
-  flex-wrap: wrap;
+  display: grid;
+  gap: 4px;
 }
 
 .title {
-  margin: 0 0 4px;
-  font-size: 18px;
+  margin: 0;
+  font-size: 20px;
   font-weight: 800;
   letter-spacing: -0.02em;
 }
@@ -28,48 +20,7 @@
   margin: 0;
   color: var(--mh-muted, #6b7280);
   font-size: 13px;
-  line-height: 1.4;
-}
-
-.legend {
-  display: inline-flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  align-items: center;
-}
-
-.legend span {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 4px 10px;
-  border-radius: 999px;
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.02em;
-}
-
-.legend span::before {
-  content: "";
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: currentColor;
-}
-
-.legend span[data-tone="high"] {
-  background: rgba(34, 197, 94, 0.12);
-  color: #15803d;
-}
-
-.legend span[data-tone="medium"] {
-  background: rgba(234, 179, 8, 0.14);
-  color: #a16207;
-}
-
-.legend span[data-tone="low"] {
-  background: rgba(239, 68, 68, 0.12);
-  color: #b91c1c;
+  line-height: 1.45;
 }
 
 .tabs {
@@ -80,11 +31,11 @@
 
 .tabs button {
   min-height: 34px;
-  border: 1px solid var(--mh-border, #e5e7eb);
+  border: 1px solid #bbf7d0;
   border-radius: 999px;
   padding: 0 14px;
-  background: var(--mh-card-soft, #f9fafb);
-  color: var(--mh-muted, #6b7280);
+  background: #ecfdf5;
+  color: #166534;
   font-size: 12px;
   font-weight: 800;
   cursor: pointer;
@@ -96,62 +47,84 @@
   color: #ffffff;
 }
 
+.tabs button[data-active="soft"] {
+  border-color: #86efac;
+  background: #dcfce7;
+  color: #166534;
+}
+
 .groups {
   display: grid;
-  gap: 14px;
+  gap: 12px;
 }
 
 .group {
   display: grid;
-  gap: 10px;
-  padding: 12px;
+  grid-template-columns: minmax(160px, 210px) minmax(0, 1fr);
+  gap: 8px 18px;
+  align-items: start;
+  padding: 16px 18px;
   border: 1px solid var(--mh-border, #e5e7eb);
-  border-radius: 14px;
-  background: var(--mh-card-soft, #f8fafc);
+  border-radius: 16px;
+  background: var(--mh-card, #ffffff);
+  box-shadow: var(--mh-shadow, 0 2px 12px rgba(15, 35, 70, 0.04));
 }
 
-.groupHead {
-  display: flex;
-  align-items: center;
+.side {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr);
   gap: 10px;
+  align-items: start;
+  padding-top: 4px;
 }
 
 .groupIcon {
   display: grid;
   place-items: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
   background: rgba(37, 99, 235, 0.1);
   color: #2563eb;
 }
 
-.groupHead h3 {
-  margin: 0;
-  font-size: 14px;
+.side h3 {
+  margin: 0 0 2px;
+  font-size: 15px;
   font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.side p {
+  margin: 0;
+  color: var(--mh-muted, #6b7280);
+  font-size: 12px;
+  line-height: 1.35;
 }
 
 .table {
   display: grid;
-  gap: 6px;
+  gap: 4px;
+  min-width: 0;
 }
 
 .cols,
 .rows li {
   display: grid;
-  grid-template-columns: 72px minmax(0, 1.2fr) minmax(140px, 1.4fr) 72px;
+  grid-template-columns: 64px minmax(0, 1.15fr) minmax(90px, 1.2fr) 64px 56px;
   gap: 10px;
   align-items: center;
 }
 
 .cols {
-  padding: 0 10px 4px;
-  color: var(--mh-muted, #6b7280);
+  padding: 0 4px 6px;
+  color: var(--mh-muted, #94a3b8);
   font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.colBar {
+  display: block;
 }
 
 .rows {
@@ -159,20 +132,23 @@
   padding: 0;
   list-style: none;
   display: grid;
-  gap: 6px;
+  gap: 2px;
 }
 
 .rows li {
-  padding: 10px;
-  border-radius: 12px;
-  border: 1px solid transparent;
-  background: var(--mh-card, #ffffff);
+  min-height: 36px;
+  padding: 6px 4px;
+  border-top: 1px solid #f1f5f9;
+}
+
+.rows li:first-child {
+  border-top: 0;
 }
 
 .code {
   color: var(--mh-muted, #64748b);
   font-size: 12px;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .pick {
@@ -180,22 +156,16 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  color: var(--mh-text, #0b1f3a);
   font-size: 13px;
-  font-weight: 800;
-}
-
-.prob {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 10px;
-  align-items: center;
+  font-weight: 700;
 }
 
 .bar {
   display: block;
-  height: 8px;
+  height: 7px;
   border-radius: 999px;
-  background: color-mix(in srgb, currentColor 10%, transparent);
+  background: #e8eef5;
   overflow: hidden;
 }
 
@@ -206,63 +176,60 @@
   background: currentColor;
 }
 
-.prob b {
-  min-width: 42px;
-  text-align: right;
+.pct {
+  justify-self: end;
   font-size: 13px;
-  font-weight: 900;
+  font-weight: 800;
   font-variant-numeric: tabular-nums;
 }
 
 .odds {
   justify-self: end;
-  min-width: 56px;
-  padding: 6px 8px;
-  border: 1px solid var(--mh-border, #e5e7eb);
-  border-radius: 10px;
-  background: var(--mh-card, #ffffff);
   color: var(--mh-text, #0b1f3a);
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 800;
-  text-align: center;
   font-variant-numeric: tabular-nums;
 }
 
-/* Tone colors — same in light & dark */
-.rows li[data-tone="high"],
-.rows li[data-tone="high"] .prob {
+/* Favori / orta / düşük — bar + % */
+.rows li[data-tone="high"] .bar,
+.rows li[data-tone="high"] .pct {
   color: #16a34a;
 }
 
-.rows li[data-tone="medium"],
-.rows li[data-tone="medium"] .prob {
+.rows li[data-tone="medium"] .bar,
+.rows li[data-tone="medium"] .pct {
   color: #ca8a04;
 }
 
-.rows li[data-tone="low"],
-.rows li[data-tone="low"] .prob {
+.rows li[data-tone="low"] .bar,
+.rows li[data-tone="low"] .pct {
   color: #dc2626;
 }
 
-.rows li[data-tone="high"] .pick,
-.rows li[data-tone="medium"] .pick,
-.rows li[data-tone="low"] .pick,
-.rows li[data-tone="high"] .code,
-.rows li[data-tone="medium"] .code,
-.rows li[data-tone="low"] .code {
-  color: var(--mh-text, #0b1f3a);
+@media (max-width: 900px) {
+  .group {
+    grid-template-columns: 1fr;
+  }
+
+  .side {
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--mh-border, #eef2f7);
+  }
 }
 
-@media (max-width: 760px) {
+@media (max-width: 640px) {
   .cols {
     display: none;
   }
 
   .rows li {
-    grid-template-columns: 64px minmax(0, 1fr) auto;
+    grid-template-columns: 56px minmax(0, 1fr) auto;
     grid-template-areas:
       "code pick odds"
-      "prob prob prob";
+      "bar bar pct";
+    gap: 6px 8px;
+    padding: 10px 2px;
   }
 
   .code {
@@ -273,8 +240,12 @@
     grid-area: pick;
   }
 
-  .prob {
-    grid-area: prob;
+  .bar {
+    grid-area: bar;
+  }
+
+  .pct {
+    grid-area: pct;
   }
 
   .odds {
@@ -282,19 +253,43 @@
   }
 }
 
-:global(html[data-theme="dark"]) .wrap {
+:global(html[data-theme="dark"]) .group {
   background: #0f1a2c;
   border-color: rgba(70, 110, 170, 0.35);
   box-shadow: none;
 }
 
-:global(html[data-theme="dark"]) .group,
-:global(html[data-theme="dark"]) .rows li,
-:global(html[data-theme="dark"]) .odds,
+:global(html[data-theme="dark"]) .title,
+:global(html[data-theme="dark"]) .side h3,
+:global(html[data-theme="dark"]) .pick,
+:global(html[data-theme="dark"]) .odds {
+  color: #eef4ff;
+}
+
+:global(html[data-theme="dark"]) .lead,
+:global(html[data-theme="dark"]) .side p,
+:global(html[data-theme="dark"]) .cols,
+:global(html[data-theme="dark"]) .code {
+  color: #8aa3c4;
+}
+
+:global(html[data-theme="dark"]) .rows li {
+  border-top-color: rgba(70, 110, 170, 0.22);
+}
+
+:global(html[data-theme="dark"]) .bar {
+  background: rgba(148, 163, 184, 0.18);
+}
+
+:global(html[data-theme="dark"]) .groupIcon {
+  background: rgba(59, 130, 246, 0.16);
+  color: #93c5fd;
+}
+
 :global(html[data-theme="dark"]) .tabs button {
-  background: #121f34;
-  border-color: rgba(70, 110, 170, 0.35);
-  color: #c5d5ea;
+  border-color: rgba(34, 197, 94, 0.35);
+  background: rgba(22, 163, 74, 0.16);
+  color: #86efac;
 }
 
 :global(html[data-theme="dark"]) .tabs button[data-active="true"] {
@@ -303,44 +298,8 @@
   color: #ffffff;
 }
 
-:global(html[data-theme="dark"]) .title,
-:global(html[data-theme="dark"]) .groupHead h3,
-:global(html[data-theme="dark"]) .pick,
-:global(html[data-theme="dark"]) .odds {
-  color: #eef4ff;
-}
-
-:global(html[data-theme="dark"]) .lead,
-:global(html[data-theme="dark"]) .cols,
-:global(html[data-theme="dark"]) .code {
-  color: #8aa3c4;
-}
-
-:global(html[data-theme="dark"]) .groupIcon {
-  background: rgba(59, 130, 246, 0.16);
-  color: #93c5fd;
-}
-
-:global(html[data-theme="dark"]) .legend span[data-tone="high"] {
-  background: rgba(34, 197, 94, 0.18);
-  color: #4ade80;
-}
-
-:global(html[data-theme="dark"]) .legend span[data-tone="medium"] {
-  background: rgba(234, 179, 8, 0.18);
-  color: #facc15;
-}
-
-:global(html[data-theme="dark"]) .legend span[data-tone="low"] {
-  background: rgba(239, 68, 68, 0.18);
-  color: #f87171;
-}
-
-:global(html[data-theme="dark"]) .rows li[data-tone="high"] .pick,
-:global(html[data-theme="dark"]) .rows li[data-tone="medium"] .pick,
-:global(html[data-theme="dark"]) .rows li[data-tone="low"] .pick,
-:global(html[data-theme="dark"]) .rows li[data-tone="high"] .code,
-:global(html[data-theme="dark"]) .rows li[data-tone="medium"] .code,
-:global(html[data-theme="dark"]) .rows li[data-tone="low"] .code {
-  color: #eef4ff;
+:global(html[data-theme="dark"]) .tabs button[data-active="soft"] {
+  background: rgba(22, 163, 74, 0.28);
+  border-color: rgba(74, 222, 128, 0.45);
+  color: #bbf7d0;
 }
