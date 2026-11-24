@@ -2,6 +2,8 @@
 
 import { useEffect } from "react";
 
+import styles from "./error.module.css";
+
 export default function ErrorBoundary({
   error,
   reset,
@@ -10,19 +12,16 @@ export default function ErrorBoundary({
   reset: () => void;
 }) {
   useEffect(() => {
-    // Sunucu tarafı loglara düşsün diye konsola yazıyoruz.
-    // Not: Burada ayrıca bir hata izleme servisine (Sentry vb.) gönderim
-    // yapılmıyor — proje şu an böyle bir entegrasyon içermiyor.
     console.error(error);
   }, [error]);
 
   return (
-    <main className="login-shell">
-      <section className="login-card" aria-live="assertive">
-        <div className="login-mark" data-no-translate>
+    <main className={styles.shell} data-theme="dark">
+      <section className={styles.card} aria-live="assertive">
+        <div className={styles.mark} data-no-translate>
           W
         </div>
-        <p className="member-eyebrow" data-no-translate>
+        <p className={styles.brand} data-no-translate>
           WINIQ
         </p>
         <h1>Bir şeyler ters gitti</h1>
@@ -30,11 +29,7 @@ export default function ErrorBoundary({
           Sayfa yüklenirken beklenmedik bir hata oluştu. Sorun devam ederse
           lütfen daha sonra tekrar deneyin.
         </p>
-        <button
-          type="button"
-          className="primary-button"
-          onClick={reset}
-        >
+        <button type="button" className={styles.retry} onClick={reset}>
           Tekrar dene
         </button>
       </section>

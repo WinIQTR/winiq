@@ -3,17 +3,11 @@
 import { useMemo, useState } from "react";
 
 import { useLanguage } from "@/components/language-provider";
+import type { MemberMarketFamilyPick } from "@/lib/member-market-family";
 
 import styles from "./member-market-family-tabs.module.css";
 
-export type MemberMarketFamilyPick = {
-  key: string;
-  family: "1x2" | "ou" | "btts" | "other";
-  market: string;
-  selection: string;
-  probability?: number | null;
-  fairOdds?: number | null;
-};
+export type { MemberMarketFamilyPick };
 
 export function MemberMarketFamilyTabs({
   picks,
@@ -68,18 +62,4 @@ export function MemberMarketFamilyTabs({
       </ul>
     </section>
   );
-}
-
-export function classifyMarketFamily(
-  market: string,
-  selection: string,
-  key = "",
-): MemberMarketFamilyPick["family"] {
-  const hay = `${market} ${selection} ${key}`.toLowerCase();
-  if (/btts|both teams|karşılıklı/.test(hay)) return "btts";
-  if (/over|under|üst|alt|o\/u|goals/.test(hay)) return "ou";
-  if (/1x2|match result|home|away|draw|beraber|ms|maç sonucu/.test(hay)) {
-    return "1x2";
-  }
-  return "other";
 }

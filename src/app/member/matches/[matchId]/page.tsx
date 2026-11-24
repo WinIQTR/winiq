@@ -3,16 +3,14 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { BetMarketCatalogPanel } from "@/components/bet-market-catalog-panel";
-import {
-  MemberMarketFamilyTabs,
-  classifyMarketFamily,
-} from "@/components/member-market-family-tabs";
+import { MemberMarketFamilyTabs } from "@/components/member-market-family-tabs";
 import { MemberPortalHeader } from "@/components/member-smart-dashboard";
 import member from "@/components/member-smart-dashboard.module.css";
 import { translateUiText } from "@/i18n/dictionaries";
 import { ACTIVE_SEASON_YEAR } from "@/config/season";
 import { buildBetMarketCatalog } from "@/lib/bet-market-catalog";
 import { requireMember } from "@/lib/auth-session";
+import { classifyMarketFamily } from "@/lib/member-market-family";
 import { buildMatchContextSummary } from "@/lib/match-context-summary";
 import { buildMatchFormTip } from "@/lib/member-match-insight";
 import { MEMBERSHIP_PLAN_LABELS } from "@/lib/membership-access";
