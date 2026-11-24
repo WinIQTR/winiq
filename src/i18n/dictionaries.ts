@@ -617,6 +617,7 @@ entries.push(
   { en: "Minimum model %", tr: "Minimum model %" },
   { en: "Odds range", tr: "Oran aralığı" },
   { en: "Under 1.20", tr: "1.20 altı" },
+  { en: "1.10+ – 1.20", tr: "1.10+ – 1.20" },
   { en: "1.20–1.60", tr: "1.20–1.60" },
   { en: "1.60–1.90", tr: "1.60–1.90" },
   { en: "1.90–2.50", tr: "1.90–2.50" },

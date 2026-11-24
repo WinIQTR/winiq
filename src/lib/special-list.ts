@@ -257,6 +257,7 @@ export function buildSpecialCandidates(
   return candidates.filter(
     (row) =>
       row.probability > 0 &&
+      passesSpecialOddsFloor(row.fairOdds) &&
       (minProb == null || row.probability >= minProb) &&
       (maxProb == null || row.probability <= maxProb),
   );
@@ -266,16 +267,27 @@ export function buildSpecialCandidates(
 export const SPECIAL_PROB_MIN_CHIPS = [50, 60, 70, 80, 90, 100] as const;
 export type SpecialProbMinChip = (typeof SPECIAL_PROB_MIN_CHIPS)[number];
 
+/**
+ * Special List floor: only show fair odds strictly after 1.10
+ * (excludes 1.01 … 1.10). Applies even when the odds chip is “All”.
+ */
+export const SPECIAL_ODDS_FLOOR_EXCLUSIVE = 1.1;
+
 export const SPECIAL_ODDS_BANDS = [
-  { id: "lt120", min: null, max: 1.2 },
-  { id: "120_160", min: 1.2, max: 1.6 },
-  { id: "160_190", min: 1.6, max: 1.9 },
-  { id: "190_250", min: 1.9, max: 2.5 },
-  { id: "250_300", min: 2.5, max: 3.0 },
-  { id: "300p", min: 3.0, max: null },
+  /** >1.10 and <1.20 (id kept as lt120 for existing query URLs). */
+  { id: "lt120", min: 1.1, max: 1.2, minExclusive: true },
+  { id: "120_160", min: 1.2, max: 1.6, minExclusive: false },
+  { id: "160_190", min: 1.6, max: 1.9, minExclusive: false },
+  { id: "190_250", min: 1.9, max: 2.5, minExclusive: false },
+  { id: "250_300", min: 2.5, max: 3.0, minExclusive: false },
+  { id: "300p", min: 3.0, max: null, minExclusive: false },
 ] as const;
 
 export type SpecialOddsBandId = (typeof SPECIAL_ODDS_BANDS)[number]["id"];
+
+export function passesSpecialOddsFloor(fairOdds: number): boolean {
+  return Number.isFinite(fairOdds) && fairOdds > SPECIAL_ODDS_FLOOR_EXCLUSIVE;
+}
 
 export function parseSpecialProbMin(value?: string | null): SpecialProbMinChip | null {
   const n = Number(value);
@@ -292,10 +304,15 @@ export function parseSpecialOddsBand(value?: string | null): SpecialOddsBandId |
 
 function matchesOddsBand(fairOdds: number, bandId: SpecialOddsBandId): boolean {
   const band = SPECIAL_ODDS_BANDS.find((item) => item.id === bandId);
-  if (!band || !Number.isFinite(fairOdds) || fairOdds <= 0) return false;
-  if (band.min == null) return fairOdds < (band.max as number);
-  if (band.max == null) return fairOdds >= band.min;
-  return fairOdds >= band.min && fairOdds < band.max;
+  if (!band || !passesSpecialOddsFloor(fairOdds)) return false;
+  const aboveMin =
+    band.min == null
+      ? true
+      : band.minExclusive
+        ? fairOdds > band.min
+        : fairOdds >= band.min;
+  const belowMax = band.max == null ? true : fairOdds < band.max;
+  return aboveMin && belowMax;
 }
 
 /** Apply chip filters after candidates are built. */
@@ -309,6 +326,7 @@ export function applySpecialChipFilters(
   const probMin = options.probMin ?? null;
   const oddsBand = options.oddsBand ?? null;
   return candidates.filter((row) => {
+    if (!passesSpecialOddsFloor(row.fairOdds)) return false;
     if (probMin != null && row.probability < probMin) return false;
     if (oddsBand != null && !matchesOddsBand(row.fairOdds, oddsBand)) return false;
     return true;

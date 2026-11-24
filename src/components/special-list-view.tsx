@@ -530,7 +530,7 @@ export function buildSpecialListLabels(_locale: "tr" | "en" = "en"): SpecialList
     oddsRange: "Odds range",
     filterAll: "All",
     probAtLeast: (n) => `≥${n}%`,
-    oddsLt120: "Under 1.20",
+    oddsLt120: "1.10+ – 1.20",
     odds120160: "1.20–1.60",
     odds160190: "1.60–1.90",
     odds190250: "1.90–2.50",
