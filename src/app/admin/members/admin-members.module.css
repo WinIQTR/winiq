@@ -20,12 +20,12 @@
 .priceGrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
 .priceCard { display: grid; gap: 10px; padding: 15px; border: 1px solid #243a58; border-radius: 13px; background: #0b192d; }
 .priceCard label, .requestForm label { display: grid; gap: 6px; color: #9fb8d8; font-size: 12px; font-weight: 800; }
-.priceCard input, .requestForm input { min-height: 42px; padding: 0 11px; border: 1px solid #2b4262; border-radius: 9px; background: #09172a; color: white; }
+.priceCard input, .requestForm input, .requestForm select { min-height: 42px; padding: 0 11px; border: 1px solid #2b4262; border-radius: 9px; background: #09172a; color: white; }
 .priceCard button, .requestForm button { min-height: 42px; padding: 0 14px; border: 0; border-radius: 9px; background: #2864e8; color: white; font-weight: 800; cursor: pointer; }
 .requestList { display: grid; gap: 12px; }
 .requestCard { display: grid; grid-template-columns: minmax(220px, .8fr) 2fr; gap: 15px; padding: 17px; border: 1px solid #284263; border-radius: 14px; background: #0b192d; }
 .requestCard p { margin: 7px 0 0; }
-.requestForm { display: grid; grid-template-columns: 1fr 1fr auto auto auto; align-items: end; gap: 9px; }
+.requestForm { display: grid; grid-template-columns: 0.9fr 1fr 1fr auto auto auto; align-items: end; gap: 9px; }
 .requestForm button:nth-of-type(2) { background: #31445e; }
 .requestForm .rejectButton { background: #6b2732; }
 @media (max-width: 900px) { .createForm, .accessForm { grid-template-columns: 1fr 1fr; } }

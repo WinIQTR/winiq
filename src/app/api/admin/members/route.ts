@@ -4,9 +4,15 @@ import { hashPassword } from "@/lib/auth-password";
 import { getCurrentUser } from "@/lib/auth-session";
 import { prisma } from "@/lib/prisma";
 import { MEMBERSHIP_PLAN_LABELS } from "@/lib/membership-access";
+import {
+  extendMembershipEndsAt,
+  formatMembershipEndsAtInput,
+  type MembershipDuration,
+} from "@/lib/membership-commerce";
 
 const PLANS = ["BASIC", "ANALYSIS", "PROFESSIONAL"] as const;
 const STATUSES = ["ACTIVE", "SUSPENDED"] as const;
+const DURATIONS = ["MONTHLY", "QUARTERLY", "YEARLY"] as const;
 
 function text(value: unknown): string {
   return typeof value === "string" ? value.trim() : "";
@@ -117,6 +123,34 @@ export async function PATCH(request: NextRequest) {
     return NextResponse.json({
       success: true,
       message: `Üyelik ${MEMBERSHIP_PLAN_LABELS[plan]} olarak kaydedildi. Doğru paketin kesin uygulanması için üyenin açık oturumları kapatıldı.`,
+    });
+  }
+
+  if (action === "EXTEND_DURATION") {
+    const duration = DURATIONS.find(
+      (item) => item === text(body?.duration).toUpperCase(),
+    ) as MembershipDuration | undefined;
+    if (!duration) {
+      return NextResponse.json(
+        { success: false, message: "Süre MONTHLY / QUARTERLY / YEARLY olmalı." },
+        { status: 400 },
+      );
+    }
+
+    const membershipEndsAt = extendMembershipEndsAt(member.membershipEndsAt, duration);
+    await prisma.appUser.update({
+      where: { id: userId },
+      data: {
+        plan: "PROFESSIONAL",
+        status: "ACTIVE",
+        membershipEndsAt,
+      },
+    });
+
+    return NextResponse.json({
+      success: true,
+      message: `Üyelik ${duration} (+${formatMembershipEndsAtInput(membershipEndsAt)} bitiş) uzatıldı.`,
+      membershipEndsAt: membershipEndsAt.toISOString(),
     });
   }
 

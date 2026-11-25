@@ -132,3 +132,47 @@ export function formatPrice(cents: number, currency: "TRY" | "EUR"): string {
 export function getDurationPrice(duration: MembershipDuration) {
   return MEMBERSHIP_DURATION_PRICES[duration];
 }
+
+export function monthsForDuration(duration: MembershipDuration): number {
+  return MEMBERSHIP_DURATION_PRICES[duration].months;
+}
+
+/** Parse RENEW MONTHLY / QUARTERLY / YEARLY from memberNote (upgrade inbox). */
+export function parseDurationFromNote(
+  note: string | null | undefined,
+): MembershipDuration | null {
+  if (!note) return null;
+  const match = note.toUpperCase().match(/\b(MONTHLY|QUARTERLY|YEARLY)\b/);
+  if (!match) return null;
+  return match[1] as MembershipDuration;
+}
+
+/**
+ * Extend membership from the later of now / current end by N months.
+ * Date-only (UTC noon) keeps admin date inputs stable across TZ.
+ */
+export function extendMembershipEndsAt(
+  currentEndsAt: Date | string | null | undefined,
+  duration: MembershipDuration,
+  now: Date = new Date(),
+): Date {
+  const months = monthsForDuration(duration);
+  const current =
+    currentEndsAt == null
+      ? null
+      : currentEndsAt instanceof Date
+        ? currentEndsAt
+        : new Date(currentEndsAt);
+  const baseMs =
+    current && !Number.isNaN(current.getTime()) && current.getTime() > now.getTime()
+      ? current.getTime()
+      : now.getTime();
+  const next = new Date(baseMs);
+  next.setUTCMonth(next.getUTCMonth() + months);
+  next.setUTCHours(12, 0, 0, 0);
+  return next;
+}
+
+export function formatMembershipEndsAtInput(date: Date): string {
+  return date.toISOString().slice(0, 10);
+}

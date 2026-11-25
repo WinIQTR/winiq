@@ -71,14 +71,23 @@ export function AdminUpgradeInbox({ upgradeRequests }: { upgradeRequests: Upgrad
                 }}
               >
                 <label>
-                  Yeni bitiş tarihi
-                  <input name="membershipEndsAt" type="date" required />
+                  Süre (tek tık)
+                  <select name="duration" defaultValue="">
+                    <option value="">Not’tan / tarih</option>
+                    <option value="MONTHLY">+1 ay</option>
+                    <option value="QUARTERLY">+3 ay</option>
+                    <option value="YEARLY">+12 ay</option>
+                  </select>
+                </label>
+                <label>
+                  Yeni bitiş tarihi (opsiyonel)
+                  <input name="membershipEndsAt" type="date" />
                 </label>
                 <label>
                   Yönetici notu
                   <input name="adminNote" maxLength={500} />
                 </label>
-                <button disabled={busy}>Ödemeyi onayla ve yükselt</button>
+                <button disabled={busy}>Ödemeyi onayla</button>
                 <button
                   type="button"
                   disabled={busy}

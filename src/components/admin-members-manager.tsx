@@ -227,27 +227,31 @@ export function AdminMembersManager({ members, upgradeRequests, prices, paymentS
                 <button disabled={busy}>Kaydet</button>
               </form>
               <div className={styles.securityActions}>
-                <button
-                  type="button"
-                  disabled={busy}
-                  onClick={() => {
-                    const base = member.membershipEndsAt ? new Date(member.membershipEndsAt) : new Date();
-                    if (base.getTime() < Date.now()) base.setTime(Date.now());
-                    base.setDate(base.getDate() + 30);
-                    void send("PATCH", {
-                      userId: member.id,
-                      action: "UPDATE_ACCESS",
-                      plan: member.plan,
-                      status: member.status,
-                      membershipEndsAt: base.toISOString().slice(0, 10),
-                    }).then((result) => {
-                      setMessage(result.message);
-                      if (result.success) router.refresh();
-                    });
-                  }}
-                >
-                  +30 gün uzat
-                </button>
+                {([
+                  ["MONTHLY", "+1 ay"],
+                  ["QUARTERLY", "+3 ay"],
+                  ["YEARLY", "+12 ay"],
+                ] as const).map(([duration, label]) => (
+                  <button
+                    key={duration}
+                    type="button"
+                    disabled={busy}
+                    onClick={() => {
+                      setBusy(true);
+                      void send("PATCH", {
+                        userId: member.id,
+                        action: "EXTEND_DURATION",
+                        duration,
+                      }).then((result) => {
+                        setMessage(result.message);
+                        setBusy(false);
+                        if (result.success) router.refresh();
+                      });
+                    }}
+                  >
+                    {label}
+                  </button>
+                ))}
                 <input id={`password-${member.id}`} type="password" placeholder="Yeni şifre (12+ karakter)" minLength={12} />
                 <button disabled={busy} onClick={() => {
                   const input = document.getElementById(`password-${member.id}`) as HTMLInputElement | null;
