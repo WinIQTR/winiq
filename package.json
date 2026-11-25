@@ -48,6 +48,7 @@
     "notifications:membership-expiry": "tsx scripts/deliver-membership-expiry-reminders.ts",
     "notifications:daily-net-three": "tsx scripts/deliver-daily-net-three.ts",
     "check:daily-ops": "tsx scripts/check-daily-ops-checklist.ts",
+    "verify:daily-notify": "tsx scripts/verify-daily-notify-steps.ts",
     "check:legacy-membership-enum": "tsx scripts/check-legacy-membership-enum.ts",
     "test:notification-delivery-v4": "tsx scripts/test-production-notification-delivery.ts",
     "check:deployment-v4": "tsx scripts/check-production-deployment-gate.ts",

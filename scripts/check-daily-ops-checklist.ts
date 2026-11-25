@@ -9,10 +9,12 @@ async function main(): Promise<void> {
   console.log("\nDAILY OPS CHECKLIST\n");
   const checklist = await buildDailyOpsChecklist();
   const path = await writeDailyOpsChecklist(checklist);
-  console.log(`Overall: ${checklist.overall}`);
+  console.log(`Overall (non-payment): ${checklist.overall}`);
+  console.log(`Payment (deferred): ${checklist.paymentOverall}`);
   console.log(`Wrote: ${path}`);
   for (const item of checklist.items) {
-    console.log(`- [${item.tone}] ${item.label}: ${item.detail}`);
+    const tag = item.deferred ? `DEFER:${item.tone}` : item.tone;
+    console.log(`- [${tag}] ${item.label}: ${item.detail}`);
   }
   if (checklist.overall === "RED") process.exitCode = 2;
 }

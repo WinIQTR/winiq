@@ -200,6 +200,8 @@ export async function deliverDailyNetThree(
     }
   }
 
+  // Mark the Istanbul day as processed even with 0 opted-in recipients
+  // so the ops checklist can go green after a successful cron pass.
   if (!dryRun) {
     await saveSentIds(path, already);
   }

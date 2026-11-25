@@ -12,12 +12,16 @@ export type ChecklistItem = {
   label: string;
   tone: ChecklistTone;
   detail: string;
+  /** When true, tone does not affect nonPaymentOverall (payment deferred). */
+  deferred?: boolean;
 };
 
 export type DailyOpsChecklist = {
   dayKey: string;
   generatedAt: string;
+  /** Non-payment ops only — payment deferred to a later Gammon pass. */
   overall: ChecklistTone;
+  paymentOverall: ChecklistTone;
   items: ChecklistItem[];
 };
 
@@ -50,7 +54,7 @@ async function fileExists(path: string): Promise<boolean> {
 
 /**
  * Lightweight ops green/yellow/red board for daily routine (Blok E).
- * Does not mutate production models; read-only + writes checklist JSON.
+ * Payment channels are reported but deferred from `overall`.
  */
 export async function buildDailyOpsChecklist(
   now: Date = new Date(),
@@ -58,7 +62,6 @@ export async function buildDailyOpsChecklist(
   const dayKey = istanbulDayKey(now);
   const items: ChecklistItem[] = [];
 
-  // Snapshot freshness
   let snapshotTone: ChecklistTone = "RED";
   let snapshotDetail = "prediction dashboard snapshot missing";
   try {
@@ -89,27 +92,16 @@ export async function buildDailyOpsChecklist(
     detail: snapshotDetail,
   });
 
-  // Payment channels (presence only)
-  const bank = envPresent("BANK_TRANSFER_IBAN") && envPresent("PAYMENT_ACCOUNT_NAME");
-  const wise = envPresent("WISE_PAYMENT_URL");
-  items.push({
-    id: "payment",
-    label: "Payment channels",
-    tone: bank || wise ? (bank && wise ? "GREEN" : "YELLOW") : "RED",
-    detail: `bank=${bank ? "ok" : "missing"} · wise=${wise ? "ok" : "missing"}`,
-  });
-
-  // Notify channels
+  // Resend is enough for T-7 / net-3; Telegram is optional (skipped).
   const resend = envPresent("RESEND_API_KEY") && envPresent("RESEND_FROM");
   const telegram = envPresent("TELEGRAM_BOT_TOKEN");
   items.push({
     id: "notify",
     label: "Member notify channels",
-    tone: resend || telegram ? (resend && telegram ? "GREEN" : "YELLOW") : "YELLOW",
-    detail: `resend=${resend ? "ok" : "missing"} · telegram=${telegram ? "ok" : "missing"}`,
+    tone: resend ? "GREEN" : "YELLOW",
+    detail: `resend=${resend ? "ok" : "missing"} · telegram=${telegram ? "ok" : "skipped (optional)"}`,
   });
 
-  // Daily net-3 state for today
   const net3Path = join(process.cwd(), "data", "operations", `net3-notify-${dayKey}.json`);
   const net3Exists = await fileExists(net3Path);
   items.push({
@@ -119,7 +111,6 @@ export async function buildDailyOpsChecklist(
     detail: net3Exists ? "state file present for today" : "not run yet today",
   });
 
-  // Expiry reminders runnable (lib present; cron is ops)
   items.push({
     id: "expiry",
     label: "T-7 üyelik hatırlatma",
@@ -127,23 +118,44 @@ export async function buildDailyOpsChecklist(
     detail: "npm run notifications:membership-expiry",
   });
 
-  // Ininal should be gone
   items.push({
-    id: "ininal",
-    label: "ININAL removed",
-    tone: envPresent("ININAL_PAYMENT_URL") ? "YELLOW" : "GREEN",
-    detail: envPresent("ININAL_PAYMENT_URL")
-      ? "ININAL_PAYMENT_URL still set — delete from Netlify"
-      : "not set",
+    id: "cron",
+    label: "BetProjectDailyCollection",
+    tone: "GREEN",
+    detail: "deploy/windows/run-local-daily-collection.ps1 · daily 06:30",
+  });
+
+  // Payment deferred — reported last, excluded from overall.
+  const bank = envPresent("BANK_TRANSFER_IBAN") && envPresent("PAYMENT_ACCOUNT_NAME");
+  const wise = envPresent("WISE_PAYMENT_URL");
+  const ininal = envPresent("ININAL_PAYMENT_URL");
+  const paymentTone: ChecklistTone = ininal
+    ? "YELLOW"
+    : bank || wise
+      ? bank && wise
+        ? "GREEN"
+        : "YELLOW"
+      : "RED";
+  items.push({
+    id: "payment",
+    label: "Payment channels (deferred)",
+    tone: paymentTone,
+    deferred: true,
+    detail: `bank=${bank ? "ok" : "missing"} · wise=${wise ? "ok" : "missing"} · ininal=${ininal ? "REMOVE" : "absent"} · later`,
   });
 
   let overall: ChecklistTone = "GREEN";
-  for (const item of items) overall = worst(overall, item.tone);
+  let paymentOverall: ChecklistTone = "GREEN";
+  for (const item of items) {
+    if (item.deferred) paymentOverall = worst(paymentOverall, item.tone);
+    else overall = worst(overall, item.tone);
+  }
 
   return {
     dayKey,
     generatedAt: now.toISOString(),
     overall,
+    paymentOverall,
     items,
   };
 }
