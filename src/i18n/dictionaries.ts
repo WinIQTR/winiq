@@ -561,6 +561,70 @@ entries.push(
     tr: "Bilgi amaçlıdır; kazanç garantisi sunulmaz.",
   },
   {
+    en: "WINIQ provides analysis only; there is no profit guarantee. Betting decisions are yours.",
+    tr: "WINIQ yalnızca analiz ve bilgilendirme sunar; kazanç garantisi yoktur. Bahis kararları size aittir.",
+  },
+  {
+    en: "Public results",
+    tr: "Herkese açık sonuçlar",
+  },
+  {
+    en: "Settled pick summary",
+    tr: "Settled seçim özeti",
+  },
+  {
+    en: "Settled pick summary →",
+    tr: "Settled seçim özeti →",
+  },
+  {
+    en: "PUBLIC TRACK RECORD",
+    tr: "HERKESE AÇIK TRACK RECORD",
+  },
+  {
+    en: "Aggregate hit rate from published Smart Picks. Voids are shown separately and are not counted in the hit-rate denominator. Per-match picks stay behind membership.",
+    tr: "Yayımlanmış Smart Pick’lerin toplam isabet oranı. Void’ler ayrı gösterilir ve isabet paydasına girmez. Maç bazlı seçimler üyelik arkasındadır.",
+  },
+  {
+    en: "Hit rate",
+    tr: "İsabet oranı",
+  },
+  {
+    en: "Excluded from hit rate",
+    tr: "İsabet oranına dahil değil",
+  },
+  {
+    en: "Odds missing",
+    tr: "Oranı yok",
+  },
+  {
+    en: "Settled rows outside 1.10+ bands",
+    tr: "1.10+ bant dışı settled kayıtlar",
+  },
+  {
+    en: "By strength",
+    tr: "Güce göre",
+  },
+  {
+    en: "By odds band",
+    tr: "Oran bandına göre",
+  },
+  {
+    en: "Disclaimer",
+    tr: "Sorumluluk / bilgilendirme",
+  },
+  {
+    en: "Membership unlocks model probabilities, match summaries, and a settled hit-rate overview. This is not an investment product, gambling operator, or guaranteed tip service.",
+    tr: "Üyelik; model olasılıkları, maç özetleri ve geçmiş isabet ÖZET’ine erişim sağlar. Bu bir yatırım, kumar işletmesi veya “garanti kupon” hizmeti değildir.",
+  },
+  {
+    en: "Hit rates reflect past settled records and do not guarantee future outcomes. Voids / postponed matches are shown separately from the hit-rate denominator.",
+    tr: "İsabet oranları geçmiş settled kayıtlara dayanır; gelecek sonuçları garanti etmez. Void / ertelenen maçlar isabet hesabından ayrı gösterilir.",
+  },
+  {
+    en: "Not intended for users under 18. Follow local laws and your own bankroll limits.",
+    tr: "18 yaş altı kullanıma uygun değildir. Yasalara ve kendi bütçe sınırlarınıza uygun hareket edin.",
+  },
+  {
     en: "Registrations open with administrator approval.",
     tr: "Kayıtlar yönetici onayıyla açılır.",
   },

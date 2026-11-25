@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { getCurrentUser } from "@/lib/auth-session";
 import { BET_MARKET_COUNT } from "@/lib/bet-market-catalog";
+import { LEGAL_DISCLAIMER_EN } from "@/lib/legal-disclaimer";
 
 import styles from "./landing.module.css";
 
@@ -135,9 +136,9 @@ export default async function HomePage() {
             <Link className={styles.ctaPrimary} href="/login">
               Sign in →
             </Link>
-            <a className={styles.ctaSecondary} href="#paketler">
-              See plans
-            </a>
+            <Link className={styles.ctaSecondary} href="/sonuc">
+              Public results
+            </Link>
           </div>
         </div>
 
@@ -244,8 +245,11 @@ export default async function HomePage() {
         </b>
         <span className={styles.footerNote}>
           <IconInfo />
-          For information only; no profit guarantee.
+          {LEGAL_DISCLAIMER_EN.short}
         </span>
+        <Link className={styles.footerLink} href="/sonuc">
+          Settled pick summary →
+        </Link>
         <span className={styles.footerGuard}>
           <IconShield />
           Registrations open with administrator approval.
