@@ -2,7 +2,7 @@
 
 import { FormEvent, useEffect, useState } from "react";
 
-import styles from "@/components/member-smart-dashboard.module.css";
+import shell from "@/components/member-smart-dashboard.module.css";
 
 type Settings = {
   notifyEmailEnabled: boolean;
@@ -13,8 +13,12 @@ type Settings = {
 
 export function MemberNotificationSettings({
   initial,
+  className,
+  variant = "default",
 }: {
   initial: Settings;
+  className?: string;
+  variant?: "default" | "desk";
 }) {
   const [settings, setSettings] = useState(initial);
   const [message, setMessage] = useState("");
@@ -42,8 +46,55 @@ export function MemberNotificationSettings({
     setBusy(false);
   }
 
+  if (variant === "desk") {
+    return (
+      <form className={className} id="bildirimler" onSubmit={onSubmit}>
+        <label>
+          <input
+            type="checkbox"
+            checked={settings.notifyEmailEnabled}
+            onChange={(event) =>
+              setSettings((prev) => ({ ...prev, notifyEmailEnabled: event.target.checked }))
+            }
+          />
+          E-posta bildirimi
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            checked={settings.notifyTelegramEnabled}
+            onChange={(event) =>
+              setSettings((prev) => ({
+                ...prev,
+                notifyTelegramEnabled: event.target.checked,
+              }))
+            }
+          />
+          Telegram bildirimi
+        </label>
+        <label className="field">
+          <span>Telegram kullanıcı adı</span>
+          <input
+            type="text"
+            value={settings.telegramHandle}
+            onChange={(event) =>
+              setSettings((prev) => ({ ...prev, telegramHandle: event.target.value }))
+            }
+            placeholder="@kullanici"
+            maxLength={64}
+            disabled={!settings.notifyTelegramEnabled}
+          />
+        </label>
+        <button type="submit" disabled={busy}>
+          {busy ? "Kaydediliyor…" : "Tercihleri kaydet"}
+        </button>
+        {message ? <span data-status>{message}</span> : null}
+      </form>
+    );
+  }
+
   return (
-    <form className={styles.planChip} id="bildirimler" onSubmit={onSubmit}>
+    <form className={className ?? shell.planChip} id="bildirimler" onSubmit={onSubmit}>
       <small>BİLDİRİMLER</small>
       <strong>Günün güçlü seçimleri</strong>
       <span style={{ color: "#8ea4b9", fontSize: 12 }}>

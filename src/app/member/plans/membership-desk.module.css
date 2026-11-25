@@ -1,0 +1,631 @@
+.desk {
+  display: grid;
+  gap: 18px;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding-bottom: 36px;
+  color: var(--mh-text, #eef4ff);
+}
+
+.hero {
+  display: grid;
+  gap: 6px;
+  text-align: center;
+  padding: 8px 0 4px;
+}
+
+.eyebrow {
+  margin: 0;
+  color: #60a5fa;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  margin: 0;
+  color: #f8fbff;
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+}
+
+.hero p {
+  margin: 0;
+  color: #8aa3c4;
+  font-size: 15px;
+}
+
+.statusBar {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  border: 1px solid rgba(70, 110, 170, 0.4);
+  border-radius: 999px;
+  background: rgba(8, 16, 30, 0.88);
+  overflow: hidden;
+}
+
+.statusItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 54px;
+  padding: 10px 16px;
+  border-right: 1px solid rgba(70, 110, 170, 0.28);
+  color: #c5d5ea;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.statusItem:last-child {
+  border-right: 0;
+}
+
+.statusItem[data-tone="green"] {
+  color: #4ade80;
+}
+
+.statusItem b {
+  color: #4ade80;
+  font-weight: 900;
+}
+
+.statusIcon {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(37, 99, 235, 0.16);
+  color: #60a5fa;
+  flex-shrink: 0;
+}
+
+.statusItem[data-tone="green"] .statusIcon {
+  background: rgba(34, 197, 94, 0.16);
+  color: #4ade80;
+}
+
+.banner {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) 120px;
+  gap: 18px;
+  align-items: center;
+  padding: 16px 20px;
+  border: 1px solid rgba(53, 217, 138, 0.28);
+  border-radius: 16px;
+  background:
+    radial-gradient(circle at 100% 50%, rgba(53, 217, 138, 0.12), transparent 42%),
+    #0b1628;
+  box-shadow: 0 0 0 1px rgba(53, 217, 138, 0.06), 0 12px 40px rgba(0, 0, 0, 0.25);
+}
+
+.bannerLeft small {
+  display: block;
+  color: #4ade80;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
+.bannerLeft strong {
+  display: block;
+  margin-top: 4px;
+  color: #f8fbff;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.bannerMid {
+  margin: 0;
+  padding-left: 18px;
+  border-left: 1px solid rgba(70, 110, 170, 0.35);
+  color: #9eb6d4;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.spark {
+  height: 42px;
+  width: 100%;
+  color: #35d98a;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.65fr) minmax(280px, 0.9fr);
+  gap: 16px;
+  align-items: start;
+}
+
+.planCard {
+  display: grid;
+  gap: 18px;
+  padding: 22px;
+  border: 1px solid rgba(45, 212, 191, 0.28);
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at 100% 0, rgba(53, 217, 138, 0.08), transparent 40%),
+    #0d1b30;
+}
+
+.planTop {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.planTop small {
+  display: block;
+  color: #60a5fa;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.planTop h2 {
+  margin: 4px 0 0;
+  color: #f8fbff;
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+.launchBadge {
+  display: inline-flex;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(139, 124, 255, 0.18);
+  color: #c4b5fd;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+}
+
+.priceRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.listPrice {
+  color: #7f93ad;
+  font-size: 15px;
+  text-decoration: line-through;
+}
+
+.priceSep {
+  width: 1px;
+  height: 18px;
+  background: rgba(70, 110, 170, 0.45);
+}
+
+.salePrice {
+  color: #f8fbff;
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+.salePrice small {
+  font-size: 14px;
+  font-weight: 700;
+  opacity: 0.7;
+}
+
+.featuresTitle {
+  margin: 0;
+  color: #c5d5ea;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.features li {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr) 20px;
+  gap: 8px;
+  align-items: center;
+  min-height: 44px;
+  padding: 8px 10px;
+  border: 1px solid rgba(70, 110, 170, 0.28);
+  border-radius: 12px;
+  background: rgba(8, 16, 30, 0.55);
+  color: #d7e7ff;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.featureIcon,
+.check {
+  display: grid;
+  place-items: center;
+  color: #8aa3c4;
+}
+
+.check {
+  color: #4ade80;
+}
+
+.durationsTitle {
+  margin: 0;
+  color: #c5d5ea;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.durationTable {
+  display: grid;
+  grid-template-columns: 88px repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  align-items: stretch;
+}
+
+.durationLabelCol,
+.durationCol {
+  display: grid;
+  gap: 8px;
+}
+
+.durationLabelCol span,
+.durationCol span {
+  display: flex;
+  align-items: center;
+  min-height: 36px;
+  color: #8aa3c4;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.durationCol {
+  padding: 10px;
+  border: 1px solid rgba(70, 110, 170, 0.3);
+  border-radius: 14px;
+  background: rgba(8, 16, 30, 0.45);
+  text-align: center;
+}
+
+.durationCol[data-active="true"] {
+  border-color: #3b82f6;
+  background: rgba(37, 99, 235, 0.12);
+  box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.35), 0 0 24px rgba(37, 99, 235, 0.18);
+}
+
+.durationCol strong {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 36px;
+  color: #f8fbff;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.durationCol em {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 36px;
+  color: #9eb6d4;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+}
+
+.advantage {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 28px;
+  padding: 0 8px;
+  border-radius: 999px;
+  background: rgba(34, 197, 94, 0.14);
+  color: #4ade80;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.side {
+  display: grid;
+  gap: 12px;
+}
+
+.sideCard {
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid rgba(70, 110, 170, 0.35);
+  border-radius: 16px;
+  background: #0d1b30;
+}
+
+.sideHead {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #f8fbff;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.sideHead svg {
+  color: #60a5fa;
+}
+
+.sideCard p {
+  margin: 0;
+  color: #8aa3c4;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.payNote {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr);
+  gap: 8px;
+  align-items: start;
+  padding: 10px 12px;
+  border: 1px solid rgba(53, 217, 138, 0.35);
+  border-radius: 12px;
+  background: rgba(53, 217, 138, 0.08);
+  color: #bbf7d0;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.payNote svg {
+  margin-top: 1px;
+  color: #4ade80;
+}
+
+/* Nested renew / notify forms */
+.sideCard :global(.member-upgrade-action) {
+  display: grid;
+  gap: 10px;
+}
+
+.sideCard :global(.member-upgrade-action) label {
+  display: grid;
+  gap: 6px;
+  color: #9eb6d4;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.sideCard :global(.member-upgrade-action) select {
+  width: 100%;
+  min-height: 42px;
+  border: 1px solid rgba(70, 110, 170, 0.4);
+  border-radius: 10px;
+  padding: 0 12px;
+  background: #08111f;
+  color: #eef4ff;
+}
+
+.sideCard :global(.member-upgrade-action) > button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  border: 0;
+  border-radius: 12px;
+  background: #2563eb;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.sideCard :global(.member-upgrade-action) > button:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+.sideCard :global(.member-upgrade-action) > span[role="status"] {
+  color: #86efac;
+  font-size: 13px;
+}
+
+.sideCard :global(.member-payment-box) {
+  display: none;
+}
+
+.notifyForm {
+  display: grid;
+  gap: 10px;
+}
+
+.notifyForm label {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  color: #c5d5ea;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.notifyForm :global(.field) {
+  display: grid;
+  gap: 6px;
+}
+
+.notifyForm :global(.field) span {
+  color: #8aa3c4;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.notifyForm input[type="text"] {
+  min-height: 40px;
+  border: 1px solid rgba(70, 110, 170, 0.4);
+  border-radius: 10px;
+  padding: 0 12px;
+  background: #08111f;
+  color: #eef4ff;
+}
+
+.notifyForm button[type="submit"] {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  min-height: 42px;
+  border: 0;
+  border-radius: 12px;
+  background: #16a34a;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.notifyForm button[type="submit"]:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+.notifyForm [data-status] {
+  color: #86efac;
+  font-size: 13px;
+}
+
+@media (max-width: 980px) {
+  .layout,
+  .statusBar,
+  .banner,
+  .features,
+  .durationTable {
+    grid-template-columns: 1fr;
+  }
+
+  .statusItem {
+    border-right: 0;
+    border-bottom: 1px solid rgba(70, 110, 170, 0.28);
+    border-radius: 0;
+    justify-content: flex-start;
+  }
+
+  .statusBar {
+    border-radius: 16px;
+  }
+
+  .bannerMid {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .spark {
+    display: none;
+  }
+
+  .durationLabelCol {
+    display: none;
+  }
+
+  .durationCol {
+    text-align: left;
+  }
+
+  .durationCol strong,
+  .durationCol em,
+  .durationCol span {
+    justify-content: flex-start;
+  }
+}
+
+/* Light counterpart */
+:global(html[data-theme="light"]) .desk,
+:global(html:not([data-theme])) .desk {
+  color: #0b1f3a;
+}
+
+:global(html[data-theme="light"]) .hero h1,
+:global(html:not([data-theme])) .hero h1,
+:global(html[data-theme="light"]) .planTop h2,
+:global(html:not([data-theme])) .planTop h2,
+:global(html[data-theme="light"]) .salePrice,
+:global(html:not([data-theme])) .salePrice,
+:global(html[data-theme="light"]) .sideHead,
+:global(html:not([data-theme])) .sideHead,
+:global(html[data-theme="light"]) .durationCol strong,
+:global(html:not([data-theme])) .durationCol strong,
+:global(html[data-theme="light"]) .bannerLeft strong,
+:global(html:not([data-theme])) .bannerLeft strong {
+  color: #0b1f3a;
+}
+
+:global(html[data-theme="light"]) .hero p,
+:global(html:not([data-theme])) .hero p,
+:global(html[data-theme="light"]) .bannerMid,
+:global(html:not([data-theme])) .bannerMid,
+:global(html[data-theme="light"]) .featuresTitle,
+:global(html:not([data-theme])) .featuresTitle,
+:global(html[data-theme="light"]) .durationsTitle,
+:global(html:not([data-theme])) .durationsTitle,
+:global(html[data-theme="light"]) .sideCard p,
+:global(html:not([data-theme])) .sideCard p {
+  color: #64748b;
+}
+
+:global(html[data-theme="light"]) .statusBar,
+:global(html:not([data-theme])) .statusBar {
+  background: #ffffff;
+  border-color: #e2e8f0;
+}
+
+:global(html[data-theme="light"]) .statusItem,
+:global(html:not([data-theme])) .statusItem {
+  color: #334155;
+  border-right-color: #e2e8f0;
+}
+
+:global(html[data-theme="light"]) .banner,
+:global(html:not([data-theme])) .banner,
+:global(html[data-theme="light"]) .planCard,
+:global(html:not([data-theme])) .planCard,
+:global(html[data-theme="light"]) .sideCard,
+:global(html:not([data-theme])) .sideCard {
+  background: #ffffff;
+  border-color: #dbeafe;
+  box-shadow: 0 2px 12px rgba(15, 35, 70, 0.05);
+}
+
+:global(html[data-theme="light"]) .features li,
+:global(html:not([data-theme])) .features li,
+:global(html[data-theme="light"]) .durationCol,
+:global(html:not([data-theme])) .durationCol {
+  background: #f8fafc;
+  border-color: #e2e8f0;
+  color: #0b1f3a;
+}
+
+:global(html[data-theme="light"]) .sideCard :global(.member-upgrade-action) select,
+:global(html:not([data-theme])) .sideCard :global(.member-upgrade-action) select,
+:global(html[data-theme="light"]) .notifyForm input[type="text"],
+:global(html:not([data-theme])) .notifyForm input[type="text"] {
+  background: #f8fafc;
+  border-color: #d1d5db;
+  color: #0b1f3a;
+}
+
+:global(html[data-theme="light"]) .payNote,
+:global(html:not([data-theme])) .payNote {
+  background: #ecfdf5;
+  border-color: #86efac;
+  color: #166534;
+}
