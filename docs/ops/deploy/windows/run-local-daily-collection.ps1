@@ -16,7 +16,10 @@ $Steps = @(
   @{ Label = "Production health"; Script = "health:production"; AllowedExitCodes = @(0) },
   @{ Label = "Controlled learning gate"; Script = "check:learning-gate-v4"; AllowedExitCodes = @(0) },
   @{ Label = "Production backup"; Script = "backup:production"; AllowedExitCodes = @(0) },
-  @{ Label = "Backup verification"; Script = "verify:backup"; AllowedExitCodes = @(0) }
+  @{ Label = "Backup verification"; Script = "verify:backup"; AllowedExitCodes = @(0) },
+  @{ Label = "Membership T-7 expiry reminders"; Script = "notifications:membership-expiry"; AllowedExitCodes = @(0, 1) },
+  @{ Label = "Daily net-three member notify"; Script = "notifications:daily-net-three"; AllowedExitCodes = @(0, 1) },
+  @{ Label = "Daily ops checklist"; Script = "check:daily-ops"; AllowedExitCodes = @(0, 2) }
 )
 
 if ($DryRun) {

@@ -46,6 +46,8 @@
     "test:operations-v4": "tsx scripts/test-production-operations-dashboard.ts",
     "notifications:deliver-v4": "tsx scripts/deliver-production-notifications.ts",
     "notifications:membership-expiry": "tsx scripts/deliver-membership-expiry-reminders.ts",
+    "notifications:daily-net-three": "tsx scripts/deliver-daily-net-three.ts",
+    "check:daily-ops": "tsx scripts/check-daily-ops-checklist.ts",
     "test:notification-delivery-v4": "tsx scripts/test-production-notification-delivery.ts",
     "check:deployment-v4": "tsx scripts/check-production-deployment-gate.ts",
     "test:deployment-gate-v4": "tsx scripts/test-production-deployment-gate.ts",

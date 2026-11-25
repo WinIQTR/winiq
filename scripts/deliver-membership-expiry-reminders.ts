@@ -1,3 +1,5 @@
+import "dotenv/config";
+
 import { deliverMembershipExpiryReminders } from "../src/lib/membership-expiry-reminder";
 
 async function main(): Promise<void> {
