@@ -625,6 +625,26 @@ entries.push(
     tr: "18 yaş altı kullanıma uygun değildir. Yasalara ve kendi bütçe sınırlarınıza uygun hareket edin.",
   },
   {
+    en: "Support & cancellation",
+    tr: "Destek ve iptal",
+  },
+  {
+    en: "Support SLA: member messages are usually answered within 1 business day (Europe/Istanbul weekdays).",
+    tr: "Destek yanıtı: üye mesajlarına genellikle 1 iş günü içinde dönüş (Europe/Istanbul iş günleri).",
+  },
+  {
+    en: "Cancel: message from the member desk or contact an admin to close access early; unused days are not auto-refunded (manual payment flow).",
+    tr: "İptal: süre dolmadan erişimi kapatmak için üye panelinden mesaj bırakın veya yöneticiye yazın; kalan gün için otomatik iade yoktur (manuel ödeme).",
+  },
+  {
+    en: "Renewal is optional. Access ends when the term expires; a T-7 reminder is sent.",
+    tr: "Yenileme zorunlu değildir. Süre bitince erişim kapanır; hatırlatma T-7’de gönderilir.",
+  },
+  {
+    en: "For payment disputes, keep your payment reference and admin note.",
+    tr: "Anlaşmazlık veya ödeme teyidi için yönetici notu + ödeme referansı yeterlidir.",
+  },
+  {
     en: "Registrations open with administrator approval.",
     tr: "Kayıtlar yönetici onayıyla açılır.",
   },

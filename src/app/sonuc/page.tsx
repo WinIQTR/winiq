@@ -1,7 +1,10 @@
 import Link from "next/link";
 
 import { LanguageSwitcher } from "@/components/language-switcher";
-import { LEGAL_DISCLAIMER_EN } from "@/lib/legal-disclaimer";
+import {
+  LEGAL_DISCLAIMER_EN,
+  SUPPORT_POLICY_EN,
+} from "@/lib/legal-disclaimer";
 import { loadPublicTrackRecordSummary } from "@/lib/public-track-record";
 
 import styles from "./sonuc.module.css";
@@ -114,6 +117,15 @@ export default async function PublicTrackRecordPage() {
         <p className={styles.legalShort}>{LEGAL_DISCLAIMER_EN.short}</p>
         <ul>
           {LEGAL_DISCLAIMER_EN.body.map((line) => (
+            <li key={line}>{line}</li>
+          ))}
+        </ul>
+        <h2 id="support-title" style={{ marginTop: 22 }}>
+          {SUPPORT_POLICY_EN.title}
+        </h2>
+        <p className={styles.legalShort}>{SUPPORT_POLICY_EN.sla}</p>
+        <ul>
+          {SUPPORT_POLICY_EN.cancel.map((line) => (
             <li key={line}>{line}</li>
           ))}
         </ul>

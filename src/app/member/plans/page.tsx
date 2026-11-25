@@ -21,6 +21,7 @@ import {
 import { prisma } from "@/lib/prisma";
 import { daysRemainingUntil } from "@/lib/time";
 import { getMembershipPaymentSettings } from "@/lib/membership-payment-settings";
+import { SUPPORT_POLICY_TR } from "@/lib/legal-disclaimer";
 
 import styles from "./membership-desk.module.css";
 
@@ -405,6 +406,19 @@ export default async function MembershipPlansPage() {
                 variant="desk"
                 className={styles.notifyForm}
               />
+            </section>
+
+            <section className={styles.sideCard} id="destek-iptal">
+              <div className={styles.sideHead}>
+                <IconInfo />
+                {SUPPORT_POLICY_TR.title}
+              </div>
+              <p>{SUPPORT_POLICY_TR.sla}</p>
+              <ul className={styles.policyList}>
+                {SUPPORT_POLICY_TR.cancel.map((line) => (
+                  <li key={line}>{line}</li>
+                ))}
+              </ul>
             </section>
           </aside>
         </div>

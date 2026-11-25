@@ -387,6 +387,18 @@
   line-height: 1.4;
 }
 
+.policyList {
+  margin: 10px 0 0;
+  padding-left: 18px;
+  color: #9eb0c6;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.policyList li + li {
+  margin-top: 6px;
+}
+
 .payNote svg {
   margin-top: 1px;
   color: #4ade80;
