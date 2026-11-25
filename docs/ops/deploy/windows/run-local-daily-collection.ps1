@@ -1,11 +1,12 @@
-param(
+﻿param(
   [switch]$DryRun
 )
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 
-$ProjectRoot = (Resolve-Path (Join-Path $PSScriptRoot "..\..")).Path
+# Mirror of deploy/windows/run-local-daily-collection.ps1 — prefer that path.
+$ProjectRoot = (Resolve-Path (Join-Path $PSScriptRoot "..\..\..\..")).Path
 $Steps = @(
   @{ Label = "Production refresh"; Script = "refresh"; AllowedExitCodes = @(0, 2) },
   @{ Label = "Data coverage and API quota"; Script = "coverage:production"; AllowedExitCodes = @(0) },
@@ -39,6 +40,32 @@ $LockPath = Join-Path $OperationsDirectory "local-daily-collection.lock"
 $LogPath = Join-Path $LogDirectory ("daily-collector-{0}.log" -f (Get-Date -Format "yyyy-MM-dd"))
 $LockStream = $null
 $TranscriptStarted = $false
+
+function Import-DotEnvFile([string]$Path, [switch]$Overwrite) {
+  if (-not (Test-Path -LiteralPath $Path -PathType Leaf)) { return }
+  foreach ($line in Get-Content -LiteralPath $Path) {
+    $trimmed = $line.Trim()
+    if (-not $trimmed -or $trimmed.StartsWith("#")) { continue }
+    $separator = $trimmed.IndexOf("=")
+    if ($separator -lt 1) { continue }
+    $key = $trimmed.Substring(0, $separator).Trim()
+    $value = $trimmed.Substring($separator + 1).Trim()
+    if (
+      ($value.StartsWith('"') -and $value.EndsWith('"')) -or
+      ($value.StartsWith("'") -and $value.EndsWith("'"))
+    ) {
+      $value = $value.Substring(1, $value.Length - 2)
+    }
+    $existing = [Environment]::GetEnvironmentVariable($key, "Process")
+    if (-not $Overwrite -and $existing) { continue }
+    Set-Item -Path "Env:$key" -Value $value
+  }
+}
+
+Import-DotEnvFile (Join-Path $ProjectRoot "data\operations\netlify-production.env") -Overwrite
+Import-DotEnvFile (Join-Path $ProjectRoot ".env")
+$env:DOTENV_CONFIG_PATH = Join-Path $ProjectRoot "data\operations\netlify-production.env"
+$env:NODE_ENV = "production"
 
 New-Item -ItemType Directory -Path $OperationsDirectory -Force | Out-Null
 New-Item -ItemType Directory -Path $LogDirectory -Force | Out-Null
