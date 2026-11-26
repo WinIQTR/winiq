@@ -384,6 +384,88 @@
   color: #7eb6ff;
 }
 
+.headActions {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.liveBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: rgba(37, 99, 235, 0.18);
+  color: #dbeafe;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.liveBadge[data-status="LIVE"] {
+  background: rgba(220, 38, 38, 0.22);
+  color: #fecaca;
+}
+
+.liveBadge[data-status="FINISHED"] {
+  background: rgba(15, 118, 110, 0.22);
+  color: #99f6e4;
+}
+
+.liveBadge em {
+  font-style: normal;
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.liveBadge strong {
+  font-variant-numeric: tabular-nums;
+}
+
+.favBtn {
+  width: 32px;
+  height: 32px;
+  border: 1px solid rgba(70, 100, 145, 0.45);
+  border-radius: 10px;
+  background: #0a1526;
+  color: #94a3b8;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.favBtn[data-on="true"] {
+  color: #fbbf24;
+  border-color: rgba(251, 191, 36, 0.55);
+}
+
+.leagueGroup {
+  display: grid;
+  gap: 10px;
+}
+
+.leagueGroupHead {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 2px;
+  color: #e8eef8;
+}
+
+.leagueGroupHead strong {
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.leagueGroupHead small {
+  margin-left: auto;
+  color: #94a3b8;
+  font-size: 11px;
+}
+
 .cardBody {
   display: grid;
   grid-template-columns:
@@ -1042,6 +1124,36 @@
 
   .statsRow {
     grid-template-columns: 1fr;
+  }
+
+  .windowRow {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 4px;
+  }
+
+  .cardHead {
+    align-items: flex-start;
+  }
+
+  .headActions {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .versus {
+    font-size: 14px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .metricRowCompact {
+    grid-column: 1 / -1;
+  }
+
+  .cardBody {
+    grid-template-columns: 1fr;
+    overflow-x: hidden;
   }
 
   .filters[data-open="false"] .field:not([data-keep="true"]),

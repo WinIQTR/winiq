@@ -111,7 +111,7 @@ export function MemberV2Desk({ desk }: { desk: MemberV2DeskBundle }) {
     <section className={styles.desk} aria-labelledby="member-v2-desk-title">
       <div className={styles.head}>
         <div>
-          <small data-no-translate>WINIQ V2</small>
+          <small data-no-translate>WINIQ V3</small>
           <h2 id="member-v2-desk-title">{t("Today's clear three")}</h2>
           <p>{t("Decide first — then browse the full board.")}</p>
         </div>

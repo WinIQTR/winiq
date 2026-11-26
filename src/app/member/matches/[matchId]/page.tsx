@@ -3,6 +3,11 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { BetMarketCatalogPanel } from "@/components/bet-market-catalog-panel";
+import {
+  MemberMatchDetailTabs,
+  MemberMatchFavoriteButton,
+  MemberMatchLiveScore,
+} from "@/components/member-match-detail-panels";
 import { MemberMatchMarkets } from "@/components/member-match-markets";
 import { MemberPortalHeader } from "@/components/member-smart-dashboard";
 import member from "@/components/member-smart-dashboard.module.css";
@@ -11,6 +16,11 @@ import { ACTIVE_SEASON_YEAR } from "@/config/season";
 import { buildBetMarketCatalog } from "@/lib/bet-market-catalog";
 import { requireMember } from "@/lib/auth-session";
 import { buildMatchContextSummary } from "@/lib/match-context-summary";
+import {
+  loadLeagueStandingsForMatch,
+  loadMatchEvents,
+  loadMatchLiveBoards,
+} from "@/lib/match-live-board";
 import { probabilityTone } from "@/lib/probability-tone";
 import { buildMatchFormTip } from "@/lib/member-match-insight";
 import { MEMBERSHIP_PLAN_LABELS } from "@/lib/membership-access";
@@ -198,11 +208,13 @@ export default async function MemberMatchDetailPage({
     tr,
   );
 
-  const matchContext = await buildMatchContextSummary(matchId).catch(() => null);
-
-  const h2h =
+  const [matchContext, liveBoardMap, events, standings, h2h] = await Promise.all([
+    buildMatchContextSummary(matchId).catch(() => null),
+    loadMatchLiveBoards([matchId]),
+    loadMatchEvents(matchId),
+    loadLeagueStandingsForMatch(matchId),
     prediction.homeTeamId && prediction.awayTeamId
-      ? await prisma.match.findMany({
+      ? prisma.match.findMany({
           where: {
             status: "FINISHED",
             homeScore: { not: null },
@@ -221,7 +233,9 @@ export default async function MemberMatchDetailPage({
             awayTeam: { select: { name: true, logoUrl: true } },
           },
         })
-      : [];
+      : Promise.resolve([]),
+  ]);
+  const liveBoard = liveBoardMap[matchId] ?? null;
 
   const kickoffLabel = new Intl.DateTimeFormat("tr-TR", {
     timeZone: TZ,
@@ -239,6 +253,16 @@ export default async function MemberMatchDetailPage({
     year: "numeric",
   });
 
+  const detailTabs = [
+    { id: "summary", label: tr("Summary") },
+    { id: "prediction", label: tr("Prediction") },
+    { id: "stats", label: tr("Statistics") },
+    { id: "h2h", label: tr("H2H") },
+    ...(standings.length ? [{ id: "table", label: tr("Standings") }] : []),
+    { id: "odds", label: tr("Odds") },
+    ...(events.length ? [{ id: "events", label: tr("Events") }] : []),
+  ];
+
   return (
     <main className={`${member.shell} member-plan-${user.plan.toLowerCase()}`}>
       <MemberPortalHeader plan={user.plan} active="home" memberName={user.name} />
@@ -249,6 +273,7 @@ export default async function MemberMatchDetailPage({
               WINIQ · MAÇ
             </p>
             <div className={styles.headAside}>
+              <MemberMatchFavoriteButton matchId={matchId} />
               <span className={styles.planPill}>{MEMBERSHIP_PLAN_LABELS[user.plan]}</span>
               <Link className={styles.back} href="/member">
                 ← {tr("All predictions")}
@@ -262,7 +287,13 @@ export default async function MemberMatchDetailPage({
               <strong>{prediction.homeTeam}</strong>
             </div>
             <span className={styles.vsLine} aria-hidden />
-            <span className={styles.vs}>vs</span>
+            <MemberMatchLiveScore board={liveBoard} locale="tr" />
+            {!liveBoard ||
+            (liveBoard.homeScore == null &&
+              liveBoard.status !== "LIVE" &&
+              liveBoard.status !== "FINISHED") ? (
+              <span className={styles.vs}>vs</span>
+            ) : null}
             <span className={styles.vsLine} aria-hidden />
             <div className={`${styles.team} ${styles.teamAway}`}>
               <strong>{prediction.awayTeam}</strong>
@@ -357,196 +388,303 @@ export default async function MemberMatchDetailPage({
           ) : null}
         </header>
 
-        {showOdds ? <MemberMatchMarkets groups={groups} /> : null}
+        <MemberMatchDetailTabs tabs={detailTabs}>
+          <div data-tab="summary" className={styles.tabStack}>
+            {showOdds ? <MemberMatchMarkets groups={groups} /> : null}
+            <section className={styles.metricGrid}>
+              <article className={styles.metricCard}>
+                <div className={styles.metricHead}>
+                  <IconTarget />
+                  {tr("Main prediction")}
+                </div>
+                <div className={styles.pickBox}>
+                  <h1 className={styles.pickTitle}>{pickTitle}</h1>
+                  <p className={styles.pickSub}>{pickSubtitle}</p>
+                  {pickReasons.length ? (
+                    <ul className={styles.reasonList}>
+                      {pickReasons.map((line) => (
+                        <li key={line}>{tr(line)}</li>
+                      ))}
+                    </ul>
+                  ) : null}
+                </div>
+              </article>
 
-        <section className={styles.metricGrid}>
-          <article className={styles.metricCard}>
-            <div className={styles.metricHead}>
-              <IconTarget />
-              {tr("Main prediction")}
-            </div>
-            <div className={styles.pickBox}>
-              <h1 className={styles.pickTitle}>{pickTitle}</h1>
-              <p className={styles.pickSub}>{pickSubtitle}</p>
-              {pickReasons.length ? (
-                <ul className={styles.reasonList}>
-                  {pickReasons.map((line) => (
-                    <li key={line}>{tr(line)}</li>
+              <article className={styles.metricCard}>
+                <div className={`${styles.metricHead} ${styles.metricHeadGreen}`}>
+                  <IconShield />
+                  {tr("Confidence")}
+                </div>
+                {showOdds ? (
+                  <>
+                    <div className={styles.confBadge}>%{confScore.toFixed(0)}</div>
+                    <p className={styles.metricFoot}>{tr("Model confidence for this pick")}</p>
+                  </>
+                ) : (
+                  <p className={styles.lockHint}>
+                    {tr("Upgrade plan to see probabilities and confidence.")}
+                  </p>
+                )}
+              </article>
+
+              <article className={styles.metricCard}>
+                <div className={styles.metricHead}>
+                  <IconBars />
+                  {tr("Match probabilities")}
+                </div>
+                {showOdds ? (
+                  <>
+                    <div className={styles.probSplit}>
+                      <div className={`${styles.probCell} ${styles.probHome}`}>
+                        <span>{tr("Home short")}</span>
+                        <strong>%{prediction.homeProbability.toFixed(0)}</strong>
+                      </div>
+                      <div className={styles.probCell}>
+                        <span>{tr("Draw")}</span>
+                        <strong>%{prediction.drawProbability.toFixed(0)}</strong>
+                      </div>
+                      <div className={styles.probCell}>
+                        <span>{tr("Away")}</span>
+                        <strong>%{prediction.awayProbability.toFixed(0)}</strong>
+                      </div>
+                    </div>
+                    <p className={styles.metricFoot}>{tr("Probability summary")}</p>
+                  </>
+                ) : (
+                  <p className={styles.lockHint}>{tr("Upgrade plan to see match probabilities.")}</p>
+                )}
+              </article>
+            </section>
+            {formTip ? (
+              <aside className={styles.formStrip} aria-label={tr("Recent form")}>
+                <span className={styles.formIcon}>
+                  <IconFlag />
+                </span>
+                <p className={styles.formText}>{formTip}</p>
+              </aside>
+            ) : null}
+          </div>
+
+          <div data-tab="prediction" className={styles.tabStack}>
+            <article className={styles.recCard}>
+              <div className={styles.recHead}>
+                <span className={styles.recHeadIcon}>
+                  <IconBall />
+                </span>
+                <span className={styles.recHeadDivider} aria-hidden />
+                <div>
+                  <span className={styles.recBadge}>{tr("RECOMMENDED PICKS")}</span>
+                  <h2 className={styles.recTitle}>{tr("Top 3 for this match")}</h2>
+                  <p className={styles.recSub}>
+                    {tr("Full catalog is below; start with the clear picks.")}
+                  </p>
+                </div>
+              </div>
+              <ol className={styles.recList}>
+                {topPicks.map((pick, index) => {
+                  const odds =
+                    "fairOdds" in pick && typeof pick.fairOdds === "number" && pick.fairOdds > 0
+                      ? pick.fairOdds
+                      : null;
+                  const market =
+                    "market" in pick && typeof pick.market === "string" ? pick.market : "";
+                  const selection =
+                    "selection" in pick && typeof pick.selection === "string" ? pick.selection : "";
+                  const pctRaw =
+                    "probability" in pick && typeof pick.probability === "number"
+                      ? pick.probability
+                      : "pickScore" in pick && typeof pick.pickScore === "number"
+                        ? pick.pickScore
+                        : prediction.confidenceScore;
+                  const pct = Math.max(0, Math.min(100, pctRaw));
+                  return (
+                    <li className={styles.recItem} key={`${market}-${selection}-${index}`}>
+                      <span className={styles.recRank}>#{index + 1}</span>
+                      <div className={styles.recPick}>
+                        <span className={styles.recMarket}>
+                          <IconBallSm />
+                          {tr(market)}
+                        </span>
+                        <strong>{tr(selection)}</strong>
+                      </div>
+                      {showOdds ? (
+                        <>
+                          <div className={styles.recConf} data-tone={probabilityTone(pct)}>
+                            <span>
+                              {tr("Model probability")} <b>%{pct.toFixed(0)}</b>
+                            </span>
+                            <span className={styles.recConfBar} aria-hidden>
+                              <i style={{ width: `${Math.max(4, pct)}%` }} />
+                            </span>
+                          </div>
+                          {odds != null ? (
+                            <span className={styles.recOdds}>
+                              {tr("odds")} <b>{odds.toFixed(2)}</b>
+                            </span>
+                          ) : (
+                            <span className={styles.recOddsMuted}>—</span>
+                          )}
+                        </>
+                      ) : (
+                        <p className={styles.lockHint}>
+                          {tr("Upgrade plan to see probabilities and confidence.")}
+                        </p>
+                      )}
+                    </li>
+                  );
+                })}
+              </ol>
+            </article>
+          </div>
+
+          <div data-tab="stats" className={styles.tabStack}>
+            {formTip ? (
+              <aside className={styles.formStrip} aria-label={tr("Recent form")}>
+                <span className={styles.formIcon}>
+                  <IconFlag />
+                </span>
+                <p className={styles.formText}>{formTip}</p>
+              </aside>
+            ) : (
+              <p className={styles.emptyPad}>{tr("No form data for this match.")}</p>
+            )}
+            {matchContext?.homeElo != null && matchContext.awayElo != null ? (
+              <p className={styles.emptyPad}>
+                Elo {Math.round(matchContext.homeElo)}–{Math.round(matchContext.awayElo)}
+              </p>
+            ) : null}
+          </div>
+
+          <div data-tab="h2h" className={styles.tabStack}>
+            <article className={styles.h2hCard}>
+              <div className={styles.h2hHead}>
+                <span className={styles.h2hIcon}>
+                  <IconBall />
+                </span>
+                <div>
+                  <h2 className={styles.h2hTitle}>{tr("Recent meetings (H2H)")}</h2>
+                  <span className={styles.h2hUnderline} aria-hidden />
+                </div>
+              </div>
+              {h2h.length ? (
+                <ul className={styles.h2hList}>
+                  {h2h.map((match, index) => (
+                    <li
+                      className={styles.h2hRow}
+                      key={`${match.kickoffAt.toISOString()}-${index}`}
+                    >
+                      <div className={styles.h2hDate}>
+                        <IconCal />
+                        <span>{h2hDateFmt.format(match.kickoffAt)}</span>
+                      </div>
+                      <div className={styles.h2hFixture}>
+                        <div className={styles.h2hTeamHome}>
+                          <TeamLogo
+                            src={match.homeTeam.logoUrl}
+                            name={match.homeTeam.name}
+                            size={28}
+                          />
+                          <strong>{match.homeTeam.name}</strong>
+                        </div>
+                        <span className={styles.score}>
+                          {match.homeScore}–{match.awayScore}
+                        </span>
+                        <div className={styles.h2hTeamAway}>
+                          <strong>{match.awayTeam.name}</strong>
+                          <TeamLogo
+                            src={match.awayTeam.logoUrl}
+                            name={match.awayTeam.name}
+                            size={28}
+                          />
+                        </div>
+                      </div>
+                    </li>
                   ))}
                 </ul>
-              ) : null}
-            </div>
-          </article>
-
-          <article className={styles.metricCard}>
-            <div className={`${styles.metricHead} ${styles.metricHeadGreen}`}>
-              <IconShield />
-              {tr("Confidence")}
-            </div>
-            {showOdds ? (
-              <>
-                <div className={styles.confBadge}>%{confScore.toFixed(0)}</div>
-                <p className={styles.metricFoot}>{tr("Model confidence for this pick")}</p>
-              </>
-            ) : (
-              <p className={styles.lockHint}>{tr("Upgrade plan to see probabilities and confidence.")}</p>
-            )}
-          </article>
-
-          <article className={styles.metricCard}>
-            <div className={styles.metricHead}>
-              <IconBars />
-              {tr("Match probabilities")}
-            </div>
-            {showOdds ? (
-              <>
-                <div className={styles.probSplit}>
-                  <div className={`${styles.probCell} ${styles.probHome}`}>
-                    <span>{tr("Home short")}</span>
-                    <strong>%{prediction.homeProbability.toFixed(0)}</strong>
-                  </div>
-                  <div className={styles.probCell}>
-                    <span>{tr("Draw")}</span>
-                    <strong>%{prediction.drawProbability.toFixed(0)}</strong>
-                  </div>
-                  <div className={styles.probCell}>
-                    <span>{tr("Away")}</span>
-                    <strong>%{prediction.awayProbability.toFixed(0)}</strong>
-                  </div>
-                </div>
-                <p className={styles.metricFoot}>{tr("Probability summary")}</p>
-              </>
-            ) : (
-              <p className={styles.lockHint}>{tr("Upgrade plan to see match probabilities.")}</p>
-            )}
-          </article>
-        </section>
-
-        {formTip ? (
-          <aside className={styles.formStrip} aria-label={tr("Recent form")}>
-            <span className={styles.formIcon}>
-              <IconFlag />
-            </span>
-            <p className={styles.formText}>{formTip}</p>
-          </aside>
-        ) : null}
-
-        <article className={styles.h2hCard}>
-          <div className={styles.h2hHead}>
-            <span className={styles.h2hIcon}>
-              <IconBall />
-            </span>
-            <div>
-              <h2 className={styles.h2hTitle}>{tr("Recent meetings (H2H)")}</h2>
-              <span className={styles.h2hUnderline} aria-hidden />
-            </div>
+              ) : (
+                <p className={styles.emptyPad}>{tr("No head-to-head results yet.")}</p>
+              )}
+            </article>
           </div>
-          {h2h.length ? (
-            <ul className={styles.h2hList}>
-              {h2h.map((match, index) => (
-                <li className={styles.h2hRow} key={`${match.kickoffAt.toISOString()}-${index}`}>
-                  <div className={styles.h2hDate}>
-                    <IconCal />
-                    <span>{h2hDateFmt.format(match.kickoffAt)}</span>
-                  </div>
-                  <div className={styles.h2hFixture}>
-                    <div className={styles.h2hTeamHome}>
-                      <TeamLogo src={match.homeTeam.logoUrl} name={match.homeTeam.name} size={28} />
-                      <strong>{match.homeTeam.name}</strong>
-                    </div>
-                    <span className={styles.score}>
-                      {match.homeScore}–{match.awayScore}
-                    </span>
-                    <div className={styles.h2hTeamAway}>
-                      <strong>{match.awayTeam.name}</strong>
-                      <TeamLogo src={match.awayTeam.logoUrl} name={match.awayTeam.name} size={28} />
-                    </div>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p className={styles.emptyPad}>{tr("No head-to-head results yet.")}</p>
-          )}
-        </article>
 
-        <article className={styles.recCard}>
-          <div className={styles.recHead}>
-            <span className={styles.recHeadIcon}>
-              <IconBall />
-            </span>
-            <span className={styles.recHeadDivider} aria-hidden />
-            <div>
-              <span className={styles.recBadge}>{tr("RECOMMENDED PICKS")}</span>
-              <h2 className={styles.recTitle}>{tr("Top 3 for this match")}</h2>
-              <p className={styles.recSub}>
-                {tr("Full catalog is below; start with the clear picks.")}
-              </p>
+          {standings.length ? (
+            <div data-tab="table" className={styles.tabStack}>
+              <div className={styles.tableWrap}>
+                <table className={styles.standingsTable}>
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>{tr("Team")}</th>
+                      <th>O</th>
+                      <th>P</th>
+                      <th>Averaj</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {standings.map((row) => (
+                      <tr
+                        key={row.teamId}
+                        data-focus={
+                          row.teamId === prediction.homeTeamId ||
+                          row.teamId === prediction.awayTeamId
+                            ? "true"
+                            : undefined
+                        }
+                      >
+                        <td>{row.rank}</td>
+                        <td>
+                          <span className={styles.standingTeam}>
+                            {row.teamLogo ? (
+                              <Image src={row.teamLogo} alt="" width={18} height={18} />
+                            ) : null}
+                            {row.teamName}
+                          </span>
+                        </td>
+                        <td>{row.played}</td>
+                        <td>{row.points}</td>
+                        <td>{row.goalDiff}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
-          </div>
-          <ol className={styles.recList}>
-            {topPicks.map((pick, index) => {
-              const odds =
-                "fairOdds" in pick && typeof pick.fairOdds === "number" && pick.fairOdds > 0
-                  ? pick.fairOdds
-                  : null;
-              const market =
-                "market" in pick && typeof pick.market === "string" ? pick.market : "";
-              const selection =
-                "selection" in pick && typeof pick.selection === "string" ? pick.selection : "";
-              const pctRaw =
-                "probability" in pick && typeof pick.probability === "number"
-                  ? pick.probability
-                  : "pickScore" in pick && typeof pick.pickScore === "number"
-                    ? pick.pickScore
-                    : prediction.confidenceScore;
-              const pct = Math.max(0, Math.min(100, pctRaw));
-              return (
-                <li className={styles.recItem} key={`${market}-${selection}-${index}`}>
-                  <span className={styles.recRank}>#{index + 1}</span>
-                  <div className={styles.recPick}>
-                    <span className={styles.recMarket}>
-                      <IconBallSm />
-                      {tr(market)}
-                    </span>
-                    <strong>{tr(selection)}</strong>
-                  </div>
-                  {showOdds ? (
-                    <>
-                      <div className={styles.recConf} data-tone={probabilityTone(pct)}>
-                        <span>
-                          {tr("Model probability")} <b>%{pct.toFixed(0)}</b>
-                        </span>
-                        <span className={styles.recConfBar} aria-hidden>
-                          <i style={{ width: `${Math.max(4, pct)}%` }} />
-                        </span>
-                      </div>
-                      {odds != null ? (
-                        <span className={styles.recOdds}>
-                          {tr("odds")} <b>{odds.toFixed(2)}</b>
-                        </span>
-                      ) : (
-                        <span className={styles.recOddsMuted}>—</span>
-                      )}
-                    </>
-                  ) : (
-                    <p className={styles.lockHint}>{tr("Upgrade plan to see probabilities and confidence.")}</p>
-                  )}
-                </li>
-              );
-            })}
-          </ol>
-        </article>
+          ) : null}
 
-        <details className={styles.catalogWrap}>
-          <summary className={styles.catalogToggle}>{tr("Show all markets")}</summary>
-          <BetMarketCatalogPanel
-            groups={groups}
-            locale="tr"
-            accessPlan={user.plan}
-            showBestOpportunities={false}
-          />
-        </details>
+          <div data-tab="odds" className={styles.tabStack}>
+            {showOdds ? <MemberMatchMarkets groups={groups} /> : null}
+            <details className={styles.catalogWrap} open>
+              <summary className={styles.catalogToggle}>{tr("Show all markets")}</summary>
+              <BetMarketCatalogPanel
+                groups={groups}
+                locale="tr"
+                accessPlan={user.plan}
+                showBestOpportunities={false}
+              />
+            </details>
+          </div>
+
+          {events.length ? (
+            <div data-tab="events" className={styles.tabStack}>
+              <ol className={styles.eventList}>
+                {events.map((event, index) => (
+                  <li key={`${event.elapsed}-${event.type}-${index}`} className={styles.eventRow}>
+                    <span className={styles.eventMin}>
+                      {event.elapsed}
+                      {event.extra != null ? `+${event.extra}` : ""}&apos;
+                    </span>
+                    <strong>{event.type}</strong>
+                    <span>
+                      {[event.playerName, event.detail, event.assistName]
+                        .filter(Boolean)
+                        .join(" · ")}
+                    </span>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          ) : null}
+        </MemberMatchDetailTabs>
 
         <section className={styles.notice}>
           {tr("WINIQ provides analysis only. There is no guarantee of profit.")}

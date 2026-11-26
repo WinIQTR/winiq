@@ -1387,6 +1387,18 @@ entries.push(
   { en: "Clear band filter", tr: "Oran bandı filtresini temizle" },
   { en: "evaluated in odds bands", tr: "oran bandında değerlendirildi" },
   { en: "No odds", tr: "Oran yok" },
+  { en: "No live scores now", tr: "Şu an canlı skor yok" },
+  { en: "Sort by probability", tr: "Olasılığa göre sırala" },
+  { en: "Favorites", tr: "Favoriler" },
+  { en: "Add to favorites", tr: "Favorilere ekle" },
+  { en: "Remove from favorites", tr: "Favorilerden çıkar" },
+  { en: "Summary", tr: "Özet" },
+  { en: "Prediction", tr: "Tahmin" },
+  { en: "Statistics", tr: "İstatistik" },
+  { en: "H2H", tr: "H2H" },
+  { en: "Events", tr: "Olaylar" },
+  { en: "Team", tr: "Takım" },
+  { en: "No form data for this match.", tr: "Bu maç için form verisi yok." },
 );
 
 const exactCaseLookup = new Map<string, TranslationEntry>();

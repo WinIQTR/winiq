@@ -260,13 +260,13 @@ export function MemberPortalHeader({
       <header className={shell.topbar}>
         <div className={shell.brandBlock}>
           <MemberMobileNav items={drawerItems} />
-          <Link href={homeHref} className={shell.brand} aria-label="WINIQ V2" data-no-translate>
+          <Link href={homeHref} className={shell.brand} aria-label="WINIQ V3" data-no-translate>
             WIN<span>IQ</span>
-            <em className={shell.brandVersion}>V2</em>
+            <em className={shell.brandVersion}>V3</em>
           </Link>
           <div className={shell.brandMeta}>
             <small>
-              {t("AI Football Predictions")} • {ACTIVE_SEASON_YEAR} • V2
+              {t("AI Football Predictions")} • {ACTIVE_SEASON_YEAR} • V3
             </small>
           </div>
         </div>
@@ -420,6 +420,7 @@ export function MemberSmartDashboard({
   performance,
   updatedAtIso,
   lineMoves = {},
+  liveBoards = {},
   v2Desk = null,
 }: {
   name: string;
@@ -430,6 +431,7 @@ export function MemberSmartDashboard({
   performance?: MemberPerformance;
   updatedAtIso?: string;
   lineMoves?: Record<string, MarketLineMove>;
+  liveBoards?: Record<number, import("@/lib/match-live-board").MatchLiveBoard>;
   v2Desk?: import("@/lib/member-v2-desk").MemberV2DeskBundle | null;
 }) {
   const matchPathPrefix = preview
@@ -455,6 +457,7 @@ export function MemberSmartDashboard({
           updatedAtIso={updatedAtIso}
           performance={performance}
           lineMoves={lineMoves}
+          liveBoards={liveBoards}
         />
       </div>
     </main>

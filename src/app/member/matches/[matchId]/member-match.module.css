@@ -191,6 +191,156 @@
   flex-shrink: 0;
 }
 
+.liveScore {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  min-width: 64px;
+}
+
+.liveScore[data-status="LIVE"] .liveStatus {
+  color: #dc2626;
+}
+
+.liveScore[data-status="FINISHED"] .liveStatus {
+  color: #0f766e;
+}
+
+.liveStatus {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #2563eb;
+}
+
+.liveDigits {
+  font-size: clamp(22px, 3vw, 30px);
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+  color: #0b1f3a;
+  letter-spacing: -0.02em;
+}
+
+.favBtn {
+  width: 34px;
+  height: 34px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  background: #f8fafc;
+  color: #64748b;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.favBtn[data-on="true"] {
+  color: #d97706;
+  border-color: #fbbf24;
+  background: #fffbeb;
+}
+
+.tabShell {
+  display: grid;
+  gap: 14px;
+}
+
+.tabBar {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+
+.tabBtn {
+  flex: 0 0 auto;
+  min-height: 36px;
+  padding: 8px 12px;
+  border: 1px solid #dbe3ef;
+  border-radius: 999px;
+  background: #f8fafc;
+  color: #334155;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.tabBtn[data-active="true"] {
+  background: #0b1f3a;
+  border-color: #0b1f3a;
+  color: #f8fafc;
+}
+
+.tabPanel {
+  display: grid;
+  gap: 14px;
+}
+
+.tabStack {
+  display: grid;
+  gap: 14px;
+}
+
+.tableWrap {
+  overflow-x: auto;
+  border: 1px solid var(--mh-border, #e5e7eb);
+  border-radius: 14px;
+  background: var(--mh-card, #fff);
+}
+
+.standingsTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.standingsTable th,
+.standingsTable td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid #eef2f7;
+  white-space: nowrap;
+}
+
+.standingsTable tr[data-focus="true"] {
+  background: #eff6ff;
+  font-weight: 700;
+}
+
+.standingTeam {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.eventList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.eventRow {
+  display: grid;
+  grid-template-columns: 56px minmax(72px, auto) 1fr;
+  gap: 10px;
+  align-items: baseline;
+  padding: 10px 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #fff;
+  font-size: 13px;
+}
+
+.eventMin {
+  font-weight: 800;
+  color: #2563eb;
+  font-variant-numeric: tabular-nums;
+}
+
 /* —— Top metric trio —— */
 .metricGrid {
   display: grid;

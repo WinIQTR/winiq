@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import { useLanguage } from "@/components/language-provider";
 import { MarketLineMoveBlock } from "@/components/market-line-move";
@@ -10,6 +10,17 @@ import {
   marketLineMoveKey,
   type MarketLineMove,
 } from "@/lib/market-line-move-shared";
+import {
+  formatMatchScore,
+  matchStatusLabel,
+  type MatchLiveBoard,
+} from "@/lib/match-live-board";
+import {
+  readFavoriteMatchIds,
+  readPreferredLeagueApiId,
+  toggleFavoriteMatchId,
+  writePreferredLeagueApiId,
+} from "@/lib/member-local-prefs";
 import {
   getPredictionLabel,
   getUiConfidence,
@@ -229,6 +240,18 @@ function isUpcoming(prediction: DashboardPrediction, now: Date) {
   return asDate(prediction.kickoffAt).getTime() >= now.getTime() && !isFinished(prediction);
 }
 
+function isListed(
+  prediction: DashboardPrediction,
+  now: Date,
+  board?: MatchLiveBoard | null,
+) {
+  if (board?.status === "LIVE") return true;
+  if (board?.status === "FINISHED" && dateKey(prediction.kickoffAt) === todayKey(now)) {
+    return board.homeScore != null && board.awayScore != null;
+  }
+  return isUpcoming(prediction, now);
+}
+
 function TeamLogo({ src, name, size = 40 }: { src: string | null; name: string; size?: number }) {
   if (src) {
     return (
@@ -314,6 +337,7 @@ export function MemberPredictionsBoard({
   updatedAtIso,
   performance,
   lineMoves = {},
+  liveBoards = {},
 }: {
   predictions: DashboardPrediction[];
   plan: MembershipPlanName;
@@ -325,6 +349,7 @@ export function MemberPredictionsBoard({
   updatedAtIso?: string;
   performance?: MemberHomePerformance;
   lineMoves?: Record<string, MarketLineMove>;
+  liveBoards?: Record<number, MatchLiveBoard>;
 }) {
   const { t, locale } = useLanguage();
   const matchHref = (matchId: number) => `${matchPathPrefix}/${matchId}${matchQuery}`;
@@ -332,6 +357,7 @@ export function MemberPredictionsBoard({
   const showOdds = true;
   const today = todayKey(now);
   const lang = locale === "tr" ? "tr-TR" : "en-GB";
+  const uiLocale = locale === "en" ? "en" : "tr";
 
   const initialDate = selectedDate && /^\d{4}-\d{2}-\d{2}$/.test(selectedDate) ? selectedDate : today;
   const emptyDraft: DraftFilters = {
@@ -346,6 +372,18 @@ export function MemberPredictionsBoard({
   const [page, setPage] = useState(1);
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [kickWindow, setKickWindow] = useState<"all" | "2h" | "30m">("all");
+  const [sortByPct, setSortByPct] = useState(false);
+  const [favoritesOnly, setFavoritesOnly] = useState(false);
+  const [favoriteIds, setFavoriteIds] = useState<number[]>([]);
+
+  useEffect(() => {
+    setFavoriteIds(readFavoriteMatchIds());
+    const preferred = readPreferredLeagueApiId();
+    if (preferred) {
+      setDraft((prev) => (prev.league === "ALL" ? { ...prev, league: preferred } : prev));
+      setApplied((prev) => (prev.league === "ALL" ? { ...prev, league: preferred } : prev));
+    }
+  }, []);
 
   const formatLongDate = (key: string) =>
     new Intl.DateTimeFormat(lang, {
@@ -389,9 +427,19 @@ export function MemberPredictionsBoard({
   const upcoming = useMemo(
     () =>
       predictions
-        .filter((item) => isUpcoming(item, now))
-        .sort((a, b) => asDate(a.kickoffAt).getTime() - asDate(b.kickoffAt).getTime()),
-    [predictions, now],
+        .filter((item) => isListed(item, now, liveBoards[item.matchId]))
+        .sort((a, b) => {
+          const aLive = liveBoards[a.matchId]?.status === "LIVE" ? 0 : 1;
+          const bLive = liveBoards[b.matchId]?.status === "LIVE" ? 0 : 1;
+          if (aLive !== bLive) return aLive - bLive;
+          return asDate(a.kickoffAt).getTime() - asDate(b.kickoffAt).getTime();
+        }),
+    [predictions, now, liveBoards],
+  );
+
+  const liveCount = useMemo(
+    () => upcoming.filter((item) => liveBoards[item.matchId]?.status === "LIVE").length,
+    [upcoming, liveBoards],
   );
 
   const todayMatches = useMemo(
@@ -428,8 +476,12 @@ export function MemberPredictionsBoard({
   }, [upcoming, today]);
 
   const filtered = useMemo(() => {
-    return upcoming.filter((item) => {
-      if (applied.date !== "ALL" && dateKey(item.kickoffAt) !== applied.date) return false;
+    const rows = upcoming.filter((item) => {
+      if (favoritesOnly && !favoriteIds.includes(item.matchId)) return false;
+      if (applied.date !== "ALL" && dateKey(item.kickoffAt) !== applied.date) {
+        // Keep LIVE matches visible even if kickoff day drifted past the filter day.
+        if (liveBoards[item.matchId]?.status !== "LIVE") return false;
+      }
       if (applied.league !== "ALL" && String(item.leagueApiId) !== applied.league) return false;
       if (applied.market !== "ALL" && !collectMatchMarkets(item).includes(applied.market)) {
         return false;
@@ -440,17 +492,56 @@ export function MemberPredictionsBoard({
       }
       if (applied.confidence === "LOW" && item.confidenceScore >= 40) return false;
       if (kickWindow !== "all") {
+        if (liveBoards[item.matchId]?.status === "LIVE") return true;
         const ms = asDate(item.kickoffAt).getTime() - now.getTime();
         const limit = kickWindow === "2h" ? 2 * 60 * 60 * 1000 : 30 * 60 * 1000;
         if (ms < 0 || ms > limit) return false;
       }
       return true;
     });
-  }, [upcoming, applied, kickWindow, now]);
 
-  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
-  const safePage = Math.min(page, totalPages);
-  const pageItems = filtered.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE);
+    if (!sortByPct) return rows;
+    return rows
+      .slice()
+      .sort(
+        (a, b) =>
+          pickProbability(b, applied.market) - pickProbability(a, applied.market),
+      );
+  }, [
+    upcoming,
+    applied,
+    kickWindow,
+    now,
+    liveBoards,
+    favoritesOnly,
+    favoriteIds,
+    sortByPct,
+  ]);
+
+  const groupedPageItems = useMemo(() => {
+    const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+    const safePage = Math.min(page, totalPages);
+    const pageItems = filtered.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE);
+    const groups = new Map<string, DashboardPrediction[]>();
+    for (const item of pageItems) {
+      const key = `${item.leagueApiId}:${item.leagueName}`;
+      const bucket = groups.get(key) ?? [];
+      bucket.push(item);
+      groups.set(key, bucket);
+    }
+    return {
+      totalPages,
+      safePage,
+      pageItems,
+      groups: [...groups.entries()].map(([key, items]) => ({
+        key,
+        leagueName: items[0]?.leagueName ?? key,
+        items,
+      })),
+    };
+  }, [filtered, page]);
+
+  const { totalPages, safePage, pageItems, groups: leagueGroups } = groupedPageItems;
 
   const couponLegs = useMemo(() => {
     const pool = (todayMatches.length ? todayMatches : upcoming)
@@ -484,6 +575,7 @@ export function MemberPredictionsBoard({
 
   const applyFilters = () => {
     setApplied(draft);
+    writePreferredLeagueApiId(draft.league === "ALL" ? null : draft.league);
     setPage(1);
     setFiltersOpen(false);
   };
@@ -497,7 +589,12 @@ export function MemberPredictionsBoard({
     };
     setDraft(next);
     setApplied(next);
+    writePreferredLeagueApiId(null);
     setPage(1);
+  };
+
+  const toggleFavorite = (matchId: number) => {
+    setFavoriteIds(toggleFavoriteMatchId(matchId));
   };
 
   const evaluatedSamples =
@@ -543,6 +640,17 @@ export function MemberPredictionsBoard({
             <strong>{formatUpdate(updatedAtIso)}</strong>
           </div>
         </article>
+        <article className={styles.statCard}>
+          <span className={styles.statIcon}>
+            <IconTrophy />
+          </span>
+          <div>
+            <small>{t("Live")}</small>
+            <strong>
+              {liveCount > 0 ? `${liveCount} ${t("matches")}` : t("No live scores now")}
+            </strong>
+          </div>
+        </article>
       </section>
 
       <div className={styles.windowRow} role="toolbar" aria-label={t("Kickoff window")}>
@@ -566,6 +674,28 @@ export function MemberPredictionsBoard({
             {label}
           </button>
         ))}
+        <button
+          type="button"
+          className={styles.windowChip}
+          data-active={sortByPct}
+          onClick={() => {
+            setSortByPct((value) => !value);
+            setPage(1);
+          }}
+        >
+          {t("Sort by probability")}
+        </button>
+        <button
+          type="button"
+          className={styles.windowChip}
+          data-active={favoritesOnly}
+          onClick={() => {
+            setFavoritesOnly((value) => !value);
+            setPage(1);
+          }}
+        >
+          {t("Favorites")}
+        </button>
       </div>
 
       <div className={styles.layout}>
@@ -659,100 +789,148 @@ export function MemberPredictionsBoard({
 
           <div className={styles.list}>
             {pageItems.length ? (
-              pageItems.map((item) => {
-                const conf = confidenceMeta(item.confidenceScore);
-                const primaryPick = resolvePrimaryPick(item, applied.market);
-                const odds = fairOdds(item, applied.market);
-                const probability = pickProbability(item, applied.market);
-                const chip = pickChip(item, locale, t, applied.market);
-                const insight = buildMatchCardInsight(item, t, locale);
-                const lineMove =
-                  showOdds && primaryPick?.key
-                    ? lineMoves[marketLineMoveKey(item.matchId, primaryPick.key)]
-                    : null;
-                return (
-                  <article className={styles.card} key={item.matchId}>
-                    <div className={styles.cardHead}>
-                      <div className={styles.league}>
-                        <span className={styles.leagueFlag}>{leagueFlagCode(item.leagueName)}</span>
-                        <span>{item.leagueName}</span>
-                      </div>
-                      <time className={styles.kick} dateTime={asDate(item.kickoffAt).toISOString()}>
-                        <IconClock size={14} />
-                        {formatKickLabel(item.kickoffAt)}
-                      </time>
-                    </div>
-
-                    <div className={styles.cardBody}>
-                      <div className={styles.matchup}>
-                        <div className={styles.team}>
-                          <TeamLogo src={item.homeTeamLogo} name={item.homeTeam} />
-                          <strong>{item.homeTeam}</strong>
+              leagueGroups.map((group) => (
+                <section className={styles.leagueGroup} key={group.key} aria-label={group.leagueName}>
+                  <header className={styles.leagueGroupHead}>
+                    <span className={styles.leagueFlag}>{leagueFlagCode(group.leagueName)}</span>
+                    <strong>{group.leagueName}</strong>
+                    <small>
+                      {group.items.length} {t("matches")}
+                    </small>
+                  </header>
+                  {group.items.map((item) => {
+                    const conf = confidenceMeta(item.confidenceScore);
+                    const primaryPick = resolvePrimaryPick(item, applied.market);
+                    const odds = fairOdds(item, applied.market);
+                    const probability = pickProbability(item, applied.market);
+                    const chip = pickChip(item, locale, t, applied.market);
+                    const insight = buildMatchCardInsight(item, t, locale);
+                    const board = liveBoards[item.matchId];
+                    const score = formatMatchScore(board);
+                    const status = matchStatusLabel(board, uiLocale);
+                    const isFav = favoriteIds.includes(item.matchId);
+                    const lineMove =
+                      showOdds && primaryPick?.key
+                        ? lineMoves[marketLineMoveKey(item.matchId, primaryPick.key)]
+                        : null;
+                    return (
+                      <article className={styles.card} key={item.matchId} data-status={board?.status}>
+                        <div className={styles.cardHead}>
+                          <div className={styles.league}>
+                            <span className={styles.leagueFlag}>{leagueFlagCode(item.leagueName)}</span>
+                            <span>{item.leagueName}</span>
+                          </div>
+                          <div className={styles.headActions}>
+                            {status || score ? (
+                              <span
+                                className={styles.liveBadge}
+                                data-status={board?.status ?? "SCHEDULED"}
+                              >
+                                {status ? <em>{status}</em> : null}
+                                {score ? <strong>{score}</strong> : null}
+                              </span>
+                            ) : (
+                              <time
+                                className={styles.kick}
+                                dateTime={asDate(item.kickoffAt).toISOString()}
+                              >
+                                <IconClock size={14} />
+                                {formatKickLabel(item.kickoffAt)}
+                              </time>
+                            )}
+                            <button
+                              type="button"
+                              className={styles.favBtn}
+                              data-on={isFav ? "true" : "false"}
+                              aria-pressed={isFav}
+                              aria-label={
+                                isFav ? t("Remove from favorites") : t("Add to favorites")
+                              }
+                              onClick={() => toggleFavorite(item.matchId)}
+                            >
+                              {isFav ? "★" : "☆"}
+                            </button>
+                          </div>
                         </div>
-                        <span className={styles.versus}>VS</span>
-                        <div className={styles.team}>
-                          <TeamLogo src={item.awayTeamLogo} name={item.awayTeam} />
-                          <strong>{item.awayTeam}</strong>
-                        </div>
-                      </div>
 
-                      <div className={styles.pickChip}>
-                        <span>{chip.market}</span>
-                        <strong>{chip.tip}</strong>
-                      </div>
-
-                      <div className={styles.metricRowCompact}>
-                        <div className={styles.metric}>
-                          <span>{t("Model probability")}</span>
-                          {showOdds ? (
-                            <strong className={styles.probValue}>%{probability.toFixed(0)}</strong>
-                          ) : (
-                            <span className={styles.lock}>—</span>
-                          )}
-                        </div>
-                        <div className={styles.metric}>
-                          <span>{t("Odds (decimal)")}</span>
-                          {showOdds ? (
-                            <strong className={styles.oddsValue}>{odds > 0 ? odds.toFixed(2) : "—"}</strong>
-                          ) : (
-                            <span className={styles.lock}>
-                              <Link href={plansHref}>{t(LOCK_HINT.modelOdds)}</Link>
+                        <div className={styles.cardBody}>
+                          <div className={styles.matchup}>
+                            <div className={styles.team}>
+                              <TeamLogo src={item.homeTeamLogo} name={item.homeTeam} />
+                              <strong>{item.homeTeam}</strong>
+                            </div>
+                            <span className={styles.versus}>
+                              {score ? score : "VS"}
                             </span>
-                          )}
-                        </div>
-                        <div className={styles.metric}>
-                          <span>{t("Confidence")}</span>
-                          <span
-                            className={`${styles.confPill} ${
-                              conf.kind === "high"
-                                ? styles.confHigh
-                                : conf.kind === "med"
-                                  ? styles.confMed
-                                  : styles.confLow
-                            }`}
-                          >
-                            {t(conf.label)}
-                          </span>
-                        </div>
-                      </div>
+                            <div className={styles.team}>
+                              <TeamLogo src={item.awayTeamLogo} name={item.awayTeam} />
+                              <strong>{item.awayTeam}</strong>
+                            </div>
+                          </div>
 
-                      <MarketLineMoveBlock locked={!showOdds} move={lineMove} />
-                    </div>
+                          <div className={styles.pickChip}>
+                            <span>{chip.market}</span>
+                            <strong>{chip.tip}</strong>
+                          </div>
 
-                    <div className={styles.cardFoot}>
-                      {insight ? (
-                        <p className={styles.analysis}>
-                          <IconChart />
-                          <span>{insight}</span>
-                        </p>
-                      ) : null}
-                      <Link className={styles.analysisLink} href={matchHref(item.matchId)}>
-                        {t("View match analysis")} →
-                      </Link>
-                    </div>
-                  </article>
-                );
-              })
+                          <div className={styles.metricRowCompact}>
+                            <div className={styles.metric}>
+                              <span>{t("Model probability")}</span>
+                              {showOdds ? (
+                                <strong className={styles.probValue}>
+                                  %{probability.toFixed(0)}
+                                </strong>
+                              ) : (
+                                <span className={styles.lock}>—</span>
+                              )}
+                            </div>
+                            <div className={styles.metric}>
+                              <span>{t("Odds (decimal)")}</span>
+                              {showOdds ? (
+                                <strong className={styles.oddsValue}>
+                                  {odds > 0 ? odds.toFixed(2) : "—"}
+                                </strong>
+                              ) : (
+                                <span className={styles.lock}>
+                                  <Link href={plansHref}>{t(LOCK_HINT.modelOdds)}</Link>
+                                </span>
+                              )}
+                            </div>
+                            <div className={styles.metric}>
+                              <span>{t("Confidence")}</span>
+                              <span
+                                className={`${styles.confPill} ${
+                                  conf.kind === "high"
+                                    ? styles.confHigh
+                                    : conf.kind === "med"
+                                      ? styles.confMed
+                                      : styles.confLow
+                                }`}
+                              >
+                                {t(conf.label)}
+                              </span>
+                            </div>
+                          </div>
+
+                          <MarketLineMoveBlock locked={!showOdds} move={lineMove} />
+                        </div>
+
+                        <div className={styles.cardFoot}>
+                          {insight ? (
+                            <p className={styles.analysis}>
+                              <IconChart />
+                              <span>{insight}</span>
+                            </p>
+                          ) : null}
+                          <Link className={styles.analysisLink} href={matchHref(item.matchId)}>
+                            {t("View match analysis")} →
+                          </Link>
+                        </div>
+                      </article>
+                    );
+                  })}
+                </section>
+              ))
             ) : (
               <div className={styles.empty}>{t("No matches match these filters.")}</div>
             )}

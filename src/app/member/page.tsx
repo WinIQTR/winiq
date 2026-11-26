@@ -5,6 +5,7 @@ import { requireMember } from "@/lib/auth-session";
 import { collectMarketLineMoveQueries } from "@/lib/market-line-move-queries";
 import { loadMarketLineMoves } from "@/lib/market-line-move";
 import { marketLineMovesToRecord } from "@/lib/market-line-move-shared";
+import { loadMatchLiveBoards } from "@/lib/match-live-board";
 import { loadMemberPastPerformance } from "@/lib/member-past-performance";
 import { buildMemberV2Desk } from "@/lib/member-v2-desk";
 import {
@@ -45,9 +46,12 @@ export default async function MemberPage({
     .slice()
     .sort((a, b) => a.kickoffAt.getTime() - b.kickoffAt.getTime())
     .slice(0, 2_000);
-  const lineMoves = marketLineMovesToRecord(
-    await loadMarketLineMoves(collectMarketLineMoveQueries(predictions)),
-  );
+  const [lineMoves, liveBoards] = await Promise.all([
+    loadMarketLineMoves(collectMarketLineMoveQueries(predictions)).then(
+      marketLineMovesToRecord,
+    ),
+    loadMatchLiveBoards(predictions.map((item) => item.matchId)),
+  ]);
   const v2Desk = buildMemberV2Desk({
     predictions,
     lineMoves,
@@ -66,6 +70,7 @@ export default async function MemberPage({
       performance={past.performance}
       updatedAtIso={updatedAtIso}
       lineMoves={lineMoves}
+      liveBoards={liveBoards}
       v2Desk={v2Desk}
     />
   );
