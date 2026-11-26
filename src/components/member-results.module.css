@@ -386,15 +386,131 @@
 }
 
 .resultCount {
-  color: #8aa3c4;
+  display: inline-flex;
+  align-items: center;
+  justify-self: end;
+  align-self: end;
+  min-height: 42px;
+  border-radius: 999px;
+  padding: 0 14px;
+  background: rgba(37, 99, 235, 0.12);
+  color: #2563eb;
   font-size: 12px;
-  padding-bottom: 10px;
+  font-weight: 700;
   white-space: nowrap;
 }
 
 .list {
   display: grid;
+  gap: 12px;
+}
+
+.matchCard {
+  border: 1px solid rgba(56, 90, 140, 0.45);
+  border-radius: 16px;
+  background: linear-gradient(145deg, rgba(10, 28, 50, 0.98), rgba(7, 18, 34, 0.98));
+  overflow: hidden;
+}
+
+.matchCardFlat .matchSummary {
+  cursor: default;
+}
+
+.matchSummary {
+  display: grid;
+  grid-template-columns: minmax(160px, 1.1fr) minmax(140px, 0.7fr) minmax(180px, 1.2fr) auto;
+  gap: 14px;
+  align-items: center;
+  padding: 16px 18px;
+  list-style: none;
+  cursor: pointer;
+}
+
+.matchSummary::-webkit-details-marker {
+  display: none;
+}
+
+.matchCard[open] .chevron {
+  transform: rotate(180deg);
+}
+
+.matchMeta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.leagueBadge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  border-radius: 999px;
+  padding: 0 10px;
+  background: rgba(37, 99, 235, 0.14);
+  color: #60a5fa;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.dateBadge {
+  color: #8aa3c4;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.pickCount {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
   gap: 10px;
+  color: #c5d7ef;
+  grid-column: 3 / -1;
+}
+
+.pickCount strong {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.chevron {
+  display: inline-grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.12);
+  color: #94a3b8;
+  font-size: 12px;
+  transition: transform 0.15s ease;
+}
+
+.collapsedPick {
+  display: grid;
+  gap: 8px;
+  justify-items: start;
+  min-width: 0;
+}
+
+.pickList {
+  display: grid;
+  gap: 8px;
+  padding: 0 18px 16px;
+  border-top: 1px solid rgba(56, 90, 140, 0.35);
+}
+
+.pickRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(56, 90, 140, 0.22);
+}
+
+.pickRow:last-child {
+  border-bottom: 0;
+  padding-bottom: 4px;
 }
 
 .row {
@@ -554,6 +670,22 @@
     grid-template-columns: 1fr;
     justify-items: start;
   }
+
+  .matchSummary {
+    grid-template-columns: 1fr;
+    justify-items: start;
+  }
+
+  .pickCount {
+    grid-column: auto;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .pickRow {
+    grid-template-columns: 1fr;
+    justify-items: start;
+  }
 }
 
 @media (max-width: 640px) {
@@ -582,6 +714,8 @@
 :global(html:not([data-theme])) .filters,
 :global(html[data-theme="light"]) .row,
 :global(html:not([data-theme])) .row,
+:global(html[data-theme="light"]) .matchCard,
+:global(html:not([data-theme])) .matchCard,
 :global(html[data-theme="light"]) .statCard,
 :global(html:not([data-theme])) .statCard {
   background: #ffffff !important;
@@ -657,8 +791,60 @@
 :global(html[data-theme="light"]) .detail,
 :global(html:not([data-theme])) .detail {
   background: #ffffff;
-  color: #059669;
-  border-color: rgba(16, 185, 129, 0.55);
+  color: #2563eb;
+  border-color: rgba(37, 99, 235, 0.45);
+}
+
+:global(html[data-theme="light"]) .resultCount,
+:global(html:not([data-theme])) .resultCount {
+  background: #eff6ff !important;
+  color: #1d4ed8 !important;
+}
+
+:global(html[data-theme="light"]) .leagueBadge,
+:global(html:not([data-theme])) .leagueBadge {
+  background: #eff6ff !important;
+  color: #1d4ed8 !important;
+}
+
+:global(html[data-theme="light"]) .dateBadge,
+:global(html:not([data-theme])) .dateBadge,
+:global(html[data-theme="light"]) .pickLabel,
+:global(html:not([data-theme])) .pickLabel,
+:global(html[data-theme="light"]) .pickCount,
+:global(html:not([data-theme])) .pickCount {
+  color: #334155 !important;
+}
+
+:global(html[data-theme="light"]) .pickList,
+:global(html:not([data-theme])) .pickList,
+:global(html[data-theme="light"]) .pickRow,
+:global(html:not([data-theme])) .pickRow {
+  border-color: #e5e7eb !important;
+}
+
+:global(html[data-theme="light"]) .chevron,
+:global(html:not([data-theme])) .chevron {
+  background: #f1f5f9 !important;
+  color: #64748b !important;
+}
+
+:global(html[data-theme="light"]) .pillWon,
+:global(html:not([data-theme])) .pillWon {
+  background: #dcfce7 !important;
+  color: #166534 !important;
+}
+
+:global(html[data-theme="light"]) .pillVoid,
+:global(html:not([data-theme])) .pillVoid {
+  background: #ffedd5 !important;
+  color: #c2410c !important;
+}
+
+:global(html[data-theme="light"]) .pillLost,
+:global(html:not([data-theme])) .pillLost {
+  background: #fee2e2 !important;
+  color: #b91c1c !important;
 }
 
 /* Light: results summary labels/numbers must be readable on white */

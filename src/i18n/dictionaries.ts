@@ -800,6 +800,8 @@ entries.push(
   { en: "All dates", tr: "Tüm tarihler" },
   { en: "All results", tr: "Tüm sonuçlar" },
   { en: "results found", tr: "sonuç bulundu" },
+  { en: "prediction picks", tr: "tahmin seçimi" },
+  { en: "Void (not a loss)", tr: "Geçersiz (not a loss)" },
   { en: "Not settled yet", tr: "Henüz sonuçlanmadı" },
   { en: "Details", tr: "Ayrıntılar" },
   { en: "No matches match these filters.", tr: "Bu filtrelere uyan maç yok." },

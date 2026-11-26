@@ -112,10 +112,52 @@ export function MemberResultsBoard({
       return (
         item.homeTeam.toLowerCase().includes(q) ||
         item.awayTeam.toLowerCase().includes(q) ||
-        item.leagueName.toLowerCase().includes(q)
+        item.leagueName.toLowerCase().includes(q) ||
+        (item.pickLabel ?? "").toLowerCase().includes(q)
       );
     });
   }, [matches, search, league, date, result, oddsBand]);
+
+  /** One accordion card per match — picks nest underneath (screenshot layout). */
+  const matchGroups = useMemo(() => {
+    const map = new Map<
+      number,
+      {
+        matchId: number;
+        homeTeam: string;
+        awayTeam: string;
+        homeTeamLogo: string | null;
+        awayTeamLogo: string | null;
+        leagueName: string;
+        dateLabel: string;
+        dateKey: string;
+        href: string;
+        picks: MemberResultsMatch[];
+      }
+    >();
+
+    for (const item of filtered) {
+      const existing = map.get(item.matchId);
+      if (existing) {
+        existing.picks.push(item);
+        continue;
+      }
+      map.set(item.matchId, {
+        matchId: item.matchId,
+        homeTeam: item.homeTeam,
+        awayTeam: item.awayTeam,
+        homeTeamLogo: item.homeTeamLogo,
+        awayTeamLogo: item.awayTeamLogo,
+        leagueName: item.leagueName,
+        dateLabel: item.dateLabel,
+        dateKey: item.dateKey,
+        href: item.href,
+        picks: [item],
+      });
+    }
+
+    return [...map.values()];
+  }, [filtered]);
 
   const bands = [
     { key: "strong", label: t("Strong"), tone: "strong" as const, icon: "🛡", band: strong },
@@ -405,39 +447,96 @@ export function MemberResultsBoard({
             </select>
           </label>
           <div className={styles.resultCount}>
-            {filtered.length} {t("results found")}
+            {matchGroups.length} {t("results found")}
           </div>
         </div>
 
         <div className={styles.list}>
-          {filtered.length ? (
-            filtered.map((item) => (
-              <article className={styles.row} key={item.rowKey ?? `${item.matchId}-${item.dateKey}`}>
-                <div className={styles.teams}>
-                  <div className={styles.teamLine}>
-                    <TeamLogo src={item.homeTeamLogo} name={item.homeTeam} />
-                    <strong>{item.homeTeam}</strong>
+          {matchGroups.length ? (
+            matchGroups.map((group) => {
+              const multi = group.picks.length > 1;
+              const primary = group.picks[0]!;
+              const head = (
+                <>
+                  <div className={styles.teams}>
+                    <div className={styles.teamLine}>
+                      <TeamLogo src={group.homeTeamLogo} name={group.homeTeam} />
+                      <strong>{group.homeTeam}</strong>
+                    </div>
+                    <div className={styles.teamLine}>
+                      <TeamLogo src={group.awayTeamLogo} name={group.awayTeam} />
+                      <strong>{group.awayTeam}</strong>
+                    </div>
                   </div>
-                  <div className={styles.teamLine}>
-                    <TeamLogo src={item.awayTeamLogo} name={item.awayTeam} />
-                    <strong>{item.awayTeam}</strong>
+
+                  <div className={styles.matchMeta}>
+                    <span className={styles.leagueBadge}>{group.leagueName}</span>
+                    <span className={styles.dateBadge}>{group.dateLabel}</span>
                   </div>
-                </div>
-                <div className={styles.meta}>
-                  <strong>{item.leagueName}</strong>
-                  <span>{item.dateLabel}</span>
-                  {item.pickLabel ? (
-                    <span className={styles.pickLabel}>
-                      {t("Pick")}: {item.pickLabel}
-                    </span>
-                  ) : null}
-                </div>
-                <span className={`${styles.pill} ${pillClass(item.status)}`}>{t(item.statusLabel)}</span>
-                <Link className={styles.detail} href={item.href}>
-                  {t("Details")} ›
-                </Link>
-              </article>
-            ))
+                </>
+              );
+
+              if (!multi) {
+                return (
+                  <article
+                    className={`${styles.matchCard} ${styles.matchCardFlat}`}
+                    key={`${group.matchId}-${group.dateKey}`}
+                  >
+                    <div className={styles.matchSummary}>
+                      {head}
+                      <div className={styles.collapsedPick}>
+                        <span className={styles.pickLabel}>
+                          {t("Pick")}: {primary.pickLabel}
+                        </span>
+                        <span className={`${styles.pill} ${pillClass(primary.status)}`}>
+                          {t(primary.statusLabel)}
+                        </span>
+                      </div>
+                      <Link className={styles.detail} href={primary.href}>
+                        {t("Details")} ›
+                      </Link>
+                    </div>
+                  </article>
+                );
+              }
+
+              return (
+                <details
+                  className={styles.matchCard}
+                  key={`${group.matchId}-${group.dateKey}`}
+                >
+                  <summary className={styles.matchSummary}>
+                    {head}
+                    <div className={styles.pickCount}>
+                      <strong>
+                        {group.picks.length} {t("prediction picks")}
+                      </strong>
+                      <span className={styles.chevron} aria-hidden>
+                        ▾
+                      </span>
+                    </div>
+                  </summary>
+                  <div className={styles.pickList}>
+                    {group.picks.map((item) => (
+                      <div
+                        className={styles.pickRow}
+                        key={item.rowKey ?? `${item.matchId}-${item.pickLabel}`}
+                      >
+                        <span className={styles.pickLabel}>
+                          {t("Pick")}: {item.pickLabel}
+                        </span>
+                        <span className={`${styles.pill} ${pillClass(item.status)}`}>
+                          {t(item.statusLabel)}
+                        </span>
+                        <Link className={styles.detail} href={item.href}>
+                          {t("Details")} ›
+                        </Link>
+                      </div>
+                    ))}
+                  </div>
+                </details>
+              );
+            })
           ) : (
             <div className={styles.empty}>{t("No matches match these filters.")}</div>
           )}
