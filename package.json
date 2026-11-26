@@ -11,6 +11,8 @@
     "import-upcoming": "tsx scripts/import-upcoming-fixtures.ts",
     "predict-upcoming": "tsx scripts/predict-upcoming.ts",
     "refresh": "tsx scripts/refresh-production-data.ts",
+    "live:poll": "tsx scripts/poll-live-fixtures.ts",
+    "live:poll:loop": "tsx scripts/poll-live-fixtures.ts --loop --interval-sec=90",
     "archive": "tsx scripts/run-prediction-archive.ts",
     "import-odds": "tsx scripts/import-upcoming-odds.ts",
     "value-bets": "tsx scripts/run-value-bet-archive.ts",
