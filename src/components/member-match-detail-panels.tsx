@@ -18,7 +18,7 @@ import {
   formatMatchScore,
   matchStatusLabel,
   type MatchLiveBoard,
-} from "@/lib/match-live-board";
+} from "@/lib/match-live-board-shared";
 
 import styles from "../app/member/matches/[matchId]/member-match.module.css";
 

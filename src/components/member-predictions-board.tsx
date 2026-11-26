@@ -14,7 +14,7 @@ import {
   formatMatchScore,
   matchStatusLabel,
   type MatchLiveBoard,
-} from "@/lib/match-live-board";
+} from "@/lib/match-live-board-shared";
 import {
   readFavoriteMatchIds,
   readPreferredLeagueApiId,

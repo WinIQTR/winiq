@@ -431,7 +431,7 @@ export function MemberSmartDashboard({
   performance?: MemberPerformance;
   updatedAtIso?: string;
   lineMoves?: Record<string, MarketLineMove>;
-  liveBoards?: Record<number, import("@/lib/match-live-board").MatchLiveBoard>;
+  liveBoards?: Record<number, import("@/lib/match-live-board-shared").MatchLiveBoard>;
   v2Desk?: import("@/lib/member-v2-desk").MemberV2DeskBundle | null;
 }) {
   const matchPathPrefix = preview
