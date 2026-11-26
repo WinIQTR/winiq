@@ -21,6 +21,21 @@ export type MemberResultsOddsBand = MemberResultsBand & {
   tone: "band1" | "band2" | "band3" | "band4" | "band5";
 };
 
+export type MemberResultsMatchStats = {
+  shotsHome: number | null;
+  shotsAway: number | null;
+  shotsOnTargetHome: number | null;
+  shotsOnTargetAway: number | null;
+  cornersHome: number | null;
+  cornersAway: number | null;
+  yellowCardsHome: number | null;
+  yellowCardsAway: number | null;
+  redCardsHome: number | null;
+  redCardsAway: number | null;
+  possessionHome: number | null;
+  possessionAway: number | null;
+};
+
 export type MemberResultsMatch = {
   matchId: number;
   rowKey?: string;
@@ -40,6 +55,17 @@ export type MemberResultsMatch = {
   status: "WON" | "LOST" | "VOID" | "PENDING" | "OTHER";
   statusLabel: string;
   href: string;
+  /** Final score when known — never invented. */
+  homeScore?: number | null;
+  awayScore?: number | null;
+  /** Pre-match model favourite from 1X2 probabilities, when available. */
+  favouriteLabel?: string | null;
+  /** Match winner from final score, or Draw. */
+  winnerLabel?: string | null;
+  homeRating?: number | null;
+  awayRating?: number | null;
+  /** Boutique team stats when MatchTeamStatistic rows exist. */
+  matchStats?: MemberResultsMatchStats | null;
 };
 
 export type MemberResultsV2Panel = {
@@ -137,7 +163,16 @@ export function MemberResultsBoard({
         dateLabel: string;
         dateKey: string;
         href: string;
+        homeScore: number | null;
+        awayScore: number | null;
+        favouriteLabel: string | null;
+        winnerLabel: string | null;
+        homeRating: number | null;
+        awayRating: number | null;
+        matchStats: MemberResultsMatchStats | null;
         picks: MemberResultsMatch[];
+        hitsWon: number;
+        hitsSettled: number;
       }
     >();
 
@@ -145,8 +180,13 @@ export function MemberResultsBoard({
       const existing = map.get(item.matchId);
       if (existing) {
         existing.picks.push(item);
+        if (item.status === "WON" || item.status === "LOST") {
+          existing.hitsSettled += 1;
+          if (item.status === "WON") existing.hitsWon += 1;
+        }
         continue;
       }
+      const settled = item.status === "WON" || item.status === "LOST";
       map.set(item.matchId, {
         matchId: item.matchId,
         homeTeam: item.homeTeam,
@@ -157,12 +197,62 @@ export function MemberResultsBoard({
         dateLabel: item.dateLabel,
         dateKey: item.dateKey,
         href: item.href,
+        homeScore: item.homeScore ?? null,
+        awayScore: item.awayScore ?? null,
+        favouriteLabel: item.favouriteLabel ?? null,
+        winnerLabel: item.winnerLabel ?? null,
+        homeRating: item.homeRating ?? null,
+        awayRating: item.awayRating ?? null,
+        matchStats: item.matchStats ?? null,
         picks: [item],
+        hitsWon: item.status === "WON" ? 1 : 0,
+        hitsSettled: settled ? 1 : 0,
       });
     }
 
     return [...map.values()];
   }, [filtered]);
+
+  function formatPair(home: number | null, away: number | null) {
+    if (home == null && away == null) return null;
+    return `${home ?? "—"}–${away ?? "—"}`;
+  }
+
+  function boutiqueLines(group: {
+    matchStats: MemberResultsMatchStats | null;
+    homeRating: number | null;
+    awayRating: number | null;
+  }) {
+    const lines: Array<{ label: string; value: string }> = [];
+    const stats = group.matchStats;
+    if (stats) {
+      const shots = formatPair(stats.shotsHome, stats.shotsAway);
+      const onTarget = formatPair(stats.shotsOnTargetHome, stats.shotsOnTargetAway);
+      const corners = formatPair(stats.cornersHome, stats.cornersAway);
+      const yellow = formatPair(stats.yellowCardsHome, stats.yellowCardsAway);
+      const red = formatPair(stats.redCardsHome, stats.redCardsAway);
+      const possession = formatPair(
+        stats.possessionHome != null ? Math.round(stats.possessionHome) : null,
+        stats.possessionAway != null ? Math.round(stats.possessionAway) : null,
+      );
+      if (shots) lines.push({ label: t("Shots"), value: shots });
+      if (onTarget) lines.push({ label: t("Shots on target"), value: onTarget });
+      if (corners) lines.push({ label: t("Corners"), value: corners });
+      if (yellow) lines.push({ label: t("Yellow cards"), value: yellow });
+      if (red) lines.push({ label: t("Red cards"), value: red });
+      if (possession) lines.push({ label: t("Possession"), value: `${possession}%` });
+    }
+    if (group.homeRating != null || group.awayRating != null) {
+      lines.push({
+        label: t("Team rating"),
+        value: formatPair(
+          group.homeRating != null ? Math.round(group.homeRating) : null,
+          group.awayRating != null ? Math.round(group.awayRating) : null,
+        )!,
+      });
+    }
+    return lines;
+  }
 
   const bands = [
     { key: "strong", label: t("Strong"), tone: "strong" as const, icon: "🛡", band: strong },
@@ -476,6 +566,13 @@ export function MemberResultsBoard({
                 </div>
               );
 
+              const hasScore = group.homeScore != null && group.awayScore != null;
+              const boutique = boutiqueLines(group);
+              const hitLabel =
+                group.hitsSettled > 0
+                  ? `${group.hitsWon}/${group.hitsSettled} ${t("hit")}`
+                  : `${group.picks.length} ${t("predictions")}`;
+
               const head = (
                 <>
                   <div className={styles.teams}>
@@ -489,12 +586,58 @@ export function MemberResultsBoard({
                     </div>
                   </div>
 
-                  <div className={styles.matchMeta}>
-                    <span className={styles.leagueBadge}>{group.leagueName}</span>
-                    <span className={styles.dateBadge}>{group.dateLabel}</span>
+                  <div className={styles.scoreBlock}>
+                    {hasScore ? (
+                      <strong className={styles.scoreDigits} aria-label={t("Final score")}>
+                        {group.homeScore} – {group.awayScore}
+                      </strong>
+                    ) : (
+                      <strong className={styles.scorePending}>—</strong>
+                    )}
+                    <div className={styles.matchMeta}>
+                      <span className={styles.leagueBadge}>{group.leagueName}</span>
+                      <span className={styles.dateBadge}>{group.dateLabel}</span>
+                    </div>
+                    <div className={styles.resultFacts}>
+                      {group.winnerLabel ? (
+                        <span>
+                          {t("Winner")}:{" "}
+                          <b>
+                            {group.winnerLabel === "Draw"
+                              ? t("Draw")
+                              : group.winnerLabel}
+                          </b>
+                        </span>
+                      ) : null}
+                      {group.favouriteLabel ? (
+                        <span>
+                          {t("Pre-match favourite")}:{" "}
+                          <b>
+                            {group.favouriteLabel === "Draw"
+                              ? t("Draw")
+                              : group.favouriteLabel}
+                          </b>
+                        </span>
+                      ) : null}
+                    </div>
+                  </div>
+
+                  <div className={styles.pickCount} data-tone={group.hitsSettled ? "hits" : "count"}>
+                    <strong>{hitLabel}</strong>
                   </div>
                 </>
               );
+
+              const boutiqueRow =
+                boutique.length > 0 ? (
+                  <div className={styles.boutique} aria-label={t("Match stats")}>
+                    {boutique.map((line) => (
+                      <span key={line.label}>
+                        <em>{line.label}</em> {line.value}
+                      </span>
+                    ))}
+                  </div>
+                ) : null;
 
               if (!multi) {
                 return (
@@ -502,9 +645,8 @@ export function MemberResultsBoard({
                     className={`${styles.matchCard} ${styles.matchCardFlat}`}
                     key={`${group.matchId}-${group.dateKey}`}
                   >
-                    <div className={styles.matchSummary}>
-                      {head}
-                    </div>
+                    <div className={styles.matchSummary}>{head}</div>
+                    {boutiqueRow}
                     <div className={styles.pickList}>
                       <div className={styles.pickRow}>
                         {pickCells(primary)}
@@ -526,14 +668,8 @@ export function MemberResultsBoard({
                   key={`${group.matchId}-${group.dateKey}`}
                   open
                 >
-                  <summary className={styles.matchSummary}>
-                    {head}
-                    <div className={styles.pickCount}>
-                      <strong>
-                        {group.picks.length} {t("predictions")}
-                      </strong>
-                    </div>
-                  </summary>
+                  <summary className={styles.matchSummary}>{head}</summary>
+                  {boutiqueRow}
                   <div className={styles.pickList}>
                     {group.picks.map((item) => (
                       <div

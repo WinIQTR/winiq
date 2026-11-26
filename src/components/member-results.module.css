@@ -418,12 +418,77 @@
 
 .matchSummary {
   display: grid;
-  grid-template-columns: minmax(160px, 1.2fr) minmax(160px, 0.9fr) auto;
+  grid-template-columns: minmax(150px, 1.1fr) minmax(180px, 1.2fr) auto;
   gap: 14px;
   align-items: center;
   padding: 16px 18px;
   list-style: none;
   cursor: pointer;
+}
+
+.scoreBlock {
+  display: grid;
+  gap: 8px;
+  justify-items: start;
+  min-width: 0;
+}
+
+.scoreDigits {
+  margin: 0;
+  color: #eef4ff;
+  font-size: clamp(22px, 3vw, 30px);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.scorePending {
+  margin: 0;
+  color: #8aa3c4;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.resultFacts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  color: #8aa3c4;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.resultFacts b {
+  color: #dbe7f7;
+  font-weight: 800;
+}
+
+.boutique {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0 18px 12px;
+}
+
+.boutique span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 28px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.12);
+  color: #c5d5ea;
+  font-size: 11px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.boutique em {
+  font-style: normal;
+  color: #8aa3c4;
+  font-weight: 700;
 }
 
 .matchCardFlat .matchSummary {
@@ -469,6 +534,11 @@
   padding: 0 12px;
   background: rgba(37, 99, 235, 0.14);
   color: #93c5fd;
+}
+
+.pickCount[data-tone="hits"] {
+  background: rgba(22, 163, 74, 0.16);
+  color: #86efac;
 }
 
 .pickCount strong {
@@ -841,6 +911,40 @@
 :global(html:not([data-theme])) .pickCount {
   background: #eff6ff !important;
   color: #1d4ed8 !important;
+}
+
+:global(html[data-theme="light"]) .pickCount[data-tone="hits"],
+:global(html:not([data-theme])) .pickCount[data-tone="hits"] {
+  background: #dcfce7 !important;
+  color: #15803d !important;
+}
+
+:global(html[data-theme="light"]) .scoreDigits,
+:global(html:not([data-theme])) .scoreDigits {
+  color: #0b1f3a !important;
+}
+
+:global(html[data-theme="light"]) .scorePending,
+:global(html:not([data-theme])) .scorePending,
+:global(html[data-theme="light"]) .resultFacts,
+:global(html:not([data-theme])) .resultFacts {
+  color: #64748b !important;
+}
+
+:global(html[data-theme="light"]) .resultFacts b,
+:global(html:not([data-theme])) .resultFacts b {
+  color: #0b1f3a !important;
+}
+
+:global(html[data-theme="light"]) .boutique span,
+:global(html:not([data-theme])) .boutique span {
+  background: #f1f5f9 !important;
+  color: #0b1f3a !important;
+}
+
+:global(html[data-theme="light"]) .boutique em,
+:global(html:not([data-theme])) .boutique em {
+  color: #64748b !important;
 }
 
 :global(html[data-theme="light"]) .pickList,

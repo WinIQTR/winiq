@@ -1,6 +1,7 @@
 import type { MemberPerformance } from "@/components/member-smart-dashboard";
 import type {
   MemberResultsMatch,
+  MemberResultsMatchStats,
   MemberResultsOddsBand,
 } from "@/components/member-results-board";
 import {
@@ -13,6 +14,80 @@ import {
   marketOddsPickKey,
 } from "@/lib/member-market-odds";
 import { prisma } from "@/lib/prisma";
+
+type MatchEnrichment = {
+  homeScore: number | null;
+  awayScore: number | null;
+  favouriteLabel: string | null;
+  winnerLabel: string | null;
+  homeRating: number | null;
+  awayRating: number | null;
+  matchStats: MemberResultsMatchStats | null;
+};
+
+function winnerFromScore(
+  homeTeam: string,
+  awayTeam: string,
+  homeScore: number | null,
+  awayScore: number | null,
+): string | null {
+  if (homeScore == null || awayScore == null) return null;
+  if (homeScore > awayScore) return homeTeam;
+  if (awayScore > homeScore) return awayTeam;
+  return "Draw";
+}
+
+function favouriteFromOneXTwo(options: {
+  homeTeam: string;
+  awayTeam: string;
+  picks: Array<{ marketKey: string; probability: number | null }>;
+}): string | null {
+  let best: { key: string; probability: number } | null = null;
+  for (const pick of options.picks) {
+    const key = pick.marketKey.trim().toLocaleLowerCase("tr-TR");
+    if (key !== "ms-1" && key !== "ms-0" && key !== "ms-2") continue;
+    if (pick.probability == null || !Number.isFinite(pick.probability)) continue;
+    if (!best || pick.probability > best.probability) {
+      best = { key, probability: pick.probability };
+    }
+  }
+  if (!best) return null;
+  if (best.key === "ms-1") return options.homeTeam;
+  if (best.key === "ms-2") return options.awayTeam;
+  return "Draw";
+}
+
+function pairStats(
+  homeTeamId: number,
+  awayTeamId: number,
+  rows: Array<{
+    teamId: number;
+    shots: number | null;
+    shotsOnTarget: number | null;
+    corners: number | null;
+    yellowCards: number | null;
+    redCards: number | null;
+    possession: number | null;
+  }>,
+): MemberResultsMatchStats | null {
+  const home = rows.find((row) => row.teamId === homeTeamId) ?? null;
+  const away = rows.find((row) => row.teamId === awayTeamId) ?? null;
+  if (!home && !away) return null;
+  return {
+    shotsHome: home?.shots ?? null,
+    shotsAway: away?.shots ?? null,
+    shotsOnTargetHome: home?.shotsOnTarget ?? null,
+    shotsOnTargetAway: away?.shotsOnTarget ?? null,
+    cornersHome: home?.corners ?? null,
+    cornersAway: away?.corners ?? null,
+    yellowCardsHome: home?.yellowCards ?? null,
+    yellowCardsAway: away?.yellowCards ?? null,
+    redCardsHome: home?.redCards ?? null,
+    redCardsAway: away?.redCards ?? null,
+    possessionHome: home?.possession ?? null,
+    possessionAway: away?.possession ?? null,
+  };
+}
 
 export {
   MEMBER_ODDS_BAND_DEFS,
@@ -294,17 +369,93 @@ export async function loadMemberPastPerformance(options?: {
       kickoffAt: true,
       result: true,
       market: true,
+      marketKey: true,
       selection: true,
       category: true,
       tier: true,
+      probability: true,
+      actualHomeScore: true,
+      actualAwayScore: true,
       match: {
         select: {
+          homeScore: true,
+          awayScore: true,
+          homeTeamId: true,
+          awayTeamId: true,
           homeTeam: { select: { logoUrl: true } },
           awayTeam: { select: { logoUrl: true } },
+          teamStatistics: {
+            select: {
+              teamId: true,
+              shots: true,
+              shotsOnTarget: true,
+              corners: true,
+              yellowCards: true,
+              redCards: true,
+              possession: true,
+            },
+          },
+          squadStrengthScores: {
+            select: {
+              teamId: true,
+              overallSquadScore: true,
+              calculatedAt: true,
+            },
+            orderBy: { calculatedAt: "desc" },
+          },
         },
       },
     },
   });
+
+  const oneXTwoByMatch = new Map<
+    number,
+    Array<{ marketKey: string; probability: number | null }>
+  >();
+  for (const row of recent) {
+    const list = oneXTwoByMatch.get(row.matchId) ?? [];
+    list.push({ marketKey: row.marketKey, probability: row.probability });
+    oneXTwoByMatch.set(row.matchId, list);
+  }
+
+  const enrichmentByMatch = new Map<number, MatchEnrichment>();
+  for (const row of recent) {
+    if (enrichmentByMatch.has(row.matchId)) continue;
+    const match = row.match;
+    const homeScore = match?.homeScore ?? row.actualHomeScore ?? null;
+    const awayScore = match?.awayScore ?? row.actualAwayScore ?? null;
+    const homeTeamId = match?.homeTeamId ?? null;
+    const awayTeamId = match?.awayTeamId ?? null;
+
+    let homeRating: number | null = null;
+    let awayRating: number | null = null;
+    if (homeTeamId != null && awayTeamId != null && match?.squadStrengthScores?.length) {
+      const seen = new Set<number>();
+      for (const score of match.squadStrengthScores) {
+        if (seen.has(score.teamId)) continue;
+        seen.add(score.teamId);
+        if (score.teamId === homeTeamId) homeRating = score.overallSquadScore;
+        if (score.teamId === awayTeamId) awayRating = score.overallSquadScore;
+      }
+    }
+
+    enrichmentByMatch.set(row.matchId, {
+      homeScore,
+      awayScore,
+      favouriteLabel: favouriteFromOneXTwo({
+        homeTeam: row.homeTeam,
+        awayTeam: row.awayTeam,
+        picks: oneXTwoByMatch.get(row.matchId) ?? [],
+      }),
+      winnerLabel: winnerFromScore(row.homeTeam, row.awayTeam, homeScore, awayScore),
+      homeRating,
+      awayRating,
+      matchStats:
+        homeTeamId != null && awayTeamId != null
+          ? pairStats(homeTeamId, awayTeamId, match?.teamStatistics ?? [])
+          : null,
+    });
+  }
 
   const matches: MemberResultsMatch[] = [];
   for (const row of recent) {
@@ -330,6 +481,7 @@ export async function loadMemberPastPerformance(options?: {
       .filter((part) => part && part !== "—")
       .join(" · ");
     const oddsMeta = oddsByRowId.get(row.id);
+    const enrichment = enrichmentByMatch.get(row.matchId);
     matches.push({
       matchId: row.matchId,
       rowKey: `${row.matchId}-${row.id}`,
@@ -355,6 +507,13 @@ export async function loadMemberPastPerformance(options?: {
               ? "Void (not a loss)"
               : "Not settled yet",
       href: `/member/matches/${row.matchId}`,
+      homeScore: enrichment?.homeScore ?? null,
+      awayScore: enrichment?.awayScore ?? null,
+      favouriteLabel: enrichment?.favouriteLabel ?? null,
+      winnerLabel: enrichment?.winnerLabel ?? null,
+      homeRating: enrichment?.homeRating ?? null,
+      awayRating: enrichment?.awayRating ?? null,
+      matchStats: enrichment?.matchStats ?? null,
     });
     if (matches.length >= matchLimit) break;
   }
