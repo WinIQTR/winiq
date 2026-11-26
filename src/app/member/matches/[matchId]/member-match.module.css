@@ -15,6 +15,114 @@
   color: var(--mh-text, #0b1f3a);
 }
 
+.matchHead[data-finished="true"] {
+  gap: 14px;
+  text-align: center;
+}
+
+.finishedMeta {
+  margin: 0;
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.finishedStatus {
+  margin: 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 28px;
+  padding: 0 14px;
+  border-radius: 999px;
+  background: #dcfce7;
+  color: #15803d;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.matchupFinished {
+  gap: 18px;
+}
+
+.finalScore {
+  margin: 0;
+  min-width: 88px;
+  color: #0b1f3a;
+  font-size: clamp(32px, 5vw, 44px);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.winnerBanner {
+  margin: 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  padding: 0 18px;
+  border-radius: 12px;
+  background: #16a34a;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.winnerBanner[data-draw="true"] {
+  background: #64748b;
+}
+
+.finalStrip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px 16px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  text-align: left;
+}
+
+.finalStrip > div {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.finalStrip strong {
+  color: #166534;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.finalStrip span {
+  color: #3f6212;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.finalStripScore {
+  color: #15803d !important;
+  font-weight: 800;
+}
+
+@media (max-width: 720px) {
+  .finalStrip {
+    grid-template-columns: 1fr;
+  }
+
+  .matchupFinished {
+    flex-direction: column;
+  }
+
+  .matchupFinished .teamHome,
+  .matchupFinished .teamAway {
+    justify-content: center;
+  }
+}
+
 .headTop {
   display: flex;
   justify-content: space-between;
@@ -888,6 +996,7 @@
   background: linear-gradient(180deg, #0f1a2c 0%, #121f34 100%);
 }
 
+:global(html[data-theme="dark"]) .finalScore,
 :global(html[data-theme="dark"]) .team strong,
 :global(html[data-theme="dark"]) .pickTitle,
 :global(html[data-theme="dark"]) .formText,
@@ -900,6 +1009,24 @@
 :global(html[data-theme="dark"]) .recOdds b,
 :global(html[data-theme="dark"]) .probCell strong {
   color: #eef4ff;
+}
+
+:global(html[data-theme="dark"]) .finishedMeta {
+  color: #8aa3c4;
+}
+
+:global(html[data-theme="dark"]) .finalStrip {
+  background: rgba(22, 163, 74, 0.12);
+  border-color: rgba(74, 222, 128, 0.28);
+}
+
+:global(html[data-theme="dark"]) .finalStrip strong {
+  color: #86efac;
+}
+
+:global(html[data-theme="dark"]) .finalStrip span,
+:global(html[data-theme="dark"]) .finalStripScore {
+  color: #bbf7d0 !important;
 }
 
 :global(html[data-theme="dark"]) .notice,

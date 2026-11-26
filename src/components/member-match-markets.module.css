@@ -5,8 +5,17 @@
 }
 
 .head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px 18px;
+  flex-wrap: wrap;
+}
+
+.headCopy {
   display: grid;
   gap: 4px;
+  min-width: 0;
 }
 
 .title {
@@ -21,6 +30,40 @@
   color: var(--mh-muted, #6b7280);
   font-size: 13px;
   line-height: 1.45;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.legendWon,
+.legendLost,
+.legendMissing {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  padding: 0 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.legendWon {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.legendLost {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.legendMissing {
+  background: #f1f5f9;
+  color: #64748b;
 }
 
 .tabs {
@@ -72,24 +115,13 @@
 
 .side {
   display: grid;
-  grid-template-columns: 40px minmax(0, 1fr);
-  gap: 10px;
-  align-items: start;
+  gap: 4px;
+  align-content: start;
   padding-top: 4px;
 }
 
-.groupIcon {
-  display: grid;
-  place-items: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 12px;
-  background: rgba(37, 99, 235, 0.1);
-  color: #2563eb;
-}
-
 .side h3 {
-  margin: 0 0 2px;
+  margin: 0;
   font-size: 15px;
   font-weight: 800;
   letter-spacing: -0.01em;
@@ -114,6 +146,11 @@
   grid-template-columns: 64px minmax(0, 1.15fr) minmax(90px, 1.2fr) 64px 56px;
   gap: 10px;
   align-items: center;
+}
+
+.group[data-settled="true"] .cols,
+.group[data-settled="true"] .rows li {
+  grid-template-columns: 64px minmax(0, 1fr) minmax(80px, 1.1fr) 56px 52px minmax(110px, 0.9fr);
 }
 
 .cols {
@@ -191,6 +228,39 @@
   font-variant-numeric: tabular-nums;
 }
 
+.outcome {
+  justify-self: end;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 26px;
+  padding: 0 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.outcome[data-outcome="WON"] {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.outcome[data-outcome="LOST"] {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.outcome[data-outcome="VOID"] {
+  background: #fef3c7;
+  color: #a16207;
+}
+
+.outcome[data-outcome="DATA_MISSING"] {
+  background: #f1f5f9;
+  color: #64748b;
+}
+
 /* Favori / orta / düşük — bar + % */
 .rows li[data-tone="high"] .bar,
 .rows li[data-tone="high"] .pct {
@@ -223,11 +293,13 @@
     display: none;
   }
 
-  .rows li {
+  .rows li,
+  .group[data-settled="true"] .rows li {
     grid-template-columns: 56px minmax(0, 1fr) auto;
     grid-template-areas:
       "code pick odds"
-      "bar bar pct";
+      "bar bar pct"
+      "out out out";
     gap: 6px 8px;
     padding: 10px 2px;
   }
@@ -250,6 +322,11 @@
 
   .odds {
     grid-area: odds;
+  }
+
+  .outcome {
+    grid-area: out;
+    justify-self: start;
   }
 }
 
@@ -281,9 +358,27 @@
   background: rgba(148, 163, 184, 0.18);
 }
 
-:global(html[data-theme="dark"]) .groupIcon {
-  background: rgba(59, 130, 246, 0.16);
-  color: #93c5fd;
+:global(html[data-theme="dark"]) .legendWon,
+:global(html[data-theme="dark"]) .outcome[data-outcome="WON"] {
+  background: rgba(22, 163, 74, 0.22);
+  color: #86efac;
+}
+
+:global(html[data-theme="dark"]) .legendLost,
+:global(html[data-theme="dark"]) .outcome[data-outcome="LOST"] {
+  background: rgba(220, 38, 38, 0.22);
+  color: #fca5a5;
+}
+
+:global(html[data-theme="dark"]) .legendMissing,
+:global(html[data-theme="dark"]) .outcome[data-outcome="DATA_MISSING"] {
+  background: rgba(148, 163, 184, 0.16);
+  color: #94a3b8;
+}
+
+:global(html[data-theme="dark"]) .outcome[data-outcome="VOID"] {
+  background: rgba(202, 138, 4, 0.22);
+  color: #fde68a;
 }
 
 :global(html[data-theme="dark"]) .tabs button {

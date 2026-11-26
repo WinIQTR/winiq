@@ -236,6 +236,19 @@ export default async function MemberMatchDetailPage({
       : Promise.resolve([]),
   ]);
   const liveBoard = liveBoardMap[matchId] ?? null;
+  const finalHomeScore =
+    liveBoard?.status === "FINISHED" && liveBoard.homeScore != null ? liveBoard.homeScore : null;
+  const finalAwayScore =
+    liveBoard?.status === "FINISHED" && liveBoard.awayScore != null ? liveBoard.awayScore : null;
+  const isFinished = finalHomeScore != null && finalAwayScore != null;
+  const winnerName = isFinished
+    ? finalHomeScore > finalAwayScore
+      ? prediction.homeTeam
+      : finalAwayScore > finalHomeScore
+        ? prediction.awayTeam
+        : null
+    : null;
+  const finalScoreLabel = isFinished ? `${finalHomeScore} – ${finalAwayScore}` : null;
 
   const kickoffLabel = new Intl.DateTimeFormat("tr-TR", {
     timeZone: TZ,
@@ -267,7 +280,7 @@ export default async function MemberMatchDetailPage({
     <main className={`${member.shell} member-plan-${user.plan.toLowerCase()}`}>
       <MemberPortalHeader plan={user.plan} active="home" memberName={user.name} />
       <div className={`${member.page} ${styles.page}`}>
-        <header className={styles.matchHead}>
+        <header className={styles.matchHead} data-finished={isFinished ? "true" : "false"}>
           <div className={styles.headTop}>
             <p className={styles.brandMark} data-no-translate>
               WINIQ · MAÇ
@@ -281,116 +294,173 @@ export default async function MemberMatchDetailPage({
             </div>
           </div>
 
-          <div className={styles.matchup}>
-            <div className={`${styles.team} ${styles.teamHome}`}>
-              <TeamLogo src={prediction.homeTeamLogo} name={prediction.homeTeam} size={48} />
-              <strong>{prediction.homeTeam}</strong>
-            </div>
-            <span className={styles.vsLine} aria-hidden />
-            <MemberMatchLiveScore board={liveBoard} locale="tr" />
-            {!liveBoard ||
-            (liveBoard.homeScore == null &&
-              liveBoard.status !== "LIVE" &&
-              liveBoard.status !== "FINISHED") ? (
-              <span className={styles.vs}>vs</span>
-            ) : null}
-            <span className={styles.vsLine} aria-hidden />
-            <div className={`${styles.team} ${styles.teamAway}`}>
-              <strong>{prediction.awayTeam}</strong>
-              <TeamLogo src={prediction.awayTeamLogo} name={prediction.awayTeam} size={48} />
-            </div>
-          </div>
-
-          <div className={styles.metaRow}>
-            <div className={styles.leagueRow}>
-              {league?.logoUrl ? (
-                <Image
-                  className={styles.leagueLogo}
-                  src={league.logoUrl}
-                  alt=""
-                  width={20}
-                  height={20}
-                />
-              ) : null}
-              <span>
+          {isFinished ? (
+            <>
+              <p className={styles.finishedMeta}>
                 {prediction.leagueName}
                 {ACTIVE_SEASON_YEAR ? ` · ${ACTIVE_SEASON_YEAR}` : ""}
-              </span>
-            </div>
-            <span className={styles.metaSep} aria-hidden>
-              |
-            </span>
-            <div className={styles.kick}>
-              <IconCal />
-              <span>{kickoffLabel}</span>
-            </div>
-          </div>
-          {matchContext ? (
-            <div className={styles.metaRow} style={{ marginTop: 10, flexWrap: "wrap", gap: 8 }}>
-              <span className={styles.planPill}>
-                {matchContext.predictionMode === "lineup_known_prediction"
-                  ? tr("Lineup-known mode")
-                  : tr("Early prediction mode")}
-              </span>
-              {matchContext.venue.isNeutral ? (
-                <span className={styles.planPill}>{tr("Neutral venue")}</span>
-              ) : null}
-              {matchContext.venue.hostCountry ? (
-                <span className={styles.planPill}>
-                  {tr("Host")}: {matchContext.venue.hostCountry}
-                </span>
-              ) : null}
-              {matchContext.homeElo != null && matchContext.awayElo != null ? (
-                <span className={styles.planPill}>
-                  Elo {Math.round(matchContext.homeElo)}–{Math.round(matchContext.awayElo)}
-                  {" · "}
-                  {Math.abs(matchContext.homeElo - matchContext.awayElo) < 40
-                    ? tr("Even matchup")
-                    : matchContext.homeElo > matchContext.awayElo
-                      ? tr("Home favourite")
-                      : tr("Away favourite")}
-                </span>
-              ) : null}
-              {matchContext.goalLines?.find((line) => line.line === 2.5) ? (
-                <span className={styles.planPill}>
-                  {tr("Goals 2.5")} ·{" "}
-                  {(
-                    (matchContext.goalLines.find((line) => line.line === 2.5)?.overProb ??
-                      0) * 100
-                  ).toFixed(0)}
-                  % {tr("Over")}
-                  {(matchContext.goalLines.find((line) => line.line === 2.5)?.overProb ??
-                    0) < 0.48
-                    ? ` → ${tr("Lean under 2.5")}`
-                    : (matchContext.goalLines.find((line) => line.line === 2.5)
-                          ?.overProb ?? 0) > 0.55
-                      ? ` → ${tr("Lean over 2.5")}`
-                      : ""}
-                </span>
-              ) : null}
-              {matchContext.goalLines
-                ?.filter((line) => line.highlighted)
-                .map((line) => (
-                  <span className={styles.planPill} key={line.line}>
-                    {labelGoalLineMarket(line.line, "over")}{" "}
-                    {(line.overProb * 100).toFixed(0)}%
+                {" · "}
+                {kickoffLabel}
+              </p>
+              <p className={styles.finishedStatus}>{tr("Match completed")}</p>
+              <div className={`${styles.matchup} ${styles.matchupFinished}`}>
+                <div className={`${styles.team} ${styles.teamHome}`}>
+                  <TeamLogo src={prediction.homeTeamLogo} name={prediction.homeTeam} size={48} />
+                  <strong>{prediction.homeTeam}</strong>
+                </div>
+                <strong className={styles.finalScore} aria-label={tr("Final score")}>
+                  {finalScoreLabel}
+                </strong>
+                <div className={`${styles.team} ${styles.teamAway}`}>
+                  <strong>{prediction.awayTeam}</strong>
+                  <TeamLogo src={prediction.awayTeamLogo} name={prediction.awayTeam} size={48} />
+                </div>
+              </div>
+              {winnerName ? (
+                <p className={styles.winnerBanner}>
+                  {tr("Winner")}: {winnerName}
+                </p>
+              ) : (
+                <p className={styles.winnerBanner} data-draw="true">
+                  {tr("Draw")}
+                </p>
+              )}
+              <div className={styles.finalStrip} role="status">
+                <div>
+                  <strong>{tr("Match result is final")}</strong>
+                  <span>{tr("Probabilities shown are based on pre-match models.")}</span>
+                </div>
+                <div>
+                  <strong>{tr("Actual result (final)")}</strong>
+                  <span className={styles.finalStripScore}>
+                    {prediction.homeTeam} {finalScoreLabel} {prediction.awayTeam}
                   </span>
-                ))}
-              {matchContext.monteCarloCheck ? (
-                <span className={styles.planPill}>
-                  MC{" "}
-                  {matchContext.monteCarloCheck.withinTolerance
-                    ? tr("aligned")
-                    : tr("check")}
+                </div>
+                <div>
+                  <strong>{tr("Model predictions")}</strong>
+                  <span>{tr("Pre-match probabilities compared with the final score.")}</span>
+                </div>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className={styles.matchup}>
+                <div className={`${styles.team} ${styles.teamHome}`}>
+                  <TeamLogo src={prediction.homeTeamLogo} name={prediction.homeTeam} size={48} />
+                  <strong>{prediction.homeTeam}</strong>
+                </div>
+                <span className={styles.vsLine} aria-hidden />
+                <MemberMatchLiveScore board={liveBoard} locale="tr" />
+                {!liveBoard ||
+                (liveBoard.homeScore == null &&
+                  liveBoard.status !== "LIVE" &&
+                  liveBoard.status !== "FINISHED") ? (
+                  <span className={styles.vs}>vs</span>
+                ) : null}
+                <span className={styles.vsLine} aria-hidden />
+                <div className={`${styles.team} ${styles.teamAway}`}>
+                  <strong>{prediction.awayTeam}</strong>
+                  <TeamLogo src={prediction.awayTeamLogo} name={prediction.awayTeam} size={48} />
+                </div>
+              </div>
+
+              <div className={styles.metaRow}>
+                <div className={styles.leagueRow}>
+                  {league?.logoUrl ? (
+                    <Image
+                      className={styles.leagueLogo}
+                      src={league.logoUrl}
+                      alt=""
+                      width={20}
+                      height={20}
+                    />
+                  ) : null}
+                  <span>
+                    {prediction.leagueName}
+                    {ACTIVE_SEASON_YEAR ? ` · ${ACTIVE_SEASON_YEAR}` : ""}
+                  </span>
+                </div>
+                <span className={styles.metaSep} aria-hidden>
+                  |
                 </span>
+                <div className={styles.kick}>
+                  <span>{kickoffLabel}</span>
+                </div>
+              </div>
+              {matchContext ? (
+                <div className={styles.metaRow} style={{ marginTop: 10, flexWrap: "wrap", gap: 8 }}>
+                  <span className={styles.planPill}>
+                    {matchContext.predictionMode === "lineup_known_prediction"
+                      ? tr("Lineup-known mode")
+                      : tr("Early prediction mode")}
+                  </span>
+                  {matchContext.venue.isNeutral ? (
+                    <span className={styles.planPill}>{tr("Neutral venue")}</span>
+                  ) : null}
+                  {matchContext.venue.hostCountry ? (
+                    <span className={styles.planPill}>
+                      {tr("Host")}: {matchContext.venue.hostCountry}
+                    </span>
+                  ) : null}
+                  {matchContext.homeElo != null && matchContext.awayElo != null ? (
+                    <span className={styles.planPill}>
+                      Elo {Math.round(matchContext.homeElo)}–{Math.round(matchContext.awayElo)}
+                      {" · "}
+                      {Math.abs(matchContext.homeElo - matchContext.awayElo) < 40
+                        ? tr("Even matchup")
+                        : matchContext.homeElo > matchContext.awayElo
+                          ? tr("Home favourite")
+                          : tr("Away favourite")}
+                    </span>
+                  ) : null}
+                  {matchContext.goalLines?.find((line) => line.line === 2.5) ? (
+                    <span className={styles.planPill}>
+                      {tr("Goals 2.5")} ·{" "}
+                      {(
+                        (matchContext.goalLines.find((line) => line.line === 2.5)?.overProb ??
+                          0) * 100
+                      ).toFixed(0)}
+                      % {tr("Over")}
+                      {(matchContext.goalLines.find((line) => line.line === 2.5)?.overProb ??
+                        0) < 0.48
+                        ? ` → ${tr("Lean under 2.5")}`
+                        : (matchContext.goalLines.find((line) => line.line === 2.5)
+                              ?.overProb ?? 0) > 0.55
+                          ? ` → ${tr("Lean over 2.5")}`
+                          : ""}
+                    </span>
+                  ) : null}
+                  {matchContext.goalLines
+                    ?.filter((line) => line.highlighted)
+                    .map((line) => (
+                      <span className={styles.planPill} key={line.line}>
+                        {labelGoalLineMarket(line.line, "over")}{" "}
+                        {(line.overProb * 100).toFixed(0)}%
+                      </span>
+                    ))}
+                  {matchContext.monteCarloCheck ? (
+                    <span className={styles.planPill}>
+                      MC{" "}
+                      {matchContext.monteCarloCheck.withinTolerance
+                        ? tr("aligned")
+                        : tr("check")}
+                    </span>
+                  ) : null}
+                </div>
               ) : null}
-            </div>
-          ) : null}
+            </>
+          )}
         </header>
 
         <MemberMatchDetailTabs tabs={detailTabs}>
           <div data-tab="summary" className={styles.tabStack}>
-            {showOdds ? <MemberMatchMarkets groups={groups} /> : null}
+            {showOdds ? (
+              <MemberMatchMarkets
+                groups={groups}
+                finalHomeScore={finalHomeScore}
+                finalAwayScore={finalAwayScore}
+              />
+            ) : null}
             <section className={styles.metricGrid}>
               <article className={styles.metricCard}>
                 <div className={styles.metricHead}>
@@ -652,7 +722,13 @@ export default async function MemberMatchDetailPage({
           ) : null}
 
           <div data-tab="odds" className={styles.tabStack}>
-            {showOdds ? <MemberMatchMarkets groups={groups} /> : null}
+            {showOdds ? (
+              <MemberMatchMarkets
+                groups={groups}
+                finalHomeScore={finalHomeScore}
+                finalAwayScore={finalAwayScore}
+              />
+            ) : null}
             <details className={styles.catalogWrap} open>
               <summary className={styles.catalogToggle}>{tr("Show all markets")}</summary>
               <BetMarketCatalogPanel
