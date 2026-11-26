@@ -71,7 +71,7 @@
 .hotFans { display:inline!important; overflow:visible!important; font-size:13px; }
 .teamCards { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; padding:12px; }
 .teamCard { border:1px solid #193955; border-radius:14px; background:#0a1a2c; padding:14px; }
-.teamCard summary { list-style:none; cursor:pointer; display:flex; justify-content:space-between; gap:10px; align-items:center; }
+.rank{display:grid;place-items:center;min-width:34px;height:28px;border-radius:8px;background:#e8f0ff;color:#2563eb;font-size:12px;font-weight:900}\n.teamCard summary { list-style:none; cursor:pointer; display:flex; justify-content:space-between; gap:10px; align-items:center; }
 .teamCard summary::-webkit-details-marker { display:none; }
 .teamCardBody { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:8px; margin-top:14px; }
 .teamCardBody div { background:#071426; border-radius:9px; padding:9px; }

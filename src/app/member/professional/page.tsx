@@ -5,6 +5,8 @@ import { redirect } from "next/navigation";
 import { MemberPortalHeader } from "@/components/member-smart-dashboard";
 import member from "@/components/member-smart-dashboard.module.css";
 import { MemberWeekFixtures, type WeekFixtureRow } from "@/components/member-week-fixtures";
+import { MemberRecentResults } from "@/components/member-recent-results";
+import { PlayerCardIdentity } from "@/components/player-card-identity";
 import { ACTIVE_SEASON_YEAR } from "@/config/season";
 import { ACTIVE_COMPETITIONS } from "@/config/competitions";
 import { requireMember } from "@/lib/auth-session";
@@ -54,12 +56,29 @@ export default async function ProfessionalDataPage({ searchParams }: { searchPar
     view === "players" ? prisma.playerSeasonStatistic.findMany({
       where: { season: { year: ACTIVE_SEASON_YEAR, ...(leagueFilter ? { leagueId: leagueFilter } : {}) }, ...(teamFilter ? { teamId: teamFilter } : {}), appearances: { gt: 0 }, ...(position !== "ALL" || query ? { player: { ...(position !== "ALL" ? { position } : {}), ...(query ? { name: { contains: query, mode: "insensitive" } } : {}) } } : {}) },
       orderBy: [{ appearances: "desc" }, { averageRating: "desc" }, { minutes: "desc" }], take: 80,
-      include: { player: { include: { injuries: { where: { actualReturnDate: null }, take: 1 } } }, team: true, season: { include: { league: true } } },
+      include: {
+        player: {
+          include: {
+            injuries: { where: { actualReturnDate: null }, take: 1 },
+            country: { select: { name: true, code: true, flagUrl: true } },
+          },
+        },
+        team: true,
+        season: { include: { league: true } },
+      },
     }) : Promise.resolve([]),
     view === "scorers" ? prisma.playerSeasonStatistic.findMany({
       where: { season: { year: ACTIVE_SEASON_YEAR, ...(leagueFilter ? { leagueId: leagueFilter } : {}) }, ...(teamFilter ? { teamId: teamFilter } : {}), appearances: { gt: 0 }, ...(query ? { player: { name: { contains: query, mode: "insensitive" } } } : {}) },
       orderBy: [{ goals: "desc" }, { assists: "desc" }, { minutes: "asc" }], take: 50,
-      include: { player: true, team: true, season: { include: { league: true } } },
+      include: {
+        player: {
+          include: {
+            country: { select: { name: true, code: true, flagUrl: true } },
+          },
+        },
+        team: true,
+        season: { include: { league: true } },
+      },
     }) : Promise.resolve([]),
     (view === "fixtures" || view === "standings") ? prisma.match.findMany({
       where: { season: { year: ACTIVE_SEASON_YEAR }, status: "FINISHED", kickoffAt: { lt: now } },
@@ -217,7 +236,18 @@ export default async function ProfessionalDataPage({ searchParams }: { searchPar
         })
       : [];
 
-  const recentResults = [...finishedMatches].reverse().filter(match => (!leagueFilter || match.season.leagueId === leagueFilter) && (!teamFilter || match.homeTeamId === teamFilter || match.awayTeamId === teamFilter)).slice(0, 20);
+  const weekFixtureIds = new Set(weekFixtureRows.map((row) => row.id));
+  const recentResults = [...finishedMatches]
+    .reverse()
+    .filter(
+      (match) =>
+        (!leagueFilter || match.season.leagueId === leagueFilter) &&
+        (!teamFilter || match.homeTeamId === teamFilter || match.awayTeamId === teamFilter) &&
+        // Avoid duplicating matches already listed in the week fixture panel above.
+        !weekFixtureIds.has(match.id),
+    )
+    .filter((match, index, list) => list.findIndex((row) => row.id === match.id) === index)
+    .slice(0, 20);
   const selectedLeague=leagues.find(item=>item.id===leagueFilter); const selectedMeta=ACTIVE_COMPETITIONS.find(item=>item.apiId===selectedLeague?.apiId);
   const stageOf=(round:string|null)=>{const value=(round??"").toLocaleLowerCase("tr-TR");if(value.includes("qualif"))return"Elemeler";if(value.includes("play-off")||value.includes("playoff"))return"Play-off";if(value.includes("league phase"))return"Lig Aşaması";if(value.includes("group"))return"Grup Aşaması";if(value.includes("round of")||value.includes("quarter")||value.includes("semi")||value.includes("final"))return"Eleme Turları";return"Normal Sezon";};
   const leagueMatches=finishedMatches.filter(item=>item.season.leagueId===leagueFilter); const stages=[...new Set(leagueMatches.map(item=>stageOf(item.round)))]; const requestedStage=stages.find(item=>item===params.stage); const activeStage=requestedStage??stages.find(item=>item==="Lig Aşaması"||item==="Normal Sezon")??stages[0];
@@ -265,9 +295,44 @@ export default async function ProfessionalDataPage({ searchParams }: { searchPar
         rangeLabel={`${formatDate(weekStart)} – ${formatDate(new Date(weekEnd.getTime() - 1))}`}
         rows={weekFixtureRows}
       />
-      <section className={`${styles.panel} ${styles.history}`}><header><div><h2>Past matches and stats</h2><small>Last {recentResults.length} matches for the selected league or team</small></div><span>Verified results</span></header><div className={styles.historyList}>{recentResults.map(match=>{const home=match.teamStatistics.find(row=>row.teamId===match.homeTeamId),away=match.teamStatistics.find(row=>row.teamId===match.awayTeamId);return <details key={match.id}><summary><small>{formatDate(match.kickoffAt)} · {match.season.league.name}</small><b>{match.homeTeam.name} <strong>{match.homeScore} – {match.awayScore}</strong> {match.awayTeam.name}</b><span>Show statistics</span></summary><div><span>Shots <b>{home?.shots??"—"} – {away?.shots??"—"}</b></span><span>Shots on target <b>{home?.shotsOnTarget??"—"} – {away?.shotsOnTarget??"—"}</b></span><span>Possession <b>{home?.possession??"—"}% – {away?.possession??"—"}%</b></span><span>Corners <b>{home?.corners??"—"} – {away?.corners??"—"}</b></span><span>Cards <b>{home?.yellowCards??"—"} – {away?.yellowCards??"—"}</b></span><span>xG <b>{home?.expectedGoals??"—"} – {away?.expectedGoals??"—"}</b></span></div></details>})}</div></section></> : null}
-      {view === "players" ? <><nav className={styles.teamTabs}><Link data-active={!teamFilter} href={`/member/professional?view=players${leagueFilter?`&league=${leagueFilter}`:""}`}>Tüm takımlar</Link>{teams.map(team=><Link data-active={team.id===teamFilter} href={`/member/professional?view=players${leagueFilter?`&league=${leagueFilter}`:""}&team=${team.id}`} key={team.id}>{team.name}</Link>)}</nav><section className={styles.metrics}><article><span>Kadro</span><strong>{players.length}</strong></article><article><span>Oynayan</span><strong>{players.filter(row=>row.appearances>0).length}</strong></article><article><span>Eksik / sakat</span><strong>{players.filter(row=>row.player.injuries.length).length}</strong></article><article><span>Yıldız oyuncu</span><strong>{players.filter(row=>(row.averageRating??0)>=7.5||row.goals+row.assists>=10).length}</strong></article></section><form className={styles.playerTools} action="/member/professional"><input type="hidden" name="view" value="players"/><input type="hidden" name="league" value={leagueFilter}/><input type="hidden" name="team" value={teamFilter}/><nav>{[["ALL","Tümü"],["GOALKEEPER","Kaleci"],["DEFENDER","Defans"],["MIDFIELDER","Orta Saha"],["FORWARD","Forvet"]].map(([key,label])=><Link data-active={position===key} href={`/member/professional?view=players&league=${leagueFilter}&team=${teamFilter}&position=${key}`} key={key}>{label}</Link>)}</nav><input name="q" defaultValue={query} placeholder="Oyuncu ara…"/><button>Ara</button></form><section className={styles.panel}><header><div><h2>Kadro ve sezon performansı</h2><small>★ Rating 7.50+ veya 10+ gol katkısı olan yıldız oyuncu</small></div><span>{players.length} oyuncu</span></header><div className={styles.playerCards}>{players.map(row=>{const star=(row.averageRating??0)>=7.5||row.goals+row.assists>=10;return <details className={`${styles.playerCard} ${star?styles.starCard:""}`} key={row.id}><summary><div className={styles.person}>{row.player.photoUrl?<Image src={row.player.photoUrl} alt="" width={48} height={48}/>:null}<span><b>{star?"★ ":""}{row.player.name}</b><small>{positionName(row.player.position)} · {row.player.nationality??"Uyruk bekleniyor"}{row.player.injuries.length?" · EKSİK / SAKAT":""}</small></span></div><strong>{row.goals} gol · {row.assists} asist</strong></summary><div className={styles.playerDetails}><span>Maç / ilk 11<b>{row.appearances} / {row.starts}</b></span><span>Dakika<b>{row.minutes}</b></span><span>Rating<b>{row.averageRating?.toFixed(2)??"—"}</b></span><span>Şut / isabet<b>{row.shots} / {row.shotsOnTarget}</b></span><span>Pas / isabet<b>{row.passes} / {row.passAccuracy??"—"}%</b></span><span>Kilit pas<b>{row.keyPasses}</b></span><span>Dribbling<b>{row.successfulDribbles}/{row.dribbleAttempts}</b></span><span>İkili mücadele<b>{row.duelsWon}/{row.duels}</b></span><span>Kart S/K<b>{row.yellowCards}/{row.redCards}</b></span><span>Boy / kilo<b>{row.player.heightCm??"—"} / {row.player.weightKg??"—"}</b></span></div></details>})}</div></section></> : null}
-      {view === "scorers" ? <><section className={styles.metrics}><article><span>Lider</span><strong>{scorers[0]?.player.name??"—"}</strong></article><article><span>Lider gol</span><strong>{scorers[0]?.goals??0}</strong></article><article><span>Gol atan oyuncu</span><strong>{scorers.filter(row=>row.goals>0).length}</strong></article><article><span>Toplam gol</span><strong>{scorers.reduce((sum,row)=>sum+row.goals,0)}</strong></article></section><form className={styles.scorerTools} action="/member/professional"><input type="hidden" name="view" value="scorers"/><input type="hidden" name="league" value={leagueFilter}/><select name="team" defaultValue={teamFilter}><option value="0">Tüm takımlar</option>{teams.map(team=><option value={team.id} key={team.id}>{team.name}</option>)}</select><input name="q" defaultValue={query} placeholder="Golcü ara…"/><button>Listeyi getir</button></form><section className={styles.panel}><header><h2>Gol & hücum liderleri</h2><span>İlk {scorers.length}</span></header><div className={styles.scorerCards}>{scorers.map((row,index)=><details className={`${styles.scorerCard} ${index<3?styles.podium:""}`} key={row.id}><summary><b className={styles.rank}>#{index+1}</b><span className={styles.person}>{row.player.photoUrl?<Image src={row.player.photoUrl} alt="" width={46} height={46}/>:null}<span><b>{row.player.name}</b><small>{row.team.name} · {row.appearances} maç</small></span></span><strong>{row.goals} GOL</strong></summary><div className={styles.playerDetails}><span>Asist<b>{row.assists}</b></span><span>Dakika<b>{row.minutes}</b></span><span>Gol / 90<b>{row.minutes?(row.goals*90/row.minutes).toFixed(2):"—"}</b></span><span>Gol başına dk.<b>{row.goals?Math.round(row.minutes/row.goals):"—"}</b></span><span>Şut / isabet<b>{row.shots}/{row.shotsOnTarget}</b></span><span>Rating<b>{row.averageRating?.toFixed(2)??"—"}</b></span><span>Penaltı gol/kaçan<b>{row.penaltiesScored}/{row.penaltiesMissed}</b></span><span>İlk 11<b>{row.starts}</b></span></div></details>)}</div></section></> : null}
+      <MemberRecentResults
+        matches={recentResults.map((match) => {
+          const home = match.teamStatistics.find((row) => row.teamId === match.homeTeamId);
+          const away = match.teamStatistics.find((row) => row.teamId === match.awayTeamId);
+          return {
+            id: match.id,
+            kickoffLabel: formatDate(match.kickoffAt),
+            leagueName: match.season.league.name,
+            homeName: match.homeTeam.name,
+            awayName: match.awayTeam.name,
+            homeScore: match.homeScore,
+            awayScore: match.awayScore,
+            homeStats: home
+              ? {
+                  shots: home.shots,
+                  shotsOnTarget: home.shotsOnTarget,
+                  possession: home.possession,
+                  corners: home.corners,
+                  yellowCards: home.yellowCards,
+                  expectedGoals: home.expectedGoals,
+                }
+              : null,
+            awayStats: away
+              ? {
+                  shots: away.shots,
+                  shotsOnTarget: away.shotsOnTarget,
+                  possession: away.possession,
+                  corners: away.corners,
+                  yellowCards: away.yellowCards,
+                  expectedGoals: away.expectedGoals,
+                }
+              : null,
+          };
+        })}
+      />
+      </> : null}
+      {view === "players" ? <><nav className={styles.teamTabs}><Link data-active={!teamFilter} href={`/member/professional?view=players${leagueFilter?`&league=${leagueFilter}`:""}`}>Tüm takımlar</Link>{teams.map(team=><Link data-active={team.id===teamFilter} href={`/member/professional?view=players${leagueFilter?`&league=${leagueFilter}`:""}&team=${team.id}`} key={team.id}>{team.name}</Link>)}</nav><section className={styles.metrics}><article><span>Kadro</span><strong>{players.length}</strong></article><article><span>Oynayan</span><strong>{players.filter(row=>row.appearances>0).length}</strong></article><article><span>Eksik / sakat</span><strong>{players.filter(row=>row.player.injuries.length).length}</strong></article><article><span>Yıldız oyuncu</span><strong>{players.filter(row=>(row.averageRating??0)>=7.5||row.goals+row.assists>=10).length}</strong></article></section><form className={styles.playerTools} action="/member/professional"><input type="hidden" name="view" value="players"/><input type="hidden" name="league" value={leagueFilter}/><input type="hidden" name="team" value={teamFilter}/><nav>{[["ALL","Tümü"],["GOALKEEPER","Kaleci"],["DEFENDER","Defans"],["MIDFIELDER","Orta Saha"],["FORWARD","Forvet"]].map(([key,label])=><Link data-active={position===key} href={`/member/professional?view=players&league=${leagueFilter}&team=${teamFilter}&position=${key}`} key={key}>{label}</Link>)}</nav><input name="q" defaultValue={query} placeholder="Oyuncu ara…"/><button>Ara</button></form><section className={styles.panel}><header><div><h2>Kadro ve sezon performansı</h2><small>★ Rating 7.50+ veya 10+ gol katkısı olan yıldız oyuncu</small></div><span>{players.length} oyuncu</span></header><div className={styles.playerCards}>{players.map(row=>{const star=(row.averageRating??0)>=7.5||row.goals+row.assists>=10;return <details className={`${styles.playerCard} ${star?styles.starCard:""}`} key={row.id}><summary><PlayerCardIdentity name={row.player.name} photoUrl={row.player.photoUrl} star={star} injury={row.player.injuries.length>0} locale="tr" source={{ nationality: row.player.nationality, position: row.player.position, detailedPosition: row.player.detailedPosition, marketValue: row.player.marketValue, marketValueCurrency: row.player.marketValueCurrency, country: row.player.country }} /><strong>{row.goals} gol · {row.assists} asist</strong></summary><div className={styles.playerDetails}><span>Maç / ilk 11<b>{row.appearances} / {row.starts}</b></span><span>Dakika<b>{row.minutes}</b></span><span>Rating<b>{row.averageRating?.toFixed(2)??"—"}</b></span><span>Şut / isabet<b>{row.shots} / {row.shotsOnTarget}</b></span><span>Pas / isabet<b>{row.passes} / {row.passAccuracy??"—"}%</b></span><span>Kilit pas<b>{row.keyPasses}</b></span><span>Dribbling<b>{row.successfulDribbles}/{row.dribbleAttempts}</b></span><span>İkili mücadele<b>{row.duelsWon}/{row.duels}</b></span><span>Kart S/K<b>{row.yellowCards}/{row.redCards}</b></span><span>Boy / kilo<b>{row.player.heightCm??"—"} / {row.player.weightKg??"—"}</b></span></div></details>})}</div></section></> : null}
+      {view === "scorers" ? <><section className={styles.metrics}><article><span>Lider</span><strong>{scorers[0]?.player.name??"—"}</strong></article><article><span>Lider gol</span><strong>{scorers[0]?.goals??0}</strong></article><article><span>Gol atan oyuncu</span><strong>{scorers.filter(row=>row.goals>0).length}</strong></article><article><span>Toplam gol</span><strong>{scorers.reduce((sum,row)=>sum+row.goals,0)}</strong></article></section><form className={styles.scorerTools} action="/member/professional"><input type="hidden" name="view" value="scorers"/><input type="hidden" name="league" value={leagueFilter}/><select name="team" defaultValue={teamFilter}><option value="0">Tüm takımlar</option>{teams.map(team=><option value={team.id} key={team.id}>{team.name}</option>)}</select><input name="q" defaultValue={query} placeholder="Golcü ara…"/><button>Listeyi getir</button></form><section className={styles.panel}><header><h2>Gol & hücum liderleri</h2><span>İlk {scorers.length}</span></header><div className={styles.scorerCards}>{scorers.map((row,index)=><details className={`${styles.scorerCard} ${index<3?styles.podium:""}`} key={row.id}><summary><b className={styles.rank}>#{index+1}</b><PlayerCardIdentity name={row.player.name} photoUrl={row.player.photoUrl} locale="tr" extraMeta={`${row.team.name} · ${row.appearances} maç`} source={{ nationality: row.player.nationality, position: row.player.position, detailedPosition: row.player.detailedPosition, marketValue: row.player.marketValue, marketValueCurrency: row.player.marketValueCurrency, country: row.player.country }} /><strong>{row.goals} GOL</strong></summary><div className={styles.playerDetails}><span>Asist<b>{row.assists}</b></span><span>Dakika<b>{row.minutes}</b></span><span>Gol / 90<b>{row.minutes?(row.goals*90/row.minutes).toFixed(2):"—"}</b></span><span>Gol başına dk.<b>{row.goals?Math.round(row.minutes/row.goals):"—"}</b></span><span>Şut / isabet<b>{row.shots}/{row.shotsOnTarget}</b></span><span>Rating<b>{row.averageRating?.toFixed(2)??"—"}</b></span><span>Penaltı gol/kaçan<b>{row.penaltiesScored}/{row.penaltiesMissed}</b></span><span>İlk 11<b>{row.starts}</b></span></div></details>)}</div></section></> : null}
       {view === "standings" ? !leagueFilter?<section className={styles.emptyState}><strong>Bir lig seçin</strong><span>Puan durumunu görmek için yukarıdaki liglerden birini seçin.</span></section>:<>{selectedMeta?.kind==="EUROPEAN_CUP"?<nav className={styles.stageTabs}>{stages.map(stage=><Link data-active={stage===activeStage} href={`/member/professional?view=standings&league=${leagueFilter}&stage=${encodeURIComponent(stage)}`} key={stage}>{stage}</Link>)}</nav>:null}{activeStage==="Eleme Turları"?<section className={styles.stageNote}>Eleme turlarında ortak lig tablosu oluşturulmaz. Buradaki sıralama yalnız seçilen tur maçlarının bilgi özetidir.</section>:null}<section className={styles.panel}><header><div><h2>{selectedLeague?.name} · {activeStage} puan durumu</h2><small>Play-off, eleme, grup ve lig aşamaları birbirine karıştırılmaz.</small></div><span>{standings.length} takım</span></header><div className={styles.standingsWrap}><div className={`${styles.standingRow} ${styles.standingHead}`}><span>#</span><span>Takım</span><span>Hareket</span><span>O</span><span>G</span><span>B</span><span>M</span><span>AG</span><span>YG</span><span>AV</span><span>P</span><span>Form</span></div>{standings.map((row,index)=>{const position=index+1;const movement=standingMovement(row.id,position);return <div className={styles.standingRow} key={row.id}><b>{position}</b><span className={styles.standingTeam}>{row.logoUrl?<Image src={row.logoUrl} alt="" width={28} height={28}/>:null}<strong>{row.name}</strong>{index===0?<em>★ Lider</em>:null}</span><span className={movement>0?styles.rankUp:movement<0?styles.rankDown:styles.rankSame}>{movement>0?`▲ ${movement}`:movement<0?`▼ ${Math.abs(movement)}`:"—"}</span><span>{row.played}</span><span>{row.won}</span><span>{row.drawn}</span><span>{row.lost}</span><span>{row.gf}</span><span>{row.ga}</span><span>{row.gf-row.ga>0?`+${row.gf-row.ga}`:row.gf-row.ga}</span><b>{row.points}</b><span className="form-result-badge">{Array.from({length:5},(_,i)=>recentForm(row.id,now)[i]??null).map((result,i)=>result?<i className="form-result-dot" data-result={result} key={i}>{result==="W"?"G":result==="D"?"B":"M"}</i>:<i className="form-result-missing" key={i}>—</i>)}</span></div>})}</div></section></> : null}
       <footer className={styles.footer}><b data-no-translate>WINIQ</b><span>Bu ekran yalnızca bilgi sunar; kullanıcı kendi kararını verir.</span></footer>
     </div>
