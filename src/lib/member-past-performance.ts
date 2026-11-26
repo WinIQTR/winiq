@@ -324,7 +324,11 @@ export async function loadMemberPastPerformance(options?: {
       month: "2-digit",
       day: "2-digit",
     }).format(row.kickoffAt);
-    const pickLabel = [row.market || row.category, row.selection].filter(Boolean).join(" · ");
+    const marketLabel = (row.market || row.category || "").trim() || "—";
+    const selectionLabel = (row.selection || "").trim() || "—";
+    const pickLabel = [marketLabel, selectionLabel]
+      .filter((part) => part && part !== "—")
+      .join(" · ");
     const oddsMeta = oddsByRowId.get(row.id);
     matches.push({
       matchId: row.matchId,
@@ -337,6 +341,8 @@ export async function loadMemberPastPerformance(options?: {
       dateKey,
       dateLabel: day,
       pickLabel: pickLabel || "—",
+      marketLabel,
+      selectionLabel,
       tierLabel: mapSmartPickTierToBand(row.tier),
       oddsBandKey: oddsMeta?.bandKey ?? null,
       status,

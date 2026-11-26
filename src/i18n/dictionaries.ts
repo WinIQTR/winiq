@@ -801,6 +801,8 @@ entries.push(
   { en: "All results", tr: "Tüm sonuçlar" },
   { en: "results found", tr: "sonuç bulundu" },
   { en: "prediction picks", tr: "tahmin seçimi" },
+  { en: "predictions", tr: "tahmin" },
+  { en: "Market field", tr: "Piyasa" },
   { en: "Void (not a loss)", tr: "Geçersiz (not a loss)" },
   { en: "Not settled yet", tr: "Henüz sonuçlanmadı" },
   { en: "Details", tr: "Ayrıntılar" },

@@ -31,7 +31,10 @@ export type MemberResultsMatch = {
   leagueName: string;
   dateLabel: string;
   dateKey: string;
+  /** Combined fallback · prefer marketLabel + selectionLabel for row UI. */
   pickLabel?: string;
+  marketLabel?: string;
+  selectionLabel?: string;
   tierLabel?: "strong" | "medium" | "weak";
   oddsBandKey?: string | null;
   status: "WON" | "LOST" | "VOID" | "PENDING" | "OTHER";
@@ -113,7 +116,9 @@ export function MemberResultsBoard({
         item.homeTeam.toLowerCase().includes(q) ||
         item.awayTeam.toLowerCase().includes(q) ||
         item.leagueName.toLowerCase().includes(q) ||
-        (item.pickLabel ?? "").toLowerCase().includes(q)
+        (item.pickLabel ?? "").toLowerCase().includes(q) ||
+        (item.marketLabel ?? "").toLowerCase().includes(q) ||
+        (item.selectionLabel ?? "").toLowerCase().includes(q)
       );
     });
   }, [matches, search, league, date, result, oddsBand]);
@@ -456,6 +461,21 @@ export function MemberResultsBoard({
             matchGroups.map((group) => {
               const multi = group.picks.length > 1;
               const primary = group.picks[0]!;
+
+              const pickCells = (item: MemberResultsMatch) => (
+                <div className={styles.pickFields}>
+                  <div className={styles.pickField}>
+                    <span className={styles.fieldLabel}>{t("Market field")}</span>
+                    <strong>{item.marketLabel ?? item.pickLabel ?? "—"}</strong>
+                  </div>
+                  <div className={styles.pickDivider} aria-hidden />
+                  <div className={styles.pickField}>
+                    <span className={styles.fieldLabel}>{t("Selection")}</span>
+                    <strong>{item.selectionLabel ?? "—"}</strong>
+                  </div>
+                </div>
+              );
+
               const head = (
                 <>
                   <div className={styles.teams}>
@@ -484,17 +504,17 @@ export function MemberResultsBoard({
                   >
                     <div className={styles.matchSummary}>
                       {head}
-                      <div className={styles.collapsedPick}>
-                        <span className={styles.pickLabel}>
-                          {t("Pick")}: {primary.pickLabel}
-                        </span>
+                    </div>
+                    <div className={styles.pickList}>
+                      <div className={styles.pickRow}>
+                        {pickCells(primary)}
                         <span className={`${styles.pill} ${pillClass(primary.status)}`}>
                           {t(primary.statusLabel)}
                         </span>
+                        <Link className={styles.detail} href={primary.href}>
+                          {t("Details")} ›
+                        </Link>
                       </div>
-                      <Link className={styles.detail} href={primary.href}>
-                        {t("Details")} ›
-                      </Link>
                     </div>
                   </article>
                 );
@@ -504,16 +524,14 @@ export function MemberResultsBoard({
                 <details
                   className={styles.matchCard}
                   key={`${group.matchId}-${group.dateKey}`}
+                  open
                 >
                   <summary className={styles.matchSummary}>
                     {head}
                     <div className={styles.pickCount}>
                       <strong>
-                        {group.picks.length} {t("prediction picks")}
+                        {group.picks.length} {t("predictions")}
                       </strong>
-                      <span className={styles.chevron} aria-hidden>
-                        ▾
-                      </span>
                     </div>
                   </summary>
                   <div className={styles.pickList}>
@@ -522,9 +540,7 @@ export function MemberResultsBoard({
                         className={styles.pickRow}
                         key={item.rowKey ?? `${item.matchId}-${item.pickLabel}`}
                       >
-                        <span className={styles.pickLabel}>
-                          {t("Pick")}: {item.pickLabel}
-                        </span>
+                        {pickCells(item)}
                         <span className={`${styles.pill} ${pillClass(item.status)}`}>
                           {t(item.statusLabel)}
                         </span>

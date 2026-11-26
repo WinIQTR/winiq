@@ -418,7 +418,7 @@
 
 .matchSummary {
   display: grid;
-  grid-template-columns: minmax(160px, 1.1fr) minmax(140px, 0.7fr) minmax(180px, 1.2fr) auto;
+  grid-template-columns: minmax(160px, 1.2fr) minmax(160px, 0.9fr) auto;
   gap: 14px;
   align-items: center;
   padding: 16px 18px;
@@ -426,12 +426,13 @@
   cursor: pointer;
 }
 
-.matchSummary::-webkit-details-marker {
-  display: none;
+.matchCardFlat .matchSummary {
+  cursor: default;
+  padding-bottom: 8px;
 }
 
-.matchCard[open] .chevron {
-  transform: rotate(180deg);
+.matchSummary::-webkit-details-marker {
+  display: none;
 }
 
 .matchMeta {
@@ -460,57 +461,73 @@
 }
 
 .pickCount {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  justify-content: flex-end;
-  gap: 10px;
-  color: #c5d7ef;
-  grid-column: 3 / -1;
+  justify-self: end;
+  min-height: 34px;
+  border-radius: 999px;
+  padding: 0 12px;
+  background: rgba(37, 99, 235, 0.14);
+  color: #93c5fd;
 }
 
 .pickCount strong {
-  font-size: 13px;
-  font-weight: 700;
-}
-
-.chevron {
-  display: inline-grid;
-  place-items: center;
-  width: 28px;
-  height: 28px;
-  border-radius: 999px;
-  background: rgba(148, 163, 184, 0.12);
-  color: #94a3b8;
   font-size: 12px;
-  transition: transform 0.15s ease;
-}
-
-.collapsedPick {
-  display: grid;
-  gap: 8px;
-  justify-items: start;
-  min-width: 0;
+  font-weight: 800;
 }
 
 .pickList {
   display: grid;
-  gap: 8px;
-  padding: 0 18px 16px;
+  padding: 0 18px 8px;
   border-top: 1px solid rgba(56, 90, 140, 0.35);
 }
 
 .pickRow {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto auto;
-  gap: 12px;
+  grid-template-columns: minmax(0, 1.4fr) auto auto;
+  gap: 14px;
   align-items: center;
-  padding: 12px 0;
+  padding: 14px 0;
   border-bottom: 1px solid rgba(56, 90, 140, 0.22);
 }
 
 .pickRow:last-child {
   border-bottom: 0;
-  padding-bottom: 4px;
+}
+
+.pickFields {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) 1px minmax(0, 0.8fr);
+  gap: 14px;
+  align-items: start;
+  min-width: 0;
+}
+
+.pickDivider {
+  align-self: stretch;
+  width: 1px;
+  background: rgba(56, 90, 140, 0.35);
+}
+
+.pickField {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.fieldLabel {
+  color: #7f96b8;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.pickField strong {
+  overflow: hidden;
+  color: #e8eef8;
+  font-size: 14px;
+  font-weight: 800;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .row {
@@ -677,14 +694,22 @@
   }
 
   .pickCount {
-    grid-column: auto;
-    width: 100%;
-    justify-content: space-between;
+    justify-self: start;
   }
 
   .pickRow {
     grid-template-columns: 1fr;
     justify-items: start;
+  }
+
+  .pickFields {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .pickDivider {
+    width: 100%;
+    height: 1px;
   }
 }
 
@@ -808,25 +833,39 @@
 }
 
 :global(html[data-theme="light"]) .dateBadge,
-:global(html:not([data-theme])) .dateBadge,
-:global(html[data-theme="light"]) .pickLabel,
-:global(html:not([data-theme])) .pickLabel,
+:global(html:not([data-theme])) .dateBadge {
+  color: #334155 !important;
+}
+
 :global(html[data-theme="light"]) .pickCount,
 :global(html:not([data-theme])) .pickCount {
-  color: #334155 !important;
+  background: #eff6ff !important;
+  color: #1d4ed8 !important;
 }
 
 :global(html[data-theme="light"]) .pickList,
 :global(html:not([data-theme])) .pickList,
 :global(html[data-theme="light"]) .pickRow,
-:global(html:not([data-theme])) .pickRow {
+:global(html:not([data-theme])) .pickRow,
+:global(html[data-theme="light"]) .pickDivider,
+:global(html:not([data-theme])) .pickDivider {
   border-color: #e5e7eb !important;
+  background-color: transparent;
 }
 
-:global(html[data-theme="light"]) .chevron,
-:global(html:not([data-theme])) .chevron {
-  background: #f1f5f9 !important;
+:global(html[data-theme="light"]) .pickDivider,
+:global(html:not([data-theme])) .pickDivider {
+  background: #e5e7eb !important;
+}
+
+:global(html[data-theme="light"]) .fieldLabel,
+:global(html:not([data-theme])) .fieldLabel {
   color: #64748b !important;
+}
+
+:global(html[data-theme="light"]) .pickField strong,
+:global(html:not([data-theme])) .pickField strong {
+  color: #0b1f3a !important;
 }
 
 :global(html[data-theme="light"]) .pillWon,
