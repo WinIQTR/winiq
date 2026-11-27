@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import { useLanguage } from "@/components/language-provider";
 
@@ -121,6 +121,8 @@ export function MemberResultsBoard({
   const [date, setDate] = useState("ALL");
   const [result, setResult] = useState("ALL");
   const [oddsBand, setOddsBand] = useState("ALL");
+  /** Only one card open at a time; first filtered match opens by default. */
+  const [openMatchKey, setOpenMatchKey] = useState<string | null>(null);
 
   const leagues = useMemo(() => {
     return [...new Set(matches.map((item) => item.leagueName))].sort((a, b) =>
@@ -214,6 +216,14 @@ export function MemberResultsBoard({
 
     return [...map.values()];
   }, [filtered]);
+
+  const firstMatchKey = matchGroups[0]
+    ? `${matchGroups[0].matchId}-${matchGroups[0].dateKey}`
+    : null;
+
+  useEffect(() => {
+    setOpenMatchKey(firstMatchKey);
+  }, [firstMatchKey]);
 
   function formatPair(home: number | null, away: number | null) {
     if (home == null && away == null) return null;
@@ -550,7 +560,8 @@ export function MemberResultsBoard({
 
         <div className={styles.list}>
           {matchGroups.length ? (
-            matchGroups.map((group, index) => {
+            matchGroups.map((group) => {
+              const cardKey = `${group.matchId}-${group.dateKey}`;
               const hasScore = group.homeScore != null && group.awayScore != null;
               const boutique = boutiqueLines(group);
               const isDraw = group.winnerLabel === "Draw";
@@ -573,8 +584,15 @@ export function MemberResultsBoard({
               return (
                 <details
                   className={styles.matchCard}
-                  key={`${group.matchId}-${group.dateKey}`}
-                  open={index === 0}
+                  key={cardKey}
+                  open={openMatchKey === cardKey}
+                  onToggle={(event) => {
+                    const nextOpen = event.currentTarget.open;
+                    setOpenMatchKey((current) => {
+                      if (nextOpen) return cardKey;
+                      return current === cardKey ? null : current;
+                    });
+                  }}
                 >
                   <summary className={styles.matchSummary}>
                     <div className={styles.teams}>
