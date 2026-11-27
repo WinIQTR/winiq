@@ -19,6 +19,7 @@ import { buildRefereeProfileMap } from "@/lib/referee-profile";
 import { hasHotSupport } from "@/lib/team-display";
 import { loadDashboardPredictionSnapshot } from "@/lib/prediction-dashboard-snapshot";
 import { syncMissingFixtureReferees } from "@/lib/sync-fixture-referees";
+import { syncRefereeMatchStatistics } from "@/lib/sync-referee-match-statistics";
 
 import styles from "./professional.module.css";
 
@@ -47,7 +48,7 @@ export default async function ProfessionalDataPage({ searchParams }: { searchPar
   const weekStart = new Date(now); weekStart.setUTCDate(now.getUTCDate() - ((now.getUTCDay() + 6) % 7) + week * 7); weekStart.setUTCHours(0,0,0,0);
   const weekEnd = new Date(weekStart.getTime() + 7 * 86_400_000);
 
-  const [fixtures, players, scorers, finishedMatches, leagues, teamMatches, predictionSnapshot] = await Promise.all([
+  let [fixtures, players, scorers, finishedMatches, leagues, teamMatches, predictionSnapshot] = await Promise.all([
     view === "fixtures" ? prisma.match.findMany({
       where: { season: { year: ACTIVE_SEASON_YEAR, ...(leagueFilter ? { leagueId: leagueFilter } : {}) }, ...(teamFilter ? { OR: [{ homeTeamId: teamFilter }, { awayTeamId: teamFilter }] } : {}), kickoffAt: { gte: weekStart, lt: weekEnd } },
       orderBy: { kickoffAt: "asc" }, take: 120,
@@ -132,12 +133,24 @@ export default async function ProfessionalDataPage({ searchParams }: { searchPar
         referee: match.referee,
         venueName: match.venueName,
         venueCity: match.venueCity,
+        kickoffAt: match.kickoffAt,
+        status: match.status,
       })),
-      { maxBatches: 2 },
+      // Free plan ≈10 req/min; keep first paint snappy and fill on revisits.
+      { maxFixtures: 8 },
     );
     const refreshed = await prisma.match.findMany({
       where: { id: { in: fixtures.map((match) => match.id) } },
-      select: { id: true, referee: true, venueName: true, venueCity: true },
+      select: {
+        id: true,
+        referee: true,
+        venueName: true,
+        venueCity: true,
+        status: true,
+        homeScore: true,
+        awayScore: true,
+        _count: { select: { teamStatistics: true } },
+      },
     });
     const refreshedById = new Map(refreshed.map((row) => [row.id, row]));
     for (const match of fixtures) {
@@ -146,7 +159,37 @@ export default async function ProfessionalDataPage({ searchParams }: { searchPar
       match.referee = next.referee;
       match.venueName = next.venueName ?? match.venueName;
       match.venueCity = next.venueCity ?? match.venueCity;
+      match.status = next.status;
+      match.homeScore = next.homeScore;
+      match.awayScore = next.awayScore;
     }
+
+    const needStats = fixtures.filter(
+      (match) =>
+        match.status === "FINISHED" &&
+        Boolean(match.referee?.trim()) &&
+        (refreshedById.get(match.id)?._count.teamStatistics ?? 0) < 2,
+    );
+    if (needStats.length) {
+      await syncRefereeMatchStatistics(
+        needStats.map((match) => ({
+          id: match.id,
+          apiId: match.apiId,
+          homeTeamId: match.homeTeamId,
+          awayTeamId: match.awayTeamId,
+          _count: refreshedById.get(match.id)?._count,
+        })),
+        { maxMatches: 12 },
+      );
+    }
+
+    // Rebuild finished history after status/referee/stat backfill so profiles
+    // on this same request see cards/match averages for week fixtures.
+    finishedMatches = await prisma.match.findMany({
+      where: { season: { year: ACTIVE_SEASON_YEAR }, status: "FINISHED", kickoffAt: { lt: now } },
+      orderBy: { kickoffAt: "asc" },
+      include: { season: { include: { league: true } }, homeTeam: true, awayTeam: true, teamStatistics: true },
+    });
   }
 
   const weatherByMatch =

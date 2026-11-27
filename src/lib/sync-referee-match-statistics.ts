@@ -47,6 +47,10 @@ function getStatistic(
  * API-Football has no referee career endpoint — cards/fouls come only from
  * per-fixture statistics.
  */
+function sleep(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 export async function syncRefereeMatchStatistics(
   matches: Array<{
     id: number;
@@ -55,16 +59,20 @@ export async function syncRefereeMatchStatistics(
     awayTeamId: number;
     _count?: { teamStatistics: number };
   }>,
-  options?: { maxMatches?: number },
+  options?: { maxMatches?: number; requestGapMs?: number },
 ): Promise<{ updated: number; checked: number }> {
   const pending = matches.filter((match) => (match._count?.teamStatistics ?? 0) < 2);
   if (!pending.length) return { updated: 0, checked: 0 };
 
   const maxMatches = Math.max(1, options?.maxMatches ?? 8);
+  const requestGapMs = Math.max(0, options?.requestGapMs ?? 0);
   let updated = 0;
   let checked = 0;
 
   for (const match of pending.slice(0, maxMatches)) {
+    if (requestGapMs > 0 && checked > 0) {
+      await sleep(requestGapMs);
+    }
     checked += 1;
     try {
       const response = await apiFootballRequest<ApiFootballFixtureStatisticsTeam[]>(
