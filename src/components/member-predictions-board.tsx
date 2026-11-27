@@ -1014,7 +1014,9 @@ export function MemberPredictionsBoard({
                           {localizePickText(getPredictionLabel(leg), locale, t)}
                         </small>
                       </div>
-                      <b>{showOdds && fairOdds(leg) > 0 ? fairOdds(leg).toFixed(2) : "—"}</b>
+                      <span className={styles.couponLegOdds}>
+                        {showOdds && fairOdds(leg) > 0 ? fairOdds(leg).toFixed(2) : "—"}
+                      </span>
                     </div>
                   ))}
                 </div>

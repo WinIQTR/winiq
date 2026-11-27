@@ -963,7 +963,7 @@
 
 .couponLeg {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-columns: 24px minmax(0, 1fr) max-content;
   gap: 8px;
   align-items: center;
   border: 1px solid rgba(56, 90, 140, 0.3);
@@ -971,21 +971,33 @@
   padding: 8px 10px;
   background: rgba(8, 16, 30, 0.55);
   min-width: 0;
+  overflow: hidden;
+}
+
+.couponLeg .logo,
+.couponLeg .logoFall {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
 }
 
 .couponLegCopy {
   min-width: 0;
+  max-width: 100%;
   overflow: hidden;
 }
 
 .couponLeg strong {
-  display: block;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
   overflow: hidden;
   color: var(--mh-text);
   font-size: 12px;
   font-weight: 800;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .couponLeg small {
@@ -997,13 +1009,15 @@
   white-space: nowrap;
 }
 
-.couponLeg b {
+.couponLegOdds {
   justify-self: end;
+  align-self: start;
   color: #93c5fd;
   font-size: 13px;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .couponTotal {
@@ -1525,8 +1539,8 @@
   border-color: #e2e8f0;
 }
 
-:global(html[data-theme="light"]) .couponLeg b,
-:global(html:not([data-theme])) .couponLeg b {
+:global(html[data-theme="light"]) .couponLegOdds,
+:global(html:not([data-theme])) .couponLegOdds {
   color: #1d4ed8 !important;
   font-weight: 700;
 }
