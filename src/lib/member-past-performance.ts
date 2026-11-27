@@ -497,6 +497,8 @@ export async function loadMemberPastPerformance(options?: {
       selectionLabel,
       tierLabel: mapSmartPickTierToBand(row.tier),
       oddsBandKey: oddsMeta?.bandKey ?? null,
+      odds:
+        oddsMeta != null && oddsMeta.odds >= 1.01 ? oddsMeta.odds : null,
       status,
       statusLabel:
         status === "WON"

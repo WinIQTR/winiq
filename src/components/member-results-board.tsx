@@ -52,6 +52,8 @@ export type MemberResultsMatch = {
   selectionLabel?: string;
   tierLabel?: "strong" | "medium" | "weak";
   oddsBandKey?: string | null;
+  /** Published market/fair odds used for the pick — never invented. */
+  odds?: number | null;
   status: "WON" | "LOST" | "VOID" | "PENDING" | "OTHER";
   statusLabel: string;
   href: string;
@@ -562,6 +564,15 @@ export function MemberResultsBoard({
                   <div className={styles.pickField}>
                     <span className={styles.fieldLabel}>{t("Selection")}</span>
                     <strong>{item.selectionLabel ?? "—"}</strong>
+                  </div>
+                  <div className={styles.pickDivider} aria-hidden />
+                  <div className={`${styles.pickField} ${styles.oddsField}`}>
+                    <span className={styles.fieldLabel}>{t("Odds")}</span>
+                    <strong>
+                      {item.odds != null && item.odds >= 1.01
+                        ? item.odds.toFixed(2)
+                        : "—"}
+                    </strong>
                   </div>
                 </div>
               );
