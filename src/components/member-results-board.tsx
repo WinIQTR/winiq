@@ -550,78 +550,70 @@ export function MemberResultsBoard({
 
         <div className={styles.list}>
           {matchGroups.length ? (
-            matchGroups.map((group) => {
-              const multi = group.picks.length > 1;
-              const primary = group.picks[0]!;
-
-              const pickCells = (item: MemberResultsMatch) => (
-                <div className={styles.pickFields}>
-                  <div className={styles.pickField}>
-                    <span className={styles.fieldLabel}>{t("Market field")}</span>
-                    <strong>{item.marketLabel ?? item.pickLabel ?? "—"}</strong>
-                  </div>
-                  <div className={styles.pickDivider} aria-hidden />
-                  <div className={styles.pickField}>
-                    <span className={styles.fieldLabel}>{t("Selection")}</span>
-                    <strong>{item.selectionLabel ?? "—"}</strong>
-                  </div>
-                  <div className={styles.pickDivider} aria-hidden />
-                  <div className={`${styles.pickField} ${styles.oddsField}`}>
-                    <span className={styles.fieldLabel}>{t("Odds")}</span>
-                    <strong>
-                      {item.odds != null && item.odds >= 1.01
-                        ? item.odds.toFixed(2)
-                        : "—"}
-                    </strong>
-                  </div>
-                </div>
-              );
-
+            matchGroups.map((group, index) => {
               const hasScore = group.homeScore != null && group.awayScore != null;
               const boutique = boutiqueLines(group);
+              const isDraw = group.winnerLabel === "Draw";
+              const winnerText = group.winnerLabel
+                ? isDraw
+                  ? t("Draw")
+                  : `${t("Winner")}: ${group.winnerLabel}`
+                : null;
               const hitLabel =
                 group.hitsSettled > 0
                   ? `${group.hitsWon}/${group.hitsSettled} ${t("hit")}`
                   : `${group.picks.length} ${t("predictions")}`;
+              const detailHit =
+                group.hitsSettled > 0
+                  ? t("{total} predictions, {won} won")
+                      .replace("{total}", String(group.hitsSettled))
+                      .replace("{won}", String(group.hitsWon))
+                  : `${group.picks.length} ${t("predictions")}`;
 
-              const head = (
-                <>
-                  <div className={styles.teams}>
-                    <div className={styles.teamLine}>
-                      <TeamLogo src={group.homeTeamLogo} name={group.homeTeam} />
-                      <strong>{group.homeTeam}</strong>
+              return (
+                <details
+                  className={styles.matchCard}
+                  key={`${group.matchId}-${group.dateKey}`}
+                  open={index === 0}
+                >
+                  <summary className={styles.matchSummary}>
+                    <div className={styles.teams}>
+                      <div className={styles.teamLine}>
+                        <TeamLogo src={group.homeTeamLogo} name={group.homeTeam} />
+                        <strong>{group.homeTeam}</strong>
+                      </div>
+                      <div className={styles.teamLine}>
+                        <TeamLogo src={group.awayTeamLogo} name={group.awayTeam} />
+                        <strong>{group.awayTeam}</strong>
+                      </div>
                     </div>
-                    <div className={styles.teamLine}>
-                      <TeamLogo src={group.awayTeamLogo} name={group.awayTeam} />
-                      <strong>{group.awayTeam}</strong>
-                    </div>
-                  </div>
 
-                  <div className={styles.scoreBlock}>
-                    {hasScore ? (
-                      <strong className={styles.scoreDigits} aria-label={t("Final score")}>
-                        {group.homeScore} – {group.awayScore}
-                      </strong>
-                    ) : (
-                      <strong className={styles.scorePending}>—</strong>
-                    )}
-                    <div className={styles.matchMeta}>
-                      <span className={styles.leagueBadge}>{group.leagueName}</span>
-                      <span className={styles.dateBadge}>{group.dateLabel}</span>
+                    <div className={styles.scoreBlock}>
+                      {hasScore ? (
+                        <strong className={styles.scoreDigits} aria-label={t("Final score")}>
+                          {group.homeScore} – {group.awayScore}
+                        </strong>
+                      ) : (
+                        <strong className={styles.scorePending}>—</strong>
+                      )}
+                      <div className={styles.matchMeta}>
+                        <span className={styles.leagueBadge}>{group.leagueName}</span>
+                        <span className={styles.dateBadge}>{group.dateLabel}</span>
+                      </div>
                     </div>
-                    <div className={styles.resultFacts}>
-                      {group.winnerLabel ? (
-                        <span>
-                          {t("Winner")}:{" "}
-                          <b>
-                            {group.winnerLabel === "Draw"
-                              ? t("Draw")
-                              : group.winnerLabel}
-                          </b>
+
+                    <div className={styles.outcomeCol}>
+                      {winnerText ? (
+                        <span className={styles.winnerLine} data-draw={isDraw ? "true" : "false"}>
+                          {winnerText}
                         </span>
-                      ) : null}
+                      ) : (
+                        <span className={styles.winnerLine} data-draw="true">
+                          —
+                        </span>
+                      )}
                       {group.favouriteLabel ? (
-                        <span>
+                        <span className={styles.favouriteLine}>
                           {t("Pre-match favourite")}:{" "}
                           <b>
                             {group.favouriteLabel === "Draw"
@@ -631,71 +623,77 @@ export function MemberResultsBoard({
                         </span>
                       ) : null}
                     </div>
-                  </div>
 
-                  <div className={styles.pickCount} data-tone={group.hitsSettled ? "hits" : "count"}>
-                    <strong>{hitLabel}</strong>
-                  </div>
-                </>
-              );
+                    <span
+                      className={styles.pickCount}
+                      data-tone={group.hitsSettled ? "hits" : "count"}
+                    >
+                      <strong>{hitLabel}</strong>
+                    </span>
 
-              const boutiqueRow =
-                boutique.length > 0 ? (
-                  <div className={styles.boutique} aria-label={t("Match stats")}>
-                    {boutique.map((line) => (
-                      <span key={line.label}>
-                        <em>{line.label}</em> {line.value}
+                    <span className={styles.expandBtn}>
+                      {t("See predictions")}
+                      <i className={styles.chevron} aria-hidden />
+                    </span>
+                  </summary>
+
+                  <div className={styles.detailPanel}>
+                    <div className={styles.detailHead}>
+                      <strong>{t("Prediction details")}</strong>
+                      <span className={styles.detailHit}>{detailHit}</span>
+                      <span className={styles.detailNote}>
+                        {t("Published picks only. Sample from WinIQ archive.")}
                       </span>
-                    ))}
-                  </div>
-                ) : null;
-
-              if (!multi) {
-                return (
-                  <article
-                    className={`${styles.matchCard} ${styles.matchCardFlat}`}
-                    key={`${group.matchId}-${group.dateKey}`}
-                  >
-                    <div className={styles.matchSummary}>{head}</div>
-                    {boutiqueRow}
-                    <div className={styles.pickList}>
-                      <div className={styles.pickRow}>
-                        {pickCells(primary)}
-                        <span className={`${styles.pill} ${pillClass(primary.status)}`}>
-                          {t(primary.statusLabel)}
-                        </span>
-                        <Link className={styles.detail} href={primary.href}>
-                          {t("Details")} ›
-                        </Link>
-                      </div>
                     </div>
-                  </article>
-                );
-              }
 
-              return (
-                <details
-                  className={styles.matchCard}
-                  key={`${group.matchId}-${group.dateKey}`}
-                  open
-                >
-                  <summary className={styles.matchSummary}>{head}</summary>
-                  {boutiqueRow}
-                  <div className={styles.pickList}>
-                    {group.picks.map((item) => (
-                      <div
-                        className={styles.pickRow}
-                        key={item.rowKey ?? `${item.matchId}-${item.pickLabel}`}
-                      >
-                        {pickCells(item)}
-                        <span className={`${styles.pill} ${pillClass(item.status)}`}>
-                          {t(item.statusLabel)}
-                        </span>
-                        <Link className={styles.detail} href={item.href}>
-                          {t("Details")} ›
-                        </Link>
+                    {boutique.length > 0 ? (
+                      <div className={styles.boutique} aria-label={t("Match stats")}>
+                        {boutique.map((line) => (
+                          <span key={line.label}>
+                            <em>{line.label}</em> {line.value}
+                          </span>
+                        ))}
                       </div>
-                    ))}
+                    ) : null}
+
+                    <div className={styles.pickList}>
+                      {group.picks.map((item, pickIndex) => (
+                        <div
+                          className={styles.pickRow}
+                          key={item.rowKey ?? `${item.matchId}-${item.pickLabel}`}
+                        >
+                          <div className={styles.pickIndex}>
+                            {t("Prediction")} {pickIndex + 1}
+                          </div>
+                          <div className={styles.pickFields}>
+                            <div className={styles.pickField}>
+                              <span className={styles.fieldLabel}>{t("Market field")}</span>
+                              <strong>{item.marketLabel ?? item.pickLabel ?? "—"}</strong>
+                            </div>
+                            <div className={styles.pickDivider} aria-hidden />
+                            <div className={styles.pickField}>
+                              <span className={styles.fieldLabel}>{t("Selection")}</span>
+                              <strong>{item.selectionLabel ?? "—"}</strong>
+                            </div>
+                            <div className={styles.pickDivider} aria-hidden />
+                            <div className={`${styles.pickField} ${styles.oddsField}`}>
+                              <span className={styles.fieldLabel}>{t("Odds")}</span>
+                              <strong>
+                                {item.odds != null && item.odds >= 1.01
+                                  ? item.odds.toFixed(2)
+                                  : "—"}
+                              </strong>
+                            </div>
+                          </div>
+                          <span className={`${styles.pill} ${pillClass(item.status)}`}>
+                            {t(item.statusLabel)}
+                          </span>
+                          <Link className={styles.detail} href={item.href}>
+                            {t("Details")} ›
+                          </Link>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </details>
               );

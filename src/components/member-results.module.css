@@ -406,24 +406,30 @@
 }
 
 .matchCard {
-  border: 1px solid rgba(56, 90, 140, 0.45);
+  border: 1px solid #e5e7eb;
   border-radius: 16px;
-  background: linear-gradient(145deg, rgba(10, 28, 50, 0.98), rgba(7, 18, 34, 0.98));
+  background: #ffffff;
+  box-shadow: 0 2px 10px rgba(15, 35, 70, 0.04);
   overflow: hidden;
-}
-
-.matchCardFlat .matchSummary {
-  cursor: default;
 }
 
 .matchSummary {
   display: grid;
-  grid-template-columns: minmax(150px, 1.1fr) minmax(180px, 1.2fr) auto;
-  gap: 14px;
+  grid-template-columns:
+    minmax(140px, 1fr)
+    minmax(120px, 0.7fr)
+    minmax(120px, 0.9fr)
+    auto
+    auto;
+  gap: 12px 16px;
   align-items: center;
   padding: 16px 18px;
   list-style: none;
   cursor: pointer;
+}
+
+.matchSummary::-webkit-details-marker {
+  display: none;
 }
 
 .scoreBlock {
@@ -435,7 +441,7 @@
 
 .scoreDigits {
   margin: 0;
-  color: #eef4ff;
+  color: #0b1f3a;
   font-size: clamp(22px, 3vw, 30px);
   font-weight: 900;
   letter-spacing: -0.03em;
@@ -445,22 +451,35 @@
 
 .scorePending {
   margin: 0;
-  color: #8aa3c4;
+  color: #94a3b8;
   font-size: 22px;
   font-weight: 800;
 }
 
-.resultFacts {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 14px;
-  color: #8aa3c4;
-  font-size: 12px;
+.outcomeCol {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.winnerLine {
+  color: #0b1f3a;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.winnerLine[data-draw="true"] {
+  color: #64748b;
+}
+
+.favouriteLine {
+  color: #64748b;
+  font-size: 11px;
   font-weight: 600;
 }
 
-.resultFacts b {
-  color: #dbe7f7;
+.favouriteLine b {
+  color: #0b1f3a;
   font-weight: 800;
 }
 
@@ -478,8 +497,8 @@
   min-height: 28px;
   padding: 0 10px;
   border-radius: 999px;
-  background: rgba(148, 163, 184, 0.12);
-  color: #c5d5ea;
+  background: #eef2f7;
+  color: #0b1f3a;
   font-size: 11px;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
@@ -487,17 +506,8 @@
 
 .boutique em {
   font-style: normal;
-  color: #8aa3c4;
+  color: #64748b;
   font-weight: 700;
-}
-
-.matchCardFlat .matchSummary {
-  cursor: default;
-  padding-bottom: 8px;
-}
-
-.matchSummary::-webkit-details-marker {
-  display: none;
 }
 
 .matchMeta {
@@ -510,17 +520,17 @@
 .leagueBadge {
   display: inline-flex;
   align-items: center;
-  min-height: 28px;
+  min-height: 26px;
   border-radius: 999px;
   padding: 0 10px;
-  background: rgba(37, 99, 235, 0.14);
-  color: #60a5fa;
+  background: #eff6ff;
+  color: #1d4ed8;
   font-size: 11px;
   font-weight: 800;
 }
 
 .dateBadge {
-  color: #8aa3c4;
+  color: #64748b;
   font-size: 12px;
   font-weight: 600;
 }
@@ -528,17 +538,16 @@
 .pickCount {
   display: inline-flex;
   align-items: center;
-  justify-self: end;
   min-height: 34px;
   border-radius: 999px;
   padding: 0 12px;
-  background: rgba(37, 99, 235, 0.14);
-  color: #93c5fd;
+  background: #eff6ff;
+  color: #1d4ed8;
 }
 
 .pickCount[data-tone="hits"] {
-  background: rgba(22, 163, 74, 0.16);
-  color: #86efac;
+  background: #dcfce7;
+  color: #15803d;
 }
 
 .pickCount strong {
@@ -546,19 +555,94 @@
   font-weight: 800;
 }
 
+.expandBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  border-radius: 12px;
+  padding: 0 14px;
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.chevron {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+  translate: 0 -2px;
+}
+
+.matchCard[open] .chevron {
+  transform: rotate(-135deg);
+  translate: 0 2px;
+}
+
+.detailPanel {
+  border-top: 1px solid #e5e7eb;
+  background: #f5f8fc;
+  padding: 14px 18px 10px;
+}
+
+.detailHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+  margin-bottom: 12px;
+}
+
+.detailHead strong {
+  color: #0b1f3a;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.detailHit {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  border-radius: 999px;
+  padding: 0 10px;
+  background: #dcfce7;
+  color: #15803d;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.detailNote {
+  margin-left: auto;
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 600;
+}
+
 .pickList {
   display: grid;
-  padding: 0 18px 8px;
-  border-top: 1px solid rgba(56, 90, 140, 0.35);
 }
 
 .pickRow {
   display: grid;
-  grid-template-columns: minmax(0, 1.4fr) auto auto;
+  grid-template-columns: 72px minmax(0, 1.4fr) auto auto;
   gap: 14px;
   align-items: center;
-  padding: 14px 0;
-  border-bottom: 1px solid rgba(56, 90, 140, 0.22);
+  padding: 12px 12px;
+  margin-bottom: 8px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.pickIndex {
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 800;
 }
 
 .pickRow:last-child {
@@ -580,7 +664,7 @@
 .pickDivider {
   align-self: stretch;
   width: 1px;
-  background: rgba(56, 90, 140, 0.35);
+  background: #e5e7eb;
 }
 
 .pickField {
@@ -590,14 +674,14 @@
 }
 
 .fieldLabel {
-  color: #7f96b8;
+  color: #64748b;
   font-size: 11px;
   font-weight: 600;
 }
 
 .pickField strong {
   overflow: hidden;
-  color: #e8eef8;
+  color: #0b1f3a;
   font-size: 14px;
   font-weight: 800;
   text-overflow: ellipsis;
@@ -630,8 +714,9 @@
 
 .teamLine strong {
   overflow: hidden;
-  color: #f2f6fc;
+  color: #0b1f3a;
   font-size: 14px;
+  font-weight: 800;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -685,43 +770,44 @@
 }
 
 .pillPending {
-  background: rgba(148, 163, 184, 0.14);
-  color: #94a3b8;
+  background: #f1f5f9;
+  color: #64748b;
 }
 
 .pillWon {
-  background: rgba(46, 160, 67, 0.16);
-  color: #3fb950;
+  background: #dcfce7;
+  color: #15803d;
 }
 
 .pillLost {
-  background: rgba(239, 68, 68, 0.16);
-  color: #f87171;
+  background: #fee2e2;
+  color: #b91c1c;
 }
 
 .pillVoid {
-  background: rgba(245, 158, 11, 0.16);
-  color: #fbbf24;
+  background: #ffedd5;
+  color: #c2410c;
 }
 
 .detail {
   display: inline-flex;
   align-items: center;
-  min-height: 40px;
-  border: 1px solid rgba(46, 160, 67, 0.55);
+  min-height: 36px;
+  border: 1px solid rgba(37, 99, 235, 0.45);
   border-radius: 10px;
-  padding: 0 14px;
-  color: #3fb950;
+  padding: 0 12px;
+  background: #ffffff;
+  color: #2563eb;
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 700;
   text-decoration: none;
   white-space: nowrap;
 }
 
 .detail:hover,
 .detail:focus-visible {
-  background: rgba(46, 160, 67, 0.1);
-  outline: 2px solid rgba(63, 185, 80, 0.45);
+  background: #eff6ff;
+  outline: 2px solid rgba(37, 99, 235, 0.35);
   outline-offset: 2px;
 }
 
@@ -767,8 +853,13 @@
     justify-items: start;
   }
 
-  .pickCount {
-    justify-self: start;
+  .expandBtn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .detailNote {
+    margin-left: 0;
   }
 
   .pickRow {
