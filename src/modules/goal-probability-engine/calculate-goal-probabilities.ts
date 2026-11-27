@@ -15,7 +15,7 @@ const MODEL_NAME =
   "venue-strength-poisson";
 
 const MODEL_VERSION =
-  "v0.4-cross-season";
+  "v0.5-cross-competition-venue";
 
 const MAX_GOALS =
   6;
@@ -32,8 +32,9 @@ const GOAL_LINES = [
  * Optimize edilmiş mevcut değerleri
  * V0.4'te değiştirmiyoruz.
  *
- * Önce yalnızca historical coverage
- * problemini çözüyoruz.
+ * V0.5: Avrupa kupası / seyrek lig
+ * venue örneklemi için cross-competition
+ * tamamlayıcı geçmiş eklenir.
  */
 const DEFAULT_SMOOTHING_MATCHES =
   5;
@@ -52,6 +53,18 @@ const DEFAULT_DIXON_COLES_RHO =
  */
 const MAX_TEAM_HISTORY =
   20;
+
+/*
+ * Aynı ligde bu eşiğin altında kalan
+ * venue geçmişi, tüm yarışmalardaki
+ * aynı venue maçlarıyla tamamlanır.
+ *
+ * UEL/UECL gibi seyrek Avrupa kupası
+ * örnekleminde confidence'ın haksız
+ * düşmesini engeller.
+ */
+const MIN_SAME_LEAGUE_VENUE_SAMPLES =
+  5;
 
 /*
  * Lig ortalaması için son 500 bitmiş maç.
@@ -613,15 +626,137 @@ async function calculateLeagueGoalProfile(
   };
 }
 
+function historicalMatchKey(
+  match: HistoricalMatch,
+): string {
+  return [
+    match.kickoffAt.toISOString(),
+    match.homeTeamId,
+    match.awayTeamId,
+  ].join("|");
+}
+
+const VENUE_MATCH_SELECT = {
+  kickoffAt: true,
+  homeTeamId: true,
+  awayTeamId: true,
+  homeScore: true,
+  awayScore: true,
+} as const;
+
 /*
  * ==================================================
- * V0.4 CROSS-SEASON HOME VENUE HISTORY
+ * V0.5 CROSS-COMPETITION VENUE HISTORY
  * ==================================================
  *
- * Takımın aynı ligdeki son 20 iç saha
- * FINISHED maçı alınır.
+ * Önce aynı ligdeki venue geçmişi alınır.
+ * Örneklem MIN_SAME_LEAGUE_VENUE_SAMPLES
+ * altındaysa diğer yarışmalardaki aynı
+ * venue maçlarıyla tamamlanır (UEL/UECL
+ * seyrekliği için).
+ */
+async function loadTeamVenueMatches(
+  options: {
+    teamId: number;
+    leagueId: number;
+    beforeDate: Date;
+    venue: "home" | "away";
+  },
+): Promise<HistoricalMatch[]> {
+  const teamFilter =
+    options.venue === "home"
+      ? { homeTeamId: options.teamId }
+      : { awayTeamId: options.teamId };
+
+  const sameLeague = await prisma.match.findMany({
+    where: {
+      season: {
+        leagueId: options.leagueId,
+      },
+      status: "FINISHED",
+      kickoffAt: {
+        lt: options.beforeDate,
+      },
+      homeScore: {
+        not: null,
+      },
+      awayScore: {
+        not: null,
+      },
+      ...teamFilter,
+    },
+    select: VENUE_MATCH_SELECT,
+    orderBy: {
+      kickoffAt: "desc",
+    },
+    take: MAX_TEAM_HISTORY,
+  });
+
+  if (sameLeague.length >= MIN_SAME_LEAGUE_VENUE_SAMPLES) {
+    return sameLeague;
+  }
+
+  const remaining = MAX_TEAM_HISTORY - sameLeague.length;
+  if (remaining <= 0) {
+    return sameLeague;
+  }
+
+  const crossCompetition = await prisma.match.findMany({
+    where: {
+      status: "FINISHED",
+      kickoffAt: {
+        lt: options.beforeDate,
+      },
+      homeScore: {
+        not: null,
+      },
+      awayScore: {
+        not: null,
+      },
+      ...teamFilter,
+      NOT: {
+        season: {
+          leagueId: options.leagueId,
+        },
+      },
+    },
+    select: VENUE_MATCH_SELECT,
+    orderBy: {
+      kickoffAt: "desc",
+    },
+    take: remaining,
+  });
+
+  const seen = new Set(
+    sameLeague.map((match) => historicalMatchKey(match)),
+  );
+  const merged = [...sameLeague];
+
+  for (const match of crossCompetition) {
+    const key = historicalMatchKey(match);
+    if (seen.has(key)) {
+      continue;
+    }
+    seen.add(key);
+    merged.push(match);
+    if (merged.length >= MAX_TEAM_HISTORY) {
+      break;
+    }
+  }
+
+  return merged.sort(
+    (left, right) => right.kickoffAt.getTime() - left.kickoffAt.getTime(),
+  );
+}
+
+/*
+ * ==================================================
+ * V0.4/V0.5 CROSS-SEASON HOME VENUE HISTORY
+ * ==================================================
  *
- * Sezon sınırı yoktur.
+ * Takımın iç saha FINISHED geçmişi.
+ * Aynı lig seyrekse diğer yarışmalar
+ * ile tamamlanır.
  */
 async function calculateHomeTeamProfile(
   options: {
@@ -644,66 +779,12 @@ async function calculateHomeTeamProfile(
       GoalProbabilityResolvedConfig;
   },
 ): Promise<TeamVenueProfile> {
-  const matches =
-    await prisma
-      .match
-      .findMany({
-        where: {
-          season: {
-            leagueId:
-              options.leagueId,
-          },
-
-          status:
-            "FINISHED",
-
-          /*
-           * DATA LEAKAGE KORUMASI
-           */
-          kickoffAt: {
-            lt:
-              options.beforeDate,
-          },
-
-          homeScore: {
-            not:
-              null,
-          },
-
-          awayScore: {
-            not:
-              null,
-          },
-
-          homeTeamId:
-            options.teamId,
-        },
-
-        select: {
-          kickoffAt:
-            true,
-
-          homeTeamId:
-            true,
-
-          awayTeamId:
-            true,
-
-          homeScore:
-            true,
-
-          awayScore:
-            true,
-        },
-
-        orderBy: {
-          kickoffAt:
-            "desc",
-        },
-
-        take:
-          MAX_TEAM_HISTORY,
-      });
+  const matches = await loadTeamVenueMatches({
+    teamId: options.teamId,
+    leagueId: options.leagueId,
+    beforeDate: options.beforeDate,
+    venue: "home",
+  });
 
   const average =
     calculateWeightedTeamAverage({
@@ -804,11 +885,12 @@ async function calculateHomeTeamProfile(
 
 /*
  * ==================================================
- * V0.4 CROSS-SEASON AWAY VENUE HISTORY
+ * V0.4/V0.5 CROSS-SEASON AWAY VENUE HISTORY
  * ==================================================
  *
- * Takımın aynı ligdeki son 20 deplasman
- * FINISHED maçı alınır.
+ * Takımın deplasman FINISHED geçmişi.
+ * Aynı lig seyrekse diğer yarışmalar
+ * ile tamamlanır.
  */
 async function calculateAwayTeamProfile(
   options: {
@@ -831,66 +913,12 @@ async function calculateAwayTeamProfile(
       GoalProbabilityResolvedConfig;
   },
 ): Promise<TeamVenueProfile> {
-  const matches =
-    await prisma
-      .match
-      .findMany({
-        where: {
-          season: {
-            leagueId:
-              options.leagueId,
-          },
-
-          status:
-            "FINISHED",
-
-          /*
-           * DATA LEAKAGE KORUMASI
-           */
-          kickoffAt: {
-            lt:
-              options.beforeDate,
-          },
-
-          homeScore: {
-            not:
-              null,
-          },
-
-          awayScore: {
-            not:
-              null,
-          },
-
-          awayTeamId:
-            options.teamId,
-        },
-
-        select: {
-          kickoffAt:
-            true,
-
-          homeTeamId:
-            true,
-
-          awayTeamId:
-            true,
-
-          homeScore:
-            true,
-
-          awayScore:
-            true,
-        },
-
-        orderBy: {
-          kickoffAt:
-            "desc",
-        },
-
-        take:
-          MAX_TEAM_HISTORY,
-      });
+  const matches = await loadTeamVenueMatches({
+    teamId: options.teamId,
+    leagueId: options.leagueId,
+    beforeDate: options.beforeDate,
+    venue: "away",
+  });
 
   const average =
     calculateWeightedTeamAverage({
@@ -1585,7 +1613,7 @@ export async function calculateGoalProbabilities(
       0
   ) {
     warnings.push(
-      "Her iki takım için de aynı ligde cross-season venue geçmişi bulunamadı.",
+      "Her iki takım için de cross-season / cross-competition venue geçmişi bulunamadı.",
     );
   }
 
