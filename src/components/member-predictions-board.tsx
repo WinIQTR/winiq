@@ -1006,11 +1006,13 @@ export function MemberPredictionsBoard({
                   {couponLegs.map((leg) => (
                     <div className={styles.couponLeg} key={leg.matchId}>
                       <TeamLogo src={leg.homeTeamLogo} name={leg.homeTeam} size={24} />
-                      <div>
-                        <strong>
+                      <div className={styles.couponLegCopy}>
+                        <strong title={`${leg.homeTeam} – ${leg.awayTeam}`}>
                           {leg.homeTeam} – {leg.awayTeam}
                         </strong>
-                        <small>{localizePickText(getPredictionLabel(leg), locale, t)}</small>
+                        <small title={localizePickText(getPredictionLabel(leg), locale, t)}>
+                          {localizePickText(getPredictionLabel(leg), locale, t)}
+                        </small>
                       </div>
                       <b>{showOdds && fairOdds(leg) > 0 ? fairOdds(leg).toFixed(2) : "—"}</b>
                     </div>

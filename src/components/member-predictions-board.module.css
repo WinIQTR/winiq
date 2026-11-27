@@ -970,25 +970,40 @@
   border-radius: 10px;
   padding: 8px 10px;
   background: rgba(8, 16, 30, 0.55);
+  min-width: 0;
+}
+
+.couponLegCopy {
+  min-width: 0;
+  overflow: hidden;
 }
 
 .couponLeg strong {
+  display: block;
   overflow: hidden;
   color: var(--mh-text);
   font-size: 12px;
+  font-weight: 800;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .couponLeg small {
   display: block;
+  overflow: hidden;
   color: var(--mh-muted);
   font-size: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .couponLeg b {
+  justify-self: end;
   color: #93c5fd;
   font-size: 13px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
 }
 
 .couponTotal {
